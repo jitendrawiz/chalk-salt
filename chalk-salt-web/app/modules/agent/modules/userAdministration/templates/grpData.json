@@ -1,0 +1,36 @@
+{"groups":
+    [{
+		"name":"Sales Group",
+		"code":"GR01|REG1|OFF1",
+		"type":"REG1",
+		"none":"false",
+		"read":"false",
+		"write":"true",
+		"execute":"false",
+		"appmatch":"false"
+	},
+	
+	{
+		"name":"Lettings Group",
+		"code":"GR01|REG1|OFF1",
+		"type":"REG1",
+		"none":"false",
+		"read":"false",
+		"write":"true",
+		"execute":"false",
+		"appmatch":"false"
+	}
+  ],
+"kpis":[{
+           "kpiName":"Average Check ins",
+           "select":"false",
+           "edit":"icon"
+          },
+           {
+           "kpiName":"Average Check outs",
+           "select":"true",
+           "edit":"icon"
+          }
+]
+
+}

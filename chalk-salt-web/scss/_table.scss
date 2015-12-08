@@ -1,0 +1,12 @@
+.table .table {
+	background-color: $bg-color-primary;
+}
+
+.table .table.active{
+	background-color: $bg-color-third;
+	color: $text-color-primary;
+}
+
+table.borderless,table.borderless td,table.borderless th{
+     border: none !important;
+}

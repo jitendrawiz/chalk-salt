@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+		<groupId>com.chalk.salt</groupId>
+    	<artifactId>chalk-salt</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>chalk-salt-ear</artifactId>
+	<name>Chalk Salt EAR</name>
+    <packaging>ear</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.parent.artifactId}</finalName>
+                    <applicationName>${project.parent.artifactId}</applicationName>
+                    <applicationId>${project.parent.artifactId}</applicationId>
+
+                    <initializeInOrder>true</initializeInOrder>
+                    <defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
+                    <!-- Use Java EE ear libraries as needed. Java EE ear libraries are in easy way to package any libraries needed 
+                        in the ear, and automatically have any modules (EJBs, JARs, WARs etc) use them -->
+                    <modules>
+                        <webModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>chalk-salt-api</artifactId>
+                            <moduleId>chalk-salt-api</moduleId>
+                        </webModule>
+                    </modules>
+                    <filtering>true</filtering>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/application/META-INF</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+    <!--Add EAR Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>propco-enterprise-api</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        
+    </dependencies>
+
+</project>

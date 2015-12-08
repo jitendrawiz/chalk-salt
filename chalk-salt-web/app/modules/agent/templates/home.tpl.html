@@ -1,0 +1,158 @@
+<section class="container-fluid" id="main-section">
+	<div id="home">
+		<alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</alert>
+		<div id="editMode" ng-class="{'workspace-center': editWorkspace }">
+			<div class="row">
+				<div class="col-xs-12 col-md-3">
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<a href=""> <i
+									class="propcoicon propcoicon-propco-home text-sixth icon-extra-large"></i>
+									<p>Home</p>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-workflow text-sixth icon-extra-large"></i>
+								<p>Workflow</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-email text-sixth icon-extra-large"></i>
+								<p>Email</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-diary text-sixth icon-extra-large"></i>
+								<p>Diary</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-mail-merge text-sixth icon-extra-large"></i>
+								<p>Mail Merge</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-message-centre text-sixth icon-extra-large"></i>
+								<p>Message Center</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-task-manager text-sixth icon-extra-large"></i>
+								<p>Task Manager</p>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="ex-block">
+								<i
+									class="propcoicon propcoicon-document-manager text-sixth icon-extra-large"></i>
+								<p>Document Manager</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-3">
+					<div class="row">
+						<div class="col-xs-6" ng-repeat="icon in iconsListPartOne">
+							<div class="ex-block removeItem" data-drop="true"
+								ng-model="iconsListPartOne" jqyoui-droppable>
+								<i
+									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
+									ng-click="remove($index,'partOne')" ng-show="editWorkspace"></i>
+								<div data-drag="true" ng-model="iconsListPartOne"
+									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
+									<i class="propcoicon text-secondary icon-extra-large"
+										ng-class="icon.icon"></i>
+									<p>{{icon.name}}</p>
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-xs-6"
+							ng-repeat="n in [] | range: 8 - iconsListPartOne.length">
+							<div class="ex-block removeItem" data-drop="true"
+								ng-model="bookmarkedItemsPartOne" jqyoui-droppable
+								ng-show="editWorkspace">
+								<i
+									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
+									ng-click="remove($index, 'partTwo')"
+									ng-show="bookmarkedItemsPartOne[$index]"></i>
+								<div data-drag="true" ng-model="bookmarkedItemsPartOne"
+									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
+									<i class="propcoicon text-secondary icon-extra-large"
+										ng-class="bookmarkedItemsPartOne[$index].icon"></i>
+									<p>{{bookmarkedItemsPartOne[$index].name}}</p>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-3">
+					<div class="row">
+						<div class="col-xs-6" ng-repeat="icon in iconsListPartTwo ">
+							<div class="ex-block removeItem" data-drop="true"
+								ng-model="iconsListPartTwo" jqyoui-droppable>
+								<i
+									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
+									ng-click="remove($index, 'partThree')" ng-show="editWorkspace"></i>
+								<div data-drag="true" ng-model="iconsListPartTwo[$index]"
+									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
+									<i class="propcoicon text-twentyfirst  icon-extra-large"
+										ng-class="icon.iconName"></i>
+									<p>{{icon.name}}</p>
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-xs-6"
+							ng-repeat="n in [] | range: 8 - iconsListPartTwo.length">
+							<div class="ex-block removeItem" data-drop="true"
+								ng-model=bookmarkedItemsPartTwo jqyoui-droppable
+								ng-show="editWorkspace">
+								<i
+									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
+									ng-click="remove($index,'partFour')"
+									ng-show="bookmarkedItemsPartTwo[$index]"></i>
+								<div data-drag="true" ng-model="bookmarkedItemsPartTwo[$index]"
+									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
+									<i class="propcoicon text-twentyfirst  icon-extra-large"
+										ng-class="bookmarkedItemsPartTwo[$index].icon"></i>
+									<p>{{bookmarkedItemsPartTwo[$index].name}}</p>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-3 ">
+					<div class="pull-right" ng-show="!editWorkspace">
+						<button class="btn btn-fourth" id="editBtn"
+							ng-click="editWorkspace = true"> {{"home.editBtn" |
+							translate}} <i class="fa fa-pencil"></i></button>
+					</div>
+					<div class="pull-right" ng-show="editWorkspace">
+						<i class="propcoicon propcoicon-cancel text-sixth icon-mid "
+							ng-click="editWorkspace = false"></i> <i
+							class="propcoicon propcoicon-save  text-secondary icon-mid"
+							ng-click="agentCtrl.saveIconList()"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,101 @@
+#dropdown {
+	position: absolute;
+    right: 40px;
+    top: 10px;
+}
+
+#search {
+	position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+#searchResult{
+	border-radius:8px;
+	padding: 5px;
+}
+
+#userMgtIcons i {
+	margin-right: 10px;
+}
+
+#userMgtModal a {
+	display:block;
+}
+
+#userMgtModal li :hover {
+	background-color: #3E3E3E !important;
+}
+
+#userMgtModal >div {
+	border-radius:8px;
+}
+
+#searchUser{
+	margin-right: 45%;
+}
+
+#avatarBlock{
+	width:70px;
+	height:70px;
+	margin:5px;
+	background-color: $bg-color-eighth
+}
+#userDetails li a {
+	background-color: $bg-color-primary;
+}
+
+#userDetails li a :hover{
+	background-color: #3E3E3E;
+}
+
+.prettycheckbox>a{
+    background-image:url('/resources/img/unchecked.png'); 
+    height:40px;
+    width:40px;
+}
+
+.prettycheckbox>a.checked {
+    background-image:url('/resources/img/checked.png');
+    height:40px;
+    width:40px;
+}
+
+#controlBtn{
+	margin-bottom: 20px;
+	padding-right: 40px;
+}
+
+
+#controlBtn .btn{
+	font-size: 16px;
+	border-radius:4px;
+	margin-right: 10px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #3E3E3E;
+    border:none;
+    border-radius:0px;
+}
+
+.nav-tabs > li > a{
+	border:none;
+    border-radius:0px;
+}
+
+.panel-default > .panel-heading {
+	background-color: #666;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+	border-top:1px solid #000; 
+}
+
+.table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td{
+	border-bottom:1px solid #4D4D4D; 
+}
+	
+
+
+

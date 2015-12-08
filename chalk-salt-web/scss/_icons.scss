@@ -1,0 +1,392 @@
+@font-face {
+    font-family: 'PropCoIcons';
+    src: url('../fonts/propcofont.eot');
+    src: url('../fonts/propcofont.eot') format('embedded-opentype'),
+         url('../fonts/propcofont.woff2') format('woff2'),
+         url('../fonts/propcofont.woff') format('woff'),
+         url('../fonts/propcofont.ttf') format('truetype'),
+         url('../fonts/propcofont.svg#PropCoIconsRegular') format('svg');
+}
+
+.propcoicon {
+    display: inline-block;
+    font-family: "PropCoIcons";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+    vertical-align: middle;
+}
+
+.propcoicon-paint-roller:before{
+	content: '';
+}
+
+.propcoicon-tools:before{
+	content: '';
+}
+
+.propcoicon-property-management:before{
+	content: '';
+}
+
+.propcoicon-chain-management:before{
+	content: '';
+}
+
+.propcoicon-property-saved:before{
+	content: '';
+}
+.propcoicon-market-apprasial:before{
+	content: '';
+}
+
+.propcoicon-property-search:before{
+	content: '';
+}
+
+.propcoicon-my-properties:before{
+	content: '';
+}
+
+.propcoicon-property-comparison:before{
+	content: '';
+}
+
+.propcoicon-location:before{
+	content: '';
+}
+
+.propcoicon-cash-register:before{
+	content: '';
+}
+
+.propcoicon-keys:before{
+	content: '';
+}
+
+.propcoicon-checklist:before{
+	content: '';
+}
+
+.propcoicon-13:before{
+	content: '';
+}
+
+.propcoicon-front-office:before{
+	content: '';
+}
+
+.propcoicon-brochure:before{
+	content: '';
+}
+
+.propcoicon-Web-browser:before{
+	content: '';
+}
+
+.propcoicon-property-information:before{
+	content: '';
+}
+
+.propcoicon-link:before{
+	content: '';
+}
+
+.propcoicon-property-description:before{
+	content: '';
+}
+
+.propcoicon-restrictions:before{
+	content: '';
+}
+
+.propcoicon-property-features:before{
+	content: '';
+}
+
+.propcoicon-property-viewings:before{
+	content: '';
+}
+
+.propcoicon-tasks:before{
+	content: '';
+}
+
+.propcoicon-property-notes:before{
+	content: '';
+}
+
+.propcoicon-property-tasks:before{
+	content: '';
+}
+
+.propcoicon-pictures:before{
+	content: '';
+}
+.propcoicon-print:before{
+	content: '';
+}
+
+.propcoicon-viewings:before{
+	content: '';
+}
+
+.propcoicon-propco-home:before{
+	content: '';
+}
+
+.propcoicon-save:before{
+	content: '';
+}
+
+.propcoicon-diary:before{
+	content: '';
+}
+
+.propcoicon-mail-merge:before{
+	content: '';
+}
+
+.propcoicon-email:before{
+	content: '';
+}
+
+.propcoicon-message-centre:before{
+	content: '';
+}
+
+.propcoicon-workflow:before{
+	content: '';
+}
+
+.propcoicon-document-manager:before{
+	content: '';
+}
+
+.propcoicon-task-manager:before{
+	content: '';
+}
+
+.propcoicon-38:before{
+	content: '';
+}
+
+.propcoicon-balance-sheet:before{
+	content: '';
+}
+
+.propcoicon-fee-run:before {
+	content: '';
+}
+
+.propcoicon-prepare-statements:before{
+	content: '';
+}
+
+
+.propcoicon-bank-reconciliation:before{
+	content: '';
+}
+
+.propcoicon-misc-cr-db:before{
+	content: '';
+}
+
+.propcoicon-overdue-tenant:before{
+	content: '';
+}
+
+.propcoicon-account-transfer:before{
+	content: '';
+}
+
+.propcoicon-reports:before{
+	content: '';
+}
+
+.propcoicon-fast-start:before{
+	content: '';
+}
+
+.propcoicon-property:before{
+	content: '';
+}
+
+.propcoicon-vendor-landlord:before{
+	content: '';
+}
+
+.propcoicon-tenant-purchaser:before{
+	content: '';
+}
+
+.propcoicon-contractor:before{
+	content: '';
+}
+
+.propcoicon-agent:before{
+	content: '';
+}
+
+.propcoicon-solicitor:before{
+	content: '';
+}
+
+.propcoicon-applicant-card:before{
+	content: '';
+}
+
+.propcoicon-applicant-management:before{
+	content: '';
+}
+
+.propcoicon-available-property-list:before{
+	content: '';
+}
+
+.propcoicon-sales-brochure:before{
+	content: '';
+}
+
+.propcoicon-beds:before{
+	content: '';
+}
+
+.propcoicon-bathrooms:before{
+	content: '';
+}
+
+.propcoicon-lounge:before {
+	content: '';
+}
+
+.propcoicon-garage:before{
+	content: '';
+}
+
+.propcoicon-close:before{
+	content: '';
+}
+
+.propcoicon-minimise:before{
+	content: '';
+}
+
+.propcoicon-expand:before{
+	content: '';
+}
+
+.propcoicon-reply:before{
+	content: '';
+}
+
+.propcoicon-reply-all:before{
+	content: '';
+}
+
+.propcoicon-forward:before{
+	content: '';
+}
+
+.propcoicon-cancel:before{
+	content: '';
+}
+
+.propcoicon-attachment:before{
+	content: '';
+}
+
+.propcoicon-refresh:before{
+	content: '';
+}
+
+.propcoicon-list-view:before{
+	content: '';
+}
+
+.propcoicon-grid-view:before{
+	content: '';
+}
+
+.propcoicon-pdf:before{
+	content: '';
+}
+
+.propcoicon-settings:before{
+	content: 'ˇ';
+}
+
+.propcoicon-four-arrow:before{
+	content: '˝';
+}
+
+.propcoicon-notification:before{
+	content: '˛';
+}
+
+.propcoicon-search:before{
+	content: '˙';
+}
+
+.propcoicon-send-mail:before{
+	content: '˚';
+}
+
+.propcoicon-t-icon:before{
+	content: '¸';
+}
+
+.propcoicon-folder:before{
+	content: '';
+}
+
+.propcoicon-dashboard:before{
+	content: '';
+}
+
+.propcoicon-actions-on:before{
+	content: '';
+}
+
+.propcoicon-empty-square:before{
+	content: '';
+}
+
+.propcoicon-dropdown:before{
+	content: '';
+}
+
+.propcoicon-filled-square:before{
+	content: '⬛';
+}
+
+.propcoicon-dropdown-right:before{
+	content: 'ᐳ';
+}
+
+.propcoicon-arrow-down:before{
+	content: '▼';
+}
+
+.propcoicon-bookmark:before{
+    content: 'Ù';
+}
+
+.propcoicon-copy-user:before{
+    content: 'Ò';
+}
+
+.propcoicon-add-user:before{
+    content: 'Û';
+}
+
+.propcoicon-user-management:before{
+    content: 'Ô';
+}
+
+.propcoicon-user-templates:before{
+    content: 'Ú';
+}
+

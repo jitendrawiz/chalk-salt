@@ -1,0 +1,186 @@
+#main-tab i.propcoicon {
+	font-size: 22px;
+	vertical-align: top;
+}
+
+#main-tab i.propcoicon:first-of-type {
+	color: $text-color-twelfth;
+	background-color: inherit;
+}
+
+#main-tab i.propcoicon:last-of-type {
+	color: $text-color-thirteenth;
+}
+
+#left-container #accordion .btn-group {
+	width: 100%;
+}
+
+#left-container #accordion button.flex-button {
+	height: 42px;
+	padding: 1px 8px;
+}
+
+#right-container #maps img {
+	width: 100%;
+}
+
+#right-container #media #media-left-container .media-footer i:last-of-type
+	{
+	margin-right: 30px;
+}
+
+#right-container #media #media-left-container #media-block {
+	height: 455px;
+	overflow-x: auto;
+}
+
+#right-container #media #media-left-container #media-block .thumbnail .caption
+	{
+	overflow: hidden;
+}
+
+#right-container #media #media-right-container {
+	border-radius: 5px;
+	padding: 10px;
+}
+
+#right-container #media #media-right-container #progress-bar {
+	color: $text-color-twenty;
+}
+
+#right-container #media #media-right-container h2 {
+	margin-top: 0px;
+	color: $text-color-seventh;
+	font-size: 22px;
+}
+
+#right-container #media #media-right-container form>.form-group:first-of-type
+	{
+	width: 100%;
+	height: 105px;
+	background-color: $text-color-fifth;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+#right-container #floor-plans #floor-plans-left-container img {
+	width: 100%;
+}
+
+#right-container #floor-plans #floor-plans-right-container {
+	height: 500px;
+	overflow: auto;
+}
+
+#right-container #floor-plans #floor-plans-right-container .plans {
+	width: 96%;
+	height: 120px;
+	padding-top: 45px;
+	background-color: $text-color-fifth;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+#right-container #epc #epc-left-container .epc-main-img {
+	max-height: 500px;
+	overflow: auto;
+}
+
+#right-container #epc #epc-left-container .epc-main-img img {
+	width: 97%;
+}
+
+#right-container #epc #epc-right-container img {
+	width: 75%;
+}
+
+#right-container #video #video-left-container #urlform {
+	overflow: hidden;
+}
+
+#right-container #video #video-left-container form .form-group input {
+	width: 60%;
+}
+
+#right-container #video #video-left-container form button[type='submit']
+	{
+	width: 100px;
+}
+
+#right-container #video #video-right-container #video-block .media {
+	background-color: $bg-color-primary;
+	border-radius: 5px;
+	padding: 10px;
+	width: 92%;
+}
+
+#right-container #video #video-right-container .dropdown {
+	overflow-y: auto;
+	margin-top: 17px;
+}
+
+#right-container #video #video-right-container .dropdown .dropdown-menu
+	{
+	left: 60px;
+}
+
+#right-container #home-letting-container img {
+	width: 100%;
+	max-width: 500px;
+}
+
+#right-container #tenant-personal, #right-container #landlord-personal {
+	margin-bottom: 10px;
+	padding-left: 8px;
+}
+
+#right-container #tenant-personal>div, #right-container #landlord-personal>div
+	{
+	display: inline-block;
+	margin-left: 10px;
+}
+
+#right-container #tenant-personal .propcoicon-link:before,
+	#right-container #landlord-personal .propcoicon-link:before {
+	font-size: 18px;
+	color: $text-color-secondary;
+}
+
+#right-container #primary-tenant table, #right-container #primary-landlord table
+	{
+	margin-left: 8px;
+}
+
+#right-container #tenant-tab+div, #right-container #landlord-tab+div {
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#right-container #tenant-tab li, #right-container #landlord-tab li {
+	width: 240px;
+}
+
+#right-container #tenant-tab .propcoicon-tenant-purchaser,
+	#right-container #landlord-tab .propcoicon-tenant-purchaser {
+	font-size: 20px;
+	color: $text-color-primary;
+}
+
+#right-container #tenant-rent-detail, #right-container #landlord-rent-detail
+	{
+	margin-top: -20px;
+}
+
+#right-container #tenant-rent-detail>div, #right-container #landlord-rent-detail>div
+	{
+	background-color: $bg-color-primary;
+	border-top: 1px solid #1A1A1A;
+}
+
+#right-container #tenant-rent-detail>div:nth-child(2), #right-container #landlord-rent-detail>div:nth-child(2)
+	{
+	border-left: 1px solid #1A1A1A;
+	border-right: 1px solid #1A1A1A;
+}

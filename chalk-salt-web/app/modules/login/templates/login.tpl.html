@@ -1,0 +1,70 @@
+<div id="login"  ng-style="{{myStyle}}" class="container-fluid img-responsive">
+	<section id="login-section" class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading bg-color-twelfth ">
+				<img src="../resources/img/logo.png" alt="PropCo" title="PropCo" class="img-responsive"/>
+			</div>
+			<div class="panel-body bg-color-thirteenth">
+				<alert ng-show="alert.show" type="{{alert.type}}"
+					close="closeAlert()">
+				<div class="model-body">
+					<i
+						class="propcoicon propcoicon-cancel text-sixth icon-extra-large pull-left"></i>
+					this is a model {{alert.message}}
+				</div>
+				</alert>
+
+				<form role="form" action="" method="post">
+					<div class="row">
+						<div class="col-xs-10 col-xs-offset-1">
+							<label for="username">{{"login.username" | translate}}</label> <input
+								type="text" class="form-control" id="username"
+								ng-model="authRequest.username" />
+						</div>
+						<div class="col-xs-10 col-xs-offset-1">
+							<label for="password">{{"login.password" | translate}}</label> <input
+								type="password" class="form-control" id="password"
+								ng-model="authRequest.password" />
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-xs-6 col-xs-offset-5">
+							<div class="checkbox">
+								<label for="remember" >{{"login.rememberMe" | translate}}&nbsp;&nbsp; </label><input
+									type="checkbox" id="remember"/>
+							</div>
+						</div>
+						<div class="clearfix"></div><br/>
+						<div class="col-xs-6 col-xs-offset-5">
+							<button type="button"
+								class="btn btn-secondary btn-block"
+								ng-click="loginCtrl.authenticateUser()">{{"login.loginBtn" | translate}}</button>
+						</div>
+						<div class="clearfix"></div>
+						<br/>
+						<div class="col-xs-6 col-xs-offset-5">
+							<a class="text-ninth" href="#"
+								alt="Forgotten login details?" title="Forgotten login details?">{{"login.forgotDetails" | translate}}</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<div id="bottomImg">
+		<footer class="container text-center">
+			<p>
+				<img src="../resources/img/news.png"  />
+			</p>
+			<p>
+				<strong>SUPPORT</strong>
+			</p>
+			<p>
+				Call: <strong>0845 0047 142</strong> entering option 1 and then 2
+			</p>
+			<p>
+				Email: <strong><a href="mailto:{{email}}">{{email}}</a></strong>
+			</p>
+			<p>Build:{{version}}.{{build}} {{releaseDate}}</p>
+		</footer>
+	</div>
+</div>

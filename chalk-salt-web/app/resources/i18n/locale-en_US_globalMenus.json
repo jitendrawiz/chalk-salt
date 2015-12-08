@@ -1,0 +1,604 @@
+ {
+    "menuItemsList": [
+        {
+            "name": "Marketing",
+            "submenu": [
+                {
+                    "name": "Property",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Fast Start",
+                            "drag": true,
+                            "icon": "propcoicon-fast-start"
+                        },
+                        {
+                            "name": "Sales Brochures",
+                            "drag": true,
+                            "icon": "propcoicon-sales-brochure"
+                        },
+                        {
+                            "name": "Carousel",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Property of the Week",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Property Matching",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Available Property List",
+                            "drag": true,
+                            "icon": "propcoicon-available-property-list"
+                        }
+                    ]
+                },
+                {
+                    "name": "Applicant",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Register An Applicant",
+                            "drag": true,
+                            "icon": "propcoicon-applicant-card"
+                        },
+                        {
+                            "name": "Applicant Management",
+                            "drag": true,
+                            "icon": "propcoicon-applicant-management"
+                        },
+                        {
+                            "name": "Applicant Matching",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Landlord/Vendor",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Register New enquiry(MA Form)",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tenancy",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Propose/Confirm",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Review/Cancel",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Extend/Renew",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Terminate",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Check In/Out",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Accounts",
+            "drag": false,
+            "submenu": [
+                {
+                    "name": "Tenant Receipts",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Direct Debits",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Generate DD Requests",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "Generate DD Instructions",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "Process DD Receipts",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "Regenerate Existing DD Requests",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Cash Register (Standing Orders /  cheques / bank transfers etc)",
+                            "drag": true,
+                            "icon": "propcoicon-cash-register"
+                        },
+                        {
+                            "name": "Automatically post rent receipts from Tenant Reserves",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Pay Rents using Rent Indemnity Funds (RIF)",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Landlord Payouts",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Prepare statements",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Prepare statements",
+                                    "drag": true,
+                                    "icon": "propcoicon-prepare-statements"
+                                },
+                                {
+                                    "name": "Prepare Statements by Statement Group",
+                                    "drag": true,
+                                    "icon": "propcoicon-prepare-statements"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Prepare Landlord Invoice Statements",
+                            "drag": true,
+                            "icon": "propcoicon-prepare-statements"
+                        },
+                        {
+                            "name": "Auto Topup Landlord Reserves",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Pay Rent Indemnity Premiums",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Contractor Payouts",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Pay Contractors",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Prepare Contract Statements",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "Prepare Contractor Statements by Statement Group",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Agent Payouts",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Pay agent",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Standard Journal",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "VAT Journal",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                },
+                                {
+                                    "name": "Standard & VAT Combined",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Agent Fees Analyser",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Bank Reconciliation",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Enter Cheque / Auto pay Numbers",
+                            "drag": true,
+                            "icon": "propcoicon-bank-reconciliation"
+                        },
+                        {
+                            "name": "Bank Reconcile",
+                            "drag": true,
+                            "icon": "propcoicon-bank-reconciliation"
+                        }
+                    ]
+                },
+                {
+                    "name": "Batch Processing",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Batch Processing Fee",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Batch Misc Credit / Debit",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Batch Rent Claim",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Batch Deposit Return",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Bulk Accounts Transfer",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Raise Invoice/Credit Note / Misc Cr/Db",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Invoice",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Credit Note",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Misc Cr/Db",
+                            "drag": true,
+                            "icon": "propcoicon-misc-cr-db"
+                        }
+                    ]
+                },
+                {
+                    "name": "Accounts Transfer",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Standard A/c Transfer",
+                            "drag": true,
+                            "icon": "propcoicon-account-transfer"
+                        },
+                        {
+                            "name": "Unallocated A/c Transfer",
+                            "drag": true,
+                            "icon": "propcoicon-account-transfer"
+                        }
+                    ]
+                },
+                {
+                    "name": "Amend Bank Details",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Request for Bank Details Amendments",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Review/ Edit Bank Details Awaiting Approval",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Approve Bank Details",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Global Processes",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Fee Run",
+                            "drag": true,
+                            "icon": "propcoicon-fee-run"
+                        },
+                        {
+                            "name": "Statement Production",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Perform Period End Procedures",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "KPI Data Check",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Daily Updates/ Post Rent Claims",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Generate Password",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Maintenance",
+            "drag": false,
+            "submenu": [
+                {
+                    "name": "Request Maintenance",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Generate Quotation",
+                            "drag": true,
+                            "icon": "propcoicon-tools"
+                        },
+                        {
+                            "name": "Create Works Order/Job Sheet",
+                            "drag": true,
+                            "icon": "propcoicon-tools"
+                        },
+                        {
+                            "name": "Cancel Works Order",
+                            "drag": true,
+                            "icon": "propcoicon-tools"
+                        }
+                    ]
+                },
+                {
+                    "name": "Invoicing",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Register an invoice",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Global Invoicing",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Batch Contractor Invoice Posting",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Reporting",
+            "drag": false,
+            "submenu": [
+                {
+                    "name": "Accounts",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Balance Sheet",
+                            "drag": true,
+                            "icon": "propcoicon-balance-sheet"
+                        }
+                    ]
+                },
+                {
+                    "name": "Arrears",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Overdue Tenants Letters",
+                            "drag": true,
+                            "icon": "propcoicon-overdue-tenant"
+                        },
+                        {
+                            "name": "Overdue Landlord Letters",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        },
+                        {
+                            "name": "Overdue Invoice Analysis",
+                            "drag": true,
+                            "icon": "propcoicon-bookmark"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tax Reporting",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "NRL Form",
+                            "drag": true,
+                            "icon": "propcoicon-reports"
+                        },
+                        {
+                            "name": "CNR/FICO Annual Return",
+                            "drag": true,
+                            "icon": "propcoicon-reports"
+                        },
+                        {
+                            "name": "NRIS Claim Journal",
+                            "drag": true,
+                            "icon": "propcoicon-reports"
+                        },
+                        {
+                            "name": "Landlord Annual Summary",
+                            "drag": true,
+                            "icon": "propcoicon-reports"
+                        },
+                        {
+                            "name": "S19 TMA",
+                            "drag": true,
+                            "icon": "propcoicon-reports"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tenant Transaction Report",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Payments Receipts Journal",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Branch Month End Reporting",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Fee/Credits Journal",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Fee Raised",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Maintenance",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Inspections",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Safety inspection List",
+                                    "drag": true,
+                                    "icon": "propcoicon-property-management"
+                                },
+                                {
+                                    "name": "Periodic Inspection Visit List",
+                                    "drag": true,
+                                    "icon": "propcoicon-property-management"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Contractor Reporting",
+                            "drag": false,
+                            "submenu": [
+                                {
+                                    "name": "Expired Certificate Contractors List",
+                                    "drag": true,
+                                    "icon": "propcoicon-bookmark"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Document Search",
+                    "drag": true,
+                    "icon": "propcoicon-document-manager"
+                },
+                {
+                    "name": "Audit Search",
+                    "drag": true,
+                    "icon": "propcoicon-document-manager"
+                },
+                {
+                    "name": "Tenant Transaction Report",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                },
+                {
+                    "name": "Workflow",
+                    "drag": false,
+                    "submenu": [
+                        {
+                            "name": "Workflow Trigger Exceptions",
+                            "drag": true,
+                            "icon": "propcoicon-workflow"
+                        },
+                        {
+                            "name": "Workflow Housekeeping",
+                            "drag": true,
+                            "icon": "propcoicon-workflow"
+                        }
+                    ]
+                },
+                {
+                    "name": "Deposit Processing",
+                    "drag": true,
+                    "icon": "propcoicon-reports"
+                }
+            ]
+        }
+    ]
+}

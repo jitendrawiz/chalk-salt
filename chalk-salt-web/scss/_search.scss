@@ -1,0 +1,72 @@
+#search-property-advanced {
+	background-color: $bg-color-seventh;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#search-property-advanced .propcoicon-link {
+	font-size: 17px;
+	color: $text-color-secondary;
+}
+
+#search-property-rangebar {
+	padding-left: 0px;
+}
+
+#search-property-rangebar>h4 {
+	margin-left: 20px;
+}
+
+#search-property-rangebar-block {
+	background-color: $bg-color-thirteenth;
+	padding: 20px;
+}
+
+#list-view, #grid-view {
+	background-color: $bg-color-fourth;
+	padding: 10px 20px 20px;
+	height: 800px;
+	overflow: auto;
+}
+
+#list-view>div:first-child .btn-group, #grid-view>div:first-child .btn-group
+	{
+	display: inline-block;
+	color: $text-color-fourth;
+}
+
+#list-view>div:first-child button, #grid-view>div:first-child button {
+	margin-right: 10px;
+}
+
+#list-view .list-view-details {
+	background-color: $bg-color-primary;
+	border-radius: 5px;
+	margin-top: 20px;
+	overflow: hidden;
+	padding: 10px 10px 0;
+}
+
+#list-view .list-view-details.active {
+	background-color: $bg-color-ninth;
+}
+
+#grid-view .grid-view-details {
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: $bg-color-primary;
+	overflow: hidden;
+}
+
+#grid-view .grid-view-details .img-responsive {
+	width: 100%;
+}
+
+#grid-view .grid-view-details.active {
+	background-color: $bg-color-ninth;
+}
+
+.applicantcard-options i {
+	margin-right: 10px;
+}

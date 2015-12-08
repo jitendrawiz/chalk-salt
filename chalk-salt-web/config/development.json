@@ -1,0 +1,6 @@
+{
+	"ENV":{
+		"NAME": "development",
+		"API_END_POINT": "http://localhost:8080/propco-enterprise-3.0.0-SNAPSHOT/api/"
+	}
+}

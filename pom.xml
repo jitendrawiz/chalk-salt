@@ -1,0 +1,644 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.chalk.salt</groupId>
+    <artifactId>chalk-salt</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Chalk Salt ${propco.enterprise.application.version}</name>
+    <description>Chalk Salt</description>
+
+    <organization>
+        <name>Chalk Salt</name>
+        <url>http://www.newhomedecores.com/</url>
+    </organization>
+    <url>http://www.newhomedecores.com/</url>
+
+    <modules>
+        <module>chalk-salt-common</module>
+        <module>chalk-salt-dao</module>
+        <module>chalk-salt-service</module>
+        <module>chalk-salt-core</module>
+        <module>chalk-salt-api</module>
+        <module>chalk-salt-ear</module>
+    </modules>
+
+    <properties>
+        <!-- Start Maven Plugins Version -->
+        <maven.version>3.3.3</maven.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <maven-enforcer-plugin.version>1.4</maven-enforcer-plugin.version>
+        <maven-source-plugin.version>2.4</maven-source-plugin.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+        <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+        <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
+        <jboss-as-maven-plugin.version>7.7.Final</jboss-as-maven-plugin.version>
+        <!-- End Maven Plugins Version -->
+
+        <jboss-logging-processor.version>2.0.1.Final</jboss-logging-processor.version>
+        <jboss-annotations-api_1.2_spec.version>1.0.0.Final</jboss-annotations-api_1.2_spec.version>
+        <cdi.api.version>1.2</cdi.api.version>
+
+        <commons-io.version>2.1.0.redhat-4</commons-io.version>
+        <reflections.version>0.9.10</reflections.version>
+        <oauth-provider.version>20100527</oauth-provider.version>
+        <assertj-core.version>1.6.1</assertj-core.version>
+        <json-path.version>0.9.1</json-path.version>
+        <awaitility.version>1.4.0</awaitility.version>
+        <shiro.version>1.2.3</shiro.version>
+        <joda-time.version>2.8.1</joda-time.version>
+        <infinispan.version>5.2.11.Final-redhat-2</infinispan.version>
+        <servlet.api.version>1.0.2.Final-redhat-2</servlet.api.version>
+        <docusign.restclient.version>1.0.4</docusign.restclient.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
+        <resteasy.version>2.3.10.Final-redhat-1</resteasy.version>
+        <jackson.version>1.9.9.redhat-4</jackson.version>
+        <bank-lookup.version>1.0</bank-lookup.version>
+        <mysql-connector.version>5.1.36</mysql-connector.version>
+        <hf-feed.version>1.1</hf-feed.version>
+        <hf-mydeposit-scotland.version>1.2</hf-mydeposit-scotland.version>
+        <jboss-logging.version>3.1.4.GA-redhat-2</jboss-logging.version>
+        <slf4j-jboss-logmanager.version>1.0.3.GA</slf4j-jboss-logmanager.version>
+        <jboss-logmanager.version>1.5.4.Final-redhat-1</jboss-logmanager.version>
+        <jmagick.version>6.0.4</jmagick.version>
+        <commons-email.version>1.4</commons-email.version>
+        <postcode-lookup.version>1.0</postcode-lookup.version>
+        <dozer.version>5.5.1</dozer.version>
+        <jboss.version>7.5.1.Final-redhat-3</jboss.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <javaee-api.version>6.0</javaee-api.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <logback-classic.version>1.1.3</logback-classic.version>
+        <sysout-over-slf4j.version>1.7.12</sysout-over-slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <junit.version>4.12</junit.version>
+        <validation-api.version>1.0.0.GA-redhat-3</validation-api.version>
+        <sql2o.version>1.5.4</sql2o.version>
+        <httpcore.version>4.3.3.redhat-1</httpcore.version>
+        <httpclient.version>4.3.6.redhat-1</httpclient.version>
+        <chalksalt.application.version>3.0.0-SNAPSHOT</chalksalt.application.version>
+        <chalksalt.application.name>chalksalt-${chalksalt.application.version}</chalksalt.application.name>
+        <chalksalt.webapp.context.path>/${chalksalt.application.name}</chalksalt.webapp.context.path>
+        <myschedule-web-version>3.2.1.0</myschedule-web-version>
+
+
+        <maven.build.timestamp.format>dd MMM, yyyy</maven.build.timestamp.format>
+        <application.buildate>${maven.build.timestamp}</application.buildate>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Repositories URLs -->
+        <!--<techblue.maven.repo.baseurl>http://repo.maven.techblue.co.uk/nexus/content/repositories</techblue.maven.repo.baseurl>-->
+        <jboss.maven.repo.baseurl>https://repository.jboss.org/nexus/content/repositories</jboss.maven.repo.baseurl>
+        <redhat.release.repository.url>http://maven.repository.redhat.com/techpreview/all</redhat.release.repository.url>
+
+    </properties>
+
+    <repositories>
+        <!-- <repository>
+            <id>chalk-slat-snapshot</id>
+            <name>chalk-slat-snapshot-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>chalk-slat-release</id>
+            <name>chalk-slat-release-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>chalk-slat-thirdparty</id>
+            <name>chalk-slat-thirdparty-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/thirdparty</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository> -->
+        <repository>
+            <id>jboss-release-repo</id>
+            <name>jboss-release-repo</name>
+            <url>${jboss.maven.repo.baseurl}/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jboss-snapshot-repo</id>
+            <name>jboss-snapshot-repo</name>
+            <url>${jboss.maven.repo.baseurl}/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>redhat-release</id>
+            <name>redhat-release-repository</name>
+            <url>${redhat.release.repository.url}</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>local</id>
+            <name>local-data</name>
+            <url>file://${project.basedir}/repo</url>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>chalk-slat-plugin-snapshot</id>
+            <name>chalk-slat-snapshot-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>chalk-slat-plugin-release</id>
+            <name>chalk-slat-release-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>chalk-slat-release</id>
+            <name>chalk-slat-release-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>chalk-slat-snapshot</id>
+            <name>chalk-slat-snapshot-repository</name>
+            <url>${chalkslat.maven.repo.baseurl}/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <fork>true</fork>
+                        <meminitial>128m</meminitial>
+                        <maxmem>512m</maxmem>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-versions</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <message>You are running an older version of Maven. PropCo
+                                            Enterprise requires at least
+                                            Maven 3.3.3</message>
+                                        <version>[3.3.3,)</version>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <message>You are running an older version of Java. PropCo
+                                            Enterprise requires at least
+                                            JDK 1.8</message>
+                                        <version>[1.8.0,)</version>
+                                    </requireJavaVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <argLine>-XX:MaxPermSize=128m -Xmx256m</argLine>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                        <runOrder>alphabetical</runOrder>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>${maven-ear-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.bsc.maven</groupId>
+                    <artifactId>maven-processor-plugin</artifactId>
+                    <version>${maven-processor-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jboss.logging</groupId>
+                            <artifactId>jboss-logging-processor</artifactId>
+                            <version>${jboss-logging-processor.version}</version>
+                            <scope>compile</scope>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <!-- The JBoss AS plugin deploys your ear to a local JBoss AS container -->
+                <!-- Due to Maven's lack of intelligence with EARs we need to configure the jboss-as maven plugin to skip deployment 
+                    for all modules. We then enable it specifically in the ear module. -->
+                <plugin>
+                    <groupId>org.jboss.as.plugins</groupId>
+                    <artifactId>jboss-as-maven-plugin</artifactId>
+                    <version>${jboss-as-maven-plugin.version}</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.annotation</groupId>
+                <artifactId>jboss-annotations-api_1.2_spec</artifactId>
+                <version>${jboss-annotations-api_1.2_spec.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>${cdi.api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.chalk.salt</groupId>
+                <artifactId>chalk-salt-dao</artifactId>
+                <version>${chalksalt.application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chalk.salt</groupId>
+                <artifactId>chalk-salt-common</artifactId>
+                <version>${chalksalt.application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chalk.salt</groupId>
+                <artifactId>chalk-salt-service</artifactId>
+                <version>${chalksalt.application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chalk.salt</groupId>
+                <artifactId>chalk-salt-core</artifactId>
+                <version>${chalksalt.application.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javaee-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-hibernatevalidator-provider</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.oauth.core</groupId>
+                <artifactId>oauth-provider</artifactId>
+                <version>${oauth-provider.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>infinispan-core</artifactId>
+                <groupId>org.infinispan</groupId>
+                <version>${infinispan.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.servlet</groupId>
+                <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+                <version>${servlet.api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uk.co.techblue</groupId>
+                <artifactId>docusign-restclient-core</artifactId>
+                <version>${docusign.restclient.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson-provider</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-multipart-provider</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>jaxrs-api</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss-logging.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.slf4j</groupId>
+                <artifactId>slf4j-jboss-logmanager</artifactId>
+                <version>${slf4j-jboss-logmanager.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logmanager</groupId>
+                <artifactId>jboss-logmanager</artifactId>
+                <version>${jboss-logmanager.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>${commons-email.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.as</groupId>
+                <artifactId>jboss-as-controller-client</artifactId>
+                <version>${jboss.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+
+            <!-- Logging Dependencies -->
+            <!-- Scope is set to provided as the third-party APIs logs through this framework are routed through SLF4J -->
+            <!-- Slf4j bridge API for routing commons-logging API logs to SLF4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Slf4j bridge API for routing java.util.logging API logs to SLF4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Slf4j bridge API for routing log4j API logs to SLF4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Slf4j bridge API for routing System.out and System.err logs to SLF4j -->
+            <dependency>
+                <groupId>uk.org.lidalia</groupId>
+                <artifactId>sysout-over-slf4j</artifactId>
+                <version>${sysout-over-slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sql2o</groupId>
+                <artifactId>sql2o</artifactId>
+                <version>${sql2o.version}</version>
+            </dependency>
+
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>${awaitility.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>${json-path.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.3m</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>2.2.1</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.23</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>

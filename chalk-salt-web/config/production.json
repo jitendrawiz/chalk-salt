@@ -1,0 +1,6 @@
+{
+	"ENV":{
+		"NAME": "production",
+		"API_END_POINT": "http://propcov3.techblue.co.uk/propco-enterprise-3.0.0-SNAPSHOT/api/"
+	}
+}

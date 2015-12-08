@@ -1,0 +1,413 @@
+<div class="panel panel-default bg-color-primary">
+	<uib-tabset> <uib-tab> <uib-tab-heading>User
+	Details</uib-tab-heading>
+	<div class="panel-body">
+		<form>
+			<h3>{{"userDetails.permissions" | translate}}</h3>
+			<br />
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="row">
+						<div class="col-sm-6">
+							<pretty-checkbox ng-model="permissions.negotiator"
+								value="'Negotiator'"></pretty-checkbox>
+						</div>
+						<div class="col-sm-6">
+							<pretty-checkbox ng-model="permissions.omitFromDiary"
+								value="'Omit From Diary'"></pretty-checkbox>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<pretty-checkbox ng-model="permissions.disableVisiblity"
+						value="'Disable Visiblity'"></pretty-checkbox>
+				</div>
+				<div class="col-sm-6 col-md-4"></div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="office">{{"permissions.office" | translate}}</label><input
+								type="text" class="form-control" id="office"
+								ng-model="permissions.office" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="mobile">{{"permissions.mobile" | translate}}</label><input
+								type="text" class="form-control" id="mobile"
+								ng-model="permissions.mobile" />
+						</div>
+						<div class="col-sm-6">
+							<label for="fax">{{"permissions.fax" | translate}}</label><input
+								type="text" class="form-control" id="fax"
+								ng-model="permissions.fax" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="maxResults">{{"permissions.maxResults"
+								|translate}}</label><input type="text" class="form-control"
+								id="maxResults" ng-model="permissions.maxResults" />
+						</div>
+						<div class="col-sm-6">
+							<label for="referencingId">{{"permissions.referncingId"
+								|translate}}</label><input type="text" class="form-control"
+								id="referencingId" ng-model="permissions.referencingId" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="diaryClashLevel">{{"permissions.diaryClashLevel"|
+								translate}}</label><input type="text" class="form-control"
+								id="diaryClashLevel" ng-model="permissions.diaryClashLevel" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="associateWithOfc">{{"permissions.associateWithOfc"|
+								translate}}</label>
+							<div uib-dropdown dropdown-append-to-body>
+								<button id="associateWithOfc" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="userTemplate">{{"permissions.userTemplate"|
+								translate}}</label>
+							<div uib-dropdown dropdown-append-to-body>
+								<button id="userTemplate" type="button" class="btn form-control"
+									uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="commission">{{"permissions.commission"|translate}}</label><input
+								type="text" class="form-control" id="commission"
+								ng-model="permissions.commission" />
+						</div>
+						<div class="col-sm-6">
+							<label for="mailServer">{{"permissions.mailServer"|translate}}</label>
+							<div uib-dropdown dropdown-append-to-body>
+								<button id="mailServer" type="button" class="btn form-control"
+									uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="email">{{"permissions.email"|translate}}</label><input
+								type="text" class="form-control" id="email"
+								ng-model="permissions.email" />
+						</div>
+						<div class="col-sm-6">
+							<label for="emailUsername">{{"permissions.emailUsername"|translate}}</label><input
+								type="text" class="form-control" id="emailUsername"
+								ng-model="permissions.emailUsername" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="userPwd">{{"permissions.userPwd"|translate}}</label><input
+								type="text" id="userPwd" ng-model="permissions.userPwd" />
+						</div>
+						<div class="col-sm-6">
+							<button type="button" class="btn btn-secondary">{{"permissions.reveal"|translate}}</button>
+							<button type="button" class="btn btn-secondary">{{"permissions.test"|translate}}</button>
+							<!-- <div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-secondary">{{"permissions.reveal"|translate}}</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-secondary">{{"permissions.test"|translate}}</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="docMgtUser">{{"permissions.docMgtUser"|translate}}</label><input
+								type="text" class="form-control" id="docMgtUser"
+								ng-model="permissions.docMgtUser" />
+						</div>
+						<div class="col-sm-6">
+							<label for="docMgtPwd">{{"permissions.docMgtPwd"|translate}}</label><input
+								type="text" class="form-control" id="docMgtPwd"
+								ng-model="permissions.docMgtPwd" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="desc">{{"permissions.desc"|translate}}</label><input
+								type="text" class="form-control" id="desc"
+								ng-model="permissions.desc" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="expires">{{"permissions.expires"|translate}}</label>
+							<div class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="dt"
+									is-open="status.opened" max-date="maxDate"
+									datepicker-options="dateOptions"
+									date-disabled="disabled(date, mode)" ng-required="true"
+									close-text="Close" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open($event)">
+										<i class="fa fa-calendar icon-extra-small"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="allowedInstances">{{"permissions.allowedInstances"|translate}}</label><input
+								type="text" class="form-control" id="allowedInstances"
+								ng-model="permissions.allowedInstances" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4"></div>
+			</div>
+		</form>
+	</div>
+	</uib-tab> <uib-tab> <uib-tab-heading>{{"permissions.accessRights"
+	| translate}}</uib-tab-heading>
+	<div class="panel-body">
+		<form>
+			<div class="row">
+				<h3>{{"userDetails.permissions" | translate}}</h3>
+				<br /> <br />
+				<div class="col-sm-4">
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="userIdleTimeout">{{"userDetails.userWorkflowAccess"|translate}}</label>
+								<button id="btn-append-to-body" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="userIdleTimeout">{{"userDetails.userReportsAccess"|translate}}</label>
+								<button id="btn-append-to-body" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="userIdleTimeout">{{"userDetails.userLettersAccess"|translate}}</label>
+								<button id="btn-append-to-body" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="userIdleTimeout">{{"userDetails.userIdleTimeout"|translate}}</label><input
+								type="text" class="form-control" id="userIdleTimeout"
+								ng-model="permissions.userIdleTimeout" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 checkbox">
+							<pretty-checkbox ng-model="permissions.disableUserTimeout"
+								value="'Disable User Timeout'"></pretty-checkbox>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default bg-color-fourth">
+						<div class="panel-body">
+							<label for="groupAccess">{{"userDetails.groupAccess"|translate}}</label><input
+								type="text" class="form-control" id="groupAccess"
+								ng-model="permissions.groupAccess" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="well bg-color-primary">
+						<pretty-checkbox ng-model="permissions.disableUserTimeout"
+							value="'Negotiator'"></pretty-checkbox>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</uib-tab> 
+	<uib-tab> <uib-tab-heading ng-click="getGroupData()">{{"permissions.ofcLevelSecurity"
+	| translate}}<span ></span></uib-tab-heading>
+	<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>{{"userDetails.editPermissions" | translate}}</h3>
+					<label for="searchOfc">{{"userDetails.searchOfc" |
+						translate}}</label> <input type="text" id="searchOfc" class="form-control"
+						ng-model="permissions.SearchOfc" />
+				</div>
+			</div>
+			<br />
+			<br />
+			<br />
+			<div class="row bg-color-ninth"">
+				<div class="col-sm-3 col-md-2">
+					{{"ofcSecurity.name" | translate}}
+				</div>
+				<div class="col-sm-2 col-md-2">
+					{{"ofcSecurity.code" | translate}}
+				</div>
+				<div class="col-sm-2 col-md-1">
+					{{"ofcSecurity.type" | translate}}
+				</div>
+				<div class="col-sm-1 col-md-1">
+					{{"ofcSecurity.none" | translate}}
+				</div>
+				<div class="col-sm-1 col-md-1">
+					{{"ofcSecurity.read" | translate}}
+				</div>
+				<div class="col-sm-1 col-md-1">
+					{{"ofcSecurity.write" | translate}}
+				</div>
+				<div class="col-sm-1 col-md-1">
+					{{"ofcSecurity.execute" | translate}}
+				</div>
+				<div class="col-sm-1 col-md-1">
+					{{"ofcSecurity.appmatch" | translate}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<uib-accordion class="bg-color-fourth" close-others="true">
+						<uib-accordion-group ng-repeat="group in groups" class="bg-color-fourth"> 
+							<uib-accordion-heading>
+								<div class="row">
+									<div class="col-sm-3 col-md-2">
+										{{group.name}}
+									</div>
+									<div class="col-sm-2 col-md-2">
+										{{group.code}} 
+									</div>
+									<div class="col-sm-2 col-md-1">
+										{{group.type}}
+									</div>
+									<div class="col-sm-1 col-md-1">
+										{{group.none}}
+									</div>
+									<div class="col-sm-1 col-md-1">
+										{{group.read}}
+									</div>
+									<div class="col-sm-1 col-md-1">
+										{{group.write}}
+									</div>
+									<div class="col-sm-1 col-md-1">
+										{{group.execute}}
+									</div>
+									<div class="col-sm-1 col-md-1">
+										{{group.appmatch}}
+									</div>
+									<i class="pull-right text-twenty icon-small"
+												ng-class="{'fa fa-minus': status.open, 'fa fa-plus': !status.open}"></i>
+								</div>
+						    </uib-accordion-heading>
+						  <div ng-repeat="item in items">{{item}}</div>
+					  </uib-accordion-group> 
+					</uib-accordion>
+			</div>
+		</div>		
+	</div>
+	</uib-tab> <uib-tab> <uib-tab-heading>{{"permissions.Kpis"
+	| translate}}</uib-tab-heading>
+	<div class="panel-body">
+		<form>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>{{"userDetails.permissions" | translate}}</h3>
+					<br />
+					<pretty-checkbox ng-model="permissions.disableKpi"
+						value="'Disable KPI'"></pretty-checkbox>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="bg-color-ninth">
+								<tr>
+									<th>{{"kpi.availableSubscriptions" | translate}}</th>
+									<th>{{"kpi.select" | translate}}</th>
+									<th>{{"home.editBtn" | translate}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="kpi in kpis" class="bg-color-fourth">
+									<td>{{kpi.kpiName}}</td>
+									<td><pretty-checkbox ng-model="permissions.kpi" value="''"></pretty-checkbox></td>
+									<td><i
+										class="propcoicon propcoicon-t-icon icon-small text-primary"></i></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</uib-tab> </uib-tabset>
+	<div class="row">
+		<div class="col-sm-12  text-right" id="controlBtn">
+			<button class="btn btn-sm btn-eleventh" type="button">Cancel</button>
+			<button class="btn btn-ninth" type="button">Back</button>
+			<button class="btn btn-secondary" type="submit">Submit</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

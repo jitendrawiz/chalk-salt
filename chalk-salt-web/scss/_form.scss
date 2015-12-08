@@ -1,0 +1,19 @@
+label{
+    font-weight: normal;
+}
+
+.checkbox {
+    margin-top:25px;
+    
+    input[type="checkbox"]{
+        width: 30px;
+        height: 30px;
+    }
+    
+    label{
+        padding-top: 7px;
+    }
+}
+form .row {
+	height: 80px;
+}

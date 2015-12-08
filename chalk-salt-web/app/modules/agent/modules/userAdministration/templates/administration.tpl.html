@@ -1,0 +1,117 @@
+<div id="administration">
+	<div class="row" id="userMgtModal">
+		<div class="col-sm-12">
+			<h1>{{"userAdministration.userAdministration" | translate}}</h1>
+			<br />
+			<br />
+		</div>
+		<div class="col-sm-2 bg-color-fourth text-center">
+			<ul class="nav nav-pills nav-stacked">
+				<li ng-class="{ active:isSet(1)}">
+					<div ng-click="setTab(1)">
+						<i
+							class="propcoicon propcoicon-user-management text-sixth icon-xxl"></i>
+						<a href="">{{"userAdministration.userManagement" | translate}}</a>
+					</div>
+				</li>
+				<li ng-class="{ active:isSet(2)}">
+					<div ng-click="setTab(2)">
+						<i
+							class="propcoicon propcoicon-add-user text-sixth icon-xxl"></i>
+						<a href="">{{"userAdministration.addUser" | translate}}</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<i
+							class="propcoicon propcoicon-user-templates text-sixth icon-xxl"></i>
+						<a href="">{{"userAdministration.userTemplates" | translate}}</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<i
+							class="propcoicon propcoicon-applicant-management text-sixth icon-xxl"></i>
+						<a href="">{{"userAdministration.accessMatrix" | translate}}</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col-sm-8">
+			<div ng-show="isSet(1)" id="searchUser">
+				<div ng-show="!enableCopyUser">
+					<h3>{{"userAdministration.searchUser" | translate}}</h3>
+					<br />
+					<form class="search" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" name="search"
+								placeholder="Type Keywords e.g. Logname, Name, Knownas etc"
+								ng-model="searchKeyword" ng-keyup="startSearch()"
+								ng-enter="performSearch()">
+							<div class="input-group-btn">
+								<button type="submit" class="btn btn-eighth">
+									<i
+										class="propcoicon propcoicon-dropdown text-primary icon-extra-small"></i>
+									<span ng-click="performSearch()"> <i
+										class="propcoicon propcoicon-search text-primary icon-extra-small"></i></span>
+								</button>
+							</div>
+						</div>
+					</form>
+					<table class="table table-responsive">
+						<tr class="bg-color-fifth"
+							ng-repeat="i in userData | filter: searchKeyword"
+							ng-if="!userManipulation">
+							<td><i
+								class="propcoicon propcoicon-user-management icon-small"></i></td>
+							<td class="text-twentythird">{{i.logname}}</td>
+							<td class="text-fourteenth">{{i.username}}</td>
+							<td class="text-seventh">{{i.office}}</td>
+							<td class="text-twentyfourth">{{i.position}}</td>
+							<td class="text-thirteenth">Propco Id: {{i.propcoId}}</td>
+						</tr>
+					</table>
+					<div class="well bg-color-thirtysecond" ng-repeat="i in userData | filter: searchKeyword"
+						 id="searchResult" ng-if="userManipulation">
+						<div class="row">
+							<div class="col-sm-2 text-right">
+								<div id="avatarBlock" ></div>
+							</div>
+							<div class="col-sm-4 text-left">
+								<div class="text-ninth"><h4>{{i.username}}</h4></div>
+								<div class="text-secondary"><h4>{{i.position}}</h4></div>
+							</div>
+							<div class="col-sm-4 col-sm-offset-2 text-right">
+								<div class="text-primary">Propco Id: {{i.propcoId}}</div>
+								<br />
+								<div id="userMgtIcons">
+									<span ng-click="showCopyUser()"><i
+										class="propcoicon propcoicon-copy-user icon-mid text-primary"></i></span>
+										
+									<span ng-click="openModal('sm')"><i class="propcoicon propcoicon-copy-user icon-mid text-primary"></i></span>
+									<i
+										class="propcoicon propcoicon-copy-user icon-mid text-primary"></i>
+									<i
+										class="propcoicon propcoicon-t-icon icon-mid text-primary"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-show="enableCopyUser">
+				<h3>{{"userAdministration.copyUser" | translate}}</h3>
+				<div
+					ng-include="'modules/agent/modules/userAdministration/templates/registrationDetails.tpl.html'"></div>
+			</div>
+			<div ng-show="isSet(2)">
+				<div
+					ng-include="'modules/agent/modules/userAdministration/templates/userDetails.tpl.html'"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+
+
