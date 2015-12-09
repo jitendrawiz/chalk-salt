@@ -149,10 +149,10 @@ public class DomainAuthRealm extends AuthorizingRealm {
                 coreException);
         }
         
-        if(!checkAllowedLicense(authInfo.getOfficeDatabase(), authInfo.getNumberOfLicenses())){
+        /*if(!checkAllowedLicense(authInfo.getOfficeDatabase(), authInfo.getNumberOfLicenses())){
             throw new AuthenticationException("Error occurred while checking allowed License against Domain '" + authInfo.getOfficeDatabase() + "'", new CoreException("Current license usage has exceeded. Please contact administrator."));            
            
-        }
+        }*/
         
         final DomainUserPrincipal userPrincipal = getDomainUserPrincipal(authInfo);
         final UserDetailDto userDetail = authInfo.getUserDetail();

@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
-import com.chalk.salt.common.dto.PropcoConstants;
+import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.exceptions.UserException;
 
 /**
@@ -51,7 +51,7 @@ public class ConnectionFactory {
             return sql2oConnections.get(jndiName);
         }
 
-        final String dataSourceJndi = PropcoConstants.JNDI_PREFIX + jndiName;
+        final String dataSourceJndi = ChalkSaltConstants.JNDI_PREFIX + jndiName;
         DataSource dataSource = null;
         try {
             final InitialContext initialContext = new InitialContext();

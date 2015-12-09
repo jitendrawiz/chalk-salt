@@ -98,16 +98,13 @@ public class AuthResource extends AbstractResource {
             domainUserPrincipal = (DomainUserPrincipal) currentUser.getPrincipal();
         
         
-            final SaveLoginRequestDto saveLoginRequest = new SaveLoginRequestDto(domainUserPrincipal.getUserId(), username, clientIpAddresses,
+            /*final SaveLoginRequestDto saveLoginRequest = new SaveLoginRequestDto(domainUserPrincipal.getUserId(), username, clientIpAddresses,
                 domainUserPrincipal.getOfficeJndi(), domainUserPrincipal.getMaxAllowedFailureLoginAttempts(), authenticationStatus);
-            userFacade.saveLoginStatus(saveLoginRequest);
-            response.put("securUuid", domainUserPrincipal.getSecurUuid());
+            //userFacade.saveLoginStatus(saveLoginRequest);
+*/            response.put("securUuid", domainUserPrincipal.getSecurUuid());
             response.put("fullName", domainUserPrincipal.getFullName());
             
-        } catch (final UserException userException) {
-            final ErrorCode errorCode = userException.getErrorCode();
-            throw Utility.buildResourceException(errorCode, userException, Status.UNAUTHORIZED, CoreException.class);
-        }
+        } 
         catch(final Exception exception){
             String msg = null;
             if(exception instanceof IncorrectCredentialsException){
@@ -117,9 +114,9 @@ public class AuthResource extends AbstractResource {
             }
             
             
-            if(userFacade.saveRejectedUserDetails(username, clientIpAddresses, AuthStatus.REJECTED)){
+            /*if(userFacade.saveRejectedUserDetails(username, clientIpAddresses, AuthStatus.REJECTED)){
                 throw Utility.buildResourceException(ErrorCode.LOGIN_COUNT_PER_USER_EXCEEDED,"Due to multiple incorrect login attempts, your account has been locked. Please click 'Unblock account' to continue.",Status.UNAUTHORIZED, CoreException.class);
-            }
+            }*/
             
             throw Utility.buildResourceException(ErrorCode.AUTHENTICATION_FAILURE,msg,Status.UNAUTHORIZED, CoreException.class);
             

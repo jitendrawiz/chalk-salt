@@ -16,7 +16,7 @@ import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.AuthStatus;
 import com.chalk.salt.common.dto.DomainDetailDto;
-import com.chalk.salt.common.dto.PropcoConstants;
+import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.SaveLoginRequestDto;
 import com.chalk.salt.common.dto.UserDetailDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao {
         final String sqlQuery = "SELECT `tbl_user`.`logname` AS logname  "
             + " FROM tbl_user AS tbl_user "
             + "WHERE ((tbl_user.logname = :username))";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("username", username);
@@ -115,7 +115,7 @@ public class UserDaoImpl implements UserDao {
         final String sqlQuery = "SELECT `tbl_user_domain`.`user_id` AS userId "
             + " FROM tbl_user_domain AS tbl_user_domain "
             + "WHERE ((tbl_user_domain.secur_uuid = :securId)) LIMIT 1";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securId", securUuid);
@@ -133,7 +133,7 @@ public class UserDaoImpl implements UserDao {
         final String sqlQuery = "SELECT `tbl_clients`.`master_id` AS masterId  "
             + " FROM tbl_clients AS tbl_clients "
             + "WHERE ((tbl_clients.jndisys = :jndisys))";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("jndisys", systemJndi);
@@ -151,7 +151,7 @@ public class UserDaoImpl implements UserDao {
         final String sqlQuery = "INSERT  INTO tbl_user (`logname`,`logpass`) "
             + "values (:logname, :logpass) ON DUPLICATE KEY "
             + "UPDATE `logname` = :logname, `logpass` = :logpass";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("logname", username);
@@ -189,7 +189,7 @@ public class UserDaoImpl implements UserDao {
     public boolean saveDomainDetail(final Long userId, final String securUuid, final Long masterId, final Integer iref, final boolean defaultDomain) throws Exception {
         final String sqlQuery = "INSERT  INTO tbl_user_domain ( `user_id`, `secur_uuid`, `master_id`, `iref`, `is_default` ) "
             + " values (:userId, :securUuid, :masterId, :iref, :defaultDomain)";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("userId", userId);
@@ -263,7 +263,7 @@ public class UserDaoImpl implements UserDao {
         String sqlQuery = "SELECT `tbl_user_domain`.`iref` AS iref "
             + " FROM tbl_user_domain AS tbl_user_domain "
             + "WHERE ((tbl_user_domain.secur_uuid = :securId))";
-        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securId", securUuid);
@@ -360,7 +360,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void lockUser(String officeJndi, SaveLoginRequestDto saveLoginRequest, String currentDate) throws Exception {        
         
-        final Sql2o datasource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);        
+        final Sql2o datasource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);        
         final String sqlQuery = "update tbl_user set locked_at = :lockedAt WHERE user_id = :userId AND logname = :userName";
             
         try (final Connection connection = datasource.beginTransaction()) {
@@ -398,7 +398,7 @@ public class UserDaoImpl implements UserDao {
         final String sqlQuery = "SELECT `secur_uuid` AS secur_uuid FROM tbl_user AS tbl_user"
             + " Join tbl_user_domain AS tbl_userdomain ON tbl_userdomain.user_id=tbl_user.user_id"
             + " WHERE tbl_user.locked_at IS NULL and tbl_userdomain.iref = :iref";
-        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);   
             query.addParameter("iref", iref);
@@ -427,7 +427,7 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public void disableUser(Long userId, String disableDate) throws Exception {
-        final Sql2o datasource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);        
+        final Sql2o datasource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);        
         final String sqlQuery = "update tbl_user set disabled_from = :disabledFrom WHERE user_id = :userId";
             
         try (final Connection connection = datasource.beginTransaction()) {
@@ -480,7 +480,7 @@ public class UserDaoImpl implements UserDao {
             + " FROM tbl_user AS tbl_user "
             + " Join tbl_user_domain AS tbl_userdomain ON tbl_userdomain.user_id=tbl_user.user_id"
             + " WHERE ((tbl_userdomain.secur_uuid = :securId)) LIMIT 1";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securId", securUuid);

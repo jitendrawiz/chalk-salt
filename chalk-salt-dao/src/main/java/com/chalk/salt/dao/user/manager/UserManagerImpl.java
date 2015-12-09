@@ -25,7 +25,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AuthStatus;
 import com.chalk.salt.common.dto.DomainDetailDto;
 import com.chalk.salt.common.dto.DomainUserPrincipalDto;
-import com.chalk.salt.common.dto.PropcoConstants;
+import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.SaveLoginRequestDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.dto.UserIconDto;
@@ -163,7 +163,7 @@ public class UserManagerImpl implements UserManager {
         final String systemJndi = domainDto.getSystemJndi();
         List<DomainDetailDto> domains = userDetail.getDomainDetails();
         try {
-            final Sql2o sql2o = ConnectionFactory.provideSql2oInstance(PropcoConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+            final Sql2o sql2o = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
             try(Connection conn = sql2o.beginTransaction()){
                 final Long masterId = officeDao.getMasterIdBySystemJndi(systemJndi);
                 final Long userId = officeDao.saveLoginDetails(username, userDetail.getPassword());

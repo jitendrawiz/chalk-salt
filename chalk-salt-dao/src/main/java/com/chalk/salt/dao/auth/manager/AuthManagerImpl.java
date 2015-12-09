@@ -73,7 +73,7 @@ public class AuthManagerImpl implements AuthManager {
         if (domainInfo == null) {
             throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");
         }
-        final String systemJndi = domainInfo.getSystemJndi();
+        /*final String systemJndi = domainInfo.getSystemJndi();
         final Long iRef = domainInfo.getIref();
         final String securUuid = domainInfo.getSecurUuid();
         if (StringUtils.isBlank(systemJndi) || (iRef == null || iRef <= 0) || StringUtils.isBlank(securUuid)) {
@@ -103,18 +103,19 @@ public class AuthManagerImpl implements AuthManager {
             userDetail = officeDao.fetchUserDetails(securUuid, officeJndi);
         } catch (Exception exception) {
             throw new UserException(exception);
-        }
-
+        }*/
+        UserDetailDto userDetail = new UserDetailDto();
         userDetail.setUsername(domainInfo.getUsername());
         userDetail.setPassword(domainInfo.getPassword());
         userDetail.setUserId(domainInfo.getUserId());
         final AuthInfoDto authInfo = new AuthInfoDto();
-        authInfo.setOfficeJndi(officeJndi);
+        authInfo.setUserDetail(userDetail);
+        /*authInfo.setOfficeJndi(officeJndi);
         authInfo.setSystemJndi(systemJndi);
         authInfo.setUserDetail(userDetail);
         authInfo.setOfficeDatabase(officeDatabase);
         authInfo.setMaxAllowedFailureLoginAttempts(systemDetail.getNumberOfLoginAttempts());
-        authInfo.setNumberOfLicenses(systemDetail.getNumberOfLicense());
+        authInfo.setNumberOfLicenses(systemDetail.getNumberOfLicense());*/
         return authInfo;
     }
 }
