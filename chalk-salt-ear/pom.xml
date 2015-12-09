@@ -46,7 +46,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>propco-enterprise-api</artifactId>
+            <artifactId>chalk-salt-api</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
