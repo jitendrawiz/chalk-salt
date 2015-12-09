@@ -29,15 +29,6 @@ public class DomainUserPrincipal extends UserPrincipal {
     /** The email. */
     private String email;
 
-    /** The office jndi name. */
-    private String officeJndi;
-
-    /** The system jndi name. */
-    private String systemJndi;
-
-    /** The max allowed failure login attempts. */
-    private int maxAllowedFailureLoginAttempts;
-
     /**
      * Instantiates a new domain user principal.
      *
@@ -96,23 +87,6 @@ public class DomainUserPrincipal extends UserPrincipal {
         return userName;
     }
 
-    /**
-     * Gets the max allowed failure login attempts.
-     *
-     * @return the maxAllowedFailureLoginAttempts
-     */
-    public int getMaxAllowedFailureLoginAttempts() {
-        return maxAllowedFailureLoginAttempts;
-    }
-
-    /**
-     * Sets the max allowed failure login attempts.
-     *
-     * @param maxAllowedFailureLoginAttempts the maxAllowedFailureLoginAttempts to set
-     */
-    public void setMaxAllowedFailureLoginAttempts(final int maxAllowedFailureLoginAttempts) {
-        this.maxAllowedFailureLoginAttempts = maxAllowedFailureLoginAttempts;
-    }
 
     /**
      * Gets the user id.
@@ -158,42 +132,6 @@ public class DomainUserPrincipal extends UserPrincipal {
      */
     public void setSecurUuid(final String securUuid) {
         this.securUuid = securUuid;
-    }
-
-    /**
-     * Gets the office jndi.
-     *
-     * @return the office jndi
-     */
-    public String getOfficeJndi() {
-        return officeJndi;
-    }
-
-    /**
-     * Sets the office jndi.
-     *
-     * @param officeJndi the new office jndi
-     */
-    public void setOfficeJndi(String officeJndi) {
-        this.officeJndi = officeJndi;
-    }
-
-    /**
-     * Gets the system jndi.
-     *
-     * @return the system jndi
-     */
-    public String getSystemJndi() {
-        return systemJndi;
-    }
-
-    /**
-     * Sets the system jndi.
-     *
-     * @param systemJndi the new system jndi
-     */
-    public void setSystemJndi(String systemJndi) {
-        this.systemJndi = systemJndi;
     }
 
 }

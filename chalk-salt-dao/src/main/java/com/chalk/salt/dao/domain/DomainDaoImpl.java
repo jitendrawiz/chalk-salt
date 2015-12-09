@@ -29,7 +29,10 @@ public class DomainDaoImpl implements DomainDao {
     public DomainInfo obtainUserDomainDetails(final String userName) throws UserException {
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
 
-        final String sqlQuery = "SELECT user_id AS userId, username AS UserName, password FROM cst_logins WHERE username= :userName";
+        final String sqlQuery = "SELECT login.user_id AS userId, login.username AS UserName, login.password, "
+        		+ "user.fore_name as foreName, user.middle_name as middleName, user.last_name as lastName, secur_uuid as securUuid, "
+        		+ "login.active FROM cst_logins as login "
+        		+ "JOIN cst_users as user on user.user_id = login.user_id WHERE username= :userName";
 
         DomainInfo domainInfo = null;
         try (final Connection connection = dataSource.open()) {

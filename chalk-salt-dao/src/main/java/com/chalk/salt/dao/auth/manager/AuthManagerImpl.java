@@ -49,9 +49,6 @@ public class AuthManagerImpl implements AuthManager {
     @AppLogger
     private Logger logger;
 
-    /** The Constant AUTHENTICATION_TYPE. */
-    private static final String AUTHENTICATION_TYPE = "IP";
-
     /*
      * (non-Javadoc)
      * 
@@ -73,49 +70,17 @@ public class AuthManagerImpl implements AuthManager {
         if (domainInfo == null) {
             throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");
         }
-        /*final String systemJndi = domainInfo.getSystemJndi();
-        final Long iRef = domainInfo.getIref();
-        final String securUuid = domainInfo.getSecurUuid();
-        if (StringUtils.isBlank(systemJndi) || (iRef == null || iRef <= 0) || StringUtils.isBlank(securUuid)) {
-            throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");
-        }
-        final SystemDetail systemDetail = systemDao.obtainUserSystemDetails(systemJndi, iRef);
-        if (systemDetail == null) {
-            throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");
-        }
-        final List<String> clientIpAddresses = authRequest.getClientIpAddresses();
-        String commaSeperatedHostAddress = null;
-        try {
-            commaSeperatedHostAddress = Utility.getCommaSeperatedHostName(clientIpAddresses);
-        } catch (final UnknownHostException unknownHostException) {
-            throw new UserException(ErrorCode.IP_NOT_ALLOWED, "Your IP Address does not match our records.Please Contact administrator.");
-        }
-
-        final boolean isUserIpAllowed = systemDao.isIPAddressAllowed(iRef, commaSeperatedHostAddress, systemJndi);
-        if (AUTHENTICATION_TYPE.equals(systemDetail.getAuthenticationType()) && !isUserIpAllowed) {
-            throw new UserException(ErrorCode.IP_NOT_ALLOWED, "Your IP Address does not match our records.Please Contact administrator.");
-        }
-
-        final String officeJndi = systemDetail.getOfficeJndi();
-        final String officeDatabase = systemDetail.getOfficeDatabase();
-        UserDetailDto userDetail;
-        try {
-            userDetail = officeDao.fetchUserDetails(securUuid, officeJndi);
-        } catch (Exception exception) {
-            throw new UserException(exception);
-        }*/
+       
         UserDetailDto userDetail = new UserDetailDto();
         userDetail.setUsername(domainInfo.getUsername());
         userDetail.setPassword(domainInfo.getPassword());
         userDetail.setUserId(domainInfo.getUserId());
+        userDetail.setForename(domainInfo.getForeName());
+        userDetail.setMiddleName(domainInfo.getMiddleName());
+        userDetail.setSurname(domainInfo.getLastName());
+        
         final AuthInfoDto authInfo = new AuthInfoDto();
         authInfo.setUserDetail(userDetail);
-        /*authInfo.setOfficeJndi(officeJndi);
-        authInfo.setSystemJndi(systemJndi);
-        authInfo.setUserDetail(userDetail);
-        authInfo.setOfficeDatabase(officeDatabase);
-        authInfo.setMaxAllowedFailureLoginAttempts(systemDetail.getNumberOfLoginAttempts());
-        authInfo.setNumberOfLicenses(systemDetail.getNumberOfLicense());*/
         return authInfo;
     }
 }

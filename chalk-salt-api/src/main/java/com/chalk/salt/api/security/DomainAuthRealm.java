@@ -5,9 +5,7 @@
 package com.chalk.salt.api.security;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -29,7 +27,6 @@ import com.chalk.salt.api.model.security.DomainUserPrincipal;
 import com.chalk.salt.common.dto.AuthInfoDto;
 import com.chalk.salt.common.dto.AuthRequest;
 import com.chalk.salt.common.dto.UserDetailDto;
-import com.chalk.salt.common.exceptions.CoreException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.core.security.AuthFacade;
 import com.chalk.salt.core.user.UserFacade;
@@ -54,8 +51,6 @@ public class DomainAuthRealm extends AuthorizingRealm {
     /** The Constant HASHING_ALGORITHM_NAME. */
     private static final String HASHING_ALGORITHM_NAME = "BCrypt";
     
-    private static Map<String, Integer> loggedInUsers;
-
     /**
      * Instantiates a new database auth realm.
      *
@@ -149,37 +144,12 @@ public class DomainAuthRealm extends AuthorizingRealm {
                 coreException);
         }
         
-        /*if(!checkAllowedLicense(authInfo.getOfficeDatabase(), authInfo.getNumberOfLicenses())){
-            throw new AuthenticationException("Error occurred while checking allowed License against Domain '" + authInfo.getOfficeDatabase() + "'", new CoreException("Current license usage has exceeded. Please contact administrator."));            
-           
-        }*/
-        
         final DomainUserPrincipal userPrincipal = getDomainUserPrincipal(authInfo);
         final UserDetailDto userDetail = authInfo.getUserDetail();
         final String base64DecodedPassword = Base64.decodeToString(userDetail.getPassword().getBytes());
         final SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userPrincipal, userDetail.getPassword(), getName());
         authenticationInfo.setCredentialsSalt(new SimpleByteSource(base64DecodedPassword));
         return authenticationInfo;
-    }
-
-    private boolean checkAllowedLicense(final String officeDatabase, int numberOfLicenses) {
-        
-        int licenseCount = 0;
-        if(loggedInUsers== null){
-            loggedInUsers = new HashMap<String, Integer>();
-        } 
-        
-        if(loggedInUsers.containsKey(officeDatabase) && loggedInUsers.get(officeDatabase)>=0){
-            licenseCount = loggedInUsers.get(officeDatabase).intValue()+1;
-            loggedInUsers.put(officeDatabase, licenseCount);
-            if(licenseCount>numberOfLicenses){                
-                return false;
-            }
-        }
-        else{
-            loggedInUsers.put(officeDatabase, 0);
-        }        
-        return true;
     }
 
     /**
@@ -192,10 +162,7 @@ public class DomainAuthRealm extends AuthorizingRealm {
         final UserDetailDto user = authenticationInfo.getUserDetail();
         final DomainUserPrincipal userPrincipal = new DomainUserPrincipal(user.getUserId(), user.getUsername());
         userPrincipal.setEmail(user.getEmail());
-        userPrincipal.setFullName(user.getDisplayAs());
-        userPrincipal.setOfficeJndi(authenticationInfo.getOfficeJndi());
-        userPrincipal.setSystemJndi(authenticationInfo.getSystemJndi());
-        userPrincipal.setMaxAllowedFailureLoginAttempts(authenticationInfo.getMaxAllowedFailureLoginAttempts());
+        userPrincipal.setFullName(user.getForename()+" "+user.getSurname());
         userPrincipal.setSecurUuid(user.getSecurUuid());
         return userPrincipal;
     }

@@ -158,7 +158,7 @@ public class UserResource extends AbstractResource {
      * Gets the domains list.
      *
      * @return the domains list
-     */
+     *//*
     @GET
     @Path("/user/domains")
     @Produces(MediaType.APPLICATION_JSON)   
@@ -183,12 +183,12 @@ public class UserResource extends AbstractResource {
         return Response.ok().entity(domainModel).build();
     }
 
-    /**
+    *//**
      * Gets the domain detail model.
      *
      * @param domains the domains
      * @return the domain detail model
-     */
+     *//*
     private List<DomainDetailModel> getDomainDetailModel(List<DomainDetailDto> domains) {
         final List<DomainDetailModel> domainModel = new ArrayList<DomainDetailModel>();
         for (DomainDetailDto domain : domains) {
@@ -200,12 +200,12 @@ public class UserResource extends AbstractResource {
         return domainModel;
     }
 
-    /**
+    *//**
      * Gets the icon list.
      *
      * @return the icon list
      * @throws UserException the user exception
-     */
+     *//*
     @GET
     @Path("user/icons")
     @Produces(MediaType.APPLICATION_JSON)
@@ -227,12 +227,12 @@ public class UserResource extends AbstractResource {
         return Response.ok().entity(userIcons).build();
     }
 
-    /**
+    *//**
      * Gets the user icon.
      *
      * @param icon the icon
      * @return the user icon
-     */
+     *//*
     private List<UserIconModel> getUserIconModel(final List<UserIconDto> icon) {
         List<UserIconModel> userIcons = new ArrayList<UserIconModel>();
         for (UserIconDto iconDto : icon) {
@@ -245,12 +245,12 @@ public class UserResource extends AbstractResource {
         return userIcons;
     }
 
-    /**
+    *//**
      * Save icon list.
      *
      * @param userIcon the user icon
      * @return the response
-     */
+     *//*
     @POST
     @Path("user/icons")
     @Produces(MediaType.APPLICATION_JSON)
@@ -278,12 +278,12 @@ public class UserResource extends AbstractResource {
         return Response.ok().entity(iconSavedSuccessfully).build();
     }
 
-    /**
+    *//**
      * Gets the user icon.
      *
      * @param icons the icons
      * @return the user icon
-     */
+     *//*
     private List<UserIconDto> getUserIconDto(final List<UserIconModel> icons) {
         List<UserIconDto> userIcons = new ArrayList<UserIconDto>();
         for (UserIconModel iconModel : icons) {
@@ -296,12 +296,12 @@ public class UserResource extends AbstractResource {
         return userIcons;
     }
     
-    /**
+    *//**
      * Gets the user list.
      *
      * @return the user list
      * @throws UserException the user exception
-     */
+     *//*
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
@@ -398,5 +398,5 @@ public class UserResource extends AbstractResource {
             throw Utility.buildInternalServerError(UserException.class, userException);
         }               
         return Response.ok(userDetails).build();        
-    }
+    }*/
 }

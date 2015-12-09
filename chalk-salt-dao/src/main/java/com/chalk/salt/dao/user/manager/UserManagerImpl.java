@@ -283,8 +283,8 @@ public class UserManagerImpl implements UserManager {
         if (domainInfo.equals(null)) {
             throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");
         }
-        final String systemJndi = domainInfo.getSystemJndi();
-        final Long iRef = domainInfo.getIref();
+        final String systemJndi = null;
+        final Long iRef = null;
         final String securUuid = domainInfo.getSecurUuid();
         if (StringUtils.isBlank(systemJndi) || (iRef == null || iRef <= 0) || StringUtils.isBlank(securUuid)) {
             throw new UserException(ErrorCode.INCORRECT_CREDENTIALS, "Username OR password is incorrect!");

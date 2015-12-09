@@ -95,13 +95,13 @@ public class AuthResource extends AbstractResource {
             if (currentUser.isAuthenticated()) {
                 authenticationStatus = AuthStatus.ACCEPTED;
             }
+            
+            if(authenticationStatus == AuthStatus.REJECTED){
+            	throw Utility.buildResourceException(ErrorCode.AUTHENTICATION_FAILURE,"Username OR password is incorrect!",Status.UNAUTHORIZED, CoreException.class);
+            }
             domainUserPrincipal = (DomainUserPrincipal) currentUser.getPrincipal();
         
-        
-            /*final SaveLoginRequestDto saveLoginRequest = new SaveLoginRequestDto(domainUserPrincipal.getUserId(), username, clientIpAddresses,
-                domainUserPrincipal.getOfficeJndi(), domainUserPrincipal.getMaxAllowedFailureLoginAttempts(), authenticationStatus);
-            //userFacade.saveLoginStatus(saveLoginRequest);
-*/            response.put("securUuid", domainUserPrincipal.getSecurUuid());
+            response.put("securUuid", domainUserPrincipal.getSecurUuid());
             response.put("fullName", domainUserPrincipal.getFullName());
             
         } 
@@ -112,14 +112,7 @@ public class AuthResource extends AbstractResource {
             } else {
                 msg = exception.getMessage();
             }
-            
-            
-            /*if(userFacade.saveRejectedUserDetails(username, clientIpAddresses, AuthStatus.REJECTED)){
-                throw Utility.buildResourceException(ErrorCode.LOGIN_COUNT_PER_USER_EXCEEDED,"Due to multiple incorrect login attempts, your account has been locked. Please click 'Unblock account' to continue.",Status.UNAUTHORIZED, CoreException.class);
-            }*/
-            
             throw Utility.buildResourceException(ErrorCode.AUTHENTICATION_FAILURE,msg,Status.UNAUTHORIZED, CoreException.class);
-            
         }
         return Response.ok().entity(response).build();
     }

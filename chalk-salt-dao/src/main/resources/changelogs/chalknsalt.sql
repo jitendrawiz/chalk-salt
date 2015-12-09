@@ -14,7 +14,7 @@ MySQL - 5.5.30 : Database - chalnsalt
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`chalnsalt` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `chalnsalt`;
+USE `chalknsalt`;
 
 /*Table structure for table `cst_contacts` */
 

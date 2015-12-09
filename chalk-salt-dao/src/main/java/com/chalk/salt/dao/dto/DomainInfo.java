@@ -14,20 +14,8 @@ public class DomainInfo {
     /** The user id. */
     private Long userId;
 
-    /** The iref. */
-    private Long iref;
-
-    /** The master id. */
-    private String masterId;
-
     /** The secur uuid. */
     private String securUuid;
-
-    /** The user type. */
-    private String userType;
-
-    /** The is default. */
-    private boolean isDefault;
 
     /** The active. */
     private boolean active;
@@ -35,211 +23,125 @@ public class DomainInfo {
     /** The username. */
     private String username;
 
-    /** The system jndi. */
-    private String systemJndi;
-
     /** The password. */
     private String password;
+    
+    private String foreName;
+    
+    private String middleName;
+    
+    private String lastName; 
 
-    /** The salt. */
-    private String salt;
+	/**
+	 * @return the userId
+	 */
+	public Long getUserId() {
+		return userId;
+	}
 
-    /**
-     * Gets the user id.
-     *
-     * @return the user id
-     */
-    public Long getUserId() {
-        return userId;
-    }
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    /**
-     * Sets the user id.
-     *
-     * @param userId the new user id
-     */
-    public void setUserId(final Long userId) {
-        this.userId = userId;
-    }
+	/**
+	 * @return the active
+	 */
+	public boolean isActive() {
+		return active;
+	}
 
-    /**
-     * Gets the iref.
-     *
-     * @return the iref
-     */
-    public Long getIref() {
-        return iref;
-    }
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    /**
-     * Sets the iref.
-     *
-     * @param iref the new iref
-     */
-    public void setIref(final Long iref) {
-        this.iref = iref;
-    }
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
 
-    /**
-     * Gets the master id.
-     *
-     * @return the master id
-     */
-    public String getMasterId() {
-        return masterId;
-    }
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    /**
-     * Sets the master id.
-     *
-     * @param masterId the new master id
-     */
-    public void setMasterId(final String masterId) {
-        this.masterId = masterId;
-    }
+	/**
+	 * @return the securUuid
+	 */
+	public String getSecurUuid() {
+		return securUuid;
+	}
 
-    /**
-     * Gets the secur uuid.
-     *
-     * @return the secur uuid
-     */
-    public String getSecurUuid() {
-        return securUuid;
-    }
+	/**
+	 * @param securUuid the securUuid to set
+	 */
+	public void setSecurUuid(String securUuid) {
+		this.securUuid = securUuid;
+	}
 
-    /**
-     * Sets the secur uuid.
-     *
-     * @param securUuid the new secur uuid
-     */
-    public void setSecurUuid(final String securUuid) {
-        this.securUuid = securUuid;
-    }
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
-    /**
-     * Gets the user type.
-     *
-     * @return the user type
-     */
-    public String getUserType() {
-        return userType;
-    }
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    /**
-     * Sets the user type.
-     *
-     * @param userType the new user type
-     */
-    public void setUserType(final String userType) {
-        this.userType = userType;
-    }
+	/**
+	 * @return the foreName
+	 */
+	public String getForeName() {
+		return foreName;
+	}
 
-    /**
-     * Checks if is default.
-     *
-     * @return true, if is default
-     */
-    public boolean isDefault() {
-        return isDefault;
-    }
+	/**
+	 * @param foreName the foreName to set
+	 */
+	public void setForeName(String foreName) {
+		this.foreName = foreName;
+	}
 
-    /**
-     * Sets the default.
-     *
-     * @param isDefault the new default
-     */
-    public void setDefault(final boolean isDefault) {
-        this.isDefault = isDefault;
-    }
+	/**
+	 * @return the middleName
+	 */
+	public String getMiddleName() {
+		return middleName;
+	}
 
-    /**
-     * Checks if is active.
-     *
-     * @return true, if is active
-     */
-    public boolean isActive() {
-        return active;
-    }
+	/**
+	 * @param middleName the middleName to set
+	 */
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 
-    /**
-     * Sets the active.
-     *
-     * @param active the new active
-     */
-    public void setActive(final boolean active) {
-        this.active = active;
-    }
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
 
-    /**
-     * Gets the system jndi.
-     *
-     * @return the system jndi
-     */
-    public String getSystemJndi() {
-        return systemJndi;
-    }
-
-    /**
-     * Sets the system jndi.
-     *
-     * @param systemJndi the new system jndi
-     */
-    public void setSystemJndi(final String systemJndi) {
-        this.systemJndi = systemJndi;
-    }
-
-    /**
-     * Gets the username.
-     *
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Sets the username.
-     *
-     * @param username the new username
-     */
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    /**
-     * Gets the password.
-     *
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets the password.
-     *
-     * @param password the new password
-     */
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    /**
-     * Gets the salt.
-     *
-     * @return the salt
-     */
-    public String getSalt() {
-        return salt;
-    }
-
-    /**
-     * Sets the salt.
-     *
-     * @param salt the new salt
-     */
-    public void setSalt(final String salt) {
-        this.salt = salt;
-    }
-
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 }
