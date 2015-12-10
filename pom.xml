@@ -56,7 +56,7 @@
         <servlet.api.version>1.0.2.Final-redhat-2</servlet.api.version>
         <docusign.restclient.version>1.0.4</docusign.restclient.version>
         <commons-collections.version>3.2.1</commons-collections.version>
-        <resteasy.version>2.3.10.Final-redhat-1</resteasy.version>
+        <resteasy.version>2.3.10.Final</resteasy.version>
         <jackson.version>1.9.9.redhat-4</jackson.version>
         <bank-lookup.version>1.0</bank-lookup.version>
         <mysql-connector.version>5.1.36</mysql-connector.version>

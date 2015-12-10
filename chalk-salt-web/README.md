@@ -1,4 +1,4 @@
-README for propco-web-client
+README for chalk and dust
 ==========================
 
 Steps to configure web client on Windows operating system
