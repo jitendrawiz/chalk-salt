@@ -51,11 +51,10 @@ public interface UserDao {
      * Save user details.
      *
      * @param userDetail the user detail
-     * @param netname the netname
      * @return true, if successful
      * @throws Exception the exception
      */
-    boolean saveUserDetails(final UserDto userDetail, final String netname) throws Exception;
+    boolean saveUserDetails(final UserDto userDetail) throws Exception;
     
     /**
      * Gets the user id by secur uuid.
@@ -114,5 +113,7 @@ public interface UserDao {
      * @throws Exception the exception
      */
     Long getIdByUuid(final String tableName, final String idFieldName, final String uuidFieldName, final String uuid) throws Exception;
+
+	Long saveContactDetails(UserDto userDetail) throws Exception;
 
 }

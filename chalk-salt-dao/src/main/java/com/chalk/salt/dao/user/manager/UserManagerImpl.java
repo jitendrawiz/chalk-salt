@@ -5,6 +5,7 @@
 package com.chalk.salt.dao.user.manager;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -56,7 +57,27 @@ public class UserManagerImpl implements UserManager {
     @Override
     public String registerUser(final DomainUserPrincipalDto domainDto, final UserDto userDetail) throws UserException {
         logger.info("Registering new user ......");
-
+        try {
+	        String userName = userDetail.getUserName();
+	        String hashedPassword = userDetail.getPassword();
+	  		String securUuid = UUID.randomUUID().toString();
+			Long userId = officeDao.saveLoginDetails(userName, hashedPassword);
+			userDetail.setSecurUuid(securUuid);
+			
+			if(userId==0 || userId == null){
+				throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save User Registration");
+			}
+			
+			Long contactId = officeDao.saveContactDetails(userDetail);
+			userDetail.setContactId(contactId);
+			if(!officeDao.saveUserDetails(userDetail)){
+				throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save User Registration");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         
         return userDetail.getSecurUuid();
     }
@@ -140,9 +161,9 @@ public class UserManagerImpl implements UserManager {
      */
     @Override
     public String saveUserInfo(final UserDto userDetails, final DomainUserPrincipalDto domainDto) throws UserException {
-        logger.info("Saving user details of username : {}", userDetails.getUsername());
+        logger.info("Saving user details of username : {}", userDetails.getUserName());
         String securUuid = null;
-        if (isUserExist(userDetails.getUsername())) {
+        if (isUserExist(userDetails.getUserName())) {
             // need more discussion about existing users. Remains for future enhancement.
             throw new UserException(ErrorCode.USER_ALREADY_EXITS, "user_already_exist");
         }

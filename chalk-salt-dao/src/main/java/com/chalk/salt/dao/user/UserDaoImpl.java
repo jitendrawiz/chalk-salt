@@ -99,14 +99,15 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public Long saveLoginDetails(final String username, final String hashedPassword) throws Exception {
-        final String sqlQuery = "INSERT  INTO tbl_user (`logname`,`logpass`) "
-            + "values (:logname, :logpass) ON DUPLICATE KEY "
+        final String sqlQuery = "INSERT  INTO tbl_user (`logname`,`logpass`,'active') "
+            + "values (:logname, :logpass, :active) ON DUPLICATE KEY "
             + "UPDATE `logname` = :logname, `logpass` = :logpass";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("logname", username);
             query.addParameter("logpass", hashedPassword);
+            query.addParameter("active", 1);
             return (Long) query.executeUpdate().getKey();
         }
     }
@@ -117,44 +118,21 @@ public class UserDaoImpl implements UserDao {
      * @see uk.co.propco.dao.user.UserDao#saveUserDetails(java.lang.String, uk.co.propco.common.dto.UserDetail, java.util.List)
      */
     @Override
-    public boolean saveUserDetails(final UserDto userDetail, final String officeJndi) throws Exception {
+    public boolean saveUserDetails(final UserDto userDetail) throws Exception {
 
-        final String sqlQuery = "INSERT  INTO tbl_secur (`secur_uuid`, `forename`, `surname`, `middle`, `jobtitle` , `aka` , `email`, "
-            + "`office` , `tel1` , `tel2` , `endsleigh_id`, `maxresults` , `diaryclashcheck` , `comm`, `mailservers_id`, `emailusername`, "
-            + "`emailpass`, `docmgtuser`, `docmgtpass`, `descr`, `passexp`, `login_count`, `neg`, `omitdiary`, `disable`) "
-            + " values (:secur_uuid, :forename, :surname, :middle, :jobtitle , :aka , :email, :office, :tel1, :tel2, :endsleigh_id, "
-            + ":maxresults, :diaryclashcheck, :comm, :mailservers_id, :emailusername, :emailpass, :docmgtuser, :docmgtpass, :descr, "
-            + ":passexp, :login_count, :neg, :omitdiary, :disable)";
+        final String sqlQuery = "INSERT INTO cst_user(`user_id`, `fore_name`, `middle_name`, `last_name`, `contact_id`)"
+        		+ "VALUES(:userId, :foreName, :middle, :surname, :contactId)";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
 
             query.addParameter("secur_uuid", userDetail.getSecurUuid());
-            query.addParameter("forename", userDetail.getForename());
-            query.addParameter("surname", userDetail.getSurname());
-            query.addParameter("middle", userDetail.getMiddle());
-            query.addParameter("jobtitle", userDetail.getJobTitle());
-            query.addParameter("aka", userDetail.getDisplayAs());
-            query.addParameter("email", userDetail.getEmail());
-            query.addParameter("office", userDetail.getOfficeId());
-            query.addParameter("tel1", userDetail.getMobile());
-            query.addParameter("tel2", userDetail.getFax());
-            query.addParameter("endsleigh_id", userDetail.getReferencingId());
-            query.addParameter("maxresults", userDetail.getMaxResults());
-            query.addParameter("diaryclashcheck", userDetail.getDiaryClashLevel());
-            query.addParameter("comm", userDetail.getCommission());
-            query.addParameter("mailservers_id", userDetail.getMailServerId());
-            query.addParameter("emailusername", userDetail.getUsername());
-            query.addParameter("emailpass", userDetail.getEmailPassword());
-            query.addParameter("docmgtuser", userDetail.getDocMgtUser());
-            query.addParameter("docmgtpass", userDetail.getDocMgtPassword());
-            query.addParameter("descr", userDetail.getDescription());
-            query.addParameter("passexp", userDetail.getExpires());
-            query.addParameter("login_count", userDetail.getAllowedInstances());
-            query.addParameter("neg", userDetail.getNegotiator());
-            query.addParameter("omitdiary", userDetail.getOmitDiary());
-            query.addParameter("disable", userDetail.getDisableVisibility());
+            query.addParameter("forename", userDetail.getForeName());
+            query.addParameter("surname", userDetail.getSurName());
+            query.addParameter("middle", userDetail.getMiddleName());
+            query.addParameter("userId", userDetail.getUserId());
+            query.addParameter("contactId", userDetail.getContactId());
 
             query.executeUpdate();
         }
@@ -244,7 +222,7 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("securUuid", securUuid);
             user = query.executeAndFetchFirst(UserDto.class);
         }
-        user.setUsername(userCredential.getUsername());
+        user.setUserName(userCredential.getUsername());
         // user.setPassword(userCredential.getPassword());
         return user;
     }
@@ -291,5 +269,27 @@ public class UserDaoImpl implements UserDao {
         }
         return id;
     }
+
+	@Override
+	public Long saveContactDetails(UserDto userDetail) throws Exception {
+		
+		final String sqlQuery = "INSERT INTO cst_contacts(`address`, `city`, `state`, `country`, `pincode`, `mobile`, `landline`, `email`)"
+				+ " VALUES(:address, :city, :state, :country, :pincode, :mobile, :landline, :email)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("address", userDetail.getAddress());
+            query.addParameter("city", userDetail.getCity());
+            query.addParameter("state", userDetail.getState());
+            query.addParameter("country", userDetail.getCountry());
+            query.addParameter("pincode", userDetail.getPincode());
+            query.addParameter("mobile", userDetail.getMobile());
+            query.addParameter("landline", userDetail.getLandline());
+            query.addParameter("email", userDetail.getEmail());
+            return (Long) query.executeUpdate().getKey();
+        }
+	}
+
+	
 
 }

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.chalk.salt.api.model.UserModel;
@@ -31,7 +30,7 @@ public class UserService {
      */
     public Map<String, String> validateUserRegistrationRequest(final UserModel user) {
         final Map<String, String> errors = new HashMap<String, String>();
-        if (StringUtils.isBlank(user.getUsername())) {
+        if (StringUtils.isBlank(user.getUserName())) {
             errors.put("username", "username can not be blank/null");
         }
         if (StringUtils.isBlank(user.getPassword())) {
@@ -43,24 +42,16 @@ public class UserService {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             errors.put("password mismatch", "password and confirm password should be same");
         }
-        if (StringUtils.isBlank(user.getForename())) {
+        if (StringUtils.isBlank(user.getForeName())) {
             errors.put("forename", "forename can not be blank/null");
         }
-        if (StringUtils.isBlank(user.getSurname())) {
+        if (StringUtils.isBlank(user.getSurName())) {
             errors.put("surname", "surname can not be blank/null");
-        }
-        if (StringUtils.isBlank(user.getJobTitle())) {
-            errors.put("jobtitle", "jobtitle can not be blank/null");
-        }
-        if (StringUtils.isBlank(user.getDisplayAs())) {
-            errors.put("displayAs", "displayAs can not be blank/null");
         }
         if (StringUtils.isBlank(user.getEmail())) {
             errors.put("emailAddress", "email address can not be blank/null");
         }
-        if (CollectionUtils.isEmpty(user.getDomainDetails())) {
-            errors.put("domainDetials", "domainDetails can not be blank/null");
-        }
+        
         return errors;
     }
 
@@ -75,11 +66,9 @@ public class UserService {
         for (final UserDto user : users) {
             final Map<String, String> userMap = new HashMap<String, String>();
             userMap.put("securUuid", user.getSecurUuid());
-            userMap.put("forename", user.getForename());
-            userMap.put("middle", user.getMiddle());
-            userMap.put("surname", user.getSurname());
-            userMap.put("jobtitle", user.getJobTitle());
-            userMap.put("displayAs", user.getDisplayAs());
+            userMap.put("forename", user.getForeName());
+            userMap.put("middle", user.getMiddleName());
+            userMap.put("surname", user.getSurName());
             userList.add(userMap);
         }
         return userList;
