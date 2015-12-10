@@ -4,7 +4,7 @@
 */
 package com.chalk.salt.dao.notification.manager;
 
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
+import com.chalk.salt.common.dto.NotificationTemplate;
 import com.chalk.salt.common.exceptions.NotificationException;
 
 /**
@@ -22,5 +22,5 @@ public interface NotificationManager {
      * @return the notification template
      * @throws NotificationException the notification exception
      */
-    public String getNotificationTemplate(final String key, final DomainUserPrincipalDto domainDto)throws NotificationException;
+    public NotificationTemplate getNotificationTemplate(final String key)throws NotificationException;
 }

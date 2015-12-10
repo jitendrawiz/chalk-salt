@@ -4,12 +4,8 @@
 */
 package com.chalk.salt.dao.auth.manager;
 
-import java.net.UnknownHostException;
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
@@ -18,12 +14,8 @@ import com.chalk.salt.common.dto.AuthRequest;
 import com.chalk.salt.common.dto.UserDetailDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
-import com.chalk.salt.common.util.Utility;
 import com.chalk.salt.dao.domain.DomainDao;
 import com.chalk.salt.dao.dto.DomainInfo;
-import com.chalk.salt.dao.dto.SystemDetail;
-import com.chalk.salt.dao.system.SystemDao;
-import com.chalk.salt.dao.user.UserDao;
 
 /**
  * The Class AuthManagerImpl.
@@ -35,15 +27,7 @@ public class AuthManagerImpl implements AuthManager {
     /** The domain dao. */
     @Inject
     private DomainDao domainDao;
-
-    /** The system dao. */
-    @Inject
-    private SystemDao systemDao;
-
-    /** The office dao. */
-    @Inject
-    private UserDao officeDao;
-
+    
     /** The logger. */
     @Inject
     @AppLogger

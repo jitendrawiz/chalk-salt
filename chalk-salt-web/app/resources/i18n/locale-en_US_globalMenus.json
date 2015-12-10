@@ -6,35 +6,42 @@
                 {
                     "name": "Property",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Fast Start",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-fast-start"
                         },
                         {
                             "name": "Sales Brochures",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-sales-brochure"
                         },
                         {
                             "name": "Carousel",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Property of the Week",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Property Matching",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Available Property List",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-available-property-list"
                         }
                     ]
@@ -42,62 +49,74 @@
                 {
                     "name": "Applicant",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Register An Applicant",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-applicant-card"
                         },
                         {
                             "name": "Applicant Management",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-applicant-management"
                         },
                         {
                             "name": "Applicant Matching",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
                 },
                 {
                     "name": "Landlord/Vendor",
+                    "link": "propco.agent.soon",
                     "drag": false,
                     "submenu": [
                         {
                             "name": "Register New enquiry(MA Form)",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
                 },
                 {
                     "name": "Tenancy",
+                    "link": "propco.agent.soon",
                     "drag": false,
                     "submenu": [
                         {
                             "name": "Propose/Confirm",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Review/Cancel",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Extend/Renew",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Terminate",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Check In/Out",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -107,33 +126,40 @@
         {
             "name": "Accounts",
             "drag": false,
+            "link": "propco.agent.soon",
             "submenu": [
                 {
                     "name": "Tenant Receipts",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Direct Debits",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Generate DD Requests",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "Generate DD Instructions",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "Process DD Receipts",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "Regenerate Existing DD Requests",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 }
                             ]
@@ -141,16 +167,19 @@
                         {
                             "name": "Cash Register (Standing Orders /  cheques / bank transfers etc)",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-cash-register"
                         },
                         {
                             "name": "Automatically post rent receipts from Tenant Reserves",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Pay Rents using Rent Indemnity Funds (RIF)",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -158,19 +187,23 @@
                 {
                     "name": "Landlord Payouts",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Prepare statements",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Prepare statements",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-prepare-statements"
                                 },
                                 {
                                     "name": "Prepare Statements by Statement Group",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-prepare-statements"
                                 }
                             ]
@@ -178,16 +211,19 @@
                         {
                             "name": "Prepare Landlord Invoice Statements",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-prepare-statements"
                         },
                         {
                             "name": "Auto Topup Landlord Reserves",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Pay Rent Indemnity Premiums",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -195,19 +231,23 @@
                 {
                     "name": "Contractor Payouts",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Pay Contractors",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Prepare Contract Statements",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "Prepare Contractor Statements by Statement Group",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 }
                             ]
@@ -217,24 +257,29 @@
                 {
                     "name": "Agent Payouts",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Pay agent",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Standard Journal",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "VAT Journal",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 },
                                 {
                                     "name": "Standard & VAT Combined",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 }
                             ]
@@ -242,6 +287,7 @@
                         {
                             "name": "Agent Fees Analyser",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -249,15 +295,18 @@
                 {
                     "name": "Bank Reconciliation",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Enter Cheque / Auto pay Numbers",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bank-reconciliation"
                         },
                         {
                             "name": "Bank Reconcile",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bank-reconciliation"
                         }
                     ]
@@ -265,30 +314,36 @@
                 {
                     "name": "Batch Processing",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Batch Processing Fee",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Batch Misc Credit / Debit",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Batch Rent Claim",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Batch Deposit Return",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Bulk Accounts Transfer",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -296,20 +351,24 @@
                 {
                     "name": "Raise Invoice/Credit Note / Misc Cr/Db",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Invoice",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Credit Note",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Misc Cr/Db",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-misc-cr-db"
                         }
                     ]
@@ -317,15 +376,18 @@
                 {
                     "name": "Accounts Transfer",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Standard A/c Transfer",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-account-transfer"
                         },
                         {
                             "name": "Unallocated A/c Transfer",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-account-transfer"
                         }
                     ]
@@ -333,20 +395,24 @@
                 {
                     "name": "Amend Bank Details",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Request for Bank Details Amendments",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Review/ Edit Bank Details Awaiting Approval",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Approve Bank Details",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -354,35 +420,42 @@
                 {
                     "name": "Global Processes",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Fee Run",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-fee-run"
                         },
                         {
                             "name": "Statement Production",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Perform Period End Procedures",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "KPI Data Check",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Daily Updates/ Post Rent Claims",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Generate Password",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -392,24 +465,29 @@
         {
             "name": "Maintenance",
             "drag": false,
+            "link": "propco.agent.soon",
             "submenu": [
                 {
                     "name": "Request Maintenance",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Generate Quotation",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-tools"
                         },
                         {
                             "name": "Create Works Order/Job Sheet",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-tools"
                         },
                         {
                             "name": "Cancel Works Order",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-tools"
                         }
                     ]
@@ -417,20 +495,24 @@
                 {
                     "name": "Invoicing",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Register an invoice",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Global Invoicing",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Batch Contractor Invoice Posting",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -440,14 +522,17 @@
         {
             "name": "Reporting",
             "drag": false,
+            "link": "propco.agent.soon",
             "submenu": [
                 {
                     "name": "Accounts",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Balance Sheet",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-balance-sheet"
                         }
                     ]
@@ -455,20 +540,24 @@
                 {
                     "name": "Arrears",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Overdue Tenants Letters",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-overdue-tenant"
                         },
                         {
                             "name": "Overdue Landlord Letters",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         },
                         {
                             "name": "Overdue Invoice Analysis",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-bookmark"
                         }
                     ]
@@ -476,30 +565,36 @@
                 {
                     "name": "Tax Reporting",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "NRL Form",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-reports"
                         },
                         {
                             "name": "CNR/FICO Annual Return",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-reports"
                         },
                         {
                             "name": "NRIS Claim Journal",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-reports"
                         },
                         {
                             "name": "Landlord Annual Summary",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-reports"
                         },
                         {
                             "name": "S19 TMA",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-reports"
                         }
                     ]
@@ -507,44 +602,53 @@
                 {
                     "name": "Tenant Transaction Report",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Payments Receipts Journal",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Branch Month End Reporting",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Fee/Credits Journal",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Fee Raised",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Maintenance",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Inspections",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Safety inspection List",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-property-management"
                                 },
                                 {
                                     "name": "Periodic Inspection Visit List",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-property-management"
                                 }
                             ]
@@ -552,10 +656,12 @@
                         {
                             "name": "Contractor Reporting",
                             "drag": false,
+                            "link": "propco.agent.soon",
                             "submenu": [
                                 {
                                     "name": "Expired Certificate Contractors List",
                                     "drag": true,
+                                    "link": "propco.agent.soon",
                                     "icon": "propcoicon-bookmark"
                                 }
                             ]
@@ -565,30 +671,36 @@
                 {
                     "name": "Document Search",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-document-manager"
                 },
                 {
                     "name": "Audit Search",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-document-manager"
                 },
                 {
                     "name": "Tenant Transaction Report",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 },
                 {
                     "name": "Workflow",
                     "drag": false,
+                    "link": "propco.agent.soon",
                     "submenu": [
                         {
                             "name": "Workflow Trigger Exceptions",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-workflow"
                         },
                         {
                             "name": "Workflow Housekeeping",
                             "drag": true,
+                            "link": "propco.agent.soon",
                             "icon": "propcoicon-workflow"
                         }
                     ]
@@ -596,6 +708,7 @@
                 {
                     "name": "Deposit Processing",
                     "drag": true,
+                    "link": "propco.agent.soon",
                     "icon": "propcoicon-reports"
                 }
             ]

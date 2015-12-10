@@ -21,16 +21,111 @@
 		"appmatch":"false"
 	}
   ],
-"kpis":[{
-           "kpiName":"Average Check ins",
-           "select":"false",
-           "edit":"icon"
+
+"templates":[{
+           "description":"Manager",
+           "Notes":"",
+          "copy":"true",
+	  "assign" : "false"
           },
            {
-           "kpiName":"Average Check outs",
-           "select":"true",
-           "edit":"icon"
+           "description":"Administrator",
+           "Notes":"",
+          "copy":"true",
+	  "assign" : "false"
+          },
+	  {
+           "description":"Negotiator",
+           "Notes":"",
+          "copy":"true",
+	  "assign" : "false"
           }
-]
-
-}
+],
+"accessRights":[{
+           "description":"Accounts User",
+           "active":"1"
+          },
+          {
+           "description":"Access Cash Register",
+           "active":"0"
+          },
+		  {
+           "description":"Access Critical Safety",
+           "active":"0"
+          },
+		  {
+           "description":"Access Faststart",
+           "active":"1"
+          },
+          {
+           "description":"Access Letters",
+           "active":"0"
+          },
+		  {
+           "description":"Access Maintenance",
+           "active":"0"
+          },
+		  {
+           "description":"Access Reports Level1",
+           "active":"1"
+          },
+		  {
+           "description":"Access Reports Level1",
+           "active":"0"
+          },
+		  {
+           "description":"Access Statement Production Controls",
+           "active":"1"
+          },
+			{
+           "description":"Access User Administration",
+           "active":"0"
+          },
+			{
+           "description":"Back date emergency resp.date",
+           "active":"1"
+          },
+		{
+           "description":"Can Add Customer Service Survey",
+           "active":"1"
+          },
+		{
+           "description":"Can cancel fees",
+           "active":"0"
+          },
+		{
+           "description":"Can change Expenditure Limit",
+           "active":"0"
+          },
+		{
+           "description":"Can change nominal on invoice",
+           "active":"1"
+          },
+		{
+           "description":"Delete Fees/Maintenance",
+           "active":"0"
+          },
+		{
+           "description":"Disable Post It Notes",
+           "active":"1"
+        }],
+	
+"groupAccess":[{
+           "description":"Property Managers",
+           "active":"1"
+          },
+          {
+           "description":"Finance",
+           "active":"1"
+          },
+		  {
+           "description":"Admin",
+           "active":"0"
+          },
+		  {
+           "description":"Maintenance",
+           "active":"1"
+          }]
+	}
+	
+	

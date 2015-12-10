@@ -8,7 +8,8 @@ import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
+import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.NotificationTemplate;
 import com.chalk.salt.common.exceptions.NotificationException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -24,26 +25,26 @@ public class NotificationDaoImpl implements NotificationDao {
      * @see com.chalk.salt.dao.notification.NotificationTemplateDao#getNotificationTemplate(java.lang.String)
      */
     @Override
-    public String getNotificationTemplate(final String key, final DomainUserPrincipalDto domainDto) throws NotificationException{   
+    public NotificationTemplate getNotificationTemplate(final String key) throws NotificationException{   
         
-        String template = null;
-        final String officeJndi = domainDto.getOfficeJndi();
-        final String sqlQuery =
-            "SELECT `value` AS primaryContent FROM `tbl_template` AS tbl_template WHERE tbl_template.`deleted` = 0 AND tbl_template.`key` = :templateKey";
-        Sql2o datasource;
-        try {
-            datasource = ConnectionFactory.provideSql2oInstance(officeJndi);
-        
-       
-        try (final Connection connection = datasource.open()) {
-            final Query query = connection.createQuery(sqlQuery);
-            query.addParameter("templateKey", key);
-            template = query.executeScalar(String.class);
-        }
-        } catch (UserException e) {
-            new NotificationException(e);
-        }
-        return template;
+    	final String sqlQuery =
+                "SELECT     `id` AS notificationTemplateId, `primary_content` AS primaryContent, `editable_content` AS editableContent,"
+                    + "`subject` AS SUBJECT, `notification_recipient_type` AS recipientType, `notification_template_key` AS notificationTemplateKey,"
+                    + "`notification_type` AS notificationType, `merge_body_in_template` AS mergeBodyInTemplate, `internal` AS internal,"
+                    + "`recipient_id` AS recipientId, `merge_subject` AS mergeSubject FROM `tbl_template` WHERE `notification_template_key` = :templateKey";
+
+            
+            try {
+            	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+
+                try (final Connection connection = dataSource.open()) {
+                    final Query query = connection.createQuery(sqlQuery);
+                    query.addParameter("templateKey", key);
+                    return query.executeAndFetchFirst(NotificationTemplate.class);
+                }
+            } catch (final UserException e) {
+                throw new NotificationException(e);
+            }
     }
 
 }

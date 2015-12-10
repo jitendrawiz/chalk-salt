@@ -7,7 +7,7 @@ define([ 'angular', 'text!../templates/header.tpl.html','text!../templates/home.
             url : '/agent',
             abstract : true,
             template : templateHeader,
-            controller : 'AgentController as agentCtrl'
+            controller : 'DashboardController as dashboardCtrl'
         })
         .state('propco.agent.home', {
             url : '/home',

@@ -4,8 +4,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
 
     var loginModule = angular.module('Login.controller', [ 'Login.router', 'System.configuration', 'Login.service']);
     
-    loginModule.controller('LoginController', [ '$scope', '$state', '$resource', 'PROPCO', 'LoginService',
-            function($scope, $state, $resource, PROPCO, LoginService) {
+    loginModule.controller('LoginController', [ '$scope', '$state', '$resource','$rootScope', 'PROPCO', 'LoginService',
+            function($scope, $state, $resource,$rootScope, PROPCO, LoginService) {
 
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -25,11 +25,14 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 $scope.build = PROPCO.BUILD;
                 $scope.email = PROPCO.EMAIL;
                 $scope.releaseDate = PROPCO.RELEASE_DATE;
-                
+                $rootScope.userName = {};
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
+                            $rootScope.userName = response.fullName;
+                            console.log($rootScope.userName);
                             $state.go('propco.agent.home');
+                            console.log(response);
                         }
                     }, function(error) {
                     	showAlert('danger',error.data.message);

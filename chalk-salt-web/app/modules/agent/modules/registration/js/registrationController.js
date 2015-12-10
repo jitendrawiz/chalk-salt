@@ -72,7 +72,7 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
                     });
                 };
                 function getDomainsList() {
-                    DomainListService.save({}, function(response) {
+                    DomainListService.get({}, function(response) {
                         $scope.domainsList = response.domainNames;
                     }, function(error) {
                         console.log(error.data.message);

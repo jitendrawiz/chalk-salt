@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 
+
 /**
  * The Class LoggerProducer.
  *
@@ -29,5 +30,5 @@ public class LoggerProducer {
     @AppLogger
     public Logger produceLogger(final InjectionPoint injectionPoint) {
         return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
-    }
+    }    
 }

@@ -4,7 +4,7 @@ define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap
         'angularTranslateStaticFile', 'angularSanitize', 'angularDragDrop','angularPrettyCheckable','css!fontAwesome'], function(angular) {
 
     var propcoEnterprise = angular.module('PropCoEnterprise', [ 'ui.router', 'ngResource', 'Login.controller', 'Agent.controller','Administration.controller',
-            'Registration.controller', 'httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
+            'Registration.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
 
     propcoEnterprise.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         /*

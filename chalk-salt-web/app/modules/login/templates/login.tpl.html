@@ -7,11 +7,7 @@
 			<div class="panel-body bg-color-thirteenth">
 				<alert ng-show="alert.show" type="{{alert.type}}"
 					close="closeAlert()">
-				<div class="model-body">
-					<i
-						class="propcoicon propcoicon-cancel text-sixth icon-extra-large pull-left"></i>
-					this is a model {{alert.message}}
-				</div>
+					{{alert.message}}
 				</alert>
 
 				<form role="form" action="" method="post">

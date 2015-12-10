@@ -15,6 +15,7 @@ import org.dozer.Mapper;
 
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 
+
 /**
  * The Class BeanMapperCDIProducer.
  *

@@ -1,0 +1,315 @@
+<div id="userTemplates">
+	<div class="row" ng-show="!addNewTemplate">
+		<div class="col-sm-12">
+			<h3>{{"userAdministration.setUp" | translate}}</h3>
+		</div>
+		<div class="col-sm-12">
+			<button type="button" class="btn btn-secondary" ng-click="addNewTemplate=true">{{"userAdministration.addNew"
+				| translate}}</button>
+		</div>
+		<div class="col-sm-12">
+		<br/>
+			<div class="table-responsive">
+				<table class="table">
+					<thead class="bg-color-ninth">
+						<tr>
+							
+							<th>{{"userAdministration.desc" | translate}}</th>
+							<th>{{"userAdministration.notes" | translate}}</th>
+							<th>{{"dashboard.editBtn" | translate}}</th>
+							<th>{{"userAdministration.remove" | translate}}</th>
+							<th>{{"userAdministration.copy" | translate}}</th>
+							<th>{{"userAdministration.assign" | translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="template in userTemplates" class="bg-color-fourth">
+							<td>{{template.description}}</td>
+							<td>{{template.notes}}</td>
+							<td><i
+								class="propcoicon propcoicon-t-icon icon-small text-primary"></i></td>
+							<td><i
+								class="propcoicon propcoicon-cancel icon-small text-sixth"></i></td>
+							<td><i
+								class="propcoicon propcoicon-copy-user icon-small text-ninth"></td>
+							<td><i
+								class="propcoicon propcoicon-circled-tick icon-small text-ninth"></i></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+		<div class="panel panel-default bg-color-thirtysecond" ng-show="addNewTemplate">
+	<uib-tabset> <uib-tab> <uib-tab-heading>{{"userAdministration.templateBasicDetails"
+	| translate}}</uib-tab-heading>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<form>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="description">{{"userAdministration.desc"|
+								translate}}</label> <input type="text" id="description"
+								class="form-control" ng-model="userTemplates.desc" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="notes">{{"userAdministration.notes"|
+								translate}}</label>
+							<textarea class="form-control" rows="7"
+								ng-model="userTemplates.notes" id="notes"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="entityMenu">{{"userAdministration.entityMenu"|translate}}</label>
+								<button id="entityMenu" type="button" class="btn form-control"
+									uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small"></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="entityTab">{{"userAdministration.entityTab"|translate}}</label>
+								<button id="entityTab" type="button" class="btn form-control"
+									uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small"></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-secondary">{{"userAdministration.addBtn"|translate}}</button>
+								</div>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-secondary">{{"userAdministration.addGrpBtn"|translate}}</button>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+	</uib-tab> <uib-tab> <uib-tab-heading>{{"userAdministration.accessRights"
+	| translate}}</uib-tab-heading>
+	<div class="panel-body">
+		<form>
+			<div class="row">
+				<br /> <br />
+				<div class="col-sm-6 col-md-4">
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="templateWorkflowAccess">{{"userAdministration.templateWorkflowAccess"|translate}}</label>
+								<button id="templateWorkflowAccess" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="templateReportsAccess">{{"userAdministration.templateReportsAccess"|translate}}</label>
+								<button id="templateReportsAccess" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div uib-dropdown dropdown-append-to-body>
+								<label for="templateLettersAccess">{{"userAdministration.templateLettersAccess"|translate}}</label>
+								<button id="templateLettersAccess" type="button"
+									class="btn form-control" uib-dropdown-toggle>
+									<i class="fa fa-angle-down pull-right icon-small "></i>
+								</button>
+								<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+									<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="templateIdleTimeout">{{"userAdministration.templateIdleTimeout"|translate}}</label><input
+								type="text" class="form-control" id="templateIdleTimeout"
+								ng-model="permissions.userIdleTimeout" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="disableTemplateTimeout">{{"userAdministration.disableTemplateTimeout"
+								| translate}}</label>
+							<pretty-checkbox ng-model="permissions.disableUserTimeout"
+								id="disableTemplateTimeout" value="''"></pretty-checkbox>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="panel panel-default bg-color-fourth">
+						<div class="panel-body scroll-On">
+							<label for="groupAccess">{{"userAdministration.groupAccess"|translate}}</label><input
+								type="text" class="form-control" id="groupAccess"
+								ng-model="permissions.groupAccess" /> <br />
+							<div class="table-responsive">
+								<table class="table no-tableBorder">
+									<tbody>
+										<tr ng-repeat="access in groupAccess" class="bg-color-fourth">
+											<td><pretty-checkbox ng-model="permissions.access"
+													value="''"></pretty-checkbox></td>
+											<td>{{access.description}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="panel panel-default bg-color-fourth ">
+						<div class="panel-body scroll-On">
+							<label for="accessRights">{{"userAdministration.accessRights"|translate}}</label><input
+								type="text" class="form-control" id="accessRights"
+								ng-model="permissions.access" /> <br />
+							<div class="table-responsive">
+								<table class="table no-tableBorder">
+									<tbody>
+										<tr ng-repeat="access in accessRights" class="bg-color-fourth">
+											<td><pretty-checkbox ng-model="permissions.accessRights"
+													value="''"></pretty-checkbox></td>
+											<td>{{access.description}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</uib-tab> <uib-tab> <uib-tab-heading>{{"userAdministration.ofcLevelSecurity"
+	| translate}}<span></span></uib-tab-heading>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<br />
+				<br /> <label for="searchOfc">{{"userAdministration.searchOfc"
+					| translate}}</label> <input type="text" id="searchOfc"
+					class="form-control" ng-model="permissions.SearchOfc" />
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-sm-12 ">
+				<uib-accordion class="bg-color-fourth" close-others="true">
+				<uib-accordion-group is-open="true" is-disabled="true">
+				<uib-accordion-heading class="bg-color-ninth">
+				<div class="row text-primary">
+					<div class="col-sm-3 col-md-2">
+						<h4>{{"userAdministration.name" | translate}}</h4>
+					</div>
+					<div class="col-sm-2 col-md-2">
+						<h4>{{"userAdministration.code" | translate}}</h4>
+					</div>
+					<div class="col-sm-2 col-md-1">
+						<h4>{{"userAdministration.type" | translate}}</h4>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<h4>{{"userAdministration.none" | translate}}</h4>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<h4>{{"userAdministration.read" | translate}}</h4>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<h4>{{"userAdministration.write" | translate}}</h4>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<h4>{{"userAdministration.execute" | translate}}</h4>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<h4>{{"userAdministration.appmatch" | translate}}</h4>
+					</div>
+				</div>
+				</uib-accordion-heading> </uib-accordion-group> <uib-accordion-group ng-repeat="group in groups"
+					class="bg-color-fourth"> <uib-accordion-heading>
+				<div class="row">
+					<div class="col-sm-3 col-md-2">{{group.name}}</div>
+					<div class="col-sm-2 col-md-2">{{group.code}}</div>
+					<div class="col-sm-2 col-md-1">{{group.type}}</div>
+					<div class="col-sm-1 col-md-1">
+						<pretty-checkbox ng-model="permissions.none" value="''"></pretty-checkbox>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<pretty-checkbox ng-model="permissions.read" value="''"></pretty-checkbox>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<pretty-checkbox ng-model="permissions.write" value="''"></pretty-checkbox>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<pretty-checkbox ng-model="permissions.execute" value="''"></pretty-checkbox>
+					</div>
+					<div class="col-sm-1 col-md-1">
+						<pretty-checkbox ng-model="permissions.appmatch" value="''"></pretty-checkbox>
+					</div>
+					<span ng-click="switchAccordianIcon()"><i
+						class="pull-right text-twenty icon-small"
+						ng-class="{'fa fa-minus': status.open, 'fa fa-plus': !status.open}"></i></span>
+				</div>
+				</uib-accordion-heading>
+				<div ng-repeat="item in items">{{item}}</div>
+				</uib-accordion-group> </uib-accordion>
+			</div>
+		</div>
+	</div>
+	</uib-tab> </uib-tabset>
+	<div class="row">
+		<div class="col-sm-12  text-right" id="controlBtn">
+			<button class="btn btn-sm btn-eleventh" type="button"
+				ng-click="addNewTemplate=false">{{"registration.cancelBtn"
+				| translate}}</button>
+			<button class="btn btn-ninth" type="button" ng-click="">{{"registration.backBtn"
+				| translate}}</button>
+			<button class="btn btn-secondary" type="submit"
+				ng-click="saveUserInfo()">{{"registration.submitBtn" |
+				translate}}</button>
+		</div>
+	</div>
+</div>
+		
+		
+	
+</div>
+

@@ -8,8 +8,8 @@
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<a href=""> <i
-									class="propcoicon propcoicon-propco-home text-sixth icon-extra-large"></i>
-									<p>Home</p>
+									class="propcoicon propcoicon-reports text-sixth icon-extra-large"></i>
+									<p>{{"dashboard.reports" |translate}}</p>
 								</a>
 							</div>
 						</div>
@@ -17,62 +17,62 @@
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-workflow text-sixth icon-extra-large"></i>
-								<p>Workflow</p>
+								<p>{{"dashboard.workflow" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-email text-sixth icon-extra-large"></i>
-								<p>Email</p>
+								<p>{{"dashboard.email" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-diary text-sixth icon-extra-large"></i>
-								<p>Diary</p>
+								<p>{{"dashboard.diary" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-mail-merge text-sixth icon-extra-large"></i>
-								<p>Mail Merge</p>
+								<p>{{"dashboard.mailMerge" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-message-centre text-sixth icon-extra-large"></i>
-								<p>Message Center</p>
+								<p>{{"dashboard.msgCenter" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-task-manager text-sixth icon-extra-large"></i>
-								<p>Task Manager</p>
+								<p>{{"dashboard.taskMgr" |translate}}</p>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="ex-block">
 								<i
 									class="propcoicon propcoicon-document-manager text-sixth icon-extra-large"></i>
-								<p>Document Manager</p>
+								<p>{{"dashboard.docMgr" |translate}}</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-3">
 					<div class="row">
-						<div class="col-xs-6" ng-repeat="icon in iconsListPartOne">
+						<div class="col-xs-6" ng-repeat="icon in iconsListColumnOne">
 							<div class="ex-block removeItem" data-drop="true"
-								ng-model="iconsListPartOne" jqyoui-droppable>
+								ng-model="iconsListColumnOne" jqyoui-droppable>
 								<i
 									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
-									ng-click="remove($index,'partOne')" ng-show="editWorkspace"></i>
-								<div data-drag="true" ng-model="iconsListPartOne"
+									ng-click="remove($index,'columnOne')" ng-show="editWorkspace"></i>
+								<div data-drag="true" ng-model="iconsListColumnOne"
 									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
 									<i class="propcoicon text-secondary icon-extra-large"
 										ng-class="icon.icon"></i>
@@ -82,19 +82,19 @@
 							</div>
 						</div>
 						<div class="col-xs-6"
-							ng-repeat="n in [] | range: 8 - iconsListPartOne.length">
+							ng-repeat="n in [] | range: 8 - iconsListColumnOne.length">
 							<div class="ex-block removeItem" data-drop="true"
-								ng-model="bookmarkedItemsPartOne" jqyoui-droppable
+								ng-model="bookmarkedItemsColumnOne" jqyoui-droppable
 								ng-show="editWorkspace">
 								<i
 									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
-									ng-click="remove($index, 'partTwo')"
-									ng-show="bookmarkedItemsPartOne[$index]"></i>
-								<div data-drag="true" ng-model="bookmarkedItemsPartOne"
+									ng-click="remove($index, 'columnTwo')"
+									ng-show="bookmarkedItemsColumnOne[$index]"></i>
+								<div data-drag="true" ng-model="bookmarkedItemsColumnOne"
 									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
 									<i class="propcoicon text-secondary icon-extra-large"
-										ng-class="bookmarkedItemsPartOne[$index].icon"></i>
-									<p>{{bookmarkedItemsPartOne[$index].name}}</p>
+										ng-class="bookmarkedItemsColumnOne[$index].icon"></i>
+									<p>{{bookmarkedItemsColumnOne[$index].name}}</p>
 								</div>
 								
 							</div>
@@ -103,35 +103,35 @@
 				</div>
 				<div class="col-xs-12 col-md-3">
 					<div class="row">
-						<div class="col-xs-6" ng-repeat="icon in iconsListPartTwo ">
+						<div class="col-xs-6" ng-repeat="icon in iconsListColumnTwo ">
 							<div class="ex-block removeItem" data-drop="true"
-								ng-model="iconsListPartTwo" jqyoui-droppable>
+								ng-model="iconsListColumnTwo" jqyoui-droppable>
 								<i
 									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
-									ng-click="remove($index, 'partThree')" ng-show="editWorkspace"></i>
-								<div data-drag="true" ng-model="iconsListPartTwo[$index]"
+									ng-click="remove($index, 'columnThree')" ng-show="editWorkspace"></i>
+								<div data-drag="true" ng-model="iconsListColumnTwo[$index]"
 									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
 									<i class="propcoicon text-twentyfirst  icon-extra-large"
-										ng-class="icon.iconName"></i>
+										ng-class="icon.icon"></i>
 									<p>{{icon.name}}</p>
 								</div>
 								
 							</div>
 						</div>
 						<div class="col-xs-6"
-							ng-repeat="n in [] | range: 8 - iconsListPartTwo.length">
+							ng-repeat="n in [] | range: 8 - iconsListColumnTwo.length">
 							<div class="ex-block removeItem" data-drop="true"
-								ng-model=bookmarkedItemsPartTwo jqyoui-droppable
+								ng-model=bookmarkedItemsColumnTwo jqyoui-droppable
 								ng-show="editWorkspace">
 								<i
 									class="propcoicon propcoicon-cancel text-sixth icon-small pull-right"
-									ng-click="remove($index,'partFour')"
-									ng-show="bookmarkedItemsPartTwo[$index]"></i>
-								<div data-drag="true" ng-model="bookmarkedItemsPartTwo[$index]"
+									ng-click="remove($index,'columnFour')"
+									ng-show="bookmarkedItemsColumnTwo[$index]"></i>
+								<div data-drag="true" ng-model="bookmarkedItemsColumnTwo[$index]"
 									data-jqyoui-options="{revert: 'invalid',  helper: 'clone'}">
 									<i class="propcoicon text-twentyfirst  icon-extra-large"
-										ng-class="bookmarkedItemsPartTwo[$index].icon"></i>
-									<p>{{bookmarkedItemsPartTwo[$index].name}}</p>
+										ng-class="bookmarkedItemsColumnTwo[$index].icon"></i>
+									<p>{{bookmarkedItemsColumnTwo[$index].name}}</p>
 								</div>
 								
 							</div>
@@ -142,14 +142,14 @@
 				<div class="col-xs-12 col-md-3 ">
 					<div class="pull-right" ng-show="!editWorkspace">
 						<button class="btn btn-fourth" id="editBtn"
-							ng-click="editWorkspace = true"> {{"home.editBtn" |
-							translate}} <i class="fa fa-pencil"></i></button>
+							ng-click="dashboardCtrl.showEditScreen()"> {{"dashboard.editBtn" |
+							translate}}</button>
 					</div>
-					<div class="pull-right" ng-show="editWorkspace">
+					<div class="pull-right" ng-show="editWorkspace" id="editWorkspaceIcons">
 						<i class="propcoicon propcoicon-cancel text-sixth icon-mid "
-							ng-click="editWorkspace = false"></i> <i
-							class="propcoicon propcoicon-save  text-secondary icon-mid"
-							ng-click="agentCtrl.saveIconList()"></i>
+							ng-click="dashboardCtrl.disableEditScreen()"></i> <i
+							class="propcoicon propcoicon-circled-tick  text-secondary icon-mid"
+							ng-click="dashboardCtrl.saveDashboard()"></i>
 					</div>
 				</div>
 			</div>
