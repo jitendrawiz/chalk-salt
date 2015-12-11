@@ -77,8 +77,8 @@ public class UserFacadeImpl implements UserFacade {
      * @see uk.co.propco.core.user.UserFacade#isUserExits(java.lang.String)
      */
     @Override
-    public boolean isUserExist(final String username) throws UserException {
-        return userManager.isUserExist(username);
+    public boolean isUserExist(final String userName) throws UserException {
+        return userManager.isUserExist(userName);
     }
 
     /**
@@ -91,11 +91,11 @@ public class UserFacadeImpl implements UserFacade {
      * @throws UserException the user exception
      */
 
-    private EmailNotificationDto getEmailNotification(final DomainUserPrincipalDto domainDto, final UserDto user, final String senderEmail) throws UserException {
+    private EmailNotificationDto getEmailNotification(final UserDto user, final String senderEmail) throws UserException {
         final EmailNotificationDto emailNotification = new EmailNotificationDto();
         emailNotification.setTo(user.getEmail());
         emailNotification.setFrom(senderEmail);
-        emailNotification.setSubject("New User created over PropCo Enterprise");
+        emailNotification.setSubject("New User created over Chalk N Dust");
 
         final Map<String, Object> userDataModel = beanMapper.map(user, Map.class);
 
@@ -105,7 +105,6 @@ public class UserFacadeImpl implements UserFacade {
             notificationTemplateRequest.setTemplateKey(NotificationTemplateKey.USER_REGISTRATION_SUCCESSFUL.name());
             notificationTemplateRequest.setDataMap(userDataModel);
             notificationTemplateRequest.setMergeBodyInTemplate(true);
-            notificationTemplateRequest.setOfficeJndi(domainDto.getOfficeJndi());
             processedNotificationTemplate = databaseTemplateConfiguration.processTemplate(notificationTemplateRequest);
 
         } catch (final TemplateProcessingException e) {
@@ -153,8 +152,8 @@ public class UserFacadeImpl implements UserFacade {
      */
     @Override
     public String saveUserInfo(final UserDto userDetails, final DomainUserPrincipalDto domainDto, final String senderEmail) throws UserException {
-        final String securUuid = userManager.saveUserInfo(userDetails, domainDto);
-        final EmailNotificationDto emailNotification = getEmailNotification(domainDto, userDetails, senderEmail);
+        final String securUuid = userManager.saveUserInfo(userDetails);
+        final EmailNotificationDto emailNotification = getEmailNotification(userDetails, senderEmail);
         emailService.sendMail(emailNotification);
         return securUuid;
     }

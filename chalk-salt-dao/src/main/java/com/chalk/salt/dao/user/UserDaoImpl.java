@@ -13,7 +13,6 @@ import org.sql2o.data.Row;
 import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
-import com.chalk.salt.common.dto.UserDetailDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
@@ -31,18 +30,18 @@ public class UserDaoImpl implements UserDao {
      * @see uk.co.techblue.propco.enterprise.dao.office.OfficeDao#fetchUserDetails(java.lang.String, java.lang.String)
      */
     @Override
-    public UserDetailDto fetchUserDetails(final String securUuid) throws Exception {
+    public UserDto fetchUserDetails(final String securUuid) throws Exception {
         final String sqlQuery =
             "SELECT `tbl_secur`.`secur_uuid` AS securUuid, `tbl_secur`.`forename` AS forename, `tbl_secur`.`aka` AS displayAs, "
                 + " `tbl_secur`.`middle` AS middle, `tbl_secur`.`surname` AS surname, `tbl_secur`.`email` as email, locale FROM tbl_secur AS tbl_secur "
                 + "WHERE ((tbl_secur.secur_uuid = :securUuid))";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
-        UserDetailDto userDetail = null;
+        UserDto userDetail = null;
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securUuid", securUuid);
-            userDetail = query.executeAndFetchFirst(UserDetailDto.class);
+            userDetail = query.executeAndFetchFirst(UserDto.class);
         }
         return userDetail;
     }
@@ -53,14 +52,14 @@ public class UserDaoImpl implements UserDao {
      * @see uk.co.propco.dao.user.UserDao#isUserExits(java.lang.String)
      */
     @Override
-    public boolean isUserExist(final String username) throws Exception {
-        final String sqlQuery = "SELECT `tbl_user`.`logname` AS logname  "
-            + " FROM tbl_user AS tbl_user "
-            + "WHERE ((tbl_user.logname = :username))";
+    public boolean isUserExist(final String userName) throws Exception {
+        final String sqlQuery = "SELECT `cst_logins`.`username` AS userName  "
+            + " FROM cst_logins AS cst_logins "
+            + "WHERE ((cst_logins.username = :userName))";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
-            query.addParameter("username", username);
+            query.addParameter("userName", userName);
             final Table table = query.executeAndFetchTable();
             final List<Row> rows = table.rows();
             if (rows != null && !rows.isEmpty()) {
@@ -99,14 +98,13 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public Long saveLoginDetails(final String username, final String hashedPassword) throws Exception {
-        final String sqlQuery = "INSERT  INTO tbl_user (`logname`,`logpass`,'active') "
-            + "values (:logname, :logpass, :active) ON DUPLICATE KEY "
-            + "UPDATE `logname` = :logname, `logpass` = :logpass";
+        final String sqlQuery = "INSERT  INTO cst_logins (`username`,`password`,`active`) "
+            + "VALUES(:username, :password, :active)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
-            query.addParameter("logname", username);
-            query.addParameter("logpass", hashedPassword);
+            query.addParameter("username", username);
+            query.addParameter("password", hashedPassword);
             query.addParameter("active", 1);
             return (Long) query.executeUpdate().getKey();
         }
@@ -120,17 +118,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean saveUserDetails(final UserDto userDetail) throws Exception {
 
-        final String sqlQuery = "INSERT INTO cst_user(`user_id`, `fore_name`, `middle_name`, `last_name`, `contact_id`)"
-        		+ "VALUES(:userId, :foreName, :middle, :surname, :contactId)";
+        final String sqlQuery = "INSERT INTO cst_users(`user_id`, `first_name`, `middle_name`, `last_name`, `contact_id`, `secur_uuid`)"
+        		+ "VALUES(:userId, :firstName, :middleName, :lastName, :contactId, :securUuid)";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
 
-            query.addParameter("secur_uuid", userDetail.getSecurUuid());
-            query.addParameter("forename", userDetail.getForeName());
-            query.addParameter("surname", userDetail.getSurName());
-            query.addParameter("middle", userDetail.getMiddleName());
+            query.addParameter("securUuid", userDetail.getSecurUuid());
+            query.addParameter("firstName", userDetail.getFirstName());
+            query.addParameter("middleName", userDetail.getMiddleName());
+            query.addParameter("lastName", userDetail.getLastName());
             query.addParameter("userId", userDetail.getUserId());
             query.addParameter("contactId", userDetail.getContactId());
 
@@ -202,7 +200,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserDto getUserInfo(final String securUuid) throws Exception {
 
-        final UserDetailDto userCredential = getUserCredentialsBySecurUuid(securUuid);
+        final UserDto userCredential = getUserCredentialsBySecurUuid(securUuid);
         UserDto user = null;
 
         final String sqlQuery =
@@ -222,7 +220,7 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("securUuid", securUuid);
             user = query.executeAndFetchFirst(UserDto.class);
         }
-        user.setUserName(userCredential.getUsername());
+        user.setUserName(userCredential.getUserName());
         // user.setPassword(userCredential.getPassword());
         return user;
     }
@@ -234,7 +232,7 @@ public class UserDaoImpl implements UserDao {
      * @return the user credentials by secur uuid
      * @throws Exception the exception
      */
-    public UserDetailDto getUserCredentialsBySecurUuid(final String securUuid) throws Exception {
+    public UserDto getUserCredentialsBySecurUuid(final String securUuid) throws Exception {
 
         final String sqlQuery = "SELECT `tbl_user`.`logname` AS username,"
             + " `tbl_user`.`logpass` as password "
@@ -245,7 +243,7 @@ public class UserDaoImpl implements UserDao {
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securId", securUuid);
-            return query.executeAndFetchFirst(UserDetailDto.class);
+            return query.executeAndFetchFirst(UserDto.class);
         }
     }
 

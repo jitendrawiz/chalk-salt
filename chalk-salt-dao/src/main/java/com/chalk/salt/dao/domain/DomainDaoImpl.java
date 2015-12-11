@@ -9,8 +9,8 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
-import com.chalk.salt.dao.dto.DomainInfo;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
@@ -26,21 +26,22 @@ public class DomainDaoImpl implements DomainDao {
      * @see uk.co.techblue.propco.enterprise.dao.domain.DomainDao#obtainUserDomainDetails(java.lang.String, boolean)
      */
     @Override
-    public DomainInfo obtainUserDomainDetails(final String userName) throws UserException {
+    public UserDto obtainUserLoginDetails(final String userName) throws UserException {
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
 
         final String sqlQuery = "SELECT login.user_id AS userId, login.username AS UserName, login.password, "
-        		+ "user.fore_name as foreName, user.middle_name as middleName, user.last_name as lastName, secur_uuid as securUuid, "
-        		+ "login.active FROM cst_logins as login "
-        		+ "JOIN cst_users as user on user.user_id = login.user_id WHERE username= :userName";
+        		+ "user.first_name as firstName, user.middle_name as middleName, user.last_name as lastName, secur_uuid as securUuid, "
+        		+ "login.active as active, contacts.`email` as email FROM cst_logins as login "
+        		+ "JOIN cst_users as user on user.user_id = login.user_id "
+        		+ "JOIN cst_contacts as contacts on user.contact_id = contacts.id WHERE username= :userName";
 
-        DomainInfo domainInfo = null;
+        UserDto userDto = null;
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("userName", userName);
-            domainInfo = query.executeAndFetchFirst(DomainInfo.class);
+            userDto = query.executeAndFetchFirst(UserDto.class);
         }
-        return domainInfo;
+        return userDto;
     }
 
 }

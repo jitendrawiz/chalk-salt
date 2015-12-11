@@ -31,7 +31,7 @@ public class NotificationDaoImpl implements NotificationDao {
                 "SELECT     `id` AS notificationTemplateId, `primary_content` AS primaryContent, `editable_content` AS editableContent,"
                     + "`subject` AS SUBJECT, `notification_recipient_type` AS recipientType, `notification_template_key` AS notificationTemplateKey,"
                     + "`notification_type` AS notificationType, `merge_body_in_template` AS mergeBodyInTemplate, `internal` AS internal,"
-                    + "`recipient_id` AS recipientId, `merge_subject` AS mergeSubject FROM `tbl_template` WHERE `notification_template_key` = :templateKey";
+                    + "`recipient_id` AS recipientId, `merge_subject` AS mergeSubject FROM `cst_template` WHERE `notification_template_key` = :templateKey";
 
             
             try {

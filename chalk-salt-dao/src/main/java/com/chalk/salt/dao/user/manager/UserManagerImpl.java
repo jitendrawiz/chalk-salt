@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -40,10 +39,10 @@ public class UserManagerImpl implements UserManager {
      * @see uk.co.propco.dao.user.manager.UserManager#isUserExits(java.lang.String)
      */
     @Override
-    public boolean isUserExist(final String username) throws UserException {
+    public boolean isUserExist(final String userName) throws UserException {
         logger.info("Checking user existance......");
         try {
-            return officeDao.isUserExist(username);
+            return officeDao.isUserExist(userName);
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.USER_ALREADY_EXITS, "user_already_exist", exception);
         }
@@ -55,13 +54,14 @@ public class UserManagerImpl implements UserManager {
      * @see uk.co.propco.dao.user.manager.UserManager#registerUser(uk.co.propco.common.dto.User)
      */
     @Override
-    public String registerUser(final DomainUserPrincipalDto domainDto, final UserDto userDetail) throws UserException {
+    public String registerUser(final UserDto userDetail) throws UserException {
         logger.info("Registering new user ......");
         try {
 	        String userName = userDetail.getUserName();
 	        String hashedPassword = userDetail.getPassword();
 	  		String securUuid = UUID.randomUUID().toString();
 			Long userId = officeDao.saveLoginDetails(userName, hashedPassword);
+			userDetail.setUserId(userId);
 			userDetail.setSecurUuid(securUuid);
 			
 			if(userId==0 || userId == null){
@@ -160,15 +160,14 @@ public class UserManagerImpl implements UserManager {
      * uk.co.propco.common.dto.DomainUserPrincipalDto)
      */
     @Override
-    public String saveUserInfo(final UserDto userDetails, final DomainUserPrincipalDto domainDto) throws UserException {
+    public String saveUserInfo(final UserDto userDetails) throws UserException {
         logger.info("Saving user details of username : {}", userDetails.getUserName());
         String securUuid = null;
         if (isUserExist(userDetails.getUserName())) {
-            // need more discussion about existing users. Remains for future enhancement.
             throw new UserException(ErrorCode.USER_ALREADY_EXITS, "user_already_exist");
         }
         try {
-            securUuid = registerUser(domainDto, userDetails);
+            securUuid = registerUser(userDetails);
 
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "fail_to_save_user_info", exception);

@@ -6,7 +6,6 @@ package com.chalk.salt.dao.user;
 
 import java.util.List;
 
-import com.chalk.salt.common.dto.UserDetailDto;
 import com.chalk.salt.common.dto.UserDto;
 
 
@@ -25,7 +24,7 @@ public interface UserDao {
      * @return the user detail
      * @throws Exception the exception
      */
-    UserDetailDto fetchUserDetails(final String securUuid) throws Exception;
+    UserDto fetchUserDetails(final String securUuid) throws Exception;
 
     /**
      * Checks if is user exits.
@@ -34,7 +33,7 @@ public interface UserDao {
      * @return true, if is user exits
      * @throws Exception the exception
      */
-    boolean isUserExist(final String username) throws Exception;
+    boolean isUserExist(final String userName) throws Exception;
 
 
     /**

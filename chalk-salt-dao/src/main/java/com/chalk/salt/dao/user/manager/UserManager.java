@@ -6,10 +6,6 @@ package com.chalk.salt.dao.user.manager;
 
 import java.util.List;
 
-import com.chalk.salt.common.dto.AuthStatus;
-import com.chalk.salt.common.dto.DomainDetailDto;
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
-import com.chalk.salt.common.dto.SaveLoginRequestDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
@@ -37,7 +33,7 @@ public interface UserManager {
      * @return the string
      * @throws UserException the core exception
      */
-    public String registerUser(final DomainUserPrincipalDto domainDto, final UserDto user) throws UserException;
+    public String registerUser(final UserDto user) throws UserException;
 
     /**
      * Fetch users.
@@ -73,5 +69,5 @@ public interface UserManager {
      * @return the string
      * @throws UserException the user exception
      */
-    String saveUserInfo(final UserDto userDetails, final DomainUserPrincipalDto domainDto) throws UserException;
+    String saveUserInfo(final UserDto userDetails) throws UserException;
 }

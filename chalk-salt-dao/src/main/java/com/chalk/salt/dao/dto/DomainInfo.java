@@ -26,7 +26,7 @@ public class DomainInfo {
     /** The password. */
     private String password;
     
-    private String foreName;
+    private String firstName;
     
     private String middleName;
     
@@ -103,17 +103,17 @@ public class DomainInfo {
 	}
 
 	/**
-	 * @return the foreName
+	 * @return the firstName
 	 */
-	public String getForeName() {
-		return foreName;
+	public String getFirstName() {
+		return firstName;
 	}
 
 	/**
-	 * @param foreName the foreName to set
+	 * @param firstName the firstName to set
 	 */
-	public void setForeName(String foreName) {
-		this.foreName = foreName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**

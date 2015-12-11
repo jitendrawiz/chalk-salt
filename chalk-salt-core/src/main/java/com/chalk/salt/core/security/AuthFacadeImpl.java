@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
-import com.chalk.salt.common.dto.AuthInfoDto;
 import com.chalk.salt.common.dto.AuthRequest;
+import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.auth.manager.AuthManager;
 
@@ -32,7 +32,7 @@ public class AuthFacadeImpl implements AuthFacade {
      * .common.dto.AuthRequest)
      */
     @Override
-    public AuthInfoDto getUserAuthenticationDetails(final AuthRequest authRequest) throws UserException {
+    public UserDto getUserAuthenticationDetails(final AuthRequest authRequest) throws UserException {
         logger.info("About to obtain the user authentication details against the user '{}',", authRequest.getUsername());
         return authManager.getUserAuthenticationDetails(authRequest);
     }

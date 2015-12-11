@@ -24,9 +24,8 @@ import org.slf4j.LoggerFactory;
 
 import com.chalk.salt.api.model.DomainAuthTokenModel;
 import com.chalk.salt.api.model.security.DomainUserPrincipal;
-import com.chalk.salt.common.dto.AuthInfoDto;
 import com.chalk.salt.common.dto.AuthRequest;
-import com.chalk.salt.common.dto.UserDetailDto;
+import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.core.security.AuthFacade;
 import com.chalk.salt.core.user.UserFacade;
@@ -136,18 +135,17 @@ public class DomainAuthRealm extends AuthorizingRealm {
         final List<String> clientIpAddresses = domainAuthToken.getClientIpAddresses();
 
         final AuthRequest authenticationRequest = new AuthRequest(username, password, clientIpAddresses);
-        AuthInfoDto authInfo = null;
+        UserDto userInfo = null;
         try {
-            authInfo = authenticationFacade.getUserAuthenticationDetails(authenticationRequest);
+        	userInfo = authenticationFacade.getUserAuthenticationDetails(authenticationRequest);
         } catch (final UserException coreException) {
             throw new AuthenticationException("Error occurred while checking the authentication details against the user '" + username + "', Error ",
                 coreException);
         }
         
-        final DomainUserPrincipal userPrincipal = getDomainUserPrincipal(authInfo);
-        final UserDetailDto userDetail = authInfo.getUserDetail();
-        final String base64DecodedPassword = Base64.decodeToString(userDetail.getPassword().getBytes());
-        final SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userPrincipal, userDetail.getPassword(), getName());
+        final DomainUserPrincipal userPrincipal = getDomainUserPrincipal(userInfo);
+        final String base64DecodedPassword = Base64.decodeToString(userInfo.getPassword().getBytes());
+        final SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userPrincipal, userInfo.getPassword(), getName());
         authenticationInfo.setCredentialsSalt(new SimpleByteSource(base64DecodedPassword));
         return authenticationInfo;
     }
@@ -155,15 +153,15 @@ public class DomainAuthRealm extends AuthorizingRealm {
     /**
      * Gets the domain user principal.
      *
-     * @param authenticationInfo the authentication info
+     * @param userInfo the authentication info
      * @return the domain user principal
      */
-    private DomainUserPrincipal getDomainUserPrincipal(final AuthInfoDto authenticationInfo) {
-        final UserDetailDto user = authenticationInfo.getUserDetail();
-        final DomainUserPrincipal userPrincipal = new DomainUserPrincipal(user.getUserId(), user.getUsername());
-        userPrincipal.setEmail(user.getEmail());
-        userPrincipal.setFullName(user.getForename()+" "+user.getSurname());
-        userPrincipal.setSecurUuid(user.getSecurUuid());
+    private DomainUserPrincipal getDomainUserPrincipal(final UserDto userInfo) {
+        final DomainUserPrincipal userPrincipal = new DomainUserPrincipal(userInfo.getUserId(), userInfo.getUserName());
+        userPrincipal.setEmail(userInfo.getEmail());
+        userPrincipal.setFullName(userInfo.getFirstName()+" "+userInfo.getLastName());
+        userPrincipal.setSecurUuid(userInfo.getSecurUuid());
+        
         return userPrincipal;
     }
 

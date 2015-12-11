@@ -42,11 +42,11 @@ public class UserService {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             errors.put("password mismatch", "password and confirm password should be same");
         }
-        if (StringUtils.isBlank(user.getForeName())) {
-            errors.put("forename", "forename can not be blank/null");
+        if (StringUtils.isBlank(user.getFirstName())) {
+            errors.put("forename", "first name can not be blank/null");
         }
-        if (StringUtils.isBlank(user.getSurName())) {
-            errors.put("surname", "surname can not be blank/null");
+        if (StringUtils.isBlank(user.getLastName())) {
+            errors.put("surname", "last name can not be blank/null");
         }
         if (StringUtils.isBlank(user.getEmail())) {
             errors.put("emailAddress", "email address can not be blank/null");
@@ -66,9 +66,9 @@ public class UserService {
         for (final UserDto user : users) {
             final Map<String, String> userMap = new HashMap<String, String>();
             userMap.put("securUuid", user.getSecurUuid());
-            userMap.put("forename", user.getForeName());
+            userMap.put("forename", user.getFirstName());
             userMap.put("middle", user.getMiddleName());
-            userMap.put("surname", user.getSurName());
+            userMap.put("surname", user.getLastName());
             userList.add(userMap);
         }
         return userList;

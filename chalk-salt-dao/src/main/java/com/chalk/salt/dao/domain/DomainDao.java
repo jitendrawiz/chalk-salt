@@ -4,8 +4,8 @@
 */
 package com.chalk.salt.dao.domain;
 
+import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
-import com.chalk.salt.dao.dto.DomainInfo;
 
 /**
  * The Interface DomainDao.
@@ -21,6 +21,6 @@ public interface DomainDao {
      * @return the user detail
      * @throws UserException the user exception
      */
-    DomainInfo obtainUserDomainDetails(final String username) throws UserException;
+    UserDto obtainUserLoginDetails(final String username) throws UserException;
 
 }
