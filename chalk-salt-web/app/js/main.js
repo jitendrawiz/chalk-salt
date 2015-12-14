@@ -11,13 +11,23 @@ require.config({
     bootstrap: 'lib/bootstrap/dist/css/bootstrap',
     jquery: 'lib/jquery/dist/jquery.min',
     jqueryUI: 'lib/jquery-ui/jquery-ui.min',
-    propCoCss: 'resources/css/propco-enterprise',
+    candDCss: 'resources/css/propco-enterprise',
     uiBootstrap: 'lib/angular-bootstrap/ui-bootstrap-tpls',
     fontAwesome: '/lib/fontawesome/css/font-awesome',
     angularTranslate: 'lib/angular-translate/angular-translate.min',
     angularTranslateStaticFile: 'lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min',
     angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min',
-    angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
+    fontAwesomeCss:'resources/css/font-awesome.min',
+    bootStrapCss:'resources/css/bootstrap.min',
+    iconCss:'resources/css/ionicons.min',
+    carouselCss:'resources/css/owl.carousel',
+    animateCss:'resources/css/animate',
+    mainCss:'resources/css/main',
+    cssSliderCss:'resources/cssslider_files/csss_engine1/style',
+    commonCss:'resources/css/Common',
+    angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min'
+
+    	//angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
     },
   /**
    * for lib that either do not support AMD out of the box, or

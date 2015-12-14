@@ -1,12 +1,14 @@
 'use strict';
 
-define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!propCoCss', 'jquery', 'jqueryUI', 'angularTranslate',
-        'angularTranslateStaticFile', 'angularSanitize', 'angularDragDrop','angularPrettyCheckable','css!fontAwesome'], function(angular) {
+define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource','css!mainCss',
+         'css!cssSliderCss','css!animateCss','css!carouselCss','css!iconCss',
+         'css!bootStrapCss','css!fontAwesomeCss','css!commonCss', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
+        'angularTranslateStaticFile', 'angularSanitize', 'angularDragDrop','css!fontAwesome'], function(angular) {
 
-    var propcoEnterprise = angular.module('PropCoEnterprise', [ 'ui.router', 'ngResource', 'Login.controller', 'Agent.controller','Administration.controller',
+    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Agent.controller','Administration.controller',
             'Registration.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
 
-    propcoEnterprise.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+    chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         /*
          * https://scotch.io/tutorials/internationalization-of-angularjs-applications
          */$translateProvider.useStaticFilesLoader({
@@ -16,13 +18,13 @@ define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap
         $translateProvider.preferredLanguage('en_US');
         $translateProvider.useSanitizeValueStrategy('sanitize');
 
-        $stateProvider.state('propco', {
-            url : '/propco',
+        $stateProvider.state('chalkanddust', {
+            url : '/chalkanddust',
             abstract : true,
             template : '<ui-view/>'
         });
-        $urlRouterProvider.otherwise('/propco/login');
+        $urlRouterProvider.otherwise('/chalkanddust/home');
     });
 
-    return propcoEnterprise;
+    return chalkAndDust;
 });

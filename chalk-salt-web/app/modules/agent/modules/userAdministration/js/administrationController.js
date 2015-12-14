@@ -1,6 +1,6 @@
 'use strict';
 define([ 'angular','./administrationRouting','./administrationService','./modalController'], function(angular) {
-    var administrationModule = angular.module('Administration.controller', ['Administration.router','System.configuration','pretty-checkable','Administration.Service','Modal.controller']);
+    var administrationModule = angular.module('Administration.controller', ['Administration.router','System.configuration','Administration.Service','Modal.controller']);
     administrationModule.controller('AdministrationController', [
                 '$scope',
                 '$state',
