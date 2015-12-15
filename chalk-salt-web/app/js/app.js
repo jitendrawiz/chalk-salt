@@ -1,8 +1,6 @@
 'use strict';
 
-define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource','css!mainCss',
-         'css!cssSliderCss','css!animateCss','css!carouselCss','css!iconCss',
-         'css!bootStrapCss','css!fontAwesomeCss','css!commonCss', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
+define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
         'angularTranslateStaticFile', 'angularSanitize', 'angularDragDrop','css!fontAwesome'], function(angular) {
 
     var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Agent.controller','Administration.controller',

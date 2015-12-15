@@ -1,13 +1,10 @@
 'use strict';
 
-define([ 'angular', './homeRouting', './homeService','css!mainCss',
-         'css!cssSliderCss','css!animateCss','css!carouselCss','css!iconCss',
-         'css!bootStrapCss','css!fontAwesomeCss','css!commonCss' ], function(angular) {
+define([ 'angular', './homeRouting', './homeService' ], function(angular) {
 
-    var loginModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service','fontAwesomeCss',
-                                                          'bootStrapCss','iconCss','carouselCss','animateCss','mainCss','cssSliderCss','commonCss']);
+    var homeModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service']);
     
-    loginModule.controller('HomeController', [ '$scope', '$state', '$resource','$rootScope', 'PROPCO', 'HomeService',
+    homeModule.controller('HomeController', [ '$scope', '$state', '$resource','$rootScope', 'PROPCO', 'HomeService',
             function($scope, $state, $resource,$rootScope, PROPCO, HomeService) {
 
     		   var showAlert = function(type, message){
