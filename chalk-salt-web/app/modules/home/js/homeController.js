@@ -19,25 +19,17 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
-    	       showAlert("i am in");
+    	      showAlert("hello");
                 $scope.authRequest = {};
                 $scope.version = PROPCO.VERSION;
                 $scope.build = PROPCO.BUILD;
                 $scope.email = PROPCO.EMAIL;
                 $scope.releaseDate = PROPCO.RELEASE_DATE;
                 $rootScope.userName = {};
-           /*     this.authenticateUser = function() {
-                    LoginService.save({}, $scope.authRequest, function(response) {
-                        if(response){
-                            $rootScope.userName = response.fullName;
-                            console.log($rootScope.userName);
-                            $state.go('propco.agent.home');
-                            console.log(response);
-                        }
-                    }, function(error) {
-                    	showAlert('danger',error.data.message);
-                    });
-                };*/
+               this.login = function() {
+                            $state.go('chalkanddust.home');
+                            console.log("i am in");
+                };
                 
             }
     ]);

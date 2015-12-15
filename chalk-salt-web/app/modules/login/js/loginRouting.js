@@ -5,7 +5,7 @@ define([ 'angular', 'text!../templates/login.tpl.html'], function(angular, templ
     var loginRouter = angular.module('Login.router', []);
 
     loginRouter.config([ '$stateProvider', function($stateProvider) {
-        $stateProvider.state('propco.login', {
+        $stateProvider.state('chalkanddust.login', {
             url : '/login',
             template : templateLogin,
             controller : 'LoginController as loginCtrl'

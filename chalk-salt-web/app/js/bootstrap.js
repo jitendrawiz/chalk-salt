@@ -1,9 +1,9 @@
 'use strict';
 
 define([ 'require', 'angular', './configuration', './httpInterceptor', './app',
-        './directives', './filters', '../modules/login/js/loginController',
+        './directives', './filters','../modules/home/js/homeController', '../modules/login/js/loginController',
         '../modules/agent/js/agentController',
-        '../modules/home/js/homeController',
+        
        '../modules/agent/modules/userAdministration/js/administrationController',
         '../modules/agent/modules/registration/js/registrationController' ],
         function(require, ng) {
