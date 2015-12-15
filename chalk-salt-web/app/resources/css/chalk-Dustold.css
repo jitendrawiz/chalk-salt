@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic,300italic");
+/*@import "variables";*/
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic);
 .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
@@ -25,6 +26,19 @@
 .gm-style img {
   max-width: none; }
 
+/*@import "icons";
+@import "tabs";
+@import "table";
+@import "form";
+@import "slider";
+@import "login";
+@import "agent";
+@import "property";
+@import "search";
+@import "email";
+@import "registration";
+@import "home";
+@import "administration";*/
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
