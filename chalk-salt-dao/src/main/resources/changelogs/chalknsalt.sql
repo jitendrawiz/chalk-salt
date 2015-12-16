@@ -88,3 +88,11 @@ CREATE TABLE `cst_usertypes` (
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+alter table `chalkndust`.`cst_users` 
+   add column `secur_uuid` varchar(100) NULL after `user_type_id`
+   
+   
+   alter table `chalkndust`.`cst_contacts` 
+   add column `email` varchar(100) NULL after `fax`

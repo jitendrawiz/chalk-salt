@@ -31,7 +31,7 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                         if(response){
                             $rootScope.userName = response.fullName;
                             console.log($rootScope.userName);
-                            $state.go('propco.agent.home');
+                           // $state.go('propco.agent.home');
                             console.log(response);
                         }
                     }, function(error) {
