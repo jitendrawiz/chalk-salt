@@ -1,7 +1,7 @@
 'use strict';
 define([ 'angular', './agentRouting','./dashboardController','angularDragDrop'], function(angular) {
 
-    var module = angular.module('Agent.controller', [ 'Agent.router','ngDragDrop','Dashboard.controller' ]);
+    var module = angular.module('Agent.controller', [ 'Agent.router','Dashboard.controller' ]);
     module.controller('AgentController', [
             '$scope',
             '$state',

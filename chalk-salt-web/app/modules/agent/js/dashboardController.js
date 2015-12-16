@@ -1,7 +1,7 @@
 'use strict';
 define([ 'angular','./agentHomeService','angularDragDrop' ], function(angular) {
 
-    var dashboardModule = angular.module('Dashboard.controller', ['AgentHome.Service', 'ngDragDrop']);
+    var dashboardModule = angular.module('Dashboard.controller', ['AgentHome.Service']);
     dashboardModule.controller('DashboardController', [
             '$scope',
             '$state',

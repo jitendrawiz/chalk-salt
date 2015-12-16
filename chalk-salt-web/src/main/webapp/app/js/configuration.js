@@ -13,7 +13,7 @@
 
 .constant("ENV", {
 	"NAME": "development",
-	"API_END_POINT": "http://localhost:8080/chalk-salt-api-3.0.0-SNAPSHOT/api/"
+	"API_END_POINT": "http://localhost:8080/chalk-salt-api/"
 })
 
 ; 

@@ -5,7 +5,7 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
 
     var registrationModule = angular.module('Registration.controller', [
             'Registration.router', 'System.configuration',
-            'Registration.Service', 'ngDragDrop']);
+            'Registration.Service']);
 
     registrationModule.controller('RegistrationController', [
             '$scope',

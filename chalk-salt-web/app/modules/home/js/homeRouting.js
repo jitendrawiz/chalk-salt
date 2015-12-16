@@ -6,7 +6,7 @@ define([ 'angular', 'text!../templates/home.tpl.html'], function(angular, templa
 
     homeRouter.config([ '$stateProvider', function($stateProvider) {
         $stateProvider.state('chalkanddust.home', {
-            url : '',
+            url : '/home',
             template : templateHome,
             controller : 'HomeController as homeCtrl'
         });
