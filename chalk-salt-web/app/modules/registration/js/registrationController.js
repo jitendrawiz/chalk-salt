@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', './registrationRouting', './registrationService', 'angularDragDrop'
+define([ 'angular', './registrationRouting', './registrationService'
         ], function(angular) {
 
     var registrationModule = angular.module('Registration.controller', [
@@ -11,11 +11,9 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
             '$scope',
             '$state',
             '$resource',
-            'PROPCO',
-            'RegistrationService',
-            'DomainListService',
-            function($scope, $state, $resource, PROPCO, RegistrationService,
-                    DomainListService) {
+            'CHALKNDUST',
+            'RegistrationService',            
+            function($scope, $state, $resource, CHALKNDUST, RegistrationService) {
 
                 var showAlert = function(type, message) {
                     $scope.alert = {};
@@ -30,21 +28,9 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
                     return true;
                 };
                 
-                $scope.domainsList = [];
-                $scope.defaultDomain =[];
+               
                 $scope.userDetails = {};
-                $scope.userDetails.defaultDomain ={};
-                $scope.userDetails.assignedDomains = [];
-                $scope.domainListValidation = {
-                    accept : function() {
-
-                        if ( $scope.defaultDomain.length >= 2) {
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    }
-                };
+                
 
                 $scope.inputType = 'password';
                 $scope.hideShowPassword = function() {
@@ -57,9 +43,7 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
 
                 
                 this.register = function() {
-                    var abc= $scope.defaultDomain[0].name;
-                    $scope.userDetails.defaultDomain =  abc;
-                        
+                                            
                     RegistrationService.save({}, $scope.userDetails, function(
                             response) {
                         if (response) {
@@ -71,15 +55,7 @@ define([ 'angular', './registrationRouting', './registrationService', 'angularDr
                         showAlert('danger', error.data.message);
                     });
                 };
-                function getDomainsList() {
-                    DomainListService.get({}, function(response) {
-                        $scope.domainsList = response.domainNames;
-                    }, function(error) {
-                        console.log(error.data.message);
-                        showAlert('danger', 'No domain has been specified');
-                    });
-                }
-                getDomainsList();
+                
             } ]);
 
 });

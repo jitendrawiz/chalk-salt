@@ -1,0 +1,32 @@
+1. Method : POST
+http://localhost:8080/chalk-salt-api/private/login
+
+request :
+
+{
+    "username":"jitendra",
+    "password":"jiten"
+}
+
+
+2. Method: POST
+http://localhost:8080/chalk-salt-api/private/users
+
+request :
+
+{
+    "userName":"abhishek",
+    "password":"abhi",
+    "confirmPassword":"abhi",
+    "firstName":"Abhishek",
+    "middleName":"",
+    "lastName":"Kumar",
+    "email":"abhishek.kumar627@gmail.com",
+    "mobile":"9787544663",
+    "landline":"012445454545",
+    "address":"Faridabad",
+    "city":"New Delhi",
+    "state":"Delhi",
+    "country":"India",
+    "pincode":"231245"
+}

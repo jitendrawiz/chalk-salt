@@ -31,7 +31,7 @@ public class DomainDaoImpl implements DomainDao {
 
         final String sqlQuery = " SELECT login.user_id AS userId,"
         		+ " login.username AS userName,"
-        		+ " login.password, users.fore_name AS firstName,"
+        		+ " login.password, users.first_name AS firstName,"
         		+ " users.middle_name AS middleName, users.last_name AS lastName,"
         		+ " users.secur_uuid AS securUuid, login.active AS active,"
         		+ " contacts.`email` AS email FROM cst_logins AS login"

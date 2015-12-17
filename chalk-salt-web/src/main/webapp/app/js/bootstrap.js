@@ -7,7 +7,7 @@ define([ 'require', 'angular', './configuration', './httpInterceptor', './app',
         function(require, ng) {
             require([ 'domReady' ], function(domReady) {
                 domReady(function() {
-                    ng.bootstrap(document, [ 'PropCoEnterprise' ]);
+                    ng.bootstrap(document, [ 'chalkAndDust' ]);
                 });
             });
         });

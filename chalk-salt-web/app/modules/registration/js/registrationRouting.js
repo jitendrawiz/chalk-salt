@@ -7,7 +7,7 @@ define([ 'angular', 'text!../templates/registration.tpl.html' ], function(
 
     registrationRouter.config([ '$stateProvider', function($stateProvider) {
 
-        $stateProvider.state('chalkanddust.agent.registration', {
+        $stateProvider.state('chalkanddust.registration', {
             url : '/registration',
             template : templateRegistration,
             controller : 'RegistrationController as regCtrl'
