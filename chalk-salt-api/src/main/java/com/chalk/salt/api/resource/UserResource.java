@@ -149,19 +149,19 @@ public class UserResource extends AbstractResource {
     @Path("/users")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresAuthentication
+   // @RequiresAuthentication
     public Response saveUserInfo(final @Valid UserModel user) throws UserException {
 
         final Map<String, String> response = new HashMap<String, String>();
         String securUuid = null;
         try {
-            final DomainUserPrincipal domainUserPrincipal = (DomainUserPrincipal) getUserPrincipal();
-            final DomainUserPrincipalDto domainDto = beanMapper.map(domainUserPrincipal, DomainUserPrincipalDto.class);
+         //   final DomainUserPrincipal domainUserPrincipal = (DomainUserPrincipal) getUserPrincipal();
+           // final DomainUserPrincipalDto domainDto = beanMapper.map(domainUserPrincipal, DomainUserPrincipalDto.class);
             final UserDto userDetails = beanMapper.map(user, UserDto.class);
-            final String senderEmail = domainUserPrincipal.getEmail();
+         //   final String senderEmail = domainUserPrincipal.getEmail();
             final String encryptedPassword = Utility.getEncodedBCryptHash(user.getPassword());
             userDetails.setPassword(encryptedPassword);
-            securUuid = userFacade.saveUserInfo(userDetails, domainDto, senderEmail);
+            securUuid = userFacade.saveUserInfo(userDetails);
             if (securUuid == null) {
                 return Response.noContent().build();
             }

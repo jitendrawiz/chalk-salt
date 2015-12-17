@@ -47,8 +47,10 @@ define([ 'angular', './registrationRouting', './registrationService'
                     RegistrationService.save({}, $scope.userDetails, function(
                             response) {
                         if (response) {
-                            showAlert('New user has been created and an email has been sent to their registered email address.');
-                            $state.go('propco.agent.home');
+                          //  showAlert('New user has been created and an email has been sent to their registered email address.');
+                            console.log(response);
+                            alert("New user has been created and an email has been sent to their registered email address.");
+                           // $state.go('chalkandddust.home');
                         }
                         
                     }, function(error) {

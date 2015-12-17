@@ -91,10 +91,10 @@ public class UserFacadeImpl implements UserFacade {
      * @throws UserException the user exception
      */
 
-    private EmailNotificationDto getEmailNotification(final UserDto user, final String senderEmail) throws UserException {
+    private EmailNotificationDto getEmailNotification(final UserDto user) throws UserException {
         final EmailNotificationDto emailNotification = new EmailNotificationDto();
         emailNotification.setTo(user.getEmail());
-        emailNotification.setFrom(senderEmail);
+       // emailNotification.setFrom(senderEmail);
         emailNotification.setSubject("New User created over Chalk N Dust");
 
         final Map<String, Object> userDataModel = beanMapper.map(user, Map.class);
@@ -151,9 +151,9 @@ public class UserFacadeImpl implements UserFacade {
      * java.lang.String)
      */
     @Override
-    public String saveUserInfo(final UserDto userDetails, final DomainUserPrincipalDto domainDto, final String senderEmail) throws UserException {
+    public String saveUserInfo(final UserDto userDetails) throws UserException {
         final String securUuid = userManager.saveUserInfo(userDetails);
-        final EmailNotificationDto emailNotification = getEmailNotification(userDetails, senderEmail);
+        final EmailNotificationDto emailNotification = getEmailNotification(userDetails);
         emailService.sendMail(emailNotification);
         return securUuid;
     }

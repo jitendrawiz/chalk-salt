@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Singleton;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.ImageHtmlEmail;
 import org.apache.commons.mail.resolver.DataSourceUrlResolver;
@@ -23,7 +23,6 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.stereotype.Service;
-
 
 import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationMessageDto;
@@ -64,15 +63,17 @@ public class EmailService {
         final EmailNotificationDto emailNotification = (EmailNotificationDto) notificationMessage;
 
         try {
+        	
             final String to = emailNotification.getTo();
             final String[] recipientList = parseRecipientList(to);
             imageHtmlEmail.addTo(recipientList);
             imageHtmlEmail.setSubject(emailNotification.getSubject());
             imageHtmlEmail.setDataSourceResolver(new DataSourceUrlResolver(null));
-            final String from = emailNotification.getFrom();
-            imageHtmlEmail.setFrom(from);
-            imageHtmlEmail.setHostName("solo.techblue.co.uk");
-            imageHtmlEmail.setSmtpPort(25);
+            imageHtmlEmail.setFrom("chalkandsalt@gmail.com");
+            imageHtmlEmail.setHostName("smtp.gmail.com");
+            imageHtmlEmail.setSmtpPort(587);
+            imageHtmlEmail.setAuthenticator(new DefaultAuthenticator("chalkandsalt@gmail.com", "ch@lkands@lt"));
+            imageHtmlEmail.setSSLOnConnect(true);;            
             imageHtmlEmail.setHtmlMsg(notificationMessage.getBody());
             final List<String> attachments = emailNotification.getAttachments();
             if (attachments != null && attachments.size() > 0) {
