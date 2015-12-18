@@ -3,7 +3,7 @@
 define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
         'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome'], function(angular) {
 
-    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
+    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','Student.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
 
     chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         /*

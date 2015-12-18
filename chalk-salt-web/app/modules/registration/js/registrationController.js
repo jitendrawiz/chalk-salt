@@ -50,7 +50,7 @@ define([ 'angular', './registrationRouting', './registrationService'
                           //  showAlert('New user has been created and an email has been sent to their registered email address.');
                             console.log(response);
                             alert("New user has been created and an email has been sent to their registered email address.");
-                           // $state.go('chalkandddust.home');
+                            $state.go('chalkanddust.login');
                         }
                         
                     }, function(error) {

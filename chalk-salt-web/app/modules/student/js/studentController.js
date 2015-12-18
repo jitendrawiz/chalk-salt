@@ -1,11 +1,11 @@
 'use strict';
 
-define([ 'angular', './homeRouting', './homeService' ], function(angular) {
+define([ 'angular', './studentRouting', './studentService' ], function(angular) {
 
-    var homeModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service']);
+    var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service']);
     
-    homeModule.controller('HomeController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService',
-            function($scope, $state, $resource,$rootScope, CHALKNDUST, HomeService) {
+    homeModule.controller('StudentController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'StudentService',
+            function($scope, $state, $resource,$rootScope, CHALKNDUST, StudentService) {
 
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -19,15 +19,15 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
-    	    //  showAlert("hello");
-                $scope.authRequest = {};
+    	      //showAlert("hello");
+                $scope.studentRequest = {};
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
-                $rootScope.userName = {};
-               this.login = function() {
-                            $state.go('chalkanddust.home');
+                $rootScope.studentName = {};
+               this.studentSuccess = function() {
+                          //  $state.go('chalkanddust.home');
                             console.log("i am in");
                 };
                 
