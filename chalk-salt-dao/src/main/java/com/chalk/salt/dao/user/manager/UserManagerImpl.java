@@ -145,10 +145,10 @@ public class UserManagerImpl implements UserManager {
         try {
             user = officeDao.getUserInfo(securUuid);
             if (user == null) {
-                throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail_to_fetch_registered_user");
+                throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user");
             }
         } catch (final Exception exception) {
-            throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail_to_fetch_registered_user", exception);
+            throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user", exception);
         }
         return user;
     }
@@ -164,7 +164,7 @@ public class UserManagerImpl implements UserManager {
         logger.info("Saving user details of username : {}", userDetails.getUserName());
         String securUuid = null;
         if (isUserExist(userDetails.getUserName())) {
-            throw new UserException(ErrorCode.USER_ALREADY_EXITS, "user_already_exist");
+            throw new UserException(ErrorCode.USER_ALREADY_EXITS, "User with this user name already exists");
         }
         try {
             securUuid = registerUser(userDetails);

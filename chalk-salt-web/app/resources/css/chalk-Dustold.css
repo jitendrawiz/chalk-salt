@@ -27,6 +27,23 @@
 .gm-style img {
   max-width: none; }
 
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  background-color: #666;
+  opacity: 0.8; }
+  #loading img {
+    width: 100px;
+    position: relative;
+    margin: auto;
+    top: 40%;
+    left: 45%;
+    z-index: 100000; }
+
 /*@import "icons";
 @import "tabs";
 @import "table";
@@ -62,6 +79,23 @@
 
 .gm-style img {
   max-width: none; }
+
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  background-color: #666;
+  opacity: 0.8; }
+  #loading img {
+    width: 100px;
+    position: relative;
+    margin: auto;
+    top: 40%;
+    left: 45%;
+    z-index: 100000; }
 
 @font-face {
   font-family: 'FontAwesome';
@@ -8744,6 +8778,16 @@ nav li #login-content {
   border: 1px solid #CCC; }
 
 .user_log_detail select {
+  width: 100%;
+  height: 40px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+  color: #000;
+  margin: 10px 0px;
+  border: 1px solid #CCC; }
+
+.user_log_detail span {
   width: 100%;
   height: 40px;
   padding-bottom: 10px;
