@@ -6,7 +6,7 @@ define([ 'angular' ], function(angular) {
 
     
     studentService.factory('GetUserDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/user/info/:securUuid',{
+        return $resource(ENV.API_END_POINT + 'private/users/:securUuid',{
             securUuid : '@securUuid'
         }, {
             get : {
@@ -14,5 +14,5 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]);
+        } ]);    
 });

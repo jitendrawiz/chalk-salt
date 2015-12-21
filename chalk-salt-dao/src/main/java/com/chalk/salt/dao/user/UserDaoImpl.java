@@ -200,27 +200,25 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserDto getUserInfo(final String securUuid) throws Exception {
 
-        final UserDto userCredential = getUserCredentialsBySecurUuid(securUuid);
+       // final UserDto userCredential = getUserCredentialsBySecurUuid(securUuid);
         UserDto user = null;
 
         final String sqlQuery =
-            "SELECT tbl_secur.`secur_uuid` AS securUuid, tbl_secur.`forename`, tbl_secur.`surname`, tbl_secur.`middle`, tbl_secur.`jobtitle` AS jobTitle, "
-                + "tbl_secur.`aka` AS displayAs, tbl_secur.`email`, tbl_secur.`office` AS officeId, tbl_offices.`name` AS officeName, "
-                + "tbl_offices.`office_uuid` AS officeUuid, tbl_secur.`tel1` AS mobile, tbl_secur.`tel2` AS fax, tbl_secur.`endsleigh_id` AS referencingId, "
-                + "tbl_secur.`maxresults` AS maxResults, tbl_secur.`diaryclashcheck` AS diaryClashLevel, tbl_secur.`comm` AS commission, tbl_secur.`mailservers_id` AS mailServerId, "
-                + "tbl_mailservers.`name` AS mailServerName, tbl_mailservers.`mailserver_uuid` AS mailServerUuid, tbl_secur.`emailusername` AS emailUser, tbl_secur.`emailpass` AS emailPassword, "
-                + "tbl_secur.`docmgtuser` AS docMgtUser, tbl_secur.`docmgtpass` AS docMgtPassword, tbl_secur.`descr` AS description, tbl_secur.`passexp` AS expires, "
-                + "tbl_secur.`login_count` AS allowedInstances, tbl_secur.`neg` AS negotiator, tbl_secur.`omitdiary` AS omitDiary, tbl_secur.`disable` AS disableVisibility "
-                + "FROM `tbl_secur` AS tbl_secur LEFT JOIN `tbl_offices` AS tbl_offices ON tbl_offices.`offices_id` = tbl_secur.`office` "
-                + "LEFT JOIN `tbl_mailservers` AS tbl_mailservers ON tbl_mailservers.`mailservers_id` = tbl_secur.`mailservers_id` "
-                + "WHERE tbl_secur.secur_uuid = :securUuid";
+            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username FROM cst_users "
+            + " JOIN cst_contacts ON cst_contacts.id=cst_users.contact_id "
+            + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id"
+            + " WHERE secur_uuid=:securUuid AND active=1";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("securUuid", securUuid);
+            query.addColumnMapping("first_name", "firstName");
+            query.addColumnMapping("middle_name", "middleName");
+            query.addColumnMapping("last_name", "lastName");
+            query.addColumnMapping("username", "userName");
             user = query.executeAndFetchFirst(UserDto.class);
         }
-        user.setUserName(userCredential.getUserName());
+     //   user.setUserName(userCredential.getUserName());
         // user.setPassword(userCredential.getPassword());
         return user;
     }

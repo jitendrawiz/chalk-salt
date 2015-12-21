@@ -120,10 +120,10 @@ public class UserResource extends AbstractResource {
      * @throws UserException the user exception
      */
     @GET
-    @Path("/users/{userId}")
+    @Path("/users/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
-    public Response getUserInfo(@NotBlank @PathParam("userId") final String securUuid) throws UserException {
+    public Response getUserInfo(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
 
         UserDto userDetails = null;
         try {

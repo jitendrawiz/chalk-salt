@@ -6,7 +6,7 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
     
     loginModule.controller('LoginController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'LoginService',
             function($scope, $state, $resource,$rootScope, CHALKNDUST, LoginService) {
-
+    //	SystemUtil.resetLocalStorage();
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -25,20 +25,26 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
-                $rootScope.userName = {};
+                $rootScope.userInfo = {};
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
-                            $rootScope.userName = response.fullName;
-                            console.log($rootScope.userName);
+                           // $rootScope.userName = response.fullName;
+                           // $rootScope.securUuid=response.securUuid;
+                          //  console.log($rootScope.userName);
+                        	$rootScope.securUuid=response.securUuid;
+                        	//getUserDetails();
                             $state.go('chalkanddust.student');
                             console.log(response);
+                           
                         }
                     }, function(error) {
                     	showAlert('danger',error.data.message);
                     });
                 };
                 
-            }
+                
+               
+    }
     ]);
 });
