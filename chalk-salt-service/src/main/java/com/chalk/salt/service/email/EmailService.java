@@ -71,8 +71,8 @@ public class EmailService {
             imageHtmlEmail.setDataSourceResolver(new DataSourceUrlResolver(null));
             imageHtmlEmail.setFrom("chalkandsalt@gmail.com");
             imageHtmlEmail.setHostName("smtp.gmail.com");
-            imageHtmlEmail.setSmtpPort(587);
-            imageHtmlEmail.setAuthenticator(new DefaultAuthenticator("chalkandsalt@gmail.com", "ch@lkands@lt"));
+            imageHtmlEmail.setSmtpPort(465);
+            imageHtmlEmail.setAuthenticator(new DefaultAuthenticator("chalkandsalt", "ch@lkands@lt"));
             imageHtmlEmail.setSSLOnConnect(true);;            
             imageHtmlEmail.setHtmlMsg(notificationMessage.getBody());
             final List<String> attachments = emailNotification.getAttachments();
