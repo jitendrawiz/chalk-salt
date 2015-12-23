@@ -245,40 +245,52 @@
         <div class="col-xs-12 col-md-6 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
           <div class="row inner-grid">
             <div class="user_log_detail">
-            
               <h3>Register</h3>
+              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.firstName.$invalid && !registrationForm.firstName.$pristine }">
               <input class="form-control" id="firstName" name="firstName" ng-model="userDetails.firstName"  type="text" placeholder="First Name" required/>
-              <span style="color:red" ng-show="registrationForm.firstName.$dirty && registrationForm.firstName.$invalid">
+              <span style="color:red" class="help-block" ng-show="registrationForm.firstName.$invalid  && !registrationForm.firstName.$pristine">
             <span ng-show="registrationForm.firstName.$error.required">First Name is required.</span>           
              </span>
+             </div>
+             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.middleName.$invalid && !registrationForm.middleName.$pristine }">
               <input class="form-control" id="middleName" name="middleName" ng-model="userDetails.middleName"  type="text" placeholder="Middle Name" required/>
-               <span style="color:red" ng-show="registrationForm.middleName.$dirty && registrationForm.middleName.$invalid">
+               <span style="color:red" ng-show="registrationForm.middleName.$invalid && !registrationForm.middleName.$pristine">
             <span ng-show="registrationForm.middleName.$error.required">Middle Name is required.</span>           
              </span>
+             </div>
+             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.lastName.$invalid && !registrationForm.lastName.$pristine }">
               <input class="form-control" id="lastName" name="lastName"  ng-model="userDetails.lastName"  type="text" placeholder="Last Name" required/>
-             <span style="color:red" ng-show="registrationForm.lastName.$dirty && registrationForm.lastName.$invalid">
+             <span style="color:red" ng-show="registrationForm.lastName.$invalid && !registrationForm.lastName.$pristine ">
             <span ng-show="registrationForm.lastName.$error.required">Last Name is required.</span>           
              </span>
+             </div>
+               <div class="form-group"  ng-class="{ 'has-error' : registrationForm.userName.$invalid && !registrationForm.userName.$pristine  }">
               <input class="form-control" id="userName" name="userName" ng-model="userDetails.userName"  type="text" placeholder="Username" required/>
-              <span style="color:red" ng-show="registrationForm.userName.$dirty && registrationForm.userName.$invalid">
+              <span style="color:red" ng-show="registrationForm.userName.$invalid && !registrationForm.userName.$pristine">
             <span ng-show="registrationForm.userName.$error.required">User Name is required.</span>           
              </span>
+             </div>
+             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.email.$invalid && !registrationForm.email.$pristine  }">
               <input class="form-control" name="email" id="email" ng-model="userDetails.email"  type="email" placeholder="E-mail" required/>
-            <span style="color:red" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">
-            <span ng-show="registrationForm.email.$error.required">Email is required.</span>
-            <span ng-show="registrationForm.email.$error.email">Invalid email address.</span>
+             <span style="color:red" ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine">
+             <span ng-show="registrationForm.email.$error.required">Email is required.</span>
+             <span ng-show="registrationForm.email.$error.email">Invalid email address.</span>
              </span>
-              
-			  
-              <input class="form-control" id="password" name="password" ng-model="userDetails.password"  type="text"  placeholder="Password" 
+              </div>
+			  <div class="form-group"  ng-class="{ 'has-error' : registrationForm.password.$invalid && !registrationForm.password.$pristine  }">
+              <input class="form-control" id="password" name="password" ng-model="userDetails.password"  type="password"  placeholder="Password" 
                tooltip-enable="!inputModel"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
               tooltip="Please note: Strong password strength requires 2 upper case letters, 2 numbers and 2 lower case letters."
                 password-strength required />                
+              
                  <password-strength ng-model="userDetails.password"  ng-show="registrationForm.password.$dirty"></password-strength>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+               </div>
+                <div class="form-group"  ng-class="{ 'has-error' : registrationForm.confirmPassword.$invalid && !registrationForm.confirmPassword.$pristine  }">
+               <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
                 ng-model="userDetails.confirmPassword" match="userDetails.password"  placeholder="Confirm Password" required />
                 <div ng-show="registrationForm.confirmPassword.$error.match">
                    <span>Passwords do not match!</span>
+                   </div>
                   </div>
             </div>
           </div>
@@ -287,10 +299,13 @@
           <div class="row inner-grid">
             <div class="user_log_detail">
             <h3>...</h3>
-              <input class="form-control" id="address" name="äddress" ng-model="userDetails.address"  type="text"  placeholder="Address" required/>
-            	<span style="color:red" ng-show="registrationForm.address.$dirty && registrationForm.address.$invalid">
-            <span ng-show="registrationForm.address.$error.required">Address is required.</span>           
+             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.registrationaddress.$invalid && !registrationForm.registrationaddress.$pristine  }">
+              <input class="form-control" name="registrationaddress" id="registrationaddress" ng-model="userDetails.address"  type="text" placeholder="Address" required/>
+             <span style="color:red" ng-show="registrationForm.registrationaddress.$invalid && !registrationForm.registrationaddress.$pristine">
+             <span ng-show="registrationForm.registrationaddress.$error.required">Address is required.</span>  
              </span>
+              </div>`
+              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.country.$invalid && !registrationForm.country.$pristine  }">
             	<select class="form-control" id="country" name="country" ng-model="userDetails.country" required>
                 <option class="active">Country</option>
                 <option value="AF">Afghanistan</option>
@@ -541,9 +556,11 @@
                 <option value="ZM">Zambia</option>
                 <option value="ZW">Zimbabwe</option>
               </select>
-              <span style="color:red" ng-show="registrationForm.country.$dirty && registrationForm.country.$invalid">
+              <span style="color:red" ng-show="!registrationForm.country.$pristine && registrationForm.country.$invalid">
             <span ng-show="registrationForm.country.$error.required">Country is required.</span>           
              </span>
+             </div>
+             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.state.$invalid && !registrationForm.state.$pristine  }">
               <select class="form-control" id = "state" name="state" ng-model="userDetails.state" required >
                 <option class="active">State</option>
                 <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
@@ -583,9 +600,11 @@
                 <option value='Uttarakhand'>Uttarakhand</option>
                 <option value='West Bengal'>West Bengal</option>
               </select>
-              <span style="color:red" ng-show="registrationForm.state.$dirty && registrationForm.state.$invalid">
+              <span style="color:red" ng-show="!registrationForm.state.$pristine && registrationForm.state.$invalid">
             <span ng-show="registrationForm.state.$error.required">State is required.</span>           
              </span>
+             </div>
+               <div class="form-group"  ng-class="{ 'has-error' : registrationForm.city.$invalid && !registrationForm.city.$pristine  }">
               <select class="form-control" id="city" name="city" ng-model="userDetails.city" required >
                 <option class="selected">City</option>
                 <option>Ahmedabad</option>
@@ -821,18 +840,21 @@
                 <option>Other</option>
                 <option>Other</option>
               </select>
-               <span style="color:red" ng-show="registrationForm.city.$dirty && registrationForm.city.$invalid">
+               <span style="color:red" ng-show="!registrationForm.city.$pristine && registrationForm.city.$invalid">
             <span ng-show="registrationForm.city.$error.required">City is required.</span>           
              </span>
+             </div>
+              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.pincode.$invalid && !registrationForm.pincode.$pristine  }">
               <input class="form-control" id="pincode" name="pincode" ng-model="userDetails.pincode"   type="number"  placeholder="Pin Code" required/>
-              <span style="color:red" ng-show="registrationForm.pincode.$dirty && registrationForm.pincode.$invalid">
+              <span style="color:red" ng-show="!registrationForm.pincode.$pristine && registrationForm.pincode.$invalid">
             <span ng-show="registrationForm.pincode.$error.required">Pincode is required.</span>     
              <span ng-show="registrationForm.pincode.$error.number">Only Numbers allowed</span>           
              </span>
+             </div>
               <br>
               <input type="checkbox" id="rememberMe" checked>
               <label for="remember-me"> I Agree with the Terms and Conditions</label>
-              <button type="button" class="btn btn-secondary btn-block" ng-click="regCtrl.register()">Submit</button>
+              <button type="button" class="btn btn-secondary btn-block" ng-disabled="registrationForm.$invalid" ng-click="regCtrl.register()">Submit</button>
             </div>
           </div>          
         </div>
@@ -868,4 +890,4 @@
   </footer>
   <!--Footer--> 
   
-  <a href="#home" id="back-top"> <i class="fa fa-angle-up"></i> </a> </div>
+  </div>
