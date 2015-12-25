@@ -1,0 +1,41 @@
+#tabbed label.tabs {
+	background: #555;
+	color: #fff;
+}
+#tabbed label.tabs:hover,
+#tabbed label.tabs:focus {
+	background: #333;
+}
+#tabbed .cell.table.first.blue {
+	background: #333;
+}
+#tabbed p.framed-quote {
+	background: #555;
+	color: #fff;
+}
+#tabbed p.quote {
+	color: #333;
+}
+#tabbed p.framed-quote.arrow-left:before {
+	border-color: transparent #555 transparent transparent;
+}
+#tabbed .button.blue {
+	background: #555;
+	color: #fff;
+}
+#tabbed .button.blue:hover {
+	background: #333;
+	color: #fff;
+}
+#tabbed .button.black:hover {
+	background: #777;
+}
+#tabbed .title.large {
+	color: #333;
+}
+#tabbed a {
+	color: #333;
+}
+#tabbed input.reset:hover {
+	color: #555;
+}

@@ -15,6 +15,7 @@
 <script src="./resources/js/jquery.validate.min.js"></script>
 <script src="./resources/js/jflickrfeed.min.js"></script>
 <script src="./resources/js/main.js"></script>
+<script src="./resources/js/switch.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
@@ -95,7 +96,7 @@
 <p>  </p>
 </div>
 </div>
-<form role="form" action="" method="post">
+<!-- <form role="form" action="" method="post">
  <div class="col-xs-12  wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
 <div class="row inner-grid">
 <div class="user_log_detail">
@@ -155,8 +156,322 @@
 </div>
 </div>
 </form>
+-->
 
 
+<div id="demo">
+		<section id="tabbed">
+			<!-- First tab input and label -->
+			<input id="t-1" name="tabbed-tabs" type="radio" checked="checked" />
+			<label for="t-1" class="tabs shadow entypo-users">General Details</label>
+			<!-- Second tab input and label -->
+			<input id="t-2" name="tabbed-tabs" type="radio" />
+			<label for="t-2" class="tabs shadow entypo-home">Academic Details</label>
+			<!-- Third tab input and label -->
+			<input id="t-3" name="tabbed-tabs" type="radio" />
+			<label for="t-3" class="tabs shadow entypo-menu">Parents Details</label>
+			<!-- Fourth tab input and label -->
+			<input id="t-4" name="tabbed-tabs" type="radio" />
+			<label for="t-4" class="tabs shadow entypo-star">Accounts Details</label>
+			<div class="wrapper shadow">
+
+				<!-- Tab 1 content -->
+				<div class="tab-1">
+					<div class="row">
+						<div class="cell w-100">
+							<div class="title large">Forms</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell w-100">
+						</div>
+					</div>
+					<div class="row">
+						<!-- Form -->
+						<div class="cell w-49">
+							<form id="tab-form" name="tab-form">
+								<!-- First name -->
+								<div class="cell w-100">
+									<input name="name" placeholder="First name" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                
+                                
+                                <!-- Last name -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Last name" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                               
+                                
+                                <!-- Permanent Address -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Permanent Address" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                
+
+								<!-- Phone input -->
+								<div class="cell w-100">
+									<input name="phone" placeholder="+44 123 456" type="Mobile" id="phone" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                
+                                
+								<!-- Email input -->
+								<div class="cell w-100">
+									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+								
+								
+							</form>
+						</div>
+						<!-- Map -->
+						<div class="cell w-49">
+                        <form id="tab-form" name="tab-form">
+							<!-- Middle name -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Middle name" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                 <!-- Contact Details -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Contact Details" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                <!-- Correspondence Address  -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Correspondence Address " type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                <!-- Telephone input -->
+								<div class="cell w-100">
+									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                <!-- Send button -->
+								<div class="cell w-32">
+									<input type="submit" value="Submit" class="button black" form="tab-form" />
+								</div>
+								
+                                </form>
+							<!--<div id="map-canvas" class="map fl-right"></div>-->
+						</div>
+					</div>
+				</div>
+				<!-- / Tab 1 content -->
+
+				<!-- Tab 2 content -->
+				<div class="tab-2">
+					<div class="row">
+						<div class="cell w-100">
+							<div class="title large">Forms</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell w-100">
+						</div>
+					</div>
+					<div class="row">
+						<!-- Form -->
+						<div class="cell w-49">
+							<form id="tab-form" name="tab-form">
+								<!-- Class input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Class" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                <!-- Marks Details  input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Marks Details : [Need to be discuss with client]" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+
+
+                                
+                                
+
+								
+							</form>
+						</div>
+						<!-- Map -->
+						<div class="cell w-49">
+                        <form id="tab-form" name="tab-form">
+                        		<!-- Subjects input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Subjects" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+                                <!-- Previous School input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Previous School" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>                        
+                        
+							<!-- Send button -->
+								<div class="cell w-32">
+									<input type="submit" value="Submit" class="button black" form="tab-form" />
+								</div>
+								<!-- Reset button -->
+								
+                                
+                                </form>
+						</div>
+					</div>
+				</div>
+				<!-- / Tab 2 content -->
+
+				<!-- Tab 3 content -->
+				<div class="tab-3">
+					<div class="row">
+						<div class="cell w-100">
+							<div class="title large">Forms</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell w-100">
+						</div>
+					</div>
+					<div class="row">
+						<!-- Form -->
+						<div class="cell w-49">
+							<form id="tab-form" name="tab-form">
+								<!-- Name input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Father Name" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+						
+                                <!-- Father’s Occupation  -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Father Occupation " type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+								<div class="cell w-100">
+									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+								<!-- Phone input -->
+								<div class="cell w-100">
+									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                <!-- Office Contact Details   -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Office Contact Details" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+								
+								
+								
+							</form>
+						</div>
+						<!-- Map -->
+						<div class="cell w-49">
+							<form id="tab-form" name="tab-form">
+								<!-- Name input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Mother Name" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+						
+                                <!-- Father’s Occupation  -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Mother Occupation " type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+								<div class="cell w-100">
+									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+								<!-- Phone input -->
+								<div class="cell w-100">
+									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                <!-- Office Contact Details   -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Office Contact Details" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+							<!-- Send button -->
+								<div class="cell w-32">
+									<input type="submit" value="Submit" class="button black" form="tab-form" />
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- / Tab 3 content -->
+
+				<!-- Tab 4 content -->
+				<div class="tab-4">
+					<div class="row">
+						<div class="cell w-100">
+							<div class="title large">Forms</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell w-100">
+						</div>
+					</div>
+					<div class="row">
+						<!-- Form -->
+						<div class="cell w-49">
+							<form id="tab-form" name="tab-form">
+								<!-- user input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Username" type="text" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                <!-- user input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Change Password" type="password" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                <!-- user input -->
+								<div class="cell w-100">
+									<input name="name" placeholder="Password" type="password" id="name" required />
+								</div>
+								<div class="clrfx mt-10"></div>
+                                
+								
+								<!-- Send button -->
+								<div class="cell w-32">
+									<input type="submit" value="Submit" class="button black" form="tab-form" />
+								</div>
+								
+							</form>
+						</div>
+						<!-- Map -->
+						<div class="cell w-49">
+							<!-- Google maps -->
+							<div id="map-canvas" class="map fl-right"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="clrfx mt-30"></div>
+			<div class="clrfx mt-30"></div>
+			<!-- / Tabs wrapper -->
+		</section>
+
+	</div>
 </div>  
 </div>  
 </section>
