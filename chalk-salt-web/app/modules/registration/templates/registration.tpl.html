@@ -179,7 +179,7 @@
 </script>
 
 
-<div class="main_bg_bg"></div>
+
 <div id="wrapper" class="main-wrapper">
   <header id="masthead" class="site-header navigation navbar-default">
     <div class="header-top">
@@ -304,10 +304,20 @@
              <span style="color:red" ng-show="registrationForm.registrationaddress.$invalid && !registrationForm.registrationaddress.$pristine">
              <span ng-show="registrationForm.registrationaddress.$error.required">Address is required.</span>  
              </span>
-              </div>`
-              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.country.$invalid && !registrationForm.country.$pristine  }">
+              </div>
+              <!-- 	 <select class="form-control" name="countryName"   
+            ng-model="userDetails.countryName" 
+            ng-options="service.ServiceID as service.ServiceName for service in services"
+            required> 
+      <option value="">Select Service</option> 
+    </select> 
+    <span class="error" ng-show="!registrationForm.countryName.$pristine && registrationForm.countryName.$invalid">Country is Required</span>
+ 
+            -->	
+            <div class="form-group"  ng-class="{ 'has-error' : registrationForm.country.$invalid && !registrationForm.country.$pristine  }">
+            	
             	<select class="form-control" id="country" name="country" ng-model="userDetails.country" required>
-                <option class="active">Country</option>
+                <option value="">Select Country</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AL">Albania</option>
                 <option value="DZ">Algeria</option>
@@ -562,7 +572,7 @@
              </div>
              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.state.$invalid && !registrationForm.state.$pristine  }">
               <select class="form-control" id = "state" name="state" ng-model="userDetails.state" required >
-                <option class="active">State</option>
+                <option value="">Select state</option>
                 <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
                 <option value='Andhra Pradesh'>Andhra Pradesh</option>
                 <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
@@ -606,7 +616,7 @@
              </div>
                <div class="form-group"  ng-class="{ 'has-error' : registrationForm.city.$invalid && !registrationForm.city.$pristine  }">
               <select class="form-control" id="city" name="city" ng-model="userDetails.city" required >
-                <option class="selected">City</option>
+                <option value="">Select City</option>
                 <option>Ahmedabad</option>
                 <option>Bengaluru/Bangalore</option>
                 <option>Chandigarh</option>
@@ -851,13 +861,16 @@
              <span ng-show="registrationForm.pincode.$error.number">Only Numbers allowed</span>           
              </span>
              </div>
-              <br>
-              <input type="checkbox" id="rememberMe" checked>
+<div class="form-group">
+              <input type="checkbox" id="rememberMe" name="rememeberMe" checked/>
               <label for="remember-me"> I Agree with the Terms and Conditions</label>
+              </div>
+             
               <button type="button" class="btn btn-secondary btn-block" ng-disabled="registrationForm.$invalid" ng-click="regCtrl.register()">Submit</button>
             </div>
           </div>          
         </div>
+        
         </form>
       </div>
     </div>
