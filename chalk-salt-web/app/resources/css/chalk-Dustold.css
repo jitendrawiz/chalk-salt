@@ -8837,8 +8837,8 @@ nav li #login-content {
 /* ------------- General ------------- */
 @font-face {
   font-family: "cs-ctrl-basic";
-  src: url("cs-ctrl-basic.eot");
-  src: url("cs-ctrl-basic.eot#iefix") format("embedded-opentype"), url("cs-ctrl-basic.woff") format("woff"), url("cs-ctrl-basic.ttf") format("truetype"), url("cs-ctrl-basic.svg#basic") format("svg");
+  src: url("../cssslider_files/csss_engine1/cs-ctrl-basic.eot");
+  src: url("../cssslider_files/csss_engine1/cs-ctrl-basic.eot#iefix") format("embedded-opentype"), url("../cssslider_files/csss_engine1/cs-ctrl-basic.woff") format("woff"), url("../cssslider_files/csss_engine1/cs-ctrl-basic.ttf") format("truetype"), url("../cssslider_files/csss_engine1/cs-ctrl-basic.svg#basic") format("svg");
   font-weight: normal;
   font-style: normal; }
 
