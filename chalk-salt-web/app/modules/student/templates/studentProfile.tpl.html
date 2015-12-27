@@ -179,7 +179,7 @@
 				<div class="tab-1">
 					<div class="row">
 						<div class="cell w-100">
-							<div class="title large">Forms</div>
+							<div class="title large">General Details</div>
 						</div>
 					</div>
 					<div class="row">
@@ -192,15 +192,14 @@
 							<form id="tab-form" name="tab-form">
 								<!-- First name -->
 								<div class="cell w-100">
-									<input name="name" placeholder="First name" type="text" id="name" required />
+									<input name="firstName" placeholder="First name" type="text" id="firstName" ng-model="userInfo.firstName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
-                                
-                                
-                                
+								
+								
                                 <!-- Last name -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Last name" type="text" id="name" required />
+									<input name="lastName" placeholder="Last name" type="text" id="lastName" ng-model="userInfo.lastName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -208,7 +207,7 @@
                                 
                                 <!-- Permanent Address -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Permanent Address" type="text" id="name" required />
+									<input name="address" placeholder="Permanent Address" type="text" id="address" ng-model="userInfo.address" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -216,7 +215,7 @@
 
 								<!-- Phone input -->
 								<div class="cell w-100">
-									<input name="phone" placeholder="+44 123 456" type="Mobile" id="phone" required />
+									<input name="mobile" placeholder="+44 123 456" type="Mobile" id="mobile" ng-model="userInfo.mobile" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -224,7 +223,7 @@
                                 
 								<!-- Email input -->
 								<div class="cell w-100">
-									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+									<input name="email" placeholder="your@email.com" type="email" id="email" ng-model="userInfo.email" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 								
@@ -236,7 +235,7 @@
                         <form id="tab-form" name="tab-form">
 							<!-- Middle name -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Middle name" type="text" id="name" required />
+									<input name="middleName" placeholder="Middle name" type="text" id="middleName" ng-model="userInfo.middleName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -254,7 +253,7 @@
                                 
                                 <!-- Telephone input -->
 								<div class="cell w-100">
-									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+									<input name="landline" placeholder="+44 123 456" type="tel" id="landline" ng-model="userInfo.landline" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -274,7 +273,7 @@
 				<div class="tab-2">
 					<div class="row">
 						<div class="cell w-100">
-							<div class="title large">Forms</div>
+							<div class="title large">Academic Details</div>
 						</div>
 					</div>
 					<div class="row">
@@ -293,7 +292,7 @@
                                 
                                 <!-- Marks Details  input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Marks Details : [Need to be discuss with client]" type="text" id="name" required />
+									<input name="name" placeholder="Marks Details :" type="text" id="name" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 
@@ -336,7 +335,7 @@
 				<div class="tab-3">
 					<div class="row">
 						<div class="cell w-100">
-							<div class="title large">Forms</div>
+							<div class="title large">Parents Details</div>
 						</div>
 					</div>
 					<div class="row">
@@ -349,33 +348,30 @@
 							<form id="tab-form" name="tab-form">
 								<!-- Name input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Father Name" type="text" id="name" required />
+									<input name="fatherName" id="fatherName" placeholder="Father Name" type="text" ng-model="userInfo.fatherName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 						
                                 <!-- Father’s Occupation  -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Father Occupation " type="text" id="name" required />
+									<input name="fatherOccupation" placeholder="Father Occupation " type="text" id="fatherOccupation"  ng-model="userInfo.Occupation" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
 								<div class="cell w-100">
-									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+									<input name="fatherEmail" placeholder="your@email.com" type="email" id="fatherEmail"  ng-model="userInfo.fatherEmail" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 								<!-- Phone input -->
 								<div class="cell w-100">
-									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+									<input name="fatherMobile" placeholder="+44 123 456" type="tel" id="fatherMobile"  ng-model="userInfo.fatherMobile" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 <!-- Office Contact Details   -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Office Contact Details" type="text" id="name" required />
+									<input name="fatherOfficeAddress" placeholder="Office Contact Details" type="text" id="fatherOfficeAddress"  ng-model="userInfo.fatherOfficeAddress" required />
 								</div>
-								<div class="clrfx mt-10"></div>
-								
-								
-								
+								<div class="clrfx mt-10"></div>								
 							</form>
 						</div>
 						<!-- Map -->
@@ -383,29 +379,30 @@
 							<form id="tab-form" name="tab-form">
 								<!-- Name input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Mother Name" type="text" id="name" required />
+									<input name="motherName" id="motherName" placeholder="mother Name" type="text" ng-model="userInfo.motherName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 						
                                 <!-- Father’s Occupation  -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Mother Occupation " type="text" id="name" required />
+									<input name="motherOccupation" placeholder="Mother Occupation " type="text" id="motherName"  ng-model="userInfo.motherName" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
 								<div class="cell w-100">
-									<input name="email" placeholder="your@email.com" type="email" id="email" required />
+									<input name="motherEmail" placeholder="your@email.com" type="email" id="motherEmail"  ng-model="userInfo.motherEmail" required />
 								</div>
 								<div class="clrfx mt-10"></div>
 								<!-- Phone input -->
 								<div class="cell w-100">
-									<input name="phone" placeholder="+44 123 456" type="tel" id="phone" required />
+									<input name="fatherMobile" placeholder="+44 123 456" type="tel" id="fatherMobile"  ng-model="userInfo.fatherMobile" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 <!-- Office Contact Details   -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Office Contact Details" type="text" id="name" required />
+									<input name="motherOfficeAddress" placeholder="Office Contact Details" type="text" id="motherOfficeAddress"  ng-model="userInfo.motherOfficeAddress" required />
 								</div>
+							
 								<div class="clrfx mt-10"></div>
 							<!-- Send button -->
 								<div class="cell w-32">
@@ -422,7 +419,7 @@
 				<div class="tab-4">
 					<div class="row">
 						<div class="cell w-100">
-							<div class="title large">Forms</div>
+							<div class="title large">Accounts Details</div>
 						</div>
 					</div>
 					<div class="row">
@@ -435,7 +432,7 @@
 							<form id="tab-form" name="tab-form">
 								<!-- user input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Username" type="text" id="name" required />
+									<input name="username" placeholder="Username" type="text" id="username" ng-model="userInfo.username" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 <!-- user input -->
@@ -445,7 +442,7 @@
 								<div class="clrfx mt-10"></div>
                                 <!-- user input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Password" type="password" id="name" required />
+									<input name="password" placeholder="Password" type="password" id="password" ng-model="userInfo.password" required />
 								</div>
 								<div class="clrfx mt-10"></div>
                                 

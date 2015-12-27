@@ -110,6 +110,21 @@ CREATE TABLE `cst_usertypes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE IF NOT EXISTS `cst_parents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `father_name` varchar(50) NOT NULL,
+  `mother_name` varchar(50) NOT NULL,
+  `father_email` varchar(50) NOT NULL,
+  `mother_email` varchar(50) NOT NULL,
+  `father_mobile` varchar(15) NOT NULL,
+  `mother_mobile` varchar(15) NOT NULL,
+  `father_office_address` text NOT NULL,
+  `mother_office_address` text NOT NULL,
+  `father_occupation` varchar(100) NOT NULL,
+  `mother_occupation` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 /*Data for the table `cst_usertypes` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/home.tpl.html'], function(angular, templateHome) {
+define([ 'angular', 'text!../templates/studentProfile.tpl.html'], function(angular, templateHome) {
     
     var homeRouter = angular.module('Student.router', []);
 
