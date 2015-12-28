@@ -204,7 +204,7 @@ public class UserDaoImpl implements UserDao {
         UserDto user = null;
 
         final String sqlQuery =
-            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username, mobile, landline FROM cst_users "
+            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username, mobile, landline, secur_uuid FROM cst_users "
             + " JOIN cst_contacts ON cst_contacts.id=cst_users.contact_id "
             + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id"
             + " WHERE secur_uuid=:securUuid AND active=1";
@@ -216,6 +216,7 @@ public class UserDaoImpl implements UserDao {
             query.addColumnMapping("middle_name", "middleName");
             query.addColumnMapping("last_name", "lastName");
             query.addColumnMapping("username", "userName");
+            query.addColumnMapping("secur_uuid", "securUuid");
             user = query.executeAndFetchFirst(UserDto.class);
         }
      //   user.setUserName(userCredential.getUserName());

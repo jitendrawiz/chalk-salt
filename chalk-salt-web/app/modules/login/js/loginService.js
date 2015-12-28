@@ -11,4 +11,17 @@ define([ 'angular' ], function(angular) {
             }
         });
     } ]);
+    
+    /**
+     * Log out service
+     * 
+     * @input token
+     */
+    loginService.factory('LogoutService', [ '$resource', 'ENV', function($resource, ENV) {
+    	return $resource(ENV.API_END_POINT + 'private/logout',{}, {
+            logout : {
+                method : 'POST'
+            }
+        });
+    } ]);
 });

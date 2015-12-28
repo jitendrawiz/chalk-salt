@@ -6,7 +6,6 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
     
     loginModule.controller('LoginController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'LoginService',
             function($scope, $state, $resource,$rootScope, CHALKNDUST, LoginService) {
-    //	SystemUtil.resetLocalStorage();
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -29,11 +28,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
-                           // $rootScope.userName = response.fullName;
-                           // $rootScope.securUuid=response.securUuid;
-                          //  console.log($rootScope.userName);
-                        	$rootScope.securUuid=response.securUuid;
-                        	//getUserDetails();
+                            $rootScope.userName = response.fullName;
+                            $rootScope.securUuid=response.securUuid;
                             $state.go('chalkanddust.student');
                             console.log(response);
                            
@@ -42,9 +38,43 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                     	showAlert('danger',error.data.message);
                     });
                 };
-                
-                
                
-    }
-    ]);
+			}
+    	]);
+
+
+/**
+ * Log out Controller
+ */
+loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService', '$window',
+        function($scope, $state, LogoutService, $window) {
+
+            /**
+             * Code to display/close alert on UI
+             */
+            $scope.alert = {};
+            $scope.alert.show = false;
+
+            var showAlert = function(type, message) {
+                $scope.alert = {};
+                $scope.alert.type = type;
+                $scope.alert.message = message;
+                $scope.alert.show = true;
+
+                $window.scrollTo(0, 0);
+            };
+
+            $scope.closeAlert = function() {
+                $scope.alert = {};
+                $scope.alert.show = false;
+            };
+            /**
+             * Service call to logging out of the application
+             */
+            LogoutService.logout({}, function() {
+            }, function() {
+                showAlert('danger', 'There was some problem while logging out.');
+            });
+            $state.go('chalkanddust.home');
+        }]);
 });

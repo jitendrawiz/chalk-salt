@@ -9,9 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.UserModel;
+import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.UserDto;
 
 
@@ -22,6 +28,10 @@ import com.chalk.salt.common.dto.UserDto;
  */
 public class UserService {
 
+	/** The logger. */
+    @Inject
+    @AppLogger
+    protected Logger logger;
     /**
      * Validate user registration request.
      *
@@ -73,4 +83,15 @@ public class UserService {
         }
         return userList;
     }
+    
+    public boolean logout() {
+		try {
+			logger.info("User Logout.....");
+            final Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            return true;
+        } catch (final Exception ex) {
+            throw ex;
+        }
+	}
 }

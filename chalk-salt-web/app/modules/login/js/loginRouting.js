@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/login.tpl.html'], function(angular, templateLogin) {
+define([ 'angular', 'text!../templates/login.tpl.html', 'text!../../home/templates/home.tpl.html'], function(angular, templateLogin, templateHome) {
     
     var loginRouter = angular.module('Login.router', []);
 
@@ -9,6 +9,10 @@ define([ 'angular', 'text!../templates/login.tpl.html'], function(angular, templ
             url : '/login',
             template : templateLogin,
             controller : 'LoginController as loginCtrl'
+        }).state('chalkanddust.logout', {
+            url : '/logout',
+            template : templateHome,
+            controller : 'LogoutController as logoutCtrl'
         });
     } ]);
 });

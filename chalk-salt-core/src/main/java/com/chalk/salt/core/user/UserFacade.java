@@ -6,7 +6,6 @@ package com.chalk.salt.core.user;
 
 import java.util.List;
 
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 

@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,15 +31,13 @@ import org.slf4j.Logger;
 import com.chalk.salt.api.model.AuthRequestModel;
 import com.chalk.salt.api.model.DomainAuthTokenModel;
 import com.chalk.salt.api.model.security.DomainUserPrincipal;
+import com.chalk.salt.api.service.UserService;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AuthStatus;
-import com.chalk.salt.common.dto.SaveLoginRequestDto;
 import com.chalk.salt.common.exceptions.CoreException;
-import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
-import com.chalk.salt.core.user.UserFacade;
 
 
 /**
@@ -56,7 +55,7 @@ public class AuthResource extends AbstractResource {
 
     /** The user facade. */
     @Inject
-    private UserFacade userFacade;
+    private UserService userService;
 
     /** The Constant REG_EXP. */
     private static final String REGEX_EXP = "[,; ]";
@@ -115,5 +114,24 @@ public class AuthResource extends AbstractResource {
             throw Utility.buildResourceException(ErrorCode.AUTHENTICATION_FAILURE,msg,Status.UNAUTHORIZED, CoreException.class);
         }
         return Response.ok().entity(response).build();
+    }
+    
+    /**
+     * Logout.
+     *
+     * @return the response
+     */
+    @POST
+    @Path("/logout")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response logout() {
+    	logger.info("User Logout service ....");
+        final boolean result = userService.logout();
+        if (result) {
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON)
+            .entity(Utility.buildErrorResponse(ErrorCode.GENERIC_SERVER_ERROR, "An internal server error occurred")).build();
     }
 }

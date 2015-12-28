@@ -27,13 +27,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.UserModel;
-import com.chalk.salt.api.model.security.DomainUserPrincipal;
 import com.chalk.salt.api.service.UserService;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
-import com.chalk.salt.common.dto.DomainUserPrincipalDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.core.user.UserFacade;
