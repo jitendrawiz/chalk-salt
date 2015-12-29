@@ -28,7 +28,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
-                            $rootScope.userName = response.fullName;
+                            $rootScope.fullName = response.fullName;
+                            //console.log($rootScope.fullName);
                             $rootScope.securUuid=response.securUuid;
                             $state.go('chalkanddust.student');
                             console.log(response);
