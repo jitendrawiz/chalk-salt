@@ -125,6 +125,20 @@ CREATE TABLE IF NOT EXISTS `cst_parents` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+alter table `cst_users` 
+   add column `class_id` int(11) NULL after `secur_uuid`
+
+CREATE TABLE `cst_class_type` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`class_id`),
+  UNIQUE KEY `class_id` (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_class_type` */
+
+insert  into `cst_class_type`(`class_id`,`class_name`) values (1,'seventh'),(2,'eighth'),(3,'nineth'),(4,'tenth'),(5,'eleventh'),(6,'twelveth');
+
 /*Data for the table `cst_usertypes` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
