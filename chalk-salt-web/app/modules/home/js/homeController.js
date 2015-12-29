@@ -19,13 +19,10 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
-    	    //  showAlert("hello");
-                $scope.authRequest = {};
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
-                $rootScope.userName = {};
                this.login = function() {
                             $state.go('chalkanddust.home');
                             console.log("i am in");

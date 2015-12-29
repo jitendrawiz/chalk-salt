@@ -20,25 +20,18 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                    return true;
                };
                
-                $scope.studentRequest = {};
                 $scope.securUuid=$rootScope.securUuid;
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
-                $rootScope.studentName = {};
                 GetUserDetailsService.get({securUuid:$scope.securUuid},  function(response) {
                     if(response){
                     	 $scope.userInfo = response;
-                         //console.log(JSON.stringify($scope.userInfo));
-                        
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
-                
-               
-                
             }
     ]);
 });

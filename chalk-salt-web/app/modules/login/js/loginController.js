@@ -24,11 +24,11 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
-                $rootScope.userInfo = {};
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
                             $rootScope.fullName = response.fullName;
+                            $rootScope.username = $scope.authRequest.username;
                             //console.log($rootScope.fullName);
                             $rootScope.securUuid=response.securUuid;
                             $state.go('chalkanddust.student');
@@ -47,8 +47,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
 /**
  * Log out Controller
  */
-loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService', '$window',
-        function($scope, $state, LogoutService, $window) {
+loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService', '$window', '$rootScope',
+        function($scope, $state, LogoutService, $window, $rootScope) {
 
             /**
              * Code to display/close alert on UI
@@ -73,6 +73,9 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
              * Service call to logging out of the application
              */
             LogoutService.logout({}, function() {
+            	$rootScope.fullName="";
+            	$rootScope.username="";
+            	$rootScope.securUuid="";
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');
             });
