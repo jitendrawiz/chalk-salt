@@ -12,4 +12,8 @@ define([ 'angular' ], function(angular) {
         
     });
     } ]);    
+    
+    registrationService.factory('userClassLookUpService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/classes', {}, {});
+    } ]);
 });

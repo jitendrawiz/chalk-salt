@@ -12,8 +12,8 @@ define([ 'angular', './registrationRouting', './registrationService'
             '$state',
             '$resource',
             'CHALKNDUST',
-            'RegistrationService',            
-            function($scope, $state, $resource, CHALKNDUST, RegistrationService) {
+            'RegistrationService', 'userClassLookUpService',           
+            function($scope, $state, $resource, CHALKNDUST, RegistrationService,userClassLookUpService) {
 
                 var showAlert = function(type, message) {
                     $scope.alert = {};
@@ -31,6 +31,10 @@ define([ 'angular', './registrationRouting', './registrationService'
                
                 $scope.userDetails = {};
                 
+                userClassLookUpService.query(function(classes) {
+                    $scope.classes = classes;
+                    console.log(classes);
+                },onRequestFailure);
 
                 $scope.inputType = 'password';
                 $scope.hideShowPassword = function() {
@@ -57,6 +61,11 @@ define([ 'angular', './registrationRouting', './registrationService'
                         showAlert('danger', error.data.message);
                     });
                 };
+                
+                function onRequestFailure(error) {
+                        showAlert('danger', error.data.message);
+                }
+                ;
                 
             } ]);
 

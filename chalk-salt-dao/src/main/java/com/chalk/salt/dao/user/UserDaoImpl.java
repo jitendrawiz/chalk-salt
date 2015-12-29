@@ -118,8 +118,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean saveUserDetails(final UserDto userDetail) throws Exception {
 
-        final String sqlQuery = "INSERT INTO cst_users(`user_id`, `first_name`, `middle_name`, `last_name`, `contact_id`, `secur_uuid`)"
-        		+ "VALUES(:userId, :firstName, :middleName, :lastName, :contactId, :securUuid)";
+        final String sqlQuery = "INSERT INTO cst_users(`user_id`, `first_name`, `middle_name`, `last_name`, `contact_id`, `secur_uuid`,class_id)"
+        		+ "VALUES(:userId, :firstName, :middleName, :lastName, :contactId, :securUuid,:studentClass)";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -131,7 +131,7 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("lastName", userDetail.getLastName());
             query.addParameter("userId", userDetail.getUserId());
             query.addParameter("contactId", userDetail.getContactId());
-
+            query.addParameter("studentClass", userDetail.getStudentClass());
             query.executeUpdate();
         }
         return true;
@@ -204,7 +204,8 @@ public class UserDaoImpl implements UserDao {
         UserDto user = null;
 
         final String sqlQuery =
-            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username, mobile, landline, secur_uuid FROM cst_users "
+            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username, mobile, landline, secur_uuid,class_name  FROM cst_users "
+           +" JOIN cst_class_type  ON cst_class_type.class_id=cst_users.class_id  "
             + " JOIN cst_contacts ON cst_contacts.id=cst_users.contact_id "
             + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id"
             + " WHERE secur_uuid=:securUuid AND active=1";
@@ -217,6 +218,7 @@ public class UserDaoImpl implements UserDao {
             query.addColumnMapping("last_name", "lastName");
             query.addColumnMapping("username", "userName");
             query.addColumnMapping("secur_uuid", "securUuid");
+            query.addColumnMapping("class_name", "studentClassName");
             user = query.executeAndFetchFirst(UserDto.class);
         }
      //   user.setUserName(userCredential.getUserName());

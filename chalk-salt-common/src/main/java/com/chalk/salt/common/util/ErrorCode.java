@@ -165,8 +165,10 @@ public enum ErrorCode {
     FAIL_TO_FETCH_REPORT_ACCESS_TEMPLATES(1051),
     
     /** The fail to fetch report access matrix. */
-    FAIL_TO_FETCH_REPORT_ACCESS_MATRIX(1052);
-
+    FAIL_TO_FETCH_REPORT_ACCESS_MATRIX(1052),
+    
+    /** The fail to fetch classes. */
+    FAIL_TO_FETCH_CLASSES(1053); 
     /** The value. */
     private final int value;
 

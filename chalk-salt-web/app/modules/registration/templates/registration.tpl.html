@@ -298,13 +298,20 @@
         <div class="col-xs-12 col-md-6 wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
           <div class="row inner-grid">
             <div class="user_log_detail">
-            <h3>...</h3>
+          
              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.registrationaddress.$invalid && !registrationForm.registrationaddress.$pristine  }">
               <input class="form-control" name="registrationaddress" id="registrationaddress" ng-model="userDetails.address"  type="text" placeholder="Address" required/>
              <span style="color:red" ng-show="registrationForm.registrationaddress.$invalid && !registrationForm.registrationaddress.$pristine">
              <span ng-show="registrationForm.registrationaddress.$error.required">Address is required.</span>  
              </span>
               </div>
+              <div class="form-group" ng-class="{ 'has-error' : registrationForm.studentClass.$invalid && !registrationForm.studentClass.$pristine }">
+            <select class="form-control" ng-model="userDetails.studentClass" name="studentClass" placeholder="Class"
+                ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true">
+                <option value="" disabled>Select Class</option>
+            </select>
+            <p ng-show="registrationForm.studentClass.$error.required && !registrationForm.studentClass.$pristine">User Class is required.</p>
+        </div>
               <!-- 	 <select class="form-control" name="countryName"   
             ng-model="userDetails.countryName" 
             ng-options="service.ServiceID as service.ServiceName for service in services"
