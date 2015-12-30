@@ -19,6 +19,7 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
+               
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
