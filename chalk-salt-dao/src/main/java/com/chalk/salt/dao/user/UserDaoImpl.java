@@ -13,16 +13,13 @@ import org.sql2o.data.Row;
 import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 
 
-/**
- * The Class UserDaoImpl.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
+
 public class UserDaoImpl implements UserDao {
     /*
      * (non-Javadoc)
@@ -287,6 +284,23 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("email", userDetail.getEmail());
             return (Long) query.executeUpdate().getKey();
         }
+	}
+
+	@Override
+	public List<SubjectDto> getUserSubjects(String securUuid) throws Exception {
+		 final String sqlQuery = "SELECT cst_class_subjects.subject_id,cst_class_subjects.subject_name FROM cst_users "
+		 		+ " JOIN cst_class_type ON cst_class_type.class_id=cst_users.class_id "
+		 		+ " JOIN cst_class_subject_mapping ON cst_class_subject_mapping.class_id=cst_class_type.class_id "
+		 		+ " JOIN cst_class_subjects ON cst_class_subjects.subject_id=cst_class_subject_mapping.subject_id "
+		 		+ " WHERE cst_users.secur_uuid=:securUuid";
+		        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+		        try (final Connection connection = dataSource.open()) {
+		            final Query query = connection.createQuery(sqlQuery);
+		            query.addParameter("securUuid", securUuid);
+		            query.addColumnMapping("subject_id", "subjectId");
+		            query.addColumnMapping("subject_name", "subjectName");
+		            return query.executeAndFetch(SubjectDto.class);
+		        }
 	}
 
 	

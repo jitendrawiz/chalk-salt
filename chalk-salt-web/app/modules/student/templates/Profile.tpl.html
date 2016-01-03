@@ -1,0 +1,230 @@
+<script src="./resources/js/jquery-1.11.2.min.js"></script>
+<script src="./resources/js/bootstrap.min.js"></script>
+<script src="./resources/js/hoe.js"></script>
+<div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1" >
+    <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
+        <header id="hoe-header" hoe-lpanel-effect="shrink">
+            <div class="hoe-left-header">
+                <a href="#"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a>
+                <span class="hoe-sidebar-toggle"><a href="javascript:void(0)"></a></span>
+            </div>
+
+            <div class="hoe-right-header" hoe-position-type="relative" >
+                <span class="hoe-sidebar-toggle"><a href="javascript:void(0)"></a></span>
+                <ul class="left-navbar">
+					
+				</ul> 
+				
+                <ul class="right-navbar">
+					<li class="dropdown hoe-rheader-submenu hoe-header-profile">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+							<span><img class="img-circle " src="./resources/images/avatar-1.jpg"></span>
+                            <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
+						</a> 
+						<ul class="dropdown-menu">
+							<li><a ui-sref="chalkanddust.student"><i class="fa fa-user"></i>My Profile</a></li>
+							<li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+				
+            </div>
+        </header>
+        <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+            <aside id="hoe-left-panel" hoe-position-type="absolute">
+                <div class="profile-box">
+                    <div class="media">
+                        <a class="pull-left" href="user-profile.html">
+                            <img class="img-circle" src="./resources/images/avatar-1.jpg">
+                        </a>
+                        <div class="media-body">
+                            <h5 class="media-heading">Welcome <span>{{fullName}}</span></h5>                            
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav panel-list">
+                    <li class="active">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-tachometer"></i>
+                            <span class="menu-text">Dashboard</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>                    
+                 <!--   <li ng-repeat="item in subjects" class="hoe-has-menu">    
+                             
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-files-o"></i>                            
+                            <span class="menu-text">{{item.subjectName}}</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Notes</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Vedios</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Practice questions</span>
+                                    <span class="label sul">Updated</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Test</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                
+                        </ul>
+                       
+                    </li> -->
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Sst</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Notes</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Vedios</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Practice questions</span>
+                                    <span class="label sul">Updated</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Test</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Science</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Notes</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Vedios</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Practice questions</span>
+                                    <span class="label sul">Updated</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Test</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">English</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Notes</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Vedios</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Practice questions</span>
+                                    <span class="label sul">Updated</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span class="menu-text">Test</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </aside>
+            <section id="main-content">
+				
+                <div class="inner-content">
+                    <div class="panel theme-panel">
+                       
+                        <div class="panel-body">
+                            <div class="col-md-3 column right-navbar-right">
+                            		<div class="notification">
+                                    	<h3><i class="fa-circle"></i>Notification</h3>
+                                        <p><span>Coming Soon</span></p>
+                                        <div class="clearfix"></div>
+                                        <div class="disc-room"><br><br>
+                                        	<i class="fa-group"></i><br>
+                                            <h3>Discussion Room</h3>
+                                          
+                                        </div>
+                                    </div>
+                                    <!--<div class="feature-box">
+                                        <span class="feature-icon"><i class="fa fa-group"></i></span>
+                                        <h4>Discussion Room</h4>
+                                        <span>Start Now</span>
+                                    </div>-->
+                                </div>
+                        </div>
+                    </div>
+                </div>  
+            </section>
+			
+        </div>
+    </div>
+  
+</div>

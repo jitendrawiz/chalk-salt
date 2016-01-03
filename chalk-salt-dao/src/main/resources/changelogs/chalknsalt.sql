@@ -145,3 +145,30 @@ insert  into `cst_class_type`(`class_id`,`class_name`) values (1,'seventh'),(2,'
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+DROP TABLE IF EXISTS `cst_class_subject_mapping`;
+
+CREATE TABLE `cst_class_subject_mapping` (
+  `class_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`class_subject_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_class_subject_mapping` */
+
+insert  into `cst_class_subject_mapping`(`class_subject_id`,`class_id`,`subject_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(10,2,5),(11,3,1),(12,3,2),(13,3,3),(14,3,4),(15,3,5),(16,4,1),(17,4,2),(18,4,3),(19,4,4),(20,4,5),(21,5,1),(22,5,2),(23,5,6),(24,5,7),(25,5,8),(26,6,1),(27,6,2),(28,6,6),(29,6,7),(30,6,8);
+
+/*Table structure for table `cst_class_subjects` */
+
+DROP TABLE IF EXISTS `cst_class_subjects`;
+
+CREATE TABLE `cst_class_subjects` (
+  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`subject_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_class_subjects` */
+
+insert  into `cst_class_subjects`(`subject_id`,`subject_name`) values (1,'Maths'),(2,'English'),(3,'Science'),(4,'Sst'),(5,'Hindi'),(6,'Physical'),(7,'Physics'),(8,'Chemistry'),(9,'Biology');

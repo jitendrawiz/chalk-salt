@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/studentProfile.tpl.html'], function(angular, templateHome) {
+define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/Profile.tpl.html'], function(angular, templateHome,templateProfile) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -8,6 +8,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html'], function(angul
         $stateProvider.state('chalkanddust.student', {
             url : '/student',
             template : templateHome,
+            controller : 'StudentController as stdCtrl'
+        }).state('chalkanddust.profile', {
+            url : '/profile',
+            template : templateProfile,
             controller : 'StudentController as stdCtrl'
         });
     } ]);

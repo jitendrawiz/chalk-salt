@@ -4,6 +4,7 @@
  */
 package com.chalk.salt.dao.user.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,15 +13,16 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.user.UserDao;
 
+
+
 /**
  * The Class UserManagerImpl.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
  */
 public class UserManagerImpl implements UserManager {
    
@@ -142,8 +144,13 @@ public class UserManagerImpl implements UserManager {
     public UserDto getUserInfo(final String securUuid) throws UserException {
         logger.info("Obtaining user details for securuuid : {}", securUuid);
         UserDto user = null;
+        List<SubjectDto> subjects=new ArrayList<SubjectDto>();
         try {
-            user = officeDao.getUserInfo(securUuid);
+            user = officeDao.getUserInfo(securUuid);            
+            subjects=officeDao.getUserSubjects(securUuid);
+            if(!subjects.isEmpty()){
+            	user.setSubjects(subjects);
+            }            
             if (user == null) {
                 throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user");
             }

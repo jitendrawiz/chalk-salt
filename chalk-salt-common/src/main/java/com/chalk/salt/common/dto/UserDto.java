@@ -1,84 +1,102 @@
 /*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
+ * Copyright 2015, Techblue. All Rights Reserved.
+ * No part of this content may be used without Techblue's express consent.
+ */
 package com.chalk.salt.common.dto;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
+
 /**
- * The Class User.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
+ * The Class UserDto.
  */
 public class UserDto {
 
 	/** The user id. */
 	private Long userId;
-	
+
 	/** The contact id. */
 	private Long contactId;
-	
+
 	/** The user name. */
-    private String userName;
+	private String userName;
 
-    /** The password. */
-    private String password;
+	/** The password. */
+	private String password;
 
-    /** The confirmPassword. */
-    private String confirmPassword;
+	/** The confirmPassword. */
+	private String confirmPassword;
 
-    /** The forename. */
-    private String firstName;
+	/** The forename. */
+	private String firstName;
 
-    /** The middle name. */
-    private String middleName;
-    
-    /** The last name. */
-    private String lastName;
-    
-    /** The email address. */
-    private String email;
+	/** The middle name. */
+	private String middleName;
 
-    /** The secur uuid. */    
-    private String securUuid;
-    
-    /** The disable date. */
-    private String disableDate;
+	/** The last name. */
+	private String lastName;
 
-    /** The mobile. */
-    private String mobile;
-    
-    /** The fax. */
-    private String landline;
-    
-    /** The address. */
-    private String address;
-    
-    /** The city. */
-    private String city;
-    
-    /** The state. */
-    private String state;
-    
-    /** The country. */
-    private String country;
-    
-    /** The pincode. */
-    private String pincode;
-    
-    /** The active. */
-    private Long active;
+	/** The email address. */
+	private String email;
 
-    
-    /** The student class. */
-    private String studentClass;
-    
-    /** The student class name. */
-    private String studentClassName;
-    
-    
-    
-    
+	/** The secur uuid. */
+	private String securUuid;
+
+	/** The disable date. */
+	private String disableDate;
+
+	/** The mobile. */
+	private String mobile;
+
+	/** The fax. */
+	private String landline;
+
+	/** The address. */
+	private String address;
+
+	/** The city. */
+	private String city;
+
+	/** The state. */
+	private String state;
+
+	/** The country. */
+	private String country;
+
+	/** The pincode. */
+	private String pincode;
+
+	/** The active. */
+	private Long active;
+
+	/** The student class. */
+	private String studentClass;
+
+	/** The student class name. */
+	private String studentClassName;
+
+	/** The subjects. */
+	private List<SubjectDto> subjects;
+
+	/**
+	 * Gets the subjects.
+	 *
+	 * @return the subjects
+	 */
+	public List<SubjectDto> getSubjects() {
+		return subjects;
+	}
+
+	/**
+	 * Sets the subjects.
+	 *
+	 * @param subjects the new subjects
+	 */
+	public void setSubjects(List<SubjectDto> subjects) {
+		this.subjects = subjects;
+	}
+
 	/**
 	 * Gets the student class name.
 	 *
@@ -91,7 +109,8 @@ public class UserDto {
 	/**
 	 * Sets the student class name.
 	 *
-	 * @param studentClassName the new student class name
+	 * @param studentClassName
+	 *            the new student class name
 	 */
 	public void setStudentClassName(String studentClassName) {
 		this.studentClassName = studentClassName;
@@ -109,7 +128,8 @@ public class UserDto {
 	/**
 	 * Sets the student class.
 	 *
-	 * @param studentClass the new student class
+	 * @param studentClass
+	 *            the new student class
 	 */
 	public void setStudentClass(String studentClass) {
 		this.studentClass = studentClass;
@@ -127,7 +147,8 @@ public class UserDto {
 	/**
 	 * Sets the user name.
 	 *
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -145,7 +166,8 @@ public class UserDto {
 	/**
 	 * Sets the password.
 	 *
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -163,7 +185,8 @@ public class UserDto {
 	/**
 	 * Sets the confirm password.
 	 *
-	 * @param confirmPassword the confirmPassword to set
+	 * @param confirmPassword
+	 *            the confirmPassword to set
 	 */
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
@@ -181,7 +204,8 @@ public class UserDto {
 	/**
 	 * Sets the first name.
 	 *
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -199,7 +223,8 @@ public class UserDto {
 	/**
 	 * Sets the middle name.
 	 *
-	 * @param middleName the middleName to set
+	 * @param middleName
+	 *            the middleName to set
 	 */
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
@@ -217,7 +242,8 @@ public class UserDto {
 	/**
 	 * Sets the last name.
 	 *
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -235,7 +261,8 @@ public class UserDto {
 	/**
 	 * Sets the email.
 	 *
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -253,7 +280,8 @@ public class UserDto {
 	/**
 	 * Sets the secur uuid.
 	 *
-	 * @param securUuid the securUuid to set
+	 * @param securUuid
+	 *            the securUuid to set
 	 */
 	public void setSecurUuid(String securUuid) {
 		this.securUuid = securUuid;
@@ -271,7 +299,8 @@ public class UserDto {
 	/**
 	 * Sets the disable date.
 	 *
-	 * @param disableDate the disableDate to set
+	 * @param disableDate
+	 *            the disableDate to set
 	 */
 	public void setDisableDate(String disableDate) {
 		this.disableDate = disableDate;
@@ -289,7 +318,8 @@ public class UserDto {
 	/**
 	 * Sets the mobile.
 	 *
-	 * @param mobile the mobile to set
+	 * @param mobile
+	 *            the mobile to set
 	 */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
@@ -307,7 +337,8 @@ public class UserDto {
 	/**
 	 * Sets the landline.
 	 *
-	 * @param landline the landline to set
+	 * @param landline
+	 *            the landline to set
 	 */
 	public void setLandline(String landline) {
 		this.landline = landline;
@@ -325,7 +356,8 @@ public class UserDto {
 	/**
 	 * Sets the address.
 	 *
-	 * @param address the address to set
+	 * @param address
+	 *            the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -343,7 +375,8 @@ public class UserDto {
 	/**
 	 * Sets the city.
 	 *
-	 * @param city the city to set
+	 * @param city
+	 *            the city to set
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -361,7 +394,8 @@ public class UserDto {
 	/**
 	 * Sets the state.
 	 *
-	 * @param state the state to set
+	 * @param state
+	 *            the state to set
 	 */
 	public void setState(String state) {
 		this.state = state;
@@ -379,7 +413,8 @@ public class UserDto {
 	/**
 	 * Sets the country.
 	 *
-	 * @param country the country to set
+	 * @param country
+	 *            the country to set
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -397,7 +432,8 @@ public class UserDto {
 	/**
 	 * Sets the pincode.
 	 *
-	 * @param pincode the pincode to set
+	 * @param pincode
+	 *            the pincode to set
 	 */
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
@@ -415,7 +451,8 @@ public class UserDto {
 	/**
 	 * Sets the user id.
 	 *
-	 * @param userId the userId to set
+	 * @param userId
+	 *            the userId to set
 	 */
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -433,7 +470,8 @@ public class UserDto {
 	/**
 	 * Sets the contact id.
 	 *
-	 * @param contactId the contactId to set
+	 * @param contactId
+	 *            the contactId to set
 	 */
 	public void setContactId(Long contactId) {
 		this.contactId = contactId;
@@ -451,11 +489,11 @@ public class UserDto {
 	/**
 	 * Sets the active.
 	 *
-	 * @param active the active to set
+	 * @param active
+	 *            the active to set
 	 */
 	public void setActive(Long active) {
 		this.active = active;
 	}
-	
-	
+
 }

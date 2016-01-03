@@ -28,6 +28,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                 GetUserDetailsService.get({securUuid:$scope.securUuid},  function(response) {
                     if(response){
                     	 $scope.userInfo = response;
+                    	 $scope.subjects =$scope.userInfo.subjects;
+                    	 
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
