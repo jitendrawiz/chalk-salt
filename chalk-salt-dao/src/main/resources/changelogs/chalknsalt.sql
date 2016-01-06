@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `cst_parents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 alter table `cst_users` 
-   add column `class_id` int(11) NULL after `secur_uuid`
+   add column `class_id` int(11) NULL after `secur_uuid`;
 
 CREATE TABLE `cst_class_type` (
   `class_id` int(11) NOT NULL AUTO_INCREMENT,

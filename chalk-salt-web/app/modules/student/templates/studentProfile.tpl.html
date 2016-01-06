@@ -40,10 +40,7 @@
 <nav class="top-nav">
  <ul class="inline text-right">
 <li><a href="#" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
-<li>
-<a ui-sref="chalkanddust.logout">Log Out</a></li>
-<!--<li>
- <a ui-sref="chalkanddust.registration">Register</a></li>-->
+<li><a ui-sref="chalkanddust.logout">Log Out</a></li>
 </ul>
 </nav>
 </div>
@@ -97,69 +94,6 @@
 <p>  </p>
 </div>
 </div>
-<!-- <form role="form" action="" method="post">
- <div class="col-xs-12  wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
-<div class="row inner-grid">
-<div class="user_log_detail">
-				<h3>User Details</h3>
-			<div class="container">
-   <div class="table-responsive">          
-  <table class="table">
-   
-      <tr>
-       
-        <td>Firstname</td>
-        <td>{{userInfo.firstName}}</td>
-       </tr>
-       <tr>
-        <td>MiddleName</td>
-        <td>{{userInfo.middleName}}</td> 
-        </tr>
-       <tr>
-       <td>LastName</td>
-        <td>{{userInfo.lastName}}</td>
-      </tr>
-   
-      <tr>
-        <td>UserName</td>
-        <td>{{userInfo.userName}}</td>
-       </tr>
-       <tr>
-        <td>Email</td>
-        <td>{{userInfo.email}}</td>
-       </tr>
-       <tr>
-        <td>Address</td>
-        <td>{{userInfo.address}}</td>
-      </tr>
-   <tr>
-        <td>Country</td>
-        <td>{{userInfo.country}}</td>
-      </tr>
-   <tr>
-        <td>State</td>
-        <td>{{userInfo.state}}</td>
-      </tr>
-   <tr>
-        <td>City</td>
-        <td>{{userInfo.city}}</td>
-      </tr>
-   <tr>
-        <td>Pincode</td>
-        <td>{{userInfo.pincode}}</td>
-      </tr>
-   
-  </table>
-  </div>
-</div>
-                       
-</div>
-</div>
-</div>
-</form>
--->
-
-
 <div id="demo">
 		<section id="tabbed">
 			<!-- First tab input and label -->
@@ -193,7 +127,12 @@
 							<form id="tab-form" name="tab-form">
 								<!-- First name -->
 								<div class="cell w-100">
-									<input name="firstName" placeholder="First name" type="text" id="firstName" ng-model="userInfo.firstName" required />
+									<div ng-show="editFlag">
+										<label for="firstName">{{userInfo.firstName}}</label>
+									</div>
+									<div ng-hide="editFlag">
+										<input name="firstName" placeholder="First name" type="text" id="firstName" ng-model="userInfo.firstName" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
 								
@@ -262,7 +201,9 @@
 								<div class="cell w-32">
 									<input type="submit" value="Submit" class="button black" form="tab-form" />
 								</div>
-								
+								<div class="cell w-32">
+									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+								</div>
                                 </form>
 							<!--<div id="map-canvas" class="map fl-right"></div>-->
 						</div>
@@ -322,6 +263,9 @@
 							<!-- Send button -->
 								<div class="cell w-32">
 									<input type="submit" value="Submit" class="button black" form="tab-form" />
+								</div>
+								<div class="cell w-32">
+									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
 								</div>
 								<!-- Reset button -->
 								
@@ -409,7 +353,9 @@
 								<div class="cell w-32">
 									<input type="submit" value="Submit" class="button black" form="tab-form" />
 								</div>
-								
+								<div class="cell w-32">
+									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -452,7 +398,9 @@
 								<div class="cell w-32">
 									<input type="submit" value="Submit" class="button black" form="tab-form" />
 								</div>
-								
+								<div class="cell w-32">
+									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+								</div>
 							</form>
 						</div>
 						<!-- Map -->

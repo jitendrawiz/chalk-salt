@@ -7,6 +7,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     homeModule.controller('StudentController', [ '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService',
             function($scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService) {
 
+    		   $scope.editFlag = false;
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -18,6 +19,11 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                    $scope.alert = {};
                    $scope.alert.show = false;
                    return true;
+               };
+               
+               $scope.securUuid=$rootScope.securUuid;
+               $scope.backToDashBoard=function(){
+            	   $state.go('chalkanddust.profile');  
                };
                
                 $scope.securUuid=$rootScope.securUuid;
