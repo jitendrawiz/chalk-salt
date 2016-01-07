@@ -139,11 +139,11 @@
 								
                                 <!-- Last name -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p><span class="empty" ng-show="!userInfo.lastName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="lastName" placeholder="Last name" type="text" id="lastName" ng-model="userInfo.lastName" required />
+										<input name="lastName" placeholder="Last name" type="text" id="lastName" ng-model="userInfo.lastName" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -152,11 +152,11 @@
                                 
                                 <!-- Permanent Address -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p><span class="empty" ng-show="!userInfo.address">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="address" placeholder="Permanent Address" type="text" id="address" ng-model="userInfo.address" required />
+										<input name="address" placeholder="Permanent Address" type="text" id="address" ng-model="userInfo.address" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -169,7 +169,7 @@
 										<label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p><span class="empty" ng-show="!userInfo.mobile">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="mobile" placeholder="+44 123 456" type="Mobile" id="mobile" ng-model="userInfo.mobile" required />
+										<input name="mobile" placeholder="+44 123 456" type="Mobile" id="mobile" ng-model="userInfo.mobile" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -178,11 +178,11 @@
                                 
 								<!-- Email input -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p><span class="empty" ng-show="!userInfo.email">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="email" placeholder="your@email.com" type="email" id="email" ng-model="userInfo.email" required />
+										<input name="email" placeholder="your@email.com" type="email" id="email" ng-model="userInfo.email" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -199,49 +199,48 @@
 										<label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p><span class="empty" ng-show="!userInfo.middleName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="middleName" placeholder="Middle name" type="text" id="middleName" ng-model="userInfo.middleName" required />
+										<input name="middleName" placeholder="Middle name" type="text" id="middleName" ng-model="userInfo.middleName" required />
 									</div>	
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                  <!-- Contact Details -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="contactDetails" ng-model="userInfo.contactDetails"><p ng-bind="userInfo.contactDetails"></p><span class="empty" ng-show="!userInfo.contactDetails">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="contactDetails" placeholder="Contact Details" type="text" id="contactDetails" required />
+										<input name="contactDetails" placeholder="Contact Details" type="text" id="contactDetails" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Correspondence Address  -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p ng-bind="userInfo.correspondenceAddress"></p><span class="empty" ng-show="!userInfo.correspondenceAddress">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="correspondenceAddress" placeholder="Correspondence Address " type="text" id="correspondenceAddress" required />
+										<input name="correspondenceAddress" placeholder="Correspondence Address " type="text" id="correspondenceAddress" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Telephone input -->
 								<div class="cell w-100">
-								<div ng-if="!editFlag">
+									<div ng-if="!editFlag">
 										<label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline "></p><span class="empty" ng-show="!userInfo.landline">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-									<input name="landline" placeholder="+44 123 456" type="tel" id="landline" ng-model="userInfo.landline" required />
+										<input name="landline" placeholder="+44 123 456" type="tel" id="landline" ng-model="userInfo.landline" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Send button -->
-								<div class="cell w-32">
-								
+								<div class="cell w-32">								
 									<div ng-if="editFlag">
-									<input type="submit" value="Submit" class="button black" form="tab-form" />
+										<input type="submit" value="Submit" class="button black" form="tab-form" />
 									</div>
 								</div>
 								<div class="cell w-32">
@@ -269,37 +268,52 @@
 						<!-- Form -->
 						<div class="cell w-49">
 							<form id="tab-form" name="tab-form">
-								<!-- Class input -->
+								<!-- Class input -->								
 								<div class="cell w-100">
-									<input name="name" placeholder="Class" type="text" id="name" ng-model="userInfo.studentClassName" required />
+									<div ng-if="!editFlag">
+										<label for="studentClassName" ng-model="userInfo.studentClassName"><p ng-bind="userInfo.studentClassName"></p><span class="empty" ng-show="!userInfo.studentClassName">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="studentClassName" placeholder="Class" type="text" id="studentClassName" ng-model="userInfo.studentClassName" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Marks Details  input -->
-								<div class="cell w-100">
-									<input name="name" placeholder="Marks Details :" type="text" id="name" required />
+                                <div class="cell w-100">
+									<div ng-if="!editFlag">
+										<label for="marksDetail" ng-model="userInfo.marksDetail"><p ng-bind="userInfo.marksDetail"></p><span class="empty" ng-show="!userInfo.marksDetail">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="marksDetail" placeholder="Marks Detail" type="text" id="marksDetail" ng-model="userInfo.marksDetail" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
-
-
-                                
-                                
-
-								
 							</form>
 						</div>
 						<!-- Map -->
 						<div class="cell w-49">
                         <form id="tab-form" name="tab-form">
                         		<!-- Subjects input -->
-								<div class="cell w-100">
-									<input name="name" placeholder="Subjects" type="text" id="name" required />
+                        		<div class="cell w-100">
+									<div ng-if="!editFlag">
+										<label for="subjects" ng-model="userInfo.subjects"><p ng-bind="userInfo.subjects"></p><span class="empty" ng-show="!userInfo.subjects">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="subjects" placeholder="Subjects" type="text" id="subjects" ng-model="userInfo.subjects" required />
+									</div>
 								</div>
+								
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Previous School input -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Previous School" type="text" id="name" required />
+									<div ng-if="!editFlag">
+										<label for="previousSchool" ng-model="userInfo.previousSchool"><p ng-bind="userInfo.previousSchool"></p><span class="empty" ng-show="!userInfo.previousSchool">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="previousSchool" placeholder="Previous School" type="text" id="previousSchool" ng-model="userInfo.previousSchool" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>                        
                         
