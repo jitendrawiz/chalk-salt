@@ -4,8 +4,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
 
     var loginModule = angular.module('Login.controller', [ 'Login.router', 'System.configuration', 'Login.service']);
     
-    loginModule.controller('LoginController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'LoginService',
-            function($scope, $state, $resource,$rootScope, CHALKNDUST, LoginService) {
+    loginModule.controller('LoginController', ['$window', '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'LoginService',
+            function($window,$scope, $state, $resource,$rootScope, CHALKNDUST, LoginService) {
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -27,10 +27,9 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 this.authenticateUser = function() {
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
-                            $rootScope.fullName = response.fullName;
                             $rootScope.username = $scope.authRequest.username;
-                            //console.log($rootScope.fullName);
-                            $rootScope.securUuid=response.securUuid;
+                            $window.localStorage.setItem(CHALKNDUST.SECURUUID,response.securUuid);
+                            $window.localStorage.setItem(CHALKNDUST.USERFULLNAME,response.fullName);
                             $state.go('chalkanddust.profile');
                             console.log(response);
                            
@@ -47,8 +46,8 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
 /**
  * Log out Controller
  */
-loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService', '$window', '$rootScope',
-        function($scope, $state, LogoutService, $window, $rootScope) {
+loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService', '$window', '$rootScope','CHALKNDUST',
+        function($scope, $state, LogoutService, $window, $rootScope,CHALKNDUST) {
 
             /**
              * Code to display/close alert on UI
@@ -76,9 +75,12 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
             	$rootScope.fullName="";
             	$rootScope.username="";
             	$rootScope.securUuid="";
+            	$window.localStorage.removeItem(CHALKNDUST.SECURUUID);
+                $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
+                $state.go('chalkanddust.home');
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');
             });
-            $state.go('chalkanddust.home');
+            
         }]);
 });

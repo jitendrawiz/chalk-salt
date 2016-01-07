@@ -8,7 +8,9 @@
 	"EMAIL": "abhishek.kumar627@gmail.com",
 	"VERSION": "3",
 	"BUILD": "0.0",
-	"RELEASE_DATE": "November 2015"
+	"RELEASE_DATE": "November 2015",
+	"SECURUUID": "securUuid",
+	"USERFULLNAME": "userFullName"
 })
 
 .constant("ENV", {

@@ -4,8 +4,8 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
 
     var homeModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service']);
     
-    homeModule.controller('HomeController', [ '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService',
-            function($scope, $state, $resource,$rootScope, CHALKNDUST, HomeService) {
+    homeModule.controller('HomeController', [ '$window', '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService',
+            function($window,$scope, $state, $resource,$rootScope, CHALKNDUST, HomeService) {
 
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -19,7 +19,8 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
-               
+               $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+               console.log($scope.fullName);
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
