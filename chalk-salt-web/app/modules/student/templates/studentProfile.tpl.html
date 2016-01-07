@@ -128,7 +128,7 @@
 								<!-- First name -->
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="firstName" ng-model="userInfo.firstName"><p ng-bind="userInfo.firstName"></p></label>
+										<label for="firstName" ng-model="userInfo.firstName"><p ng-bind="userInfo.firstName"></p><span class="empty" ng-show="!userInfo.firstName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 										<input name="firstName" placeholder="First name" type="text" id="firstName" ng-model="userInfo.firstName" required />
@@ -140,7 +140,7 @@
                                 <!-- Last name -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p></label>
+										<label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p><span class="empty" ng-show="!userInfo.lastName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="lastName" placeholder="Last name" type="text" id="lastName" ng-model="userInfo.lastName" required />
@@ -153,7 +153,7 @@
                                 <!-- Permanent Address -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p></label>
+										<label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p><span class="empty" ng-show="!userInfo.address">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="address" placeholder="Permanent Address" type="text" id="address" ng-model="userInfo.address" required />
@@ -166,7 +166,7 @@
 								<!-- Phone input -->
 								<div class="cell w-100">
 							        <div ng-if="!editFlag">
-										<label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p></label>
+										<label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p><span class="empty" ng-show="!userInfo.mobile">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="mobile" placeholder="+44 123 456" type="Mobile" id="mobile" ng-model="userInfo.mobile" required />
@@ -179,7 +179,7 @@
 								<!-- Email input -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p></label>
+										<label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p><span class="empty" ng-show="!userInfo.email">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="email" placeholder="your@email.com" type="email" id="email" ng-model="userInfo.email" required />
@@ -196,7 +196,7 @@
 							<!-- Middle name -->
 								<div class="cell w-100">
 							        <div ng-if="!editFlag">
-										<label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p></label>
+										<label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p><span class="empty" ng-show="!userInfo.middleName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="middleName" placeholder="Middle name" type="text" id="middleName" ng-model="userInfo.middleName" required />
@@ -207,7 +207,7 @@
                                  <!-- Contact Details -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="contactDetails" ng-model="userInfo.contactDetails"><p ng-bind="userInfo.contactDetails"></p></label>
+										<label for="contactDetails" ng-model="userInfo.contactDetails"><p ng-bind="userInfo.contactDetails"></p><span class="empty" ng-show="!userInfo.contactDetails">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="contactDetails" placeholder="Contact Details" type="text" id="contactDetails" required />
@@ -218,7 +218,7 @@
                                 <!-- Correspondence Address  -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p ng-bind="userInfo.correspondenceAddress"></p></label>
+										<label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p ng-bind="userInfo.correspondenceAddress"></p><span class="empty" ng-show="!userInfo.correspondenceAddress">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="correspondenceAddress" placeholder="Correspondence Address " type="text" id="correspondenceAddress" required />
@@ -229,7 +229,7 @@
                                 <!-- Telephone input -->
 								<div class="cell w-100">
 								<div ng-if="!editFlag">
-										<label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline || N/A"></p></label>
+										<label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline "></p><span class="empty" ng-show="!userInfo.landline">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
 									<input name="landline" placeholder="+44 123 456" type="tel" id="landline" ng-model="userInfo.landline" required />
