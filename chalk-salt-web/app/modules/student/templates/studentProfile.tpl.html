@@ -127,10 +127,10 @@
 							<form id="tab-form" name="tab-form">
 								<!-- First name -->
 								<div class="cell w-100">
-									<div ng-show="editFlag">
-										<label for="firstName">{{userInfo.firstName}}</label>
+									<div ng-if="!editFlag">
+										<label for="firstName" ng-model="userInfo.firstName"><p ng-bind="userInfo.firstName"></p></label>
 									</div>
-									<div ng-hide="editFlag">
+									<div ng-if="editFlag">
 										<input name="firstName" placeholder="First name" type="text" id="firstName" ng-model="userInfo.firstName" required />
 									</div>
 								</div>
@@ -139,7 +139,12 @@
 								
                                 <!-- Last name -->
 								<div class="cell w-100">
+								<div ng-if="!editFlag">
+										<label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="lastName" placeholder="Last name" type="text" id="lastName" ng-model="userInfo.lastName" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -147,7 +152,12 @@
                                 
                                 <!-- Permanent Address -->
 								<div class="cell w-100">
+								<div ng-if="!editFlag">
+										<label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="address" placeholder="Permanent Address" type="text" id="address" ng-model="userInfo.address" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -155,7 +165,12 @@
 
 								<!-- Phone input -->
 								<div class="cell w-100">
+							        <div ng-if="!editFlag">
+										<label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="mobile" placeholder="+44 123 456" type="Mobile" id="mobile" ng-model="userInfo.mobile" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
@@ -163,7 +178,12 @@
                                 
 								<!-- Email input -->
 								<div class="cell w-100">
+								<div ng-if="!editFlag">
+										<label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="email" placeholder="your@email.com" type="email" id="email" ng-model="userInfo.email" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
 								
@@ -175,31 +195,54 @@
                         <form id="tab-form" name="tab-form">
 							<!-- Middle name -->
 								<div class="cell w-100">
+							        <div ng-if="!editFlag">
+										<label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="middleName" placeholder="Middle name" type="text" id="middleName" ng-model="userInfo.middleName" required />
+									</div>	
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                  <!-- Contact Details -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Contact Details" type="text" id="name" required />
+								<div ng-if="!editFlag">
+										<label for="contactDetails" ng-model="userInfo.contactDetails"><p ng-bind="userInfo.contactDetails"></p></label>
+									</div>
+									<div ng-if="editFlag">
+									<input name="contactDetails" placeholder="Contact Details" type="text" id="contactDetails" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Correspondence Address  -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Correspondence Address " type="text" id="name" required />
+								<div ng-if="!editFlag">
+										<label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p ng-bind="userInfo.correspondenceAddress"></p></label>
+									</div>
+									<div ng-if="editFlag">
+									<input name="correspondenceAddress" placeholder="Correspondence Address " type="text" id="correspondenceAddress" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Telephone input -->
 								<div class="cell w-100">
+								<div ng-if="!editFlag">
+										<label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline || N/A"></p></label>
+									</div>
+									<div ng-if="editFlag">
 									<input name="landline" placeholder="+44 123 456" type="tel" id="landline" ng-model="userInfo.landline" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Send button -->
 								<div class="cell w-32">
+								
+									<div ng-if="editFlag">
 									<input type="submit" value="Submit" class="button black" form="tab-form" />
+									</div>
 								</div>
 								<div class="cell w-32">
 									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
