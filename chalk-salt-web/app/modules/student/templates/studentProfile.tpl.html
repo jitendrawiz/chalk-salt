@@ -348,61 +348,126 @@
 						<!-- Form -->
 						<div class="cell w-49">
 							<form id="tab-form" name="tab-form">
-								<!-- Name input -->
+								<!-- Name input -->								
 								<div class="cell w-100">
-									<input name="fatherName" id="fatherName" placeholder="Father Name" type="text" ng-model="userInfo.fatherName" required />
+									<div ng-if="!editFlag">
+										<label for="fatherName" ng-model="userInfo.fatherName"><p ng-bind="userInfo.fatherName"></p><span class="empty" ng-show="!userInfo.fatherName">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="fatherName" placeholder="Father Name" type="text" id="fatherName" ng-model="userInfo.fatherName" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
 						
-                                <!-- Father’s Occupation  -->
+                                <!-- Father’s Occupation  -->								
+								
 								<div class="cell w-100">
-									<input name="fatherOccupation" placeholder="Father Occupation " type="text" id="fatherOccupation"  ng-model="userInfo.Occupation" required />
+									<div ng-if="!editFlag">
+										<label for="fatherOccupation" ng-model="userInfo.fatherOccupation"><p ng-bind="userInfo.fatherOccupation"></p><span class="empty" ng-show="!userInfo.fatherOccupation">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="fatherOccupation" placeholder="Father Occupation" type="text" id="fatherOccupation" ng-model="userInfo.fatherOccupation" required />
+									</div>
+								</div>
+								
+								<div class="clrfx mt-10"></div>
+                                								
+								<div class="cell w-100">
+									<div ng-if="!editFlag">
+										<label for="fatherEmail" ng-model="userInfo.fatherEmail"><p ng-bind="userInfo.fatherEmail"></p><span class="empty" ng-show="!userInfo.fatherEmail">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="fatherEmail" placeholder="Father Email" type="text" id="fatherEmail" ng-model="userInfo.fatherEmail" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
-                                
+								
+								
+								<!-- Phone input -->																
 								<div class="cell w-100">
-									<input name="fatherEmail" placeholder="your@email.com" type="email" id="fatherEmail"  ng-model="userInfo.fatherEmail" required />
+									<div ng-if="!editFlag">
+										<label for="fatherMobile" ng-model="userInfo.fatherMobile"><p ng-bind="userInfo.fatherMobile"></p><span class="empty" ng-show="!userInfo.fatherMobile">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="fatherMobile" placeholder="Father Mobile" type="text" id="fatherMobile" ng-model="userInfo.fatherMobile" required />
+									</div>
 								</div>
+																
 								<div class="clrfx mt-10"></div>
-								<!-- Phone input -->
+								
+                                <!-- Office Contact Details   -->															
 								<div class="cell w-100">
-									<input name="fatherMobile" placeholder="+44 123 456" type="tel" id="fatherMobile"  ng-model="userInfo.fatherMobile" required />
+									<div ng-if="!editFlag">
+										<label for="fatherOfficeAddress" ng-model="userInfo.fatherOfficeAddress"><p ng-bind="userInfo.fatherOfficeAddress"></p><span class="empty" ng-show="!userInfo.fatherOfficeAddress">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="fatherOfficeAddress" placeholder="Office Contact Details" type="text" id="fatherOfficeAddress" ng-model="userInfo.fatherOfficeAddress" required />
+									</div>
 								</div>
-								<div class="clrfx mt-10"></div>
-                                <!-- Office Contact Details   -->
-								<div class="cell w-100">
-									<input name="fatherOfficeAddress" placeholder="Office Contact Details" type="text" id="fatherOfficeAddress"  ng-model="userInfo.fatherOfficeAddress" required />
-								</div>
+								
 								<div class="clrfx mt-10"></div>								
 							</form>
 						</div>
 						<!-- Map -->
 						<div class="cell w-49">
 							<form id="tab-form" name="tab-form">
-								<!-- Name input -->
+								<!-- Name input -->								
 								<div class="cell w-100">
-									<input name="motherName" id="motherName" placeholder="mother Name" type="text" ng-model="userInfo.motherName" required />
+									<div ng-if="!editFlag">
+										<label for="motherName" ng-model="userInfo.motherName"><p ng-bind="userInfo.motherName"></p><span class="empty" ng-show="!userInfo.motherName">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="motherName" placeholder="Mother Name" type="text" id="motherName" ng-model="userInfo.motherName" required />
+									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
 						
-                                <!-- Father’s Occupation  -->
+                                <!-- Mother’s Occupation  -->								
+								
 								<div class="cell w-100">
-									<input name="motherOccupation" placeholder="Mother Occupation " type="text" id="motherName"  ng-model="userInfo.motherName" required />
+									<div ng-if="!editFlag">
+										<label for="motherOccupation" ng-model="userInfo.motherOccupation"><p ng-bind="userInfo.motherOccupation"></p><span class="empty" ng-show="!userInfo.motherOccupation">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="motherOccupation" placeholder="Mother Occupation" type="text" id="motherOccupation" ng-model="userInfo.motherOccupation" required />
+									</div>
 								</div>
+								
 								<div class="clrfx mt-10"></div>
                                 
 								<div class="cell w-100">
-									<input name="motherEmail" placeholder="your@email.com" type="email" id="motherEmail"  ng-model="userInfo.motherEmail" required />
+									<div ng-if="!editFlag">
+										<label for="motherEmail" ng-model="userInfo.motherEmail"><p ng-bind="userInfo.motherEmail"></p><span class="empty" ng-show="!userInfo.motherEmail">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="motherEmail" placeholder="Mother Email" type="text" id="motherEmail" ng-model="userInfo.motherEmail" required />
+									</div>
 								</div>
+								
+								
 								<div class="clrfx mt-10"></div>
 								<!-- Phone input -->
+																
 								<div class="cell w-100">
-									<input name="fatherMobile" placeholder="+44 123 456" type="tel" id="fatherMobile"  ng-model="userInfo.fatherMobile" required />
+									<div ng-if="!editFlag">
+										<label for="motherMobile" ng-model="userInfo.motherMobile"><p ng-bind="userInfo.motherMobile"></p><span class="empty" ng-show="!userInfo.motherMobile">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="motherMobile" placeholder="Mother Mobile" type="text" id="motherMobile" ng-model="userInfo.motherMobile" required />
+									</div>
 								</div>
+								
 								<div class="clrfx mt-10"></div>
                                 <!-- Office Contact Details   -->
+																
+								
 								<div class="cell w-100">
-									<input name="motherOfficeAddress" placeholder="Office Contact Details" type="text" id="motherOfficeAddress"  ng-model="userInfo.motherOfficeAddress" required />
+									<div ng-if="!editFlag">
+										<label for="motherOfficeAddress" ng-model="userInfo.motherOfficeAddress"><p ng-bind="userInfo.motherOfficeAddress"></p><span class="empty" ng-show="!userInfo.motherOfficeAddress">N/A</span></label>
+									</div>
+									<div ng-if="editFlag">
+										<input name="motherOfficeAddress" placeholder="Office Contact Details" type="text" id="motherOfficeAddress" ng-model="userInfo.motherOfficeAddress" required />
+									</div>
 								</div>
 							
 								<div class="clrfx mt-10"></div>
@@ -434,22 +499,30 @@
 						<!-- Form -->
 						<div class="cell w-49">
 							<form id="tab-form" name="tab-form">
-								<!-- user input -->
+							
+								<!-- user name -->
 								<div class="cell w-100">
 									<input name="username" placeholder="Username" type="text" id="username" ng-model="userInfo.username" required />
 								</div>
 								<div class="clrfx mt-10"></div>
-                                <!-- user input -->
+								
+                                <!-- user Password -->
 								<div class="cell w-100">
-									<input name="name" placeholder="Change Password" type="password" id="name" required />
+									<input name="currentPassword" placeholder="Current Password" type="password" id="currentPassword" required />
 								</div>
 								<div class="clrfx mt-10"></div>
-                                <!-- user input -->
+								
+                                <!-- New Password -->
 								<div class="cell w-100">
-									<input name="password" placeholder="Password" type="password" id="password" ng-model="userInfo.password" required />
-								</div>
+									<input name="newPassword" placeholder="New Password" type="password" id="newPassword" ng-model="userInfo.password" required />
+								</div>								
 								<div class="clrfx mt-10"></div>
                                 
+                                <!-- Confirm Password -->
+                                <div class="cell w-100">
+									<input name="confirmPassword" placeholder="Confirm Password" type="password" id="confirmPassword" ng-model="userInfo.confirmPassword" required />
+								</div>
+								<div class="clrfx mt-10"></div>                                
 								
 								<!-- Send button -->
 								<div class="cell w-32">
