@@ -12,7 +12,9 @@ import org.sql2o.Sql2o;
 import org.sql2o.data.Row;
 import org.sql2o.data.Table;
 
+import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -189,39 +191,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.UserDao#getUserInfo(java.lang.String, java.lang.String)
-     */
-    @Override
-    public UserDto getUserInfo(final String securUuid) throws Exception {
-
-       // final UserDto userCredential = getUserCredentialsBySecurUuid(securUuid);
-        UserDto user = null;
-
-        final String sqlQuery =
-            "SELECT first_name,middle_name,last_name,address,city,state,country,pincode,email,username, mobile, landline, secur_uuid,class_name  FROM cst_users "
-           +" JOIN cst_class_type  ON cst_class_type.class_id=cst_users.class_id  "
-            + " JOIN cst_contacts ON cst_contacts.id=cst_users.contact_id "
-            + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id"
-            + " WHERE secur_uuid=:securUuid AND active=1";
-        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
-        try (final Connection connection = dataSource.open()) {
-            final Query query = connection.createQuery(sqlQuery);
-            query.addParameter("securUuid", securUuid);
-            query.addColumnMapping("first_name", "firstName");
-            query.addColumnMapping("middle_name", "middleName");
-            query.addColumnMapping("last_name", "lastName");
-            query.addColumnMapping("username", "userName");
-            query.addColumnMapping("secur_uuid", "securUuid");
-            query.addColumnMapping("class_name", "studentClassName");
-            user = query.executeAndFetchFirst(UserDto.class);
-        }
-     //   user.setUserName(userCredential.getUserName());
-        // user.setPassword(userCredential.getPassword());
-        return user;
-    }
+    
 
     /**
      * Gets the user credentials by secur uuid.
@@ -285,6 +255,32 @@ public class UserDaoImpl implements UserDao {
             return (Long) query.executeUpdate().getKey();
         }
 	}
+	
+	/*
+     * (non-Javadoc)
+     * 
+     * @see uk.co.propco.dao.user.UserDao#getUserInfo(java.lang.String, java.lang.String)
+     */
+    @Override
+    public UserDto getUserInfo(final String securUuid) throws Exception {
+
+        UserDto user = null;
+
+        final String sqlQuery = "SELECT first_name as firstName, middle_name as middleName, last_name as lastName, address, city, state, "
+    		+ "country, pincode, email, username, mobile, landline, secur_uuid as securUuid "
+    		+ "FROM cst_users "
+    		+ "JOIN cst_logins ON cst_logins.user_id = cst_users.user_id "
+    		+ "JOIN cst_contacts ON cst_contacts.id = cst_users.contact_id "
+    		+ "WHERE secur_uuid =:securUuid AND active =1";
+           
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            user = query.executeAndFetchFirst(UserDto.class);
+        }
+        return user;
+    }
 
 	@Override
 	public List<SubjectDto> getUserSubjects(String securUuid) throws Exception {
@@ -303,6 +299,45 @@ public class UserDaoImpl implements UserDao {
 		        }
 	}
 
-	
+	@Override
+	public AcademicInfoDto getAcademicInfo(String securUuid) throws Exception {
+		
+		AcademicInfoDto academicInfo = null;
+
+        final String sqlQuery = "SELECT class_name as studentClassName, `student_class_id` as studentClassId, `percentage`, "
+    		+ "`previous_school` as previousSchool FROM cst_users "
+    		+ "JOIN cst_class_type ON cst_class_type.class_id = cst_users.class_id "
+    		+ "JOIN cst_academic_details ON cst_academic_details.id = cst_users.academic_id "
+    		+ "WHERE secur_uuid =:securUuid";
+           
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            academicInfo = query.executeAndFetchFirst(AcademicInfoDto.class);
+        }
+        return academicInfo;
+	}
+
+	@Override
+	public ParentsInfoDto getParentsInfo(String securUuid) throws Exception {
+		
+		ParentsInfoDto parentsInfo = null;
+
+        final String sqlQuery = "SELECT `father_name` as fatherName, `mother_name` as motherName, `father_email` as fatherEmail, `mother_email` as motherEmail, "
+    		+ "`father_mobile` as fatherMobile, `mother_mobile` as motherMobile, `father_office_address` as fatherOfficeAddress, "
+    		+ "`mother_office_address` as motherOfficeAddress, `father_occupation` as fatherOccupation, "
+    		+ "`mother_occupation` as motherOccupation FROM cst_users "
+    		+ "JOIN cst_parents ON cst_parents.id = cst_users.parents_id "
+    		+ "WHERE secur_uuid =:securUuid";
+           
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            parentsInfo = query.executeAndFetchFirst(ParentsInfoDto.class);
+        }
+        return parentsInfo;
+	}
 
 }

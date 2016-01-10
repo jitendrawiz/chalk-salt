@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.dto.AcademicInfoDto;
+import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
@@ -145,15 +147,25 @@ public class UserManagerImpl implements UserManager {
         logger.info("Obtaining user details for securuuid : {}", securUuid);
         UserDto user = null;
         List<SubjectDto> subjects=new ArrayList<SubjectDto>();
+        AcademicInfoDto academicInfo = new AcademicInfoDto();
+        ParentsInfoDto parentsInfo = new ParentsInfoDto();
         try {
-            user = officeDao.getUserInfo(securUuid);            
-            subjects=officeDao.getUserSubjects(securUuid);
-            if(!subjects.isEmpty()){
-            	user.setSubjects(subjects);
-            }            
+            user = officeDao.getUserInfo(securUuid);     
+            
             if (user == null) {
                 throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user");
             }
+            subjects=officeDao.getUserSubjects(securUuid);
+            if(!subjects.isEmpty()){
+            	user.setSubjects(subjects);
+            }    
+            
+            academicInfo = officeDao.getAcademicInfo(securUuid);
+            parentsInfo = officeDao.getParentsInfo(securUuid);
+            
+            user.setAcademicInfo(academicInfo);
+            user.setParentsInfo(parentsInfo);
+            
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user", exception);
         }

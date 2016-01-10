@@ -6,6 +6,8 @@ package com.chalk.salt.dao.user;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.AcademicInfoDto;
+import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 
@@ -156,5 +158,9 @@ public interface UserDao {
 	 *             the exception
 	 */
 	List<SubjectDto> getUserSubjects(String securUuid) throws Exception;
+
+	AcademicInfoDto getAcademicInfo(String securUuid) throws Exception;
+
+	ParentsInfoDto getParentsInfo(String securUuid) throws Exception;
 
 }

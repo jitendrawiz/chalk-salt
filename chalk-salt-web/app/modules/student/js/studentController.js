@@ -35,6 +35,9 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                     	 $scope.userInfo = response;
                     	 $scope.subjects =$scope.userInfo.subjects;
                     	 
+                    	 $scope.academicInfo =$scope.userInfo.academicInfo;
+                    	 
+                    	 $scope.parentsInfo =$scope.userInfo.parentsInfo;
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);

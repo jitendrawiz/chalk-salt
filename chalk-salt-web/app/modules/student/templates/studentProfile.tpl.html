@@ -270,11 +270,12 @@
 							<form id="tab-form" name="tab-form">
 								<!-- Class input -->								
 								<div class="cell w-100">
+																										
 									<div ng-if="!editFlag">
-										<label for="studentClassName" ng-model="userInfo.studentClassName"><p ng-bind="userInfo.studentClassName"></p><span class="empty" ng-show="!userInfo.studentClassName">N/A</span></label>
+										<label for="studentClassName" ng-model="academicInfo.studentClassName"><p ng-bind="academicInfo.studentClassName"></p><span class="empty" ng-show="!academicInfo.studentClassName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="studentClassName" placeholder="Class" type="text" id="studentClassName" ng-model="userInfo.studentClassName" required />
+										<input name="studentClassName" placeholder="Class" type="text" id="studentClassName" ng-model="academicInfo.studentClassName" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -282,10 +283,10 @@
                                 <!-- Marks Details  input -->
                                 <div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="marksDetail" ng-model="userInfo.marksDetail"><p ng-bind="userInfo.marksDetail"></p><span class="empty" ng-show="!userInfo.marksDetail">N/A</span></label>
+										<label for="percentage" ng-model="academicInfo.percentage"><p ng-bind="academicInfo.percentage"></p><span class="empty" ng-show="!academicInfo.percentage">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="marksDetail" placeholder="Marks Detail" type="text" id="marksDetail" ng-model="userInfo.marksDetail" required />
+										<input name="percentage" placeholder="Percentage" type="text" id="percentage" ng-model="academicInfo.percentage" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -297,10 +298,10 @@
                         		<!-- Subjects input -->
                         		<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="subjects" ng-model="userInfo.subjects"><p ng-bind="userInfo.subjects"></p><span class="empty" ng-show="!userInfo.subjects">N/A</span></label>
+										<label for="subjects" ng-model="academicInfo.subjects"><p ng-bind="academicInfo.subjects"></p><span class="empty" ng-show="!academicInfo.subjects">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="subjects" placeholder="Subjects" type="text" id="subjects" ng-model="userInfo.subjects" required />
+										<input name="subjects" placeholder="Subjects" type="text" id="subjects" ng-model="academicInfo.subjects" required />
 									</div>
 								</div>
 								
@@ -309,10 +310,10 @@
                                 <!-- Previous School input -->
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="previousSchool" ng-model="userInfo.previousSchool"><p ng-bind="userInfo.previousSchool"></p><span class="empty" ng-show="!userInfo.previousSchool">N/A</span></label>
+										<label for="previousSchool" ng-model="academicInfo.previousSchool"><p ng-bind="academicInfo.previousSchool"></p><span class="empty" ng-show="!academicInfo.previousSchool">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="previousSchool" placeholder="Previous School" type="text" id="previousSchool" ng-model="userInfo.previousSchool" required />
+										<input name="previousSchool" placeholder="Previous School" type="text" id="previousSchool" ng-model="academicInfo.previousSchool" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>                        
@@ -351,10 +352,10 @@
 								<!-- Name input -->								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="fatherName" ng-model="userInfo.fatherName"><p ng-bind="userInfo.fatherName"></p><span class="empty" ng-show="!userInfo.fatherName">N/A</span></label>
+										<label for="fatherName" ng-model="parentsInfo.fatherName"><p ng-bind="parentsInfo.fatherName"></p><span class="empty" ng-show="!parentsInfo.fatherName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="fatherName" placeholder="Father Name" type="text" id="fatherName" ng-model="userInfo.fatherName" required />
+										<input name="fatherName" placeholder="Father Name" type="text" id="fatherName" ng-model="parentsInfo.fatherName" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -363,10 +364,10 @@
 								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="fatherOccupation" ng-model="userInfo.fatherOccupation"><p ng-bind="userInfo.fatherOccupation"></p><span class="empty" ng-show="!userInfo.fatherOccupation">N/A</span></label>
+										<label for="fatherOccupation" ng-model="parentsInfo.fatherOccupation"><p ng-bind="parentsInfo.fatherOccupation"></p><span class="empty" ng-show="!parentsInfo.fatherOccupation">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="fatherOccupation" placeholder="Father Occupation" type="text" id="fatherOccupation" ng-model="userInfo.fatherOccupation" required />
+										<input name="fatherOccupation" placeholder="Father Occupation" type="text" id="fatherOccupation" ng-model="parentsInfo.fatherOccupation" required />
 									</div>
 								</div>
 								
@@ -374,10 +375,10 @@
                                 								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="fatherEmail" ng-model="userInfo.fatherEmail"><p ng-bind="userInfo.fatherEmail"></p><span class="empty" ng-show="!userInfo.fatherEmail">N/A</span></label>
+										<label for="fatherEmail" ng-model="parentsInfo.fatherEmail"><p ng-bind="parentsInfo.fatherEmail"></p><span class="empty" ng-show="!parentsInfo.fatherEmail">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="fatherEmail" placeholder="Father Email" type="text" id="fatherEmail" ng-model="userInfo.fatherEmail" required />
+										<input name="fatherEmail" placeholder="Father Email" type="text" id="fatherEmail" ng-model="parentsInfo.fatherEmail" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -386,10 +387,10 @@
 								<!-- Phone input -->																
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="fatherMobile" ng-model="userInfo.fatherMobile"><p ng-bind="userInfo.fatherMobile"></p><span class="empty" ng-show="!userInfo.fatherMobile">N/A</span></label>
+										<label for="fatherMobile" ng-model="parentsInfo.fatherMobile"><p ng-bind="parentsInfo.fatherMobile"></p><span class="empty" ng-show="!parentsInfo.fatherMobile">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="fatherMobile" placeholder="Father Mobile" type="text" id="fatherMobile" ng-model="userInfo.fatherMobile" required />
+										<input name="fatherMobile" placeholder="Father Mobile" type="text" id="fatherMobile" ng-model="parentsInfo.fatherMobile" required />
 									</div>
 								</div>
 																
@@ -398,10 +399,10 @@
                                 <!-- Office Contact Details   -->															
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="fatherOfficeAddress" ng-model="userInfo.fatherOfficeAddress"><p ng-bind="userInfo.fatherOfficeAddress"></p><span class="empty" ng-show="!userInfo.fatherOfficeAddress">N/A</span></label>
+										<label for="fatherOfficeAddress" ng-model="parentsInfo.fatherOfficeAddress"><p ng-bind="parentsInfo.fatherOfficeAddress"></p><span class="empty" ng-show="!parentsInfo.fatherOfficeAddress">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="fatherOfficeAddress" placeholder="Office Contact Details" type="text" id="fatherOfficeAddress" ng-model="userInfo.fatherOfficeAddress" required />
+										<input name="fatherOfficeAddress" placeholder="Office Contact Details" type="text" id="fatherOfficeAddress" ng-model="parentsInfo.fatherOfficeAddress" required />
 									</div>
 								</div>
 								
@@ -414,10 +415,10 @@
 								<!-- Name input -->								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="motherName" ng-model="userInfo.motherName"><p ng-bind="userInfo.motherName"></p><span class="empty" ng-show="!userInfo.motherName">N/A</span></label>
+										<label for="motherName" ng-model="parentsInfo.motherName"><p ng-bind="parentsInfo.motherName"></p><span class="empty" ng-show="!parentsInfo.motherName">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="motherName" placeholder="Mother Name" type="text" id="motherName" ng-model="userInfo.motherName" required />
+										<input name="motherName" placeholder="Mother Name" type="text" id="motherName" ng-model="parentsInfo.motherName" required />
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>
@@ -426,10 +427,10 @@
 								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="motherOccupation" ng-model="userInfo.motherOccupation"><p ng-bind="userInfo.motherOccupation"></p><span class="empty" ng-show="!userInfo.motherOccupation">N/A</span></label>
+										<label for="motherOccupation" ng-model="parentsInfo.motherOccupation"><p ng-bind="parentsInfo.motherOccupation"></p><span class="empty" ng-show="!parentsInfo.motherOccupation">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="motherOccupation" placeholder="Mother Occupation" type="text" id="motherOccupation" ng-model="userInfo.motherOccupation" required />
+										<input name="motherOccupation" placeholder="Mother Occupation" type="text" id="motherOccupation" ng-model="parentsInfo.motherOccupation" required />
 									</div>
 								</div>
 								
@@ -437,10 +438,10 @@
                                 
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="motherEmail" ng-model="userInfo.motherEmail"><p ng-bind="userInfo.motherEmail"></p><span class="empty" ng-show="!userInfo.motherEmail">N/A</span></label>
+										<label for="motherEmail" ng-model="parentsInfo.motherEmail"><p ng-bind="parentsInfo.motherEmail"></p><span class="empty" ng-show="!parentsInfo.motherEmail">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="motherEmail" placeholder="Mother Email" type="text" id="motherEmail" ng-model="userInfo.motherEmail" required />
+										<input name="motherEmail" placeholder="Mother Email" type="text" id="motherEmail" ng-model="parentsInfo.motherEmail" required />
 									</div>
 								</div>
 								
@@ -450,10 +451,10 @@
 																
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="motherMobile" ng-model="userInfo.motherMobile"><p ng-bind="userInfo.motherMobile"></p><span class="empty" ng-show="!userInfo.motherMobile">N/A</span></label>
+										<label for="motherMobile" ng-model="parentsInfo.motherMobile"><p ng-bind="parentsInfo.motherMobile"></p><span class="empty" ng-show="!parentsInfo.motherMobile">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="motherMobile" placeholder="Mother Mobile" type="text" id="motherMobile" ng-model="userInfo.motherMobile" required />
+										<input name="motherMobile" placeholder="Mother Mobile" type="text" id="motherMobile" ng-model="parentsInfo.motherMobile" required />
 									</div>
 								</div>
 								
@@ -463,10 +464,10 @@
 								
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="motherOfficeAddress" ng-model="userInfo.motherOfficeAddress"><p ng-bind="userInfo.motherOfficeAddress"></p><span class="empty" ng-show="!userInfo.motherOfficeAddress">N/A</span></label>
+										<label for="motherOfficeAddress" ng-model="parentsInfo.motherOfficeAddress"><p ng-bind="parentsInfo.motherOfficeAddress"></p><span class="empty" ng-show="!parentsInfo.motherOfficeAddress">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<input name="motherOfficeAddress" placeholder="Office Contact Details" type="text" id="motherOfficeAddress" ng-model="userInfo.motherOfficeAddress" required />
+										<input name="motherOfficeAddress" placeholder="Office Contact Details" type="text" id="motherOfficeAddress" ng-model="parentsInfo.motherOfficeAddress" required />
 									</div>
 								</div>
 							
@@ -502,7 +503,7 @@
 							
 								<!-- user name -->
 								<div class="cell w-100">
-									<input name="username" placeholder="Username" type="text" id="username" ng-model="userInfo.username" required />
+									<label for="userName" ng-model="userInfo.userName"><p ng-bind="userInfo.userName"></p></label>
 								</div>
 								<div class="clrfx mt-10"></div>
 								
@@ -526,7 +527,7 @@
 								
 								<!-- Send button -->
 								<div class="cell w-32">
-									<input type="submit" value="Submit" class="button black" form="tab-form" />
+									<input type="submit" value="Change Password" class="button black" form="tab-form" />
 								</div>
 								<div class="cell w-32">
 									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>

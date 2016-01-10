@@ -69,72 +69,17 @@ public class UserDto {
 
 	/** The active. */
 	private Long active;
-
+	
 	/** The student class. */
 	private String studentClass;
 
-	/** The student class name. */
-	private String studentClassName;
-
 	/** The subjects. */
 	private List<SubjectDto> subjects;
-
-	/**
-	 * Gets the subjects.
-	 *
-	 * @return the subjects
-	 */
-	public List<SubjectDto> getSubjects() {
-		return subjects;
-	}
-
-	/**
-	 * Sets the subjects.
-	 *
-	 * @param subjects the new subjects
-	 */
-	public void setSubjects(List<SubjectDto> subjects) {
-		this.subjects = subjects;
-	}
-
-	/**
-	 * Gets the student class name.
-	 *
-	 * @return the student class name
-	 */
-	public String getStudentClassName() {
-		return studentClassName;
-	}
-
-	/**
-	 * Sets the student class name.
-	 *
-	 * @param studentClassName
-	 *            the new student class name
-	 */
-	public void setStudentClassName(String studentClassName) {
-		this.studentClassName = studentClassName;
-	}
-
-	/**
-	 * Gets the student class.
-	 *
-	 * @return the student class
-	 */
-	public String getStudentClass() {
-		return studentClass;
-	}
-
-	/**
-	 * Sets the student class.
-	 *
-	 * @param studentClass
-	 *            the new student class
-	 */
-	public void setStudentClass(String studentClass) {
-		this.studentClass = studentClass;
-	}
-
+	
+	private AcademicInfoDto academicInfo;
+	
+	private ParentsInfoDto parentsInfo;
+	
 	/**
 	 * Gets the user name.
 	 *
@@ -496,4 +441,36 @@ public class UserDto {
 		this.active = active;
 	}
 
+	public AcademicInfoDto getAcademicInfo() {
+		return academicInfo;
+	}
+
+	public void setAcademicInfo(AcademicInfoDto academicInfo) {
+		this.academicInfo = academicInfo;
+	}
+
+	public ParentsInfoDto getParentsInfo() {
+		return parentsInfo;
+	}
+
+	public void setParentsInfo(ParentsInfoDto parentsInfo) {
+		this.parentsInfo = parentsInfo;
+	}
+
+	public String getStudentClass() {
+		return studentClass;
+	}
+
+	public void setStudentClass(String studentClass) {
+		this.studentClass = studentClass;
+	}
+
+	public List<SubjectDto> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<SubjectDto> subjects) {
+		this.subjects = subjects;
+	}
+	
 }

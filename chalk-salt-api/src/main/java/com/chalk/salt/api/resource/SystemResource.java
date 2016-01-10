@@ -56,8 +56,6 @@ public class SystemResource extends AbstractResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserClassesList() throws SystemException {
 		List<UserClassDto> classes = null;
-		List<Map<String, String>> userList = null;
-
 		try {
 			classes = systemFacade.getUserClassesList();
 			if (CollectionUtils.isEmpty(classes)) {
