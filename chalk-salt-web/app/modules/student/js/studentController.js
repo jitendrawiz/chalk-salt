@@ -43,15 +43,15 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                 	showAlert('danger',error.data.message);
                 });
                 
-                $scope.updateProfile = function() {
-                    
-                    StudentService.save({}, $scope.userDetails, function(
+                this.updateProfile = function() {
+                    $scope.userInfo.academicInfo = $scope.academicInfo;
+                    $scope.userInfo.parentsInfo = $scope.parentsInfo;
+                    StudentProfileUpdateService.save({}, $scope.userInfo, function(
                             response) {
                         if (response) {
-                          //  showAlert('New user has been created and an email has been sent to their registered email address.');
                             console.log(response);
-                            alert("New user has been created and an email has been sent to their registered email address.");
-                            $state.go('chalkanddust.login');
+                            $scope.editFlag=false;
+                            $state.go('chalkanddust.student');
                         }
                         
                     }, function(error) {

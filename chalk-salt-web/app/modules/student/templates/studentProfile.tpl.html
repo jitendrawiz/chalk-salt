@@ -271,7 +271,8 @@
                                 <!-- Send button -->
 								<div class="cell w-32">								
 									<div ng-if="editFlag">
-										<input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/>
+										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
+										<button type="button" class="btn btn-secondary btn-block button black" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()">Submit</button>
 									</div>
 								</div>
 								<div class="cell w-32">

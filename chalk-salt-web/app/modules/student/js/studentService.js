@@ -14,5 +14,14 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]);    
+        } ]); 
+    
+    studentService.factory('StudentProfileUpdateService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/users',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]); 
 });
