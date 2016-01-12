@@ -7,7 +7,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService',
             function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService) {
 
-    		   $scope.editFlag = false;
+    		   $scope.editFlag = true;
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -42,6 +42,27 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
+                
+                $scope.updateProfile = function() {
+                    
+                    StudentService.save({}, $scope.userDetails, function(
+                            response) {
+                        if (response) {
+                          //  showAlert('New user has been created and an email has been sent to their registered email address.');
+                            console.log(response);
+                            alert("New user has been created and an email has been sent to their registered email address.");
+                            $state.go('chalkanddust.login');
+                        }
+                        
+                    }, function(error) {
+                        showAlert('danger', error.data.message);
+                    });
+                };
+                
+                $scope.editProfile = function(){
+                	$scope.editFlag=true;
+                	$state.go('chalkanddust.student');
+                };
             }
     ]);
 });

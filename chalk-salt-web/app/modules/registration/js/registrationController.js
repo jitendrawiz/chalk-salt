@@ -64,8 +64,7 @@ define([ 'angular', './registrationRouting', './registrationService'
                 
                 function onRequestFailure(error) {
                         showAlert('danger', error.data.message);
-                }
-                ;
+                };
                 
             } ]);
 
