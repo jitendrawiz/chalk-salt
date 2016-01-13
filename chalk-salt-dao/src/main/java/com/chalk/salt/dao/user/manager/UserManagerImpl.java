@@ -21,8 +21,6 @@ import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.user.UserDao;
 
-
-
 /**
  * The Class UserManagerImpl.
  */
@@ -30,41 +28,43 @@ public class UserManagerImpl implements UserManager {
    
     /** The office dao. */
     @Inject
-    private UserDao officeDao;
+    private UserDao userDao;
 
     /** The logger. */
     @Inject
     @AppLogger
     private Logger logger;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#isUserExits(java.lang.String)
+    /**
+     * Checks if is user exist.
+     *
+     * @param userName the user name
+     * @return true, if is user exist
+     * @throws UserException the user exception
      */
-    @Override
-    public boolean isUserExist(final String userName) throws UserException {
+    private boolean isUserExist(final String userName) throws UserException {
         logger.info("Checking user existance......");
         try {
-            return officeDao.isUserExist(userName);
+            return userDao.isUserExist(userName);
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.USER_ALREADY_EXITS, "user_already_exist", exception);
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#registerUser(uk.co.propco.common.dto.User)
+    /**
+     * Register user.
+     *
+     * @param userDetail the user detail
+     * @return the string
+     * @throws UserException the user exception
      */
-    @Override
-    public String registerUser(final UserDto userDetail) throws UserException {
+    private String registerUser(final UserDto userDetail) throws UserException {
         logger.info("Registering new user ......");
         try {
 	        String userName = userDetail.getUserName();
 	        String hashedPassword = userDetail.getPassword();
 	  		String securUuid = UUID.randomUUID().toString();
-			Long userId = officeDao.saveLoginDetails(userName, hashedPassword);
+			Long userId = userDao.saveLoginDetails(userName, hashedPassword);
 			userDetail.setUserId(userId);
 			userDetail.setSecurUuid(securUuid);
 			
@@ -72,75 +72,20 @@ public class UserManagerImpl implements UserManager {
 				throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save User Registration");
 			}
 			
-			Long contactId = officeDao.saveContactDetails(userDetail);
+			Long contactId = userDao.saveContactDetails(userDetail);
 			userDetail.setContactId(contactId);
-			if(!officeDao.saveUserDetails(userDetail)){
+			if(!userDao.saveUserDetails(userDetail)){
 				throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save User Registration");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        
         return userDetail.getSecurUuid();
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#fetchUsers(java.lang.String)
-     */
-    @Override
-    public List<UserDto> fetchUsers() throws UserException {
-        logger.info("Obtaining the list of users");
-        /*final List<UserDto> users = new ArrayList<UserDto>();
-        try {
-            final Integer iref = officeDao.fetchIrefByOfficeJndi(officeJndi, systemJndi);
-            if (iref == null) {
-                throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail_to_fetch_registered_user");
-            }
-            final List<String> allowedUserUuids = officeDao.fetchAllowedUsers(iref);
-            for (final String securUuid : allowedUserUuids) {
-                final UserDto user = officeDao.fetchUsers(securUuid, officeJndi);
-                if (user != null) {
-                    users.add(user);
-                }
-            }
-            if (CollectionUtils.isEmpty(users)) {
-                throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail_to_fetch_registered_user");
-            }
-        } catch (final Exception exception) {
-            throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail_to_fetch_registered_user", exception);
-        }
-        return users;*/
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#disableUser(java.lang.String, java.lang.String)
-     */
-    @Override
-    public void disableUser(final String securUuid, final String disableDate) throws UserException {
-        logger.info("Disabling user : {} from {}", securUuid, disableDate);
-        try {
-            final Long userId = officeDao.getUserIdBySecurUuid(securUuid);
-            if (userId == null) {
-                throw new UserException(ErrorCode.FAIL_TO_DISABLE_USER, "fail_to_disable_user");
-            }
-            officeDao.disableUser(userId, disableDate);
-        } catch (final Exception exception) {
-            throw new UserException(ErrorCode.FAIL_TO_DISABLE_USER, "fail_to_disable_user", exception);
-        }
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#getUserInfo(java.lang.String, java.lang.String)
+  
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#getUserInfo(java.lang.String)
      */
     @Override
     public UserDto getUserInfo(final String securUuid) throws UserException {
@@ -150,18 +95,18 @@ public class UserManagerImpl implements UserManager {
         AcademicInfoDto academicInfo = new AcademicInfoDto();
         ParentsInfoDto parentsInfo = new ParentsInfoDto();
         try {
-            user = officeDao.getUserInfo(securUuid);     
+            user = userDao.getUserInfo(securUuid);     
             
             if (user == null) {
                 throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user");
             }
-            subjects=officeDao.getUserSubjects(securUuid);
+            subjects=userDao.getUserSubjects(securUuid);
             if(!subjects.isEmpty()){
             	user.setSubjects(subjects);
             }    
             
-            academicInfo = officeDao.getAcademicInfo(securUuid);
-            parentsInfo = officeDao.getParentsInfo(securUuid);
+            academicInfo = userDao.getAcademicInfo(securUuid);
+            parentsInfo = userDao.getParentsInfo(securUuid);
             
             user.setAcademicInfo(academicInfo);
             user.setParentsInfo(parentsInfo);
@@ -172,13 +117,10 @@ public class UserManagerImpl implements UserManager {
         return user;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.dao.user.manager.UserManager#saveUserInfo(uk.co.propco.common.dto.UserDto,
-     * uk.co.propco.common.dto.DomainUserPrincipalDto)
-     */
-    @Override
+   /* (non-Javadoc)
+    * @see com.chalk.salt.dao.user.manager.UserManager#saveUserInfo(com.chalk.salt.common.dto.UserDto)
+    */
+   @Override
     public String saveUserInfo(final UserDto userDetails) throws UserException {
         logger.info("Saving user details of username : {}", userDetails.getUserName());
         String securUuid = null;
@@ -193,5 +135,41 @@ public class UserManagerImpl implements UserManager {
         }
         return securUuid;
     }
+
+
+/* (non-Javadoc)
+ * @see com.chalk.salt.dao.user.manager.UserManager#updateProfile(com.chalk.salt.common.dto.UserDto)
+ */
+@Override
+public Boolean updateProfile(UserDto userDetails) throws UserException {
+	logger.info("Updating user details of username : {}", userDetails.getUserName());
+    String securUuid = null;
+    UserDto user=null;
+    Boolean userStatus=false;
+    Boolean contactStatus=false;
+    AcademicInfoDto academicInfo=null;
+    ParentsInfoDto parentsInfo=null;
+    try {
+    	 if (userDetails!=null) {
+    		 academicInfo= userDetails.getAcademicInfo();
+    		 parentsInfo= userDetails.getParentsInfo();
+    		 userStatus=userDao.updateUserDetails(userDetails); 
+    	     user= userDao.getUserKeyDetails(userDetails.getSecurUuid());
+    	     userDetails.setContactId(user.getContactId());
+    		 contactStatus=userDao.updateContactDetails(userDetails);    		
+    		 if(academicInfo!=null && userStatus && contactStatus){
+    			 academicInfo.setAcademicInfoId(user.getAcademicId());
+    			 userDao.updateAcademicDetails(academicInfo);
+    		 }
+    		 if(parentsInfo!=null && userStatus && contactStatus){
+    			 parentsInfo.setParentId(user.getParentsId());
+    			 userDao.updateParentsDetails(parentsInfo);
+    		 }
+    	 }
+    } catch (final Exception exception) {
+        throw new UserException(ErrorCode.FAIL_TO_UPDATE_USER_INFO, "Fail to update user info", exception);
+    }
+    return (userStatus && contactStatus)?true:false;
+}
 
 }

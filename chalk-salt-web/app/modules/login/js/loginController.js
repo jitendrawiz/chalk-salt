@@ -30,6 +30,7 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                             $rootScope.username = $scope.authRequest.username;
                             $window.localStorage.setItem(CHALKNDUST.SECURUUID,response.securUuid);
                             $window.localStorage.setItem(CHALKNDUST.USERFULLNAME,response.fullName);
+                            $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);
                             $state.go('chalkanddust.profile');
                             console.log(response);
                            
@@ -77,6 +78,7 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
             	$rootScope.securUuid="";
             	$window.localStorage.removeItem(CHALKNDUST.SECURUUID);
                 $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
+                $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
                 $state.go('chalkanddust.home');
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');

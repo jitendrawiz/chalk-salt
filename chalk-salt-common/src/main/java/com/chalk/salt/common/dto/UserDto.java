@@ -76,9 +76,95 @@ public class UserDto {
 	/** The subjects. */
 	private List<SubjectDto> subjects;
 	
+	/** The academic info. */
 	private AcademicInfoDto academicInfo;
 	
+	/** The parents info. */
 	private ParentsInfoDto parentsInfo;
+	
+	/** The correspondence address. */
+	private String correspondenceAddress;
+	
+	/** The parents id. */
+	private Long parentsId;
+	
+	/** The academic id. */
+	private Long academicId;
+	
+	/** The class id. */
+	private Long classId;
+    
+	/**
+	 * Gets the parents id.
+	 *
+	 * @return the parents id
+	 */
+	public Long getParentsId() {
+		return parentsId;
+	}
+
+	/**
+	 * Sets the parents id.
+	 *
+	 * @param parentsId the new parents id
+	 */
+	public void setParentsId(Long parentsId) {
+		this.parentsId = parentsId;
+	}
+
+	/**
+	 * Gets the academic id.
+	 *
+	 * @return the academic id
+	 */
+	public Long getAcademicId() {
+		return academicId;
+	}
+
+	/**
+	 * Sets the academic id.
+	 *
+	 * @param academicId the new academic id
+	 */
+	public void setAcademicId(Long academicId) {
+		this.academicId = academicId;
+	}
+
+	/**
+	 * Gets the class id.
+	 *
+	 * @return the class id
+	 */
+	public Long getClassId() {
+		return classId;
+	}
+
+	/**
+	 * Sets the class id.
+	 *
+	 * @param classId the new class id
+	 */
+	public void setClassId(Long classId) {
+		this.classId = classId;
+	}
+
+	/**
+	 * Gets the correspondence address.
+	 *
+	 * @return the correspondence address
+	 */
+	public String getCorrespondenceAddress() {
+		return correspondenceAddress;
+	}
+
+	/**
+	 * Sets the correspondence address.
+	 *
+	 * @param correspondenceAddress the new correspondence address
+	 */
+	public void setCorrespondenceAddress(String correspondenceAddress) {
+		this.correspondenceAddress = correspondenceAddress;
+	}
 	
 	/**
 	 * Gets the user name.
@@ -441,34 +527,74 @@ public class UserDto {
 		this.active = active;
 	}
 
+	/**
+	 * Gets the academic info.
+	 *
+	 * @return the academic info
+	 */
 	public AcademicInfoDto getAcademicInfo() {
 		return academicInfo;
 	}
 
+	/**
+	 * Sets the academic info.
+	 *
+	 * @param academicInfo the new academic info
+	 */
 	public void setAcademicInfo(AcademicInfoDto academicInfo) {
 		this.academicInfo = academicInfo;
 	}
 
+	/**
+	 * Gets the parents info.
+	 *
+	 * @return the parents info
+	 */
 	public ParentsInfoDto getParentsInfo() {
 		return parentsInfo;
 	}
 
+	/**
+	 * Sets the parents info.
+	 *
+	 * @param parentsInfo the new parents info
+	 */
 	public void setParentsInfo(ParentsInfoDto parentsInfo) {
 		this.parentsInfo = parentsInfo;
 	}
 
+	/**
+	 * Gets the student class.
+	 *
+	 * @return the student class
+	 */
 	public String getStudentClass() {
 		return studentClass;
 	}
 
+	/**
+	 * Sets the student class.
+	 *
+	 * @param studentClass the new student class
+	 */
 	public void setStudentClass(String studentClass) {
 		this.studentClass = studentClass;
 	}
 
+	/**
+	 * Gets the subjects.
+	 *
+	 * @return the subjects
+	 */
 	public List<SubjectDto> getSubjects() {
 		return subjects;
 	}
 
+	/**
+	 * Sets the subjects.
+	 *
+	 * @param subjects the new subjects
+	 */
 	public void setSubjects(List<SubjectDto> subjects) {
 		this.subjects = subjects;
 	}

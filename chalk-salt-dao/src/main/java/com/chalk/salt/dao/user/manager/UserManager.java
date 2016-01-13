@@ -4,54 +4,15 @@
  */
 package com.chalk.salt.dao.user.manager;
 
-import java.util.List;
-
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
+
 /**
- * The Class AuthManager.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
+ * The Interface UserManager.
  */
 public interface UserManager {
-
-    /**
-     * Checks if is user exist.
-     *
-     * @param username the username
-     * @return true, if is user exist
-     * @throws UserException the core exception
-     */
-    boolean isUserExist(final String username) throws UserException;
-
-    /**
-     * Register user.
-     *
-     * @param domainDto the domain dto
-     * @param user the user
-     * @return the string
-     * @throws UserException the core exception
-     */
-    public String registerUser(final UserDto user) throws UserException;
-
-    /**
-     * Fetch users.
-     *
-     * @return the list
-     * @throws UserException the user exception
-     */
-    List<UserDto> fetchUsers() throws UserException;
-
-    /**
-     * Disable user.
-     *
-     * @param securUuid the secur uuid
-     * @param disableDate the disable date
-     * @throws UserException the user exception
-     */
-    void disableUser(final String securUuid, final String disableDate) throws UserException;
-
+   
     /**
      * Gets the user info.
      *
@@ -60,14 +21,22 @@ public interface UserManager {
      * @throws UserException the user exception
      */
     UserDto getUserInfo(final String securUuid) throws UserException;
-
+    
     /**
      * Save user info.
      *
      * @param userDetails the user details
-     * @param domainDto the domain dto
      * @return the string
      * @throws UserException the user exception
      */
     String saveUserInfo(final UserDto userDetails) throws UserException;
+	
+	/**
+	 * Update profile.
+	 *
+	 * @param userDetails the user details
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean updateProfile(final UserDto userDetails)throws UserException;
 }

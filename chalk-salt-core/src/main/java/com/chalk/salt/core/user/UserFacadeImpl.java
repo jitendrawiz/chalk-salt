@@ -27,11 +27,8 @@ import com.chalk.salt.core.templating.TemplateConfig;
 import com.chalk.salt.dao.user.manager.UserManager;
 import com.chalk.salt.service.email.EmailService;
 
-
 /**
  * The Class UserFacadeImpl.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
  */
 public class UserFacadeImpl implements UserFacade {
 
@@ -58,42 +55,17 @@ public class UserFacadeImpl implements UserFacade {
     @TemplateConfig
     private DatabaseTemplateConfiguration databaseTemplateConfiguration;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.techblue.propco.enterprise.common.facade.interfaces.UserFacade#getAllUserPermissions(java.lang.Long)
-     */
-    @Override
-    public List<String> fetchAllUserPermissions(final Long userId) {
-        final List<String> permissions = new ArrayList<String>();
-        permissions.add("agent:domain:view");
-        return permissions;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.core.user.UserFacade#isUserExits(java.lang.String)
-     */
-    @Override
-    public boolean isUserExist(final String userName) throws UserException {
-        return userManager.isUserExist(userName);
-    }
-
+    
     /**
      * Gets the email notification.
      *
-     * @param domainDto the domain dto
      * @param user the user
-     * @param senderEmail the sender email
      * @return the email notification
      * @throws UserException the user exception
      */
-
     private EmailNotificationDto getEmailNotification(final UserDto user) throws UserException {
         final EmailNotificationDto emailNotification = new EmailNotificationDto();
         emailNotification.setTo(user.getEmail());
-       // emailNotification.setFrom(senderEmail);
         emailNotification.setSubject("New User created over Chalk N Dust");
 
         final Map<String, Object> userDataModel = beanMapper.map(user, Map.class);
@@ -112,42 +84,17 @@ public class UserFacadeImpl implements UserFacade {
         emailNotification.setBody(processedNotificationTemplate);
         return emailNotification;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.core.user.UserFacade#fetchUsers(java.lang.String)
-     */
-    @Override
-    public List<UserDto> fetchUsers() throws UserException {
-        return userManager.fetchUsers();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.core.user.UserFacade#disableUser(java.lang.String, java.lang.String)
-     */
-    @Override
-    public void disableUser(final String securUuid, final String disableDate) throws UserException {
-        userManager.disableUser(securUuid, disableDate);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.core.user.UserFacade#getUserInfo(java.lang.String, java.lang.String)
+    
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#getUserInfo(java.lang.String)
      */
     @Override
     public UserDto getUserInfo(final String securUuid) throws UserException {
         return userManager.getUserInfo(securUuid);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.propco.core.user.UserFacade#saveUserInfo(uk.co.propco.common.dto.UserDto, java.lang.String, java.lang.String,
-     * java.lang.String)
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#saveUserInfo(com.chalk.salt.common.dto.UserDto)
      */
     @Override
     public String saveUserInfo(final UserDto userDetails) throws UserException {
@@ -156,5 +103,13 @@ public class UserFacadeImpl implements UserFacade {
         emailService.sendMail(emailNotification);
         return securUuid;
     }
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#updateProfile(com.chalk.salt.common.dto.UserDto)
+	 */
+	@Override
+	public Boolean updateProfile(UserDto userDetails) throws UserException {
+		return userManager.updateProfile(userDetails);
+	}
 
 }

@@ -4,10 +4,10 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
     var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service']);
     
-    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService',
-            function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService) {
+    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
+            function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService) {
 
-    		   $scope.editFlag = true;
+    		  
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
@@ -22,7 +22,12 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                };
                $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
-               
+               if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="false"){
+               $scope.editFlag=false;
+               }
+               else  if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="true"){
+               $scope.editFlag=true;
+               }
                $scope.backToDashBoard=function(){
             	   $state.go('chalkanddust.profile');  
                };
@@ -50,8 +55,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                             response) {
                         if (response) {
                             console.log(response);
-                            $scope.editFlag=false;
-                            $state.go('chalkanddust.student');
+                            $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);                            
+                            $state.reload();
                         }
                         
                     }, function(error) {
@@ -60,8 +65,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                 };
                 
                 $scope.editProfile = function(){
-                	$scope.editFlag=true;
-                	$state.go('chalkanddust.student');
+                	$window.localStorage.setItem(CHALKNDUST.EDITFLAG,true);                	
+                	 $state.reload();
                 };
             }
     ]);

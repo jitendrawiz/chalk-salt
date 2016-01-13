@@ -4,6 +4,8 @@
 */
 package com.chalk.salt.api.model;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
@@ -62,31 +64,92 @@ public class UserModel extends ApiModel {
     
     /** The pincode. */
     private String pincode;
-
     
     /** The student class. */
     private String studentClass;
     
-    /** The student class name. */
-    private String studentClassName;
-    
+    /** The subjects. */
+	private List<SubjectModel> subjects;
+	
+	/** The academic info. */
+	private AcademicInfoModel academicInfo;
+	
+	/** The parents info. */
+	private ParentsInfoModel parentsInfo;
+	
+	/** The correspondence address. */
+	private String correspondenceAddress;
     
 	/**
-	 * Gets the student class name.
+	 * Gets the correspondence address.
 	 *
-	 * @return the student class name
+	 * @return the correspondence address
 	 */
-	public String getStudentClassName() {
-		return studentClassName;
+	public String getCorrespondenceAddress() {
+		return correspondenceAddress;
 	}
 
 	/**
-	 * Sets the student class name.
+	 * Sets the correspondence address.
 	 *
-	 * @param studentClassName the new student class name
+	 * @param correspondenceAddress the new correspondence address
 	 */
-	public void setStudentClassName(String studentClassName) {
-		this.studentClassName = studentClassName;
+	public void setCorrespondenceAddress(String correspondenceAddress) {
+		this.correspondenceAddress = correspondenceAddress;
+	}
+
+	/**
+	 * Gets the subjects.
+	 *
+	 * @return the subjects
+	 */
+	public List<SubjectModel> getSubjects() {
+		return subjects;
+	}
+
+	/**
+	 * Sets the subjects.
+	 *
+	 * @param subjects the new subjects
+	 */
+	public void setSubjects(List<SubjectModel> subjects) {
+		this.subjects = subjects;
+	}
+
+	/**
+	 * Gets the academic info.
+	 *
+	 * @return the academic info
+	 */
+	public AcademicInfoModel getAcademicInfo() {
+		return academicInfo;
+	}
+
+	/**
+	 * Sets the academic info.
+	 *
+	 * @param academicInfo the new academic info
+	 */
+	public void setAcademicInfo(AcademicInfoModel academicInfo) {
+		this.academicInfo = academicInfo;
+	}
+
+	/**
+	 * Gets the parents info.
+	 *
+	 * @return the parents info
+	 */
+	public ParentsInfoModel getParentsInfo() {
+		return parentsInfo;
+	}
+
+	/**
+	 * Sets the parents info.
+	 *
+	 * @param parentsInfo the new parents info
+	 */
+	public void setParentsInfo(ParentsInfoModel parentsInfo) {
+		this.parentsInfo = parentsInfo;
 	}
 
 	/**

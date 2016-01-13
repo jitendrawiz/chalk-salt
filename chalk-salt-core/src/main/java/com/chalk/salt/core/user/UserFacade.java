@@ -9,70 +9,37 @@ import java.util.List;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
+
 /**
- * The Class UserFacade.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
+ * The Interface UserFacade.
  */
 public interface UserFacade {
 
 	/**
-	 * Gets the all user permissions.
-	 *
-	 * @param userId
-	 *            the user id
-	 * @return the all user permissions
-	 */
-	List<String> fetchAllUserPermissions(final Long userId);
-
-	/**
-	 * Checks if is user exits.
-	 *
-	 * @param username
-	 *            the username
-	 * @return true, if is user exits
-	 * @throws UserException
-	 *             the core exception
-	 */
-	boolean isUserExist(final String username) throws UserException;
-
-	/**
-	 * Fetch users.
-	 *
-	 * @param officeJndi
-	 *            the office jndi
-	 * @param systemJndi
-	 *            the system jndi
-	 * @return the list
-	 * @throws UserException
-	 *             the user exception
-	 */
-	List<UserDto> fetchUsers() throws UserException;
-
-	/**
-	 * Disable user.
-	 *
-	 * @param securUuid
-	 *            the secur uuid
-	 * @param disableDate
-	 *            the disable date
-	 * @throws UserException
-	 *             the user exception
-	 */
-	void disableUser(final String securUuid, final String disableDate)
-			throws UserException;
-
-	/**
 	 * Gets the user info.
 	 *
-	 * @param securUuid
-	 *            the secur uuid
+	 * @param securUuid the secur uuid
 	 * @return the user info
-	 * @throws UserException
-	 *             the user exception
+	 * @throws UserException the user exception
 	 */
 	UserDto getUserInfo(final String securUuid) throws UserException;
 
+	/**
+	 * Save user info.
+	 *
+	 * @param userDetails the user details
+	 * @return the string
+	 * @throws UserException the user exception
+	 */
 	String saveUserInfo(final UserDto userDetails) throws UserException;
+	
+	/**
+	 * Update profile.
+	 *
+	 * @param userDetails the user details
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean updateProfile(UserDto userDetails)throws UserException;
 
 }

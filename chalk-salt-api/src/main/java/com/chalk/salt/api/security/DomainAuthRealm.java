@@ -108,7 +108,7 @@ public class DomainAuthRealm extends AuthorizingRealm {
         try {
             logger.info("Domain user '{}' authenticated successfully against user Id '{}'. Fetching Authorization info", consumerPrincipal.getUserName(),
                 userId);
-            permissions = userFacade.fetchAllUserPermissions(userId);
+            //permissions = userFacade.fetchAllUserPermissions(userId);
         } catch (final Exception exception) {
             final AuthenticationException authException = new AuthenticationException(
                 "An error occurred while getting authorization info (permissions) against user Id:'" + userId + "'", exception);

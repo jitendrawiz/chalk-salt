@@ -65,24 +65,7 @@ public class UserService {
         return errors;
     }
 
-    /**
-     * Generate user detail list.
-     *
-     * @param users the users
-     * @return the list
-     */
-    public List<Map<String, String>> generateUserDetailList(final List<UserDto> users) {
-        final List<Map<String, String>> userList = new ArrayList<Map<String, String>>();
-        for (final UserDto user : users) {
-            final Map<String, String> userMap = new HashMap<String, String>();
-            userMap.put("securUuid", user.getSecurUuid());
-            userMap.put("forename", user.getFirstName());
-            userMap.put("middle", user.getMiddleName());
-            userMap.put("surname", user.getLastName());
-            userList.add(userMap);
-        }
-        return userList;
-    }
+    
     
     public boolean logout() {
 		try {

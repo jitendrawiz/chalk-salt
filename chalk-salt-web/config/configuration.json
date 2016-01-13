@@ -6,7 +6,8 @@
       "BUILD":"0.0",
       "RELEASE_DATE": "November 2015",
 	"SECURUUID":"securUuid",
-	"USERFULLNAME":"userFullName"
+	"USERFULLNAME":"userFullName",
+	"EDITFLAG":"Flag"
     }
    
 }
