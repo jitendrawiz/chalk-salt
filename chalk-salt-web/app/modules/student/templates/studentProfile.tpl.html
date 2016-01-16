@@ -185,9 +185,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.mobile.$invalid && !generalDetailsForm.mobile.$pristine }">
-							              	<input class="form-control" id="mobile" name="mobile" ng-model="userInfo.mobile"  type="text" placeholder="Mobile No." required/>
+							              	<input class="form-control" id="mobile" name="mobile" ng-model="userInfo.mobile" phone-number maxlength="10" type="text" placeholder="Mobile No." required/>
 							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.mobile.$invalid  && !generalDetailsForm.mobile.$pristine">
-							              		<span ng-show="generalDetailsForm.mobile.$error.required">Mobile No. is required.</span>           
+							              		<span ng-show="generalDetailsForm.mobile.$error.required">Mobile No. is required.</span>   
+							              		<span ng-show="generalDetailsForm.mobile.$error.phonenumber">Please enter valid mobile number.</span>
 							              	</span>
 							             </div>
 									</div>
@@ -203,9 +204,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.email.$invalid && !generalDetailsForm.email.$pristine }">
-							              	<input class="form-control" id="email" name="email" ng-model="userInfo.email"  type="text" placeholder="your@email.com" required/>
+							              	<input class="form-control" id="email" name="email" ng-model="userInfo.email"  type="email" placeholder="your@email.com" required/>
 							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.email.$invalid  && !generalDetailsForm.email.$pristine">
-							              		<span ng-show="generalDetailsForm.email.$error.required">Email Address is required.</span>           
+							              		<span ng-show="generalDetailsForm.email.$error.required">Email Address is required.</span>   
+							              		<span ng-show="generalDetailsForm.email.$error.email">Invalid email address.</span>
 							              	</span>
 							             </div>
 									</div>
@@ -259,9 +261,11 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.landline.$invalid && !generalDetailsForm.landline.$pristine }">
-							              	<input class="form-control" id="landline" name="landline" ng-model="userInfo.landline"  type="text" placeholder="Landline No." required/>
+							              	<input class="form-control" id="landline" name="landline" ng-model="userInfo.landline" phone-number maxlength="11"  type="text" placeholder="Landline No." required/>
 							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.landline.$invalid  && !generalDetailsForm.landline.$pristine">
 							              		<span ng-show="generalDetailsForm.landline.$error.required">Landline No. is required.</span>           
+							              		<span ng-show="generalDetailsForm.landline.$error.phonenumber">Please enter valid landline number.</span>
+							              	
 							              	</span>
 							             </div>
 									</div>
@@ -309,7 +313,7 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.studentClassName.$invalid && !academicDetailsForm.studentClassName.$pristine }">
-							              	<input class="form-control" id="studentClassName" name="studentClassName" ng-model="academicInfo.studentClassName"  type="text" placeholder="Class" required/>
+							              	<input class="form-control" id="studentClassName" name="studentClassName" ng-model="academicInfo.studentClassName"  type="text" placeholder="Class"  readonly/>
 							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.studentClassName.$invalid  && !academicDetailsForm.studentClassName.$pristine">
 							              		<span ng-show="academicDetailsForm.studentClassName.$error.required">Class is required.</span>           
 							              	</span>
@@ -325,7 +329,7 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.percentage.$invalid && !academicDetailsForm.percentage.$pristine }">
-							              	<input class="form-control" id="percentage" name="percentage" ng-model="academicInfo.percentage"  type="text" placeholder="Percentage" required/>
+							              	<input class="form-control" id="percentage" name="percentage" ng-model="academicInfo.percentage" maxlength="5"  type="text" placeholder="Percentage" required/>
 							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.percentage.$invalid  && !academicDetailsForm.percentage.$pristine">
 							              		<span ng-show="academicDetailsForm.percentage.$error.required">Last Class Percentage is required.</span>           
 							              	</span>
@@ -340,14 +344,11 @@
                         		<!-- Subjects input -->
                         		<div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="subjects" ng-model="academicInfo.subjects"><p ng-bind="academicInfo.subjects"></p><span class="empty" ng-show="!academicInfo.subjects">N/A</span></label>
+										<label for="subjects" ng-model="studentSubjects"><p ng-bind="studentSubjects"></p><span class="empty" ng-show="!studentSubjects">N/A</span></label>
 									</div>
 									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.subjects.$invalid && !academicDetailsForm.subjects.$pristine }">
-							              	<input class="form-control" id="subjects" name="subjects" ng-model="academicInfo.subjects"  type="text" placeholder="Subjects" required/>
-							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.subjects.$invalid  && !academicDetailsForm.subjects.$pristine">
-							              		<span ng-show="academicDetailsForm.subjects.$error.required">Subjects are required.</span>           
-							              	</span>
+										<div class="form-group">
+							              	<input class="form-control" id="subjects" name="subjects" ng-model="studentSubjects"  type="text" placeholder="Subjects" readonly/>
 							             </div>
 									</div>
 								</div>
@@ -440,9 +441,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherEmail.$invalid && !parentDetailsForm.fatherEmail.$pristine }">
-							              	<input class="form-control" id="fatherEmail" name="fatherEmail" ng-model="parentsInfo.fatherEmail"  type="text" placeholder="Father Email" required/>
+							              	<input class="form-control" id="fatherEmail" name="fatherEmail" ng-model="parentsInfo.fatherEmail"  type="email" placeholder="Father Email" required/>
 							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherEmail.$invalid  && !parentDetailsForm.fatherEmail.$pristine">
 							              		<span ng-show="parentDetailsForm.fatherEmail.$error.required">Father Email is required.</span>           
+							              		<span ng-show="parentDetailsForm.fatherEmail.$error.email">Invalid email address.</span>
 							              	</span>
 							             </div>
 									</div>
@@ -457,9 +459,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherMobile.$invalid && !parentDetailsForm.fatherMobile.$pristine }">
-							              	<input class="form-control" id="fatherMobile" name="fatherMobile" ng-model="parentsInfo.fatherMobile"  type="text" placeholder="Father Mobile No." required/>
+							              	<input class="form-control" id="fatherMobile" name="fatherMobile" phone-number maxlength="10" ng-model="parentsInfo.fatherMobile"  type="text" placeholder="Father Mobile No." required/>
 							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherMobile.$invalid  && !parentDetailsForm.fatherMobile.$pristine">
 							              		<span ng-show="parentDetailsForm.fatherMobile.$error.required">Father Mobile is required.</span>           
+							              	    <span ng-show="parentDetailsForm.fatherMobile.$error.phonenumber">Please enter valid mobile number.</span>
 							              	</span>
 							             </div>
 									</div>
@@ -526,9 +529,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherEmail.$invalid && !parentDetailsForm.motherEmail.$pristine }">
-							              	<input class="form-control" id="motherEmail" name="motherEmail" ng-model="parentsInfo.motherEmail"  type="text" placeholder="Mother Email" required/>
+							              	<input class="form-control" id="motherEmail" name="motherEmail" ng-model="parentsInfo.motherEmail"  type="email" placeholder="Mother Email" required/>
 							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherEmail.$invalid  && !parentDetailsForm.motherEmail.$pristine">
 							              		<span ng-show="parentDetailsForm.motherEmail.$error.required">Mother Email is required.</span>           
+							              		<span ng-show="parentDetailsForm.motherEmail.$error.email">Invalid email address.</span>
 							              	</span>
 							             </div>
 									</div>
@@ -544,9 +548,10 @@
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherMobile.$invalid && !parentDetailsForm.motherMobile.$pristine }">
-							              	<input class="form-control" id="motherMobile" name="motherMobile" ng-model="parentsInfo.motherMobile"  type="text" placeholder="Mother Mobile" required/>
+							              	<input class="form-control" id="motherMobile" phone-number maxlength="10" name="motherMobile" ng-model="parentsInfo.motherMobile"  type="text" placeholder="Mother Mobile" required/>
 							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherMobile.$invalid  && !parentDetailsForm.motherMobile.$pristine">
 							              		<span ng-show="parentDetailsForm.motherMobile.$error.required">Mother Mobile is required.</span>           
+							              	    <span ng-show="parentDetailsForm.motherMobile.$error.phonenumber">Please enter valid mobile number.</span>
 							              	</span>
 							             </div>
 									</div>

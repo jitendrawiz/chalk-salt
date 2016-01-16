@@ -39,10 +39,19 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                     if(response){
                     	 $scope.userInfo = response;
                     	 $scope.subjects =$scope.userInfo.subjects;
-                    	 
+
                     	 $scope.academicInfo =$scope.userInfo.academicInfo;
                     	 
                     	 $scope.parentsInfo =$scope.userInfo.parentsInfo;
+                    	 $scope.studentSubjects=""; 
+                    	 for(var i=0;i<$scope.subjects.length;i++){
+                    		 if($scope.studentSubjects==""){
+                    			 $scope.studentSubjects=$scope.subjects[i].subjectName;
+                    		 }else{
+                    			 $scope.studentSubjects=$scope.studentSubjects+", "+$scope.subjects[i].subjectName;
+                    		 }
+                    		 
+                    	 }
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);

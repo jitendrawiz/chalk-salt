@@ -135,7 +135,7 @@ public class UserDaoImpl implements UserDao {
         UserDto user = null;
 
         final String sqlQuery = "SELECT first_name as firstName, middle_name as middleName, last_name as lastName, address, city, state, "
-    		+ "country, pincode, email, username, mobile, landline, secur_uuid as securUuid "
+    		+ "country, pincode, email, username, mobile, landline, secur_uuid as securUuid ,corsAddress as correspondenceAddress "
     		+ "FROM cst_users "
     		+ "JOIN cst_logins ON cst_logins.user_id = cst_users.user_id "
     		+ "JOIN cst_contacts ON cst_contacts.id = cst_users.contact_id "
