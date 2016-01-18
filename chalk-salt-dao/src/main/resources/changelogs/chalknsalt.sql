@@ -285,6 +285,36 @@ CREATE TABLE IF NOT EXISTS `cst_usertypes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+
+DROP TABLE IF EXISTS `cst_discussion_topic_comments`;
+
+CREATE TABLE `cst_discussion_topic_comments` (
+  `discussion_comments_id` int(11) NOT NULL AUTO_INCREMENT,
+  `discussion_topics_id` int(11) DEFAULT NULL,
+  `general_comments` varchar(500) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `delete_status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`discussion_comments_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_discussion_topic_comments` */
+
+/*Table structure for table `cst_discussion_topics` */
+
+DROP TABLE IF EXISTS `cst_discussion_topics`;
+
+CREATE TABLE `cst_discussion_topics` (
+  `discussion_topic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `topic_title` varchar(500) DEFAULT NULL,
+  `topic_description` varchar(1000) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`discussion_topic_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
