@@ -23,5 +23,14 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]); 
+        } ]);
+    
+    studentService.factory('ChangePasswordService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/users/changepassword',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]);
 });

@@ -4,8 +4,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
     var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service']);
     
-    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
-            function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService) {
+    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService'
+            function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService) {
 
     		  
     		   var showAlert = function(type, message){
@@ -76,6 +76,20 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                 $scope.editProfile = function(){
                 	$window.localStorage.setItem(CHALKNDUST.EDITFLAG,true);                	
                 	 $state.reload();
+                };
+                
+                this.changePassword = function() {
+                	ChangePasswordService.save({}, $scope.userInfo, function(
+                            response) {
+                        if (response) {
+                            console.log(response);
+                            $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);                            
+                            $state.reload();
+                        }
+                        
+                    }, function(error) {
+                        showAlert('danger', error.data.message);
+                    });
                 };
             }
     ]);

@@ -603,37 +603,53 @@
 						</div>
 					</div>
 					<div class="row">
-	-					<!-- Form -->
+						<!-- Form -->
 						<form name="accountDetailsForm" role="form" action="" method="post" novalidate>
 							<div class="cell w-49">
 							
 								<!-- user name -->
 								<div class="cell w-100">
-									<label for="userName" ng-model="userInfo.userName"><p ng-bind="userInfo.userName"></p></label>
+									Username : {{userInfo.userName}}									
 								</div>
 								<div class="clrfx mt-10"></div>
 								
                                 <!-- user Password -->
 								<div class="cell w-100">
-									<input name="currentPassword" placeholder="Current Password" type="password" id="currentPassword" required />
+									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.password.$invalid && !accountDetailsForm.password.$pristine }">
+						              	<input class="form-control" id="password" name="password" ng-model="accountDetailsForm.password"  type="password" placeholder="Current Password" required/>
+						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.password.$invalid  && !accountDetailsForm.password.$pristine">
+						              		<span ng-show="accountDetailsForm.password.$error.required">Current Password is required.</span>           
+						              	</span>
+						             </div>
 								</div>
 								<div class="clrfx mt-10"></div>
 								
                                 <!-- New Password -->
 								<div class="cell w-100">
-									<input name="newPassword" placeholder="New Password" type="password" id="newPassword" ng-model="userInfo.password" required />
+									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.newPassword.$invalid && !accountDetailsForm.newPassword.$pristine }">
+						              	<input class="form-control" id="newPassword" name="newPassword" ng-model="accountDetailsForm.newPassword"  type="password" placeholder="New Password" required/>
+						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.newPassword.$invalid  && !accountDetailsForm.newPassword.$pristine">
+						              		<span ng-show="accountDetailsForm.newPassword.$error.required">New Password is required.</span>           
+						              	</span>
+						             </div>
 								</div>								
 								<div class="clrfx mt-10"></div>
                                 
                                 <!-- Confirm Password -->
                                 <div class="cell w-100">
 									<input name="confirmPassword" placeholder="Confirm Password" type="password" id="confirmPassword" ng-model="userInfo.confirmPassword" required />
+									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.confirmPassword.$invalid && !accountDetailsForm.confirmPassword.$pristine }">
+						              	<input class="form-control" id="confirmPassword" name="confirmPassword" ng-model="accountDetailsForm.confirmPassword"  type="password" placeholder="Confirm Password" required/>
+						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.confirmPassword.$invalid  && !accountDetailsForm.confirmPassword.$pristine">
+						              		<span ng-show="accountDetailsForm.confirmPassword.$error.required">Confirm Password is required.</span>           
+						              	</span>
+						             </div>
 								</div>
 								<div class="clrfx mt-10"></div>                                
 								
 								<!-- Send button -->
 								<div class="cell w-32">
-									<input type="submit" value="Change Password" class="button black" form="tab-form" />
+									<input type="submit" value="Change Password" class="button black" form="parentDetailsForm" ng-disabled="parentDetailsForm.$invalid" ng-click="stdCtrl.changePassword()"/>
 								</div>
 								<div class="cell w-32">
 									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>

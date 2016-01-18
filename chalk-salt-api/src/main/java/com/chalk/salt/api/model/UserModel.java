@@ -25,6 +25,8 @@ public class UserModel extends ApiModel {
 
     /** The confirmPassword. */
     private String confirmPassword;
+    
+    private String newPassword;
 
     /** The forename. */
     private String firstName;
@@ -96,6 +98,15 @@ public class UserModel extends ApiModel {
 	 */
 	public void setCorrespondenceAddress(String correspondenceAddress) {
 		this.correspondenceAddress = correspondenceAddress;
+	}
+
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 
 	/**

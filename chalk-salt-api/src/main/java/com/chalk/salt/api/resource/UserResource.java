@@ -79,6 +79,32 @@ public class UserResource extends AbstractResource {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }
     }
+    
+    /**
+     * Update profile.
+     *
+     * @param userModel the user model
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @POST
+    @Path("/users/chnagepassword")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response chnagePassword(final @Valid UserModel userModel) throws UserException {
+    	final Map<String, String> response = new HashMap<String, String>();
+        Boolean updateStatus = false;
+        try {
+            final UserDto userDetails = beanMapper.map(userModel, UserDto.class); 
+            updateStatus = userFacade.changePassword(userDetails);            
+            response.put("updateStatus", updateStatus.toString());
+            return Response.ok(response).build();
+
+        } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
+    }
         
     /**
      * Gets the user info.
