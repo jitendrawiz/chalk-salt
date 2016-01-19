@@ -11,7 +11,8 @@
 	"RELEASE_DATE": "November 2015",
 	"SECURUUID": "securUuid",
 	"USERFULLNAME": "userFullName",
-	"EDITFLAG": "Flag"
+	"EDITFLAG": "Flag",
+	"USERNAME": "Username"
 })
 
 .constant("ENV", {

@@ -31,7 +31,13 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                             $window.localStorage.setItem(CHALKNDUST.SECURUUID,response.securUuid);
                             $window.localStorage.setItem(CHALKNDUST.USERFULLNAME,response.fullName);
                             $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);
+                            $window.localStorage.setItem(CHALKNDUST.USERNAME,response.userName);
+                            if($window.localStorage.getItem(CHALKNDUST.USERNAME)=="admin"){
+                            $state.go('chalkanddust.adminhome');
+                            }
+                            else{
                             $state.go('chalkanddust.profile');
+                            }	
                             console.log(response);
                            
                         }
@@ -79,6 +85,7 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
             	$window.localStorage.removeItem(CHALKNDUST.SECURUUID);
                 $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
                 $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
+                $window.localStorage.removeItem(CHALKNDUST.USERNAME);
                 $state.go('chalkanddust.home');
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');

@@ -102,6 +102,7 @@ public class AuthResource extends AbstractResource {
         
             response.put("securUuid", domainUserPrincipal.getSecurUuid());
             response.put("fullName", domainUserPrincipal.getFullName());
+            response.put("userName", domainUserPrincipal.getUserName());
             
         } 
         catch(final Exception exception){
