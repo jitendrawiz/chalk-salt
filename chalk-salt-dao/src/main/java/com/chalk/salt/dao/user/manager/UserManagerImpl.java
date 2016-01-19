@@ -137,39 +137,57 @@ public class UserManagerImpl implements UserManager {
     }
 
 
-/* (non-Javadoc)
- * @see com.chalk.salt.dao.user.manager.UserManager#updateProfile(com.chalk.salt.common.dto.UserDto)
- */
-@Override
-public Boolean updateProfile(UserDto userDetails) throws UserException {
-	logger.info("Updating user details of username : {}", userDetails.getUserName());
-    String securUuid = null;
-    UserDto user=null;
-    Boolean userStatus=false;
-    Boolean contactStatus=false;
-    AcademicInfoDto academicInfo=null;
-    ParentsInfoDto parentsInfo=null;
-    try {
-    	 if (userDetails!=null) {
-    		 academicInfo= userDetails.getAcademicInfo();
-    		 parentsInfo= userDetails.getParentsInfo();
-    		 userStatus=userDao.updateUserDetails(userDetails); 
-    	     user= userDao.getUserKeyDetails(userDetails.getSecurUuid());
-    	     userDetails.setContactId(user.getContactId());
-    		 contactStatus=userDao.updateContactDetails(userDetails);    		
-    		 if(academicInfo!=null && userStatus && contactStatus){
-    			 academicInfo.setAcademicInfoId(user.getAcademicId());
-    			 userDao.updateAcademicDetails(academicInfo);
-    		 }
-    		 if(parentsInfo!=null && userStatus && contactStatus){
-    			 parentsInfo.setParentId(user.getParentsId());
-    			 userDao.updateParentsDetails(parentsInfo);
-    		 }
-    	 }
-    } catch (final Exception exception) {
-        throw new UserException(ErrorCode.FAIL_TO_UPDATE_USER_INFO, "Fail to update user info", exception);
-    }
-    return (userStatus && contactStatus)?true:false;
-}
-
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#updateProfile(com.chalk.salt.common.dto.UserDto)
+	 */
+	@Override
+	public Boolean updateProfile(final UserDto userDetails) throws UserException {
+		logger.info("Updating user details of username : {}", userDetails.getUserName());    
+	    UserDto user=null;
+	    Boolean userStatus=false;
+	    Boolean contactStatus=false;
+	    AcademicInfoDto academicInfo=null;
+	    ParentsInfoDto parentsInfo=null;
+	    try {
+	    	 if (userDetails!=null) {
+	    		 academicInfo= userDetails.getAcademicInfo();
+	    		 parentsInfo= userDetails.getParentsInfo();
+	    		 userStatus=userDao.updateUserDetails(userDetails); 
+	    	     user= userDao.getUserKeyDetails(userDetails.getSecurUuid());
+	    	     userDetails.setContactId(user.getContactId());
+	    		 contactStatus=userDao.updateContactDetails(userDetails);    		
+	    		 if(academicInfo!=null && userStatus && contactStatus){
+	    			 academicInfo.setAcademicInfoId(user.getAcademicId());
+	    			 userDao.updateAcademicDetails(academicInfo);
+	    		 }
+	    		 if(parentsInfo!=null && userStatus && contactStatus){
+	    			 parentsInfo.setParentId(user.getParentsId());
+	    			 userDao.updateParentsDetails(parentsInfo);
+	    		 }
+	    	 }
+	    } catch (final Exception exception) {
+	        throw new UserException(ErrorCode.FAIL_TO_UPDATE_USER_INFO, "Fail to update user info", exception);
+	    }
+	    return (userStatus && contactStatus)?true:false;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#changePassword(com.chalk.salt.common.dto.UserDto)
+	 */
+	@Override
+	public Boolean changePassword(final UserDto userDetails) throws UserException {
+		Boolean updateStatus = false; 
+		if(userDetails!=null){
+			try {
+				final String userName = userDetails.getUserName();
+				final String password = userDetails.getPassword();
+				final String newPassword = userDetails.getNewPassword();
+			
+				updateStatus = userDao.changePassword(userName, password, newPassword);
+			} catch (Exception exception) {
+				throw new UserException(ErrorCode.FAIL_TO_UPDATE_USER_INFO, "Fail to change user password", exception);
+			}		
+		}
+		return updateStatus;
+	}
 }

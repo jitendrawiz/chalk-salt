@@ -6,8 +6,6 @@ package com.chalk.salt.common.dto;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
-
 /**
  * The Class UserDto.
  */
@@ -23,10 +21,13 @@ public class UserDto {
 	private String userName;
 
 	/** The password. */
-	private String password;
+    private String password;
 
-	/** The confirmPassword. */
-	private String confirmPassword;
+    /** The confirmPassword. */
+    private String confirmPassword;
+    
+    /** The new password. */
+    private String newPassword;
 
 	/** The forename. */
 	private String firstName;
@@ -598,5 +599,24 @@ public class UserDto {
 	public void setSubjects(List<SubjectDto> subjects) {
 		this.subjects = subjects;
 	}
+
+	/**
+	 * Gets the new password.
+	 *
+	 * @return the newPassword
+	 */
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	/**
+	 * Sets the new password.
+	 *
+	 * @param newPassword the newPassword to set
+	 */
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
 	
 }

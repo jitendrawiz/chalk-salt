@@ -31,8 +31,8 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
+import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.user.UserFacade;
-
 
 /**
  * The Class UserResource.
@@ -80,30 +80,42 @@ public class UserResource extends AbstractResource {
         }
     }
     
+    
     /**
-     * Update profile.
+     * Change password.
      *
      * @param userModel the user model
      * @return the response
      * @throws UserException the user exception
      */
     @POST
-    @Path("/users/chnagepassword")
+    @Path("/users/changepassword")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
-    public Response chnagePassword(final @Valid UserModel userModel) throws UserException {
+    public Response changePassword(final @Valid UserModel userModel) throws UserException {
     	final Map<String, String> response = new HashMap<String, String>();
         Boolean updateStatus = false;
         try {
             final UserDto userDetails = beanMapper.map(userModel, UserDto.class); 
+            
+            if(userDetails.getNewPassword() != userDetails.getConfirmPassword()){
+            	throw Utility.buildResourceException(ErrorCode.INCORRECT_CREDENTIALS, "New Password and Confirm Password not matched", Status.INTERNAL_SERVER_ERROR, UserException.class, new UserException());
+            }
+            
+            String encryptedPassword = Utility.getEncodedBCryptHash(userDetails.getNewPassword());
+            userDetails.setNewPassword(encryptedPassword);
+            
+            encryptedPassword = Utility.getEncodedBCryptHash(userDetails.getPassword());
+            userDetails.setPassword(encryptedPassword);
+            
             updateStatus = userFacade.changePassword(userDetails);            
             response.put("updateStatus", updateStatus.toString());
             return Response.ok(response).build();
 
         } catch (final UserException userException) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
-        }
+        }    	
     }
         
     /**
@@ -143,7 +155,7 @@ public class UserResource extends AbstractResource {
     @Path("/users")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-  
+    
     public Response saveUserInfo(final @Valid UserModel user) throws UserException {
 
         final Map<String, String> response = new HashMap<String, String>();

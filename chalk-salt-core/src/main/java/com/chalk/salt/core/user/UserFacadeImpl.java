@@ -4,8 +4,6 @@
  */
 package com.chalk.salt.core.user;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -108,8 +106,16 @@ public class UserFacadeImpl implements UserFacade {
 	 * @see com.chalk.salt.core.user.UserFacade#updateProfile(com.chalk.salt.common.dto.UserDto)
 	 */
 	@Override
-	public Boolean updateProfile(UserDto userDetails) throws UserException {
+	public Boolean updateProfile(final UserDto userDetails) throws UserException {
 		return userManager.updateProfile(userDetails);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#changePassword(com.chalk.salt.common.dto.UserDto)
+	 */
+	@Override
+	public Boolean changePassword(final UserDto userDetails) throws UserException {
+		return userManager.changePassword(userDetails);
 	}
 
 }

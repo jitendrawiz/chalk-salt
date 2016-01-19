@@ -61,7 +61,7 @@ public interface UserDao {
 	 * @return the long
 	 * @throws Exception the exception
 	 */
-	Long saveContactDetails(UserDto userDetail) throws Exception;
+	Long saveContactDetails(final UserDto userDetail) throws Exception;
 	
 	/**
 	 * Gets the user subjects.
@@ -70,7 +70,7 @@ public interface UserDao {
 	 * @return the user subjects
 	 * @throws Exception the exception
 	 */
-	List<SubjectDto> getUserSubjects(String securUuid) throws Exception;
+	List<SubjectDto> getUserSubjects(final String securUuid) throws Exception;
 
 	/**
 	 * Gets the academic info.
@@ -79,7 +79,7 @@ public interface UserDao {
 	 * @return the academic info
 	 * @throws Exception the exception
 	 */
-	AcademicInfoDto getAcademicInfo(String securUuid) throws Exception;
+	AcademicInfoDto getAcademicInfo(final String securUuid) throws Exception;
 
 	/**
 	 * Gets the parents info.
@@ -88,7 +88,7 @@ public interface UserDao {
 	 * @return the parents info
 	 * @throws Exception the exception
 	 */
-	ParentsInfoDto getParentsInfo(String securUuid) throws Exception;
+	ParentsInfoDto getParentsInfo(final String securUuid) throws Exception;
 
 	/**
 	 * Update academic details.
@@ -96,7 +96,7 @@ public interface UserDao {
 	 * @param academicInfo the academic info
 	 * @throws Exception the exception
 	 */
-	void updateAcademicDetails(AcademicInfoDto academicInfo)throws Exception;
+	void updateAcademicDetails(final AcademicInfoDto academicInfo)throws Exception;
 
 	/**
 	 * Update parents details.
@@ -104,7 +104,7 @@ public interface UserDao {
 	 * @param parentsInfo the parents info
 	 * @throws Exception the exception
 	 */
-	void updateParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
+	void updateParentsDetails(final ParentsInfoDto parentsInfo)throws Exception;
 
 	/**
 	 * Update user details.
@@ -113,7 +113,7 @@ public interface UserDao {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	Boolean updateUserDetails(UserDto userDetails)throws Exception;
+	Boolean updateUserDetails(final UserDto userDetails)throws Exception;
 
 	/**
 	 * Update contact details.
@@ -122,8 +122,26 @@ public interface UserDao {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	Boolean updateContactDetails(UserDto userDetails)throws Exception;
+	Boolean updateContactDetails(final UserDto userDetails)throws Exception;
 
-	UserDto getUserKeyDetails(String securUuid)throws Exception;
+	/**
+	 * Gets the user key details.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the user key details
+	 * @throws Exception the exception
+	 */
+	UserDto getUserKeyDetails(final String securUuid)throws Exception;
+
+	/**
+	 * Change password.
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @param newPassword the new password
+	 * @return the boolean
+	 * @throws Exception the exception
+	 */
+	Boolean changePassword(final String userName, final String password, final String newPassword)throws Exception;
 
 }

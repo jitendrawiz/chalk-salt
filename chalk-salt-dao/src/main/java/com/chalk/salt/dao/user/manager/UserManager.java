@@ -7,7 +7,6 @@ package com.chalk.salt.dao.user.manager;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
-
 /**
  * The Interface UserManager.
  */
@@ -39,4 +38,13 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	Boolean updateProfile(final UserDto userDetails)throws UserException;
+
+	/**
+	 * Change password.
+	 *
+	 * @param userDetails the user details
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean changePassword(final UserDto userDetails)throws UserException;
 }

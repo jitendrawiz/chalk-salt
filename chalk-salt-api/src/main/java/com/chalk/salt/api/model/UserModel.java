@@ -6,11 +6,8 @@ package com.chalk.salt.api.model;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class User.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
+ * The Class UserModel.
  */
 public class UserModel extends ApiModel {
 
@@ -26,6 +23,7 @@ public class UserModel extends ApiModel {
     /** The confirmPassword. */
     private String confirmPassword;
     
+    /** The new password. */
     private String newPassword;
 
     /** The forename. */
@@ -101,10 +99,20 @@ public class UserModel extends ApiModel {
 	}
 
 	
+	/**
+	 * Gets the new password.
+	 *
+	 * @return the new password
+	 */
 	public String getNewPassword() {
 		return newPassword;
 	}
 
+	/**
+	 * Sets the new password.
+	 *
+	 * @param newPassword the new new password
+	 */
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}

@@ -106,7 +106,7 @@ public class UserDaoImpl implements UserDao {
     }
 */
 	@Override
-	public Long saveContactDetails(UserDto userDetail) throws Exception {
+	public Long saveContactDetails(final UserDto userDetail) throws Exception {
 		
 		final String sqlQuery = "INSERT INTO cst_contacts(`address`, `city`, `state`, `country`, `pincode`, `mobile`, `landline`, `email`)"
 				+ " VALUES(:address, :city, :state, :country, :pincode, :mobile, :landline, :email)";
@@ -154,7 +154,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#getUserSubjects(java.lang.String)
 	 */
 	@Override
-	public List<SubjectDto> getUserSubjects(String securUuid) throws Exception {
+	public List<SubjectDto> getUserSubjects(final String securUuid) throws Exception {
 		 final String sqlQuery = "SELECT cst_class_subjects.subject_id,cst_class_subjects.subject_name FROM cst_users "
 		 		+ " JOIN cst_class_type ON cst_class_type.class_id=cst_users.class_id "
 		 		+ " JOIN cst_class_subject_mapping ON cst_class_subject_mapping.class_id=cst_class_type.class_id "
@@ -174,7 +174,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#getAcademicInfo(java.lang.String)
 	 */
 	@Override
-	public AcademicInfoDto getAcademicInfo(String securUuid) throws Exception {
+	public AcademicInfoDto getAcademicInfo(final String securUuid) throws Exception {
 		
 		AcademicInfoDto academicInfo = null;
 
@@ -197,7 +197,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#getParentsInfo(java.lang.String)
 	 */
 	@Override
-	public ParentsInfoDto getParentsInfo(String securUuid) throws Exception {
+	public ParentsInfoDto getParentsInfo(final String securUuid) throws Exception {
 		
 		ParentsInfoDto parentsInfo = null;
 
@@ -221,7 +221,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#updateAcademicDetails(com.chalk.salt.common.dto.AcademicInfoDto)
 	 */
 	@Override
-	public void updateAcademicDetails(AcademicInfoDto academicInfo)
+	public void updateAcademicDetails(final AcademicInfoDto academicInfo)
 			throws Exception {
 		final String sqlQuery = "UPDATE cst_academic_details "
 				+ " SET percentage=:percentage,"
@@ -241,7 +241,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#updateParentsDetails(com.chalk.salt.common.dto.ParentsInfoDto)
 	 */
 	@Override
-	public void updateParentsDetails(ParentsInfoDto parentsInfo)
+	public void updateParentsDetails(final ParentsInfoDto parentsInfo)
 			throws Exception {
 		final String sqlQuery = "Update cst_parents set father_name=:fatherName,"
 				+ " mother_name=:motherName, father_email=:fatherEmail,"
@@ -273,7 +273,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#updateUserDetails(com.chalk.salt.common.dto.UserDto)
 	 */
 	@Override
-	public Boolean updateUserDetails(UserDto userDetail) throws Exception {
+	public Boolean updateUserDetails(final UserDto userDetail) throws Exception {
 		final String sqlQuery = "UPDATE cst_users SET first_name=:firstName,middle_name=:middleName,last_name=:lastName "
 				+ " WHERE secur_uuid=:securUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -292,7 +292,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#updateContactDetails(com.chalk.salt.common.dto.UserDto)
 	 */
 	@Override
-	public Boolean updateContactDetails(UserDto userDetail) throws Exception {
+	public Boolean updateContactDetails(final UserDto userDetail) throws Exception {
 		final String sqlQuery = "UPDATE cst_contacts "
 				+ " SET address=:address,"
 				+ " mobile=:mobile,"
@@ -313,8 +313,11 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getUserKeyDetails(java.lang.String)
+	 */
 	@Override
-	public UserDto getUserKeyDetails(String securUuid) throws Exception {
+	public UserDto getUserKeyDetails(final String securUuid) throws Exception {
         final String sqlQuery = " SELECT contact_id,class_id,parents_id,academic_id "
         		+ " FROM cst_users WHERE secur_uuid=:securUuid";
     	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -327,6 +330,27 @@ public class UserDaoImpl implements UserDao {
             query.addColumnMapping("class_id", "classId");
             return query.executeAndFetchFirst(UserDto.class);
         }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#changePassword(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Boolean changePassword(final String userName, final String password,
+			final String newPassword) throws Exception {
+		
+		final String sqlQuery = "UPDATE cst_logins "
+				+ " SET password=:newPassword"				
+				+ " WHERE username=:userName and password=:password";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("password", password);
+            query.addParameter("newPassword", newPassword);
+            query.addParameter("userName", userName);           
+            query.executeUpdate();
+            return true;
+        }        
 	}
 
 }

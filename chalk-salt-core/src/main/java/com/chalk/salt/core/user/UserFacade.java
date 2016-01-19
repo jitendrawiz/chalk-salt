@@ -4,11 +4,8 @@
  */
 package com.chalk.salt.core.user;
 
-import java.util.List;
-
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
-
 
 /**
  * The Interface UserFacade.
@@ -40,6 +37,15 @@ public interface UserFacade {
 	 * @return the boolean
 	 * @throws UserException the user exception
 	 */
-	Boolean updateProfile(UserDto userDetails)throws UserException;
+	Boolean updateProfile(final UserDto userDetails)throws UserException;
+
+	/**
+	 * Change password.
+	 *
+	 * @param userDetails the user details
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean changePassword(final UserDto userDetails)throws UserException;
 
 }
