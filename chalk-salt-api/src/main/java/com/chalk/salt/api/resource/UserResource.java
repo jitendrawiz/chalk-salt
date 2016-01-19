@@ -99,7 +99,7 @@ public class UserResource extends AbstractResource {
         try {
             final UserDto userDetails = beanMapper.map(userModel, UserDto.class); 
             
-            if(userDetails.getNewPassword() != userDetails.getConfirmPassword()){
+            if(!(userDetails.getNewPassword().equals(userDetails.getConfirmPassword()))){
             	throw Utility.buildResourceException(ErrorCode.INCORRECT_CREDENTIALS, "New Password and Confirm Password not matched", Status.INTERNAL_SERVER_ERROR, UserException.class, new UserException());
             }
             

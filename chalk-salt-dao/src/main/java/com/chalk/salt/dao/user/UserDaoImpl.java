@@ -341,11 +341,11 @@ public class UserDaoImpl implements UserDao {
 		
 		final String sqlQuery = "UPDATE cst_logins "
 				+ " SET password=:newPassword"				
-				+ " WHERE username=:userName and password=:password";
+				+ " WHERE username=:userName";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
-            query.addParameter("password", password);
+         //   query.addParameter("password", password);
             query.addParameter("newPassword", newPassword);
             query.addParameter("userName", userName);           
             query.executeUpdate();

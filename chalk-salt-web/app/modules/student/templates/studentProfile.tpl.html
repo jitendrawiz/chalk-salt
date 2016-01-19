@@ -611,23 +611,30 @@
 								<div class="cell w-100">
 									Username : {{userInfo.userName}}									
 								</div>
-								<div class="clrfx mt-10"></div>
+							<!-- 	<div class="clrfx mt-10"></div>
 								
-                                <!-- user Password -->
+                               
 								<div class="cell w-100">
 									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.password.$invalid && !accountDetailsForm.password.$pristine }">
-						              	<input class="form-control" id="password" name="password" ng-model="accountDetailsForm.password"  type="password" placeholder="Current Password" required/>
+						              	<input class="form-control" id="password" name="password" ng-model="userInfo.password"  type="password" placeholder="Current Password" required/>
 						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.password.$invalid  && !accountDetailsForm.password.$pristine">
 						              		<span ng-show="accountDetailsForm.password.$error.required">Current Password is required.</span>           
 						              	</span>
 						             </div>
 								</div>
+								-->
 								<div class="clrfx mt-10"></div>
-								
+			
+			      
+           
                                 <!-- New Password -->
 								<div class="cell w-100">
 									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.newPassword.$invalid && !accountDetailsForm.newPassword.$pristine }">
-						              	<input class="form-control" id="newPassword" name="newPassword" ng-model="accountDetailsForm.newPassword"  type="password" placeholder="New Password" required/>
+						              	<input class="form-control" id="newPassword" name="newPassword" ng-model="userInfo.newPassword"  type="password" placeholder="New Password"
+						              	 tooltip-enable="!inputModel"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
+             							 tooltip="Please note: Strong password strength requires 2 upper case letters, 2 numbers and 2 lower case letters."
+                							password-strength required/>
+                  <password-strength ng-model="userInfo.newPassword"  ng-show="accountDetailsForm.newPassword.$dirty"></password-strength>
 						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.newPassword.$invalid  && !accountDetailsForm.newPassword.$pristine">
 						              		<span ng-show="accountDetailsForm.newPassword.$error.required">New Password is required.</span>           
 						              	</span>
@@ -637,11 +644,16 @@
                                 
                                 <!-- Confirm Password -->
                                 <div class="cell w-100">
-									<input name="confirmPassword" placeholder="Confirm Password" type="password" id="confirmPassword" ng-model="userInfo.confirmPassword" required />
 									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.confirmPassword.$invalid && !accountDetailsForm.confirmPassword.$pristine }">
-						              	<input class="form-control" id="confirmPassword" name="confirmPassword" ng-model="accountDetailsForm.confirmPassword"  type="password" placeholder="Confirm Password" required/>
+						              	<input class="form-control" id="confirmPassword" name="confirmPassword"
+						              	 ng-model="userInfo.confirmPassword" match="userInfo.newPassword"  type="password" placeholder="Confirm Password" required/>
+						               
 						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.confirmPassword.$invalid  && !accountDetailsForm.confirmPassword.$pristine">
-						              		<span ng-show="accountDetailsForm.confirmPassword.$error.required">Confirm Password is required.</span>           
+						              		<span ng-show="accountDetailsForm.confirmPassword.$error.required">Confirm Password is required.</span> 
+						              		 <div ng-show="accountDetailsForm.confirmPassword.$error.match">
+                                              <span>Passwords do not match!</span>
+                                              </div>
+                        
 						              	</span>
 						             </div>
 								</div>
@@ -649,7 +661,7 @@
 								
 								<!-- Send button -->
 								<div class="cell w-32">
-									<input type="submit" value="Change Password" class="button black" form="parentDetailsForm" ng-disabled="parentDetailsForm.$invalid" ng-click="stdCtrl.changePassword()"/>
+									<input type="submit" value="Change Password" class="button black" form="accountDetailsForm" ng-disabled="accountDetailsForm.$invalid" ng-click="stdCtrl.changePassword()"/>
 								</div>
 								<div class="cell w-32">
 									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
