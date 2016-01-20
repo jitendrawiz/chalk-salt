@@ -22,15 +22,14 @@ DROP TABLE IF EXISTS `cst_academic_details`;
 CREATE TABLE `cst_academic_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_class_id` int(11) NOT NULL,
-  `percentage` decimal(5,2) NOT NULL,
-  `previous_school` varchar(255) NOT NULL,
-  `academic_details_id` int(11) NOT NULL,
+  `percentage` decimal(5,2) DEFAULT NULL,
+  `previous_school` varchar(255) DEFAULT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_academic_details` */
 
-insert  into `cst_academic_details`(`id`,`student_class_id`,`percentage`,`previous_school`,`academic_details_id`) values (1,1,'43.54','new schooll',0);
+insert  into `cst_academic_details`(`id`,`student_class_id`,`percentage`,`previous_school`) values (1,1,'43.54','new schooll');
 
 /*Table structure for table `cst_class_subject_mapping` */
 
@@ -155,16 +154,16 @@ DROP TABLE IF EXISTS `cst_parents`;
 
 CREATE TABLE `cst_parents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `father_name` varchar(50) NOT NULL,
-  `mother_name` varchar(50) NOT NULL,
-  `father_email` varchar(50) NOT NULL,
-  `mother_email` varchar(50) NOT NULL,
-  `father_mobile` varchar(15) NOT NULL,
-  `mother_mobile` varchar(15) NOT NULL,
-  `father_office_address` text NOT NULL,
-  `mother_office_address` text NOT NULL,
-  `father_occupation` varchar(100) NOT NULL,
-  `mother_occupation` varchar(100) NOT NULL,
+  `father_name` varchar(50) DEFAULT NULL,
+  `mother_name` varchar(50) DEFAULT NULL,
+  `father_email` varchar(50) DEFAULT NULL,
+  `mother_email` varchar(50) DEFAULT NULL,
+  `father_mobile` varchar(15) DEFAULT NULL,
+  `mother_mobile` varchar(15) DEFAULT NULL,
+  `father_office_address` text DEFAULT NULL,
+  `mother_office_address` text DEFAULT NULL,
+  `father_occupation` varchar(100) DEFAULT NULL,
+  `mother_occupation` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 

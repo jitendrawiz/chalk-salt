@@ -144,8 +144,22 @@ public interface UserDao {
 	 */
 	Boolean changePassword(final String userName, final String password, final String newPassword)throws Exception;
 
-	void saveAcademicDetails(AcademicInfoDto academicInfo)throws Exception;
+	/**
+	 * Save academic details.
+	 *
+	 * @param academicInfo the academic info
+	 * @return the long
+	 * @throws Exception the exception
+	 */
+	Long saveAcademicDetails(AcademicInfoDto academicInfo)throws Exception;
 
-	void saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
+	/**
+	 * Save parents details.
+	 *
+	 * @param parentsInfo the parents info
+	 * @return the long
+	 * @throws Exception the exception
+	 */
+	Long saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
 
 }

@@ -325,7 +325,7 @@
                                 <!-- Marks Details  input -->
                                 <div class="cell w-100">
 									<div ng-if="!editFlag">
-										<label for="percentage" ng-model="academicInfo.percentage"><p ng-bind="academicInfo.percentage"></p><span class="empty" ng-show="!academicInfo.percentage">N/A</span></label>
+										<label for="percentage" ng-model="academicInfo.percentage"><p ng-bind="academicInfo.percentage"></p></label>
 									</div>
 									<div ng-if="editFlag">
 										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.percentage.$invalid && !academicDetailsForm.percentage.$pristine }">
