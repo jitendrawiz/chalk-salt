@@ -353,4 +353,44 @@ public class UserDaoImpl implements UserDao {
         }        
 	}
 
+	@Override
+	public void saveAcademicDetails(AcademicInfoDto academicInfo) throws Exception {
+		final String sqlQuery = "INSERT into cst_academic_details "
+				+ " (percentage, previous_school, student_class_id) VALUES(:percentage,:schooling,:studentClassId)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("percentage", academicInfo.getPercentage());
+            query.addParameter("schooling", academicInfo.getPreviousSchool());
+            query.addParameter("studentClassId", academicInfo.getStudentClassId());           
+            query.executeUpdate();
+        }
+	}
+
+	@Override
+	public void saveParentsDetails(ParentsInfoDto parentsInfo) throws Exception {
+		final String sqlQuery = "INSERT INTO cst_parents "
+				+ " (father_name, mother_name, father_email, mother_email, father_mobile, "
+				+ " mother_mobile, father_office_address, mother_office_address, father_occupation, mother_occupation) "
+				+ " VALUES(:fatherName, :motherName, :fatherEmail, :motherEmail, :fatherMobile, :motherMobile, "
+				+ " :fatherOfficeAddress, :motherOfficeAddress, :fatherOccupation, :motherOccupation)";
+				
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("fatherName", parentsInfo.getFatherName());
+            query.addParameter("motherName", parentsInfo.getMotherName());
+            query.addParameter("fatherEmail", parentsInfo.getFatherEmail());   
+            query.addParameter("motherEmail", parentsInfo.getMotherEmail());
+            query.addParameter("fatherMobile", parentsInfo.getFatherMobile());
+            query.addParameter("motherMobile", parentsInfo.getMotherMobile());   
+            query.addParameter("fatherOfficeAddress", parentsInfo.getFatherOfficeAddress());
+            query.addParameter("motherOfficeAddress", parentsInfo.getMotherOfficeAddress());
+            query.addParameter("fatherOccupation", parentsInfo.getFatherOccupation());   
+            query.addParameter("motherOccupation", parentsInfo.getMotherOccupation());   
+            query.addParameter("parentId", parentsInfo.getParentId()); 
+            query.executeUpdate();
+        }
+	}
+
 }

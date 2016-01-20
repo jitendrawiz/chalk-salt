@@ -158,11 +158,21 @@ public class UserManagerImpl implements UserManager {
 	    		 contactStatus=userDao.updateContactDetails(userDetails);    		
 	    		 if(academicInfo!=null && userStatus && contactStatus){
 	    			 academicInfo.setAcademicInfoId(user.getAcademicId());
-	    			 userDao.updateAcademicDetails(academicInfo);
+	    			 if(academicInfo.getAcademicInfoId()==null){
+	    				 userDao.saveAcademicDetails(academicInfo);
+	    			 } else{
+	    				 userDao.updateAcademicDetails(academicInfo);
+	    			 }
+	    			 
 	    		 }
 	    		 if(parentsInfo!=null && userStatus && contactStatus){
 	    			 parentsInfo.setParentId(user.getParentsId());
-	    			 userDao.updateParentsDetails(parentsInfo);
+	    			 if(parentsInfo.getParentId()==null){
+	    				 userDao.saveParentsDetails(parentsInfo);
+	    			 } else {
+	    				 userDao.updateParentsDetails(parentsInfo);
+	    			 }
+	    			 
 	    		 }
 	    	 }
 	    } catch (final Exception exception) {
