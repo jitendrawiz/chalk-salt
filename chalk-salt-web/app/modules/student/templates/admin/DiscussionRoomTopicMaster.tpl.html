@@ -1,0 +1,111 @@
+<style>
+.title_text{
+	width:70%;
+	float:left;
+}
+.title_name{
+	width:30%;
+	float:left;
+}
+.title_name{
+	text-align:right;
+	padding-right:20px;
+	padding-top:25px;
+}
+.title_name_sub{
+	padding-top:25px;
+}
+.title_name_title{
+	padding-top:85px;
+}
+.title_name_des{
+	padding-top:88px;
+}
+.title_text textarea{
+	    width: 100%;
+    height: 100px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+
+.title_text select{
+	    width: 60%;
+    height: 40px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+.title_text button a {
+    color: #FFF;
+    padding: 0px 40px;
+}
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+.title_text button {
+    padding: 8px 0px;
+    cursor: pointer;
+    background: #2f889a;
+    color: #FFF;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-6 wow fadeInLeft" 
+style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="row inner-grid">
+            <div class="user_log_detail">
+              <h3>Discussion Room</h3>
+              <div class="title_name">
+              
+              	<label class="title_name_class">Class</label><br>
+                <label class="title_name_sub">Subject</label><br>
+                <label class="title_name_title">Topic Title</label><br>
+                <label class="title_name_des">Topic Description</label>
+              </div>
+              <div class="title_text">
+              <select>
+                <option class="active">Class</option>
+                <option value="AF">10th</option>
+                <option value="AL">11th</option>
+                <option value="DZ">12th</option>
+                <option value="AS">BBA</option>
+                <option value="AD">MBA</option>
+              </select>
+              <select>
+                <option class="active">Subject</option>
+                <option value="AF">Math</option>
+                <option value="AL">English</option>
+                <option value="DZ">Accountancy</option>
+                <option value="AS">Business</option>
+                <option value="AD">Finance</option>
+              </select>
+              <textarea class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Topic Title" name="textarea" cols="" rows=""></textarea>
+              <textarea class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Topic Description" name="textarea" cols="" rows=""></textarea>
+              <button><a href="#">Submit</a></button>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
