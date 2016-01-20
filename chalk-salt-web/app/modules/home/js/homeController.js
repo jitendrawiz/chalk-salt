@@ -20,6 +20,7 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    return true;
                };
                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+               $scope.userName=$window.localStorage.getItem(CHALKNDUST.USERNAME);
                console.log($scope.fullName);
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;

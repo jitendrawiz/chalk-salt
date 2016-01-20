@@ -125,8 +125,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
         else  if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="true"){
         $scope.editFlag=true;
         }
-        $scope.backToDashBoard=function(){
-     	   $state.go('chalkanddust.adminprofile');  
+        $scope.backToAdminDashBoard=function(){
+     	   $state.go('chalkanddust.adminhome');  
         };
          $scope.version = CHALKNDUST.VERSION;
          $scope.build = CHALKNDUST.BUILD;

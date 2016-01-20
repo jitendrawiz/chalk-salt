@@ -99,9 +99,9 @@
 			<!-- First tab input and label -->
 			<input id="t-1" name="tabbed-tabs" type="radio" checked="checked" />
 			<label for="t-1" class="tabs shadow entypo-users">General Details</label>
-			<!-- Second tab input and label -->
+			<!-- Second tab input and label 
 			<input id="t-2" name="tabbed-tabs" type="radio" />
-			<label for="t-2" class="tabs shadow entypo-home">Academic Details</label>
+			<label for="t-2" class="tabs shadow entypo-home">Academic Details</label>-->
 			<!-- Third tab input and label -->
 			<input id="t-3" name="tabbed-tabs" type="radio" />
 			<label for="t-3" class="tabs shadow entypo-menu">Parents Details</label>
@@ -275,12 +275,12 @@
                                 <!-- Send button -->
 								<div class="cell w-32">								
 									<div ng-if="editFlag">
-										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
-										<button type="button" class="btn btn-secondary btn-block button black" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()">Submit</button>
+										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="adminCtrl.updateProfile()"/> -->
+										<button type="button" class="btn btn-secondary btn-block button black" ng-disabled="generalDetailsForm.$invalid" ng-click="adminCtrl.updateProfile()">Submit</button>
 									</div>
 								</div>
 								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+									<input type="button" value="Dashboard" class="button black" ng-click="backToAdminDashBoard()"/>
 								</div>
                                 <!--<div id="map-canvas" class="map fl-right"></div>-->
 							</div>
@@ -289,7 +289,7 @@
 				</div>
 				<!-- / Tab 1 content -->
 
-				<!-- Tab 2 content -->
+				<!-- Tab 2 content 
 				<div class="tab-2">
 					<div class="row">
 						<div class="cell w-100">
@@ -301,11 +301,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- Form -->
+						
 						<form name="academicDetailsForm" role="form" action="" method="post" novalidate>
 							<div class="cell w-49">
 							
-								<!-- Class input -->								
 								<div class="cell w-100">
 																										
 									<div ng-if="!editFlag">
@@ -322,7 +321,6 @@
 								</div>
 								<div class="clrfx mt-10"></div>
                                 
-                                <!-- Marks Details  input -->
                                 <div class="cell w-100">
 									<div ng-if="!editFlag">
 										<label for="percentage" ng-model="academicInfo.percentage"><p ng-bind="academicInfo.percentage"></p><span class="empty" ng-show="!academicInfo.percentage">N/A</span></label>
@@ -339,9 +337,7 @@
 								<div class="clrfx mt-10"></div>
 							
 							</div>
-							<!-- Map -->
 							<div class="cell w-49">
-                        		<!-- Subjects input -->
                         		<div class="cell w-100">
 									<div ng-if="!editFlag">
 										<label for="subjects" ng-model="studentSubjects"><p ng-bind="studentSubjects"></p><span class="empty" ng-show="!studentSubjects">N/A</span></label>
@@ -355,7 +351,6 @@
 								
 								<div class="clrfx mt-10"></div>
                                 
-                                <!-- Previous School input -->
 								<div class="cell w-100">
 									<div ng-if="!editFlag">
 										<label for="previousSchool" ng-model="academicInfo.previousSchool"><p ng-bind="academicInfo.previousSchool"></p><span class="empty" ng-show="!academicInfo.previousSchool">N/A</span></label>
@@ -371,19 +366,18 @@
 								</div>
 								<div class="clrfx mt-10"></div>                        
                         
-								<!-- Send button -->
 								<div class="cell w-32">								
 									<div ng-if="editFlag">
-										<input type="submit" value="Submit" class="button black" form="academicDetailsForm" ng-disabled="academicDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/>
+										<input type="submit" value="Submit" class="button black" form="academicDetailsForm" ng-disabled="academicDetailsForm.$invalid" ng-click="adminCtrl.updateProfile()"/>
 									</div>
 								</div>
 								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+									<input type="button" value="Dashboard" class="button black" ng-click="backToAdminDashBoard()"/>
 								</div>
 							</div>
 						</form>
 					</div>
-				</div>
+				</div>  -->
 				<!-- / Tab 2 content -->
 
 				<!-- Tab 3 content -->
@@ -579,11 +573,11 @@
 								<!-- Send button -->
 								<div class="cell w-32">								
 									<div ng-if="editFlag">
-										<input type="submit" value="Submit" class="button black" form="parentDetailsForm" ng-disabled="parentDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/>
+										<input type="submit" value="Submit" class="button black" form="parentDetailsForm" ng-disabled="parentDetailsForm.$invalid" ng-click="adminCtrl.updateProfile()"/>
 									</div>
 								</div>
 								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+									<input type="button" value="Dashboard" class="button black" ng-click="backToAdminDashBoard()"/>
 								</div>
 							</div>
 						</form>
@@ -661,10 +655,10 @@
 								
 								<!-- Send button -->
 								<div class="cell w-32">
-									<input type="submit" value="Change Password" class="button black" form="accountDetailsForm" ng-disabled="accountDetailsForm.$invalid" ng-click="stdCtrl.changePassword()"/>
+									<input type="submit" value="Change Password" class="button black" form="accountDetailsForm" ng-disabled="accountDetailsForm.$invalid" ng-click="adminCtrl.changePassword()"/>
 								</div>
 								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
+									<input type="button" value="Dashboard" class="button black" ng-click="backToAdminDashBoard()"/>
 								</div>
 							</form>
 						</div>
