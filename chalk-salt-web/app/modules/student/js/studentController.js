@@ -101,8 +101,10 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     
     //* Admin Controller
     
-    homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService',
-    function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService) {
+    homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
+      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic',
+    function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
+       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic) {
 
  
 		   var showAlert = function(type, message){
@@ -117,6 +119,17 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
             $scope.alert.show = false;
             return true;
         };
+        
+        $scope.tab = 1;
+
+        $scope.setTab = function(newTab){
+          $scope.tab = newTab;
+        };
+
+        $scope.isSet = function(tabNum){
+          return $scope.tab === tabNum;
+        };
+        
         $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
         $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
         if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="false"){
@@ -189,7 +202,42 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                  showAlert('danger', error.data.message);
              });
          };
+
+         userClassLookUpService.query(function(classes) {
+             $scope.classes = classes;
+             console.log(classes);
+         },onRequestFailure);
+         
+         function onRequestFailure(error) {
+             showAlert('danger', error.data.message);
+     };
      
-                              
-            }]);
+     
+     $scope.showSubjectsList = function(classId) {
+    	if (!classId) {
+             return;
+         }
+         GetSubjectsList.query({classId:classId}, function(response) {
+             $scope.subjectsList = response;
+         }, onRequestFailure);
+
+     };
+     $scope.topicDetails = {};
+     this.createTopic = function() {
+         
+         createNewTopic.save({}, $scope.topicDetails, function(
+                 response) {
+             if (response) {
+                 console.log(response);
+                 alert("New Topic is Created.");
+                 $state.reload();
+             }
+             
+         }, function(error) {
+             showAlert('danger', error.data.message);
+         });
+     };
+    
+     
+   }]);
 });

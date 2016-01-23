@@ -33,4 +33,27 @@ define([ 'angular' ], function(angular) {
             
         });
         } ]);
+    
+    
+
+    studentService.factory('GetSubjectsList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/subjects/:classId',{
+            classId : '@classId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
+    
+    studentService.factory('createNewTopic', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topic',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]);    
+        
 });

@@ -75,7 +75,8 @@ button, input, select, textarea {
 style="visibility: visible; animation-name: fadeInLeft;">
           <div class="row inner-grid">
             <div class="user_log_detail">
-              <h3>Discussion Room</h3>
+             <form name="topicCreationForm" role="form" action="" method="post" novalidate>
+              <h3>Create New Discussion Room Topic</h3>
               <div class="title_name">
               
               	<label class="title_name_class">Class</label><br>
@@ -84,27 +85,37 @@ style="visibility: visible; animation-name: fadeInLeft;">
                 <label class="title_name_des">Topic Description</label>
               </div>
               <div class="title_text">
-              <select>
-                <option class="active">Class</option>
-                <option value="AF">10th</option>
-                <option value="AL">11th</option>
-                <option value="DZ">12th</option>
-                <option value="AS">BBA</option>
-                <option value="AD">MBA</option>
-              </select>
-              <select>
-                <option class="active">Subject</option>
-                <option value="AF">Math</option>
-                <option value="AL">English</option>
-                <option value="DZ">Accountancy</option>
-                <option value="AS">Business</option>
-                <option value="AD">Finance</option>
-              </select>
-              <textarea class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Topic Title" name="textarea" cols="" rows=""></textarea>
-              <textarea class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Topic Description" name="textarea" cols="" rows=""></textarea>
-              <button><a href="#">Submit</a></button>
+              <div class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentClass.$invalid && !topicCreationForm.studentClass.$pristine }">
+                <select class="form-control" ng-model="topicDetails.classId" name="studentClass" placeholder="Class"
+                ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true" 
+                ng-change="showSubjectsList(topicDetails.classId)">
+                <option value="" disabled>Select Class</option>
+               </select>
+            <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
+                 </div>
+                <div class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentSubject.$invalid && !topicCreationForm.studentSubject.$pristine }">
+                <select class="form-control" ng-model="topicDetails.subjectId" name="studentSubject" placeholder="Subject"
+                ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                <option value="" disabled>Select Subject</option>
+               </select>
+            <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
+                 </div> 
+                 
+                 <div class="form-group"  ng-class="{ 'has-error' : topicCreationForm.topicTitle.$invalid && !topicCreationForm.topicTitle.$pristine }">
+              	<textarea class="form-control" id="topicTitle" name="topicTitle" ng-model="topicDetails.topicTitle"  type="text" placeholder="Topic Title" required></textarea>
+              	<span style="color:red" class="help-block" ng-show="topicCreationForm.topicTitle.$invalid  && !topicCreationForm.topicTitle.$pristine">
+              		<span ng-show="topicCreationForm.topicTitle.$error.required">Topic Title is required.</span>           
+              	</span>
+             </div>
+              <div class="form-group"  ng-class="{ 'has-error' : topicCreationForm.topicDescription.$invalid && !topicCreationForm.topicDescription.$pristine }">
+              	<textarea class="form-control" id="topicDescription" name="topicDescription" ng-model="topicDetails.topicDescription"  type="text" placeholder="Topic Description" required></textarea>
+              	<span style="color:red" class="help-block" ng-show="topicCreationForm.topicDescription.$invalid  && !topicCreationForm.topicDescription.$pristine">
+              		<span ng-show="topicCreationForm.topicDescription.$error.required">Topic Decription is required.</span>           
+              	</span>
+             </div>
+                  <button type="button" class="btn btn-secondary btn-block" ng-disabled="topicCreationForm.$invalid" ng-click="adminCtrl.createTopic()">Submit</button>
               </div>
-              
+              </form>
               
             </div>
           </div>

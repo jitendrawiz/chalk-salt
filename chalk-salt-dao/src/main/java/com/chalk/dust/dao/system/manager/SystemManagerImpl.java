@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 
 import com.chalk.dust.dao.system.lookup.SystemLookupDao;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -44,5 +45,23 @@ public class SystemManagerImpl implements SystemManager {
 
 		return classes;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.dust.dao.system.manager.SystemManager#getSubjectsListByClassId(java.lang.String)
+	 */
+	@Override
+	public List<SubjectDto> getSubjectsListByClassId(String classId)
+			throws SystemException {
+		logger.info("Obtaining the list of subjects");
+		List<SubjectDto> subjects = new ArrayList<SubjectDto>();
+		try {
+			subjects = systemLookupDao.getSubjectsListByClassId(classId);
+		} catch (final Exception exception) {
+			throw new SystemException(ErrorCode.FAIL_TO_FETCH_SUBJECTS,
+					"fail to fetch subjects", exception);
+		}
+
+		return subjects;
+}
 
 }

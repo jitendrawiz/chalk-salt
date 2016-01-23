@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import com.chalk.dust.dao.system.manager.SystemManager;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 
@@ -34,6 +35,16 @@ public class SystemFacadeImpl implements SystemFacade {
 	@Override
 	public List<UserClassDto> getUserClassesList() throws SystemException {
 		return systemManager.getUserClassesList();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.dust.core.system.SystemFacade#getSubjectsListByClassId(java.lang.String)
+	 */
+	@Override
+	public List<SubjectDto> getSubjectsListByClassId(String classId)
+			throws SystemException {
+		return systemManager.getSubjectsListByClassId(classId);
+
 	}
 
 }
