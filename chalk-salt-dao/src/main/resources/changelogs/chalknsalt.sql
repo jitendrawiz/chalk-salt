@@ -16,20 +16,19 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`chalkndust` /*!40100 DEFAULT CHARACTER 
 USE `chalkndust`;
 
 /*Table structure for table `cst_academic_details` */
-
 DROP TABLE IF EXISTS `cst_academic_details`;
 
 CREATE TABLE `cst_academic_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_class_id` int(11) NOT NULL,
   `percentage` decimal(5,2) DEFAULT NULL,
-  `previous_school` varchar(255) DEFAULT NULL
+  `previous_school` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_academic_details` */
 
-insert  into `cst_academic_details`(`id`,`student_class_id`,`percentage`,`previous_school`) values (1,1,'43.54','new schooll');
+insert  into `cst_academic_details`(`id`,`student_class_id`,`percentage`,`previous_school`) values (1,1,'43.54','new schooll'),(8,1,'0.00',NULL);
 
 /*Table structure for table `cst_class_subject_mapping` */
 
@@ -44,7 +43,7 @@ CREATE TABLE `cst_class_subject_mapping` (
 
 /*Data for the table `cst_class_subject_mapping` */
 
-insert  into `cst_class_subject_mapping`(`class_subject_id`,`class_id`,`subject_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(10,2,5),(11,3,1),(12,3,2),(13,3,3),(14,3,4),(15,3,5),(16,4,1),(17,4,2),(18,4,3),(19,4,4),(20,4,5),(21,5,1),(22,5,2),(23,5,6),(24,5,7),(25,5,8),(26,6,1),(27,6,2),(28,6,6),(29,6,7),(30,6,8);
+insert  into `cst_class_subject_mapping`(`class_subject_id`,`class_id`,`subject_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(11,3,1),(12,3,2),(13,3,3),(14,3,4),(16,4,1),(17,4,5),(18,4,6),(21,5,1),(22,5,5),(23,5,6),(26,6,7),(27,7,8),(28,8,9);
 
 /*Table structure for table `cst_class_subjects` */
 
@@ -54,11 +53,11 @@ CREATE TABLE `cst_class_subjects` (
   `subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_class_subjects` */
 
-insert  into `cst_class_subjects`(`subject_id`,`subject_name`) values (1,'Maths'),(2,'English'),(3,'Science'),(4,'Sst'),(5,'Hindi'),(6,'Physical'),(7,'Physics'),(8,'Chemistry'),(9,'Biology');
+insert  into `cst_class_subjects`(`subject_id`,`subject_name`) values (1,'Maths'),(2,'English'),(3,'Science'),(4,'Social Studies'),(5,'Physics'),(6,'Chemistry'),(7,'National Defence Academy'),(8,'NATA Coaching'),(9,'Olympiads/NTSE');
 
 /*Table structure for table `cst_class_type` */
 
@@ -69,11 +68,11 @@ CREATE TABLE `cst_class_type` (
   `class_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`class_id`),
   UNIQUE KEY `class_id` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_class_type` */
 
-insert  into `cst_class_type`(`class_id`,`class_name`) values (1,'VII'),(2,'VIII'),(3,'IX'),(4,'X'),(5,'XI'),(6,'XII');
+insert  into `cst_class_type`(`class_id`,`class_name`) values (1,'Foundation 8'),(2,'Foundation 9'),(3,'Foundation 10'),(4,'IIT-JEE 11'),(5,'IIT-JEE 12'),(6,'NDA'),(7,'Architecture'),(8,'Olympiads/NTSE');
 
 /*Table structure for table `cst_contacts` */
 
@@ -92,11 +91,11 @@ CREATE TABLE `cst_contacts` (
   `email` varchar(50) DEFAULT NULL,
   `corsAddress` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_contacts` */
 
-insert  into `cst_contacts`(`id`,`address`,`city`,`state`,`country`,`pincode`,`mobile`,`landline`,`fax`,`email`,`corsAddress`) values (2,'103, Ambapark Colony address','Ajmer','Rajasthan','India','305001','232323232','12121212121',NULL,'tadfa@gmail.com','new address'),(8,'217, Sector 1','Gurgaon','Rajasthan','India','321004','97853215500','01247821565',NULL,'abhishek.kumar627@gmail.com',NULL),(9,'chalkanddust','Gurgaon','Haryana','India','121004','9876543210','12121212121',NULL,'chalkandsalt@gmail.com','newAddress');
+insert  into `cst_contacts`(`id`,`address`,`city`,`state`,`country`,`pincode`,`mobile`,`landline`,`fax`,`email`,`corsAddress`) values (2,'103, Ambapark Colony address','Ajmer','Rajasthan','India','305001','232323232','12121212121',NULL,'tadfa@gmail.com','new address'),(16,'house no 380','Faridabad','Haryana','IN','121004','1111111111','12121212121',NULL,'abhishek.kumar627@gmail.com','corsaddress');
 
 /*Table structure for table `cst_discussion_topic_comments` */
 
@@ -142,11 +141,11 @@ CREATE TABLE `cst_logins` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `disabled_from` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_logins` */
 
-insert  into `cst_logins`(`user_id`,`username`,`password`,`active`,`disabled_from`) values (1,'jitendra','JDJhJDEyJEI5eXpoUndzVWszVFVTaWhDcUgwN09JYTFVRmx3a1VrYm5XWkhKM1AyaVFubDdvdHk0ODJt',1,NULL),(11,'abhishek','JDJhJDEyJFAxYTZvNU9Yd0tZbDVYUXppM2pTOHUzdEVCUGpKQmNQckFHS1BYei92N28vQkVFQmYyODJL',1,NULL),(12,'admin','JDJhJDEyJEI5eXpoUndzVWszVFVTaWhDcUgwN09JYTFVRmx3a1VrYm5XWkhKM1AyaVFubDdvdHk0ODJt',1,NULL);
+insert  into `cst_logins`(`user_id`,`username`,`password`,`active`,`disabled_from`) values (1,'jitendra','JDJhJDEyJGVVMTA1T1l4VUpSRkNvenVqYlpHSGV1bVNxWjdqLzBlM3hBUkY5SkhiQzhFNldvODRQTk42',1,NULL),(19,'admin','JDJhJDEyJFFIT1pmZHhlN2tjTW5WUU1VU0hsZHVyU2NRbFFMLjZlM1VzMS9kVnR5MEtvRUpnSjh6alhL',1,NULL);
 
 /*Table structure for table `cst_parents` */
 
@@ -160,16 +159,16 @@ CREATE TABLE `cst_parents` (
   `mother_email` varchar(50) DEFAULT NULL,
   `father_mobile` varchar(15) DEFAULT NULL,
   `mother_mobile` varchar(15) DEFAULT NULL,
-  `father_office_address` text DEFAULT NULL,
-  `mother_office_address` text DEFAULT NULL,
+  `father_office_address` text,
+  `mother_office_address` text,
   `father_occupation` varchar(100) DEFAULT NULL,
   `mother_occupation` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_parents` */
 
-insert  into `cst_parents`(`id`,`father_name`,`mother_name`,`father_email`,`mother_email`,`father_mobile`,`mother_mobile`,`father_office_address`,`mother_office_address`,`father_occupation`,`mother_occupation`) values (1,'Satish Sharma updated333','minakshi sharma333','newsharmaji@gmail.com','abhishek.kumar623337@gmail.com','2123434343','121212121','new address 3434','address2333','Software Engineer l1 l2','House Wife l2333');
+insert  into `cst_parents`(`id`,`father_name`,`mother_name`,`father_email`,`mother_email`,`father_mobile`,`mother_mobile`,`father_office_address`,`mother_office_address`,`father_occupation`,`mother_occupation`) values (1,'Satish Sharma updated333','minakshi sharma333','newsharmaji@gmail.com','abhishek.kumar623337@gmail.com','2123434343','121212121','new address 3434','address2333','Software Engineer l1 l2','House Wife l2333'),(4,'father name','mothername','father@gmail.com','mother@gmail.com','1212121212','3434343434','officeAddress','office Address','occupation','mother occupation');
 
 /*Table structure for table `cst_template` */
 
@@ -211,11 +210,11 @@ CREATE TABLE `cst_users` (
   `parents_id` int(11) DEFAULT NULL,
   `academic_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_users` */
 
-insert  into `cst_users`(`id`,`user_id`,`first_name`,`middle_name`,`last_name`,`contact_id`,`user_type_id`,`secur_uuid`,`class_id`,`parents_id`,`academic_id`) values (1,1,'jitendra firstname updated','lastname','lastname',2,0,'4e0b6910-5650-497b-81c5-4d4e96c06d6d',1,1,1),(6,11,'abhishek',' Ji','kumar',8,NULL,'5a0fcf08-a2eb-457f-8390-ecf8ec8fef72',1,NULL,0),(7,12,'admin','kumar','sharma',9,0,'5a0fcf08-a2eb-457f-8390-ecf8ec232323',NULL,NULL,NULL);
+insert  into `cst_users`(`id`,`user_id`,`first_name`,`middle_name`,`last_name`,`contact_id`,`user_type_id`,`secur_uuid`,`class_id`,`parents_id`,`academic_id`) values (1,1,'jitendra','lastname','middlename',2,0,'4e0b6910-5650-497b-81c5-4d4e96c06d6d',1,1,1),(12,19,'admin','none','kumar',16,NULL,'802d096e-bcd1-4559-b5af-16a93149bbc7',1,4,8);
 
 /*Table structure for table `cst_usertypes` */
 
