@@ -148,16 +148,18 @@ public interface UserDao {
 	 * Save academic details.
 	 *
 	 * @param academicInfo the academic info
+	 * @return the long
 	 * @throws Exception the exception
 	 */
-	void saveAcademicDetails(AcademicInfoDto academicInfo)throws Exception;
+	Long saveAcademicDetails(AcademicInfoDto academicInfo)throws Exception;
 
 	/**
 	 * Save parents details.
 	 *
 	 * @param parentsInfo the parents info
+	 * @return the long
 	 * @throws Exception the exception
 	 */
-	void saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
+	Long saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
 
 }
