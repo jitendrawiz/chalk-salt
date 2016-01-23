@@ -72,7 +72,10 @@ public enum ErrorCode {
     FAIL_TO_FETCH_CLASSES(1018),
     
     /** The fail to update user info. */
-    FAIL_TO_UPDATE_USER_INFO(1019); 
+    FAIL_TO_UPDATE_USER_INFO(1019),
+	
+	/** The fail to save discussion topic. */
+	FAIL_TO_SAVE_DISCUSSION_TOPIC(1020);
     /** The value. */
     private final int value;
 

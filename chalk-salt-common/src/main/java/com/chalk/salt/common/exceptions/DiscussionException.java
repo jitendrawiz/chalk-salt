@@ -2,17 +2,14 @@ package com.chalk.salt.common.exceptions;
 
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class CoreException.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
-public class UserException extends CoreException {
+public class DiscussionException extends CoreException{
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 4459486228192238521L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4543875045373119468L;
 
-    /** The error code. */
+	/** The error code. */
     private ErrorCode errorCode;
 
     /**
@@ -36,60 +33,59 @@ public class UserException extends CoreException {
     /**
      * Instantiates a new generic exception.
      */
-    public UserException() {
+    public DiscussionException() {
         super();
     }
 
     /**
-     * Instantiates a new user exception.
+     * Instantiates a new discussion exception.
      *
      * @param message the message
      */
-    public UserException(String message) {
+    public DiscussionException(String message) {
         super(message);
     }
 
     /**
-     * Instantiates a new user exception.
+     * Instantiates a new discussion exception.
      *
      * @param message the message
      * @param cause the cause
      */
-    public UserException(String message, Throwable cause) {
+    public DiscussionException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * Instantiates a new user exception.
+     * Instantiates a new discussion exception.
      *
      * @param errorCode the error code
      * @param message the message
      * @param cause the cause
      */
-    public UserException(final ErrorCode errorCode, final String message,
+    public DiscussionException(final ErrorCode errorCode, final String message,
         final Throwable cause) {
         super(message, cause);
         this.errorCode = errorCode;
     }
 
     /**
-     * Instantiates a new user exception.
+     * Instantiates a new discussion exception.
      *
      * @param errorCode the error code
      * @param message the message
      */
-    public UserException(final ErrorCode errorCode, final String message) {
+    public DiscussionException(final ErrorCode errorCode, final String message) {
         super(message);
         this.errorCode = errorCode;
     }
 
     /**
-     * Instantiates a new user exception.
+     * Instantiates a new discussion exception.
      *
      * @param cause the cause
      */
-    public UserException(Throwable cause) {
+    public DiscussionException(Throwable cause) {
         super(cause);
     }
-
 }

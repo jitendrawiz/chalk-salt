@@ -74,20 +74,6 @@ public class UserManagerImpl implements UserManager {
 			
 			Long contactId = userDao.saveContactDetails(userDetail);
 			userDetail.setContactId(contactId);
-			if(userDetail.getStudentClass()!=null){
-				AcademicInfoDto academicInfo =new AcademicInfoDto();
-				academicInfo.setStudentClassId(Integer.parseInt(userDetail.getStudentClass()));
-				academicInfo.setPercentage(0.0f);
-				academicInfo.setPreviousSchool(null);
-			Long academicId=userDao.saveAcademicDetails(academicInfo);
-			userDetail.setAcademicId(academicId);
-			}
-			if(userDetail.getParentsId()==null){
-				ParentsInfoDto parentsInfoDto=new ParentsInfoDto();
-				userDetail.setParentsInfo(parentsInfoDto);
-				Long parentsId=userDao.saveParentsDetails(parentsInfoDto);
-				userDetail.setParentsId(parentsId);
-			}
 			if(!userDao.saveUserDetails(userDetail)){
 				throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save User Registration");
 			}
@@ -172,11 +158,21 @@ public class UserManagerImpl implements UserManager {
 	    		 contactStatus=userDao.updateContactDetails(userDetails);    		
 	    		 if(academicInfo!=null && userStatus && contactStatus){
 	    			 academicInfo.setAcademicInfoId(user.getAcademicId());
+	    			 if(academicInfo.getAcademicInfoId()==null){
+	    				 userDao.saveAcademicDetails(academicInfo);
+	    			 } else{
 	    				 userDao.updateAcademicDetails(academicInfo);
+	    			 }
+	    			 
 	    		 }
 	    		 if(parentsInfo!=null && userStatus && contactStatus){
 	    			 parentsInfo.setParentId(user.getParentsId());
+	    			 if(parentsInfo.getParentId()==null){
+	    				 userDao.saveParentsDetails(parentsInfo);
+	    			 } else {
 	    				 userDao.updateParentsDetails(parentsInfo);
+	    			 }
+	    			 
 	    		 }
 	    	 }
 	    } catch (final Exception exception) {

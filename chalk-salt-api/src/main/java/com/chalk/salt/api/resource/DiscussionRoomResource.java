@@ -1,0 +1,76 @@
+package com.chalk.salt.api.resource;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.dozer.Mapper;
+import org.slf4j.Logger;
+
+import com.chalk.salt.api.model.DicussionModel;
+import com.chalk.salt.api.util.ApiConstants;
+import com.chalk.salt.api.util.Utility;
+import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.exceptions.DiscussionException;
+import com.chalk.salt.core.discussion.DiscussionRoomFacade;
+import com.chalk.salt.dao.dto.DiscussionDto;
+
+/**
+ * The Class DiscussionRoomResource.
+ */
+@Path(ApiConstants.API_PRIVATE_BASEPATH)
+public class DiscussionRoomResource extends AbstractResource {
+	/** The logger. */
+    @Inject
+    @AppLogger
+    protected Logger logger;
+
+    /** The bean mapper. */
+    @Inject
+    @BeanMapper
+    protected Mapper beanMapper;
+    
+    /** The discussion room facade. */
+    @Inject
+    private DiscussionRoomFacade discussionRoomFacade;
+    
+    /**
+     * Save topic.
+     *
+     * @param discussion the discussion
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
+    @POST
+    @Path("/discussion/topic")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response saveTopic(final @Valid DicussionModel discussion)throws DiscussionException{
+    	
+    	DiscussionDto discussionDetails = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean saveStatus = false;
+    	try{
+    		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
+    		saveStatus = discussionRoomFacade.saveTopic(discussionDetails);
+    		response.put("saveStatus", saveStatus.toString());
+            return Response.ok(response).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+}

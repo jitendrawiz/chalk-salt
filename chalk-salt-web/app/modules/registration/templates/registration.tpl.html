@@ -95,12 +95,13 @@
               		<span ng-show="registrationForm.firstName.$error.required">First Name is required.</span>           
               	</span>
              </div>
-             <div class="form-group"  ng-class="{ 'has-error' : registrationForm.middleName.$invalid && !registrationForm.middleName.$pristine }">
+             <input class="form-control" id="middleName" name="middleName" ng-model="userDetails.middleName"  type="text" placeholder="Middle Name"/>
+             <!-- <div class="form-group"  ng-class="{ 'has-error' : registrationForm.middleName.$invalid && !registrationForm.middleName.$pristine }">
               <input class="form-control" id="middleName" name="middleName" ng-model="userDetails.middleName"  type="text" placeholder="Middle Name" required/>
                <span style="color:red" ng-show="registrationForm.middleName.$invalid && !registrationForm.middleName.$pristine">
             <span ng-show="registrationForm.middleName.$error.required">Middle Name is required.</span>           
              </span>
-             </div>
+             </div> -->
              <div class="form-group"  ng-class="{ 'has-error' : registrationForm.lastName.$invalid && !registrationForm.lastName.$pristine }">
               <input class="form-control" id="lastName" name="lastName"  ng-model="userDetails.lastName"  type="text" placeholder="Last Name" required/>
              <span style="color:red" ng-show="registrationForm.lastName.$invalid && !registrationForm.lastName.$pristine ">

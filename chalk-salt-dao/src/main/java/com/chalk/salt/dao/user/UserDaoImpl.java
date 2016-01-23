@@ -29,9 +29,9 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public boolean isUserExist(final String userName) throws Exception {
-        final String sqlQuery = "SELECT `cst_logins`.`username` AS userName  "
+        final String sqlQuery = "SELECT `cst_logins`.`user_id` AS userId  "
             + " FROM cst_logins AS cst_logins "
-            + "WHERE ((cst_logins.username = :userName))";
+            + "WHERE cst_logins.username = :userName";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
@@ -68,8 +68,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean saveUserDetails(final UserDto userDetail) throws Exception {
 
-        final String sqlQuery = "INSERT INTO cst_users(`user_id`, `first_name`, `middle_name`, `last_name`, `contact_id`, `secur_uuid`,class_id,academic_id,parents_id)"
-        		+ "VALUES(:userId, :firstName, :middleName, :lastName, :contactId, :securUuid,:studentClass,:academicId,:parentsId)";
+        final String sqlQuery = "INSERT INTO cst_users(`user_id`, `first_name`, `middle_name`, `last_name`, `contact_id`, `secur_uuid`,class_id)"
+        		+ "VALUES(:userId, :firstName, :middleName, :lastName, :contactId, :securUuid,:studentClass)";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -82,8 +82,6 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("userId", userDetail.getUserId());
             query.addParameter("contactId", userDetail.getContactId());
             query.addParameter("studentClass", userDetail.getStudentClass());
-            query.addParameter("academicId", userDetail.getAcademicId());
-            query.addParameter("parentsId", userDetail.getParentsId());
             query.executeUpdate();
         }
         return true;
@@ -355,11 +353,8 @@ public class UserDaoImpl implements UserDao {
         }        
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.user.UserDao#saveAcademicDetails(com.chalk.salt.common.dto.AcademicInfoDto)
-	 */
 	@Override
-	public Long saveAcademicDetails(AcademicInfoDto academicInfo) throws Exception {
+	public void saveAcademicDetails(AcademicInfoDto academicInfo) throws Exception {
 		final String sqlQuery = "INSERT into cst_academic_details "
 				+ " (percentage, previous_school, student_class_id) VALUES(:percentage,:schooling,:studentClassId)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -368,15 +363,12 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("percentage", academicInfo.getPercentage());
             query.addParameter("schooling", academicInfo.getPreviousSchool());
             query.addParameter("studentClassId", academicInfo.getStudentClassId());           
-            return (Long)query.executeUpdate().getKey();
+            query.executeUpdate();
         }
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.user.UserDao#saveParentsDetails(com.chalk.salt.common.dto.ParentsInfoDto)
-	 */
 	@Override
-	public Long saveParentsDetails(ParentsInfoDto parentsInfo) throws Exception {
+	public void saveParentsDetails(ParentsInfoDto parentsInfo) throws Exception {
 		final String sqlQuery = "INSERT INTO cst_parents "
 				+ " (father_name, mother_name, father_email, mother_email, father_mobile, "
 				+ " mother_mobile, father_office_address, mother_office_address, father_occupation, mother_occupation) "
@@ -396,7 +388,8 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("motherOfficeAddress", parentsInfo.getMotherOfficeAddress());
             query.addParameter("fatherOccupation", parentsInfo.getFatherOccupation());   
             query.addParameter("motherOccupation", parentsInfo.getMotherOccupation());   
-            return (Long) query.executeUpdate().getKey();
+            query.addParameter("parentId", parentsInfo.getParentId()); 
+            query.executeUpdate();
         }
 	}
 
