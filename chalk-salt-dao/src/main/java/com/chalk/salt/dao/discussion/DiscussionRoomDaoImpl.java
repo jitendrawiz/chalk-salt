@@ -41,7 +41,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	public List<DiscussionDto> getTopics() throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
-				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics` WHERE 1";
+				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics`";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);   
