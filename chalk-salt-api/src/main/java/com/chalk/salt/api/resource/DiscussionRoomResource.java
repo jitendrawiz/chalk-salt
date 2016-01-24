@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
+import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionModel;
@@ -28,6 +30,7 @@ import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.DozerMapperUtil;
+import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.discussion.DiscussionRoomFacade;
 
 /**
@@ -86,11 +89,32 @@ public class DiscussionRoomResource extends AbstractResource {
     	
     	List<DiscussionModel> discussionTopics = null;
     	List<DiscussionDto> discussionTopicList = null;
-    	String securUuid = null;
     	try{
     		discussionTopicList = discussionRoomFacade.getTopics();
     		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionModel.class);
             return Response.ok(discussionTopics).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    @GET
+    @Path("/discussion/topic/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response getTopic(@NotBlank @PathParam("securUuid") final String securUuid)throws DiscussionException{
+    	
+    	DiscussionModel discussionTopic = null;
+    	DiscussionDto discussionTopicDetails = null;
+    	try{
+    		discussionTopicDetails = discussionRoomFacade.getTopic(securUuid);
+    		
+    		discussionTopic = beanMapper.map(discussionTopicDetails, DiscussionModel.class);
+    		if(discussionTopic!=null)
+    			return Response.ok(discussionTopic).build();
+    		else
+    			throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to fetch discussion topic.");
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }

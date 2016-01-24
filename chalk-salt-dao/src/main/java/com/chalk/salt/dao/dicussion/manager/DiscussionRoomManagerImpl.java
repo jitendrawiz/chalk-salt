@@ -60,4 +60,14 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	@Override
+	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
+		logger.info("fetch list of dicussion topic using secur uuid...");
+		try{
+			return discussionDao.getTopic(securUuid);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC, "Fail to Fetch Discussion Topic", exception);
+        }
+	}
+
 }

@@ -21,4 +21,6 @@ public interface DiscussionRoomManager {
 
 	List<DiscussionDto> getTopics()throws DiscussionException;
 
+	DiscussionDto getTopic(String securUuid)throws DiscussionException;
+
 }

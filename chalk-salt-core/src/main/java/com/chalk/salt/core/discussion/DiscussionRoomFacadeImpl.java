@@ -30,4 +30,9 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.getTopics();
 	}
 
+	@Override
+	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
+		return discussionManager.getTopic(securUuid);
+	}
+
 }

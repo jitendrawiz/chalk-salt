@@ -17,8 +17,10 @@ public interface DiscussionRoomFacade {
 	 * @return the boolean
 	 * @throws DiscussionException the discussion exception
 	 */
-	String saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
+	String saveTopic(final DiscussionDto discussionDetails)throws DiscussionException;
 
 	List<DiscussionDto> getTopics()throws DiscussionException;
+
+	DiscussionDto getTopic(final String securUuid)throws DiscussionException;
 
 }

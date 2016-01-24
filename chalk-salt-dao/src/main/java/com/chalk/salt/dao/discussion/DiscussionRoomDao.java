@@ -19,5 +19,7 @@ public interface DiscussionRoomDao {
 	void saveTopic(DiscussionDto discussionDetails) throws Exception;
 
 	List<DiscussionDto> getTopics() throws Exception;
+
+	DiscussionDto getTopic(String securUuid) throws Exception;
 	
 }
