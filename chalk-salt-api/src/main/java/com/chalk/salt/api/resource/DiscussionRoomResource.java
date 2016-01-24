@@ -2,11 +2,13 @@ package com.chalk.salt.api.resource;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,13 +20,14 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 
-import com.chalk.salt.api.model.DicussionModel;
+import com.chalk.salt.api.model.DiscussionModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
+import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.core.discussion.DiscussionRoomFacade;
 
 /**
@@ -59,7 +62,7 @@ public class DiscussionRoomResource extends AbstractResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
-    public Response saveTopic(final @Valid DicussionModel discussion)throws DiscussionException{
+    public Response saveTopic(final @Valid DiscussionModel discussion)throws DiscussionException{
     	
     	DiscussionDto discussionDetails = null;
     	final Map<String, String> response = new HashMap<String, String>();
@@ -69,6 +72,25 @@ public class DiscussionRoomResource extends AbstractResource {
     		securUuid = discussionRoomFacade.saveTopic(discussionDetails);
     		response.put("securUuid", securUuid);
             return Response.ok(response).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    @GET
+    @Path("/discussion/topics")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response getTopics()throws DiscussionException{
+    	
+    	List<DiscussionModel> discussionTopics = null;
+    	List<DiscussionDto> discussionTopicList = null;
+    	String securUuid = null;
+    	try{
+    		discussionTopicList = discussionRoomFacade.getTopics();
+    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionModel.class);
+            return Response.ok(discussionTopics).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }

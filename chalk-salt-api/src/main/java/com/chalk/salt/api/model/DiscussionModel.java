@@ -3,7 +3,7 @@ package com.chalk.salt.api.model;
 /**
  * The Class DicussionModel.
  */
-public class DicussionModel extends ApiModel {
+public class DiscussionModel extends ApiModel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -392137791643067959L;

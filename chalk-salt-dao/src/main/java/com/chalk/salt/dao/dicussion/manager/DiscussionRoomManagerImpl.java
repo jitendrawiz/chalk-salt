@@ -2,6 +2,7 @@ package com.chalk.salt.dao.dicussion.manager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -46,6 +47,16 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to Save Discussion Topic", exception);
+        }
+	}
+
+	@Override
+	public List<DiscussionDto> getTopics() throws DiscussionException {
+		logger.info("fetch list of dicussion topics...");
+		try{
+			return discussionDao.getTopics();
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPICS, "Fail to Fetch list of Discussion Topics", exception);
         }
 	}
 

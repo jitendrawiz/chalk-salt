@@ -1,5 +1,7 @@
 package com.chalk.salt.dao.dicussion.manager;
 
+import java.util.List;
+
 import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 
@@ -16,5 +18,7 @@ public interface DiscussionRoomManager {
 	 * @throws DiscussionException the discussion exception
 	 */
 	String saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
+
+	List<DiscussionDto> getTopics()throws DiscussionException;
 
 }

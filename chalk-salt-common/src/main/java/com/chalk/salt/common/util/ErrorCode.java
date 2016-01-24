@@ -78,8 +78,12 @@ public enum ErrorCode {
 	FAIL_TO_SAVE_DISCUSSION_TOPIC(1020),
 	
 	/** The fail to fetch subjects. */
-	FAIL_TO_FETCH_SUBJECTS(1021);
-    /** The value. */
+	FAIL_TO_FETCH_SUBJECTS(1021),
+	
+	/** The fail to fetch discussion topics. */
+	FAIL_TO_FETCH_DISCUSSION_TOPICS(1022);
+
+	/** The value. */
     private final int value;
 
     /**

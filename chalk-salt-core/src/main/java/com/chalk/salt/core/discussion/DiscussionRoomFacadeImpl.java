@@ -1,5 +1,7 @@
 package com.chalk.salt.core.discussion;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.DiscussionDto;
@@ -21,6 +23,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	@Override
 	public String saveTopic(DiscussionDto discussionDetails) throws DiscussionException {
 		return discussionManager.saveTopic(discussionDetails);
+	}
+
+	@Override
+	public List<DiscussionDto> getTopics() throws DiscussionException {
+		return discussionManager.getTopics();
 	}
 
 }
