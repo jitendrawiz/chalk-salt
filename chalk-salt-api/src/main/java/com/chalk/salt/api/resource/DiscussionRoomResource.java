@@ -23,9 +23,9 @@ import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.core.discussion.DiscussionRoomFacade;
-import com.chalk.salt.dao.dto.DiscussionDto;
 
 /**
  * The Class DiscussionRoomResource.
@@ -63,11 +63,11 @@ public class DiscussionRoomResource extends AbstractResource {
     	
     	DiscussionDto discussionDetails = null;
     	final Map<String, String> response = new HashMap<String, String>();
-    	Boolean saveStatus = false;
+    	String securUuid = null;
     	try{
     		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
-    		saveStatus = discussionRoomFacade.saveTopic(discussionDetails);
-    		response.put("saveStatus", saveStatus.toString());
+    		securUuid = discussionRoomFacade.saveTopic(discussionDetails);
+    		response.put("securUuid", securUuid);
             return Response.ok(response).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);

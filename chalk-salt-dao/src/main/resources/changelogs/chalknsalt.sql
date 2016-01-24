@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `cst_discussion_topic_comments`;
 CREATE TABLE `cst_discussion_topic_comments` (
   `discussion_comments_id` int(11) NOT NULL AUTO_INCREMENT,
   `discussion_topics_id` int(11) DEFAULT NULL,
-  `general_comments` varchar(500) DEFAULT NULL,
+  `general_comments` text,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `delete_status` tinyint(1) DEFAULT '1',
@@ -121,10 +121,11 @@ CREATE TABLE `cst_discussion_topics` (
   `discussion_topic_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
-  `topic_title` varchar(500) DEFAULT NULL,
-  `topic_description` varchar(1000) DEFAULT NULL,
+  `topic_title` text,
+  `topic_description` text,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `secur_uuid` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`discussion_topic_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

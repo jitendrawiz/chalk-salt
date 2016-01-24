@@ -1,4 +1,4 @@
-package com.chalk.salt.dao.dto;
+package com.chalk.salt.common.dto;
 
 /**
  * The Class DiscussionDto.
@@ -25,6 +25,10 @@ public class DiscussionDto {
  	
 	 /** The modified date. */
 	 private String modifiedDate;
+	 
+	 /** The secur uuid. */
+ 	private String securUuid;
+	 
  	
 	/**
 	 * Gets the discussion topic id.
@@ -151,4 +155,24 @@ public class DiscussionDto {
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
+
+	/**
+	 * Gets the secur uuid.
+	 *
+	 * @return the secur uuid
+	 */
+	public String getSecurUuid() {
+		return securUuid;
+	}
+
+	/**
+	 * Sets the secur uuid.
+	 *
+	 * @param securUuid the new secur uuid
+	 */
+	public void setSecurUuid(String securUuid) {
+		this.securUuid = securUuid;
+	}
+	
+	
 }

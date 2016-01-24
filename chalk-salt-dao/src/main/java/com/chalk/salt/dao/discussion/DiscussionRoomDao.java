@@ -1,6 +1,6 @@
 package com.chalk.salt.dao.discussion;
 
-import com.chalk.salt.dao.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionDto;
 
 /**
  * The Interface DiscussionRoomDao.
@@ -14,6 +14,6 @@ public interface DiscussionRoomDao {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	Boolean saveTopic(DiscussionDto discussionDetails) throws Exception;
+	void saveTopic(DiscussionDto discussionDetails) throws Exception;
 	
 }

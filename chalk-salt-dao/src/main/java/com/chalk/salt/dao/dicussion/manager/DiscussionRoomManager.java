@@ -1,7 +1,7 @@
 package com.chalk.salt.dao.dicussion.manager;
 
+import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
-import com.chalk.salt.dao.dto.DiscussionDto;
 
 /**
  * The Interface DiscussionRoomManager.
@@ -15,6 +15,6 @@ public interface DiscussionRoomManager {
 	 * @return the boolean
 	 * @throws DiscussionException the discussion exception
 	 */
-	Boolean saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
+	String saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
 
 }

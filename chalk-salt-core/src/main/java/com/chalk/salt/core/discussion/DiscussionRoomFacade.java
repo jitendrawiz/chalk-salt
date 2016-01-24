@@ -1,7 +1,7 @@
 package com.chalk.salt.core.discussion;
 
+import com.chalk.salt.common.dto.DiscussionDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
-import com.chalk.salt.dao.dto.DiscussionDto;
 
 /**
  * The Interface DiscussionRoomFacade.
@@ -15,6 +15,6 @@ public interface DiscussionRoomFacade {
 	 * @return the boolean
 	 * @throws DiscussionException the discussion exception
 	 */
-	Boolean saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
+	String saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
 
 }
