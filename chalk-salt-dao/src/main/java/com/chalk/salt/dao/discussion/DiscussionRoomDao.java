@@ -21,5 +21,7 @@ public interface DiscussionRoomDao {
 	List<DiscussionDto> getTopics() throws Exception;
 
 	DiscussionDto getTopic(String securUuid) throws Exception;
+
+	void deleteTopic(String securUuid)throws Exception;
 	
 }

@@ -23,4 +23,6 @@ public interface DiscussionRoomFacade {
 
 	DiscussionDto getTopic(final String securUuid)throws DiscussionException;
 
+	Boolean deleteTopic(String securUuid)throws DiscussionException;
+
 }

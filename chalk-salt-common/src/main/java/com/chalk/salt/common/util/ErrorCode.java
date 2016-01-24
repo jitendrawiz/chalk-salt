@@ -83,7 +83,9 @@ public enum ErrorCode {
 	/** The fail to fetch discussion topics. */
 	FAIL_TO_FETCH_DISCUSSION_TOPICS(1022),
 	
-	FAIL_TO_FETCH_DISCUSSION_TOPIC(1023);
+	FAIL_TO_FETCH_DISCUSSION_TOPIC(1023),
+	
+	FAIL_TO_DELETE_DISCUSSION_TOPIC(1023);
 
 	/** The value. */
     private final int value;

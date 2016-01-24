@@ -61,4 +61,16 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             return query.executeAndFetchFirst(DiscussionDto.class);
         }
 	}
+
+	@Override
+	public void deleteTopic(String securUuid) throws Exception {
+		final String sqlQuery = "delete from cst_discussion_topics where secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+            
+        }
+	}
 }

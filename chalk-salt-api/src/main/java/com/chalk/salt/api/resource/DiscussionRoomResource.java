@@ -119,4 +119,23 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+    
+    @GET
+    @Path("/discussion/topic/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response deleteTopic(@NotBlank @PathParam("securUuid") final String securUuid)throws DiscussionException{
+    	
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean deleteStatus = false;
+    	try{
+    		deleteStatus = discussionRoomFacade.deleteTopic(securUuid);
+    		response.put("deleteStatus", deleteStatus.toString());
+    		return Response.ok(deleteStatus).build();
+    		
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
 }

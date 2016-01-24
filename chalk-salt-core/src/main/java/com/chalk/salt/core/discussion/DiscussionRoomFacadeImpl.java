@@ -35,4 +35,9 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.getTopic(securUuid);
 	}
 
+	@Override
+	public Boolean deleteTopic(String securUuid) throws DiscussionException {
+		return discussionManager.deleteTopic(securUuid);
+	}
+
 }
