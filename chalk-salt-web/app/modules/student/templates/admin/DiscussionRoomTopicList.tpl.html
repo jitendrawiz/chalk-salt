@@ -70,8 +70,12 @@ button, input, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
+
+#topicList th:last-child,td:last-child{
+width:10%;
+}
 </style>
-<div class="col-xs-12 col-md-6 wow fadeInLeft" 
+<div class="span12" 
 style="visibility: visible; animation-name: fadeInLeft;">
           <div class="row inner-grid">
             <div class="user_log_detail">
@@ -93,13 +97,46 @@ style="visibility: visible; animation-name: fadeInLeft;">
                  </div>
                 <div class="form-group" ng-class="{ 'has-error' : topicListForm.studentSubject.$invalid && !topicListForm.studentSubject.$pristine }">
                 <select class="form-control" ng-model="topicDetails.subjectId" name="studentSubject" placeholder="Subject"
-                ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                ng-change="showTopicDetails(topicDetails.classId,topicDetails.subjectId)">
                 <option value="" disabled>Select Subject</option>
                </select>
             <p ng-show="topicListForm.studentClass.$error.required && !topicListForm.studentClass.$pristine">Class is required.</p>
                  </div> 
+ 
               </form>
               
             </div>
           </div>
         </div>
+        
+        <div class="container-fluid">
+  <div class="row">
+    
+                 <div class="table-responsive ">
+              <table id="topicList" class="table table-bordered">
+              <thead>
+              <tr>
+                  <th>S.No</th>
+                  <th>Topic Title</th>
+                  <th>Topic Description</th>
+                  <th>Action</th>                  
+              </tr>
+              </thead>
+              <tbody>
+   			 <tr ng-repeat="item in topicsList">
+   			 <td>{{$index +1}}
+   			 </td>
+   			 <td>{{item.topicTitle}}
+   			 </td>
+   			 <td>{{item.topicDescription}}
+   			 </td>
+   			 <td style="text-align: center;"><button type="button" class="btn btn-secondary btn-block"  ng-click="adminCtrl.editTopic(item.securUuid)">Edit</button>
+   			 </td>   			 
+   			 </tr>
+   			 </tbody>
+              </table>
+				</div>
+				
+  </div>
+</div>

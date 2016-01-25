@@ -50,6 +50,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopics()
+	 */
 	@Override
 	public List<DiscussionDto> getTopics() throws DiscussionException {
 		logger.info("fetch list of dicussion topics...");
@@ -60,6 +63,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopic(java.lang.String)
+	 */
 	@Override
 	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
 		logger.info("fetch dicussion topic using secur uuid...");
@@ -70,6 +76,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#deleteTopic(java.lang.String)
+	 */
 	@Override
 	public Boolean deleteTopic(String securUuid) throws DiscussionException {
 		logger.info("delete dicussion topic using secur uuid...");
@@ -78,6 +87,20 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			return true; // need to be discussed how to implement.
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_DISCUSSION_TOPIC, "Fail to delete Discussion Topic", exception);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopics(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DiscussionDto> getTopics(String classId, String subjectId)
+			throws DiscussionException {
+		logger.info("fetch list of dicussion topics...");
+		try{
+			return discussionDao.getTopics(classId,subjectId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPICS, "Fail to Fetch list of Discussion Topics", exception);
         }
 	}
 

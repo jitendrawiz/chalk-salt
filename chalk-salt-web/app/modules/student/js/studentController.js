@@ -102,9 +102,9 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     //* Admin Controller
     
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
-      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic',
+      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic','GetTopicsList',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
-       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic) {
+       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic,GetTopicsList) {
 
  
 		   var showAlert = function(type, message){
@@ -222,6 +222,20 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }, onRequestFailure);
 
      };
+
+     $scope.showTopicDetails = function(classId,subjectId) {
+    	if (!classId) {
+    		if(!subjectId){
+    			return;
+    		}             
+         }
+    	
+         GetTopicsList.query({classId:classId,subjectId:subjectId}, function(response) {
+             $scope.topicsList = response;
+         }, onRequestFailure);
+
+     };
+
      $scope.topicDetails = {};
      this.createTopic = function() {
          
@@ -236,6 +250,10 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }, function(error) {
              showAlert('danger', error.data.message);
          });
+     };
+     
+     this.editTopic=function(securUuid){
+    	 alert(securUuid);
      };
     
      

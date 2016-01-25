@@ -124,10 +124,14 @@ CREATE TABLE `cst_discussion_topics` (
   `topic_title` text,
   `topic_description` text,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_date` datetime DEFAULT NULL,
   `secur_uuid` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`discussion_topic_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_discussion_topics` */
+
+insert  into `cst_discussion_topics`(`discussion_topic_id`,`class_id`,`subject_id`,`topic_title`,`topic_description`,`created_date`,`modified_date`,`secur_uuid`) values (1,1,1,'new topic','new description','2016-01-25 00:00:00',NULL,'79be3f99-077c-41b0-bca6-e78e604dad1e'),(2,1,2,'topic 2','topic desciption','2016-01-25 00:00:00',NULL,'b738c616-a1b5-467d-9f76-a6100954b4e2');
 
 /*Data for the table `cst_discussion_topics` */
 

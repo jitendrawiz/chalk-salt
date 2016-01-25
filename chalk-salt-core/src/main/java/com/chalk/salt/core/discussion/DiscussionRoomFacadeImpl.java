@@ -25,19 +25,37 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.saveTopic(discussionDetails);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopics()
+	 */
 	@Override
 	public List<DiscussionDto> getTopics() throws DiscussionException {
 		return discussionManager.getTopics();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopic(java.lang.String)
+	 */
 	@Override
 	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
 		return discussionManager.getTopic(securUuid);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#deleteTopic(java.lang.String)
+	 */
 	@Override
 	public Boolean deleteTopic(String securUuid) throws DiscussionException {
 		return discussionManager.deleteTopic(securUuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopics(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DiscussionDto> getTopics(String classId, String subjectId)
+			throws DiscussionException {
+		return discussionManager.getTopics(classId,subjectId);
 	}
 
 }

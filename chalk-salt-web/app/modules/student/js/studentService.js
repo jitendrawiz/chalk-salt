@@ -56,4 +56,16 @@ define([ 'angular' ], function(angular) {
         });
         } ]);    
         
+    studentService.factory('GetTopicsList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/:classId/:subjectId',{
+            classId : '@classId',
+            subjectId:'@subjectId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
+    
 });

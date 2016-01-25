@@ -37,6 +37,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopics()
+	 */
 	@Override
 	public List<DiscussionDto> getTopics() throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
@@ -49,6 +52,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopic(java.lang.String)
+	 */
 	@Override
 	public DiscussionDto getTopic(String securUuid) throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
@@ -62,6 +68,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#deleteTopic(java.lang.String)
+	 */
 	@Override
 	public void deleteTopic(String securUuid) throws Exception {
 		final String sqlQuery = "delete from cst_discussion_topics where secur_uuid=:securUuid";
@@ -71,6 +80,24 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("securUuid", securUuid);
             query.executeUpdate();
             
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopics(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DiscussionDto> getTopics(String classId, String subjectId)
+			throws Exception {
+		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
+				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
+				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics` where class_id=:classId and subject_id =:subjectId";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(DiscussionDto.class);
         }
 	}
 }

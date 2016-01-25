@@ -80,6 +80,12 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the topics.
+     *
+     * @return the topics
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topics")
     @Produces(MediaType.APPLICATION_JSON)
@@ -98,6 +104,13 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the topic.
+     *
+     * @param securUuid the secur uuid
+     * @return the topic
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topic/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -120,6 +133,13 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Delete topic.
+     *
+     * @param securUuid the secur uuid
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topic/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -138,4 +158,31 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+    
+    /**
+     * Gets the topics using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the topics using ids
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/topics/{classId}/{subjectId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response getTopicsUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws DiscussionException{
+    	
+    	List<DiscussionModel> discussionTopics = null;
+    	List<DiscussionDto> discussionTopicList = null;
+    	try{
+    		discussionTopicList = discussionRoomFacade.getTopics(classId,subjectId);
+    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionModel.class);
+            return Response.ok(discussionTopics).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
 }
