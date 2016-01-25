@@ -68,4 +68,16 @@ define([ 'angular' ], function(angular) {
         });
         } ]); 
     
+    studentService.factory('GetTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topic/:securUuid',{
+            securUuid : '@securUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
+    
+    
 });

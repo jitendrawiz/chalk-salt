@@ -102,9 +102,9 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     //* Admin Controller
     
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
-      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic','GetTopicsList',
+      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic','GetTopicsList','GetTopicDetailsService',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
-       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic,GetTopicsList) {
+       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic,GetTopicsList,GetTopicDetailsService) {
 
  
 		   var showAlert = function(type, message){
@@ -253,9 +253,15 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
      };
      
      this.editTopic=function(securUuid){
-    	 alert(securUuid);
-     };
-    
-     
-   }]);
-});
+    	 GetTopicDetailsService.get({securUuid:securUuid},  function(response) {
+             if(response){
+             	 $scope.topicDetails = response;
+             	 console.log($scope.topicDetails);
+             	 $scope.setTab(4);
+             	 }
+         }, function(error) {
+         	showAlert('danger',error.data.message);
+         }
+   )};
+}]);
+});    
