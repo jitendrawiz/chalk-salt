@@ -104,4 +104,20 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#updateTopic(com.chalk.salt.common.dto.DiscussionDto)
+	 */
+	@Override
+	public void updateTopic(DiscussionDto discussionDetails) throws DiscussionException {
+		logger.info("Update discussion room topic.......");
+		try {
+			final Date date = new Date();
+			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+			discussionDetails.setCreatedDate(modifiedDate);
+			discussionDao.updateTopic(discussionDetails);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_UPDATE_DISCUSSION_TOPIC, "Fail to update Discussion Topic", exception);
+        }
+	}
+
 }

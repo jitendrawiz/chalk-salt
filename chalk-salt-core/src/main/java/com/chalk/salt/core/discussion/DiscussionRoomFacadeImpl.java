@@ -58,4 +58,12 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.getTopics(classId,subjectId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#updateTopic(com.chalk.salt.common.dto.DiscussionDto)
+	 */
+	@Override
+	public void updateTopic(DiscussionDto discussionDetails) throws DiscussionException {
+		discussionManager.updateTopic(discussionDetails);
+	}
+
 }

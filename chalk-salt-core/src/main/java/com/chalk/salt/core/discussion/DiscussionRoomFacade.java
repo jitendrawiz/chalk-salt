@@ -55,4 +55,12 @@ public interface DiscussionRoomFacade {
 	 */
 	List<DiscussionDto> getTopics(String classId, String subjectId)throws DiscussionException;
 
+	/**
+	 * Update topic.
+	 *
+	 * @param discussionDetails the discussion details
+	 * @throws DiscussionException the discussion exception
+	 */
+	void updateTopic(DiscussionDto discussionDetails)throws DiscussionException;
+
 }

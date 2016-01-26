@@ -52,5 +52,13 @@ public interface DiscussionRoomDao {
 	 * @throws Exception the exception
 	 */
 	List<DiscussionDto> getTopics(String classId, String subjectId)throws Exception;
+
+	/**
+	 * Update topic.
+	 *
+	 * @param discussionDetails the discussion details
+	 * @throws Exception the exception
+	 */
+	void updateTopic(DiscussionDto discussionDetails)throws Exception;
 	
 }

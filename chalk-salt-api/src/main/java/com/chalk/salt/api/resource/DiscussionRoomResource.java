@@ -60,7 +60,7 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @POST
-    @Path("/discussion/topic")
+    @Path("/discussion/topics")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
@@ -112,7 +112,7 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/topic/{securUuid}")
+    @Path("/discussion/topics/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
@@ -141,7 +141,7 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/topic/{securUuid}")
+    @Path("/discussion/topics/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
@@ -184,5 +184,29 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+
+    /**
+     * Update topic.
+     *
+     * @param discussion the discussion
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
+    @POST
+    @Path("/discussion/topics/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
     
+    public Response updateTopic(final @Valid DiscussionModel discussion)throws DiscussionException{
+    	
+    	DiscussionDto discussionDetails = null;
+    	try{
+    		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
+    		discussionRoomFacade.updateTopic(discussionDetails);    		
+            return Response.ok().build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
 }
