@@ -48,7 +48,7 @@ define([ 'angular' ], function(angular) {
         } ]); 
     
     studentService.factory('createNewTopic', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/discussion/topic',{}, {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics',{}, {
             save : {
                 method : 'POST'
             }
@@ -69,7 +69,7 @@ define([ 'angular' ], function(angular) {
         } ]); 
     
     studentService.factory('GetTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/discussion/topic/:securUuid',{
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/:securUuid',{
             securUuid : '@securUuid'
         }, {
             get : {
