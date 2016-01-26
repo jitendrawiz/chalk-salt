@@ -112,7 +112,7 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/topics/{securUuid}")
+    @Path("/discussion/edittopic/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     

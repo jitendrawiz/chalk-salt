@@ -69,7 +69,7 @@ define([ 'angular' ], function(angular) {
         } ]); 
     
     studentService.factory('GetTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/discussion/topics/:securUuid',{
+        return $resource(ENV.API_END_POINT + 'private/discussion/edittopic/:securUuid',{
             securUuid : '@securUuid'
         }, {
             get : {
