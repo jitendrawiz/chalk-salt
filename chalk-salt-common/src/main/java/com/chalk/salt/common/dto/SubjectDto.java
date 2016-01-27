@@ -7,17 +7,18 @@ package com.chalk.salt.common.dto;
 public class SubjectDto {
 
 	/** The subject id. */
-	private String subjectId;
+	private Integer subjectId;
 
 	/** The subject name. */
 	private String subjectName;
 
+	
 	/**
 	 * Gets the subject id.
 	 *
 	 * @return the subject id
 	 */
-	public String getSubjectId() {
+	public Integer getSubjectId() {
 		return subjectId;
 	}
 
@@ -26,7 +27,7 @@ public class SubjectDto {
 	 *
 	 * @param subjectId the new subject id
 	 */
-	public void setSubjectId(String subjectId) {
+	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
 

@@ -107,14 +107,12 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	@Override
 	public void updateTopic(DiscussionDto discussionDetails) throws Exception {
 		final String sqlQuery = "UPDATE cst_discussion_topics "
-				+ " set `class_id`=:classId, `subject_id`=:subjectId, `topic_title`=:topicTitle, "
+				+ " set `topic_title`=:topicTitle, "
 				+ "`topic_description`=:topicDescription, `modified_date`=:modifiedDate "
 				+ " WHERE secur_uuid=:securUuid LIMIT 1";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
-            query.addParameter("classId", discussionDetails.getClassId());
-            query.addParameter("subjectId", discussionDetails.getSubjectId());
             query.addParameter("topicTitle", discussionDetails.getTopicTitle());
             query.addParameter("topicDescription", discussionDetails.getTopicDescription());
             query.addParameter("modifiedDate", discussionDetails.getModifiedDate());

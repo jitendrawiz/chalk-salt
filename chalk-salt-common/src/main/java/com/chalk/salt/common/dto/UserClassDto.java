@@ -7,27 +7,27 @@ package com.chalk.salt.common.dto;
 public class UserClassDto {
 
 	/** The class id. */
-	private String classId;
+	private Integer classId;
 
 	/** The class name. */
 	private String className;
 
+	
 	/**
 	 * Gets the class id.
 	 *
 	 * @return the class id
 	 */
-	public String getClassId() {
+	public Integer getClassId() {
 		return classId;
 	}
 
 	/**
 	 * Sets the class id.
 	 *
-	 * @param classId
-	 *            the new class id
+	 * @param classId the new class id
 	 */
-	public void setClassId(String classId) {
+	public void setClassId(Integer classId) {
 		this.classId = classId;
 	}
 

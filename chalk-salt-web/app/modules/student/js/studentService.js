@@ -79,5 +79,24 @@ define([ 'angular' ], function(angular) {
         });
         } ]); 
     
-    
+    studentService.factory('deleteTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/deletetopic/:securUuid',{
+            securUuid : '@securUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
+  
+    studentService.factory('updateTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/update',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]);
+  
 });

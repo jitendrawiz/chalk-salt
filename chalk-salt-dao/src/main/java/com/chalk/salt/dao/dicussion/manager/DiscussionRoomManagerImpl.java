@@ -37,7 +37,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		logger.info("Save discussion room topic.......");
 		try {
 			final Date date = new Date();
-			final String createdDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+			final String createdDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 			final String securUuid = UUID.randomUUID().toString();
 			discussionDetails.setSecurUuid(securUuid);
 			discussionDetails.setCreatedDate(createdDate);
@@ -112,8 +112,8 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		logger.info("Update discussion room topic.......");
 		try {
 			final Date date = new Date();
-			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
-			discussionDetails.setCreatedDate(modifiedDate);
+			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			discussionDetails.setModifiedDate(modifiedDate);
 			discussionDao.updateTopic(discussionDetails);
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_UPDATE_DISCUSSION_TOPIC, "Fail to update Discussion Topic", exception);

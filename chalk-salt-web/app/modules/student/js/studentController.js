@@ -102,9 +102,11 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     //* Admin Controller
     
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
-      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList','createNewTopic','GetTopicsList','GetTopicDetailsService',
+      'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
+      'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
-       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,createNewTopic,GetTopicsList,GetTopicDetailsService) {
+       GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
+       createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService) {
 
  
 		   var showAlert = function(type, message){
@@ -123,7 +125,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
         $scope.tab = 1;
 
         $scope.setTab = function(newTab){
-          $scope.tab = newTab;
+          $scope.tab = newTab;          
+          $scope.topicsList={};
         };
 
         $scope.isSet = function(tabNum){
@@ -211,20 +214,31 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          function onRequestFailure(error) {
              showAlert('danger', error.data.message);
      };
-     
+     $scope.topicDetails = {};
+
+     var resetOptions = function() {
+    	 $scope.topicDetails.subjectId = ""; 
+    	 $scope.topicDetails.listsubjectId = ""; 
+     };
+
      
      $scope.showSubjectsList = function(classId) {
     	if (!classId) {
              return;
          }
          GetSubjectsList.query({classId:classId}, function(response) {
+        	 resetOptions();
+        	 $scope.topicsList={};
+        	 console.log(classId);
              $scope.subjectsList = response;
          }, onRequestFailure);
 
      };
 
      $scope.showTopicDetails = function(classId,subjectId) {
+    	 console.log(classId+"--------------------------"+subjectId);
     	if (!classId) {
+    		resetOptions();
     		if(!subjectId){
     			return;
     		}             
@@ -236,7 +250,14 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
      };
 
-     $scope.topicDetails = {};
+         
+     $scope.isEmpty = function(obj) {
+    	 for(var prop in obj) {
+    	      if(obj.hasOwnProperty(prop))
+    	          return false;
+    	  }
+    	  return true;
+     };
      this.createTopic = function() {
          
          createNewTopic.save({}, $scope.topicDetails, function(
@@ -263,5 +284,39 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          	showAlert('danger',error.data.message);
          }
    )};
+   
+   
+//delete topic
+   this.deleteTopic=function(securUuid){
+	   if(confirm("Do you want to delete this topic")){
+  	 deleteTopicDetailsService.get({securUuid:securUuid},  function(response) {
+           if(response){
+           	 console.log(response);
+           	 alert("Topic deleted successfully");
+           	 $state.reload();
+           	// $scope.setTab(4);
+           	 }
+       }, function(error) {
+       	showAlert('danger',error.data.message);
+       })
+       }
+ };
+ //update Topic
+
+this.updateTopic = function() {
+    updateTopicDetailsService.save({}, $scope.topicDetails, function(
+            response) {
+        if (response) {
+            console.log(response);
+            alert("Your Topic is updated successfully");
+        //    $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);                            
+            $state.reload();
+        }
+        
+    }, function(error) {
+        showAlert('danger', error.data.message);
+    });
+};
+
 }]);
 });    

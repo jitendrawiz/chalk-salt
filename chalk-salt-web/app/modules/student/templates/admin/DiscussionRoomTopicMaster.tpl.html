@@ -76,7 +76,7 @@ style="visibility: visible; animation-name: fadeInLeft;">
           <div class="row inner-grid">
             <div class="user_log_detail">
              <form name="topicCreationForm" role="form" action="" method="post" novalidate>
-              <h3>Create New Discussion Room Topic</h3>
+              <h3>Discussion Room Topic</h3>
               <div class="title_name">
               
               	<label class="title_name_class">Class</label><br>
@@ -85,7 +85,7 @@ style="visibility: visible; animation-name: fadeInLeft;">
                 <label class="title_name_des">Topic Description</label>
               </div>
               <div class="title_text">
-              <div class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentClass.$invalid && !topicCreationForm.studentClass.$pristine }">
+              <div ng-if="isEmpty(topicDetails.securUuid)" class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentClass.$invalid && !topicCreationForm.studentClass.$pristine }">
                 <select class="form-control" ng-model="topicDetails.classId" name="studentClass" placeholder="Class"
                 ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true" 
                 ng-change="showSubjectsList(topicDetails.classId)">
@@ -93,15 +93,32 @@ style="visibility: visible; animation-name: fadeInLeft;">
                </select>
             <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
                  </div>
-                <div class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentSubject.$invalid && !topicCreationForm.studentSubject.$pristine }">
+                 <div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentClass.$invalid && !topicCreationForm.studentClass.$pristine }">
+                <select class="form-control" ng-model="topicDetails.classId" disabled="true" name="studentClass" placeholder="Class"
+                ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true" 
+                ng-change="showSubjectsList(topicDetails.classId)">
+                <option value="" disabled>Select Class</option>
+               </select>
+            <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
+                 </div>
+                 
+                 <div ng-if="isEmpty(topicDetails.securUuid)" class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentSubject.$invalid && !topicCreationForm.studentSubject.$pristine }">
                 <select class="form-control" ng-model="topicDetails.subjectId" name="studentSubject" placeholder="Subject"
                 ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
                 <option value="" disabled>Select Subject</option>
                </select>
             <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
                  </div> 
+                  <div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group" ng-class="{ 'has-error' : topicCreationForm.studentSubject.$invalid && !topicCreationForm.studentSubject.$pristine }">
+                <select class="form-control" ng-model="topicDetails.subjectId" disabled="true" name="studentSubject" placeholder="Subject"
+                ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                <option value="" disabled>Select Subject</option>
+               </select>
+            <p ng-show="topicCreationForm.studentClass.$error.required && !topicCreationForm.studentClass.$pristine">Class is required.</p>
+                 </div> 
+                
                  
-                 <div class="form-group"  ng-class="{ 'has-error' : topicCreationForm.topicTitle.$invalid && !topicCreationForm.topicTitle.$pristine }">
+                 <div  class="form-group"  ng-class="{ 'has-error' : topicCreationForm.topicTitle.$invalid && !topicCreationForm.topicTitle.$pristine }">
               	<textarea class="form-control" id="topicTitle" name="topicTitle" ng-model="topicDetails.topicTitle"  type="text" placeholder="Topic Title" required></textarea>
               	<span style="color:red" class="help-block" ng-show="topicCreationForm.topicTitle.$invalid  && !topicCreationForm.topicTitle.$pristine">
               		<span ng-show="topicCreationForm.topicTitle.$error.required">Topic Title is required.</span>           
@@ -113,7 +130,13 @@ style="visibility: visible; animation-name: fadeInLeft;">
               		<span ng-show="topicCreationForm.topicDescription.$error.required">Topic Decription is required.</span>           
               	</span>
              </div>
+             <div ng-if="isEmpty(topicDetails.securUuid)" class="form-group">
                   <button type="button" class="btn btn-secondary btn-block" ng-disabled="topicCreationForm.$invalid" ng-click="adminCtrl.createTopic()">Submit</button>
+             </div>
+              <div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group">
+                  <button type="button" class="btn btn-secondary btn-block" ng-disabled="topicCreationForm.$invalid" ng-click="adminCtrl.updateTopic()">Update</button>
+             </div>
+            
               </div>
               </form>
               

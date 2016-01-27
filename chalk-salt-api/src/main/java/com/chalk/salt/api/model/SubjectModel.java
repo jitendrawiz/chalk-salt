@@ -1,34 +1,35 @@
 package com.chalk.salt.api.model;
 
+/**
+ * The Class SubjectModel.
+ */
 public class SubjectModel extends ApiModel {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7492056214273577170L;
 
 	/** The subject id. */
-	private String subjectId;
+	private Integer subjectId;
 
 	/** The subject name. */
 	private String subjectName;
+
 
 	/**
 	 * Gets the subject id.
 	 *
 	 * @return the subject id
 	 */
-	public String getSubjectId() {
+	public Integer getSubjectId() {
 		return subjectId;
 	}
 
 	/**
 	 * Sets the subject id.
 	 *
-	 * @param subjectId
-	 *            the new subject id
+	 * @param subjectId the new subject id
 	 */
-	public void setSubjectId(String subjectId) {
+	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
 
