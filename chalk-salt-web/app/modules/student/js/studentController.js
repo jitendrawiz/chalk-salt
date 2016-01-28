@@ -2,7 +2,7 @@
 
 define([ 'angular', './studentRouting', './studentService' ], function(angular) {
 
-    var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service']);
+    var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service','Student.discussionroom.controller']);
     
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService',
             function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService) {

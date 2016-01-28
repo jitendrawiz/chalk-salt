@@ -10,7 +10,8 @@ define([ 'require',
          '../modules/home/js/homeController', 
          '../modules/login/js/loginController',
          '../modules/registration/js/registrationController',
-         '../modules/student/js/studentController'],
+         '../modules/student/js/studentController',
+         '../modules/student/modules/discussionroom/controller'],
         function(require, ng) {
             require([ 'domReady' ], function(domReady) {
                 domReady(function() {
