@@ -3,6 +3,7 @@ package com.chalk.salt.dao.discussion;
 import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicStatisticsDto;
 
 /**
  * The Interface DiscussionRoomDao.
@@ -60,5 +61,14 @@ public interface DiscussionRoomDao {
 	 * @throws Exception the exception
 	 */
 	void updateTopic(DiscussionDto discussionDetails)throws Exception;
+
+	/**
+	 * Gets the topics count.
+	 *
+	 * @param classId the class id
+	 * @return the topics count
+	 * @throws Exception the exception
+	 */
+	List<TopicStatisticsDto> getTopicsCount(String classId)throws Exception;
 	
 }

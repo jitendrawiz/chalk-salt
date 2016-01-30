@@ -12,11 +12,11 @@ define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
             url : '/discussionroom/subjects',            
             template : templatediscussionroomsubjects,
             controller : 'DiscussionRoomSubjectsController as disCtrl'
-        }).state('chalkanddust.topics', {
+        }).state('chalkanddust.discussionroomtopics', {
             url : '/discussionroom/topics',
             template : templatediscussionroomtopics,
             controller : 'DiscussionRoomTopicController as topicCtrl'
-        }).state('chalkanddust.comments',{
+        }).state('chalkanddust.discussionroomcomments',{
         	url : '/discussionroom/comments',
             template : templatediscussionroomcomments,
             controller : 'DiscussionRoomCommentsController as commCtrl'        		

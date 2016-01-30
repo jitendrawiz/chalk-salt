@@ -12,7 +12,8 @@
 	"SECURUUID": "securUuid",
 	"USERFULLNAME": "userFullName",
 	"EDITFLAG": "Flag",
-	"USERNAME": "Username"
+	"USERNAME": "Username",
+	"CLASSID": "classId"
 })
 
 .constant("ENV", {

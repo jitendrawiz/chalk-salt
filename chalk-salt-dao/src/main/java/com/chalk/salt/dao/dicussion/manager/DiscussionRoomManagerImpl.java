@@ -7,10 +7,13 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import org.dozer.Mapper;
 import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.discussion.DiscussionRoomDao;
@@ -28,6 +31,11 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
     @Inject
     @AppLogger
     private Logger logger;
+    
+    /** The bean mapper. */
+    @Inject
+    @BeanMapper
+    protected Mapper beanMapper;
 	
 	/* (non-Javadoc)
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#saveTopic(com.chalk.salt.dao.dto.DiscussionDto)
@@ -117,6 +125,20 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			discussionDao.updateTopic(discussionDetails);
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_UPDATE_DISCUSSION_TOPIC, "Fail to update Discussion Topic", exception);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopicsCount(java.lang.String)
+	 */
+	@Override
+	public List<TopicStatisticsDto> getTopicsCount(String classId) throws DiscussionException {
+		logger.info("fetch counts of dicussion topics using subjects ...");
+		
+		try{
+			return  discussionDao.getTopicsCount(classId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COUNT, "Fail to Fetch count of Discussion Topics", exception);
         }
 	}
 

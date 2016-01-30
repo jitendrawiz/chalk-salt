@@ -10,38 +10,52 @@ background-size:100%;
 	position:fixed;
 }
 </style>
-<div><div class="d_head">
+<div ><div class="d_head">
 	<div class="logo">
 	<a href="index.html"><img src="../../../../resources/images/logo.png" /></a>
 	</div>
 	<div class="menu_d_room">
     	<ul>
-        	<li><a href="#"><i class="search_d"></i>Search</a></li>
+    		<li><a ui-sref="chalkanddust.student" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}}</a></li>
+        	<!-- <li><a href="#"><i class="search_d"></i>Search</a></li>
             <li><a href="#"><i class="resent_d"></i>Resent Topic</a></li>
             <li><a href="#"><i class="hottest_d"></i>Hottest Topic</a></li>
             <li><a href="#"><i class="member_d"></i>Member Listing</a></li>
             <li><a href="#"><i class="home_d"></i>Back To Home Page</a></li>
             <li><a href="#"><i class="moderation_d"></i>Moderation Log</a></li>
             <li><a href="#"><i class="register_d"></i>Register</a></li>
-            <li><a href="#"><i class="log_d"></i>Log In</a></li>
+            <li><a href="#"><i class="log_d"></i>Log In</a></li> -->
         </ul>
     </div>
 </div>
 	<div class="clear"></div>
 <div class="table_d">
 	<div class="main_time">
-    	<h5>The time now is: 27/01/2016 17:09:09</h5>
-        <h3><a href="#">Forum Index</a></h3>
+    	<h5>The time now is: {{currentDate | date:'MMM dd, yyyy h:mm a'}}</h5>
+        <h3><a href="#">Subject Index</a></h3>
     </div>
     <table width="100%">
   <tr>
-    <th scope="col" height="40px">no</th>
-    <th scope="col" height="40px">Forums</th>
+    
+    <th scope="col" height="40px">Subjects</th>
     <th scope="col" height="40px">&nbsp;&nbsp;Topics&nbsp;&nbsp;</th>
     <th scope="col" height="40px">&nbsp;&nbsp;Messages&nbsp;&nbsp;</th>
     <th scope="col" height="40px">&nbsp;Last Message&nbsp;</th>
   </tr>
-  <tr>
+  <tbody ng-repeat="item in topicStatistics">
+       <tr ng-click="showing=!showing">
+          
+	    <td><a href="#" ng-click="openTopic(subject.subjectId)">Open Discussion</a><br />
+	    
+	    	<p>{{item.subjectName}}</p></td>
+	    <td align="center">{{item.topics}}</td>
+	    <td align="center">{{item.comments}}</td>
+	    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
+	    &nbsp;&nbsp;</a></td>
+       </tr>
+  </tbody>
+  
+  <!-- <tr>
     <td>1</td>
     <td><a ui-sref="chalkanddust.topics">Open Discussion</a><br />
     	<p>Want to talk about OSBI and SpagoBI? Got great ideas for SpagoBI enhancement? Want to make suggestions? Here is the right place.</p></td>
@@ -149,7 +163,7 @@ background-size:100%;
     <td align="center">814</td>
     <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
     &nbsp;&nbsp;</a></td>
-  </tr>
+  </tr> -->
 </table>
 
     

@@ -8,6 +8,7 @@ import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
@@ -120,5 +121,27 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.executeUpdate();
         }
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopicsCount(java.lang.String)
+	 */
+	@Override
+	public List<TopicStatisticsDto> getTopicsCount(String classId) throws Exception {
+		final String sqlQuery = "SELECT subjects.subject_id as subjectId, subjects.subject_name as subjectName, COUNT(discussion_topic.discussion_topic_id) as topics,"
+				+ " COUNT(discussion_comment.discussion_comment_id) as comments FROM cst_class_subjects AS subjects "
+				+ " JOIN cst_class_subject_mapping AS subject_mapping ON subject_mapping.subject_id = subjects.subject_id"
+				+ " JOIN cst_discussion_topics AS discussion_topic ON discussion_topic.subject_id = subjects.subject_id"
+				+ " JOIN cst_discussion_topic_comments AS discussion_comment ON "
+				+ " discussion_comment.discussion_topic_id = discussion_topic.discussion_topic_id"
+				+ " WHERE subject_mapping.class_id =:classId AND discussion_topic.class_id = subject_mapping.class_id "
+				+ " GROUP BY discussion_topic.class_id, discussion_topic.subject_id, discussion_comment.discussion_topic_id";
+		
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            return query.executeAndFetch(TopicStatisticsDto.class);
+        }
 	}
 }

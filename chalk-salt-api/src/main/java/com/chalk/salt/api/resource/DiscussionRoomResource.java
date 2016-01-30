@@ -23,11 +23,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionModel;
+import com.chalk.salt.api.model.TopicStatisticsModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
@@ -205,6 +207,32 @@ public class DiscussionRoomResource extends AbstractResource {
     		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
     		discussionRoomFacade.updateTopic(discussionDetails);    		
             return Response.ok().build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    /**
+     * Gets the topics count.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the topics count
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/topics/subjects/{studentClassId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response getTopicsCount(@NotBlank @PathParam("studentClassId") final String classId)throws DiscussionException{
+    	
+    	List<TopicStatisticsModel> topicCounts=null;
+    	List<TopicStatisticsDto> topicsStatistics=null;
+    	try{
+    		topicsStatistics = discussionRoomFacade.getTopicsCount(classId);
+    		topicCounts = DozerMapperUtil.mapCollection(beanMapper, topicsStatistics, TopicStatisticsModel.class);
+    		return Response.ok(topicCounts).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }

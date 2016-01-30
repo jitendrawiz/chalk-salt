@@ -39,9 +39,9 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                     if(response){
                     	 $scope.userInfo = response;
                     	 $scope.subjects =$scope.userInfo.subjects;
-
-                    	 $scope.academicInfo =$scope.userInfo.academicInfo;
                     	 
+                    	 $scope.academicInfo =$scope.userInfo.academicInfo;
+                    	 $window.localStorage.setItem(CHALKNDUST.CLASSID,$scope.academicInfo.studentClassId);
                     	 $scope.parentsInfo =$scope.userInfo.parentsInfo;
                     	 $scope.studentSubjects=""; 
                     	 if($scope.subjects!=null){
