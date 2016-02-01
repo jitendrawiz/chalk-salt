@@ -128,14 +128,34 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 */
 	@Override
 	public List<TopicStatisticsDto> getTopicsCount(String classId) throws Exception {
-		final String sqlQuery = "SELECT subjects.subject_id as subjectId, subjects.subject_name as subjectName, COUNT(discussion_topic.discussion_topic_id) as topics,"
-				+ " COUNT(discussion_comment.discussion_comment_id) as comments FROM cst_class_subjects AS subjects "
-				+ " JOIN cst_class_subject_mapping AS subject_mapping ON subject_mapping.subject_id = subjects.subject_id"
-				+ " JOIN cst_discussion_topics AS discussion_topic ON discussion_topic.subject_id = subjects.subject_id"
-				+ " JOIN cst_discussion_topic_comments AS discussion_comment ON "
-				+ " discussion_comment.discussion_topic_id = discussion_topic.discussion_topic_id"
-				+ " WHERE subject_mapping.class_id =:classId AND discussion_topic.class_id = subject_mapping.class_id "
-				+ " GROUP BY discussion_topic.class_id, discussion_topic.subject_id, discussion_comment.discussion_topic_id";
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " subjects.subject_id AS subjectId, "
+				+ " subjects.subject_name AS subjectName,"
+				+ " (SELECT COUNT(cst_discussion_topics.discussion_topic_id) FROM cst_discussion_topics "
+				+ " WHERE cst_discussion_topics.class_id=cst_class_subject_mapping.class_id"
+				+ "  AND cst_discussion_topics.subject_id=cst_class_subject_mapping.subject_id) AS topics,"
+				+ " (SELECT COUNT(cst_discussion_topic_comments.discussion_comment_id) "
+				+ " FROM cst_discussion_topic_comments "
+				+ " INNER JOIN cst_discussion_topics ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
+				+ " WHERE cst_discussion_topics.subject_id = cst_class_subject_mapping.subject_id "
+				+ " )AS comments, "
+				+ " (SELECT "
+				+ " MAX(cst_discussion_topic_comments.modified_date)"
+				+ " FROM "
+				+ " cst_discussion_topics "
+				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topics.discussion_topic_id = cst_discussion_topic_comments.discussion_topic_id "
+				+ " WHERE cst_discussion_topics.subject_id = subjects.subject_id) AS lastModifiedDate, "
+				+ " (SELECT CONCAT(cst_users.first_name,cst_users.middle_name,cst_users.last_name) "
+				+ " FROM cst_discussion_topics "
+				+ " INNER JOIN cst_users ON cst_users.class_id = cst_discussion_topics.class_id "
+				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topics.discussion_topic_id = cst_discussion_topic_comments.discussion_topic_id "
+				+ " WHERE cst_discussion_topics.subject_id = subjects.subject_id "
+				+ " HAVING MAX(cst_discussion_topic_comments.modified_date) "
+				+ " )AS lastModifiedUserName  "
+				+ " FROM cst_class_subjects subjects "
+				+ " JOIN `cst_class_subject_mapping` ON `cst_class_subject_mapping`.subject_id=subjects.subject_id "
+				+ " JOIN cst_discussion_topics topics ON topics.class_id=cst_class_subject_mapping.class_id "
+				+ " WHERE  cst_class_subject_mapping.class_id=:classId ";
 		
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {

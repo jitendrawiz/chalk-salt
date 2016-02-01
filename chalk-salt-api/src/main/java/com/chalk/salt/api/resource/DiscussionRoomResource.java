@@ -172,8 +172,7 @@ public class DiscussionRoomResource extends AbstractResource {
     @GET
     @Path("/discussion/topics/{classId}/{subjectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresAuthentication
-    
+    @RequiresAuthentication    
     public Response getTopicsUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws DiscussionException{
     	
     	List<DiscussionModel> discussionTopics = null;

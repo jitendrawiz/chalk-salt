@@ -26,6 +26,29 @@ public class TopicStatisticsModel extends ApiModel {
 	/** The last modified date. */
 	private String lastModifiedDate;
 	
+	/** The last modified user name. */
+	private String lastModifiedUserName;
+	
+	
+	
+	/**
+	 * Gets the last modified user name.
+	 *
+	 * @return the last modified user name
+	 */
+	public String getLastModifiedUserName() {
+		return lastModifiedUserName;
+	}
+
+	/**
+	 * Sets the last modified user name.
+	 *
+	 * @param lastModifiedUserName the new last modified user name
+	 */
+	public void setLastModifiedUserName(String lastModifiedUserName) {
+		this.lastModifiedUserName = lastModifiedUserName;
+	}
+
 	/**
 	 * Gets the subject id.
 	 *

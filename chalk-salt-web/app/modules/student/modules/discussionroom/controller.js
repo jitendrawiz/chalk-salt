@@ -7,19 +7,19 @@ define([ 'angular', './routing', './service' ], function(angular) {
     			
                 $scope.alert = {};
                 $scope.alert.show = false;
-                $scope.currentDate = new Date;
+                $scope.currentDate = new Date();
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 
-                $scope.topicDetails=[];
-                $scope.topicStatistics="";
-                
-            	GetTopicStatistics.get({studentClassId:$scope.classId},  function(response) {
+              //  $scope.topicDetails=[];
+              //  $scope.topicStatistics="";
+                GetTopicStatistics.query({studentClassId:$scope.classId}, function(response) { 
                     if(response){
-                    	 $scope.topicDetails = response;
-                    	 $scope.topicStatistics = topicDetails[0];
-                    	 console.log($scope.topicStatistics);
+                    	 //$scope.topicDetails = response;
+                    	 $scope.topicStatistics = response;
+                    	// console.log($scope.topicStatistics);
+                    	console.log(response);
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);

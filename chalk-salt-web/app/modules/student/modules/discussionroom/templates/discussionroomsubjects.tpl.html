@@ -45,13 +45,12 @@ background-size:100%;
   <tbody ng-repeat="item in topicStatistics">
        <tr ng-click="showing=!showing">
           
-	    <td><a href="#" ng-click="openTopic(subject.subjectId)">Open Discussion</a><br />
-	    
-	    	<p>{{item.subjectName}}</p></td>
-	    <td align="center">{{item.topics}}</td>
-	    <td align="center">{{item.comments}}</td>
-	    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-	    &nbsp;&nbsp;</a></td>
+	    <td align="center">
+	    <h1><a href="#" ng-click="openTopic(item.subjectId)">{{item.subjectName}}</a></h1></td>
+	    <td align="center">{{item.topics}}<span class="empty" ng-show="!item.topics">N/A</span></td>
+	    <td align="center">{{item.comments}}<span class="empty" ng-show="!item.comments">N/A</span></td>
+	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a href="#">{{item.lastModifiedUserName}}
+	    &nbsp;&nbsp;</a>  <span class="empty" ng-show="!item.lastModifiedDate">N/A</span></td>
        </tr>
   </tbody>
   
