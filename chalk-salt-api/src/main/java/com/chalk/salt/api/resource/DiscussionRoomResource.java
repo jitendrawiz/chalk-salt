@@ -23,12 +23,14 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionModel;
+import com.chalk.salt.api.model.TopicDetailsModel;
 import com.chalk.salt.api.model.TopicStatisticsModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.DozerMapperUtil;
@@ -236,4 +238,22 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+    
+    @GET
+    @Path("/discussion/topics/statistics/{classId}/{subjectId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getTopicDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws DiscussionException{
+    	
+    	List<TopicDetailsModel> discussionTopics = null;
+    	List<TopicDetailsDto> discussionTopicList = null;
+    	try{
+    		discussionTopicList = discussionRoomFacade.getTopicDetails(classId,subjectId);
+    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, TopicDetailsModel.class);
+            return Response.ok(discussionTopics).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
 }

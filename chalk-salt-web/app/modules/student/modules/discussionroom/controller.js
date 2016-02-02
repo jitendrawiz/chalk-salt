@@ -12,13 +12,9 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 
-              //  $scope.topicDetails=[];
-              //  $scope.topicStatistics="";
                 GetTopicStatistics.query({studentClassId:$scope.classId}, function(response) { 
                     if(response){
-                    	 //$scope.topicDetails = response;
                     	 $scope.topicStatistics = response;
-                    	// console.log($scope.topicStatistics);
                     	console.log(response);
                     }
                 }, function(error) {
@@ -45,13 +41,13 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 
             } ]);
 
-    module.controller('DiscussionRoomTopicController', [ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams',
+    module.controller('DiscussionRoomTopicController', [ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService',
             
-            function($scope, CHALKNDUST, $state, $window,$stateParams) {
+            function($scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
-                
+                $scope.currentDate = new Date();
                 
                 var showAlert = function(type, message) {
                     $scope.alert = {};
@@ -68,8 +64,20 @@ define([ 'angular', './routing', './service' ], function(angular) {
 
                     return true;
                 };
-                var subjectId = $stateParams.subjectId;
-console.log(subjectId);
+                $scope.subjectId = $stateParams.subjectId;
+                $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
+                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+                $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                
+                GetTopicsService.query({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
+                    if(response){
+                    	 $scope.topicDetails = response;
+                    	console.log(response);
+                    }
+                }, function(error) {
+                	showAlert('danger',error.data.message);
+                });
+                
                 
             } ]);
 

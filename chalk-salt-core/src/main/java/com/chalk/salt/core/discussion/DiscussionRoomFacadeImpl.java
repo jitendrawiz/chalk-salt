@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager;
@@ -73,6 +74,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	@Override
 	public List<TopicStatisticsDto> getTopicsCount(String classId) throws DiscussionException {
 		return discussionManager.getTopicsCount(classId);
+	}
+
+	@Override
+	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws DiscussionException {
+		return discussionManager.getTopicDetails(classId, subjectId);
 	}
 
 }

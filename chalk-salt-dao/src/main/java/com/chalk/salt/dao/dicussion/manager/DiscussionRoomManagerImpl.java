@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -139,6 +140,17 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			return  discussionDao.getTopicsCount(classId);
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COUNT, "Fail to Fetch count of Discussion Topics", exception);
+        }
+	}
+
+	@Override
+	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws DiscussionException {
+		logger.info("fetch details of dicussion topics using class and subject ...");
+		
+		try{
+			return  discussionDao.getTopicDetails(classId, subjectId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
         }
 	}
 

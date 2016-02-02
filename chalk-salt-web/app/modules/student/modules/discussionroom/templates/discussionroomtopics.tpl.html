@@ -14,24 +14,17 @@ background-size:100%;
 	<div class="logo">
 	<a href="index.html"><img src="../../../../resources/images/logo.png" /></a>
 	</div>
-	<div class="menu_d_room">
+	<div class="menu_d_room" align="right">
     	<ul>
-        	<li><a href="#"><i class="search_d"></i>Search</a></li>
-            <li><a href="#"><i class="resent_d"></i>Resent Topic</a></li>
-            <li><a href="#"><i class="hottest_d"></i>Hottest Topic</a></li>
-            <li><a href="#"><i class="member_d"></i>Member Listing</a></li>
-            <li><a href="#"><i class="home_d"></i>Back To Home Page</a></li>
-            <li><a href="#"><i class="moderation_d"></i>Moderation Log</a></li>
-            <li><a href="#"><i class="register_d"></i>Register</a></li>
-            <li><a href="#"><i class="log_d"></i>Log In</a></li>
+        	<li><a ui-sref="chalkanddust.student" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}}</a></li>
         </ul>
     </div>
 </div>
 	<div class="clear"></div>
 <div class="table_d">
 	<div class="main_time">
-    	<h5>The time now is: 27/01/2016 17:09:09</h5>
-        <h3><a href="#">Forum Index</a> &raquo;&nbsp;<a href="#">Open Discussion</a></h3>
+    	<h5>The time now is: {{currentDate | date:'MMM dd, yyyy h:mm a'}}</h5>
+        <h3><a href="#">Subject Index</a> &raquo;&nbsp;<a href="#">Open Discussion</a></h3>
     </div>
     	<div class="clear"></div>
     <div class="number_scroll">
@@ -55,160 +48,18 @@ background-size:100%;
         </div>
     </div>
     <table width="100%">
-  <tr>
-    <th scope="col" height="40px" width="20px">no</th>
-    <th scope="col" height="40px" width="770px">Topic</th>
-    <th scope="col" height="40px" width="85px">&nbsp;&nbsp;Answers &nbsp;&nbsp;</th>
-    <th scope="col" height="40px" width="85px">&nbsp;&nbsp;Auther&nbsp;&nbsp;</th>
-    <th scope="col" height="40px" width="65px">&nbsp;&nbsp;Views &nbsp;&nbsp;</th>
-    <th scope="col" height="40px" width="160px">&nbsp;Last Message&nbsp;</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a ui-sref="chalkanddust.comments">Welcome !!!</a></td>
-    <td align="center">0</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">2214</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">Posting guidelines</a></td>
-    <td align="center">0</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">2343</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">DataSource with MongoDB</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">DataSource with MongoDB</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">admin user can't see Datasets tab</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">How to fetch the exact href for a spagoBI document</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">Error connecting SpagoBI to Vertica data source</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">How to run SpagoBI as service?</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">Is SpagoBI Active or Dead?</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">Group Dataset</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">The dataset window does not display any saved/existing datasets</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">SpagoBI Studio - Reports or BIRT reports</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">New version SpagoBI</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">Values reports</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">An error has occurred. Retry later. If the problems persists, contact the system administrator.</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td><a href="#">External Cross Navigation in composite document doesn't work.</a></td>
-    <td align="center">3</td>
-    <td align="center"><a href="#">cazzin</a></td>
-    <td align="center">4536</td>
-    <td align="center" class="center_d"><p>25/01/2016 18:53:45</p><a href="#">velmuruganms12.spw
-    &nbsp;&nbsp;</a></td>
-  </tr>
-  
-  
+	  <tr>
+	    <th scope="col" height="40px" width="770px">Topic</th>
+	    <th scope="col" height="40px" width="85px">&nbsp;&nbsp;Comments &nbsp;&nbsp;</th>
+	    <th scope="col" height="40px" width="160px">&nbsp;Last Message&nbsp;</th>
+	  </tr>
+	  <tbody ng-repeat="item in topicDetails">
+       <tr ng-click="showing=!showing">
+	    <td><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.topicTitle}}</a></td>
+	    <td align="center">{{item.comments}}</td>
+	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a ui-sref="chalkanddust.student">{{item.lastModifiedUserName}}
+	    &nbsp;&nbsp;</a></td>
+	   </tr>  
 </table>
 <div class="number_scroll">
     	<button><a href="#">New Post</a></button>

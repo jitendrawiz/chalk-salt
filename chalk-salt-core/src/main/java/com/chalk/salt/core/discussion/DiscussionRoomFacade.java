@@ -3,6 +3,7 @@ package com.chalk.salt.core.discussion;
 import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 
@@ -72,5 +73,15 @@ public interface DiscussionRoomFacade {
 	 * @throws DiscussionException the discussion exception
 	 */
 	List<TopicStatisticsDto> getTopicsCount(String classId)throws DiscussionException;
+
+	/**
+	 * Gets the topic details.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the topic details
+	 * @throws DiscussionException the discussion exception
+	 */
+	List<TopicDetailsDto> getTopicDetails(String classId, String subjectId)throws DiscussionException;
 
 }
