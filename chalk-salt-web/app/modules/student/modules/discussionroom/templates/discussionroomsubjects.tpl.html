@@ -46,7 +46,7 @@ background-size:100%;
        <tr ng-click="showing=!showing">
           
 	    <td align="center">
-	    <h1><a href="#" ng-click="openTopic(item.subjectId)">{{item.subjectName}}</a></h1></td>
+	    <h1><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.subjectName}}</a></h1></td>
 	    <td align="center">{{item.topics}}<span class="empty" ng-show="!item.topics">N/A</span></td>
 	    <td align="center">{{item.comments}}<span class="empty" ng-show="!item.comments">N/A</span></td>
 	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a href="#">{{item.lastModifiedUserName}}

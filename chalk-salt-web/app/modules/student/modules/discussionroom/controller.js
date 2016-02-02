@@ -42,16 +42,12 @@ define([ 'angular', './routing', './service' ], function(angular) {
                     return true;
                 };
                 
-                $scope.openTopic = function(subjectId) {
-                	alert(subjectId);
-                	$state.go('chalkanddust.discussionroomtopics');
-                };
                 
             } ]);
 
-    module.controller('DiscussionRoomTopicController', [ '$scope', 'CHALKNDUST', '$state',  '$window',
+    module.controller('DiscussionRoomTopicController', [ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams',
             
-            function($scope, CHALKNDUST, $state, $window) {
+            function($scope, CHALKNDUST, $state, $window,$stateParams) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -72,7 +68,8 @@ define([ 'angular', './routing', './service' ], function(angular) {
 
                     return true;
                 };
-
+                var subjectId = $stateParams.subjectId;
+console.log(subjectId);
                 
             } ]);
 

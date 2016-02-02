@@ -13,7 +13,7 @@ define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
             template : templatediscussionroomsubjects,
             controller : 'DiscussionRoomSubjectsController as disCtrl'
         }).state('chalkanddust.discussionroomtopics', {
-            url : '/discussionroom/topics',
+            url : '/discussionroom/topics/:subjectId',
             template : templatediscussionroomtopics,
             controller : 'DiscussionRoomTopicController as topicCtrl'
         }).state('chalkanddust.discussionroomcomments',{
