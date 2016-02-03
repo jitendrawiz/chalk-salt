@@ -174,7 +174,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws Exception {
 
-		final String sqlQuery = "SELECT DISTINCT topic_title AS topicTitle,  "
+		final String sqlQuery = "SELECT DISTINCT topic_title AS topicTitle,discussion_topic_id AS topicId,  "
 				+ "(SELECT COUNT(cst_discussion_topic_comments.discussion_comment_id) "
 				+ "FROM cst_discussion_topic_comments "
 				+ "WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id"
@@ -215,5 +215,12 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("commentUuid", discussionComment.getCommentUuid());
             query.executeUpdate();
         }
+	}
+
+	@Override
+	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
+			String subjectId, String topicId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

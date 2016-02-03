@@ -43,7 +43,7 @@ background-size:100%;
 	  </tr>
 	  <tbody>
        <tr ng-repeat="item in topicDetails | filter:search" >
-	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({subjectId: item.subjectId})">{{item.topicTitle}}</a></td>
+	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a></td>
 	    <td align="center">{{item.comments}}</td>
 	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a ui-sref="chalkanddust.student">{{item.lastModifiedUserName}}
 	    &nbsp;&nbsp;</a></td>

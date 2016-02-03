@@ -17,7 +17,7 @@ define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
             template : templatediscussionroomtopics,
             controller : 'DiscussionRoomTopicController as topicCtrl'
         }).state('chalkanddust.discussionroomcomments',{
-        	url : '/discussionroom/comments',
+        	url : '/discussionroom/comments/:topicId',
             template : templatediscussionroomcomments,
             controller : 'DiscussionRoomCommentsController as commCtrl'        		
         });

@@ -88,10 +88,22 @@ public interface DiscussionRoomFacade {
 	/**
 	 * Save comments.
 	 *
-	 * @param discussionDetails the discussion details
+	 * @param discussionComment the discussion comment
 	 * @return the string
 	 * @throws DiscussionException the discussion exception
 	 */
 	String saveComments(DiscussionCommentDto discussionComment)throws DiscussionException;
+
+	/**
+	 * Gets the topic comment details.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param topicId the topic id
+	 * @return the topic comment details
+	 * @throws DiscussionException the discussion exception
+	 */
+	List<DiscussionCommentDto> getTopicCommentDetails(String classId,
+			String subjectId, String topicId)throws DiscussionException;;
 
 }

@@ -28,4 +28,21 @@ define([ 'angular' ], function(angular) {
         
     }]);
     
+    
+    
+    
+    module.factory('GetCommmentsOfTopicService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/comments/statistics/:classId/:subjectId/:topicId',{
+            classId : '@classId',
+            subjectId : '@subjectId',
+            topicId :'@topicId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        
+    }]);
+    
 });

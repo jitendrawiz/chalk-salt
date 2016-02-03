@@ -69,6 +69,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                $window.localStorage.setItem(CHALKNDUST.SUBJECTID,$scope.subjectId);
                 
                 GetTopicsService.query({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
                     if(response){
@@ -102,14 +103,18 @@ define([ 'angular', './routing', './service' ], function(angular) {
             '$scope',
             'CHALKNDUST',
             '$state',
-            '$window',
-            function($scope, CHALKNDUST,$state,$window) {
+            '$stateParams',
+            '$window','GetCommmentsOfTopicService',
+            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService) {
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+                $scope.topicId = $stateParams.topicId;
+                
                 var showAlert = function(type, message) {
                     $scope.alert = {};
                     $scope.alert.type = type;
@@ -125,6 +130,33 @@ define([ 'angular', './routing', './service' ], function(angular) {
 
                     return true;
                 };
+                
+                GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
+                    if(response){
+                    	$scope.commentsList = response;
+                    	console.log(response);
+                    	$scope.totalItems = $scope.commentsList.length;
+                        $scope.currentPage = 1;
+                        $scope.itemsPerPage = 10;
+
+                        $scope.setPage = function(pageNo) {
+                            $scope.currentPage = pageNo;
+                        };
+
+                        $scope.pageCount = function() {
+                            return Math.ceil($scope.domains.length / $scope.itemsPerPage);
+                        };
+
+                        $scope.$watch('currentPage + itemsPerPage', function() {
+                            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+                            $scope.commentListDetails = $scope.commentsList.slice(begin, end);
+                        });
+                    }
+                }, function(error) {
+                	showAlert('danger',error.data.message);
+                });
+                //showAlert('Success',$scope.topicId);
+               // alert($scope.topicId);
 
             } ]);
 

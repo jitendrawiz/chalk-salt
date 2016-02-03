@@ -145,6 +145,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopicDetails(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws DiscussionException {
 		logger.info("fetch details of dicussion topics using class and subject ...");
@@ -156,6 +159,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#saveComments(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
 	@Override
 	public String saveComments(DiscussionCommentDto discussionComment) throws DiscussionException {
 		logger.info("Save discussion comment .......");
@@ -172,6 +178,20 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			return commentUuid;
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to Save Discussion Comment", exception);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopicCommentDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
+			String subjectId, String topicId) throws DiscussionException {
+		logger.info("fetch details of dicussion topics comments using class, subject and topic ...");
+		try{
+			return  discussionDao.getTopicCommentDetails(classId, subjectId,topicId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COMMENTS_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
         }
 	}
 

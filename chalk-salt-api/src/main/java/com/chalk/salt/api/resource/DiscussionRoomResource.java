@@ -265,6 +265,37 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    
+    /**
+     * Gets the topic comment details.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param topicId the topic id
+     * @return the topic comment details
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/comments/statistics/{classId}/{subjectId}/{topicId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getTopicCommentDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId,
+    		@NotBlank @PathParam("topicId") final String topicId)throws DiscussionException{
+    	
+    	List<DiscussionCommentModel> discussionComments = null;
+    	List<DiscussionCommentDto> discussionCommentsList = null;
+    	try{
+    		discussionCommentsList = discussionRoomFacade.getTopicCommentDetails(classId,subjectId,topicId);
+    		discussionComments = DozerMapperUtil.mapCollection(beanMapper, discussionCommentsList, DiscussionCommentModel.class);
+            return Response.ok(discussionComments).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    
+    
+    
     /**
      * Save comments.
      *

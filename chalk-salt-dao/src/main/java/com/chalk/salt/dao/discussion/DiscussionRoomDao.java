@@ -90,5 +90,17 @@ public interface DiscussionRoomDao {
 	 * @throws Exception the exception
 	 */
 	void saveComments(DiscussionCommentDto discussionComment)throws Exception;
+
+	/**
+	 * Gets the topic comment details.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param topicId the topic id
+	 * @return the topic comment details
+	 * @throws Exception the exception
+	 */
+	List<DiscussionCommentDto> getTopicCommentDetails(String classId,
+			String subjectId, String topicId)throws Exception;
 	
 }

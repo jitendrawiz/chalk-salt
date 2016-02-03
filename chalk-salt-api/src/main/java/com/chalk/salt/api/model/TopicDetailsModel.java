@@ -19,6 +19,27 @@ public class TopicDetailsModel extends ApiModel{
 	
 	/** The last modified user name. */
 	private String lastModifiedUserName;
+	/** The topic id. */
+	private Integer topicId;
+	
+	
+	/**
+	 * Gets the topic id.
+	 *
+	 * @return the topic id
+	 */
+	public Integer getTopicId() {
+		return topicId;
+	}
+
+	/**
+	 * Sets the topic id.
+	 *
+	 * @param topicId the new topic id
+	 */
+	public void setTopicId(Integer topicId) {
+		this.topicId = topicId;
+	}
 
 	/**
 	 * Gets the topic title.

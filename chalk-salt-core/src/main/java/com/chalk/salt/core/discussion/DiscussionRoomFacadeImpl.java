@@ -77,14 +77,29 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.getTopicsCount(classId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopicDetails(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws DiscussionException {
 		return discussionManager.getTopicDetails(classId, subjectId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#saveComments(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
 	@Override
 	public String saveComments(DiscussionCommentDto discussionComment) throws DiscussionException {
 		return discussionManager.saveComments(discussionComment);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopicCommentDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
+			String subjectId, String topicId) throws DiscussionException {
+		return discussionManager.getTopicCommentDetails(classId, subjectId,topicId);
 	}
 
 }
