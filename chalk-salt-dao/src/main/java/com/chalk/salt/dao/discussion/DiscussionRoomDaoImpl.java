@@ -24,8 +24,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	public void saveTopic(DiscussionDto discussionDetails) throws Exception {
 
 		final String sqlQuery = "INSERT into cst_discussion_topics "
-				+ " (`class_id`, `subject_id`, `topic_title`, `topic_description`, `created_date`, `secur_uuid`) "
-				+ " VALUES(:classId, :subjectId, :topicTitle, :topicDescription, :createdDate, :securUuid)";
+				+ " (`class_id`, `subject_id`, `topic_title`, `topic_description`, `created_date`, `secur_uuid`,modified_date) "
+				+ " VALUES(:classId, :subjectId, :topicTitle, :topicDescription, :createdDate, :securUuid,:modifiedDate)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -35,6 +35,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("topicDescription", discussionDetails.getTopicDescription());
             query.addParameter("createdDate", discussionDetails.getCreatedDate());
             query.addParameter("securUuid", discussionDetails.getSecurUuid());
+            query.addParameter("modifiedDate", discussionDetails.getModifiedDate());
             query.executeUpdate();
         }
 	}

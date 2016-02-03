@@ -42,8 +42,8 @@ background-size:100%;
     <th scope="col" height="40px">&nbsp;&nbsp;Messages&nbsp;&nbsp;</th>
     <th scope="col" height="40px">&nbsp;Last Message&nbsp;</th>
   </tr>
-  <tbody ng-repeat="item in topicStatistics">
-       <tr ng-click="showing=!showing">
+  <tbody>
+       <tr ng-repeat="item in topicStatistics">
           
 	    <td align="center">
 	    <h1><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.subjectName}}</a></h1></td>

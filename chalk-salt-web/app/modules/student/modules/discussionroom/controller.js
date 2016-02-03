@@ -64,6 +64,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
 
                     return true;
                 };
+                               
                 $scope.subjectId = $stateParams.subjectId;
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
@@ -71,8 +72,24 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 
                 GetTopicsService.query({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
                     if(response){
-                    	 $scope.topicDetails = response;
+                    	$scope.topicList = response;
                     	console.log(response);
+                    	$scope.totalItems = $scope.topicList.length;
+                        $scope.currentPage = 1;
+                        $scope.itemsPerPage = 10;
+
+                        $scope.setPage = function(pageNo) {
+                            $scope.currentPage = pageNo;
+                        };
+
+                        $scope.pageCount = function() {
+                            return Math.ceil($scope.domains.length / $scope.itemsPerPage);
+                        };
+
+                        $scope.$watch('currentPage + itemsPerPage', function() {
+                            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+                            $scope.topicDetails = $scope.topicList.slice(begin, end);
+                        });
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);

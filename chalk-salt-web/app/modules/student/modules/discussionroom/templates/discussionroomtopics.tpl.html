@@ -23,28 +23,16 @@ background-size:100%;
 	<div class="clear"></div>
 <div class="table_d">
 	<div class="main_time">
+	<br/>
     	<h5>The time now is: {{currentDate | date:'MMM dd, yyyy h:mm a'}}</h5>
-        <h3><a href="#">Subject Index</a> &raquo;&nbsp;<a href="#">Open Discussion</a></h3>
+        
     </div>
     	<div class="clear"></div>
     <div class="number_scroll">
-    	<button><a href="#">New Post</a></button>
-        <input name="search" type="text" placeholder="search these frums..." /><button><a href="#">search</a></button>
+    	
+        <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
         <div class="num_s">
-        	<ul>
-            	<li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="#">8</a></li>
-                <li><a href="#">9</a></li>
-                <li><a href="#">10</a></li>
-                <li><a href="#">&raquo;</a></li>
-                <li><a href="#">go</a></li>
-            </ul>
+        	<pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></pagination>
         </div>
     </div>
     <table width="100%">
@@ -53,32 +41,17 @@ background-size:100%;
 	    <th scope="col" height="40px" width="85px">&nbsp;&nbsp;Comments &nbsp;&nbsp;</th>
 	    <th scope="col" height="40px" width="160px">&nbsp;Last Message&nbsp;</th>
 	  </tr>
-	  <tbody ng-repeat="item in topicDetails">
-       <tr ng-click="showing=!showing">
-	    <td><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.topicTitle}}</a></td>
+	  <tbody>
+       <tr ng-repeat="item in topicDetails | filter:search" >
+	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({subjectId: item.subjectId})">{{item.topicTitle}}</a></td>
 	    <td align="center">{{item.comments}}</td>
 	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a ui-sref="chalkanddust.student">{{item.lastModifiedUserName}}
 	    &nbsp;&nbsp;</a></td>
 	   </tr>  
 </table>
-<div class="number_scroll">
-    	<button><a href="#">New Post</a></button>
-        <input name="search" type="text" placeholder="search these frums..." /><button><a href="#">search</a></button>
+<div class="number_scroll">     
         <div class="num_s">
-        	<ul>
-            	<li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="#">8</a></li>
-                <li><a href="#">9</a></li>
-                <li><a href="#">10</a></li>
-                <li><a href="#">&raquo;</a></li>
-                <li><a href="#">go</a></li>
-            </ul>
+        	<pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></pagination>
         </div>
     </div>
 

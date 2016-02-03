@@ -50,6 +50,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			final String securUuid = UUID.randomUUID().toString();
 			discussionDetails.setSecurUuid(securUuid);
 			discussionDetails.setCreatedDate(createdDate);
+			discussionDetails.setModifiedDate(createdDate);
 			discussionDao.saveTopic(discussionDetails);
 			return securUuid;
 			
