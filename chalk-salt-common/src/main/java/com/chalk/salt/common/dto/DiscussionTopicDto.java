@@ -3,7 +3,7 @@ package com.chalk.salt.common.dto;
 /**
  * The Class DiscussionDto.
  */
-public class DiscussionDto {
+public class DiscussionTopicDto {
 
 	/** The discussion topic id. */
 	private Integer discussionTopicId;

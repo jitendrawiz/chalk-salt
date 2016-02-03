@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -23,7 +24,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#saveTopic(com.chalk.salt.dao.dto.DiscussionDto)
 	 */
 	@Override
-	public String saveTopic(DiscussionDto discussionDetails) throws DiscussionException {
+	public String saveTopic(DiscussionTopicDto discussionDetails) throws DiscussionException {
 		return discussionManager.saveTopic(discussionDetails);
 	}
 
@@ -31,7 +32,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopics()
 	 */
 	@Override
-	public List<DiscussionDto> getTopics() throws DiscussionException {
+	public List<DiscussionTopicDto> getTopics() throws DiscussionException {
 		return discussionManager.getTopics();
 	}
 
@@ -39,7 +40,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopic(java.lang.String)
 	 */
 	@Override
-	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
+	public DiscussionTopicDto getTopic(String securUuid) throws DiscussionException {
 		return discussionManager.getTopic(securUuid);
 	}
 
@@ -55,7 +56,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopics(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<DiscussionDto> getTopics(String classId, String subjectId)
+	public List<DiscussionTopicDto> getTopics(String classId, String subjectId)
 			throws DiscussionException {
 		return discussionManager.getTopics(classId,subjectId);
 	}
@@ -64,7 +65,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#updateTopic(com.chalk.salt.common.dto.DiscussionDto)
 	 */
 	@Override
-	public void updateTopic(DiscussionDto discussionDetails) throws DiscussionException {
+	public void updateTopic(DiscussionTopicDto discussionDetails) throws DiscussionException {
 		discussionManager.updateTopic(discussionDetails);
 	}
 
@@ -79,6 +80,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws DiscussionException {
 		return discussionManager.getTopicDetails(classId, subjectId);
+	}
+
+	@Override
+	public String saveComments(DiscussionCommentDto discussionComment) throws DiscussionException {
+		return discussionManager.saveComments(discussionComment);
 	}
 
 }

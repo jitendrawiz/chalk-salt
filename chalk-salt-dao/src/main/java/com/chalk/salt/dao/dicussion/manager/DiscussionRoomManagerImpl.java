@@ -12,7 +12,8 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -42,7 +43,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#saveTopic(com.chalk.salt.dao.dto.DiscussionDto)
 	 */
 	@Override
-	public String saveTopic(DiscussionDto discussionDetails) throws DiscussionException {
+	public String saveTopic(DiscussionTopicDto discussionDetails) throws DiscussionException {
 		logger.info("Save discussion room topic.......");
 		try {
 			final Date date = new Date();
@@ -64,7 +65,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopics()
 	 */
 	@Override
-	public List<DiscussionDto> getTopics() throws DiscussionException {
+	public List<DiscussionTopicDto> getTopics() throws DiscussionException {
 		logger.info("fetch list of dicussion topics...");
 		try{
 			return discussionDao.getTopics();
@@ -77,7 +78,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopic(java.lang.String)
 	 */
 	@Override
-	public DiscussionDto getTopic(String securUuid) throws DiscussionException {
+	public DiscussionTopicDto getTopic(String securUuid) throws DiscussionException {
 		logger.info("fetch dicussion topic using secur uuid...");
 		try{
 			return discussionDao.getTopic(securUuid);
@@ -104,7 +105,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopics(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<DiscussionDto> getTopics(String classId, String subjectId)
+	public List<DiscussionTopicDto> getTopics(String classId, String subjectId)
 			throws DiscussionException {
 		logger.info("fetch list of dicussion topics...");
 		try{
@@ -118,7 +119,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#updateTopic(com.chalk.salt.common.dto.DiscussionDto)
 	 */
 	@Override
-	public void updateTopic(DiscussionDto discussionDetails) throws DiscussionException {
+	public void updateTopic(DiscussionTopicDto discussionDetails) throws DiscussionException {
 		logger.info("Update discussion room topic.......");
 		try {
 			final Date date = new Date();
@@ -152,6 +153,25 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			return  discussionDao.getTopicDetails(classId, subjectId);
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
+        }
+	}
+
+	@Override
+	public String saveComments(DiscussionCommentDto discussionComment) throws DiscussionException {
+		logger.info("Save discussion comment .......");
+		try {
+			final Date date = new Date();
+			final String createdDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			final String commentUuid = UUID.randomUUID().toString();
+			discussionComment.setCommentUuid(commentUuid);
+			discussionComment.setCreatedDate(createdDate);
+			discussionComment.setModifiedDate(modifiedDate);
+			// if we have topic securUuid then we have to make change in code otherwise for topic_id it is ok.
+			discussionDao.saveComments(discussionComment);
+			return commentUuid;
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to Save Discussion Comment", exception);
         }
 	}
 

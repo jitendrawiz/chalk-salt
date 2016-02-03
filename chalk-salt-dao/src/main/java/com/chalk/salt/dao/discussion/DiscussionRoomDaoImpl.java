@@ -7,7 +7,8 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -21,7 +22,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#saveTopic(com.chalk.salt.dao.dto.DiscussionDto)
 	 */
 	@Override
-	public void saveTopic(DiscussionDto discussionDetails) throws Exception {
+	public void saveTopic(DiscussionTopicDto discussionDetails) throws Exception {
 
 		final String sqlQuery = "INSERT into cst_discussion_topics "
 				+ " (`class_id`, `subject_id`, `topic_title`, `topic_description`, `created_date`, `secur_uuid`,modified_date) "
@@ -44,14 +45,14 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopics()
 	 */
 	@Override
-	public List<DiscussionDto> getTopics() throws Exception {
+	public List<DiscussionTopicDto> getTopics() throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
 				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics`";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);   
-            return query.executeAndFetch(DiscussionDto.class);
+            return query.executeAndFetch(DiscussionTopicDto.class);
         }
 	}
 
@@ -59,7 +60,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopic(java.lang.String)
 	 */
 	@Override
-	public DiscussionDto getTopic(String securUuid) throws Exception {
+	public DiscussionTopicDto getTopic(String securUuid) throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
 				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics` WHERE secur_uuid=:securUuid";
@@ -67,7 +68,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);   
             query.addParameter("securUuid", securUuid);
-            return query.executeAndFetchFirst(DiscussionDto.class);
+            return query.executeAndFetchFirst(DiscussionTopicDto.class);
         }
 	}
 
@@ -90,7 +91,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopics(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<DiscussionDto> getTopics(String classId, String subjectId)
+	public List<DiscussionTopicDto> getTopics(String classId, String subjectId)
 			throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
@@ -100,7 +101,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             final Query query = connection.createQuery(sqlQuery); 
             query.addParameter("classId", classId);
             query.addParameter("subjectId", subjectId);
-            return query.executeAndFetch(DiscussionDto.class);
+            return query.executeAndFetch(DiscussionTopicDto.class);
         }
 	}
 
@@ -108,7 +109,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#updateTopic(com.chalk.salt.common.dto.DiscussionDto)
 	 */
 	@Override
-	public void updateTopic(DiscussionDto discussionDetails) throws Exception {
+	public void updateTopic(DiscussionTopicDto discussionDetails) throws Exception {
 		final String sqlQuery = "UPDATE cst_discussion_topics "
 				+ " set `topic_title`=:topicTitle, "
 				+ "`topic_description`=:topicDescription, `modified_date`=:modifiedDate "
@@ -167,6 +168,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopicDetails(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws Exception {
 
@@ -190,6 +194,26 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("classId", classId);
             query.addParameter("subjectId", subjectId);
             return query.executeAndFetch(TopicDetailsDto.class);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#saveComments(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
+	@Override
+	public void saveComments(DiscussionCommentDto discussionComment) throws Exception {
+		final String sqlQuery = "INSERT into cst_discussion_topic_comments "
+				+ " (`discussion_topic_id`, `general_comments`, `created_date`, `modified_date`, `comment_uuid`) "
+				+ " VALUES(:classId, :subjectId, :topicTitle, :topicDescription, :createdDate, :modifiedDate, :commentUuid)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("discussionTopicId", discussionComment.getDiscussionTopicId());
+            query.addParameter("generalComments", discussionComment.getGeneralComments());
+            query.addParameter("createdDate", discussionComment.getCreatedDate());
+            query.addParameter("modifiedDate", discussionComment.getModifiedDate());
+            query.addParameter("commentUuid", discussionComment.getCommentUuid());
+            query.executeUpdate();
         }
 	}
 }

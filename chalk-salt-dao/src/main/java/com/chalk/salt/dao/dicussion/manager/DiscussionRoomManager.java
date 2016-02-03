@@ -2,7 +2,8 @@ package com.chalk.salt.dao.dicussion.manager;
 
 import java.util.List;
 
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -19,7 +20,7 @@ public interface DiscussionRoomManager {
 	 * @return the boolean
 	 * @throws DiscussionException the discussion exception
 	 */
-	String saveTopic(DiscussionDto discussionDetails)throws DiscussionException;
+	String saveTopic(DiscussionTopicDto discussionDetails)throws DiscussionException;
 
 	/**
 	 * Gets the topics.
@@ -27,7 +28,7 @@ public interface DiscussionRoomManager {
 	 * @return the topics
 	 * @throws DiscussionException the discussion exception
 	 */
-	List<DiscussionDto> getTopics()throws DiscussionException;
+	List<DiscussionTopicDto> getTopics()throws DiscussionException;
 
 	/**
 	 * Gets the topic.
@@ -36,7 +37,7 @@ public interface DiscussionRoomManager {
 	 * @return the topic
 	 * @throws DiscussionException the discussion exception
 	 */
-	DiscussionDto getTopic(String securUuid)throws DiscussionException;
+	DiscussionTopicDto getTopic(String securUuid)throws DiscussionException;
 
 	/**
 	 * Delete topic.
@@ -55,7 +56,7 @@ public interface DiscussionRoomManager {
 	 * @return the topics
 	 * @throws DiscussionException the discussion exception
 	 */
-	List<DiscussionDto> getTopics(String classId, String subjectId)throws DiscussionException;
+	List<DiscussionTopicDto> getTopics(String classId, String subjectId)throws DiscussionException;
 
 	/**
 	 * Update topic.
@@ -63,7 +64,7 @@ public interface DiscussionRoomManager {
 	 * @param discussionDetails the discussion details
 	 * @throws DiscussionException the discussion exception
 	 */
-	void updateTopic(DiscussionDto discussionDetails)throws DiscussionException;
+	void updateTopic(DiscussionTopicDto discussionDetails)throws DiscussionException;
 
 	/**
 	 * Gets the topics count.
@@ -83,5 +84,14 @@ public interface DiscussionRoomManager {
 	 * @throws DiscussionException the discussion exception
 	 */
 	List<TopicDetailsDto> getTopicDetails(String classId, String subjectId)throws DiscussionException;
+
+	/**
+	 * Save comments.
+	 *
+	 * @param discussionComment the discussion comment
+	 * @return the string
+	 * @throws DiscussionException the discussion exception
+	 */
+	String saveComments(DiscussionCommentDto discussionComment)throws DiscussionException;
 
 }

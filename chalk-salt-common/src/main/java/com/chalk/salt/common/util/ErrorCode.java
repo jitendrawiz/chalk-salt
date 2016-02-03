@@ -96,7 +96,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_DISCUSSION_TOPIC_COUNT(1026),
 	
 	/** The fail to fetch discussion topic details. */
-	FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS(1027);
+	FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS(1027),
+	
+	/** The fail to save discussion comment. */
+	FAIL_TO_SAVE_DISCUSSION_COMMENT(1028);
 
 	/** The value. */
     private final int value;

@@ -2,7 +2,8 @@ package com.chalk.salt.dao.discussion;
 
 import java.util.List;
 
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 
@@ -18,7 +19,7 @@ public interface DiscussionRoomDao {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	void saveTopic(DiscussionDto discussionDetails) throws Exception;
+	void saveTopic(DiscussionTopicDto discussionDetails) throws Exception;
 
 	/**
 	 * Gets the topics.
@@ -26,7 +27,7 @@ public interface DiscussionRoomDao {
 	 * @return the topics
 	 * @throws Exception the exception
 	 */
-	List<DiscussionDto> getTopics() throws Exception;
+	List<DiscussionTopicDto> getTopics() throws Exception;
 
 	/**
 	 * Gets the topic.
@@ -35,7 +36,7 @@ public interface DiscussionRoomDao {
 	 * @return the topic
 	 * @throws Exception the exception
 	 */
-	DiscussionDto getTopic(String securUuid) throws Exception;
+	DiscussionTopicDto getTopic(String securUuid) throws Exception;
 
 	/**
 	 * Delete topic.
@@ -53,7 +54,7 @@ public interface DiscussionRoomDao {
 	 * @return the topics
 	 * @throws Exception the exception
 	 */
-	List<DiscussionDto> getTopics(String classId, String subjectId)throws Exception;
+	List<DiscussionTopicDto> getTopics(String classId, String subjectId)throws Exception;
 
 	/**
 	 * Update topic.
@@ -61,7 +62,7 @@ public interface DiscussionRoomDao {
 	 * @param discussionDetails the discussion details
 	 * @throws Exception the exception
 	 */
-	void updateTopic(DiscussionDto discussionDetails)throws Exception;
+	void updateTopic(DiscussionTopicDto discussionDetails)throws Exception;
 
 	/**
 	 * Gets the topics count.
@@ -81,5 +82,13 @@ public interface DiscussionRoomDao {
 	 * @throws Exception the exception
 	 */
 	List<TopicDetailsDto> getTopicDetails(String classId, String subjectId)throws Exception;
+
+	/**
+	 * Save comments.
+	 *
+	 * @param discussionComment the discussion comment
+	 * @throws Exception the exception
+	 */
+	void saveComments(DiscussionCommentDto discussionComment)throws Exception;
 	
 }

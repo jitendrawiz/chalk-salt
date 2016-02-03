@@ -22,14 +22,16 @@ import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
-import com.chalk.salt.api.model.DiscussionModel;
+import com.chalk.salt.api.model.DiscussionCommentModel;
+import com.chalk.salt.api.model.DiscussionTopicModel;
 import com.chalk.salt.api.model.TopicDetailsModel;
 import com.chalk.salt.api.model.TopicStatisticsModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
-import com.chalk.salt.common.dto.DiscussionDto;
+import com.chalk.salt.common.dto.DiscussionCommentDto;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -69,13 +71,13 @@ public class DiscussionRoomResource extends AbstractResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
-    public Response saveTopic(final @Valid DiscussionModel discussion)throws DiscussionException{
+    public Response saveTopic(final @Valid DiscussionTopicModel discussion)throws DiscussionException{
     	
-    	DiscussionDto discussionDetails = null;
+    	DiscussionTopicDto discussionDetails = null;
     	final Map<String, String> response = new HashMap<String, String>();
     	String securUuid = null;
     	try{
-    		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
+    		discussionDetails = beanMapper.map(discussion, DiscussionTopicDto.class);
     		securUuid = discussionRoomFacade.saveTopic(discussionDetails);
     		response.put("securUuid", securUuid);
             return Response.ok(response).build();
@@ -97,11 +99,11 @@ public class DiscussionRoomResource extends AbstractResource {
     
     public Response getTopics()throws DiscussionException{
     	
-    	List<DiscussionModel> discussionTopics = null;
-    	List<DiscussionDto> discussionTopicList = null;
+    	List<DiscussionTopicModel> discussionTopics = null;
+    	List<DiscussionTopicDto> discussionTopicList = null;
     	try{
     		discussionTopicList = discussionRoomFacade.getTopics();
-    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionModel.class);
+    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionTopicModel.class);
             return Response.ok(discussionTopics).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
@@ -122,12 +124,12 @@ public class DiscussionRoomResource extends AbstractResource {
     
     public Response getTopic(@NotBlank @PathParam("securUuid") final String securUuid)throws DiscussionException{
     	
-    	DiscussionModel discussionTopic = null;
-    	DiscussionDto discussionTopicDetails = null;
+    	DiscussionTopicModel discussionTopic = null;
+    	DiscussionTopicDto discussionTopicDetails = null;
     	try{
     		discussionTopicDetails = discussionRoomFacade.getTopic(securUuid);
     		
-    		discussionTopic = beanMapper.map(discussionTopicDetails, DiscussionModel.class);
+    		discussionTopic = beanMapper.map(discussionTopicDetails, DiscussionTopicModel.class);
     		if(discussionTopic!=null)
     			return Response.ok(discussionTopic).build();
     		else
@@ -177,11 +179,11 @@ public class DiscussionRoomResource extends AbstractResource {
     @RequiresAuthentication    
     public Response getTopicsUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws DiscussionException{
     	
-    	List<DiscussionModel> discussionTopics = null;
-    	List<DiscussionDto> discussionTopicList = null;
+    	List<DiscussionTopicModel> discussionTopics = null;
+    	List<DiscussionTopicDto> discussionTopicList = null;
     	try{
     		discussionTopicList = discussionRoomFacade.getTopics(classId,subjectId);
-    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionModel.class);
+    		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, DiscussionTopicModel.class);
             return Response.ok(discussionTopics).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
@@ -201,11 +203,11 @@ public class DiscussionRoomResource extends AbstractResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
-    public Response updateTopic(final @Valid DiscussionModel discussion)throws DiscussionException{
+    public Response updateTopic(final @Valid DiscussionTopicModel discussion)throws DiscussionException{
     	
-    	DiscussionDto discussionDetails = null;
+    	DiscussionTopicDto discussionDetails = null;
     	try{
-    		discussionDetails = beanMapper.map(discussion, DiscussionDto.class);
+    		discussionDetails = beanMapper.map(discussion, DiscussionTopicDto.class);
     		discussionRoomFacade.updateTopic(discussionDetails);    		
             return Response.ok().build();
 	    } catch (final DiscussionException discussionException) {
@@ -217,7 +219,6 @@ public class DiscussionRoomResource extends AbstractResource {
      * Gets the topics count.
      *
      * @param classId the class id
-     * @param subjectId the subject id
      * @return the topics count
      * @throws DiscussionException the discussion exception
      */
@@ -239,6 +240,14 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the topic details.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the topic details
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topics/statistics/{classId}/{subjectId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -251,6 +260,34 @@ public class DiscussionRoomResource extends AbstractResource {
     		discussionTopicList = discussionRoomFacade.getTopicDetails(classId,subjectId);
     		discussionTopics = DozerMapperUtil.mapCollection(beanMapper, discussionTopicList, TopicDetailsModel.class);
             return Response.ok(discussionTopics).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    /**
+     * Save comments.
+     *
+     * @param discussion the discussion
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
+    @POST
+    @Path("/discussion/topics/comments")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response saveComments(final @Valid DiscussionCommentModel discussion)throws DiscussionException{
+    	
+    	DiscussionCommentDto discussionComment = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	String commentUuid = null;
+    	try{
+    		discussionComment = beanMapper.map(discussion, DiscussionCommentDto.class);
+    		commentUuid = discussionRoomFacade.saveComments(discussionComment);
+    		response.put("commentUuid", commentUuid);
+            return Response.ok(response).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
