@@ -106,7 +106,10 @@ define([ 'angular', './routing', './service' ], function(angular) {
             function($scope, CHALKNDUST,$state,$window) {
                 $scope.alert = {};
                 $scope.alert.show = false;
-
+                $scope.currentDate = new Date();
+                $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
+                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+                $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 var showAlert = function(type, message) {
                     $scope.alert = {};
                     $scope.alert.type = type;

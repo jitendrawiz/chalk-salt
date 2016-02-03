@@ -13465,3 +13465,20 @@ table td {
   margin: 5px 5px;
   display: block;
   text-align: center; }
+
+.Com_post {
+  float: left;
+  width: 70%; }
+
+.discussion_comment {
+  width: 100%;
+  margin: 0 auto; }
+
+#commentTextArea {
+  padding: 6px 12px;
+  margin-right: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  width: 80%;
+  height: 80px;
+  float: right; }
