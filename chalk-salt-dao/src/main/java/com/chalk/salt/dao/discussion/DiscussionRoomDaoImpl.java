@@ -304,4 +304,25 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             return query.executeAndFetchFirst(String.class);
         }
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopicCommentInfo(java.lang.String)
+	 */
+	@Override
+	public DiscussionCommentDto getTopicCommentInfo(String commentUuid)
+			throws Exception {
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " cst_discussion_topic_comments.general_comments AS generalComments, "
+				+ " cst_discussion_topic_comments.comment_uuid AS commentUuid "
+				+ " FROM "
+				+ " cst_discussion_topic_comments "
+				+ " WHERE "
+				+ " cst_discussion_topic_comments.comment_uuid =:commentUuid AND "
+				+ " cst_discussion_topic_comments.delete_status = 1  ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("commentUuid", commentUuid);
+            return query.executeAndFetchFirst(DiscussionCommentDto.class);
+        }	}
 }

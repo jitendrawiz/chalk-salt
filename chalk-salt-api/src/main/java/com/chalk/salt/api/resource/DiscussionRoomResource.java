@@ -376,5 +376,28 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
 
+    /**
+     * Gets the topic comment info.
+     *
+     * @param commentUuid the comment uuid
+     * @return the topic comment info
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/editComment/{commentUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getTopicCommentInfo(@NotBlank @PathParam("commentUuid") final String commentUuid)throws DiscussionException{
+    	
+    	DiscussionCommentModel discussionCommentModel = null;
+    	DiscussionCommentDto discussionCommentDto = null;
+    	try{
+    		discussionCommentDto = discussionRoomFacade.getTopicCommentInfo(commentUuid);
+    		discussionCommentModel = beanMapper.map(discussionCommentDto, DiscussionCommentModel.class);
+            return Response.ok(discussionCommentModel).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
     
 }

@@ -105,7 +105,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_DISCUSSION_TOPIC_COMMENTS_DETAILS(1029),
 	
 	/** The fail to fetch subject detail. */
-	FAIL_TO_FETCH_SUBJECT_DETAIL(1030);
+	FAIL_TO_FETCH_SUBJECT_DETAIL(1030),
+	
+	/** The fail to fetch comment detail. */
+	FAIL_TO_FETCH_COMMENT_DETAIL(1031);
 
 	/** The value. */
     private final int value;

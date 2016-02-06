@@ -122,4 +122,14 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopicCommentInfo(java.lang.String)
+	 */
+	@Override
+	public DiscussionCommentDto getTopicCommentInfo(String commentUuid)
+			throws DiscussionException {
+		return discussionManager.getTopicCommentInfo(commentUuid);
+
+	}
+
 }

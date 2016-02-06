@@ -223,4 +223,18 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopicCommentInfo(java.lang.String)
+	 */
+	@Override
+	public DiscussionCommentDto getTopicCommentInfo(String commentUuid)
+			throws DiscussionException {
+		logger.info("fetch details of comment of discussion topic");
+		try{
+			return  discussionDao.getTopicCommentInfo(commentUuid);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_COMMENT_DETAIL, "Fail to Fetch details of topic's comment", exception);
+        }
+	}
+
 }

@@ -128,4 +128,13 @@ public interface DiscussionRoomFacade {
 	 */
 	String getSubjectName(String classId, String subjectId)throws DiscussionException;
 
+	/**
+	 * Gets the topic comment info.
+	 *
+	 * @param commentUuid the comment uuid
+	 * @return the topic comment info
+	 * @throws DiscussionException the discussion exception
+	 */
+	DiscussionCommentDto getTopicCommentInfo(String commentUuid)throws DiscussionException;
+
 }

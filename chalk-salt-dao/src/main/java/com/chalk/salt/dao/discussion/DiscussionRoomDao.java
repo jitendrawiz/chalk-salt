@@ -125,5 +125,14 @@ public interface DiscussionRoomDao {
 	 */
 	String getSubjectName(String classId, String subjectId)throws Exception;
 
+	/**
+	 * Gets the topic comment info.
+	 *
+	 * @param commentUuid the comment uuid
+	 * @return the topic comment info
+	 * @throws Exception the exception
+	 */
+	DiscussionCommentDto getTopicCommentInfo(String commentUuid)throws Exception;
+
 	
 }
