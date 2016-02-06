@@ -19,6 +19,9 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                    $scope.alert.show = false;
                    return true;
                };
+               this.backToTop=function(){
+               	$window.scrollTo(0, 0);  
+               };
                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                $scope.userName=$window.localStorage.getItem(CHALKNDUST.USERNAME);
                console.log($scope.fullName);
