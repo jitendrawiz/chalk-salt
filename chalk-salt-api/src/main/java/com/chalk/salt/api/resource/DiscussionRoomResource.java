@@ -324,6 +324,15 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the single topic details.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param topicId the topic id
+     * @return the single topic details
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topic/{classId}/{subjectId}/{topicId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -341,5 +350,31 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+
+    /**
+     * Gets the subject name.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the subject name
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/subject/{classId}/{subjectId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getSubjectName(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws DiscussionException{
+    	
+    	String subjectName = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	try{
+    		subjectName = discussionRoomFacade.getSubjectName(classId,subjectId);
+    		response.put("subjectName", subjectName);
+            return Response.ok(response).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+
     
 }

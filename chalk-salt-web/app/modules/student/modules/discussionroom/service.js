@@ -68,4 +68,19 @@ define([ 'angular' ], function(angular) {
         });
         
     }]);
+    
+    module.factory('getSubjectNameService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/subject/:classId/:subjectId',{
+            classId : '@classId',
+            subjectId : '@subjectId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        
+    }]);
+    
+    
 });

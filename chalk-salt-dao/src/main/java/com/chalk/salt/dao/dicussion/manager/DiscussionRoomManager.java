@@ -118,4 +118,14 @@ public interface DiscussionRoomManager {
 	TopicDetailsDto getSingleTopicDetails(String classId, String subjectId,
 			String topicId)throws DiscussionException;
 
+	/**
+	 * Gets the subject name.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the subject name
+	 * @throws DiscussionException the discussion exception
+	 */
+	String getSubjectName(String classId, String subjectId)throws DiscussionException;
+
 }

@@ -41,9 +41,10 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 
             } ]);
 
-    module.controller('DiscussionRoomTopicController', [ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService',
+    module.controller('DiscussionRoomTopicController',
+    		[ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService',
             
-            function($scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService) {
+            function($scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -70,6 +71,14 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 $window.localStorage.setItem(CHALKNDUST.SUBJECTID,$scope.subjectId);
+                
+                getSubjectNameService.get({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
+                    if(response){
+                    	$scope.subjectName=response.subjectName;
+                 }
+                }, function(error) {
+                	showAlert('danger',error.data.message);
+                });                
                 
                 GetTopicsService.query({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
                     if(response){

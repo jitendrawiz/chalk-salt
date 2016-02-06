@@ -115,5 +115,15 @@ public interface DiscussionRoomDao {
 	TopicDetailsDto getSingleTopicDetails(String classId, String subjectId,
 			String topicId)throws Exception;
 
+	/**
+	 * Gets the subject name.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the subject name
+	 * @throws Exception the exception
+	 */
+	String getSubjectName(String classId, String subjectId)throws Exception;
+
 	
 }

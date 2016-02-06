@@ -257,6 +257,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getSingleTopicDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public TopicDetailsDto getSingleTopicDetails(String classId,
 			String subjectId, String topicId) throws Exception {
@@ -276,6 +279,29 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("subjectId", subjectId);
             query.addParameter("topicId", topicId);
             return query.executeAndFetchFirst(TopicDetailsDto.class);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getSubjectName(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public String getSubjectName(String classId, String subjectId)
+			throws Exception {
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " cst_class_subjects.subject_name AS subjectName "
+				+ " FROM "
+				+ " cst_class_subjects "
+				+ " INNER JOIN cst_class_subject_mapping ON cst_class_subjects.subject_id = cst_class_subject_mapping.subject_id "
+				+ " WHERE  "
+				+ " cst_class_subject_mapping.class_id =:classId AND "
+				+ " cst_class_subject_mapping.subject_id =:subjectId ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetchFirst(String.class);
         }
 	}
 }

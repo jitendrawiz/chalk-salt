@@ -195,6 +195,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getSingleTopicDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public TopicDetailsDto getSingleTopicDetails(String classId,
 			String subjectId, String topicId) throws DiscussionException {
@@ -205,5 +208,19 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
             throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
         }
 		}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getSubjectName(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public String getSubjectName(String classId, String subjectId)
+			throws DiscussionException {
+		logger.info("fetch details of dicussion subject");
+		try{
+			return  discussionDao.getSubjectName(classId, subjectId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_SUBJECT_DETAIL, "Fail to Fetch details of Subject", exception);
+        }
+	}
 
 }

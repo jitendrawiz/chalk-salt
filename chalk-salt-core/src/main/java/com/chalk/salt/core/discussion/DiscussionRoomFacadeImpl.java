@@ -112,4 +112,14 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getSubjectName(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public String getSubjectName(String classId, String subjectId)
+			throws DiscussionException {
+		return discussionManager.getSubjectName(classId, subjectId);
+
+	}
+
 }
