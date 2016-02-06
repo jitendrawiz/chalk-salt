@@ -325,4 +325,24 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("commentUuid", commentUuid);
             return query.executeAndFetchFirst(DiscussionCommentDto.class);
         }	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#updateComment(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
+	@Override
+	public String updateComment(DiscussionCommentDto discussionComment) throws Exception {
+		final String sqlQuery = "UPDATE cst_discussion_topic_comments "
+				+ " SET `general_comments`=:generalComments, `modified_date`=:modifiedDate) "
+				+ " WHERE comment_uuid=:commentUuid and discussion_topic_id=:discussionTopicId LIMIT 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("discussionTopicId", discussionComment.getDiscussionTopicId());
+            query.addParameter("generalComments", discussionComment.getGeneralComments());
+            query.addParameter("modifiedDate", discussionComment.getModifiedDate());
+            query.addParameter("commentUuid", discussionComment.getCommentUuid());
+            query.executeUpdate();
+            return discussionComment.getCommentUuid();
+        }
+	}
 }

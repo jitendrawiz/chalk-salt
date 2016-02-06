@@ -237,4 +237,22 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#updateComment(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
+	@Override
+	public String updateComment(DiscussionCommentDto discussionComment) throws DiscussionException {
+		logger.info("Update discussion comment .......");
+		try {
+			final Date date = new Date();
+			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			discussionComment.setModifiedDate(modifiedDate);
+			// if we have topic securUuid then we have to make change in code otherwise for topic_id it is ok.
+			String commentUuid = discussionDao.updateComment(discussionComment);
+			return commentUuid;
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_UPDATE_DISCUSSION_COMMENT, "Fail to Update Discussion Topic Comment", exception);
+        }
+	}
+
 }

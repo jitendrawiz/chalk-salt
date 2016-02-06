@@ -137,4 +137,13 @@ public interface DiscussionRoomFacade {
 	 */
 	DiscussionCommentDto getTopicCommentInfo(String commentUuid)throws DiscussionException;
 
+	/**
+	 * Update comment.
+	 *
+	 * @param discussionCommentDetails the discussion comment details
+	 * @return the string
+	 * @throws DiscussionException the discussion exception
+	 */
+	String updateComment(DiscussionCommentDto discussionComment)throws DiscussionException;
+
 }

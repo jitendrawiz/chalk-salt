@@ -132,4 +132,12 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#updateComment(com.chalk.salt.common.dto.DiscussionCommentDto)
+	 */
+	@Override
+	public String updateComment(DiscussionCommentDto discussionComment) throws DiscussionException {
+		return discussionManager.updateComment(discussionComment);
+	}
+
 }

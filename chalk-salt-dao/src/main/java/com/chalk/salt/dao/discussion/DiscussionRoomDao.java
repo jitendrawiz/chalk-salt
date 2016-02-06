@@ -134,5 +134,14 @@ public interface DiscussionRoomDao {
 	 */
 	DiscussionCommentDto getTopicCommentInfo(String commentUuid)throws Exception;
 
+	/**
+	 * Update comment.
+	 *
+	 * @param discussionCommentDetails the discussion comment details
+	 * @return the string
+	 * @throws Exception the exception
+	 */
+	String updateComment(DiscussionCommentDto discussionComment)throws Exception;
+
 	
 }

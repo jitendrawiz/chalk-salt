@@ -400,4 +400,24 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    @POST
+    @Path("/discussion/topics")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response updateComment(final @Valid DiscussionCommentModel discussionComment)throws DiscussionException{
+    	
+    	DiscussionCommentDto discussionCommentDetails = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	String commentSecurUuid = null;
+    	try{
+    		discussionCommentDetails = beanMapper.map(discussionComment, DiscussionCommentDto.class);
+    		commentSecurUuid = discussionRoomFacade.updateComment(discussionCommentDetails);
+    		response.put("securUuid", commentSecurUuid);
+            return Response.ok(response).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
 }
