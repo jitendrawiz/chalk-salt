@@ -247,7 +247,6 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			final Date date = new Date();
 			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 			discussionComment.setModifiedDate(modifiedDate);
-			// if we have topic securUuid then we have to make change in code otherwise for topic_id it is ok.
 			String commentUuid = discussionDao.updateComment(discussionComment);
 			return commentUuid;
 		} catch (final Exception exception) {

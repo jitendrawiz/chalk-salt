@@ -400,14 +400,19 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Update comment.
+     *
+     * @param discussionComment the discussion comment
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
     @POST
-    @Path("/discussion/topics")
+    @Path("/discussion/comment/update")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
-    
     public Response updateComment(final @Valid DiscussionCommentModel discussionComment)throws DiscussionException{
-    	
     	DiscussionCommentDto discussionCommentDetails = null;
     	final Map<String, String> response = new HashMap<String, String>();
     	String commentSecurUuid = null;

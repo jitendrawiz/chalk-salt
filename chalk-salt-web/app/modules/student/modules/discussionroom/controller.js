@@ -113,8 +113,8 @@ define([ 'angular', './routing', './service' ], function(angular) {
             'CHALKNDUST',
             '$state',
             '$stateParams',
-            '$window','GetCommmentsOfTopicService','CommentService','topicDetailsService',
-            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,topicDetailsService) {
+            '$window','GetCommmentsOfTopicService','CommentService','topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService',
+            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService) {
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
@@ -199,6 +199,45 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
+                
+                
+                this.editComment=function(commentUuid){
+                    getDetailsOfCommentService.get({commentUuid:commentUuid}, function(response) { 
+                        if(response){
+                        	$scope.commentsinfo=response;
+                        	console.log(response);
+                        	$window.scrollTo(0, angular.element(document.getElementById('commentTextArea')).offsetTop);  
+                        	$window.document.getElementById('commentTextArea').focus();
+                        }
+                    }, function(error) {
+                    	showAlert('danger',error.data.message);
+                    });
+                	
+                	
+                };
+                
+                $scope.isEmpty = function(obj) {
+               	 for(var prop in obj) {
+               	      if(obj.hasOwnProperty(prop))
+               	          return false;
+               	  }
+               	  return true;
+                };
+                
+
+                this.updateComment = function() {
+                    updateCommentDetailsService.save({}, $scope.commentsinfo, function(
+                            response) {
+                        if (response) {
+                            console.log(response);
+                            alert("Your Comment is updated successfully");
+                            $state.reload();
+                        }
+                        
+                    }, function(error) {
+                        showAlert('danger', error.data.message);
+                    });
+                };
 
             } ]);
 

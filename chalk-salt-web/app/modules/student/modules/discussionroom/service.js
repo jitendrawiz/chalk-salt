@@ -82,5 +82,25 @@ define([ 'angular' ], function(angular) {
         
     }]);
     
+    module.factory('getDetailsOfCommentService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/editComment/:commentUuid',{
+            commentUuid : '@commentUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        
+    }]);
+    
+    module.factory('updateCommentDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/comment/update',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]);    
     
 });
