@@ -87,6 +87,7 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
                 $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
                 $window.localStorage.removeItem(CHALKNDUST.USERNAME);
                 $window.localStorage.removeItem(CHALKNDUST.CLASSID);
+                $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
                 $state.go('chalkanddust.home');
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');

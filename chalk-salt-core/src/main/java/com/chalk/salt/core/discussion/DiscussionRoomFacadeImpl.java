@@ -102,4 +102,14 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.getTopicCommentDetails(classId, subjectId,topicId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getSingleTopicDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public TopicDetailsDto getSingleTopicDetails(String classId,
+			String subjectId, String topicId) throws DiscussionException {
+		return discussionManager.getSingleTopicDetails(classId, subjectId,topicId);
+
+	}
+
 }

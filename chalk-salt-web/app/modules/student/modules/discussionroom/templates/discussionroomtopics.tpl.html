@@ -43,10 +43,10 @@ background-size:100%;
 	  </tr>
 	  <tbody>
        <tr ng-repeat="item in topicDetails | filter:search" >
-	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a></td>
+	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a><span class="empty" ng-show="!item.topicTitle">N/A</span></td>
 	    <td align="center">{{item.comments}}</td>
-	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a ui-sref="chalkanddust.student">{{item.lastModifiedUserName}}
-	    &nbsp;&nbsp;</a></td>
+	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p>{{item.lastModifiedUserName}}
+	    &nbsp;&nbsp;<span class="empty" ng-show="!item.lastModifiedDate">N/A</span></td>
 	   </tr>  
 </table>
 <div class="number_scroll">     

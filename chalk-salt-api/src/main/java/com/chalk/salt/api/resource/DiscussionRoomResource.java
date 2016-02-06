@@ -324,4 +324,22 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    @GET
+    @Path("/discussion/topic/{classId}/{subjectId}/{topicId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getSingleTopicDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId,
+    		@PathParam("topicId") final String topicId)throws DiscussionException{
+    	
+    	TopicDetailsModel discussionTopics = null;
+    	TopicDetailsDto discussionTopic = null;
+    	try{
+    		discussionTopic = discussionRoomFacade.getSingleTopicDetails(classId,subjectId,topicId);
+    		discussionTopics = beanMapper.map(discussionTopic, TopicDetailsModel.class);
+            return Response.ok(discussionTopics).build();
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
 }

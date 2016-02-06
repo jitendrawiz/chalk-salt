@@ -49,8 +49,8 @@ background-size:100%;
 	    <h1><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.subjectName}}</a></h1></td>
 	    <td align="center">{{item.topics}}<span class="empty" ng-show="!item.topics">N/A</span></td>
 	    <td align="center">{{item.comments}}<span class="empty" ng-show="!item.comments">N/A</span></td>
-	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p><a href="#">{{item.lastModifiedUserName}}
-	    &nbsp;&nbsp;</a>  <span class="empty" ng-show="!item.lastModifiedDate">N/A</span></td>
+	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p>{{item.lastModifiedUserName}}
+	    &nbsp;&nbsp;  <span class="empty" ng-show="!item.lastModifiedDate">N/A</span></td>
        </tr>
   </tbody>
 </table>

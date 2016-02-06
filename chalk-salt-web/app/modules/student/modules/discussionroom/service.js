@@ -45,4 +45,27 @@ define([ 'angular' ], function(angular) {
         
     }]);
     
+    
+    module.factory('CommentService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/comments',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]);    
+
+    module.factory('topicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topic/:classId/:subjectId/:topicId',{
+            classId : '@classId',
+            subjectId : '@subjectId',
+            topicId :'@topicId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        
+    }]);
 });

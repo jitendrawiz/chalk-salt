@@ -104,8 +104,8 @@ define([ 'angular', './routing', './service' ], function(angular) {
             'CHALKNDUST',
             '$state',
             '$stateParams',
-            '$window','GetCommmentsOfTopicService',
-            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService) {
+            '$window','GetCommmentsOfTopicService','CommentService','topicDetailsService',
+            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,topicDetailsService) {
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
@@ -114,6 +114,8 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
                 $scope.topicId = $stateParams.topicId;
+                
+                
                 
                 var showAlert = function(type, message) {
                     $scope.alert = {};
@@ -131,13 +133,46 @@ define([ 'angular', './routing', './service' ], function(angular) {
                     return true;
                 };
                 
+                topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
+                    if(response){
+                        console.log("resoibse aere"+response);
+                    	$scope.topicTitle=response.topicTitle;
+                    	$scope.topicDescription=response.topicDescription;
+                	                    }
+                }, function(error) {
+                	showAlert('danger',error.data.message);
+                });
+                
+                this.saveComment = function() {
+                   if($scope.commentsinfo!=null && $scope.commentsinfo!=""){
+                	   $scope.commentsinfo.classId=$scope.classId;
+                	   $scope.commentsinfo.subjectId=$scope.subjectId;
+                	   $scope.commentsinfo.discussionTopicId=$scope.topicId;
+                	   $scope.commentsinfo.userSecurUuid=$scope.securUuid;                	   
+                	   console.log($scope.commentsinfo);
+                     CommentService.save({}, $scope.commentsinfo, function(
+                             response) {
+                         if (response) {
+                             console.log(response);
+                             alert("Your comment added Successfully");
+                             $state.reload();
+                         }
+                         
+                     }, function(error) {
+                         showAlert('danger', error.data.message);
+                     });                   
+                	   }else{
+                	   alert("Please fill your comments");
+                   }
+                };
+                
                 GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
                     	$scope.commentsList = response;
                     	console.log(response);
                     	$scope.totalItems = $scope.commentsList.length;
                         $scope.currentPage = 1;
-                        $scope.itemsPerPage = 10;
+                        $scope.itemsPerPage = 40;
 
                         $scope.setPage = function(pageNo) {
                             $scope.currentPage = pageNo;
@@ -155,8 +190,6 @@ define([ 'angular', './routing', './service' ], function(angular) {
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
-                //showAlert('Success',$scope.topicId);
-               // alert($scope.topicId);
 
             } ]);
 

@@ -203,8 +203,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	@Override
 	public void saveComments(DiscussionCommentDto discussionComment) throws Exception {
 		final String sqlQuery = "INSERT into cst_discussion_topic_comments "
-				+ " (`discussion_topic_id`, `general_comments`, `created_date`, `modified_date`, `comment_uuid`) "
-				+ " VALUES(:classId, :subjectId, :topicTitle, :topicDescription, :createdDate, :modifiedDate, :commentUuid)";
+				+ " (`discussion_topic_id`, `general_comments`, `created_date`, `modified_date`, `comment_uuid`,user_securUuid) "
+				+ " VALUES(:discussionTopicId, :generalComments, :createdDate, :modifiedDate, :commentUuid, :userSecurUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -213,14 +213,68 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("createdDate", discussionComment.getCreatedDate());
             query.addParameter("modifiedDate", discussionComment.getModifiedDate());
             query.addParameter("commentUuid", discussionComment.getCommentUuid());
+            query.addParameter("userSecurUuid", discussionComment.getUserSecurUuid());
             query.executeUpdate();
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopicCommentDetails(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
 			String subjectId, String topicId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " cst_discussion_topics.topic_title AS topicTitle,"
+				+ " cst_discussion_topics.topic_description AS topicDescription,"
+				+ " cst_discussion_topics.class_id AS classId,"
+				+ " cst_discussion_topics.subject_id AS subjectId,"
+				+ " CONCAT_WS(' ',cst_users.first_name,cst_users.middle_name,cst_users.last_name) AS userName,"
+				+ " cst_discussion_topic_comments.discussion_comment_id AS discussionCommentId,"
+				+ " cst_discussion_topic_comments.discussion_topic_id AS discussionTopicId,"
+				+ " cst_discussion_topic_comments.general_comments AS generalComments,"
+				+ " cst_discussion_topic_comments.modified_date AS modifiedDate, "
+				+ " cst_discussion_topic_comments.user_securUuid AS userSecurUuid, "
+				+ " cst_discussion_topic_comments.comment_uuid  AS commentUuid "
+				+ " FROM "
+				+ " cst_discussion_topics "
+				+ " INNER JOIN cst_users ON cst_discussion_topics.class_id = cst_users.class_id "
+				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
+				+ " AND cst_users.secur_uuid = cst_discussion_topic_comments.user_securUuid"
+				+ " WHERE cst_discussion_topics.class_id =:classId AND "
+				+ " cst_discussion_topics.subject_id =:subjectId AND "
+				+ " cst_discussion_topics.discussion_topic_id =:topicId AND "
+				+ " cst_discussion_topic_comments.delete_status = 1 "
+				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            query.addParameter("topicId", topicId);
+            return query.executeAndFetch(DiscussionCommentDto.class);
+        }
+	}
+
+	@Override
+	public TopicDetailsDto getSingleTopicDetails(String classId,
+			String subjectId, String topicId) throws Exception {
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " cst_discussion_topics.topic_title AS topicTitle,"
+				+ " cst_discussion_topics.topic_description AS topicDescription "
+				+ " FROM "
+				+ " cst_discussion_topics "
+				+ " WHERE "
+				+ " cst_discussion_topics.subject_id =:subjectId AND "
+				+ " cst_discussion_topics.class_id =:classId AND "
+				+ " cst_discussion_topics.discussion_topic_id =:topicId ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            query.addParameter("topicId", topicId);
+            return query.executeAndFetchFirst(TopicDetailsDto.class);
+        }
 	}
 }

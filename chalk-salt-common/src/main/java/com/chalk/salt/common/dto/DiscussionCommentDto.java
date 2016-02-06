@@ -22,6 +22,153 @@ public class DiscussionCommentDto {
 	/** The comment uuid. */
 	private String commentUuid;
 	
+	/** The topic title. */
+	private String topicTitle;
+	
+	/** The topic description. */
+	private String topicDescription;
+	
+	/** The class id. */
+	private Integer classId;
+	
+	/** The subject id. */
+	private Integer subjectId;
+	
+	/** The user name. */
+	private String userName;
+	
+	/** The discussion comment id. */
+	private Integer discussionCommentId;
+	
+	/** The user secur uuid. */
+	private String userSecurUuid;
+	
+	/**
+	 * Gets the topic title.
+	 *
+	 * @return the topic title
+	 */
+	public String getTopicTitle() {
+		return topicTitle;
+	}
+
+	/**
+	 * Sets the topic title.
+	 *
+	 * @param topicTitle the new topic title
+	 */
+	public void setTopicTitle(String topicTitle) {
+		this.topicTitle = topicTitle;
+	}
+
+	/**
+	 * Gets the topic description.
+	 *
+	 * @return the topic description
+	 */
+	public String getTopicDescription() {
+		return topicDescription;
+	}
+
+	/**
+	 * Sets the topic description.
+	 *
+	 * @param topicDescription the new topic description
+	 */
+	public void setTopicDescription(String topicDescription) {
+		this.topicDescription = topicDescription;
+	}
+
+	/**
+	 * Gets the class id.
+	 *
+	 * @return the class id
+	 */
+	public Integer getClassId() {
+		return classId;
+	}
+
+	/**
+	 * Sets the class id.
+	 *
+	 * @param classId the new class id
+	 */
+	public void setClassId(Integer classId) {
+		this.classId = classId;
+	}
+
+	/**
+	 * Gets the subject id.
+	 *
+	 * @return the subject id
+	 */
+	public Integer getSubjectId() {
+		return subjectId;
+	}
+
+	/**
+	 * Sets the subject id.
+	 *
+	 * @param subjectId the new subject id
+	 */
+	public void setSubjectId(Integer subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	/**
+	 * Gets the user name.
+	 *
+	 * @return the user name
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * Sets the user name.
+	 *
+	 * @param userName the new user name
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * Gets the discussion comment id.
+	 *
+	 * @return the discussion comment id
+	 */
+	public Integer getDiscussionCommentId() {
+		return discussionCommentId;
+	}
+
+	/**
+	 * Sets the discussion comment id.
+	 *
+	 * @param discussionCommentId the new discussion comment id
+	 */
+	public void setDiscussionCommentId(Integer discussionCommentId) {
+		this.discussionCommentId = discussionCommentId;
+	}
+
+	/**
+	 * Gets the user secur uuid.
+	 *
+	 * @return the user secur uuid
+	 */
+	public String getUserSecurUuid() {
+		return userSecurUuid;
+	}
+
+	/**
+	 * Sets the user secur uuid.
+	 *
+	 * @param userSecurUuid the new user secur uuid
+	 */
+	public void setUserSecurUuid(String userSecurUuid) {
+		this.userSecurUuid = userSecurUuid;
+	}
+
 	/**
 	 * Gets the discussion topic id.
 	 *

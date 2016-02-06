@@ -20,7 +20,26 @@ public class TopicDetailsDto {
 	/** The topic id. */
 	private Integer topicId;
 	
+	/** The topic description. */
+	private String topicDescription;
 	
+	/**
+	 * Gets the topic description.
+	 *
+	 * @return the topic description
+	 */
+	public String getTopicDescription() {
+		return topicDescription;
+	}
+
+	/**
+	 * Sets the topic description.
+	 *
+	 * @param topicDescription the new topic description
+	 */
+	public void setTopicDescription(String topicDescription) {
+		this.topicDescription = topicDescription;
+	}
 
 	/**
 	 * Gets the topic id.

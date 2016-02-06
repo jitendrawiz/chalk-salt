@@ -155,7 +155,7 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		try{
 			return  discussionDao.getTopicDetails(classId, subjectId);
 		} catch (final Exception exception) {
-            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topics", exception);
         }
 	}
 
@@ -191,8 +191,19 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		try{
 			return  discussionDao.getTopicCommentDetails(classId, subjectId,topicId);
 		} catch (final Exception exception) {
-            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COMMENTS_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COMMENTS_DETAILS, "Fail to Fetch details Discussion Topic comments", exception);
         }
 	}
+
+	@Override
+	public TopicDetailsDto getSingleTopicDetails(String classId,
+			String subjectId, String topicId) throws DiscussionException {
+		logger.info("fetch details of dicussion topic using class, subject and topic ...");
+		try{
+			return  discussionDao.getSingleTopicDetails(classId, subjectId,topicId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to Fetch details of Discussion Topic", exception);
+        }
+		}
 
 }
