@@ -43,6 +43,27 @@ public class DiscussionCommentDto {
 	/** The user secur uuid. */
 	private String userSecurUuid;
 	
+	/** The joined date. */
+	private String joinedDate;
+	
+	/**
+	 * Gets the joined date.
+	 *
+	 * @return the joined date
+	 */
+	public String getJoinedDate() {
+		return joinedDate;
+	}
+
+	/**
+	 * Sets the joined date.
+	 *
+	 * @param joinedDate the new joined date
+	 */
+	public void setJoinedDate(String joinedDate) {
+		this.joinedDate = joinedDate;
+	}
+
 	/**
 	 * Gets the topic title.
 	 *
