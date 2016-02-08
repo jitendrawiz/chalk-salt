@@ -93,7 +93,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
                         };
 
                         $scope.pageCount = function() {
-                            return Math.ceil($scope.domains.length / $scope.itemsPerPage);
+                            return Math.ceil($scope.topicList.length / $scope.itemsPerPage);
                         };
 
                         $scope.$watch('currentPage + itemsPerPage', function() {
@@ -188,7 +188,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
                         };
 
                         $scope.pageCount = function() {
-                            return Math.ceil($scope.domains.length / $scope.itemsPerPage);
+                            return Math.ceil($scope.commentsList.length / $scope.itemsPerPage);
                         };
 
                         $scope.$watch('currentPage + itemsPerPage', function() {
