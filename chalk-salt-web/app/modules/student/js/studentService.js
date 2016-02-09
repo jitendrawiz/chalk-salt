@@ -66,7 +66,7 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]); 
+    } ]); 
     
     studentService.factory('GetTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/discussion/edittopic/:securUuid',{
@@ -77,7 +77,7 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]); 
+    } ]); 
     
     studentService.factory('deleteTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/discussion/deletetopic/:securUuid',{
@@ -88,7 +88,7 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]); 
+    } ]); 
   
     studentService.factory('updateTopicDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/discussion/topics/update',{}, {
@@ -97,6 +97,30 @@ define([ 'angular' ], function(angular) {
             }
             
         });
-        } ]);
+    } ]);
+    
+    studentService.factory('GetCommentsList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/comments/statistics/:classId/:subjectId/:topicId',{
+        	classId : '@classId',
+        	subjectId : '@subjectId',
+        	topicId : '@topicId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+   }]);
+    
+    studentService.factory('deleteCommentDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/deletecomment/:commentUuid',{
+        	commentUuid : '@commentUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+   } ]); 
   
 });

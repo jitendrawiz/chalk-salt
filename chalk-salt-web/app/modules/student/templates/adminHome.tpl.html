@@ -84,6 +84,14 @@
                         </a>
 				</li>
 				
+				<li ng-class="{ active:isSet(6)}">
+                        <a ng-click="setTab(6);" href="">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Discussion Room Comment List</span>
+                            <span class="selected"></span>
+                        </a>
+				</li>
+				
                     <!-- <li class="active">
                         <a href="javascript:void(0)">
                             <i class="fa fa-tachometer"></i>
@@ -139,6 +147,9 @@
 				</div>
 				<div ng-switch-when="5">
 				 <div ng-include="'modules/student/templates/admin/DiscussionRoomTopicList.tpl.html'"></div>
+				</div>
+				<div ng-switch-when="6">
+				 <div ng-include="'modules/student/templates/admin/DiscussionRoomCommentList.tpl.html'"></div>
 				</div>
 			</div>
                              

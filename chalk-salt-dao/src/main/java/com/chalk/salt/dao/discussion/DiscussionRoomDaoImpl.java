@@ -95,7 +95,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 			throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
-				+ "`secur_uuid` as securUuid FROM `cst_discussion_topics` where class_id=:classId and subject_id =:subjectId";
+				+ "`secur_uuid` as securUuid, discussion_topic_id as discussionTopicId FROM `cst_discussion_topics` where class_id=:classId and subject_id =:subjectId";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -342,6 +342,22 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.addParameter("commentUuid", discussionComment.getCommentUuid());
             query.executeUpdate();
             return discussionComment.getCommentUuid();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#deleteComment(java.lang.String)
+	 */
+	@Override
+	public void deleteComment(String commentUuid) throws Exception {
+		final String sqlQuery = "update cst_discussion_topic_comments set delete_status=:deleteStatus where comment_uuid=:commentUuid LIMIT 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("deleteStatus", "0");
+            query.addParameter("commentUuid", commentUuid);
+            query.executeUpdate();
+            
         }
 	}
 }

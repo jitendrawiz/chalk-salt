@@ -140,10 +140,19 @@ public interface DiscussionRoomFacade {
 	/**
 	 * Update comment.
 	 *
-	 * @param discussionCommentDetails the discussion comment details
+	 * @param discussionComment the discussion comment
 	 * @return the string
 	 * @throws DiscussionException the discussion exception
 	 */
 	String updateComment(DiscussionCommentDto discussionComment)throws DiscussionException;
+
+	/**
+	 * Delete comment.
+	 *
+	 * @param commentUuid the comment uuid
+	 * @return the boolean
+	 * @throws DiscussionException the discussion exception
+	 */
+	Boolean deleteComment(String commentUuid)throws DiscussionException;
 
 }

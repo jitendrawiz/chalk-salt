@@ -103,10 +103,12 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
-      'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService',
+      'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
+      'deleteCommentDetailsService',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
-       createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService) {
+       createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
+       GetCommentsList,deleteCommentDetailsService) {
 
  
 		   var showAlert = function(type, message){
@@ -127,6 +129,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
         $scope.setTab = function(newTab){
           $scope.tab = newTab;          
           $scope.topicsList={};
+          $scope.commentsList={};
         };
 
         $scope.isSet = function(tabNum){
@@ -215,10 +218,15 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
              showAlert('danger', error.data.message);
      };
      $scope.topicDetails = {};
-
+     $scope.commentDetails={};
+     
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
     	 $scope.topicDetails.listsubjectId = ""; 
+    	 $scope.commentDetails.subjectId = ""; 
+    	 $scope.commentDetails.listsubjectId = ""; 
+    	 $scope.commentDetails.topicId = ""; 
+    	 $scope.commentDetails.listTopicId = ""; 
      };
 
      
@@ -229,14 +237,16 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          GetSubjectsList.query({classId:classId}, function(response) {
         	 resetOptions();
         	 $scope.topicsList={};
+        	 $scope.commentsList={};
         	 console.log(classId);
              $scope.subjectsList = response;
          }, onRequestFailure);
 
      };
-
+     
      $scope.showTopicDetails = function(classId,subjectId) {
-    	 console.log(classId+"--------------------------"+subjectId);
+    	 console.log(classId+"--------------------------"+classId);
+    	 console.log(subjectId+"--------------------------"+subjectId);
     	if (!classId) {
     		resetOptions();
     		if(!subjectId){
@@ -246,6 +256,25 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     	
          GetTopicsList.query({classId:classId,subjectId:subjectId}, function(response) {
              $scope.topicsList = response;
+         }, onRequestFailure);
+
+     };
+     
+     $scope.showCommentDetails = function(classId,subjectId,topicId) {
+    	 console.log(classId+"--------------------------"+classId);
+    	 console.log(subjectId+"--------------------------"+subjectId);
+    	 console.log(topicId+"--------------------------"+topicId);
+    	if (!topicId) {
+    		resetOptions(); 
+    		if (!subjectId) {
+    			if(!topicId){
+        			return;
+        		}            
+             }
+         }
+    	
+         GetCommentsList.query({classId:classId,subjectId:subjectId,topicId:topicId}, function(response) {
+             $scope.commentsList = response;
          }, onRequestFailure);
 
      };
@@ -316,6 +345,22 @@ this.updateTopic = function() {
     }, function(error) {
         showAlert('danger', error.data.message);
     });
+};
+
+//delete comment
+this.deleteComment=function(commentUuid){
+	   if(confirm("Do you want to delete this Comment")){
+	 deleteCommentDetailsService.get({commentUuid:commentUuid},  function(response) {
+        if(response){
+        	 console.log(response);
+        	 alert("Comment deleted successfully");
+        	 $state.reload();
+        	// $scope.setTab(4);
+        	 }
+    }, function(error) {
+    	showAlert('danger',error.data.message);
+    })
+    }
 };
 
 }]);

@@ -137,11 +137,19 @@ public interface DiscussionRoomDao {
 	/**
 	 * Update comment.
 	 *
-	 * @param discussionCommentDetails the discussion comment details
+	 * @param discussionComment the discussion comment
 	 * @return the string
 	 * @throws Exception the exception
 	 */
 	String updateComment(DiscussionCommentDto discussionComment)throws Exception;
+
+	/**
+	 * Delete comment.
+	 *
+	 * @param commentUuid the comment uuid
+	 * @throws Exception the exception
+	 */
+	void deleteComment(String commentUuid)throws Exception;
 
 	
 }

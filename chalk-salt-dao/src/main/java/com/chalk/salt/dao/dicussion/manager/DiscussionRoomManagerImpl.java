@@ -254,4 +254,18 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#deleteComment(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteComment(String commentUuid) throws DiscussionException {
+		logger.info("delete dicussion comment using comment uuid...");
+		try{
+			discussionDao.deleteComment(commentUuid);
+			return true; // need to be discussed how to implement.
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_DISCUSSION_COMMENT, "Fail to delete Discussion Comment", exception);
+        }
+	}
+
 }

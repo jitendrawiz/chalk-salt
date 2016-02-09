@@ -111,7 +111,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_COMMENT_DETAIL(1031),
 	
 	/** The fail to update discussion comment. */
-	FAIL_TO_UPDATE_DISCUSSION_COMMENT(1032);
+	FAIL_TO_UPDATE_DISCUSSION_COMMENT(1032),
+	
+	/** The fail to delete discussion comment. */
+	FAIL_TO_DELETE_DISCUSSION_COMMENT(1033);
 
 	/** The value. */
     private final int value;

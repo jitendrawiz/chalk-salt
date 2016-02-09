@@ -19,6 +19,10 @@
 	padding-top: 25px;
 }
 
+.title_name_topic{
+	padding-top: 25px;
+}
+
 .title_name_title {
 	padding-top: 85px;
 }
@@ -88,51 +92,66 @@ button.btn-block {
 	color: white;
 }
 
-#topicList th:last-child, td:last-child {
+#commentList th:last-child, td:last-child {
 	width: 10%;
 }
 
-#topicList th{
+#commentList th{
 	color:#fff;
 }
+
 </style>
 <div class="span12"
 	style="visibility: visible; animation-name: fadeInLeft;">
 	<div class="row inner-grid">
 		<div class="user_log_detail">
-			<form name="topicListForm" role="form" action="" method="post"
+			<form name="commentListForm" role="form" action="" method="post"
 				novalidate>
-				<h3>Discussion Room Topic List</h3>
+				<h3>Discussion Room Comment List</h3>
 				<div class="title_name">
-
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Subject</label><br>
+					<label class="title_name_class">Class</label><br> 
+					<label class="title_name_sub">Subject</label><br>
+					<label class="title_name_topic">Topic</label><br>
 				</div>
 				<div class="title_text">
 					<div class="form-group"
-						ng-class="{ 'has-error' : topicListForm.studentClass.$invalid && !topicListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="topicDetails.listclassId"
+						ng-class="{ 'has-error' : commentListForm.studentClass.$invalid && !commentListForm.studentClass.$pristine }">
+						<select class="form-control" ng-model="commentDetails.listclassId"
 							name="studentClass" placeholder="Class"
 							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
 							ng-required="true"
-							ng-change="showSubjectsList(topicDetails.listclassId)">
+							ng-change="showSubjectsList(commentDetails.listclassId)">
 							<option value="" disabled>Select Class</option>
 						</select>
 						<p
-							ng-show="topicListForm.studentClass.$error.required && !topicListForm.studentClass.$pristine">Class
+							ng-show="commentListForm.studentClass.$error.required && !commentListForm.studentClass.$pristine">Class
 							is required.</p>
 					</div>
 					<div class="form-group"
-						ng-class="{ 'has-error' : topicListForm.studentSubject.$invalid && !topicListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="topicDetails.listsubjectId"
+						ng-class="{ 'has-error' : commentListForm.studentSubject.$invalid && !commentListForm.studentSubject.$pristine }">
+						<select class="form-control" ng-model="commentDetails.listsubjectId"
 							name="studentSubject" placeholder="Subject"
 							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
 							ng-required="true"
-							ng-change="showTopicDetails(topicDetails.listclassId,topicDetails.listsubjectId)">
+							ng-change="showTopicDetails(commentDetails.listclassId,commentDetails.listsubjectId)">
 							<option value="" disabled>Select Subject</option>
 						</select>
 						<p
-							ng-show="topicListForm.studentClass.$error.required && !topicListForm.studentClass.$pristine">Class
+							ng-show="commentListForm.studentSubject.$error.required && !commentListForm.studentSubject.$pristine">Subject 
+							is required.</p>
+					</div>
+					
+					<div class="form-group"
+						ng-class="{ 'has-error' : commentListForm.topic.$invalid && !commentListForm.topic.$pristine }">
+						<select class="form-control" ng-model="commentDetails.listTopicId"
+							name="topic" placeholder="Topic"
+							ng-options="topic.discussionTopicId as topic.topicTitle for topic in topicsList"
+							ng-required="true"
+							ng-change="showCommentDetails(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">
+							<option value="" disabled>Select Topic</option>
+						</select>
+						<p
+							ng-show="commentListForm.topic.$error.required && !commentListForm.topic.$pristine">Topic 
 							is required.</p>
 					</div>
 			</form>
@@ -145,24 +164,22 @@ button.btn-block {
 	<div class="row">
 
 		<div class="table-responsive ">
-			<table id="topicList" class="table table-bordered">
+			<table id="commentList" class="table table-bordered">
 				<thead>
 					<tr>
 						<th>S.No</th>
-						<th>Topic Title</th>
-						<th>Topic Description</th>
+						<th>Comment</th>
+						<th>User/Last Updated</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in topicsList">
+					<tr ng-repeat="item in commentsList">
 						<td>{{$index +1}}</td>
-						<td>{{item.topicTitle}}</td>
-						<td>{{item.topicDescription}}</td>
+						<td>{{item.generalComments}}</td>
+						<td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.editTopic(item.securUuid)">Edit</button> |
-							<button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.deleteTopic(item.securUuid)">Delete</button>
+								ng-click="adminCtrl.deleteComment(item.commentUuid)">Delete</button>
 						</td>
 					</tr>
 				</tbody>

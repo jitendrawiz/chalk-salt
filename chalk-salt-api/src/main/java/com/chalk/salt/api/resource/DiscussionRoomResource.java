@@ -425,4 +425,30 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+    
+    /**
+     * Delete comment.
+     *
+     * @param commentUuid the comment uuid
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/deletecomment/{commentUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response deleteComment(@NotBlank @PathParam("commentUuid") final String commentUuid)throws DiscussionException{
+    	
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean deleteStatus = false;
+    	try{
+    		deleteStatus = discussionRoomFacade.deleteComment(commentUuid);
+    		response.put("deleteStatus", deleteStatus.toString());
+    		return Response.ok(deleteStatus).build();
+    		
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
 }

@@ -140,4 +140,12 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.updateComment(discussionComment);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#deleteComment(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteComment(String commentUuid) throws DiscussionException {
+		return discussionManager.deleteComment(commentUuid);
+	}
+
 }
