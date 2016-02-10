@@ -363,4 +363,21 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             
         }
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#deleteTopicComments(java.lang.String)
+	 */
+	@Override
+	public void deleteTopicComments(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE T FROM `cst_discussion_topic_comments` T "
+				+ " INNER JOIN `cst_discussion_topics` ON `cst_discussion_topics`.discussion_topic_id = T.discussion_topic_id "
+				+ " WHERE cst_discussion_topics.secur_uuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+            
+        }		
+	}
 }

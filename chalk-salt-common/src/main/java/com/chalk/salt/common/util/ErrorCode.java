@@ -86,8 +86,8 @@ public enum ErrorCode {
 	/** The fail to fetch discussion topic. */
 	FAIL_TO_FETCH_DISCUSSION_TOPIC(1023),
 	
-	/** The fail to delete discussion topic. */
-	FAIL_TO_DELETE_DISCUSSION_TOPIC(1024),
+	/** The fail to delete discussion topic and comments. */
+	FAIL_TO_DELETE_DISCUSSION_TOPIC_AND_COMMENTS(1024),
 	
 	/** The fail to update discussion topic. */
 	FAIL_TO_UPDATE_DISCUSSION_TOPIC(1025),

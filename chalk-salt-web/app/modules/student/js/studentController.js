@@ -223,12 +223,14 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
     	 $scope.topicDetails.listsubjectId = ""; 
+     };
+
+     var resetOptionsComments=function(){
     	 $scope.commentDetails.subjectId = ""; 
     	 $scope.commentDetails.listsubjectId = ""; 
     	 $scope.commentDetails.topicId = ""; 
     	 $scope.commentDetails.listTopicId = ""; 
-     };
-
+     }
      
      $scope.showSubjectsList = function(classId) {
     	if (!classId) {
@@ -236,6 +238,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }
          GetSubjectsList.query({classId:classId}, function(response) {
         	 resetOptions();
+        	 resetOptionsComments();
         	 $scope.topicsList={};
         	 $scope.commentsList={};
         	 console.log(classId);
@@ -255,15 +258,18 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }
     	
          GetTopicsList.query({classId:classId,subjectId:subjectId}, function(response) {
+        	 $scope.commentsList={};
+        	 $scope.commentDetails.topicId = ""; 
+        	 $scope.commentDetails.listTopicId = "";
              $scope.topicsList = response;
          }, onRequestFailure);
 
      };
      
      $scope.showCommentDetails = function(classId,subjectId,topicId) {
-    	 console.log(classId+"--------------------------"+classId);
-    	 console.log(subjectId+"--------------------------"+subjectId);
-    	 console.log(topicId+"--------------------------"+topicId);
+    	 console.log("classId--------------------------"+classId);
+    	 console.log("subjectId--------------------------"+subjectId);
+    	 console.log("TopicId--------------------------"+topicId);
     	if (!topicId) {
     		resetOptions(); 
     		if (!subjectId) {
@@ -317,7 +323,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
    
 //delete topic
    this.deleteTopic=function(securUuid){
-	   if(confirm("Do you want to delete this topic")){
+	   if(confirm("Deleting this topic will also delete associated comments. \n                     Do you want to continue?")){
   	 deleteTopicDetailsService.get({securUuid:securUuid},  function(response) {
            if(response){
            	 console.log(response);
@@ -328,6 +334,9 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
        }, function(error) {
        	showAlert('danger',error.data.message);
        })
+       
+       }else{
+    	   console.log("User cancelled the operation");
        }
  };
  //update Topic

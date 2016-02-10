@@ -151,5 +151,13 @@ public interface DiscussionRoomDao {
 	 */
 	void deleteComment(String commentUuid)throws Exception;
 
+	/**
+	 * Delete topic comments.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteTopicComments(String securUuid)throws Exception;
+
 	
 }

@@ -92,12 +92,13 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 */
 	@Override
 	public Boolean deleteTopic(String securUuid) throws DiscussionException {
-		logger.info("delete dicussion topic using secur uuid...");
+		logger.info("delete dicussion topic and topic comments using secur uuid...");
 		try{
+			discussionDao.deleteTopicComments(securUuid);
 			discussionDao.deleteTopic(securUuid);
 			return true; // need to be discussed how to implement.
 		} catch (final Exception exception) {
-            throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_DISCUSSION_TOPIC, "Fail to delete Discussion Topic", exception);
+            throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_DISCUSSION_TOPIC_AND_COMMENTS, "Fail to delete Discussion Topic and comments", exception);
         }
 	}
 
