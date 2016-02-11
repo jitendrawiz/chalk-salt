@@ -145,6 +145,13 @@ button.btn-block {
 	<div class="row">
 
 		<div class="table-responsive ">
+		<div class="number_scroll">
+    	
+        <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
+        <div class="num_s">
+          <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"  boundary-link-numbers="true"></uib-pagination>      
+         </div> 
+    </div>
 			<table id="topicList" class="table table-bordered">
 				<thead>
 					<tr>
@@ -155,7 +162,7 @@ button.btn-block {
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in topicsList">
+					<tr ng-repeat="item in topicsList | filter:search track by $index">
 						<td>{{$index +1}}</td>
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
@@ -167,6 +174,11 @@ button.btn-block {
 					</tr>
 				</tbody>
 			</table>
+			<div class="number_scroll">     
+         <div class="num_s"> 
+          <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"  boundary-link-numbers="true"></uib-pagination>      
+         </div> 
+    </div>
 		</div>
 
 	</div>

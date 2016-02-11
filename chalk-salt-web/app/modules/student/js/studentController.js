@@ -128,8 +128,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
         $scope.setTab = function(newTab){
           $scope.tab = newTab;          
-          $scope.topicsList={};
-          $scope.commentsList={};
+          $scope.topicsList=[];
+          $scope.commentsList=[];
         };
 
         $scope.isSet = function(tabNum){
@@ -217,8 +217,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          function onRequestFailure(error) {
              showAlert('danger', error.data.message);
      };
-     $scope.topicDetails = {};
-     $scope.commentDetails={};
+     $scope.topicDetails = [];
+     $scope.commentDetails=[];
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -239,8 +239,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          GetSubjectsList.query({classId:classId}, function(response) {
         	 resetOptions();
         	 resetOptionsComments();
-        	 $scope.topicsList={};
-        	 $scope.commentsList={};
+        	 $scope.topicsList=[];
+        	 $scope.commentsList=[];
         	 console.log(classId);
              $scope.subjectsList = response;
          }, onRequestFailure);
@@ -258,13 +258,57 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }
     	
          GetTopicsList.query({classId:classId,subjectId:subjectId}, function(response) {
-        	 $scope.commentsList={};
+        	 $scope.commentsList=[];
         	 $scope.commentDetails.topicId = ""; 
         	 $scope.commentDetails.listTopicId = "";
-             $scope.topicsList = response;
+        	 
+        	 if(response){
+                $scope.topicsListDetails = response;
+             	console.log(response);
+             	$scope.totalItems = $scope.topicsListDetails.length;
+                 $scope.currentPage = 1;
+                 $scope.itemsPerPage = 5;
+                 $scope.maxSize = 5;
+
+                 $scope.setPage = function(pageNo) {
+                     $scope.currentPage = pageNo;
+                 };
+
+                 $scope.pageCount = function() {
+                     return Math.ceil($scope.topicsListDetails.length / $scope.itemsPerPage);
+                 };
+
+                 $scope.$watch('currentPage + itemsPerPage', function() {
+                     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+                     $scope.topicsList = $scope.topicsListDetails.slice(begin, end);
+                 });
+             }
          }, onRequestFailure);
 
      };
+
+     $scope.showTopicDetailsForCommentsPage = function(classId,subjectId) {
+    	 console.log(classId+"--------------------------"+classId);
+    	 console.log(subjectId+"--------------------------"+subjectId);
+    	if (!classId) {
+    		resetOptions();
+    		if(!subjectId){
+    			return;
+    		}             
+         }
+    	
+         GetTopicsList.query({classId:classId,subjectId:subjectId}, function(response) {
+        	 $scope.commentsList=[];
+        	 $scope.commentDetails.topicId = ""; 
+        	 $scope.commentDetails.listTopicId = "";
+        	 if(response){
+        		 $scope.topicsList = response;
+             }
+         }, onRequestFailure);
+
+     };
+
+     
      
      $scope.showCommentDetails = function(classId,subjectId,topicId) {
     	 console.log("classId--------------------------"+classId);
@@ -280,7 +324,27 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }
     	
          GetCommentsList.query({classId:classId,subjectId:subjectId,topicId:topicId}, function(response) {
-             $scope.commentsList = response;
+             if(response){
+                 $scope.commentsListDetails = response;
+              	console.log(response);
+              	  $scope.totalItemsCom = $scope.commentsListDetails.length;
+                  $scope.currentPageCom = 1;
+                  $scope.itemsPerPageCom = 5;
+                  $scope.maxSize = 5;
+
+                  $scope.setPage = function(pageNo) {
+                      $scope.currentPage = pageNo;
+                  };
+
+                  $scope.pageCount = function() {
+                      return Math.ceil($scope.commentsListDetails.length / $scope.itemsPerPage);
+                  };
+
+                  $scope.$watch('currentPage + itemsPerPage', function() {
+                      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+                      $scope.commentsList = $scope.commentsListDetails.slice(begin, end);
+                  });
+              }
          }, onRequestFailure);
 
      };

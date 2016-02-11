@@ -87,6 +87,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
                     	$scope.totalItems = $scope.topicList.length;
                         $scope.currentPage = 1;
                         $scope.itemsPerPage = 10;
+                        $scope.maxSize = 5;
 
                         $scope.setPage = function(pageNo) {
                             $scope.currentPage = pageNo;
@@ -182,7 +183,7 @@ define([ 'angular', './routing', './service' ], function(angular) {
                     	$scope.totalItems = $scope.commentsList.length;
                         $scope.currentPage = 1;
                         $scope.itemsPerPage = 40;
-
+                        $scope.maxSize = 5;
                         $scope.setPage = function(pageNo) {
                             $scope.currentPage = pageNo;
                         };

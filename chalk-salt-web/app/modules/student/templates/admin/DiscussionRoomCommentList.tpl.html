@@ -133,7 +133,7 @@ button.btn-block {
 							name="studentSubject" placeholder="Subject"
 							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
 							ng-required="true"
-							ng-change="showTopicDetails(commentDetails.listclassId,commentDetails.listsubjectId)">
+							ng-change="showTopicDetailsForCommentsPage(commentDetails.listclassId,commentDetails.listsubjectId)">
 							<option value="" disabled>Select Subject</option>
 						</select>
 						<p
@@ -164,6 +164,13 @@ button.btn-block {
 	<div class="row">
 
 		<div class="table-responsive ">
+		<div class="number_scroll">
+    	
+        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Comment" />
+        <div class="num_s">
+          <uib-pagination total-items="totalItemsCom" ng-model="currentPageCom" max-size="maxSize" items-per-page="itemsPerPageCom"  boundary-link-numbers="true"></uib-pagination>      
+         </div>
+         </div>
 			<table id="commentList" class="table table-bordered">
 				<thead>
 					<tr>
@@ -174,7 +181,7 @@ button.btn-block {
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in commentsList">
+					<tr ng-repeat="item in commentsList | filter:search track by $index">
 						<td>{{$index +1}}</td>
 						<td>{{item.generalComments}}</td>
 						<td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}</td>
@@ -184,6 +191,11 @@ button.btn-block {
 					</tr>
 				</tbody>
 			</table>
+			<div class="number_scroll">     
+         <div class="num_s"> 
+          <uib-pagination total-items="totalItemsCom" ng-model="currentPageCom" max-size="maxSize" items-per-page="itemsPerPageCom"  boundary-link-numbers="true"></uib-pagination>      
+         </div> 
+    </div>
 		</div>
 
 	</div>
