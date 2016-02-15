@@ -333,15 +333,15 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                   $scope.maxSize = 5;
 
                   $scope.setPage = function(pageNo) {
-                      $scope.currentPage = pageNo;
+                      $scope.currentPageCom = pageNo;
                   };
 
                   $scope.pageCount = function() {
-                      return Math.ceil($scope.commentsListDetails.length / $scope.itemsPerPage);
+                      return Math.ceil($scope.commentsListDetails.length / $scope.itemsPerPageCom);
                   };
 
-                  $scope.$watch('currentPage + itemsPerPage', function() {
-                      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+                  $scope.$watch('currentPageCom + itemsPerPageCom', function() {
+                      var begin = (($scope.currentPageCom - 1) * $scope.itemsPerPageCom), end = begin + $scope.itemsPerPageCom;
                       $scope.commentsList = $scope.commentsListDetails.slice(begin, end);
                   });
               }
@@ -357,9 +357,10 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     	  }
     	  return true;
      };
-     this.createTopic = function() {
-         
-         createNewTopic.save({}, $scope.topicDetails, function(
+     $scope.topicDetailsToSave = {};
+     this.createTopic = function() {   	
+    	 angular.extend($scope.topicDetailsToSave,$scope.topicDetails);
+         createNewTopic.save({}, $scope.topicDetailsToSave, function(
                  response) {
              if (response) {
                  console.log(response);
