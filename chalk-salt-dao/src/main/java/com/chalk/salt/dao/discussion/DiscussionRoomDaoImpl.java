@@ -255,7 +255,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
 				+ " cst_discussion_topics.discussion_topic_id =:topicId AND "
 				+ " cst_discussion_topic_comments.delete_status = 1 "
-				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id";
+				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
+				+ " ORDER BY cst_discussion_topic_comments.modified_date DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
