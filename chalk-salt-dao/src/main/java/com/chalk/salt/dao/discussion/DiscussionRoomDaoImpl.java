@@ -142,7 +142,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " INNER JOIN cst_discussion_topics ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
 				+ " WHERE cst_discussion_topics.subject_id = cst_class_subject_mapping.subject_id "
 				+ " AND cst_discussion_topics.class_id = cst_class_subject_mapping.class_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1 "
+			//	+ " AND cst_discussion_topic_comments.delete_status=1 "
 				+ " )AS comments, "
 				+ " (SELECT "
 				+ " MAX(cst_discussion_topic_comments.modified_date)"
@@ -151,14 +151,15 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topics.discussion_topic_id = cst_discussion_topic_comments.discussion_topic_id "
 				+ " WHERE cst_discussion_topics.subject_id = subjects.subject_id "
 				+ " AND cst_discussion_topics.class_id = cst_class_subject_mapping.class_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1 ) AS lastModifiedDate, "
+				//+ " AND cst_discussion_topic_comments.delete_status=1 "
+				+ " ) AS lastModifiedDate, "
 				+ " (SELECT CONCAT(cst_users.first_name,cst_users.middle_name,cst_users.last_name) "
 				+ " FROM cst_discussion_topics "
 				+ " INNER JOIN cst_users ON cst_users.class_id = cst_discussion_topics.class_id "
 				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topics.discussion_topic_id = cst_discussion_topic_comments.discussion_topic_id "
 				+ " WHERE cst_discussion_topics.subject_id = subjects.subject_id "
 				+ " AND cst_discussion_topics.class_id = cst_class_subject_mapping.class_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1 "
+				//+ " AND cst_discussion_topic_comments.delete_status=1 "
 				+ " HAVING MAX(cst_discussion_topic_comments.modified_date) "
 				+ " )AS lastModifiedUserName  "
 				+ " FROM cst_class_subjects subjects "
@@ -184,16 +185,17 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ "(SELECT COUNT(cst_discussion_topic_comments.discussion_comment_id) "
 				+ "FROM cst_discussion_topic_comments "
 				+ "WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1"
+				//+ " AND cst_discussion_topic_comments.delete_status=1"
 				+ " )AS comments,"
 				+ "(SELECT MAX(cst_discussion_topic_comments.modified_date) FROM cst_discussion_topic_comments "
 				+ "WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1) AS lastModifiedDate, "
+				//+ " AND cst_discussion_topic_comments.delete_status=1"
+				+ " ) AS lastModifiedDate, "
 				+ "(SELECT DISTINCT CONCAT(cst_users.first_name,cst_users.middle_name,cst_users.last_name) "
 				+ "FROM cst_discussion_topics INNER JOIN cst_users ON cst_users.class_id = cst_discussion_topics.class_id "
 				+ "INNER JOIN cst_discussion_topic_comments ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
 				+ " WHERE cst_users.class_id = discussion_topics.class_id AND cst_discussion_topics.discussion_topic_id = discussion_topics.discussion_topic_id "
-				+ " AND cst_discussion_topic_comments.delete_status=1 "
+				//+ " AND cst_discussion_topic_comments.delete_status=1 "
 				+ "HAVING MAX(cst_discussion_topic_comments.modified_date))AS lastModifiedUserName "
 				+ "FROM cst_discussion_topics AS discussion_topics "
 				+ "WHERE  discussion_topics.class_id=:classId AND discussion_topics.subject_id=:subjectId";
@@ -253,8 +255,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " AND cst_users.secur_uuid = cst_discussion_topic_comments.user_securUuid"
 				+ " WHERE cst_discussion_topics.class_id =:classId AND "
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
-				+ " cst_discussion_topics.discussion_topic_id =:topicId AND "
-				+ " cst_discussion_topic_comments.delete_status = 1 "
+				+ " cst_discussion_topics.discussion_topic_id =:topicId "
+				//+ " AND  cst_discussion_topic_comments.delete_status = 1 "
 				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
 				+ " ORDER BY cst_discussion_topic_comments.modified_date DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -327,8 +329,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " FROM "
 				+ " cst_discussion_topic_comments "
 				+ " WHERE "
-				+ " cst_discussion_topic_comments.comment_uuid =:commentUuid AND "
-				+ " cst_discussion_topic_comments.delete_status = 1  ";
+				+ " cst_discussion_topic_comments.comment_uuid =:commentUuid";
+				//+ " AND  cst_discussion_topic_comments.delete_status = 1  ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -360,11 +362,10 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	 */
 	@Override
 	public void deleteComment(String commentUuid) throws Exception {
-		final String sqlQuery = "update cst_discussion_topic_comments set delete_status=:deleteStatus where comment_uuid=:commentUuid LIMIT 1";
+		final String sqlQuery = "DELETE FROM cst_discussion_topic_comments where cst_discussion_topic_comments.comment_uuid=:commentUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
-            final Query query = connection.createQuery(sqlQuery, true);
-            query.addParameter("deleteStatus", "0");
+            final Query query = connection.createQuery(sqlQuery, true);            
             query.addParameter("commentUuid", commentUuid);
             query.executeUpdate();
             
