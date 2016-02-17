@@ -27,6 +27,7 @@ public class AuthRequestModel extends ApiModel {
     @NotEmpty(message = "password : password can not be null/blank")
     private String password;
 
+    private Boolean rememberMe;
     /**
      * Gets the username.
      *
@@ -63,4 +64,12 @@ public class AuthRequestModel extends ApiModel {
         this.password = password;
     }
 
+	public Boolean getRememberMe() {
+		return rememberMe;
+	}
+
+	public void setRememberMe(Boolean rememberMe) {
+		this.rememberMe = rememberMe;
+	}
+    
 }

@@ -21,10 +21,11 @@ public class DomainAuthTokenModel extends UsernamePasswordToken {
      *
      * @param username the username
      * @param password the password
+     * @param rememberMe 
      * @param clientIpAddresses the client ip addresses
      */
-    public DomainAuthTokenModel(final String username, final String password, final List<String> clientIpAddresses) {
-        super(username, password);
+    public DomainAuthTokenModel(final String username, final String password, Boolean rememberMe, final List<String> clientIpAddresses) {
+        super(username, password, rememberMe);
         this.clientIpAddresses = clientIpAddresses;
     }
 

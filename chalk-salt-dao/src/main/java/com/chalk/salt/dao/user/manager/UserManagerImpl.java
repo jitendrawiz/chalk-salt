@@ -204,4 +204,20 @@ public class UserManagerImpl implements UserManager {
 		}
 		return updateStatus;
 	}
+
+	@Override
+	public List<UserDto> getStudents() throws UserException {
+		logger.info("Obtaining list of students......");
+        List<UserDto> students = null;
+        try {
+        	students = userDao.getStudents();     
+            
+            if (students == null) {
+                throw new UserException(ErrorCode.FAIL_TO_FETCH_STUDENTS_LIST, "fail to fetch students list");
+            }
+        } catch (final Exception exception) {
+        	throw new UserException(ErrorCode.FAIL_TO_FETCH_STUDENTS_LIST, "fail to fetch students list", exception);
+        }
+        return students;
+	}
 }

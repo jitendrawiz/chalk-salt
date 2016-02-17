@@ -14,6 +14,7 @@ import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -398,6 +399,22 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("motherOccupation", parentsInfo.getMotherOccupation());   
             return (Long) query.executeUpdate().getKey();
         }
+	}
+
+	@Override
+	public List<UserDto> getStudents() throws Exception {
+		final String sqlQuery = "SELECT cst_users.`first_name` as firstName, cst_users.`middle_name` as middleName,"
+				+ "cst_users.`last_name` as lastName, cst_users.`secur_uuid` as securUuid, cst_contacts.`mobile` as mobile,"
+				+ "	cst_contacts.`email` as email, class_type.class_name as studentClass FROM `cst_users` AS cst_users "
+				+ "	JOIN `cst_contacts` AS cst_contacts ON cst_contacts.id = cst_users.contact_id "
+				+ " JOIN cst_class_type AS class_type ON class_type.class_id = cst_users.class_id";
+		
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            return query.executeAndFetch(UserDto.class);
+        }
+        
 	}
 
 }

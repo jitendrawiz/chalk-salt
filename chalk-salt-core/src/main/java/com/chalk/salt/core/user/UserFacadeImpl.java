@@ -4,6 +4,7 @@
  */
 package com.chalk.salt.core.user;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -116,6 +117,11 @@ public class UserFacadeImpl implements UserFacade {
 	@Override
 	public Boolean changePassword(final UserDto userDetails) throws UserException {
 		return userManager.changePassword(userDetails);
+	}
+
+	@Override
+	public List<UserDto> getStudents() throws UserException {
+		return userManager.getStudents();
 	}
 
 }

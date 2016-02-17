@@ -20,11 +20,13 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                };
     	       
                 $scope.authRequest = {};
+                $scope.authRequest.rememberMe=false;
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
                 this.authenticateUser = function() {
+                	
                     LoginService.save({}, $scope.authRequest, function(response) {
                         if(response){
                             $rootScope.username = $scope.authRequest.username;

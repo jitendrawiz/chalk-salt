@@ -5,6 +5,7 @@
 package com.chalk.salt.api.resource;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -170,6 +171,25 @@ public class UserResource extends AbstractResource {
             }
             response.put("securUuid", securUuid);
             return Response.ok(response).build();
+
+        } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
+    }
+    
+    @GET
+    @Path("/students")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getStudents() throws UserException {
+
+        List<UserDto> students = null;
+        try {
+        	students = userFacade.getStudents();
+            if (students == null) {
+                return Response.noContent().build();
+            }
+            return Response.ok(students).build();
 
         } catch (final UserException userException) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);

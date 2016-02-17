@@ -77,10 +77,11 @@ public class AuthResource extends AbstractResource {
         final String username = authRequest.getUsername();
         final String password = authRequest.getPassword();
         final String remoteAddress = request.getRemoteAddr();
+        final Boolean rememberMe = authRequest.getRememberMe();
 
         logger.info("About to authenticate the user '{}' , remoteAddress '{}'", username, remoteAddress);
         final List<String> clientIpAddresses = Arrays.asList(remoteAddress.split(REGEX_EXP));
-        final DomainAuthTokenModel authenticationToken = new DomainAuthTokenModel(username, password, clientIpAddresses);
+        final DomainAuthTokenModel authenticationToken = new DomainAuthTokenModel(username, password, rememberMe, clientIpAddresses);
 
         final Subject currentUser = SecurityUtils.getSubject();
         final Map<String, String> response = new HashMap<String, String>();

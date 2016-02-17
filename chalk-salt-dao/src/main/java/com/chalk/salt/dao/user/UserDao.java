@@ -162,4 +162,6 @@ public interface UserDao {
 	 */
 	Long saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
 
+	List<UserDto> getStudents()throws Exception;
+
 }

@@ -4,6 +4,8 @@
  */
 package com.chalk.salt.dao.user.manager;
 
+import java.util.List;
+
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
@@ -47,4 +49,6 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	Boolean changePassword(final UserDto userDetails)throws UserException;
+
+	List<UserDto> getStudents()throws UserException;
 }

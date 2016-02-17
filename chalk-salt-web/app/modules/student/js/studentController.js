@@ -104,11 +104,11 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService',
+      'deleteCommentDetailsService','GetStudentListService',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService) {
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService) {
 
  
 		   var showAlert = function(type, message){
@@ -211,7 +211,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
          userClassLookUpService.query(function(classes) {
              $scope.classes = classes;
-             console.log(classes);
+             //console.log(classes);
          },onRequestFailure);
          
          function onRequestFailure(error) {
@@ -219,6 +219,7 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
      };
      $scope.topicDetails = [];
      $scope.commentDetails=[];
+     $scope.studentList=[];
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -349,6 +350,13 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
 
      };
 
+     $scope.showStudentList = function() {
+         GetStudentList.query({}, function(response) {
+        	 if(response){
+        		 $scope.studentList = response;
+             }
+         }, onRequestFailure);
+     };
          
      $scope.isEmpty = function(obj) {
     	 for(var prop in obj) {

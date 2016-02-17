@@ -21,7 +21,6 @@ define([ 'angular' ], function(angular) {
             save : {
                 method : 'POST'
             }
-            
         });
         } ]);
     
@@ -30,7 +29,6 @@ define([ 'angular' ], function(angular) {
             save : {
                 method : 'POST'
             }
-            
         });
         } ]);
     
@@ -43,7 +41,6 @@ define([ 'angular' ], function(angular) {
             get : {
                 method : 'GET'
             }
-            
         });
         } ]); 
     
@@ -52,7 +49,6 @@ define([ 'angular' ], function(angular) {
             save : {
                 method : 'POST'
             }
-            
         });
         } ]);    
         
@@ -64,7 +60,6 @@ define([ 'angular' ], function(angular) {
             get : {
                 method : 'GET'
             }
-            
         });
     } ]); 
     
@@ -86,7 +81,6 @@ define([ 'angular' ], function(angular) {
             get : {
                 method : 'GET'
             }
-            
         });
     } ]); 
   
@@ -95,7 +89,6 @@ define([ 'angular' ], function(angular) {
             save : {
                 method : 'POST'
             }
-            
         });
     } ]);
     
@@ -108,7 +101,6 @@ define([ 'angular' ], function(angular) {
             get : {
                 method : 'GET'
             }
-            
         });
    }]);
     
@@ -119,8 +111,15 @@ define([ 'angular' ], function(angular) {
             get : {
                 method : 'GET'
             }
-            
         });
-   } ]); 
+   } ]);
+    
+    studentService.factory('GetStudentListService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/students',{}, {
+            get : {
+                method : 'GET'
+            }
+        });
+   } ]);
   
 });
