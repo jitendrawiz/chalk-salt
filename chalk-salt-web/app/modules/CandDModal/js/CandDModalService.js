@@ -1,13 +1,13 @@
 'use strict';
 define([ 'angular' ], function(angular) {
-    var propcoModal = angular.module('PropcoModal',['System.configuration']);
-    propcoModal.service('PropcoModalService', [ '$modal',function($modal) {
+    var CandDModal = angular.module('CandDModal',['System.configuration']);
+    CandDModal.service('CandDModalService', [ '$modal',function($modal) {
 
         var modalDefaults = {
             backdrop : true,
             keyboard : true,
             modalFade : true,
-            templateUrl : '/modules/PropCoModal/templates/propCoModal.tpl.html'
+            templateUrl : '/modules/CandDModal/templates/CandDModal.tpl.html'
         };
 
         var modalOptions = {
@@ -22,6 +22,17 @@ define([ 'angular' ], function(angular) {
             customModalDefaults.backdrop = 'static';
             return this.show(customModalDefaults, customModalOptions);
         };
+        
+        this.showConfirm = function(customModalDefaults, customModalOptions) {
+            if (!customModalDefaults)
+                customModalDefaults = {};
+            customModalDefaults.backdrop = 'static';
+            customModalDefaults.keyboard = 'false';
+            customModalDefaults.templateUrl = '/modules/CandDModal/templates/CandDHeaderModal.tpl.html';
+            return this.show(customModalDefaults, customModalOptions);
+        };
+        
+        
 
         this.show = function(customModalDefaults, customModalOptions) {
             //Create temp objects to work with since we're in a singleton service
@@ -35,14 +46,19 @@ define([ 'angular' ], function(angular) {
             angular.extend(tempModalOptions, modalOptions, customModalOptions);
 
             if (!tempModalDefaults.controller) {
+                
                 tempModalDefaults.controller = function($scope, $modalInstance) {
                     $scope.modalOptions = tempModalOptions;
-                    $scope.modalOptions.ok = function(result) {
+                    $scope.ok = function(result) {
+                        $modalInstance.close(result);
+                    };
+                    $scope.close = function() {
                         $modalInstance.dismiss('cancel');
                     };
-                    $scope.modalOptions.close = function(result) {
-                        $modalInstance.dismiss('cancel');
+                    $scope.cancel = function(result) {
+                        $modalInstance.close(result);
                     };
+                    
                 }
             }
 

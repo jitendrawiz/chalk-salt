@@ -44,6 +44,14 @@
     left: 45%;
     z-index: 100000; }
 
+.bg-color-sixth {
+  background-color: #3498DB !important;
+  border-color: #3498DB !important; }
+
+.bg-color-seventh {
+  background-color: #F5F5F5 !important;
+  border-color: #F5F5F5 !important; }
+
 /*@import "icons";
 @import "tabs";
 @import "table";
@@ -96,6 +104,14 @@
     top: 40%;
     left: 45%;
     z-index: 100000; }
+
+.bg-color-sixth {
+  background-color: #3498DB !important;
+  border-color: #3498DB !important; }
+
+.bg-color-seventh {
+  background-color: #F5F5F5 !important;
+  border-color: #F5F5F5 !important; }
 
 @font-face {
   font-family: 'FontAwesome';

@@ -1,6 +1,6 @@
 'use strict';
-define([ 'angular', './routing', './service' ], function(angular) {
-    var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service' ]);
+define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalService' ], function(angular) {
+    var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service','CandDModal' ]);
 
     module.controller('DiscussionRoomSubjectsController', [ '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService', 'GetTopicStatistics',   
             function($scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics) {
@@ -114,8 +114,10 @@ define([ 'angular', './routing', './service' ], function(angular) {
             'CHALKNDUST',
             '$state',
             '$stateParams',
-            '$window','GetCommmentsOfTopicService','CommentService','topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService',
-            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService) {
+            '$window','GetCommmentsOfTopicService','CommentService',
+            'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log',
+            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,
+            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log) {
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
@@ -164,7 +166,15 @@ define([ 'angular', './routing', './service' ], function(angular) {
                              response) {
                          if (response) {
                              console.log(response);
-                             alert("Your comment added Successfully");
+                             var modalOptions = {
+                                     header : 'Note',
+                                     body : 'Your comment added Successfully',
+                                     btn : 'OK'
+                                 };
+
+                             CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                     $log.info(result);
+                                 });
                              $state.reload();
                          }
                          
@@ -172,7 +182,16 @@ define([ 'angular', './routing', './service' ], function(angular) {
                          showAlert('danger', error.data.message);
                      });                   
                 	   }else{
-                	   alert("Please fill your comments");
+                		   var modalOptions = {
+                                   header : 'Note',
+                                   body : 'Please fill your comments!!',
+                                   btn : 'OK'
+                               };
+
+                           CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                   $log.info(result);
+                               });
+
                    }
                 };
                 
@@ -231,7 +250,15 @@ define([ 'angular', './routing', './service' ], function(angular) {
                             response) {
                         if (response) {
                             console.log(response);
-                            alert("Your Comment is updated successfully");
+                            var modalOptions = {
+                                    header : 'Note',
+                                    body : 'Your Comment is updated successfully',
+                                    btn : 'OK'
+                                };
+
+                            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                    $log.info(result);
+                                });
                             $state.reload();
                         }
                         

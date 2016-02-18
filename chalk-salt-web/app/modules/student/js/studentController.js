@@ -1,8 +1,8 @@
 'use strict';
 
-define([ 'angular', './studentRouting', './studentService' ], function(angular) {
+define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/CandDModalService' ], function(angular) {
 
-    var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service','Student.discussionroom.controller']);
+    var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service','Student.discussionroom.controller','CandDModal']);
     
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService',
             function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService) {
@@ -101,15 +101,14 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
     
     //* Admin Controller
     
-    homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST',
+    homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService','GetStudentListService',
-    function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,
+      'deleteCommentDetailsService','GetStudentListService','CandDModalService',
+    function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService,GetStudentListService) {
-
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -371,7 +370,15 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
                  response) {
              if (response) {
                  console.log(response);
-                 alert("New Topic is Created.");
+                 var modalOptions = {
+                         header : 'Note',
+                         body : 'New Topic is Created',
+                         btn : 'OK'
+                     };
+
+                 CandDModalService.showModal({}, modalOptions).then(function(result) {
+                         $log.info(result);
+                     });
                  $state.reload();
              }
              
@@ -395,21 +402,30 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
    
 //delete topic
    this.deleteTopic=function(securUuid){
-	   if(confirm("Deleting this topic will also delete associated comments. \n                     Do you want to continue?")){
+	   var modalOptionsConfirm = {
+	            header : 'Note',
+	            body : 'Deleting this topic will also delete associated comments.Do you want to continue?',
+	            btn : 'OK'
+	        };
+	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
   	 deleteTopicDetailsService.get({securUuid:securUuid},  function(response) {
            if(response){
            	 console.log(response);
-           	 alert("Topic deleted successfully");
+           	var modalOptions = {
+                    header : 'Note',
+                    body : 'Topic deleted successfully',
+                    btn : 'OK'
+                };
+
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                    $log.info(result);
+                });
            	 $state.reload();
-           	// $scope.setTab(4);
            	 }
        }, function(error) {
        	showAlert('danger',error.data.message);
        })
-       
-       }else{
-    	   console.log("User cancelled the operation");
-       }
+    });
  };
  //update Topic
 
@@ -418,8 +434,14 @@ this.updateTopic = function() {
             response) {
         if (response) {
             console.log(response);
-            alert("Your Topic is updated successfully");
-        //    $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);                            
+        	var modalOptions = {
+                    header : 'Note',
+                    body : 'Your Topic is updated successfully',
+                    btn : 'OK'
+                };
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                    $log.info(result);
+                });
             $state.reload();
         }
         
@@ -430,18 +452,32 @@ this.updateTopic = function() {
 
 //delete comment
 this.deleteComment=function(commentUuid){
-	   if(confirm("Do you want to delete this Comment")){
-	 deleteCommentDetailsService.get({commentUuid:commentUuid},  function(response) {
-        if(response){
-        	 console.log(response);
-        	 alert("Comment deleted successfully");
-        	 $state.reload();
-        	// $scope.setTab(4);
-        	 }
-    }, function(error) {
-    	showAlert('danger',error.data.message);
-    })
-    }
+	var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Do you want to delete this Comment ?',
+            btn : 'OK'
+        };
+    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+    	 deleteCommentDetailsService.get({commentUuid:commentUuid},  function(response) {
+    	        if(response){
+    	        	 console.log(response);
+    	         	var modalOptions = {
+    	                    header : 'Note',
+    	                    body : 'Comment deleted successfully',
+    	                    btn : 'OK'
+    	                };
+    	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+    	                    $log.info(result);
+    	                });
+    	        	 $state.reload();
+    	        	 }
+    	    }, function(error) {
+    	    	showAlert('danger',error.data.message);
+    	    })
+
+        });
+    
+   
 };
 
 showStudentList();
