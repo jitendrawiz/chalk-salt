@@ -349,9 +349,8 @@ define([ 'angular', './studentRouting', './studentService' ], function(angular) 
          }, onRequestFailure);
 
      };
-
-     $scope.showStudentList = function() {
-         GetStudentList.query({}, function(response) {
+     function showStudentList(){
+    	 GetStudentListService.query({}, function(response) {
         	 if(response){
         		 $scope.studentList = response;
              }
@@ -444,6 +443,8 @@ this.deleteComment=function(commentUuid){
     })
     }
 };
+
+showStudentList();
 
 }]);
 });    
