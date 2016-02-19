@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/home.tpl.html'], function(angular, templateHome) {
+define([ 'angular', 'text!../templates/home.tpl.html', 'text!../templates/contact_us.tpl.html'], function(angular, templateHome,templateContactUs) {
     
     var homeRouter = angular.module('Home.router', []);
 
@@ -8,6 +8,10 @@ define([ 'angular', 'text!../templates/home.tpl.html'], function(angular, templa
         $stateProvider.state('chalkanddust.home', {
             url : '/home',
             template : templateHome,
+            controller : 'HomeController as homeCtrl'
+        }).state('chalkanddust.contactUs', {
+            url : '/contactUs',
+            template : templateContactUs,
             controller : 'HomeController as homeCtrl'
         });
     } ]);

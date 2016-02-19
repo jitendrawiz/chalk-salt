@@ -2440,3 +2440,40 @@ nav li #login-content {
 	float:right;
 	position:relative;
 }
+.map-wrapper{
+	z-index:1;
+	position:relative;
+}
+#map-canvas{
+	z-index:1;
+	position:relative;
+	opacity:0.5;
+}
+.grid-blogg{
+	padding:20px;
+	background: #ddd;
+	border-radius:5px;
+	z-index:1;
+	position:relative;
+}
+.nav_two{
+	    float: left;
+    margin: 0;
+}
+.nav_two>li {
+    float: left;
+	position: relative;
+    display: block;
+}
+.nav_two>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+	line-height: 20px;
+	position: relative;
+    display: block;
+	background:none;
+}
+.nav_two>li>a:hover{
+	color:#000;
+	display:inherit;
+}

@@ -6,7 +6,7 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
     
     homeModule.controller('HomeController', [ '$window', '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService',
             function($window,$scope, $state, $resource,$rootScope, CHALKNDUST, HomeService) {
-
+    	           $window.scrollTo(0, 0); 
     		   var showAlert = function(type, message){
                    $scope.alert = {};
                    $scope.alert.type = type;
