@@ -7,6 +7,7 @@ package com.chalk.salt.common.util;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonValue;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum ErrorCode.
  *
@@ -117,8 +118,12 @@ public enum ErrorCode {
 	FAIL_TO_DELETE_DISCUSSION_COMMENT(1033),
 	
 	/** The fail to fetch students list. */
-	FAIL_TO_FETCH_STUDENTS_LIST(1034);
+	FAIL_TO_FETCH_STUDENTS_LIST(1034),
 	
+    /** The fail to delete student. */
+    FAIL_TO_DELETE_STUDENT(1035);
+	
+    
 	
 	/** The value. */
     private final int value;

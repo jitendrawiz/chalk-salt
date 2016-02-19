@@ -1,0 +1,172 @@
+<style>
+.title_text {
+	width: 70%;
+	float: left;
+}
+
+.title_name {
+	width: 30%;
+	float: left;
+}
+
+.title_name {
+	text-align: right;
+	padding-right: 20px;
+	padding-top: 25px;
+}
+
+.title_name_sub {
+	padding-top: 25px;
+}
+
+.title_name_title {
+	padding-top: 85px;
+}
+
+.title_name_des {
+	padding-top: 88px;
+}
+
+.title_text textarea {
+	width: 100%;
+	height: 100px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
+
+.title_text select {
+	width: 60%;
+	height: 40px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
+
+.title_text button a {
+	color: #FFF;
+	padding: 0px 40px;
+}
+
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
+
+.title_text button {
+	padding: 8px 0px;
+	cursor: pointer;
+	background: #2f889a;
+	color: #FFF;
+	width: 100%;
+	border-radius: 5px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-6 wow fadeInLeft"
+	style="visibility: visible; animation-name: fadeInLeft;">
+	<div class="row inner-grid">
+		<div class="user_log_detail">
+			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
+				novalidate>
+				<h3>Student General Details</h3>
+				<div class="title_name">
+					<label class="title_name_des">Username</label><br>
+					<label class="title_name_class">First Name</label><br> 
+					<label class="title_name_sub">Middle Name</label><br> 
+					<label class="title_name_title">Last Name</label><br> 
+					<label class="title_name_des">Address</label><br>
+					<label class="title_name_des">City</label><br>
+					<label class="title_name_des">State</label><br>
+					<label class="title_name_des">Country</label><br>
+					<label class="title_name_des">Pincode</label><br>
+					<label class="title_name_des">Email</label>		<br>								
+					<label class="title_name_des">Mobile</label><br>
+					<label class="title_name_des">Landline</label><br>
+					<label class="title_name_des">Correspondence Address</label><br>						
+				</div>
+				<div class="title_name">
+					<label class="title_name_des">{{userInfo.username}}</label><br>
+					<label class="title_name_class">{{userInfo.firstName}}</label><br> 
+					<label class="title_name_sub">{{userInfo.middleName}}</label><br> 
+					<label class="title_name_title">{{userInfo.lastName}}</label><br> 
+					<label class="title_name_des">{{userInfo.address}}</label><br>
+					<label class="title_name_des">{{userInfo.city}}</label><br>
+					<label class="title_name_des">{{userInfo.state}}</label><br>
+					<label class="title_name_des">{{userInfo.country}}</label><br>
+					<label class="title_name_des">{{userInfo.pincode}}</label><br>
+					<label class="title_name_des">{{userInfo.email}}</label>	<br>									
+					<label class="title_name_des">{{userInfo.mobile}}</label><br>
+					<label class="title_name_des">{{userInfo.landline}}</label><br>
+					<label class="title_name_des">{{userInfo.correspondenceAddress}}</label><br>
+				</div>
+			</form>
+
+			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
+				novalidate>
+				<h3>Student Academic Details</h3>
+				<div class="title_name">
+					<label class="title_name_des">Class Name</label><br>
+					<label class="title_name_class">Subjects</label><br> 
+					<label class="title_name_sub">Percentage</label><br> 
+					<label class="title_name_title">Previous School</label><br>											
+				</div>
+				<div class="title_name">
+					<label class="title_name_des">{{academicInfo.studentClassName}}</label><br>
+					<label class="title_name_class">{{studentSubjects}}</label><br> 
+					<label class="title_name_sub">{{academicInfo.percentage}}</label><br> 
+					<label class="title_name_title">{{academicInfo.previousSchool}}</label><br>	
+				</div>
+			</form>
+			
+			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
+				novalidate>
+				<h3>Student Parents Details</h3>
+				<div class="title_name">
+					<label class="title_name_des">Father Name</label><br>
+					<label class="title_name_sub">Father Email</label><br>
+					<label class="title_name_des">Father Mobile</label><br>
+					<label class="title_name_sub">Father Office Address</label><br>
+					<label class="title_name_des">Father Occupation</label><br> 
+					
+					<label class="title_name_class">Mother Name</label><br> 					
+					<label class="title_name_title">Mother Email</label><br>					
+					<label class="title_name_class">Mother Mobile</label><br> 
+					<label class="title_name_title">Mother Office Address</label><br>
+					<label class="title_name_class">Mother Occupation</label><br>										
+				</div>
+				<div class="title_name">
+					<label class="title_name_des">{{parentsInfo.fatherName}}</label><br>
+					<label class="title_name_sub">{{parentsInfo.fatherEmail}}</label><br>
+					<label class="title_name_des">{{parentsInfo.fatherMobile}}</label><br>
+					<label class="title_name_sub">{{parentsInfo.fatherOfficeAddress}}</label><br>
+					<label class="title_name_des">{{parentsInfo.fatherOccupation}}</label><br>
+					
+					<label class="title_name_class">{{parentsInfo.motherName}}</label><br> 
+					<label class="title_name_title">{{parentsInfo.motherEmail}}</label><br>
+					<label class="title_name_class">{{parentsInfo.motherMobile}}</label><br> 
+					<label class="title_name_title">{{parentsInfo.motherOfficeAddress}}</label><br>
+					<label class="title_name_class">{{parentsInfo.motherOccupation}}</label><br> 
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

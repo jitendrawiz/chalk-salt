@@ -61,9 +61,9 @@ button.btn-block {
 						<td>{{item.mobile}}</td>
 						<td>{{item.email}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.editTopic(item.securUuid)">Edit</button> |
+								ng-click="adminCtrl.showStudentDetails(item.securUuid)">Show</button> |
 							<button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.deleteTopic(item.securUuid)">Delete</button>
+								ng-click="adminCtrl.deleteStudent(item.securUuid)">Delete</button>
 						</td>
 					</tr>
 				</tbody>

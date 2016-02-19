@@ -14,12 +14,12 @@ import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
-import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserDaoImpl.
  */
@@ -401,13 +401,18 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getStudents()
+	 */
 	@Override
 	public List<UserDto> getStudents() throws Exception {
 		final String sqlQuery = "SELECT cst_users.`first_name` as firstName, cst_users.`middle_name` as middleName,"
 				+ "cst_users.`last_name` as lastName, cst_users.`secur_uuid` as securUuid, cst_contacts.`mobile` as mobile,"
 				+ "	cst_contacts.`email` as email, class_type.class_name as studentClass FROM `cst_users` AS cst_users "
 				+ "	JOIN `cst_contacts` AS cst_contacts ON cst_contacts.id = cst_users.contact_id "
-				+ " JOIN cst_class_type AS class_type ON class_type.class_id = cst_users.class_id";
+				+ " JOIN cst_class_type AS class_type ON class_type.class_id = cst_users.class_id"
+				+ " JOIN cst_logins as cst_logins ON cst_logins.user_id = cst_users.user_id"
+				+ " WHERE cst_logins.username<>'admin'";
 		
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -415,6 +420,96 @@ public class UserDaoImpl implements UserDao {
             return query.executeAndFetch(UserDto.class);
         }
         
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteStudent(java.lang.String)
+	 */
+	@Override
+	public void deleteStudent(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE from cst_users where secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }     		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteContact(java.lang.String)
+	 */
+	@Override
+	public void deleteContact(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE contact.* FROM cst_contacts contact "
+				+ " JOIN cst_users ON cst_users.contact_id = contact.id "
+				+ " WHERE cst_users.secur_uuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteParents(java.lang.String)
+	 */
+	@Override
+	public void deleteParents(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE parents.* FROM cst_parents parents "
+				+ " JOIN cst_users ON cst_users.parents_id = parents.id "
+				+ " WHERE cst_users.secur_uuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteAcademic(java.lang.String)
+	 */
+	@Override
+	public void deleteAcademic(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE academic.* FROM cst_academic_details academic "
+				+ " JOIN cst_users ON cst_users.academic_id = academic.id "
+				+ " WHERE cst_users.secur_uuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteTopicComment(java.lang.String)
+	 */
+	@Override
+	public void deleteTopicComment(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE from cst_discussion_topic_comments WHERE user_securUuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+	}
+
+	@Override
+	public void deleteLogin(String securUuid) throws Exception {
+		final String sqlQuery = "DELETE cst_logins.* FROM cst_logins cst_logins "
+				+ " JOIN cst_users ON cst_users.user_id = cst_logins.user_id "
+				+ " WHERE cst_users.secur_uuid =:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+		
 	}
 
 }

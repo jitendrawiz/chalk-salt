@@ -26,6 +26,7 @@ import com.chalk.salt.core.templating.TemplateConfig;
 import com.chalk.salt.dao.user.manager.UserManager;
 import com.chalk.salt.service.email.EmailService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserFacadeImpl.
  */
@@ -119,9 +120,20 @@ public class UserFacadeImpl implements UserFacade {
 		return userManager.changePassword(userDetails);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#getStudents()
+	 */
 	@Override
 	public List<UserDto> getStudents() throws UserException {
 		return userManager.getStudents();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#deleteStudent(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteStudent(String securUuid) throws UserException {
+		return userManager.deleteStudent(securUuid);
 	}
 
 }

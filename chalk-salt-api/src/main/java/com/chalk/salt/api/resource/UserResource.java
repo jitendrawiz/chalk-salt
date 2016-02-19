@@ -195,4 +195,25 @@ public class UserResource extends AbstractResource {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }
     }
+    
+    @GET
+    @Path("/students/delete/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteStudent(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
+
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean deleteStatus = false;
+        try {
+        	deleteStatus = userFacade.deleteStudent(securUuid);
+            if (deleteStatus == null) {
+                return Response.noContent().build();
+            }
+            response.put("deleteStatus", deleteStatus.toString());
+            return Response.ok(response).build();
+
+        } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
+    }
 }

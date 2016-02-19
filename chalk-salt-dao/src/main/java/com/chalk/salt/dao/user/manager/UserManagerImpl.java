@@ -17,10 +17,12 @@ import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
+import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.user.UserDao;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserManagerImpl.
  */
@@ -205,6 +207,9 @@ public class UserManagerImpl implements UserManager {
 		return updateStatus;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#getStudents()
+	 */
 	@Override
 	public List<UserDto> getStudents() throws UserException {
 		logger.info("Obtaining list of students......");
@@ -219,5 +224,24 @@ public class UserManagerImpl implements UserManager {
         	throw new UserException(ErrorCode.FAIL_TO_FETCH_STUDENTS_LIST, "fail to fetch students list", exception);
         }
         return students;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#deleteStudent(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteStudent(String securUuid) throws UserException {
+		logger.info("delete student with his contact details, parents, academic details and comments using secur uuid...");
+		try{			
+			userDao.deleteContact(securUuid);
+			userDao.deleteParents(securUuid);
+			userDao.deleteAcademic(securUuid);
+			userDao.deleteTopicComment(securUuid);
+			userDao.deleteLogin(securUuid);
+			userDao.deleteStudent(securUuid);
+			return true; // need to be discussed how to implement.
+		} catch (final Exception exception) {
+        	throw new UserException(ErrorCode.FAIL_TO_DELETE_STUDENT, "fail to delete student", exception);
+        }
 	}
 }

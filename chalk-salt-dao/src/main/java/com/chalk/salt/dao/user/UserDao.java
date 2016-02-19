@@ -11,6 +11,7 @@ import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface UserDao.
  */
@@ -162,6 +163,60 @@ public interface UserDao {
 	 */
 	Long saveParentsDetails(ParentsInfoDto parentsInfo)throws Exception;
 
+	/**
+	 * Gets the students.
+	 *
+	 * @return the students
+	 * @throws Exception the exception
+	 */
 	List<UserDto> getStudents()throws Exception;
+
+	/**
+	 * Delete student.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteStudent(String securUuid)throws Exception;
+
+	/**
+	 * Delete contact.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteContact(String securUuid)throws Exception;
+
+	/**
+	 * Delete parents.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteParents(String securUuid)throws Exception;
+
+	/**
+	 * Delete academic.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteAcademic(String securUuid)throws Exception;
+
+	/**
+	 * Delete topic comment.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteTopicComment(String securUuid)throws Exception;
+
+	/**
+	 * Delete login.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteLogin(String securUuid)throws Exception;
 
 }

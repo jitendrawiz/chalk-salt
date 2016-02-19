@@ -9,6 +9,7 @@ import java.util.List;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface UserFacade.
  */
@@ -50,6 +51,21 @@ public interface UserFacade {
 	 */
 	Boolean changePassword(final UserDto userDetails)throws UserException;
 
+	/**
+	 * Gets the students.
+	 *
+	 * @return the students
+	 * @throws UserException the user exception
+	 */
 	List<UserDto> getStudents()throws UserException;
+
+	/**
+	 * Delete student.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean deleteStudent(String securUuid)throws UserException;
 
 }

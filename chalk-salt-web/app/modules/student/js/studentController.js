@@ -104,11 +104,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService','GetStudentListService','CandDModalService',
+      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService',
     function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService) {
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -476,8 +476,64 @@ this.deleteComment=function(commentUuid){
     	    })
 
         });
-    
-   
+};
+
+//delete student
+this.deleteStudent=function(securUuid){
+	var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Do you want to delete this Student ?',
+            btn : 'OK'
+        };
+    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+    	 deleteStudentDetailsService.get({securUuid:securUuid},  function(response) {
+	        if(response){
+	        	 console.log(response);
+	         	var modalOptions = {
+	                    header : 'Note',
+	                    body : 'Student deleted successfully',
+	                    btn : 'OK'
+	                };
+	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+	                    $log.info(result);
+	                });
+	        	 $state.reload();
+	        	 }
+    	    }, function(error) {
+    	    	showAlert('danger',error.data.message);
+    	    })
+
+        });
+};
+
+//Show Student's Details
+$scope.showStudentDetails = function(securUuid) {
+	if (!securUuid) {
+		return;
+	}
+	GetUserDetailsService.get({securUuid:$scope.securUuid},  function(response) {
+        if(response){
+        	 $scope.userInfo = response;
+        	 $scope.subjects =$scope.userInfo.subjects;
+
+        	 $scope.academicInfo =$scope.userInfo.academicInfo;
+        	 
+        	 $scope.parentsInfo =$scope.userInfo.parentsInfo;
+        	 $scope.studentSubjects=""; 
+        	 if($scope.subjects!=null){
+        	 for(var i=0;i<$scope.subjects.length;i++){
+        		 if($scope.studentSubjects==""){
+        			 $scope.studentSubjects=$scope.subjects[i].subjectName;
+        		 }else{
+        			 $scope.studentSubjects=$scope.studentSubjects+", "+$scope.subjects[i].subjectName;
+        		 }
+        		 
+        	 }}
+        	 
+        }
+    }, function(error) {
+    	showAlert('danger',error.data.message);
+    });
 };
 
 showStudentList();
