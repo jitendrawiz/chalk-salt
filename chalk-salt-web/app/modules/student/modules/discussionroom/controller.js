@@ -38,7 +38,10 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     return true;
                 };
                 
-                
+                this.goBackToProfileScreen = function() {
+                	console.log("Going back to profile screen");
+                	 $state.go('chalkanddust.profile');
+                };
             } ]);
 
     module.controller('DiscussionRoomTopicController',
@@ -106,6 +109,10 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	showAlert('danger',error.data.message);
                 });
                 
+                this.goBackToSubjectsScreen = function() {
+                	console.log("Going back to subjects screen");
+                            $state.go("chalkanddust.discussionroomsubjects");
+                };
                 
             } ]);
 
@@ -265,6 +272,12 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     }, function(error) {
                         showAlert('danger', error.data.message);
                     });
+                };
+                
+                this.goBackToTopicsScreen = function() {
+                	console.log("Going back to Topics screen");
+                	$state.go('chalkanddust.discussionroomtopics', {'subjectId': $scope.subjectId});
+                           
                 };
 
             } ]);
