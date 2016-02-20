@@ -2,8 +2,8 @@
 define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalService' ], function(angular) {
     var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service','CandDModal' ]);
 
-    module.controller('DiscussionRoomSubjectsController', [ '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService', 'GetTopicStatistics',   
-            function($scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics) {
+    module.controller('DiscussionRoomSubjectsController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService', 'GetTopicStatistics',   
+            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics) {
     			
                 $scope.alert = {};
                 $scope.alert.show = false;
@@ -42,12 +42,23 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	console.log("Going back to profile screen");
                 	 $state.go('chalkanddust.profile');
                 };
+                var myElements = $element.find('.requestTopicButton');
+                function showElement() {
+                	myElements.css("background", "Aqua");               
+                    $timeout(hideElement, 1000);
+                }
+
+                function hideElement() {
+                	myElements.css("background", "Wheat");                
+                    $timeout(showElement, 1000);
+                }
+                showElement();
             } ]);
 
     module.controller('DiscussionRoomTopicController',
-    		[ '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService',
+    		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService',
             
-            function($scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService) {
+            function($element,$timeout,$scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -113,17 +124,27 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	console.log("Going back to subjects screen");
                             $state.go("chalkanddust.discussionroomsubjects");
                 };
-                
+                var myElements = $element.find('.requestTopicButton');
+                function showElement() {
+                	myElements.css("background", "Aqua");               
+                    $timeout(hideElement, 1000);
+                }
+
+                function hideElement() {
+                	myElements.css("background", "Wheat");                
+                    $timeout(showElement, 1000);
+                }
+                showElement();
             } ]);
 
-    module.controller('DiscussionRoomCommentsController', [
+    module.controller('DiscussionRoomCommentsController', ['$element','$timeout',
             '$scope',
             'CHALKNDUST',
             '$state',
             '$stateParams',
             '$window','GetCommmentsOfTopicService','CommentService',
             'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log',
-            function($scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,
+            function($element,$timeout,$scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,
             		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log) {
                 $scope.alert = {};
                 $scope.alert.show = false;
@@ -279,7 +300,17 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	$state.go('chalkanddust.discussionroomtopics', {'subjectId': $scope.subjectId});
                            
                 };
+                var myElements = $element.find('.requestTopicButton');
+                function showElement() {
+                	myElements.css("background", "Aqua");               
+                    $timeout(hideElement, 1000);
+                }
 
+                function hideElement() {
+                	myElements.css("background", "Wheat");                
+                    $timeout(showElement, 1000);
+                }
+                showElement();
             } ]);
 
 });
