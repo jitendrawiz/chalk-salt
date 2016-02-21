@@ -529,7 +529,7 @@ $scope.showStudentDetails = function(securUuid) {
         		 }
         		 
         	 }}
-        	 
+        	$state.go('chalkanddust.studentdetails'); 
         }
     }, function(error) {
     	showAlert('danger',error.data.message);

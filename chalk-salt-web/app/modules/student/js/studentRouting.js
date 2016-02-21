@@ -1,8 +1,8 @@
 'use strict';
 
 define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/Profile.tpl.html',
-         'text!../templates/adminProfile.tpl.html','text!../templates/adminHome.tpl.html'],
-		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate) {
+         'text!../templates/adminProfile.tpl.html','text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html'],
+		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -22,6 +22,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
         }).state('chalkanddust.adminhome',{
         	url : '/adminhome',
             template : adminhometemplate,
+            controller : 'AdminController as adminCtrl'        		
+        }).state('chalkanddust.studentdetails',{
+        	url : '/admin/students',
+            template : studentdetailstemplate,
             controller : 'AdminController as adminCtrl'        		
         });
     } ]);
