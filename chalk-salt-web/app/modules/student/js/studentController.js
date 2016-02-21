@@ -507,11 +507,11 @@ this.deleteStudent=function(securUuid){
 };
 
 //Show Student's Details
-$scope.showStudentDetails = function(securUuid) {
-	if (!securUuid) {
+this.showStudentDetails = function(securUuId) {
+	if (!securUuId) {
 		return;
 	}
-	GetUserDetailsService.get({securUuid:$scope.securUuid},  function(response) {
+	GetUserDetailsService.get({securUuid:securUuId},  function(response) {
         if(response){
         	 $scope.userInfo = response;
         	 $scope.subjects =$scope.userInfo.subjects;
