@@ -9,8 +9,8 @@ define([ 'angular', 'text!../templates/home.tpl.html', 'text!../templates/contac
             url : '/home',
             template : templateHome,
             controller : 'HomeController as homeCtrl'
-        }).state('chalkanddust.contactUs', {
-            url : '/contactUs',
+        }).state('chalkanddust.contactus', {
+            url : '/contactus',
             template : templateContactUs,
             controller : 'HomeController as homeCtrl'
         });

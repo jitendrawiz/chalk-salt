@@ -33,7 +33,12 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                             $state.go('chalkanddust.home');
                             console.log("i am in");
                 };
-                
+               
+                this.contactUs = function() {
+                    $state.go('chalkanddust.contactus');
+                    console.log("i am in");
+        };
+       
             }
     ]);
 });

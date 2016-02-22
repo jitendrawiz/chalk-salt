@@ -24,7 +24,7 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
             template : adminhometemplate,
             controller : 'AdminController as adminCtrl'        		
         }).state('chalkanddust.studentdetails',{
-        	url : '/admin/students',
+        	url : '/admin/:id/students',
             template : studentdetailstemplate,
             controller : 'AdminController as adminCtrl'        		
         });

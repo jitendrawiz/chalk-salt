@@ -1,172 +1,156 @@
 <style>
-.title_text {
-	width: 70%;
-	float: left;
-}
-
-.title_name {
-	width: 30%;
-	float: left;
-}
-
-.title_name {
-	text-align: right;
-	padding-right: 20px;
-	padding-top: 25px;
-}
-
-.title_name_sub {
-	padding-top: 25px;
-}
-
-.title_name_title {
-	padding-top: 85px;
-}
-
-.title_name_des {
-	padding-top: 88px;
-}
-
-.title_text textarea {
-	width: 100%;
-	height: 100px;
-	padding-bottom: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	color: #000;
-	margin: 5px 0px;
-	border: 1px solid #CCC;
-}
-
-.title_text select {
-	width: 60%;
-	height: 40px;
-	padding-bottom: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	color: #000;
-	margin: 5px 0px;
-	border: 1px solid #CCC;
-}
-
-.title_text button a {
-	color: #FFF;
-	padding: 0px 40px;
-}
-
-.btn:focus, .btn:hover, a, a:focus, a:hover {
-	text-decoration: none;
-	outline: 0;
-}
-
-.title_text button {
-	padding: 8px 0px;
-	cursor: pointer;
-	background: #2f889a;
-	color: #FFF;
-	width: 100%;
-	border-radius: 5px;
-	font-weight: bold;
-	border: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-}
-
-button, input, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
+.main_bg_bg{
+background-image: none;
+background-size:100%;
+	width:0%;
+	height:1000px;	
+	top:0;
+	z-index:0;
+	position:fixed;
 }
 </style>
-<div class="col-xs-12 col-md-6 wow fadeInLeft"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Student General Details</h3>
-				<div class="title_name">
-					<label class="title_name_des">Username</label><br>
-					<label class="title_name_class">First Name</label><br> 
-					<label class="title_name_sub">Middle Name</label><br> 
-					<label class="title_name_title">Last Name</label><br> 
-					<label class="title_name_des">Address</label><br>
-					<label class="title_name_des">City</label><br>
-					<label class="title_name_des">State</label><br>
-					<label class="title_name_des">Country</label><br>
-					<label class="title_name_des">Pincode</label><br>
-					<label class="title_name_des">Email</label>		<br>								
-					<label class="title_name_des">Mobile</label><br>
-					<label class="title_name_des">Landline</label><br>
-					<label class="title_name_des">Correspondence Address</label><br>						
-				</div>
-				<div class="title_name">
-					<label class="title_name_des">{{userInfo.username}}</label><br>
-					<label class="title_name_class">{{userInfo.firstName}}</label><br> 
-					<label class="title_name_sub">{{userInfo.middleName}}</label><br> 
-					<label class="title_name_title">{{userInfo.lastName}}</label><br> 
-					<label class="title_name_des">{{userInfo.address}}</label><br>
-					<label class="title_name_des">{{userInfo.city}}</label><br>
-					<label class="title_name_des">{{userInfo.state}}</label><br>
-					<label class="title_name_des">{{userInfo.country}}</label><br>
-					<label class="title_name_des">{{userInfo.pincode}}</label><br>
-					<label class="title_name_des">{{userInfo.email}}</label>	<br>									
-					<label class="title_name_des">{{userInfo.mobile}}</label><br>
-					<label class="title_name_des">{{userInfo.landline}}</label><br>
-					<label class="title_name_des">{{userInfo.correspondenceAddress}}</label><br>
-				</div>
-			</form>
-
-			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Student Academic Details</h3>
-				<div class="title_name">
-					<label class="title_name_des">Class Name</label><br>
-					<label class="title_name_class">Subjects</label><br> 
-					<label class="title_name_sub">Percentage</label><br> 
-					<label class="title_name_title">Previous School</label><br>											
-				</div>
-				<div class="title_name">
-					<label class="title_name_des">{{academicInfo.studentClassName}}</label><br>
-					<label class="title_name_class">{{studentSubjects}}</label><br> 
-					<label class="title_name_sub">{{academicInfo.percentage}}</label><br> 
-					<label class="title_name_title">{{academicInfo.previousSchool}}</label><br>	
-				</div>
-			</form>
-			
-			<form name="StudentGeneralDetailsForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Student Parents Details</h3>
-				<div class="title_name">
-					<label class="title_name_des">Father Name</label><br>
-					<label class="title_name_sub">Father Email</label><br>
-					<label class="title_name_des">Father Mobile</label><br>
-					<label class="title_name_sub">Father Office Address</label><br>
-					<label class="title_name_des">Father Occupation</label><br> 
-					
-					<label class="title_name_class">Mother Name</label><br> 					
-					<label class="title_name_title">Mother Email</label><br>					
-					<label class="title_name_class">Mother Mobile</label><br> 
-					<label class="title_name_title">Mother Office Address</label><br>
-					<label class="title_name_class">Mother Occupation</label><br>										
-				</div>
-				<div class="title_name">
-					<label class="title_name_des">{{parentsInfo.fatherName}}</label><br>
-					<label class="title_name_sub">{{parentsInfo.fatherEmail}}</label><br>
-					<label class="title_name_des">{{parentsInfo.fatherMobile}}</label><br>
-					<label class="title_name_sub">{{parentsInfo.fatherOfficeAddress}}</label><br>
-					<label class="title_name_des">{{parentsInfo.fatherOccupation}}</label><br>
-					
-					<label class="title_name_class">{{parentsInfo.motherName}}</label><br> 
-					<label class="title_name_title">{{parentsInfo.motherEmail}}</label><br>
-					<label class="title_name_class">{{parentsInfo.motherMobile}}</label><br> 
-					<label class="title_name_title">{{parentsInfo.motherOfficeAddress}}</label><br>
-					<label class="title_name_class">{{parentsInfo.motherOccupation}}</label><br> 
-				</div>
-			</form>
-		</div>
-	</div>
+<script src="./resources/js/prefixfree.min.js"></script>
+<link href="./resources/css/userDetailsOnAdminPage.css" rel="stylesheet" type="text/css">
+<div>
+<h1>STUDENTS DETAILS</h1>
+<button type="button" style="width: 100px;height:50px;float:right;text-align: center;"class="btn btn-secondary btn-block" id="back" ng-click="adminCtrl.goBackToAdminHomePage()" >Go Back</button>
+<main>
+  <input id="tab1" type="radio" name="tabs" checked>
+  <label for="tab1">General Details</label>
+  <input id="tab2" type="radio" name="tabs">
+  <label for="tab2">Academic Details</label>
+  <input id="tab3" type="radio" name="tabs">
+  <label for="tab3">Parents Details</label>
+  
+  <!--  <input id="tab4" type="radio" name="tabs">
+  <label for="tab4">Drupal</label>-->
+  
+  <section id="content1">
+    <table width="100%">
+      <tr>
+        <td width="200px">Username</td>
+        <td>{{userInfoToShow.userName}}<span class="empty" ng-show="!userInfoToShow.userName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>First Name</td>
+        <td>{{userInfoToShow.firstName}}<span class="empty" ng-show="!userInfoToShow.firstName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Middle Name</td>
+        <td>{{userInfoToShow.middleName}}<span class="empty" ng-show="!userInfoToShow.middleName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>{{userInfoToShow.lastName}}<span class="empty" ng-show="!userInfoToShow.lastName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{userInfoToShow.address}}<span class="empty" ng-show="!userInfoToShow.address">N/A</span></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>{{userInfoToShow.city}}<span class="empty" ng-show="!userInfoToShow.city">N/A</span></td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td>{{userInfoToShow.state}}<span class="empty" ng-show="!userInfoToShow.state">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td>{{userInfoToShow.country}}<span class="empty" ng-show="!userInfoToShow.country">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Pincode</td>
+        <td>{{userInfoToShow.pincode}}<span class="empty" ng-show="!userInfoToShow.pincode">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{userInfoToShow.email}}<span class="empty" ng-show="!userInfoToShow.email">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>{{userInfoToShow.mobile}}<span class="empty" ng-show="!userInfoToShow.mobile">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Landline</td>
+        <td>{{userInfoToShow.landline}}<span class="empty" ng-show="!userInfoToShow.landline">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Correspondence Address</td>
+        <td>{{userInfoToShow.correspondenceAddress}}<span class="empty" ng-show="!userInfoToShow.correspondenceAddress">N/A</span></td>
+      </tr>
+    </table>
+  </section>
+  <section id="content2">
+    <table width="100%">
+      <tr>
+        <td width="200px">Class Name</td>
+        <td>{{academicInfoToShow.studentClassName}}<span class="empty" ng-show="!academicInfoToShow.studentClassName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Subjects</td>
+        <td>{{studentSubjectsToShow}}<span class="empty" ng-show="!studentSubjectsToShow">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Percentage</td>
+        <td>{{academicInfoToShow.percentage}}</td>
+      </tr>
+      <tr>
+        <td>Previous School</td>
+        <td>{{academicInfoToShow.previousSchool}}<span class="empty" ng-show="!academicInfoToShow.previousSchool">N/A</span></td>
+      </tr>
+      
+    </table>
+  </section>
+  <section id="content3">
+    <table width="100%">
+      <tr>
+        <td width="200px">Father Name</td>
+        <td>{{parentsInfoToShow.fatherName}}<span class="empty" ng-show="!parentsInfoToShow.fatherName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Father Email</td>
+        <td>{{parentsInfoToShow.fatherEmail}}<span class="empty" ng-show="!parentsInfoToShow.fatherEmail">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Father Mobile</td>
+        <td>{{parentsInfoToShow.fatherMobile}}<span class="empty" ng-show="!parentsInfoToShow.fatherMobile">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Father Office Address</td>
+        <td>{{parentsInfoToShow.fatherOfficeAddress}}<span class="empty" ng-show="!parentsInfoToShow.fatherOfficeAddress">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Father Occupation</td>
+        <td>{{parentsInfoToShow.fatherOccupation}}<span class="empty" ng-show="!parentsInfoToShow.fatherOccupation">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mother Name</td>
+        <td>{{parentsInfoToShow.motherName}}<span class="empty" ng-show="!parentsInfoToShow.motherName">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mother Email</td>
+        <td>{{parentsInfoToShow.motherEmail}}<span class="empty" ng-show="!parentsInfoToShow.motherEmail">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mother Mobile</td>
+        <td>{{parentsInfoToShow.motherMobile}}<span class="empty" ng-show="!parentsInfoToShow.motherMobile">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mother Office Address</td>
+        <td>{{parentsInfoToShow.motherOfficeAddress}}<span class="empty" ng-show="!parentsInfoToShow.motherOfficeAddress">N/A</span></td>
+      </tr>
+      <tr>
+        <td>Mother Occupation</td>
+        <td>{{parentsInfoToShow.motherOccupation}}<span class="empty" ng-show="!parentsInfoToShow.motherOccupation">N/A</span></td>
+      </tr>
+      
+    </table>
+  </section>
+  
+  <!--  <section id="content4">
+    
+  </section>--> 
+  
+</main>
 </div>

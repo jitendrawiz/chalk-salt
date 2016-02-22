@@ -101,11 +101,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     
     //* Admin Controller
     
-    homeModule.controller('AdminController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
+    homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService',
-    function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
+    function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService) {
@@ -506,37 +506,43 @@ this.deleteStudent=function(securUuid){
         });
 };
 
+
+showStudentList();
+
+
+var Id = $stateParams.id;
 //Show Student's Details
-this.showStudentDetails = function(securUuId) {
-	if (!securUuId) {
+
+	if (!Id) {
 		return;
 	}
-	GetUserDetailsService.get({securUuid:securUuId},  function(response) {
+	GetUserDetailsService.get({securUuid:Id},  function(response) {
         if(response){
-        	 $scope.userInfo = response;
-        	 $scope.subjects =$scope.userInfo.subjects;
+        	 $scope.userInfoToShow = response;
+        	 $scope.subjectsToShow =$scope.userInfoToShow.subjects;
 
-        	 $scope.academicInfo =$scope.userInfo.academicInfo;
+        	 $scope.academicInfoToShow =$scope.userInfoToShow.academicInfo;
         	 
-        	 $scope.parentsInfo =$scope.userInfo.parentsInfo;
-        	 $scope.studentSubjects=""; 
-        	 if($scope.subjects!=null){
-        	 for(var i=0;i<$scope.subjects.length;i++){
-        		 if($scope.studentSubjects==""){
-        			 $scope.studentSubjects=$scope.subjects[i].subjectName;
+        	 $scope.parentsInfoToShow =$scope.userInfoToShow.parentsInfo;
+        	 $scope.studentSubjectsToShow=""; 
+        	 if($scope.subjectsToShow!=null){
+        	 for(var i=0;i<$scope.subjectsToShow.length;i++){
+        		 if($scope.studentSubjectsToShow==""){
+        			 $scope.studentSubjectsToShow=$scope.subjectsToShow[i].subjectName;
         		 }else{
-        			 $scope.studentSubjects=$scope.studentSubjects+", "+$scope.subjects[i].subjectName;
+        			 $scope.studentSubjectsToShow=$scope.studentSubjectsToShow+", "+$scope.subjectsToShow[i].subjectName;
         		 }
         		 
         	 }}
-        	$state.go('chalkanddust.studentdetails'); 
+        	
         }
     }, function(error) {
     	showAlert('danger',error.data.message);
     });
-};
 
-showStudentList();
-
+this.goBackToAdminHomePage=function(){
+	$state.go('chalkanddust.adminhome');
+}
+	
 }]);
 });    

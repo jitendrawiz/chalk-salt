@@ -22,7 +22,7 @@
 </script>
 
 
-<div id="login"><div id="wrapper" class="main-wrapper">
+<div id="home"><div id="wrapper" class="main-wrapper">
 <header id="masthead" class="site-header navigation navbar-default">
 
 <div class="header-top">
@@ -72,11 +72,11 @@
 </div>
 <nav class="collapse navbar-collapse navbar-right" id="navigation">
 <ul class="nav navbar-nav">
-<li><a href="#home">Home</a></li>
+<li><a href="#home">HOME</a></li>
 <li><a href="#module">OUR MODULE</a></li>
 <li><a href="#courses">COURSES</a></li>
 <li><a href="#team">TEAM</a></li>
-<li><a ui-sref="chalkanddust.contactUs">CONTACT</a></li>
+<li><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">CONTACT US</a></li>
 </ul>
 </nav>
 </div>
@@ -660,7 +660,7 @@
 <ul class="new_foot_nav">
 	<li><a href="policie.html">Our Policies</a></li>
     <li><a href="term.html">Terms & Conditions</a></li>
-    <li class="last"><a ui-sref="chalkanddust.contactUs">Contact Us</a></li>
+    <li class="last"><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">Contact Us</a></li>
 </ul>
 </div>
 </div>

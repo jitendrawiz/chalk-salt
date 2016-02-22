@@ -50,7 +50,8 @@ button.btn-block {
 						<th>Class</th>
 						<th>Mobile</th>
 						<th>Email</th>
-						<th>Action</th>
+						<th>Show</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,11 +61,15 @@ button.btn-block {
 						<td>{{item.studentClass}}</td>
 						<td>{{item.mobile}}</td>
 						<td>{{item.email}}</td>
-						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.showStudentDetails(item.securUuid)">Show</button> |
-							<button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.deleteStudent(item.securUuid)">Delete</button>
+						<td><a ui-sref="chalkanddust.studentdetails({id: item.securUuid})">Show</a> 
 						</td>
+						<td><button type="button" class="btn btn-secondary btn-block"
+								ng-click="adminCtrl.deleteStudent(item.securUuid)">Delete</button></td>
+						<!-- <td><button type="button" class="btn btn-secondary btn-block"
+								ng-click="adminCtrl.showStudentDetails(item.securUuid)">Show</button> |
+							
+						</td>-->
+						
 					</tr>
 				</tbody>
 			</table>
