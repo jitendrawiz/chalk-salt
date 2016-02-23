@@ -1,27 +1,20 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
+
 package com.chalk.salt.common.dto;
+
 
 /**
  * The Enum NotificationRecipientType.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
  */
 public enum NotificationRecipientType {
 
-    /** The landlord. */
-    LANDLORD(1, "Landlord"),
+    
+    /** The student. */
+    STUDENT(1, "Student"),
 
-    /** The guarantor. */
-    GUARANTOR(2, "Guarantor"),
-
-    /** The tenant. */
-    TENANT(3, "Tenant"),
-
-    /** The tenant. */
-    AGENT(3, "Agent");
+   
+    /** The admin. */
+    ADMIN(2, "Admin");
+    
 
     /** The index. */
     private int index;

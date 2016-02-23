@@ -1,11 +1,11 @@
 'use strict';
 
-define([ 'angular', './homeRouting', './homeService' ], function(angular) {
+define([ 'angular', './homeRouting', './homeService','../../CandDModal/js/CandDModalService' ], function(angular) {
 
     var homeModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service']);
     
-    homeModule.controller('HomeController', [ '$window', '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService',
-            function($window,$scope, $state, $resource,$rootScope, CHALKNDUST, HomeService) {
+    homeModule.controller('HomeController', [ '$window', '$scope', '$state', '$resource','$rootScope', 'CHALKNDUST', 'HomeService','CandDModalService','$log',
+            function($window,$scope, $state, $resource,$rootScope, CHALKNDUST, HomeService,CandDModalService,$log) {
     	           $window.scrollTo(0, 0); 
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -39,6 +39,28 @@ define([ 'angular', './homeRouting', './homeService' ], function(angular) {
                     console.log("i am in");
         };
        
+        this.sendMessage = function() {
+        	HomeService.save({}, $scope.enquiryDetails, function(
+                      response) {
+                  if (response) {
+                  	var modalOptions = {
+                              header : 'Note',
+                              body : 'Your Enquiry email has been sent to the Admin,We will respond you soon',
+                              btn : 'OK'
+                          };
+
+                      CandDModalService.showModal({}, modalOptions).then(function(result) {
+                    	  $state.reload();
+                          });
+                      console.log(response);     
+                      
+                  }
+                  
+              }, function(error) {
+                  showAlert('danger', error.data.message);
+              });
+         };
+        
             }
     ]);
 });

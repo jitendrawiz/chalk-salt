@@ -1,9 +1,14 @@
 package com.chalk.salt.api.resource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,11 +22,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.dust.core.system.SystemFacade;
+import com.chalk.salt.api.model.SystemEnquiryModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.SystemEnquiryDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 
@@ -97,4 +104,31 @@ public class SystemResource extends AbstractResource {
 					SystemException.class, systemException);
 		}
 	}
+	
+	
+	/**
+	 * System enquiry.
+	 *
+	 * @param systemEnquiryModel the system enquiry model
+	 * @return the response
+	 * @throws SystemException the system exception
+	 */
+	@POST
+    @Path("/enquiry")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response systemEnquiry(final @Valid SystemEnquiryModel systemEnquiryModel)throws SystemException{
+
+        final Map<String, String> response = new HashMap<String, String>();
+        Boolean status = false;
+        try {
+            final SystemEnquiryDto systemEnquiryDetails = beanMapper.map(systemEnquiryModel, SystemEnquiryDto.class);
+            status = systemFacade.systemEnquiry(systemEnquiryDetails);
+            response.put("status", status.toString());
+            return Response.ok(response).build();
+
+        } catch (final SystemException systemException) {
+            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+        }
+    }
 }

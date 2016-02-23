@@ -84,26 +84,42 @@ background-size:100%;
           </div>
         </div>
         <div class="col-sm-8 col-md-8 wow fadeInRight">
-          <form action="#" class="contact-form">
+          <form  class="contact-form" name="EnquiryForm" role="form" action="" method="post" novalidate>
+                  <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>               
             <div class="row">
-              <div class="col-sm-6 input-wrap">
-                <input type="text" name="name" placeholder="Name" class="form-control input-field">
+            <div class="col-sm-6 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.enquiryName.$invalid && !EnquiryForm.enquiryName.$pristine }">
+              	<input class="form-control" id="enquiryName" name="enquiryName" ng-model="enquiryDetails.enquiryName"  type="text" placeholder="Name" required/>
+              	<span style="color:red" class="help-block" ng-show="EnquiryForm.enquiryName.$invalid  && !EnquiryForm.enquiryName.$pristine">
+              		<span ng-show="EnquiryForm.enquiryName.$error.required">Name is required.</span>           
+              	</span>
+             </div>
+             <div class="col-sm-6 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine  }">
+              <input class="form-control" name="email" id="email" ng-model="enquiryDetails.email"  type="email" placeholder="E-mail" required/>
+             <span style="color:red" ng-show="EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine">
+             <span ng-show="EnquiryForm.email.$error.required">Email is required.</span>
+             <span ng-show="EnquiryForm.email.$error.email">Invalid email address.</span>
+             </span>
               </div>
-              <div class="col-sm-6 input-wrap">
-                <input type="email" name="email" placeholder="Email" class="form-control input-field">
-              </div>
-              <div class="col-sm-12 input-wrap">
-                <input type="text" name="subject" placeholder="Subject" class="form-control input-field">
-              </div>
-              <div class="col-sm-12 input-wrap">
-                <textarea name="message" placeholder="Message" class="form-control input-field"></textarea>
-              </div>
+               <div class="col-sm-12 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.enquirySubject.$invalid && !EnquiryForm.enquirySubject.$pristine }">
+              	<input class="form-control" id="enquirySubject" name="enquirySubject" ng-model="enquiryDetails.enquirySubject"  type="text" placeholder="Subject" required/>
+              	<span style="color:red" class="help-block" ng-show="EnquiryForm.enquirySubject.$invalid  && !EnquiryForm.enquirySubject.$pristine">
+              		<span ng-show="EnquiryForm.enquirySubject.$error.required">Subject is required.</span>           
+              	</span>
+             </div>
+             <div class="col-sm-12 input-wrap"
+						ng-class="{ 'has-error' : EnquiryForm.enquiryMessage.$invalid && !EnquiryForm.enquiryMessage.$pristine }">
+						<textarea class="form-control" id="enquiryMessage" name="enquiryMessage"
+							ng-model="enquiryDetails.enquiryMessage" type="text"
+							placeholder="Message" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="EnquiryForm.enquiryMessage.$invalid  && !EnquiryForm.enquiryMessage.$pristine">
+							<span ng-show="EnquiryForm.enquiryMessage.$error.required">Message
+								is required.</span>
+						</span>
+					</div>
+					           
               <div class="col-sm-12 text-right">
-                <button type="submit" class="btn btn-main btn-shadow shutter-both">Send Message</button>
-              </div>
-              <div class="col-sm-12">
-                <div class="success">Your message was sent successfully.</div>
-                <div class="error">Something is wrong, please try again.</div>
+              <button type="button" class="btn btn-main btn-shadow shutter-both" ng-disabled="EnquiryForm.$invalid" ng-click="homeCtrl.sendMessage()">Send Message</button>
               </div>
             </div>
           </form>
@@ -142,7 +158,7 @@ background-size:100%;
         <ul class="new_foot_nav">
           <li><a href="policie.html">Our Policies</a></li>
           <li><a href="term.html">Terms & Conditions</a></li>
-          <li class="last"><a ui-sref="chalkanddust.contactUs">Contact Us</a></li>
+          <li class="last"><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">Contact Us</a></li>
         </ul>
       </div>
     </div>

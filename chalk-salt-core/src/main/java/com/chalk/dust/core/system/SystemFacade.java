@@ -3,6 +3,7 @@ package com.chalk.dust.core.system;
 import java.util.List;
 
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.SystemEnquiryDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 
@@ -29,5 +30,14 @@ public interface SystemFacade {
 	 * @throws SystemException the system exception
 	 */
 	List<SubjectDto> getSubjectsListByClassId(String classId) throws SystemException;
+
+	/**
+	 * System enquiry.
+	 *
+	 * @param systemEnquiryDetails the system enquiry details
+	 * @return the boolean
+	 * @throws SystemException the system exception
+	 */
+	Boolean systemEnquiry(SystemEnquiryDto systemEnquiryDetails)throws SystemException;
 
 }

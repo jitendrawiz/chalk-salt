@@ -7,11 +7,8 @@ package com.chalk.salt.common.util;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonValue;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum ErrorCode.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
  */
 public enum ErrorCode {
 
@@ -121,7 +118,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_STUDENTS_LIST(1034),
 	
     /** The fail to delete student. */
-    FAIL_TO_DELETE_STUDENT(1035);
+    FAIL_TO_DELETE_STUDENT(1035),
+    
+    /** The enquiry sent failure. */
+    ENQUIRY_SENT_FAILURE(1036);
 	
     
 	
