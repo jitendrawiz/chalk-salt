@@ -10,5 +10,15 @@ define([ './app.js', 'angular' ], function(filters, angular) {
         };
     });
     
+    filters.filter('startFrom', function () {
+    	return function (input, start) {
+    		if (input) {
+    			start = +start;
+    			return input.slice(start);
+    		}
+    		return [];
+    	};
+    });
+    
     return filters;
 });

@@ -46,8 +46,8 @@ background-size:100%;
 	    <th scope="col" height="40px" width="160px">&nbsp;Last Message&nbsp;</th>
 	  </tr>
 	  <tbody>
-       <tr ng-repeat="item in topicDetails | filter:search" >
-	    <td><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a><span class="empty" ng-show="!item.topicTitle">N/A</span></td>
+       <tr ng-repeat="item in topicDetails=topicList | filter:search|startFrom:(currentPage-1)*itemsPerPage | limitTo:itemsPerPage" >
+	    <td style="text-align: left;"><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a><span class="empty" ng-show="!item.topicTitle">N/A</span></td>
 	    <td align="center">{{item.comments}}</td>
 	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p>{{item.lastModifiedUserName}}
 	    &nbsp;&nbsp;<span class="empty" ng-show="!item.lastModifiedDate">N/A</span></td>

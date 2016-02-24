@@ -66,7 +66,7 @@ background-size:100%;
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="item in commentListDetails | filter:search">
+  <tr ng-repeat="item in commentListDetails=commentsList | filter:search|startFrom:(currentPage-1)*itemsPerPage | limitTo:itemsPerPage">
     <td style="padding-top: 15px;width: 15%;height: auto;">{{item.userName}}<br/>Joined:&nbsp;&nbsp;{{item.joinedDate}}</td>
     <td style="padding-top: 15px;width: 60%;text-align: left;height: auto;">{{item.generalComments}}</td>
     <td style="padding-top: 15px;width: 15%;height: auto;">{{item.modifiedDate}}</td>

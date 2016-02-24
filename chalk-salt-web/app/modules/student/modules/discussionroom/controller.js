@@ -56,9 +56,9 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
             } ]);
 
     module.controller('DiscussionRoomTopicController',
-    		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService',
+    		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService','filterFilter',
             
-            function($element,$timeout,$scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService) {
+            function($element,$timeout,$scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService,filterFilter) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -98,23 +98,19 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     if(response){
                     	$scope.topicList = response;
                     	console.log(response);
+                    	// pagination controls
+                    	$scope.currentPage = 1;
                     	$scope.totalItems = $scope.topicList.length;
-                        $scope.currentPage = 1;
-                        $scope.itemsPerPage = 10;
-                        $scope.maxSize = 5;
+                    	$scope.itemsPerPage = 10; // items per page
+                    	$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
 
-                        $scope.setPage = function(pageNo) {
-                            $scope.currentPage = pageNo;
-                        };
-
-                        $scope.pageCount = function() {
-                            return Math.ceil($scope.topicList.length / $scope.itemsPerPage);
-                        };
-
-                        $scope.$watch('currentPage + itemsPerPage', function() {
-                            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
-                            $scope.topicDetails = $scope.topicList.slice(begin, end);
-                        });
+                    	// $watch search to update pagination
+                    	$scope.$watch('search', function (newVal, oldVal) {
+                    		$scope.topicDetails = filterFilter($scope.topicList, newVal);
+                    		$scope.totalItems = $scope.topicDetails.length;
+                    		$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+                    		$scope.currentPage = 1;
+                    	}, true);
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
@@ -143,9 +139,9 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
             '$state',
             '$stateParams',
             '$window','GetCommmentsOfTopicService','CommentService',
-            'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log',
+            'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log','filterFilter',
             function($element,$timeout,$scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,
-            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log) {
+            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log,filterFilter) {
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
@@ -226,23 +222,20 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
                     	$scope.commentsList = response;
-                    	console.log(response);
+                    	// pagination controls
+                    	$scope.currentPage = 1;
                     	$scope.totalItems = $scope.commentsList.length;
-                        $scope.currentPage = 1;
-                        $scope.itemsPerPage = 40;
-                        $scope.maxSize = 5;
-                        $scope.setPage = function(pageNo) {
-                            $scope.currentPage = pageNo;
-                        };
+                    	$scope.itemsPerPage = 10; // items per page
+                    	$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
 
-                        $scope.pageCount = function() {
-                            return Math.ceil($scope.commentsList.length / $scope.itemsPerPage);
-                        };
+                    	// $watch search to update pagination
+                    	$scope.$watch('search', function (newVal, oldVal) {
+                    		$scope.commentListDetails = filterFilter($scope.commentsList, newVal);
+                    		$scope.totalItems = $scope.commentListDetails.length;
+                    		$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+                    		$scope.currentPage = 1;
+                    	}, true);
 
-                        $scope.$watch('currentPage + itemsPerPage', function() {
-                            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
-                            $scope.commentListDetails = $scope.commentsList.slice(begin, end);
-                        });
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
