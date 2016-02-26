@@ -161,7 +161,7 @@ button.btn-block {
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in topicsList | filter:search track by $index">
+					<tr ng-repeat="item in topicsList=topicsListDetails | filter:search|startFrom:(currentPagetopicsList-1)*itemsPerPagetopicsList | limitTo:itemsPerPagetopicsList">
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"

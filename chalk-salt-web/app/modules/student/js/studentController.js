@@ -104,11 +104,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService',
+      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter',
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService) {
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService,filterFilter) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -269,6 +269,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                  $scope.currentPagetopicsList = 1;
                  $scope.itemsPerPagetopicsList = 5;
                  $scope.maxSizetopicsList = 5;
+                 
+                 $scope.$watch('search', function (newVal, oldVal) {
+             		$scope.topicsList = filterFilter($scope.topicsListDetails, newVal);
+             		$scope.totalItemstopicsList = $scope.topicsList.length;
+             		//$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+             		$scope.currentPagetopicsList = 1;
+             	}, true);
  	              $scope.getTopicsData = function () {
  	                  // keep a reference to the current instance "this" as the context is changing
  	                  var self = this;
@@ -327,6 +334,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                  $scope.currentPagecommentsList = 1;
                  $scope.itemsPerPagecommentsList = 5;
                  $scope.maxSizecommentsList = 5;
+                 
+                 $scope.$watch('search', function (newVal, oldVal) {
+             		$scope.commentsList = filterFilter($scope.commentsListDetails, newVal);
+             		$scope.totalItemscommentsList = $scope.commentsList.length;
+             		//$scope.maxSizecommentsList = Math.ceil($scope.totalItemscommentsList / $scope.itemsPerPagecommentsList);
+             		$scope.currentPagecommentsList = 1;
+             	}, true);
+                 
  	              $scope.getCommentsData = function () {
  	                  // keep a reference to the current instance "this" as the context is changing
  	                  var self = this;
@@ -350,6 +365,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                 $scope.currentPageStudentList = 1;
                 $scope.itemsPerPageStudentList = 8;
                 $scope.maxSizeStudentList = 5;
+                
+                $scope.$watch('search', function (newVal, oldVal) {
+            		$scope.studentList = filterFilter($scope.studentListDetails, newVal);
+            		$scope.totalItemsstudentList = $scope.studentList.length;
+            		//$scope.maxSizeStudentList = Math.ceil($scope.totalItemsstudentList / $scope.itemsPerPageStudentList);
+            		$scope.currentPageStudentList = 1;
+            	}, true);
+                
 	              $scope.getData = function () {
 	                  // keep a reference to the current instance "this" as the context is changing
 	                  var self = this;

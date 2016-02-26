@@ -180,7 +180,7 @@ button.btn-block {
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in commentsList | filter:search track by $index">
+					<tr ng-repeat="item in commentsList =commentsListDetails| filter:search|startFrom:(currentPagecommentsList-1)*itemsPerPagecommentsList | limitTo:itemsPerPagecommentsList">
 						<td>{{item.generalComments}}</td>
 						<td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"

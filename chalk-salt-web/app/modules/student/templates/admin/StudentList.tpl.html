@@ -55,7 +55,7 @@ button.btn-block {
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in studentList | filter:search track by $index">
+					<tr ng-repeat="item in studentList=studentListDetails| filter:search|startFrom:(currentPageStudentList-1)*itemsPerPageStudentList | limitTo:itemsPerPageStudentList">
 						<td>{{item.firstName+" "+item.lastName}}</td>
 						<td>{{item.studentClass}}</td>
 						<td>{{item.mobile}}</td>
