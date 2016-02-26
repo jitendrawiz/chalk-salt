@@ -167,14 +167,13 @@ button.btn-block {
 		<div class="number_scroll">
     	
         <input ng-model="search" type="text" style="width: 40%" placeholder="Search Comment" />
-        <div class="num_s">
-          <uib-pagination total-items="totalItemsCom" ng-model="currentPageCom" max-size="maxSize" items-per-page="itemsPerPageCom"  boundary-link-numbers="true"></uib-pagination>      
-         </div>
+       <div class="num_s">
+          <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()" ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList" items-per-page="$parent.itemsPerPagecommentsList"  boundary-link-numbers="true"></uib-pagination>      
+         </div> 
          </div>
 			<table id="commentList" class="table table-bordered">
 				<thead>
 					<tr>
-						<th>S.No</th>
 						<th>Comment</th>
 						<th>User/Last Updated</th>
 						<th>Action</th>
@@ -182,7 +181,6 @@ button.btn-block {
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in commentsList | filter:search track by $index">
-						<td>{{$index +1}}</td>
 						<td>{{item.generalComments}}</td>
 						<td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"
@@ -192,8 +190,8 @@ button.btn-block {
 				</tbody>
 			</table>
 			<div class="number_scroll">     
-         <div class="num_s"> 
-          <uib-pagination total-items="totalItemsCom" ng-model="currentPageCom" max-size="maxSize" items-per-page="itemsPerPageCom"  boundary-link-numbers="true"></uib-pagination>      
+         <div class="num_s">
+          <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()" ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList" items-per-page="$parent.itemsPerPagecommentsList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
 		</div>

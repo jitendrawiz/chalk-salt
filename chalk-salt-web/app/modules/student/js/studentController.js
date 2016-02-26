@@ -123,10 +123,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
             return true;
         };
         
-        $scope.tab = 1;
+        $scope.tab = $window.localStorage.getItem(CHALKNDUST.TABNUMBER);;
 
         $scope.setTab = function(newTab){
-          $scope.tab = newTab;          
+          $scope.tab = newTab; 
+          $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);
           $scope.topicsList=[];
           $scope.commentsList=[];
         };
@@ -263,25 +264,21 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
         	 $scope.commentDetails.listTopicId = "";
         	 
         	 if(response){
-                $scope.topicsListDetails = response;
-             	console.log(response);
-             	$scope.totalItems = $scope.topicsListDetails.length;
-                 $scope.currentPage = 1;
-                 $scope.itemsPerPage = 5;
-                 $scope.maxSize = 5;
-
-                 $scope.setPage = function(pageNo) {
-                     $scope.currentPage = pageNo;
-                 };
-
-                 $scope.pageCount = function() {
-                     return Math.ceil($scope.topicsListDetails.length / $scope.itemsPerPage);
-                 };
-
-                 $scope.$watch('currentPage + itemsPerPage', function() {
-                     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
-                     $scope.topicsList = $scope.topicsListDetails.slice(begin, end);
-                 });
+        		 $scope.topicsListDetails = response;
+             	$scope.totalItemstopicsList = $scope.topicsListDetails.length;
+                 $scope.currentPagetopicsList = 1;
+                 $scope.itemsPerPagetopicsList = 5;
+                 $scope.maxSizetopicsList = 5;
+ 	              $scope.getTopicsData = function () {
+ 	                  // keep a reference to the current instance "this" as the context is changing
+ 	                  var self = this;
+ 	                  console.log(self.currentPagetopicsList);
+ 	                  var itemsPerPagetopicsList = self.itemsPerPagetopicsList; 
+ 	                  var offset = (self.currentPagetopicsList-1) * itemsPerPagetopicsList;
+ 	                  $scope.topicsList = $scope.topicsListDetails.slice(offset, offset + itemsPerPagetopicsList)
+ 	
+ 	              };
+               $scope.getTopicsData();
              }
          }, onRequestFailure);
 
@@ -325,38 +322,49 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     	
          GetCommentsList.query({classId:classId,subjectId:subjectId,topicId:topicId}, function(response) {
              if(response){
-                 $scope.commentsListDetails = response;
-              	console.log(response);
-              	  $scope.totalItemsCom = $scope.commentsListDetails.length;
-                  $scope.currentPageCom = 1;
-                  $scope.itemsPerPageCom = 5;
-                  $scope.maxSize = 5;
-
-                  $scope.setPage = function(pageNo) {
-                      $scope.currentPageCom = pageNo;
-                  };
-
-                  $scope.pageCount = function() {
-                      return Math.ceil($scope.commentsListDetails.length / $scope.itemsPerPageCom);
-                  };
-
-                  $scope.$watch('currentPageCom + itemsPerPageCom', function() {
-                      var begin = (($scope.currentPageCom - 1) * $scope.itemsPerPageCom), end = begin + $scope.itemsPerPageCom;
-                      $scope.commentsList = $scope.commentsListDetails.slice(begin, end);
-                  });
+            	 $scope.commentsListDetails = response;
+             	 $scope.totalItemscommentsList = $scope.commentsListDetails.length;
+                 $scope.currentPagecommentsList = 1;
+                 $scope.itemsPerPagecommentsList = 5;
+                 $scope.maxSizecommentsList = 5;
+ 	              $scope.getCommentsData = function () {
+ 	                  // keep a reference to the current instance "this" as the context is changing
+ 	                  var self = this;
+ 	                  console.log(self.currentPagecommentsList);
+ 	                  var itemsPerPagecommentsList = self.itemsPerPagecommentsList; 
+ 	                  var offset = (self.currentPagecommentsList-1) * itemsPerPagecommentsList;
+ 	                  $scope.commentsList = $scope.commentsListDetails.slice(offset, offset + itemsPerPagecommentsList)
+ 	
+ 	              };
+               $scope.getCommentsData();
               }
          }, onRequestFailure);
 
      };
+
      function showStudentList(){
     	 GetStudentListService.query({}, function(response) {
         	 if(response){
-        		 $scope.studentList = response;
+             	$scope.studentListDetails = response;
+            	$scope.totalItemsstudentList = $scope.studentListDetails.length;
+                $scope.currentPageStudentList = 1;
+                $scope.itemsPerPageStudentList = 8;
+                $scope.maxSizeStudentList = 5;
+	              $scope.getData = function () {
+	                  // keep a reference to the current instance "this" as the context is changing
+	                  var self = this;
+	                  console.log(self.currentPageStudentList);
+	                  var itemsPerPageStudentList = self.itemsPerPageStudentList; 
+	                  var offset = (self.currentPageStudentList-1) * itemsPerPageStudentList;
+	                  $scope.studentList = $scope.studentListDetails.slice(offset, offset + itemsPerPageStudentList)
+	
+	              };
+              $scope.getData();
              }
          }, onRequestFailure);
      };
          
-     $scope.isEmpty = function(obj) {
+        $scope.isEmpty = function(obj) {
     	 for(var prop in obj) {
     	      if(obj.hasOwnProperty(prop))
     	          return false;

@@ -14,7 +14,8 @@
 	"EDITFLAG": "Flag",
 	"USERNAME": "Username",
 	"CLASSID": "classId",
-	"SUBJECTID": "subjectId"
+	"SUBJECTID": "subjectId",
+	"TABNUMBER": "tabnumber"
 })
 
 .constant("ENV", {

@@ -149,13 +149,12 @@ button.btn-block {
     	
         <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
         <div class="num_s">
-          <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"  boundary-link-numbers="true"></uib-pagination>      
+          <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList" max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
 			<table id="topicList" class="table table-bordered">
 				<thead>
 					<tr>
-						<th>S.No</th>
 						<th>Topic Title</th>
 						<th>Topic Description</th>
 						<th>Action</th>
@@ -163,7 +162,6 @@ button.btn-block {
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in topicsList | filter:search track by $index">
-						<td>{{$index +1}}</td>
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"
@@ -175,8 +173,8 @@ button.btn-block {
 				</tbody>
 			</table>
 			<div class="number_scroll">     
-         <div class="num_s"> 
-          <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"  boundary-link-numbers="true"></uib-pagination>      
+         <div class="num_s">
+          <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList" max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
 		</div>
