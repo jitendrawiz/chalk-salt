@@ -162,7 +162,7 @@ gulp.task('config', function () {
           constants: envConfig,
           wrap:'"use strict";\n\n define(["angular"], function(angular) { \n  <%= __ngModule %> \n\n});',
         }))
-        .pipe(gulp.dest('src/main/webapp/app/js/'));
+        .pipe(gulp.dest('app/js/'));
         
 });
 
