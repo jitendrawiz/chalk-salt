@@ -41,12 +41,14 @@ background-size:100%;
     </div>
     <table width="100%">
 	  <tr>
+       <th scope="col" width="10px" height="10px"></th>
 	    <th scope="col" height="40px" width="770px">Topic</th>
 	    <th scope="col" height="40px" width="85px">&nbsp;&nbsp;Comments &nbsp;&nbsp;</th>
 	    <th scope="col" height="40px" width="160px">&nbsp;Last Message&nbsp;</th>
 	  </tr>
 	  <tbody>
        <tr ng-repeat="item in topicDetails=topicList | filter:search|startFrom:(currentPage-1)*itemsPerPage | limitTo:itemsPerPage" >
+        <td><img src="./resources/images/icon_D/folder_big.gif" /></td>
 	    <td style="text-align: left;"><a href="#" ui-sref="chalkanddust.discussionroomcomments({topicId: item.topicId})">{{item.topicTitle}}</a><span class="empty" ng-show="!item.topicTitle">N/A</span></td>
 	    <td align="center">{{item.comments}}</td>
 	    <td align="center" class="center_d"><p>{{item.lastModifiedDate}}</p>{{item.lastModifiedUserName}}
