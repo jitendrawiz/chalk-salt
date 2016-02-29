@@ -129,30 +129,36 @@ button, input, select, textarea {
 						<select class="form-control" ng-model="topicRequestInfo.subjectId"
 							name="studentSubject" placeholder="Subject"
 							ng-options="item.subjectId as item.subjectName for item in topicStatistics"
-							ng-required="true">
+							required>
 							<option value="" disabled>Select Subject</option>
 						</select>
 						<p ng-show="topicRequestForm.studentSubject.$error.required && !topicRequestForm.studentSubject.$pristine">
 							Subject is required.
 						</p>
 					</div>
-					
 					<div class="form-group"
 						ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
-						<input type="text" id="topicTitle" ng-model="topicRequestInfo.topicTitle" placeholder="Please enter Topic Title" ng-required="true"/>
-						<p ng-show="topicRequestForm.topicTitle.$error.required && !topicRequestForm.topicTitle.$pristine">
-							Topic Title is required.
-						</p>
+						<textarea class="form-control" id="topicTitle" name="topicTitle"
+							ng-model="topicRequestInfo.topicTitle" type="text"
+							placeholder="Topic Title" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="topicRequestForm.topicTitle.$invalid  && !topicRequestForm.topicTitle.$pristine">
+							<span ng-show="topicRequestForm.topicTitle.$error.required">Topic
+								Title is required.</span>
+						</span>
 					</div>
-					
 					<div class="form-group"
 						ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
-						<textarea name="textarea" id="topicDescription" ng-model="topicRequestInfo.topicDescription" cols="" rows="" placeholder="Please enter Topic Description" ng-required="true"></textarea>
-						<p ng-show="topicRequestForm.topicDescription.$error.required && !topicRequestForm.topicDescription.$pristine">
-							Topic Description is required.
-						</p>
+						<textarea class="form-control" id="topicDescription"
+							name="topicDescription" ng-model="topicRequestInfo.topicDescription"
+							type="text" placeholder="Topic Description" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine">
+							<span
+							ng-show="topicRequestForm.topicDescription.$error.required">Topic
+								Decription is required.</span>
+						</span>
 					</div>
-					
 					
 					<div class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"

@@ -324,9 +324,9 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 showElement();
             } ]);
     
-    module.controller('DiscussionRoomTopicRequestController', ['$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
+    module.controller('DiscussionRoomTopicRequestController', ['$log','$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
                                                                '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest',   
-       function($element,$timeout,$scope, $state, $filter, CHALKNDUST, CandDModalService,$window,GetUserDetailsService,GetTopicStatistics,SaveTopicRequest) {
+       function($log,$element,$timeout,$scope, $state, $filter, CHALKNDUST, CandDModalService,$window,GetUserDetailsService,GetTopicStatistics,SaveTopicRequest) {
 		
            $scope.alert = {};
            $scope.alert.show = false;
