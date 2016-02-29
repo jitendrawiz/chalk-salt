@@ -25,11 +25,13 @@ import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
+import com.chalk.salt.api.model.DiscussionTopicRequestModel;
 import com.chalk.salt.api.model.UserModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -213,6 +215,24 @@ public class UserResource extends AbstractResource {
             return Response.ok(response).build();
 
         } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
+    }
+    
+    @POST
+    @Path("/students/topics/request")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response saveTopicRequest(final @Valid DiscussionTopicRequestModel discussion)throws UserException{
+    	
+    	DiscussionTopicRequestDto discussionDetails = null;
+    	try{
+    		discussionDetails = beanMapper.map(discussion, DiscussionTopicRequestDto.class);
+    		userFacade.saveTopicRequest(discussionDetails);
+            return Response.ok().build();
+	    } catch (final UserException userException) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }
     }

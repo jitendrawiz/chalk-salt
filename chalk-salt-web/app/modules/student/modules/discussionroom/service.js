@@ -103,4 +103,13 @@ define([ 'angular' ], function(angular) {
         });
         } ]);    
     
+    module.factory('SaveTopicRequest', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/students/topics/request/',{}, {
+            save : {
+                method : 'POST'
+            }
+            
+        });
+        } ]); 
+    
 });

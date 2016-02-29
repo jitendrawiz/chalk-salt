@@ -14,6 +14,7 @@ import org.sql2o.data.Table;
 
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -510,6 +511,29 @@ public class UserDaoImpl implements UserDao {
             query.executeUpdate();
         }
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
+	 */
+	@Override
+	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws Exception {
+		final String sqlQuery = "INSERT INTO cst_topic_requests(`topic_title`, `topic_description`, `secur_uuid`, "
+				+ "`subject_id`, `class_id`, `request_date`, `approval_date`)"
+				+ "VALUES (:topicTitle, :topicDescription, :securUuid, :subjectId, :classId, :requestDate, :approvalDate)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("topicTitle", discussionDetails.getTopicTitle());
+            query.addParameter("topicDescription", discussionDetails.getTopicDescription());
+            query.addParameter("subjectId", discussionDetails.getSubjectId());
+            query.addParameter("classId", discussionDetails.getClassId());
+            query.addParameter("securUuid", discussionDetails.getSecurUuid());
+            query.addParameter("requestDate", discussionDetails.getRequestDate());
+            query.addParameter("approvalDate", discussionDetails.getApprovalDate());
+            
+            query.executeUpdate();
+        }
 	}
 
 }

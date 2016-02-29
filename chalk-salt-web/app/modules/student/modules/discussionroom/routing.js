@@ -1,9 +1,10 @@
 'use strict';
 define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
          'text!./templates/discussionroomtopics.tpl.html',
-         'text!./templates/discussionroomcomments.tpl.html'],
+         'text!./templates/discussionroomcomments.tpl.html',
+         'text!./templates/topicrequest.tpl.html'],
 		function(angular, templatediscussionroomsubjects,templatediscussionroomtopics,
-				templatediscussionroomcomments) {
+				templatediscussionroomcomments,templatetopicrequest) {
 
     var module = angular.module('Student.discussionroom.routing', []);
 
@@ -20,6 +21,10 @@ define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
         	url : '/discussionroom/comments/:topicId',
             template : templatediscussionroomcomments,
             controller : 'DiscussionRoomCommentsController as commCtrl'        		
+        }).state('chalkanddust.topicrequest',{
+        	url : '/discussionroom/topicsrequest',
+            template : templatetopicrequest,
+            controller : 'DiscussionRoomTopicRequestController as requestCtrl'        		
         });
     } ]);
 

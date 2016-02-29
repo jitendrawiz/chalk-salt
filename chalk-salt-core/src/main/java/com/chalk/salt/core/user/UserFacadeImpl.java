@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.UserDto;
@@ -134,6 +135,14 @@ public class UserFacadeImpl implements UserFacade {
 	@Override
 	public Boolean deleteStudent(String securUuid) throws UserException {
 		return userManager.deleteStudent(securUuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
+	 */
+	@Override
+	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
+		userManager.saveTopicRequest(discussionDetails);
 	}
 
 }

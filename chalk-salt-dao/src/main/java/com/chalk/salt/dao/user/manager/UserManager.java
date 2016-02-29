@@ -6,6 +6,7 @@ package com.chalk.salt.dao.user.manager;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
@@ -68,4 +69,12 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	Boolean deleteStudent(String securUuid)throws UserException;
+
+	/**
+	 * Save topic request.
+	 *
+	 * @param discussionDetails the discussion details
+	 * @throws UserException the user exception
+	 */
+	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws UserException;
 }

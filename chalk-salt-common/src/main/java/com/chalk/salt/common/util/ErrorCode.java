@@ -121,7 +121,10 @@ public enum ErrorCode {
     FAIL_TO_DELETE_STUDENT(1035),
     
     /** The enquiry sent failure. */
-    ENQUIRY_SENT_FAILURE(1036);
+    ENQUIRY_SENT_FAILURE(1036),
+    
+    /** The fail to save topic request. */
+    FAIL_TO_SAVE_TOPIC_REQUEST(1037);
 	
     
 	

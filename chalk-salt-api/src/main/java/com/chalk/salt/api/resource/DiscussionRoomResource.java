@@ -451,4 +451,5 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
+    
 }

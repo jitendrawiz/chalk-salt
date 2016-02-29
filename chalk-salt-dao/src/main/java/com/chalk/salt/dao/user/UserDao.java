@@ -7,6 +7,7 @@ package com.chalk.salt.dao.user;
 import java.util.List;
 
 import com.chalk.salt.common.dto.AcademicInfoDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -218,5 +219,13 @@ public interface UserDao {
 	 * @throws Exception the exception
 	 */
 	void deleteLogin(String securUuid)throws Exception;
+
+	/**
+	 * Save topic request.
+	 *
+	 * @param discussionDetails the discussion details
+	 * @throws Exception the exception
+	 */
+	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
 
 }

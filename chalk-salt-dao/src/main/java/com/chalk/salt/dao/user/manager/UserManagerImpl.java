@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AcademicInfoDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
-import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.user.UserDao;
@@ -242,6 +242,22 @@ public class UserManagerImpl implements UserManager {
 			return true; // need to be discussed how to implement.
 		} catch (final Exception exception) {
         	throw new UserException(ErrorCode.FAIL_TO_DELETE_STUDENT, "fail to delete student", exception);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
+	 */
+	@Override
+	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
+		
+		logger.info("Saving topic request for user {}",discussionDetails.getSecurUuid());
+        //check for already available topic requests.
+        try {
+        		userDao.saveTopicRequest(discussionDetails);
+
+        } catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_SAVE_TOPIC_REQUEST, "FAil to save topic request", exception);
         }
 	}
 }

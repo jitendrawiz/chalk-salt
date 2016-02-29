@@ -42,6 +42,12 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	console.log("Going back to profile screen");
                 	 $state.go('chalkanddust.profile');
                 };
+                
+                this.openTopicRequest = function() {
+                	console.log("open topic request page");
+                	$state.go('chalkanddust.topicrequest');
+                };
+                
                 var myElements = $element.find('.requestTopicButton');
                 function showElement() {
                 	myElements.css("background", "Aqua");               
@@ -293,6 +299,12 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	$state.go('chalkanddust.discussionroomtopics', {'subjectId': $scope.subjectId});
                            
                 };
+                
+                this.openTopicRequest = function() {
+                	console.log("open topic request page");
+                	$state.go('chalkanddust.topicrequest');
+                };
+                
                 var myElements = $element.find('.requestTopicButton');
                 function showElement() {
                 	myElements.css("background", "Aqua");               
@@ -305,5 +317,106 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 }
                 showElement();
             } ]);
+    
+    module.controller('DiscussionRoomTopicRequestController', ['$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
+                                                               '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest',   
+       function($element,$timeout,$scope, $state, $filter, CHALKNDUST, CandDModalService,$window,GetUserDetailsService,GetTopicStatistics,SaveTopicRequest) {
+		
+           $scope.alert = {};
+           $scope.alert.show = false;
+           $scope.currentDate = new Date();
+           $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
+           $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+           
+           GetTopicStatistics.query({studentClassId:$scope.classId}, function(response) { 
+               if(response){
+               	 $scope.topicStatistics = response;
+               	console.log(response);
+               }
+           }, function(error) {
+           	showAlert('danger',error.data.message);
+           });                	
+          
+           
+           var showAlert = function(type, message) {
+               $scope.alert = {};
+               $scope.alert.type = type;
+               $scope.alert.message = message;
+               $scope.alert.show = true;
+
+               $window.scrollTo(0, 0);
+           };
+
+           $scope.closeAlert = function() {
+               $scope.alert = {};
+               $scope.alert.show = false;
+
+               return true;
+           };
+           
+           this.goBackToTopicsScreen = function() {
+           	console.log("Going back to Topics screen");
+           	$state.go('chalkanddust.discussionroomsubjects');
+                      
+           };
+           
+           this.openTopicRequest = function() {
+           	console.log("open topic request page");
+           	$state.go('chalkanddust.topicrequest');
+           };
+           
+           this.saveTopicRequest = function() {
+               if($scope.topicRequestInfo!=null && $scope.topicRequestInfo!=""){
+            	   $scope.topicRequestInfo.securUuid=$scope.securUuid; 
+            	   $scope.topicRequestInfo.classId=$scope.classId;
+            	   $scope.topicRequestInfo.requestDate=$filter('date')(new Date(),'yyyy-MM-dd HH:mm:ss');
+            	   
+            	   console.log($scope.topicRequestInfo);
+            	   SaveTopicRequest.save({}, $scope.topicRequestInfo, function(
+                         response) {
+                     if (response) {
+                         console.log(response);
+                         var modalOptions = {
+                                 header : 'Note',
+                                 body : 'Your topic request added Successfully',
+                                 btn : 'OK'
+                             };
+
+                         CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                 $log.info(result);
+                             });
+                         $state.reload();
+                     }
+                     
+                 }, function(error) {
+                     showAlert('danger', error.data.message);
+                 });                   
+            	   }else{
+            		   var modalOptions = {
+                               header : 'Note',
+                               body : 'Please fill your topic details!!',
+                               btn : 'OK'
+                           };
+
+                       CandDModalService.showModal({}, modalOptions).then(function(result) {
+                               $log.info(result);
+                           });
+
+               }
+            };
+           
+           var myElements = $element.find('.requestTopicButton');
+           function showElement() {
+           	myElements.css("background", "Aqua");               
+               $timeout(hideElement, 1000);
+           }
+
+           function hideElement() {
+           	myElements.css("background", "Wheat");                
+               $timeout(showElement, 1000);
+           }
+           showElement();
+       } ]);
 
 });
