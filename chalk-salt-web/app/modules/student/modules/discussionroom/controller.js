@@ -124,8 +124,14 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 
                 this.goBackToSubjectsScreen = function() {
                 	console.log("Going back to subjects screen");
-                            $state.go("chalkanddust.discussionroomsubjects");
+                    $state.go("chalkanddust.discussionroomsubjects");
                 };
+                
+                this.openTopicRequest = function() {
+                   	console.log("open topic request page");
+                   	$state.go('chalkanddust.topicrequest');
+                };
+                   
                 var myElements = $element.find('.requestTopicButton');
                 function showElement() {
                 	myElements.css("background", "Aqua");               

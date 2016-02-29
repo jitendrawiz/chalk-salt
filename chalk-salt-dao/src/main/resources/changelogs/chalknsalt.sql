@@ -282,6 +282,28 @@ CREATE TABLE `cst_usertypes` (
 
 /*Data for the table `cst_usertypes` */
 
+/*Table structure for table `cst_topic_requests` */
+
+DROP TABLE IF EXISTS `cst_topic_requests`;
+
+CREATE TABLE `cst_topic_requests` (
+  `topic_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `topic_title` text NOT NULL,
+  `topic_description` text NOT NULL,
+  `secur_uuid` varchar(100) NOT NULL,
+  `approved` tinyint(4) NOT NULL DEFAULT '0',
+  `subject_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `request_date` datetime NOT NULL,
+  `approval_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`topic_request_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_topic_requests` */
+
+insert  into `cst_topic_requests`(`topic_request_id`,`topic_title`,`topic_description`,`secur_uuid`,`approved`,`subject_id`,`class_id`,`request_date`,`approval_date`) values (1,'even no','divisible by 2','4e0b6910-5650-497b-81c5-4d4e96c06d6d',0,1,1,'2016-02-29 17:41:21',NULL),(2,'water formula','h2o','4e0b6910-5650-497b-81c5-4d4e96c06d6d',0,3,1,'2016-02-29 17:44:55',NULL);
+
+
 /* Trigger structure for table `cst_discussion_topic_comments` */
 
 DELIMITER $$
