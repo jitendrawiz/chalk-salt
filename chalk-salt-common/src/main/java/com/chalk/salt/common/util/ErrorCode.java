@@ -124,9 +124,10 @@ public enum ErrorCode {
     ENQUIRY_SENT_FAILURE(1036),
     
     /** The fail to save topic request. */
-    FAIL_TO_SAVE_TOPIC_REQUEST(1037);
-	
+    FAIL_TO_SAVE_TOPIC_REQUEST(1037),
     
+    /** The fail to fetch topic requests. */
+    FAIL_TO_FETCH_TOPIC_REQUESTS(1038);
 	
 	/** The value. */
     private final int value;

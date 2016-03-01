@@ -8,6 +8,9 @@ public class DiscussionTopicRequestModel extends ApiModel{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8818042593716111312L;
 	
+	/** The topic request id. */
+	private int topicRequestId;
+	
 	/** The topic title. */
 	private String topicTitle;
 	
@@ -28,6 +31,23 @@ public class DiscussionTopicRequestModel extends ApiModel{
 	
 	/** The approval date. */
 	private String approvalDate;
+	
+	/** The student name. */
+	private String studentName;
+	
+	/** The email. */
+	private String email;
+	
+	/** The mobile. */
+	private String mobile;
+	
+	/** The subject name. */
+	private String subjectName;
+	
+	/** The student class. */
+	private String studentClass;
+	
+	private Boolean approved;
 	
 	/**
 	 * Gets the topic title.
@@ -154,6 +174,121 @@ public class DiscussionTopicRequestModel extends ApiModel{
 	public void setApprovalDate(String approvalDate) {
 		this.approvalDate = approvalDate;
 	}
-	
+
+	/**
+	 * Gets the student name.
+	 *
+	 * @return the student name
+	 */
+	public String getStudentName() {
+		return studentName;
+	}
+
+	/**
+	 * Sets the student name.
+	 *
+	 * @param studentName the new student name
+	 */
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Gets the mobile.
+	 *
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+
+	/**
+	 * Sets the mobile.
+	 *
+	 * @param mobile the new mobile
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	/**
+	 * Gets the subject name.
+	 *
+	 * @return the subject name
+	 */
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	/**
+	 * Sets the subject name.
+	 *
+	 * @param subjectName the new subject name
+	 */
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	/**
+	 * Gets the student class.
+	 *
+	 * @return the student class
+	 */
+	public String getStudentClass() {
+		return studentClass;
+	}
+
+	/**
+	 * Sets the student class.
+	 *
+	 * @param studentClass the new student class
+	 */
+	public void setStudentClass(String studentClass) {
+		this.studentClass = studentClass;
+	}
+
+	/**
+	 * Gets the topic request id.
+	 *
+	 * @return the topic request id
+	 */
+	public int getTopicRequestId() {
+		return topicRequestId;
+	}
+
+	/**
+	 * Sets the topic request id.
+	 *
+	 * @param topicRequestId the new topic request id
+	 */
+	public void setTopicRequestId(int topicRequestId) {
+		this.topicRequestId = topicRequestId;
+	}
+
+	public Boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
+	}
 	
 }

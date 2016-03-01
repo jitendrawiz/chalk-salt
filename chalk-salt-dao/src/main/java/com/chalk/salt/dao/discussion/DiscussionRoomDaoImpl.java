@@ -9,6 +9,7 @@ import org.sql2o.Sql2o;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -336,7 +337,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             final Query query = connection.createQuery(sqlQuery); 
             query.addParameter("commentUuid", commentUuid);
             return query.executeAndFetchFirst(DiscussionCommentDto.class);
-        }	}
+        }	
+    }
 
 	/* (non-Javadoc)
 	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#updateComment(com.chalk.salt.common.dto.DiscussionCommentDto)
@@ -387,5 +389,25 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             query.executeUpdate();
             
         }		
+	}
+
+	@Override
+	public List<DiscussionTopicRequestDto> getTopicRequests() throws Exception {
+		final String sqlQuery = "SELECT topicRequest.`topic_request_id` AS topicRequestId, "
+				+ "topicRequest.`topic_title` AS topicTitle, topicRequest.`topic_description` AS topicDescription, "
+				+ "topicRequest.`secur_uuid` AS securUuid, topicRequest.`approved`, topicRequest.`subject_id` AS subjectId, "
+				+ "topicRequest.`class_id` AS classId, classType.`class_name` AS studentClass, "
+				+ "subjects.`subject_name` AS subjectName, CONCAT(users.`first_name`, ' ', users.`last_name`)AS studentName, "
+				+ " contacts.mobile, contacts.email"
+				+ " FROM `cst_topic_requests` AS topicRequest "
+				+ "JOIN `cst_class_type` AS classType ON classType.class_id = topicRequest.class_id "
+				+ "JOIN `cst_class_subjects` AS subjects ON subjects.subject_id = topicRequest.subject_id "
+				+ "JOIN `cst_users` AS users ON users.secur_uuid = topicRequest.secur_uuid "
+				+ "JOIN `cst_contacts` AS contacts ON contacts.id = users.contact_id";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            return query.executeAndFetch(DiscussionTopicRequestDto.class);
+        }
 	}
 }

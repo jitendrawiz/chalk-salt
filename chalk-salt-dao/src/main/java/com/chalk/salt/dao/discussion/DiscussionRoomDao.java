@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 
@@ -158,6 +159,14 @@ public interface DiscussionRoomDao {
 	 * @throws Exception the exception
 	 */
 	void deleteTopicComments(String securUuid)throws Exception;
+
+	/**
+	 * Gets the topic requests.
+	 *
+	 * @return the topic requests
+	 * @throws Exception the exception
+	 */
+	List<DiscussionTopicRequestDto> getTopicRequests()throws Exception;
 
 	
 }

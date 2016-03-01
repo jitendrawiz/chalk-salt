@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -154,6 +155,14 @@ public interface DiscussionRoomManager {
 	 * @throws DiscussionException the discussion exception
 	 */
 	Boolean deleteComment(String commentUuid)throws DiscussionException;
+
+	/**
+	 * Gets the topic requests.
+	 *
+	 * @return the topic requests
+	 * @throws DiscussionException the discussion exception
+	 */
+	List<DiscussionTopicRequestDto> getTopicRequests()throws DiscussionException;
 
 
 }

@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionCommentModel;
 import com.chalk.salt.api.model.DiscussionTopicModel;
+import com.chalk.salt.api.model.DiscussionTopicRequestModel;
 import com.chalk.salt.api.model.TopicDetailsModel;
 import com.chalk.salt.api.model.TopicStatisticsModel;
 import com.chalk.salt.api.util.ApiConstants;
@@ -32,6 +33,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -446,6 +448,24 @@ public class DiscussionRoomResource extends AbstractResource {
     		deleteStatus = discussionRoomFacade.deleteComment(commentUuid);
     		response.put("deleteStatus", deleteStatus.toString());
     		return Response.ok(deleteStatus).build();
+    		
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    @GET
+    @Path("/discussion/topics/requests")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response getTopicRequests()throws DiscussionException{
+    	List<DiscussionTopicRequestModel> topicRequestList;
+    	List<DiscussionTopicRequestDto> topicRequests;
+    	try{
+    		topicRequests = discussionRoomFacade.getTopicRequests();
+    		topicRequestList = DozerMapperUtil.mapCollection(beanMapper, topicRequests, DiscussionTopicRequestModel.class);
+    		return Response.ok(topicRequestList).build();
     		
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);

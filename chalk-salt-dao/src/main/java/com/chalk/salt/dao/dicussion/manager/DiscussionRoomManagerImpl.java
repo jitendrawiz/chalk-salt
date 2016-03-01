@@ -14,6 +14,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -266,6 +267,18 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 			return true; // need to be discussed how to implement.
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_DISCUSSION_COMMENT, "Fail to delete Discussion Comment", exception);
+        }
+	}
+
+	@Override
+	public List<DiscussionTopicRequestDto> getTopicRequests() throws DiscussionException {
+		logger.info("Fetch topic requests list .......");
+		List<DiscussionTopicRequestDto> topicRequests;
+		try {
+			topicRequests = discussionDao.getTopicRequests();
+			return topicRequests;
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_TOPIC_REQUESTS, "Fail to fetch topic requests", exception);
         }
 	}
 

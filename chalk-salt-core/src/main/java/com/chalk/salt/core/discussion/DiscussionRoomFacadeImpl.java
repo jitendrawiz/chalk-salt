@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.DiscussionCommentDto;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
@@ -146,6 +147,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	@Override
 	public Boolean deleteComment(String commentUuid) throws DiscussionException {
 		return discussionManager.deleteComment(commentUuid);
+	}
+
+	@Override
+	public List<DiscussionTopicRequestDto> getTopicRequests() throws DiscussionException {
+		return discussionManager.getTopicRequests();
 	}
 
 }

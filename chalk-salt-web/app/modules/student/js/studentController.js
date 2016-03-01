@@ -104,11 +104,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter',
+      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 'GetTopicRequestList', 
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService,filterFilter) {
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService,filterFilter,GetTopicRequestList) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -222,6 +222,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      $scope.topicDetails = [];
      $scope.commentDetails=[];
      $scope.studentList=[];
+     $scope.topicRequestListDetails=[];
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -539,8 +540,40 @@ this.deleteStudent=function(securUuid){
         });
 };
 
+function showTopicRequestList () {
+	
+    GetTopicRequestList.query({}, function(response) {
+   	 
+   	 if(response){
+   		 $scope.topicRequestListDetails = response;
+        	$scope.totalItemsTopicRequestList = $scope.topicRequestListDetails.length;
+            $scope.currentPageTopicRequestList = 1;
+            $scope.itemsPerPageTopicRequestList = 5;
+            $scope.maxSizeTopicRequestList = 5;
+            
+            $scope.$watch('search', function (newVal, oldVal) {
+        		$scope.topicRequestList = filterFilter($scope.topicRequestListDetails, newVal);
+        		$scope.totalItemsTopicRequestList = $scope.topicRequestList.length;
+        		//$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+        		$scope.currentPageTopicRequestList = 1;
+        	}, true);
+              $scope.getTopicRequestData = function () {
+                  // keep a reference to the current instance "this" as the context is changing
+                  var self = this;
+                  console.log(self.currentPageTopicRequestList);
+                  var itemsPerPageTopicRequestList = self.itemsPerPageTopicRequestList; 
+                  var offset = (self.currentPageTopicRequestList-1) * itemsPerPageTopicRequestList;
+                  $scope.topicRequestList = $scope.topicRequestListDetails.slice(offset, offset + itemsPerPageTopicRequestList)
+
+              };
+          $scope.getTopicRequestData();
+        }
+    }, onRequestFailure);
+
+};
 
 showStudentList();
+showTopicRequestList();
 
 
 var Id = $stateParams.id;

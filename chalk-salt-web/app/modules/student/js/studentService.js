@@ -132,4 +132,12 @@ define([ 'angular' ], function(angular) {
         });
    } ]);
   
+    studentService.factory('GetTopicRequestList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/requests',{}, {
+            get : {
+                method : 'GET'
+            }
+        });
+   } ]);
+    
 });
