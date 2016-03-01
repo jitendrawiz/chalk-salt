@@ -122,9 +122,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
             $scope.alert.show = false;
             return true;
         };
-        
-        $scope.tab = $window.localStorage.getItem(CHALKNDUST.TABNUMBER);;
-
+        if($window.localStorage.getItem(CHALKNDUST.TABNUMBER)!=null){
+        $scope.tab = $window.localStorage.getItem(CHALKNDUST.TABNUMBER);
+        }else{
+        	$scope.tab=1;
+        }
         $scope.setTab = function(newTab){
           $scope.tab = newTab; 
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);

@@ -77,6 +77,15 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
                 $scope.alert = {};
                 $scope.alert.show = false;
             };
+            function resetLocalStorage(){
+            	$window.localStorage.removeItem(CHALKNDUST.SECURUUID);
+                $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
+                $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
+                $window.localStorage.removeItem(CHALKNDUST.USERNAME);
+                $window.localStorage.removeItem(CHALKNDUST.CLASSID);
+                $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
+                $window.localStorage.removeItem(CHALKNDUST.TABNUMBER);
+            };
             /**
              * Service call to logging out of the application
              */
@@ -84,12 +93,7 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
             	$rootScope.fullName="";
             	$rootScope.username="";
             	$rootScope.securUuid="";
-            	$window.localStorage.removeItem(CHALKNDUST.SECURUUID);
-                $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
-                $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
-                $window.localStorage.removeItem(CHALKNDUST.USERNAME);
-                $window.localStorage.removeItem(CHALKNDUST.CLASSID);
-                $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
+            	resetLocalStorage();            	
                 $state.go('chalkanddust.home');
             }, function() {
                 showAlert('danger', 'There was some problem while logging out.');
