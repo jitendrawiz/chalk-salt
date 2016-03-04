@@ -149,9 +149,20 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		return discussionManager.deleteComment(commentUuid);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#getTopicRequests()
+	 */
 	@Override
 	public List<DiscussionTopicRequestDto> getTopicRequests() throws DiscussionException {
 		return discussionManager.getTopicRequests();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#approveTopicRequests(int)
+	 */
+	@Override
+	public void approveTopicRequests(int topicRequestId) throws DiscussionException {
+		discussionManager.approveTopicRequests(topicRequestId);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.chalk.salt.dao.discussion;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.sql2o.Connection;
@@ -391,6 +393,9 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         }		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#getTopicRequests()
+	 */
 	@Override
 	public List<DiscussionTopicRequestDto> getTopicRequests() throws Exception {
 		final String sqlQuery = "SELECT topicRequest.`topic_request_id` AS topicRequestId, "
@@ -408,6 +413,24 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
             return query.executeAndFetch(DiscussionTopicRequestDto.class);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#approveTopicRequests(int)
+	 */
+	@Override
+	public void approveTopicRequests(int topicRequestId) throws Exception {
+		final String sqlQuery = "UPDATE cst_topic_requests set approved=:approved, approval_date=:approvalDate "
+				+ "WHERE topic_request_id=:topicRequestId limit 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("approved", "1");
+            query.addParameter("approvalDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            query.addParameter("topicRequestId", topicRequestId);
+            query.executeUpdate();
+            
         }
 	}
 }

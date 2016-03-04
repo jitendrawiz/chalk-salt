@@ -127,7 +127,10 @@ public enum ErrorCode {
     FAIL_TO_SAVE_TOPIC_REQUEST(1037),
     
     /** The fail to fetch topic requests. */
-    FAIL_TO_FETCH_TOPIC_REQUESTS(1038);
+    FAIL_TO_FETCH_TOPIC_REQUESTS(1038),
+    
+    /** The fail to approve topic requests. */
+    FAIL_TO_APPROVE_TOPIC_REQUESTS(1039);
 	
 	/** The value. */
     private final int value;

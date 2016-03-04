@@ -270,6 +270,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#getTopicRequests()
+	 */
 	@Override
 	public List<DiscussionTopicRequestDto> getTopicRequests() throws DiscussionException {
 		logger.info("Fetch topic requests list .......");
@@ -280,6 +283,20 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_TOPIC_REQUESTS, "Fail to fetch topic requests", exception);
         }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#approveTopicRequests(int)
+	 */
+	@Override
+	public void approveTopicRequests(int topicRequestId) throws DiscussionException {
+		logger.info("approving topic request...");
+		try{
+			discussionDao.approveTopicRequests(topicRequestId);
+		} catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_APPROVE_TOPIC_REQUESTS, "Fail to approve topic requests", exception);
+        }
+		
 	}
 
 }

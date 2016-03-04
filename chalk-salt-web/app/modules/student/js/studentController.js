@@ -104,11 +104,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
-      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 'GetTopicRequestList', 
+      'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
+      'GetTopicRequestList','approveTopicRequestService', 
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
-       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,deleteStudentDetailsService,filterFilter,GetTopicRequestList) {
+       GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
+       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -540,6 +542,7 @@ this.deleteStudent=function(securUuid){
         });
 };
 
+//show topic request list
 function showTopicRequestList () {
 	
     GetTopicRequestList.query({}, function(response) {
@@ -569,8 +572,37 @@ function showTopicRequestList () {
           $scope.getTopicRequestData();
         }
     }, onRequestFailure);
-
 };
+
+//approve topic request
+this.approveTopicRequest=function(topicRequestId){
+	var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Do you want to approve this Topic Request?',
+            btn : 'OK'
+    };
+    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+    	approveTopicRequestService.get({topicRequestId:topicRequestId},  function(response) {
+	        if(response){
+	        	 console.log(response);
+	         	var modalOptions = {
+	                    header : 'Note',
+	                    body : 'Topic request approved successfully',
+	                    btn : 'OK'
+	                };
+	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+	                    $log.info(result);
+	                });
+	        	 $state.reload();
+	        	 }
+    	    }, function(error) {
+    	    	showAlert('danger',error.data.message);
+    	    })
+
+        });
+};	
+
+
 
 showStudentList();
 showTopicRequestList();

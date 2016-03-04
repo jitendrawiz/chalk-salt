@@ -454,6 +454,34 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Approve topic requests.
+     *
+     * @param topicRequestId the topic request id
+     * @return the response
+     * @throws DiscussionException the discussion exception
+     */
+    @GET
+    @Path("/discussion/topics/requests/{topicRequestId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    
+    public Response approveTopicRequests(@NotBlank @PathParam("topicRequestId") final int topicRequestId)throws DiscussionException{
+    	try{
+    		discussionRoomFacade.approveTopicRequests(topicRequestId);
+    		return Response.ok().build();
+    		
+	    } catch (final DiscussionException discussionException) {
+	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
+	    }
+    }
+    
+    /**
+     * Gets the topic requests.
+     *
+     * @return the topic requests
+     * @throws DiscussionException the discussion exception
+     */
     @GET
     @Path("/discussion/topics/requests")
     @Produces(MediaType.APPLICATION_JSON)
@@ -471,5 +499,4 @@ public class DiscussionRoomResource extends AbstractResource {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
     }
-    
 }
