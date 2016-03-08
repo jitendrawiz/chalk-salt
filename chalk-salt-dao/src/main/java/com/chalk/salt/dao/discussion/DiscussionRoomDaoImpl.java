@@ -403,7 +403,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ "topicRequest.`secur_uuid` AS securUuid, topicRequest.`approved`, topicRequest.`subject_id` AS subjectId, "
 				+ "topicRequest.`class_id` AS classId, classType.`class_name` AS studentClass, "
 				+ "subjects.`subject_name` AS subjectName, CONCAT(users.`first_name`, ' ', users.`last_name`)AS studentName, "
-				+ " contacts.mobile, contacts.email"
+				+ " contacts.mobile, contacts.email, topicRequest.request_securuuid as requestSecurUuid "
 				+ " FROM `cst_topic_requests` AS topicRequest "
 				+ "JOIN `cst_class_type` AS classType ON classType.class_id = topicRequest.class_id "
 				+ "JOIN `cst_class_subjects` AS subjects ON subjects.subject_id = topicRequest.subject_id "
@@ -417,18 +417,18 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#approveTopicRequests(int)
+	 * @see com.chalk.salt.dao.discussion.DiscussionRoomDao#approveTopicRequests(String)
 	 */
 	@Override
-	public void approveTopicRequests(int topicRequestId) throws Exception {
+	public void approveTopicRequests(String requestSecurUuid) throws Exception {
 		final String sqlQuery = "UPDATE cst_topic_requests set approved=:approved, approval_date=:approvalDate "
-				+ "WHERE topic_request_id=:topicRequestId limit 1";
+				+ "WHERE request_securuuid=:requestSecurUuid limit 1";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("approved", "1");
             query.addParameter("approvalDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-            query.addParameter("topicRequestId", topicRequestId);
+            query.addParameter("requestSecurUuid", requestSecurUuid);
             query.executeUpdate();
             
         }

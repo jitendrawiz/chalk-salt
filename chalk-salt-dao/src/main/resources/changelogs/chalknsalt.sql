@@ -364,11 +364,14 @@ CREATE
 	subject_id=OLD.subject_id,
 	topic_title=OLD.topic_title,
 	topic_description=OLD.topic_description,
+	secur_uuid=OLD.request_securuuid,
 	created_date=NOW();	
    END;
 $$
 
 DELIMITER ;
+
+ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `request_securuuid` VARCHAR(100) NOT NULL AFTER `approval_date`;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

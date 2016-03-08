@@ -141,8 +141,8 @@ define([ 'angular' ], function(angular) {
    } ]);
     
     studentService.factory('approveTopicRequestService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/discussion/topics/requests/:topicRequestId',{
-        	topicRequestId:'@topicRequestId'
+        return $resource(ENV.API_END_POINT + 'private/discussion/topics/requests/:requestSecurUuid',{
+        	requestSecurUuid:'@requestSecurUuid'
         }, {
             get : {
                 method : 'GET'

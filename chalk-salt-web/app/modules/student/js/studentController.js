@@ -575,14 +575,14 @@ function showTopicRequestList () {
 };
 
 //approve topic request
-this.approveTopicRequest=function(topicRequestId){
+this.approveTopicRequest=function(requestSecurUuid){
 	var modalOptionsConfirm = {
             header : 'Note',
             body : 'Do you want to approve this Topic Request?',
             btn : 'OK'
     };
     CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
-    	approveTopicRequestService.get({topicRequestId:topicRequestId},  function(response) {
+    	approveTopicRequestService.get({requestSecurUuid:requestSecurUuid},  function(response) {
 	        if(response){
 	        	 console.log(response);
 	         	var modalOptions = {

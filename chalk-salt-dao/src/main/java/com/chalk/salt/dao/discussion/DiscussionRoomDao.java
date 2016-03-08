@@ -168,13 +168,14 @@ public interface DiscussionRoomDao {
 	 */
 	List<DiscussionTopicRequestDto> getTopicRequests()throws Exception;
 
+	
 	/**
 	 * Approve topic requests.
 	 *
-	 * @param topicRequestId the topic request id
+	 * @param requestSecurUuid the request secur uuid
 	 * @throws Exception the exception
 	 */
-	void approveTopicRequests(int topicRequestId)throws Exception;
+	void approveTopicRequests(String requestSecurUuid)throws Exception;
 
 	
 }

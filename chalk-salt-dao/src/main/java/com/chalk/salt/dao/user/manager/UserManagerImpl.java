@@ -254,6 +254,7 @@ public class UserManagerImpl implements UserManager {
 		logger.info("Saving topic request for user {}",discussionDetails.getSecurUuid());
         //check for already available topic requests.
         try {
+        		discussionDetails.setRequestSecurUuid(UUID.randomUUID().toString());
         		userDao.saveTopicRequest(discussionDetails);
 
         } catch (final Exception exception) {

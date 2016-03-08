@@ -44,7 +44,11 @@ public class DiscussionTopicRequestDto {
 	/** The student class. */
 	private String studentClass;
 	
+	/** The approved. */
 	private Boolean approved;
+	
+	/** The request secur uuid. */
+	private String requestSecurUuid;
 	
 	/**
 	 * Gets the topic title.
@@ -280,12 +284,40 @@ public class DiscussionTopicRequestDto {
 		this.topicRequestId = topicRequestId;
 	}
 
+	/**
+	 * Gets the approved.
+	 *
+	 * @return the approved
+	 */
 	public Boolean getApproved() {
 		return approved;
 	}
 
+	/**
+	 * Sets the approved.
+	 *
+	 * @param approved the new approved
+	 */
 	public void setApproved(Boolean approved) {
 		this.approved = approved;
+	}
+
+	/**
+	 * Gets the request secur uuid.
+	 *
+	 * @return the request secur uuid
+	 */
+	public String getRequestSecurUuid() {
+		return requestSecurUuid;
+	}
+
+	/**
+	 * Sets the request secur uuid.
+	 *
+	 * @param requestSecurUuid the new request secur uuid
+	 */
+	public void setRequestSecurUuid(String requestSecurUuid) {
+		this.requestSecurUuid = requestSecurUuid;
 	}
 	
 }

@@ -158,11 +158,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#approveTopicRequests(int)
+	 * @see com.chalk.salt.core.discussion.DiscussionRoomFacade#approveTopicRequests(String)
 	 */
 	@Override
-	public void approveTopicRequests(int topicRequestId) throws DiscussionException {
-		discussionManager.approveTopicRequests(topicRequestId);
+	public void approveTopicRequests(String requestSecurUuid) throws DiscussionException {
+		discussionManager.approveTopicRequests(requestSecurUuid);
 	}
 
 }

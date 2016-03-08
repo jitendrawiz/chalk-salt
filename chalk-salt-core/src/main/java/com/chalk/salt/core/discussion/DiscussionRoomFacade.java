@@ -164,12 +164,13 @@ public interface DiscussionRoomFacade {
 	 */
 	List<DiscussionTopicRequestDto> getTopicRequests()throws DiscussionException;
 
+	
 	/**
 	 * Approve topic requests.
 	 *
-	 * @param topicRequestId the topic request id
+	 * @param requestSecurUuid the request secur uuid
 	 * @throws DiscussionException the discussion exception
 	 */
-	void approveTopicRequests(int topicRequestId)throws DiscussionException;
+	void approveTopicRequests(String requestSecurUuid)throws DiscussionException;
 
 }

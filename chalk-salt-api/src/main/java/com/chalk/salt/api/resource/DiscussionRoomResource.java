@@ -462,13 +462,13 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/topics/requests/{topicRequestId}")
+    @Path("/discussion/topics/requests/{requestSecurUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     
-    public Response approveTopicRequests(@NotBlank @PathParam("topicRequestId") final int topicRequestId)throws DiscussionException{
+    public Response approveTopicRequests(@NotBlank @PathParam("requestSecurUuid") final String requestSecurUuid)throws DiscussionException{
     	try{
-    		discussionRoomFacade.approveTopicRequests(topicRequestId);
+    		discussionRoomFacade.approveTopicRequests(requestSecurUuid);
     		return Response.ok().build();
     		
 	    } catch (final DiscussionException discussionException) {

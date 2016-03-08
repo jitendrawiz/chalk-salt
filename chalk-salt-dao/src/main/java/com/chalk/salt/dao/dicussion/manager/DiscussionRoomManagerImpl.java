@@ -286,13 +286,13 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#approveTopicRequests(int)
+	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#approveTopicRequests(String)
 	 */
 	@Override
-	public void approveTopicRequests(int topicRequestId) throws DiscussionException {
+	public void approveTopicRequests(String requestSecurUuid) throws DiscussionException {
 		logger.info("approving topic request...");
 		try{
-			discussionDao.approveTopicRequests(topicRequestId);
+			discussionDao.approveTopicRequests(requestSecurUuid);
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_APPROVE_TOPIC_REQUESTS, "Fail to approve topic requests", exception);
         }
