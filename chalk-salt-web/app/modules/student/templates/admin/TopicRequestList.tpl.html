@@ -112,9 +112,9 @@ button.btn-block {
 		<div class="number_scroll">
     	
         <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList" max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
+       <div class="num_s">
+          <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()" ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList" items-per-page="$parent.itemsPerPageTopicRequestList"  boundary-link-numbers="true"></uib-pagination>      
+         </div>
     </div>
 			<table id="topicList" class="table table-bordered">
 				<thead>
@@ -135,17 +135,16 @@ button.btn-block {
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
 						<td>
-							<button type="button" class="btn btn-secondary btn-block" 
-								ng-click="adminCtrl.approveTopicRequest(item.requestSecurUuid)">
-								Approve
-							</button>
+						<a ng-click="adminCtrl.approveTopicRequest(item.requestSecurUuid)"
+                ng-show="item.approved != '1' "><span class="glyphicon glyphicon-ok"></span></a> <span
+                ng-show="item.approved == '1'" class="glyphicon glyphicon-minus"></span>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="number_scroll">     
          <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicsData()" ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList" items-per-page="$parent.itemsPerPageTopicRequestList"  boundary-link-numbers="true"></uib-pagination>      
+          <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()" ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList" items-per-page="$parent.itemsPerPageTopicRequestList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
 		</div>
