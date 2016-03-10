@@ -14213,20 +14213,6 @@ nav li #login-content {
   color: #000;
   transition: 0.3s; }
 
-.user_image {
-  margin-top: 30px;
-  width: 220px;
-  margin-right: 120px;
-  height: 210px;
-  border: 1px solid #666;
-  border-radius: 10px;
-  background-image: url(../images/icons/profile-default-male.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  float: right;
-  position: relative; }
-
 .map-wrapper {
   z-index: 1;
   position: relative; }
