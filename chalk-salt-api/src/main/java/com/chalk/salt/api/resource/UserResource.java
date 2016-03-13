@@ -23,15 +23,18 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionTopicRequestModel;
+import com.chalk.salt.api.model.ProfilePhotoUploadModel;
 import com.chalk.salt.api.model.UserModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -179,6 +182,12 @@ public class UserResource extends AbstractResource {
         }
     }
     
+    /**
+     * Gets the students.
+     *
+     * @return the students
+     * @throws UserException the user exception
+     */
     @GET
     @Path("/students")
     @Produces(MediaType.APPLICATION_JSON)
@@ -198,6 +207,13 @@ public class UserResource extends AbstractResource {
         }
     }
     
+    /**
+     * Delete student.
+     *
+     * @param securUuid the secur uuid
+     * @return the response
+     * @throws UserException the user exception
+     */
     @GET
     @Path("/students/delete/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -219,6 +235,13 @@ public class UserResource extends AbstractResource {
         }
     }
     
+    /**
+     * Save topic request.
+     *
+     * @param discussion the discussion
+     * @return the response
+     * @throws UserException the user exception
+     */
     @POST
     @Path("/students/topics/request")
     @Produces(MediaType.APPLICATION_JSON)
@@ -236,4 +259,32 @@ public class UserResource extends AbstractResource {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }
     }
+    
+    
+    /**
+     * Upload profile photo.
+     *
+     * @param securUuid the secur uuid
+     * @param profilePhotoUploadRequest the profile photo upload request
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/users/update/profile/photo/{securUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadProfilePhoto(@PathParam("securUuid") final String securUuid,
+        @MultipartForm final ProfilePhotoUploadModel profilePhotoUploadRequest) throws UserException {
+    	ProfilePhotoUploadDto profilePhotoUploadDetails = null;
+        try
+        {
+        	profilePhotoUploadDetails = beanMapper.map(profilePhotoUploadRequest, ProfilePhotoUploadDto.class);
+        	userFacade.uploadProfilePhoto(securUuid, profilePhotoUploadDetails);
+            return Response.ok().build();
+	    } catch (final UserException userException) {
+	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+	    }
+    }
+    
 }

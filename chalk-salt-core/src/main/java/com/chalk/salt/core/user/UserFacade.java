@@ -7,6 +7,7 @@ package com.chalk.salt.core.user;
 import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
@@ -76,5 +77,14 @@ public interface UserFacade {
 	 * @throws UserException the user exception
 	 */
 	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws UserException;
+
+	/**
+	 * Upload profile photo.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param profilePhotoUploadDetails the profile photo upload details
+	 * @throws UserException the user exception
+	 */
+	void uploadProfilePhoto(String securUuid, ProfilePhotoUploadDto profilePhotoUploadDetails)throws UserException;
 
 }

@@ -4,8 +4,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
 
     var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service','Student.discussionroom.controller','CandDModal']);
     
-    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService',
-            function($window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST, GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService) {
+    homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 
+                                                'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
+                                                'ChangePasswordService','UpdateProfilePhotoService',
+            function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
+            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService) {
 
     		  
     		   var showAlert = function(type, message){
@@ -92,12 +95,41 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                         showAlert('danger', error.data.message);
                     });
                 };
+                
+                /**
+                 * Function to upload profile photo
+                 */
+                
+                $scope.uploadedProfilePhoto = {};
+                
+                this.updateProfilePhoto = function() {
+
+                    var file = $scope.uploadedProfilePhoto;
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('name', file.name);
+                    formData.append('documentType', ".png");
+                    
+                    UpdateProfilePhotoService.upload(formData, $scope.securUuid, function(response) {
+                        showAlert("success", "Profile Photo updated successfully.");
+                    }, onRequestFailure);
+                };
+
+                /**
+                 * Function to enable/disable upload profile photo button
+                 */
+                $scope.disableUploadPhotoButton = function() {
+                    var disable = true;
+                    var inputVal = document.getElementById("inputUploadProfilePhoto").value;
+
+                    if (inputVal) {
+                        disable = false;
+                    }
+
+                    return disable;
+                };
             }
     ]);
-    
-    
-    
-    
     
     //* Admin Controller
     

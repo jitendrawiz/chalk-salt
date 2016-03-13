@@ -17,6 +17,7 @@ import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
+import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.TemplateProcessingException;
 import com.chalk.salt.common.exceptions.UserException;
@@ -143,6 +144,12 @@ public class UserFacadeImpl implements UserFacade {
 	@Override
 	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
 		userManager.saveTopicRequest(discussionDetails);
+	}
+
+	@Override
+	public void uploadProfilePhoto(String securUuid, ProfilePhotoUploadDto profilePhotoUploadDetails)
+			throws UserException {
+		
 	}
 
 }

@@ -2,7 +2,7 @@
 
 define([ 'angular' ], function(angular) {
 
-    var studentService = angular.module('Student.service', [ 'System.configuration' ]);
+    var studentService = angular.module('Student.service', [ 'System.configuration','ngResource' ]);
 
     
     studentService.factory('GetUserDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
@@ -149,6 +149,24 @@ define([ 'angular' ], function(angular) {
             }
         });
    } ]);
-    
+           
+    studentService.factory('UpdateProfilePhotoService', [ '$http', 'ENV', function($http, ENV) {
+        return {
+            upload : function(formData, securUuid, successCallback, errorCallback) {
+                var uploadUrl = ENV.API_END_POINT + "private/users/update/profile/photo/:securUuid";
+
+                $http.post(uploadUrl, formData, {
+                    transformRequest : angular.identity,
+                    headers : {
+                        'Content-Type' : undefined
+                    }
+                }).success(function(response) {
+                    successCallback(response);
+                }).error(function(error) {
+                    errorCallback(error);
+                });
+            }
+        };
+    } ]);
     
 });
