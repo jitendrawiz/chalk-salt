@@ -108,13 +108,18 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                     var formData = new FormData();
                     formData.append('file', file);
                     formData.append('name', file.name);
-                    formData.append('documentType', ".png");
+                    formData.append('documentType', "25");
                     
                     UpdateProfilePhotoService.upload(formData, $scope.securUuid, function(response) {
                         showAlert("success", "Profile Photo updated successfully.");
+                        console.log("photo uploaded successfully");
                     }, onRequestFailure);
                 };
 
+                
+                function onRequestFailure(error) {
+                    showAlert('danger', error.data.message);
+               };
                 /**
                  * Function to enable/disable upload profile photo button
                  */

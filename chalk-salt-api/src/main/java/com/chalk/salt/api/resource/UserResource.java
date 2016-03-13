@@ -4,6 +4,7 @@
  */
 package com.chalk.salt.api.resource;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
@@ -260,7 +262,6 @@ public class UserResource extends AbstractResource {
         }
     }
     
-    
     /**
      * Upload profile photo.
      *
@@ -276,12 +277,26 @@ public class UserResource extends AbstractResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadProfilePhoto(@PathParam("securUuid") final String securUuid,
         @MultipartForm final ProfilePhotoUploadModel profilePhotoUploadRequest) throws UserException {
-    	ProfilePhotoUploadDto profilePhotoUploadDetails = null;
+    	  final File sourceFile = profilePhotoUploadRequest.getFile();
+          final String filename = profilePhotoUploadRequest.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final ProfilePhotoUploadDto documentUploadData = new ProfilePhotoUploadDto();
+          documentUploadData.setName(filename);
+          documentUploadData.setFile(sourceFile);
+          documentUploadData.setFilePath(sourceFile.getPath());
         try
         {
-        	profilePhotoUploadDetails = beanMapper.map(profilePhotoUploadRequest, ProfilePhotoUploadDto.class);
-        	userFacade.uploadProfilePhoto(securUuid, profilePhotoUploadDetails);
-            return Response.ok().build();
+        	final String dmsIdentifier = userFacade.uploadProfilePhoto(securUuid, documentUploadData);
+        	 final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("dmsIdentifier", dmsIdentifier);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+        	
 	    } catch (final UserException userException) {
 	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
 	    }

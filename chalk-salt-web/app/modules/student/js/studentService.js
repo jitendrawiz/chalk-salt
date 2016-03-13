@@ -153,7 +153,7 @@ define([ 'angular' ], function(angular) {
     studentService.factory('UpdateProfilePhotoService', [ '$http', 'ENV', function($http, ENV) {
         return {
             upload : function(formData, securUuid, successCallback, errorCallback) {
-                var uploadUrl = ENV.API_END_POINT + "private/users/update/profile/photo/:securUuid";
+                var uploadUrl = ENV.API_END_POINT + "private/users/update/profile/photo/" + securUuid;
 
                 $http.post(uploadUrl, formData, {
                     transformRequest : angular.identity,

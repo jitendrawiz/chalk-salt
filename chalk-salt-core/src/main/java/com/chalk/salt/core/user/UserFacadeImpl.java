@@ -146,10 +146,15 @@ public class UserFacadeImpl implements UserFacade {
 		userManager.saveTopicRequest(discussionDetails);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#uploadProfilePhoto(java.lang.String, com.chalk.salt.common.dto.ProfilePhotoUploadDto)
+	 */
 	@Override
-	public void uploadProfilePhoto(String securUuid, ProfilePhotoUploadDto profilePhotoUploadDetails)
-			throws UserException {
-		
+	public String uploadProfilePhoto(String securUuid,
+			ProfilePhotoUploadDto documentUploadData) throws UserException {
+		return userManager.uploadProfilePhoto(securUuid,documentUploadData);
 	}
+
+	
 
 }

@@ -82,9 +82,11 @@ public interface UserFacade {
 	 * Upload profile photo.
 	 *
 	 * @param securUuid the secur uuid
-	 * @param profilePhotoUploadDetails the profile photo upload details
+	 * @param documentUploadData the document upload data
+	 * @return the string
 	 * @throws UserException the user exception
 	 */
-	void uploadProfilePhoto(String securUuid, ProfilePhotoUploadDto profilePhotoUploadDetails)throws UserException;
+	String uploadProfilePhoto(String securUuid,	ProfilePhotoUploadDto documentUploadData)throws UserException;;
 
+	
 }

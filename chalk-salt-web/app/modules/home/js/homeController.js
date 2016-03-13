@@ -24,7 +24,7 @@ define([ 'angular', './homeRouting', './homeService','../../CandDModal/js/CandDM
                };
                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                $scope.userName=$window.localStorage.getItem(CHALKNDUST.USERNAME);
-               console.log($scope.fullName);
+               console.log($scope.userName);
                 $scope.version = CHALKNDUST.VERSION;
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
@@ -61,6 +61,34 @@ define([ 'angular', './homeRouting', './homeService','../../CandDModal/js/CandDM
               });
          };
         
+         this.goToDiscussionRoom=function(){
+        	if($scope.userName!=null){
+        		 if($scope.userName!="admin"){
+        			 $state.go('chalkanddust.discussionroomsubjects');
+        		 }else{
+        			 var modalOptions = {
+                             header : 'Note',
+                             body : "Sorry,Your don't have permission for discussion room",
+                             btn : 'OK'
+                         };
+
+                     CandDModalService.showModal({}, modalOptions).then(function(result) {
+                   	  console.log("inside admin page discussion room button click");
+                         });
+        		 }
+        	 }else{
+        		 var modalOptions = {
+                         header : 'Note',
+                         body : "Please Login to go to discussion room",
+                         btn : 'OK'
+                     };
+
+                 CandDModalService.showModal({}, modalOptions).then(function(result) {
+                	 $state.go('chalkanddust.login');
+                     });
+        		 
+        	 }
+         };
             }
     ]);
 });

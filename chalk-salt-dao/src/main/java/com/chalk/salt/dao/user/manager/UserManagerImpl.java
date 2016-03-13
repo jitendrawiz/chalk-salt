@@ -16,6 +16,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
+import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
@@ -260,5 +261,23 @@ public class UserManagerImpl implements UserManager {
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_SAVE_TOPIC_REQUEST, "FAil to save topic request", exception);
         }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#uploadProfilePhoto(java.lang.String, com.chalk.salt.common.dto.ProfilePhotoUploadDto)
+	 */
+	@Override
+	public String uploadProfilePhoto(String securUuid,
+			ProfilePhotoUploadDto documentUploadData) throws UserException {
+		logger.info("Update profile image");
+        try {
+        		System.out.println("Inside profile photo upload section");
+        		//Continue your code here for photo upload now.
+        		//userDao.saveTopicRequest(discussionDetails);
+
+        } catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_UPDATE_PROFILE_PHOTO, "FAil to update profile photo", exception);
+        }
+		return "Done";
 	}
 }

@@ -130,7 +130,10 @@ public enum ErrorCode {
     FAIL_TO_FETCH_TOPIC_REQUESTS(1038),
     
     /** The fail to approve topic requests. */
-    FAIL_TO_APPROVE_TOPIC_REQUESTS(1039);
+    FAIL_TO_APPROVE_TOPIC_REQUESTS(1039),
+    
+    /** The fail to update profile photo. */
+    FAIL_TO_UPDATE_PROFILE_PHOTO(1040);
 	
 	/** The value. */
     private final int value;

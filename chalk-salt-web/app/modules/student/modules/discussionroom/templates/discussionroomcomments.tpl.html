@@ -71,10 +71,12 @@ background-size:100%;
     <td style="padding-top: 15px;width: 60%;text-align: left;height: auto;">{{item.generalComments}}</td>
     <td style="padding-top: 15px;width: 15%;height: auto;">{{item.modifiedDate}}</td>
      <td style="padding-top: 15px;width: 10%;height: auto;" ng-if="securUuid==item.userSecurUuid">
-     <button type="button"  class="btn btn-secondary btn-block"  ng-click="commCtrl.editComment(item.commentUuid)">Edit</button> 
+     <button type="button" class="btn btn-info" ng-click="commCtrl.editComment(item.commentUuid)">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </button>
     </td>
     <td style="padding-top: 15px;width: 10%;height: auto;" ng-if="securUuid!=item.userSecurUuid">
-     <span>--</span> 
+   <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-minus"></span>
     </td>
  </tr> 
   </tbody>
