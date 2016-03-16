@@ -4,7 +4,13 @@
  */
 package com.chalk.salt.dao.user.manager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -272,12 +278,41 @@ public class UserManagerImpl implements UserManager {
 		logger.info("Update profile image");
         try {
         		System.out.println("Inside profile photo upload section");
+        		String destPath = userDao.getSystemSettings("PROFILE_PHOTO");
+        		destPath += "ProfilePhoto";
+        		File file = new File(destPath);
+        		if (!file.exists()) {
+        			file.mkdirs();
+        		}
+        		
+        		String fileName = "PROFILE_"+new Date().getTime();
+        		destPath = destPath+"\\"+fileName+".jpg";
+        		
+        		FileInputStream fin=new FileInputStream(documentUploadData.getFile());  
+        		FileOutputStream fout=new FileOutputStream(destPath);  
+        		int i=0;  
+        		while((i=fin.read())!=-1){  
+        		fout.write((byte)i);  
+        		}  
+        		fin.close();
+        		fout.close();
+        		
         		//Continue your code here for photo upload now.
         		//userDao.saveTopicRequest(discussionDetails);
 
         } catch (final Exception exception) {
-            throw new UserException(ErrorCode.FAIL_TO_UPDATE_PROFILE_PHOTO, "FAil to update profile photo", exception);
+            throw new UserException(ErrorCode.FAIL_TO_UPDATE_PROFILE_PHOTO, "Fail to update profile photo", exception);
         }
 		return "Done";
+	}
+	
+	String getExtension(String fileName){
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		}
+		return extension; 
 	}
 }

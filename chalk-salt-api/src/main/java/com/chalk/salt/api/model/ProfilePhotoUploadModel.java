@@ -26,7 +26,7 @@ public class ProfilePhotoUploadModel extends ApiModel {
     /** The document type. */
     @FormParam(value = "documentType")
     @PartType(MediaType.TEXT_PLAIN)
-    private Integer documentType;
+    private String documentType;
 
 	public File getFile() {
 		return file;
@@ -44,13 +44,14 @@ public class ProfilePhotoUploadModel extends ApiModel {
 		this.name = name;
 	}
 
-	public Integer getDocumentType() {
+	public String getDocumentType() {
 		return documentType;
 	}
 
-	public void setDocumentType(Integer documentType) {
+	public void setDocumentType(String documentType) {
 		this.documentType = documentType;
 	}
+
     
     
 }

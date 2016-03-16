@@ -13,7 +13,7 @@ public class ProfilePhotoUploadDto {
     private String name;
 
     /** The document type. */
-    private Integer documentType;
+    private String documentType;
     
     /** The file path. */
     private String filePath;
@@ -72,21 +72,13 @@ public class ProfilePhotoUploadDto {
 		this.name = name;
 	}
 
-	/**
-	 * Gets the document type.
-	 *
-	 * @return the document type
-	 */
-	public Integer getDocumentType() {
+	public String getDocumentType() {
 		return documentType;
 	}
 
-	/**
-	 * Sets the document type.
-	 *
-	 * @param documentType the new document type
-	 */
-	public void setDocumentType(Integer documentType) {
+	public void setDocumentType(String documentType) {
 		this.documentType = documentType;
 	}
+
+	
 }

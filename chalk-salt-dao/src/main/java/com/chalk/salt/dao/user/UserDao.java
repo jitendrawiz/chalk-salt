@@ -228,4 +228,6 @@ public interface UserDao {
 	 */
 	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
 
+	String getSystemSettings(String settingsKey)throws Exception;
+
 }
