@@ -155,6 +155,14 @@ public class UserFacadeImpl implements UserFacade {
 		return userManager.uploadProfilePhoto(securUuid,documentUploadData);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#getUserPhotoLink(java.lang.String)
+	 */
+	@Override
+	public String getUserPhotoLink(String securUuid) throws UserException {
+		return userManager.getUserPhotoLink(securUuid);
+	}
+
 	
 
 }

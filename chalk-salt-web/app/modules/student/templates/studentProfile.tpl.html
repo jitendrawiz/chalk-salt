@@ -274,20 +274,19 @@
 								<div class="clrfx mt-10"></div>
                                 
                                 <div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="Photo"> Profile Photo: </label>
+									<div ng-if="!editFlag">										
 	                                    <div>
-	                                        <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive">
+	                                        <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive" width="250" height="250">
 	                                    </div>
 									</div>
 									<div ng-if="editFlag">
-										<div class="form-group">
+										<div class="input-group">
 							              	<label for="ProfilePhoto">Profile Photo: </label><input id="inputUploadProfilePhoto" type="file" file-model="uploadedlogo"/>
-							             </div>
-							             <div class="form-group">
-		                                    <button type="button" class="btn btn-block btn-success" ng-click="updateProfilePhoto(uploadedlogo)"
-		                                        >Update</button>
-		                                </div>
+							          <span class="input-group-btn">
+							           <button type="button" class="btn btn-secondary btn-block button black" ng-click="updateProfilePhoto(uploadedlogo)"
+		                                        >Upload</button>
+							          </span>
+							             </div>							           
 									</div>
 								</div>
 								<div class="clrfx mt-10"></div>

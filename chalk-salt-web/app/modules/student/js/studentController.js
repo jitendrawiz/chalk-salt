@@ -6,9 +6,9 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 
                                                 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
-                                                'ChangePasswordService','UpdateProfilePhotoService',
+                                                'ChangePasswordService','UpdateProfilePhotoService','GetUserPhotoService',
             function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
-            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService) {
+            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,GetUserPhotoService) {
     	       $scope.uploadedlogo = {};
     		  
     		   var showAlert = function(type, message){
@@ -18,7 +18,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                    $scope.alert.show = true;
                };
                
-               $scope.userProfilePhoto="G:/CHALKANDDUST/ProfilePhoto/PROFILE_1458372608339.jpg";
                $scope.closeAlert = function(){
                    $scope.alert = {};
                    $scope.alert.show = false;
@@ -57,6 +56,12 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                     		 }
                     		 
                     	 }}
+                    	 
+                         GetUserPhotoService.get({securUuid:$scope.securUuid},  function(result) {
+                             	$scope.userProfilePhoto=result.photolink;
+                         }, function(error) {
+                         	showAlert('danger',error.data.message);
+                         });
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);

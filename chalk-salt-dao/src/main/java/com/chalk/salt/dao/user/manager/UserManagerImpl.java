@@ -280,15 +280,22 @@ public class UserManagerImpl implements UserManager {
         		System.out.println("Inside profile photo upload section");
         		String destPath = userDao.getSystemSettings("PROFILE_PHOTO");
         		Integer userId=userDao.getUserIdUsingSecurUuid(securUuid);
-        		destPath += "ProfilePhoto"+File.separator+ userId.toString();
+        		destPath +=  userId.toString();
         		File file = new File(destPath);
         		if (!file.exists()) {
         			file.mkdirs();
         		}
-     		
-        		String fileName = "PROFILE_"+ userId.toString();
-        		destPath = destPath+File.separator+fileName+"."+getExtension(documentUploadData.getName());
-        		File oldfile = new File(destPath);
+        		String fileName = "PROFILE_"+ userId.toString();//File Name to be saved without extension
+        		String oldfileName=userDao.getUserProfilePhoto(securUuid); //File name already saved in database
+        		String destPathToDeleteFile=null;
+        		String fileNameToSave=fileName+"."+getExtension(documentUploadData.getName());
+        		if(oldfileName!=null){
+            		 destPathToDeleteFile=destPath+File.separator+fileName+"."+getExtension(oldfileName);
+        		}else{
+        			destPathToDeleteFile=destPath+File.separator+fileNameToSave;
+        		}
+        		destPath = destPath+File.separator+fileNameToSave;
+        		File oldfile = new File(destPathToDeleteFile);
         		if(oldfile.exists()){
         			oldfile.delete();
         		}
@@ -299,8 +306,8 @@ public class UserManagerImpl implements UserManager {
         		fout.write((byte)i);  
         		}  
         		fin.close();
-        		fout.close();
-        		userDao.updateUserProfilePictureDetails(fileName,securUuid);
+        		fout.close();        	
+        		userDao.updateUserProfilePictureDetails(fileNameToSave,securUuid);
         		logger.info("Profile Photo updated successfully in database");
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_UPDATE_PROFILE_PHOTO, "Fail to update profile photo", exception);
@@ -308,6 +315,12 @@ public class UserManagerImpl implements UserManager {
 		return securUuid;
 	}
 	
+	/**
+	 * Gets the extension.
+	 *
+	 * @param fileName the file name
+	 * @return the extension
+	 */
 	private String getExtension(String fileName){
 		String extension = "";
 
@@ -316,5 +329,27 @@ public class UserManagerImpl implements UserManager {
 		    extension = fileName.substring(i+1);
 		}
 		return extension; 
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#getUserPhotoLink(java.lang.String)
+	 */
+	@Override
+	public String getUserPhotoLink(String securUuid) throws UserException {
+		String imagePath=null;
+		 logger.info("Obtaining user details to make link of photo:", securUuid);
+	        try {
+	        	String destPath = userDao.getSystemSettings("PROFILE_PHOTO");
+	            String profilePhoto = userDao.getUserProfilePhoto(securUuid);     
+	            if (profilePhoto == null) {
+	            	return profilePhoto;
+	            }
+	            Integer Id=userDao.getUserIdUsingSecurUuid(securUuid);
+	            imagePath=destPath+Id.toString()+File.separator+profilePhoto;
+	            logger.info("Image Path created is"+imagePath);
+	        } catch (final Exception exception) {
+	            throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user", exception);
+	        }
+	        return imagePath;
 	}
 }

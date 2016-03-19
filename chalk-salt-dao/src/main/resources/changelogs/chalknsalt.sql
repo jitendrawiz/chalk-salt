@@ -262,8 +262,9 @@ CREATE TABLE `cst_users` (
   `parents_id` int(11) DEFAULT NULL,
   `academic_id` int(11) DEFAULT NULL,
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `profile_photo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_users` */
 
@@ -357,7 +358,7 @@ CREATE TABLE `cst_system_settings` (
 
 /*Data for the table `cst_system_settings` */
 
-insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','D:\\ChalkAndDust\\','To store Profile photo');
+insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo');
 
 /*Table structure for table `cst_test_master` */
 

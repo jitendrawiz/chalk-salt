@@ -5,6 +5,8 @@
 package com.chalk.salt.api.resource;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
@@ -309,4 +312,36 @@ public class UserResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the user photo.
+     *
+     * @param securUuid the secur uuid
+     * @return the user photo
+     * @throws UserException the user exception
+     */
+    @GET
+    @Path("/user/photo/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getUserPhoto(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
+    	final Map<String, String> response = new HashMap<String, String>();
+        String photolink = null;
+        try {
+        	photolink = userFacade.getUserPhotoLink(securUuid);
+            if (photolink == null) {
+                return Response.noContent().build();
+            }
+            File file=new File(photolink);
+            final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+            final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+            response.put("photolink", "data:" + mediaType + ";base64," + encodedImageString);
+            return Response.ok(response).build();
+        } catch (final UserException userException ) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Response.ok(response).build();
+    }
 }

@@ -499,6 +499,9 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteLogin(java.lang.String)
+	 */
 	@Override
 	public void deleteLogin(String securUuid) throws Exception {
 		final String sqlQuery = "DELETE cst_logins.* FROM cst_logins cst_logins "
@@ -538,6 +541,9 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getSystemSettings(java.lang.String)
+	 */
 	@Override
 	public String getSystemSettings(String settingsKey) throws Exception {
 
@@ -552,6 +558,9 @@ public class UserDaoImpl implements UserDao {
     	}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getUserIdUsingSecurUuid(java.lang.String)
+	 */
 	@Override
 	public Integer getUserIdUsingSecurUuid(String securUuid) throws Exception {
 		final String sqlQuery = "SELECT cst_users.id "
@@ -566,6 +575,9 @@ public class UserDaoImpl implements UserDao {
     	}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#updateUserProfilePictureDetails(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateUserProfilePictureDetails(String fileName,
 			String securUuid) throws Exception {
@@ -579,6 +591,23 @@ public class UserDaoImpl implements UserDao {
             query.executeUpdate();
         }
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getUserProfilePhoto(java.lang.String)
+	 */
+	@Override
+	public String getUserProfilePhoto(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT profile_photo from cst_users "
+    		+ " WHERE secur_uuid =:securUuid ";
+           
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(String.class);
+        }
+       
 	}
 
 }

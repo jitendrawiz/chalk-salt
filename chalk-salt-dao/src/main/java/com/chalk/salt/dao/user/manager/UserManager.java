@@ -89,4 +89,13 @@ public interface UserManager {
 	 */
 	String uploadProfilePhoto(String securUuid,
 			ProfilePhotoUploadDto documentUploadData)throws UserException;
+
+	/**
+	 * Gets the user photo link.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the user photo link
+	 * @throws UserException the user exception
+	 */
+	String getUserPhotoLink(String securUuid)throws UserException;
 }

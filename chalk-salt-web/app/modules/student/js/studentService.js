@@ -168,5 +168,15 @@ define([ 'angular' ], function(angular) {
             }
         };
     } ]);
-    
+
+    studentService.factory('GetUserPhotoService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/user/photo/:securUuid',{
+            securUuid : '@securUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
 });

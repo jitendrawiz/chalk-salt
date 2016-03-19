@@ -256,4 +256,13 @@ public interface UserDao {
 	 */
 	void updateUserProfilePictureDetails(String fileName, String securUuid)throws Exception;
 
+	/**
+	 * Gets the user profile photo.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the user profile photo
+	 * @throws Exception the exception
+	 */
+	String getUserProfilePhoto(String securUuid)throws Exception;
+
 }
