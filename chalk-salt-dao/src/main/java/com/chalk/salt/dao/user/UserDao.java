@@ -228,6 +228,32 @@ public interface UserDao {
 	 */
 	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
 
+	/**
+	 * Gets the system settings.
+	 *
+	 * @param settingsKey the settings key
+	 * @return the system settings
+	 * @throws Exception the exception
+	 */
 	String getSystemSettings(String settingsKey)throws Exception;
+
+	
+	/**
+	 * Gets the user id using secur uuid.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the user id using secur uuid
+	 * @throws Exception the exception
+	 */
+	Integer getUserIdUsingSecurUuid(String securUuid)throws Exception;
+
+	/**
+	 * Update user profile picture details.
+	 *
+	 * @param fileName the file name
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void updateUserProfilePictureDetails(String fileName, String securUuid)throws Exception;
 
 }

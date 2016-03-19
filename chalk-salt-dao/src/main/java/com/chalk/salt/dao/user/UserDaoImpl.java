@@ -139,7 +139,7 @@ public class UserDaoImpl implements UserDao {
         UserDto user = null;
 
         final String sqlQuery = "SELECT first_name as firstName, middle_name as middleName, last_name as lastName, address, city, state, "
-    		+ "country, pincode, email, username, mobile, landline, secur_uuid as securUuid ,corsAddress as correspondenceAddress "
+    		+ "country, pincode, email, username, mobile, landline, secur_uuid as securUuid ,corsAddress as correspondenceAddress,profile_photo as profilePhoto "
     		+ "FROM cst_users "
     		+ "JOIN cst_logins ON cst_logins.user_id = cst_users.user_id "
     		+ "JOIN cst_contacts ON cst_contacts.id = cst_users.contact_id "
@@ -550,6 +550,35 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("settingsKey", settingsKey);
             return query.executeAndFetchFirst(String.class);
     	}
+	}
+
+	@Override
+	public Integer getUserIdUsingSecurUuid(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT cst_users.id "
+				+ " FROM cst_users "
+				+ " WHERE cst_users.secur_uuid=:securUuid";
+	
+		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(Integer.class);
+    	}
+	}
+
+	@Override
+	public void updateUserProfilePictureDetails(String fileName,
+			String securUuid) throws Exception {
+		final String sqlQuery = "UPDATE cst_users SET profile_photo=:fileName "
+				+ " WHERE secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("fileName", fileName);          
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+		
 	}
 
 }

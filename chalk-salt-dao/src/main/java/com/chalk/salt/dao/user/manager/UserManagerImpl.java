@@ -275,19 +275,23 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public String uploadProfilePhoto(String securUuid,
 			ProfilePhotoUploadDto documentUploadData) throws UserException {
-		logger.info("Update profile image");
+		logger.info("Upload profile image");
         try {
         		System.out.println("Inside profile photo upload section");
         		String destPath = userDao.getSystemSettings("PROFILE_PHOTO");
-        		destPath += "ProfilePhoto";
+        		Integer userId=userDao.getUserIdUsingSecurUuid(securUuid);
+        		destPath += "ProfilePhoto"+File.separator+ userId.toString();
         		File file = new File(destPath);
         		if (!file.exists()) {
         			file.mkdirs();
         		}
-        		
-        		String fileName = "PROFILE_"+new Date().getTime();
-        		destPath = destPath+"\\"+fileName+".jpg";
-        		
+     		
+        		String fileName = "PROFILE_"+ userId.toString();
+        		destPath = destPath+File.separator+fileName+"."+getExtension(documentUploadData.getName());
+        		File oldfile = new File(destPath);
+        		if(oldfile.exists()){
+        			oldfile.delete();
+        		}
         		FileInputStream fin=new FileInputStream(documentUploadData.getFile());  
         		FileOutputStream fout=new FileOutputStream(destPath);  
         		int i=0;  
@@ -296,17 +300,15 @@ public class UserManagerImpl implements UserManager {
         		}  
         		fin.close();
         		fout.close();
-        		
-        		//Continue your code here for photo upload now.
-        		//userDao.saveTopicRequest(discussionDetails);
-
+        		userDao.updateUserProfilePictureDetails(fileName,securUuid);
+        		logger.info("Profile Photo updated successfully in database");
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_UPDATE_PROFILE_PHOTO, "Fail to update profile photo", exception);
         }
-		return "Done";
+		return securUuid;
 	}
 	
-	String getExtension(String fileName){
+	private String getExtension(String fileName){
 		String extension = "";
 
 		int i = fileName.lastIndexOf('.');

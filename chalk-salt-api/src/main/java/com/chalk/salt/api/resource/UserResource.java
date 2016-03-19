@@ -277,6 +277,13 @@ public class UserResource extends AbstractResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadProfilePhoto(@PathParam("securUuid") final String securUuid,
         @MultipartForm final ProfilePhotoUploadModel profilePhotoUploadRequest) throws UserException {
+    	 if (profilePhotoUploadRequest == null || StringUtils.isBlank(securUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
     	  final File sourceFile = profilePhotoUploadRequest.getFile();
           final String filename = profilePhotoUploadRequest.getName();
           if (sourceFile == null || StringUtils.isBlank(filename)) {

@@ -21,13 +21,13 @@ public class UserDto {
 	private String userName;
 
 	/** The password. */
-    private String password;
+	private String password;
 
-    /** The confirmPassword. */
-    private String confirmPassword;
-    
-    /** The new password. */
-    private String newPassword;
+	/** The confirmPassword. */
+	private String confirmPassword;
+
+	/** The new password. */
+	private String newPassword;
 
 	/** The forename. */
 	private String firstName;
@@ -70,31 +70,52 @@ public class UserDto {
 
 	/** The active. */
 	private Long active;
-	
+
 	/** The student class. */
 	private String studentClass;
 
 	/** The subjects. */
 	private List<SubjectDto> subjects;
-	
+
 	/** The academic info. */
 	private AcademicInfoDto academicInfo;
-	
+
 	/** The parents info. */
 	private ParentsInfoDto parentsInfo;
-	
+
 	/** The correspondence address. */
 	private String correspondenceAddress;
-	
+
 	/** The parents id. */
 	private Long parentsId;
-	
+
 	/** The academic id. */
 	private Long academicId;
-	
+
 	/** The class id. */
 	private Long classId;
-    
+
+	/** The profile photo. */
+	private String profilePhoto;
+
+	/**
+	 * Gets the profile photo.
+	 *
+	 * @return the profile photo
+	 */
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	/**
+	 * Sets the profile photo.
+	 *
+	 * @param profilePhoto the new profile photo
+	 */
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
+
 	/**
 	 * Gets the parents id.
 	 *
@@ -107,7 +128,8 @@ public class UserDto {
 	/**
 	 * Sets the parents id.
 	 *
-	 * @param parentsId the new parents id
+	 * @param parentsId
+	 *            the new parents id
 	 */
 	public void setParentsId(Long parentsId) {
 		this.parentsId = parentsId;
@@ -125,7 +147,8 @@ public class UserDto {
 	/**
 	 * Sets the academic id.
 	 *
-	 * @param academicId the new academic id
+	 * @param academicId
+	 *            the new academic id
 	 */
 	public void setAcademicId(Long academicId) {
 		this.academicId = academicId;
@@ -143,7 +166,8 @@ public class UserDto {
 	/**
 	 * Sets the class id.
 	 *
-	 * @param classId the new class id
+	 * @param classId
+	 *            the new class id
 	 */
 	public void setClassId(Long classId) {
 		this.classId = classId;
@@ -161,12 +185,13 @@ public class UserDto {
 	/**
 	 * Sets the correspondence address.
 	 *
-	 * @param correspondenceAddress the new correspondence address
+	 * @param correspondenceAddress
+	 *            the new correspondence address
 	 */
 	public void setCorrespondenceAddress(String correspondenceAddress) {
 		this.correspondenceAddress = correspondenceAddress;
 	}
-	
+
 	/**
 	 * Gets the user name.
 	 *
@@ -540,7 +565,8 @@ public class UserDto {
 	/**
 	 * Sets the academic info.
 	 *
-	 * @param academicInfo the new academic info
+	 * @param academicInfo
+	 *            the new academic info
 	 */
 	public void setAcademicInfo(AcademicInfoDto academicInfo) {
 		this.academicInfo = academicInfo;
@@ -558,7 +584,8 @@ public class UserDto {
 	/**
 	 * Sets the parents info.
 	 *
-	 * @param parentsInfo the new parents info
+	 * @param parentsInfo
+	 *            the new parents info
 	 */
 	public void setParentsInfo(ParentsInfoDto parentsInfo) {
 		this.parentsInfo = parentsInfo;
@@ -576,7 +603,8 @@ public class UserDto {
 	/**
 	 * Sets the student class.
 	 *
-	 * @param studentClass the new student class
+	 * @param studentClass
+	 *            the new student class
 	 */
 	public void setStudentClass(String studentClass) {
 		this.studentClass = studentClass;
@@ -594,7 +622,8 @@ public class UserDto {
 	/**
 	 * Sets the subjects.
 	 *
-	 * @param subjects the new subjects
+	 * @param subjects
+	 *            the new subjects
 	 */
 	public void setSubjects(List<SubjectDto> subjects) {
 		this.subjects = subjects;
@@ -612,11 +641,11 @@ public class UserDto {
 	/**
 	 * Sets the new password.
 	 *
-	 * @param newPassword the newPassword to set
+	 * @param newPassword
+	 *            the newPassword to set
 	 */
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-	
-	
+
 }

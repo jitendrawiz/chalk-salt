@@ -9,7 +9,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                                                 'ChangePasswordService','UpdateProfilePhotoService',
             function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
             		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService) {
-
+    	       $scope.uploadedlogo = {};
     		  
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -18,6 +18,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                    $scope.alert.show = true;
                };
                
+               $scope.userProfilePhoto="G:/CHALKANDDUST/ProfilePhoto/PROFILE_1458372608339.jpg";
                $scope.closeAlert = function(){
                    $scope.alert = {};
                    $scope.alert.show = false;
@@ -99,20 +100,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                 /**
                  * Function to upload profile photo
                  */
-                
-                $scope.uploadedProfilePhoto = {};
-                
-                this.updateProfilePhoto = function() {
-
-                    var file = $scope.uploadedProfilePhoto;
+                $scope.updateProfilePhoto = function(fileData) {
+                    var file = fileData;
                     var formData = new FormData();
                     formData.append('file', file);
                     formData.append('name', file.name);
-                    formData.append('documentType', "25");
-                    
+                    formData.append('documentType', file.type);
                     UpdateProfilePhotoService.upload(formData, $scope.securUuid, function(response) {
-                        showAlert("success", "Profile Photo updated successfully.");
-                        console.log("photo uploaded successfully");
+                        showAlert("success", "Profile Photo updated successfully.");                        
                     }, onRequestFailure);
                 };
 
