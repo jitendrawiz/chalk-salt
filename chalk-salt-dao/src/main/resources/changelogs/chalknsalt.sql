@@ -303,6 +303,110 @@ CREATE TABLE `cst_topic_requests` (
 
 insert  into `cst_topic_requests`(`topic_request_id`,`topic_title`,`topic_description`,`secur_uuid`,`approved`,`subject_id`,`class_id`,`request_date`,`approval_date`) values (1,'even no','divisible by 2','4e0b6910-5650-497b-81c5-4d4e96c06d6d',0,1,1,'2016-02-29 17:41:21',NULL),(2,'water formula','h2o','4e0b6910-5650-497b-81c5-4d4e96c06d6d',0,3,1,'2016-02-29 17:44:55',NULL);
 
+/*Table structure for table `cst_questions` */
+
+DROP TABLE IF EXISTS `cst_questions`;
+
+CREATE TABLE `cst_questions` (
+  `question_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `option1` text NOT NULL,
+  `option2` text NOT NULL,
+  `option3` text NOT NULL,
+  `option4` text NOT NULL,
+  `answer` int(11) NOT NULL,
+  `marks` int(11) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` datetime DEFAULT NULL,
+  `question_uuid` varchar(100) NOT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_questions` */
+
+/*Table structure for table `cst_student_test` */
+
+DROP TABLE IF EXISTS `cst_student_test`;
+
+CREATE TABLE `cst_student_test` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `test_id` int(11) NOT NULL,
+  `answer` int(11) DEFAULT NULL,
+  `updt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_student_test` */
+
+/*Table structure for table `cst_system_settings` */
+
+DROP TABLE IF EXISTS `cst_system_settings`;
+
+CREATE TABLE `cst_system_settings` (
+  `settings_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `settings_key` varchar(100) NOT NULL,
+  `settings_value` varchar(200) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`settings_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_system_settings` */
+
+insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','D:\\ChalkAndDust\\','To store Profile photo');
+
+/*Table structure for table `cst_test_master` */
+
+DROP TABLE IF EXISTS `cst_test_master`;
+
+CREATE TABLE `cst_test_master` (
+  `test_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `test_title` varchar(100) NOT NULL,
+  `test_description` text,
+  `test_date` date NOT NULL,
+  `test_time` time DEFAULT NULL,
+  `test_type_uuid` varchar(100) NOT NULL,
+  `marks` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `test_uuid` varchar(100) NOT NULL,
+  PRIMARY KEY (`test_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_test_master` */
+
+/*Table structure for table `cst_test_result` */
+
+DROP TABLE IF EXISTS `cst_test_result`;
+
+CREATE TABLE `cst_test_result` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `test_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `total_marks` int(11) NOT NULL,
+  `result` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_test_result` */
+
+/*Table structure for table `cst_test_type` */
+
+DROP TABLE IF EXISTS `cst_test_type`;
+
+CREATE TABLE `cst_test_type` (
+  `test_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_type_uuid` varchar(100) NOT NULL,
+  `test_duration` int(11) NOT NULL,
+  `no_of_questions` int(11) NOT NULL,
+  PRIMARY KEY (`test_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 /* Trigger structure for table `cst_discussion_topic_comments` */
 
