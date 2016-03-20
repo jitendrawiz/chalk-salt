@@ -276,14 +276,16 @@
                                 <div class="cell w-100">
 									<div ng-if="!editFlag">										
 	                                    <div>
+	                                    <p ng-show="{{userProfilePhoto === undefined}}">No Image Available</p>
+	                                      <p ng-hide="{{userProfilePhoto === undefined}}">
 	                                        <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive" width="250" height="250">
-	                                    </div>
+	                                 </p>   </div>
 									</div>
 									<div ng-if="editFlag">
 										<div class="input-group">
 							              	<label for="ProfilePhoto">Profile Photo: </label><input id="inputUploadProfilePhoto" type="file" file-model="uploadedlogo"/>
 							          <span class="input-group-btn">
-							           <button type="button" class="btn btn-secondary btn-block button black" ng-click="updateProfilePhoto(uploadedlogo)"
+							           <button type="button" class="btn btn-secondary btn-block button black" ng-disabled="disableUploadPhotoButton()" ng-click="updateProfilePhoto(uploadedlogo)"
 		                                        >Upload</button>
 							          </span>
 							             </div>							           
