@@ -276,8 +276,8 @@
                                 <div class="cell w-100">
 									<div ng-if="!editFlag">										
 	                                    <div>
-	                                    <p ng-show="{{userProfilePhoto === undefined}}">No Image Available</p>
-	                                      <p ng-hide="{{userProfilePhoto === undefined}}">
+	                                    <p ng-show="isUndefined(userProfilePhoto)">No Image Available</p>
+	                                      <p ng-show="!isUndefined(userProfilePhoto)">
 	                                        <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive" width="250" height="250">
 	                                 </p>   </div>
 									</div>

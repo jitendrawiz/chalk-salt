@@ -133,6 +133,10 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
 
                     return disable;
                 };
+                
+                $scope.isUndefined = function (thing) {
+                    return (typeof thing === "undefined");
+                }
             }
     ]);
     
