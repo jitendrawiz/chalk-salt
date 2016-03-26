@@ -626,4 +626,54 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getTopicIdUsingSecurUuid(java.lang.String)
+	 */
+	@Override
+	public Integer getTopicIdUsingSecurUuid(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT discussion_topic_id FROM `cst_discussion_topics` "
+				+ " WHERE secur_uuid=:securUuid";
+	
+		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(Integer.class);
+    	}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getPreviousTopicImage(java.lang.String)
+	 */
+	@Override
+	public String getPreviousTopicImage(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT topic_image from cst_discussion_topics "
+	    		+ " WHERE secur_uuid =:securUuid ";
+	           
+	    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+	    	try (final Connection connection = dataSource.open()) {
+	            final Query query = connection.createQuery(sqlQuery);
+	            query.addParameter("securUuid", securUuid);
+	            return query.executeAndFetchFirst(String.class);
+	        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#updateTopicImageDetails(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void updateTopicImageDetails(String fileNameToSave, String securUuid)
+			throws Exception {
+		final String sqlQuery = "UPDATE cst_discussion_topics SET topic_image=:fileName "
+				+ " WHERE secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("fileName", fileNameToSave);          
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+		
+	}
+
 }

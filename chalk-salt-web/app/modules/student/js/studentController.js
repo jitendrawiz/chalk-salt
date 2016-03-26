@@ -175,12 +175,12 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
-      'GetTopicRequestList','approveTopicRequestService', 
+      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService',
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
-       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService) {
+       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -470,22 +470,25 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     	  return true;
      };
      $scope.topicDetailsToSave = {};
-     this.createTopic = function() {   	
-    	 angular.extend($scope.topicDetailsToSave,$scope.topicDetails);
+     this.createTopic = function(fileData) {   	
+    	 angular.extend($scope.topicDetailsToSave,$scope.topicDetails);    	 
          createNewTopic.save({}, $scope.topicDetailsToSave, function(
                  response) {
              if (response) {
                  console.log(response);
+                 
+                 if(!angular.isUndefined(fileData)){
+                 	updateTopicPhoto(fileData,response.securUuid);
+                 }
                  var modalOptions = {
                          header : 'Note',
                          body : 'New Topic is Created',
                          btn : 'OK'
                      };
-
                  CandDModalService.showModal({}, modalOptions).then(function(result) {
-                         $log.info(result);
-                     });
-                 $state.reload();
+                	 $state.reload();
+                 });
+                 
              }
              
          }, function(error) {
@@ -677,6 +680,35 @@ this.approveTopicRequest=function(requestSecurUuid){
 showStudentList();
 showTopicRequestList();
 
+this.goBackToAdminHomePage=function(){
+	$state.go('chalkanddust.adminhome');
+};
+	
+
+
+$scope.isUndefined = function (thing) {
+    return (typeof thing === "undefined");
+};
+
+
+
+/**
+ * Function to upload Topic photo
+ */
+var updateTopicPhoto = function (fileData,securUuid) {
+    var file = fileData;
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', file.name);
+    formData.append('documentType', file.type);
+    UpdateTopicImageService.upload(formData, securUuid, function(response) {
+        showAlert("success", "Topic Image updated successfully.");                        
+    }, onRequestFailure);
+};
+
+
+
+
 
 var Id = $stateParams.id;
 //Show Student's Details
@@ -708,9 +740,6 @@ var Id = $stateParams.id;
     	showAlert('danger',error.data.message);
     });
 
-this.goBackToAdminHomePage=function(){
-	$state.go('chalkanddust.adminhome');
-}
-	
+
 }]);
 });    

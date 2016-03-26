@@ -85,7 +85,7 @@ button, input, select, textarea {
 	style="visibility: visible; animation-name: fadeInLeft;">
 	<div class="row inner-grid">
 		<div class="user_log_detail">
-			<form name="topicCreationForm" role="form" action="" method="post"
+			<form name="topicCreationForm"  role="form" action="" method="post"
 				novalidate>
 				<h3>Discussion Room Topic</h3>
 				<div class="title_name">
@@ -93,7 +93,8 @@ button, input, select, textarea {
 					<label class="title_name_class">Class</label><br> <label
 						class="title_name_sub">Subject</label><br> <label
 						class="title_name_title">Topic Title</label><br> <label
-						class="title_name_des">Topic Description</label>
+						class="title_name_des">Topic Description</label><br/><br/>
+						 <label>Topic Image</label>
 				</div>
 				<div class="title_text">
 					<div ng-if="isEmpty(topicDetails.securUuid)" class="form-group"
@@ -172,10 +173,15 @@ button, input, select, textarea {
 								Decription is required.</span>
 						</span>
 					</div>
+					
+					<div class="form-group">
+						<input id="inputUploadTopicPhoto" type="file" file-model="topicImage"/>
+					</div>
+
 					<div ng-if="isEmpty(topicDetails.securUuid)" class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"
 							ng-disabled="topicCreationForm.$invalid"
-							ng-click="adminCtrl.createTopic()">Submit</button>
+							ng-click="adminCtrl.createTopic(topicImage)">Submit</button>
 					</div>
 					<div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"

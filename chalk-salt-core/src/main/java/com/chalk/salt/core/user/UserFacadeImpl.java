@@ -18,6 +18,7 @@ import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.TemplateProcessingException;
 import com.chalk.salt.common.exceptions.UserException;
@@ -170,6 +171,15 @@ public class UserFacadeImpl implements UserFacade {
 	public void deleteUserPhoto(String securUuid) throws UserException {
 		 userManager.deleteUserPhoto(securUuid);
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#uploadTopicImage(java.lang.String, com.chalk.salt.common.dto.TopicImageUploadDto)
+	 */
+	@Override
+	public String uploadTopicImage(String securUuid,
+			TopicImageUploadDto documentUploadData) throws UserException {
+		return userManager.uploadTopicImage(securUuid,documentUploadData);
 	}
 
 	

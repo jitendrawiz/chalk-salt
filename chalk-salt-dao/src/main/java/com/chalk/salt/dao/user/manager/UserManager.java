@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
@@ -106,4 +107,15 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	void deleteUserPhoto(String securUuid)throws UserException;
+
+	/**
+	 * Upload topic image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param documentUploadData the document upload data
+	 * @return the string
+	 * @throws UserException the user exception
+	 */
+	String uploadTopicImage(String securUuid,
+			TopicImageUploadDto documentUploadData)throws UserException;
 }

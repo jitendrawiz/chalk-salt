@@ -24,6 +24,7 @@ import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -374,5 +375,55 @@ public class UserManagerImpl implements UserManager {
             throw new UserException(ErrorCode.FAIL_TO_DELETE_PROFILE_PHOTO, "Fail to delete profile photo", exception);
         }
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#uploadTopicImage(java.lang.String, com.chalk.salt.common.dto.TopicImageUploadDto)
+	 */
+	@Override
+	public String uploadTopicImage(String securUuid,
+			TopicImageUploadDto documentUploadData) throws UserException {
+		logger.info("Uploading Topic image");
+        try {
+			System.out.println("Inside topic image upload section");
+			String destPath = userDao.getSystemSettings("TOPIC_IMAGE");
+			//Integer topicId = userDao.getTopicIdUsingSecurUuid(securUuid);
+			destPath += securUuid.toString();
+			File file = new File(destPath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			String fileName = "TOPIC_" + securUuid.toString();
+			String oldfileName = userDao.getPreviousTopicImage(securUuid);
+			String destPathToDeleteFile = null;
+			String fileNameToSave = fileName + "."
+					+ getExtension(documentUploadData.getName());
+			if (oldfileName != null) {
+				destPathToDeleteFile = destPath + File.separator + fileName
+						+ "." + getExtension(oldfileName);
+			} else {
+				destPathToDeleteFile = destPath + File.separator
+						+ fileNameToSave;
+			}
+			destPath = destPath + File.separator + fileNameToSave;
+			File oldfile = new File(destPathToDeleteFile);
+			if (oldfile.exists()) {
+				oldfile.delete();
+			}
+			FileInputStream fin = new FileInputStream(
+					documentUploadData.getFile());
+			FileOutputStream fout = new FileOutputStream(destPath);
+			int i = 0;
+			while ((i = fin.read()) != -1) {
+				fout.write((byte) i);
+			}
+			fin.close();
+			fout.close();
+			userDao.updateTopicImageDetails(fileNameToSave, securUuid);
+			logger.info("Topic Image updated successfully in database");
+        } catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_UPDATE_TOPIC_IMAGE, "Fail to update topic image", exception);
+        }
+		return securUuid;
 	}
 }

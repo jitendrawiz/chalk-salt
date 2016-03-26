@@ -274,5 +274,32 @@ public interface UserDao {
 	 */
 	void deleteUserPhotoFromDB(String securUuid)throws Exception;
 
+	/**
+	 * Gets the topic id using secur uuid.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the topic id using secur uuid
+	 * @throws Exception the exception
+	 */
+	Integer getTopicIdUsingSecurUuid(String securUuid)throws Exception;
+
+	/**
+	 * Gets the previous topic image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the previous topic image
+	 * @throws Exception the exception
+	 */
+	String getPreviousTopicImage(String securUuid)throws Exception;
+
+	/**
+	 * Update topic image details.
+	 *
+	 * @param fileNameToSave the file name to save
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void updateTopicImageDetails(String fileNameToSave, String securUuid)throws Exception;
+
 
 }

@@ -136,7 +136,10 @@ public enum ErrorCode {
     FAIL_TO_UPDATE_PROFILE_PHOTO(1040),
     
     /** The fail to delete profile photo. */
-    FAIL_TO_DELETE_PROFILE_PHOTO(1041);
+    FAIL_TO_DELETE_PROFILE_PHOTO(1041),
+    
+    /** The fail to update topic image. */
+    FAIL_TO_UPDATE_TOPIC_IMAGE(1042);
 	
 	/** The value. */
     private final int value;

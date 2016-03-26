@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionTopicRequestModel;
 import com.chalk.salt.api.model.ProfilePhotoUploadModel;
+import com.chalk.salt.api.model.TopicImageUploadModel;
 import com.chalk.salt.api.model.UserModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
@@ -42,6 +43,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -374,5 +376,53 @@ public class UserResource extends AbstractResource {
         } catch (final UserException userException ) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         } 
+    }
+    
+    
+    /**
+     * Upload topic image.
+     *
+     * @param securUuid the secur uuid
+     * @param topicImageUploadRequest the topic image upload request
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/users/update/topic/photo/{securUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadTopicImage(@PathParam("securUuid") final String securUuid,
+        @MultipartForm final TopicImageUploadModel topicImageUploadRequest) throws UserException {
+    	 if (topicImageUploadRequest == null || StringUtils.isBlank(securUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+    	  final File sourceFile = topicImageUploadRequest.getFile();
+          final String filename = topicImageUploadRequest.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final TopicImageUploadDto documentUploadData = new TopicImageUploadDto();
+          documentUploadData.setName(filename);
+          documentUploadData.setFile(sourceFile);
+          documentUploadData.setFilePath(sourceFile.getPath());
+        try
+        {
+        	final String TopicSecurUuid = userFacade.uploadTopicImage(securUuid, documentUploadData);
+        	 final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("TopicSecurUuid", TopicSecurUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+        	
+	    } catch (final UserException userException) {
+	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+	    }
     }
 }

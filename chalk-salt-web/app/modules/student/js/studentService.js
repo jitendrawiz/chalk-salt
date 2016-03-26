@@ -189,5 +189,24 @@ define([ 'angular' ], function(angular) {
             }
         });
     } ]);
+    
+    studentService.factory('UpdateTopicImageService', [ '$http', 'ENV', function($http, ENV) {
+        return {
+            upload : function(formData, securUuid, successCallback, errorCallback) {
+                var uploadUrl = ENV.API_END_POINT + "private/users/update/topic/photo/" + securUuid;
+
+                $http.post(uploadUrl, formData, {
+                    transformRequest : angular.identity,
+                    headers : {
+                        'Content-Type' : undefined
+                    }
+                }).success(function(response) {
+                    successCallback(response);
+                }).error(function(error) {
+                    errorCallback(error);
+                });
+            }
+        };
+    } ]);
 
 });
