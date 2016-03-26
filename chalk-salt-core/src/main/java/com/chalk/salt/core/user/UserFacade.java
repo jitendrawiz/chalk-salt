@@ -97,5 +97,12 @@ public interface UserFacade {
 	 */
 	String getUserPhotoLink(String securUuid)throws UserException;
 
+	/**
+	 * Delete user photo.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws UserException the user exception
+	 */
+	void deleteUserPhoto(String securUuid)throws UserException;
 	
 }

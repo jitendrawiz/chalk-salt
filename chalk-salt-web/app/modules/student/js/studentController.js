@@ -6,9 +6,9 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 
                                                 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
-                                                'ChangePasswordService','UpdateProfilePhotoService','GetUserPhotoService',
+                                                'ChangePasswordService','UpdateProfilePhotoService','GetUserPhotoService','DeletePhotoService','CandDModalService',
             function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
-            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,GetUserPhotoService) {
+            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,GetUserPhotoService,DeletePhotoService,CandDModalService) {
     	       $scope.uploadedlogo = {};
     		  
     		   var showAlert = function(type, message){
@@ -136,7 +136,36 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                 
                 $scope.isUndefined = function (thing) {
                     return (typeof thing === "undefined");
-                }
+                };
+                
+                /**
+                 * Function to delete uploaded profile photo 
+                 */ 
+                this.deleteProfilePhoto=function(){   
+                	var modalOptionsConfirm = {
+                            header : 'Note',
+                            body : 'Do you want to delete profile photo?',
+                            btn : 'OK'
+                        };
+                    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+                    	DeletePhotoService.remove({securUuid:$scope.securUuid},  function(response) {
+                    	        if(response){
+                    	        	 console.log(response);
+                    	         	var modalOptions = {
+                    	                    header : 'Note',
+                    	                    body : response.message,
+                    	                    btn : 'OK'
+                    	                };
+                    	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                    	            	showAlert('success',response.message);
+                    	                });
+                    	        	 $state.reload();
+                    	        	 }
+                    	    }, function(error) {
+                    	    	showAlert('danger',error.data.message);
+                    	    })
+                        });
+                };
             }
     ]);
     

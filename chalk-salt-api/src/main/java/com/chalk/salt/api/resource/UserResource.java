@@ -7,6 +7,7 @@ package com.chalk.salt.api.resource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -339,9 +341,38 @@ public class UserResource extends AbstractResource {
         } catch (final UserException userException ) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         } catch (IOException e) {
+        	if(e instanceof NoSuchFileException){
+                throw Utility.buildResourceException(ErrorCode.RESOURCE_NOT_FOUND, "No Image File exists corresponding to the user", Status.NO_CONTENT, UserException.class, e);
+        	}
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Response.ok(response).build();
+    }
+    
+    /**
+     * Delete user photo.
+     *
+     * @param securUuid the secur uuid
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @DELETE
+    @Path("/user/photo/delete/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteUserPhoto(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
+    	final Map<String, String> response = new HashMap<String, String>();
+        if (StringUtils.isBlank(securUuid)) {
+            return Response.status(Status.BAD_REQUEST).entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID, "Required parameters are invalid or missing"))
+                .type(MediaType.APPLICATION_JSON).build();
+        }
+        try {
+        	userFacade.deleteUserPhoto(securUuid);
+        	response.put("message", "Profile Photo deleted successfully");
+             return Response.ok(response, MediaType.APPLICATION_JSON).build();
+        } catch (final UserException userException ) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        } 
     }
 }

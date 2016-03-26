@@ -179,4 +179,15 @@ define([ 'angular' ], function(angular) {
             
         });
         } ]); 
+    
+    studentService.factory('DeletePhotoService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/user/photo/delete/:securUuid', {
+        	securUuid : '@securUuid'
+        }, {
+            remove : {
+                method : 'DELETE'
+            }
+        });
+    } ]);
+
 });

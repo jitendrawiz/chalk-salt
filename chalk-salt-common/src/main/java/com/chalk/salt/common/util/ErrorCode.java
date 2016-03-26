@@ -133,7 +133,10 @@ public enum ErrorCode {
     FAIL_TO_APPROVE_TOPIC_REQUESTS(1039),
     
     /** The fail to update profile photo. */
-    FAIL_TO_UPDATE_PROFILE_PHOTO(1040);
+    FAIL_TO_UPDATE_PROFILE_PHOTO(1040),
+    
+    /** The fail to delete profile photo. */
+    FAIL_TO_DELETE_PROFILE_PHOTO(1041);
 	
 	/** The value. */
     private final int value;

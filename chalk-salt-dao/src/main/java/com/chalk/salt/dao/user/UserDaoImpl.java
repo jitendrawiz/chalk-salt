@@ -610,4 +610,20 @@ public class UserDaoImpl implements UserDao {
        
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#deleteUserPhotoFromDB(java.lang.String)
+	 */
+	@Override
+	public void deleteUserPhotoFromDB(String securUuid) throws Exception {
+		final String sqlQuery = "UPDATE `cst_users` SET `cst_users`.profile_photo=NULL"
+				+ " WHERE secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+		
+	}
+
 }

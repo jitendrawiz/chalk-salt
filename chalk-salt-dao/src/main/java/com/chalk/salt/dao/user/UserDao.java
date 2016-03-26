@@ -265,4 +265,14 @@ public interface UserDao {
 	 */
 	String getUserProfilePhoto(String securUuid)throws Exception;
 
+	
+	/**
+	 * Delete user photo from db.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void deleteUserPhotoFromDB(String securUuid)throws Exception;
+
+
 }

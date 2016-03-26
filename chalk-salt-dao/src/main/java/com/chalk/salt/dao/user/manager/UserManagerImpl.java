@@ -352,4 +352,27 @@ public class UserManagerImpl implements UserManager {
 	        }
 	        return imagePath;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#deleteUserPhoto(java.lang.String)
+	 */
+	@Override
+	public void deleteUserPhoto(String securUuid) throws UserException {
+
+		logger.info("DELETING USER PHOTO :",securUuid);
+        try {
+        	
+        	      String destPath=getUserPhotoLink(securUuid);   
+        	      logger.info("DELETING USER PHOTO FROM SERVER LOCATION "+destPath);
+        	      File file = new File(destPath);
+        	      if(file.exists()){
+        	    	  file.delete();
+        	      }
+        	      logger.info("FILE DELETED FROM LOCATION "+destPath);
+        	      userDao.deleteUserPhotoFromDB(securUuid); 
+        } catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_DELETE_PROFILE_PHOTO, "Fail to delete profile photo", exception);
+        }
+		
+	}
 }

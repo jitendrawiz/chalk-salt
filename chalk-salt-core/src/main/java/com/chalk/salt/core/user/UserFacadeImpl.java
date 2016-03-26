@@ -163,6 +163,15 @@ public class UserFacadeImpl implements UserFacade {
 		return userManager.getUserPhotoLink(securUuid);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#deleteUserPhoto(java.lang.String)
+	 */
+	@Override
+	public void deleteUserPhoto(String securUuid) throws UserException {
+		 userManager.deleteUserPhoto(securUuid);
+		
+	}
+
 	
 
 }

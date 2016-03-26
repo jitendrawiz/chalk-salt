@@ -303,6 +303,12 @@
 								<div class="cell w-32">
 									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
 								</div>
+								<div class="cell w-32">								
+									<div ng-if="!editFlag">
+										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
+										<button ng-show="!isUndefined(userProfilePhoto)" type="button" class="btn btn-secondary btn-block button black"  ng-click="stdCtrl.deleteProfilePhoto()">Delete Photo</button>
+									</div>
+								</div>
                                 <!--<div id="map-canvas" class="map fl-right"></div>-->
 							</div>
 						</form>
