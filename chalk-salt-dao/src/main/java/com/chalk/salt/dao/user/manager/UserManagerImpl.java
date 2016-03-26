@@ -349,7 +349,7 @@ public class UserManagerImpl implements UserManager {
 	            imagePath=destPath+Id.toString()+File.separator+profilePhoto;
 	            logger.info("Image Path created is"+imagePath);
 	        } catch (final Exception exception) {
-	            throw new UserException(ErrorCode.FAIL_TO_FETCH_REGISTERD_USERS, "fail to fetch registered user", exception);
+	            throw new UserException(ErrorCode.FAIL_TO_FETCH_USER_IMAGE_PATH, "fail to fetch user image path", exception);
 	        }
 	        return imagePath;
 	}
@@ -425,5 +425,23 @@ public class UserManagerImpl implements UserManager {
             throw new UserException(ErrorCode.FAIL_TO_UPDATE_TOPIC_IMAGE, "Fail to update topic image", exception);
         }
 		return securUuid;
+	}
+
+	@Override
+	public String getTopicImageLink(String securUuid) throws UserException {
+		String imagePath=null;
+		 logger.info("Obtaining topic details to make link of image:", securUuid);
+	        try {
+	        	String destPath = userDao.getSystemSettings("TOPIC_IMAGE");
+	            String topicImage = userDao.getPreviousTopicImage(securUuid);     
+	            if (topicImage == null) {
+	            	return topicImage;
+	            }
+	            imagePath=destPath+securUuid.toString()+File.separator+topicImage;
+	            logger.info("Image Path created is"+imagePath);
+	        } catch (final Exception exception) {
+	            throw new UserException(ErrorCode.FAIL_TO_FETCH_TOPIC_IMAGE_PATH, "fail to fetch topic image path", exception);
+	        }
+	        return imagePath;
 	}
 }

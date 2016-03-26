@@ -182,6 +182,14 @@ public class UserFacadeImpl implements UserFacade {
 		return userManager.uploadTopicImage(securUuid,documentUploadData);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#getTopicImageLink(java.lang.String)
+	 */
+	@Override
+	public String getTopicImageLink(String securUuid) throws UserException {
+		return userManager.getTopicImageLink(securUuid);
+	}
+
 	
 
 }

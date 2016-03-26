@@ -139,7 +139,13 @@ public enum ErrorCode {
     FAIL_TO_DELETE_PROFILE_PHOTO(1041),
     
     /** The fail to update topic image. */
-    FAIL_TO_UPDATE_TOPIC_IMAGE(1042);
+    FAIL_TO_UPDATE_TOPIC_IMAGE(1042),
+    
+    /** The fail to fetch user image path. */
+    FAIL_TO_FETCH_USER_IMAGE_PATH(1043),
+    
+    /** The fail to fetch topic image path. */
+    FAIL_TO_FETCH_TOPIC_IMAGE_PATH(1044);
 	
 	/** The value. */
     private final int value;

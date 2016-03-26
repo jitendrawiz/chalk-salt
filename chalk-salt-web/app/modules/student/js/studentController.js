@@ -175,12 +175,12 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
-      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService',
+      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService',
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
-       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService) {
+       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -501,6 +501,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
              if(response){
              	 $scope.topicDetails = response;
              	 console.log($scope.topicDetails);
+             	 if($scope.topicDetails.topicImage!=null){
+             	 GetTopicImageService.get({securUuid:$scope.topicDetails.securUuid},  function(result) {
+                 	$scope.topicImageLink=result.topicImageLink;
+             	 }, function(error) {
+             	 showAlert('danger',error.data.message);
+             	 });
+             	}
              	 $scope.setTab(4);
              	 }
          }, function(error) {
@@ -538,20 +545,23 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
  };
  //update Topic
 
-this.updateTopic = function() {
+this.updateTopic = function(fileData) {
     updateTopicDetailsService.save({}, $scope.topicDetails, function(
             response) {
         if (response) {
             console.log(response);
+            if(!angular.isUndefined(fileData)){
+             	updateTopicPhoto(fileData,$scope.topicDetails.securUuid);
+             }
+            
         	var modalOptions = {
                     header : 'Note',
                     body : 'Your Topic is updated successfully',
                     btn : 'OK'
                 };
             CandDModalService.showModal({}, modalOptions).then(function(result) {
-                    $log.info(result);
+            	$state.reload();
                 });
-            $state.reload();
         }
         
     }, function(error) {

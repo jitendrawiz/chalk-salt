@@ -153,6 +153,7 @@ CREATE TABLE `cst_discussion_topics` (
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_date` timestamp NULL DEFAULT NULL,
   `secur_uuid` varchar(100) NOT NULL,
+  `topic_image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`discussion_topic_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
@@ -358,7 +359,7 @@ CREATE TABLE `cst_system_settings` (
 
 /*Data for the table `cst_system_settings` */
 
-insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo');
+insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo'),(2,'TOPIC_IMAGE','G:\\CHALKANDDUST\\TopicPhoto\\','TO save topic image.');
 
 /*Table structure for table `cst_test_master` */
 

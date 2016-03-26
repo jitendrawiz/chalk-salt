@@ -208,5 +208,16 @@ define([ 'angular' ], function(angular) {
             }
         };
     } ]);
+    
+    studentService.factory('GetTopicImageService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/topic/image/:securUuid',{
+            securUuid : '@securUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+        } ]); 
 
 });

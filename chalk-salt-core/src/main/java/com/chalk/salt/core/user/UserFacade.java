@@ -115,5 +115,14 @@ public interface UserFacade {
 	 * @throws UserException the user exception
 	 */
 	String uploadTopicImage(String securUuid,TopicImageUploadDto documentUploadData)throws UserException;
+
+	/**
+	 * Gets the topic image link.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the topic image link
+	 * @throws UserException the user exception
+	 */
+	String getTopicImageLink(String securUuid)throws UserException;
 	
 }

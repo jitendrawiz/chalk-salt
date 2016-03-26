@@ -184,9 +184,15 @@ button, input, select, textarea {
 							ng-click="adminCtrl.createTopic(topicImage)">Submit</button>
 					</div>
 					<div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group">
+						<p ng-show="!isUndefined(topicImageLink)">
+	                                        <img ng-src="{{topicImageLink}}" alt="Topic Image" style="float: right;margin-bottom: 20px;" class="img-responsive" width="250" height="250">
+	                                 </p> 
+					</div>
+					
+					<div ng-if="!isEmpty(topicDetails.securUuid)" class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"
 							ng-disabled="topicCreationForm.$invalid"
-							ng-click="adminCtrl.updateTopic()">Update</button>
+							ng-click="adminCtrl.updateTopic(topicImage)">Update</button>
 					</div>
 
 				</div>

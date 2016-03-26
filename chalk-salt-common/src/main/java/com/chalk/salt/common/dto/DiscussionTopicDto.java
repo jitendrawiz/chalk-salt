@@ -28,8 +28,29 @@ public class DiscussionTopicDto {
 	 
 	 /** The secur uuid. */
  	private String securUuid;
+ 	
+ 	/** The topic image. */
+	 private String topicImage;
 	 
  	
+	/**
+	 * Gets the topic image.
+	 *
+	 * @return the topic image
+	 */
+	public String getTopicImage() {
+		return topicImage;
+	}
+
+	/**
+	 * Sets the topic image.
+	 *
+	 * @param topicImage the new topic image
+	 */
+	public void setTopicImage(String topicImage) {
+		this.topicImage = topicImage;
+	}
+
 	/**
 	 * Gets the discussion topic id.
 	 *

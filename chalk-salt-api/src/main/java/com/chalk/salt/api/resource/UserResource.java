@@ -425,4 +425,34 @@ public class UserResource extends AbstractResource {
 	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
 	    }
     }
+    
+    @GET
+    @Path("/topic/image/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getTopicImage(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
+    	final Map<String, String> response = new HashMap<String, String>();
+        String topicImageLink = null;
+        try {
+        	topicImageLink = userFacade.getTopicImageLink(securUuid);
+            if (topicImageLink == null) {
+                return Response.noContent().build();
+            }
+            File file=new File(topicImageLink);
+            final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+            final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+            response.put("topicImageLink", "data:" + mediaType + ";base64," + encodedImageString);
+            return Response.ok(response).build();
+        } catch (final UserException userException ) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        } catch (IOException e) {
+        	if(e instanceof NoSuchFileException){
+                throw Utility.buildResourceException(ErrorCode.RESOURCE_NOT_FOUND, "No Image File exists corresponding to the topic", Status.NO_CONTENT, UserException.class, e);
+        	}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return Response.ok(response).build();
+    }
 }
