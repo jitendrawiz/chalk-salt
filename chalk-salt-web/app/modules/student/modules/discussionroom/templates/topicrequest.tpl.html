@@ -8,172 +8,64 @@
 	z-index: 0;
 	position: fixed;
 }
-
-.title_text {
-	width: 70%;
-	float: left;
-}
-
-.title_name {
-	width: 30%;
-	float: left;
-}
-
-.title_name {
-	text-align: right;
-	padding-right: 20px;
-}
-
-.title_name_sub {
-	padding-top:10px;
-}
-
-.title_name_title {
-	padding-top: 30px;
-}
-
-.title_name_des {
-	padding-top: 40px;
-}
-
-.title_text textarea {
-	width: 100%;
-	height: 100px;
-	padding-bottom: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	color: #000;
-	margin: 5px 0px;
-	border: 1px solid #CCC;
-}
-
-.title_text select {
-	width: 60%;
-	height: 40px;
-	padding-bottom: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	color: #000;
-	margin: 5px 0px;
-	border: 1px solid #CCC;
-}
-
-.title_text button a {
-	color: #FFF;
-	padding: 0px 40px;
-}
-
-.btn:focus, .btn:hover, a, a:focus, a:hover {
-	text-decoration: none;
-	outline: 0;
-}
-
-.title_text button {
-	padding: 8px 0px;
-	cursor: pointer;
-	background: #2f889a;
-	color: #FFF;
-	width: 100%;
-	border-radius: 5px;
-	font-weight: bold;
-	border: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-}
-
-button, input, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-}
 </style>
-<div>
-	<div class="d_head">
-		<div class="logo">
-			<a ui-sref="chalkanddust.home"><img
-				src="../../../../resources/images/logo.png" /></a>
-		</div>
-		<div class="menu_d_room">
-			<ul>
-				<li><a ui-sref="chalkanddust.student" ng-show="fullName"><i
-						class="fa fa-user"></i>{{fullName}}</a></li>
-			</ul>
-			<div class="number_scroll">
-				<button style="float: right;"
-					ng-click="requestCtrl.goBackToTopicsScreen()">Go Back</button>
 
+<div class="dr_com_main">
+	<div class="dr_com_head">
+		<div class="dr_heading">
+			<ul>
+				<li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com
+				</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
+			</ul>
+			<div class="dr_search">
+				<ul>
+					<li><a href="#"><span class="glyphicon glyphicon-plus"></span>New
+							Request</a></li>
+					<li><a href="#"><span
+							class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="clear"></div>
-</div>
-
-<div class="col-xs-12 col-md-10 wow fadeInLeft"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="topicRequestForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Topic Request</h3>
-				<div class="title_name">
-					<label class="title_name_sub">Subject</label><br> 
-					<label class="title_name_title">Topic Title</label><br> 
-					<label class="title_name_des">Topic Description</label>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : topicRequestForm.studentSubject.$invalid && !topicRequestForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="topicRequestInfo.subjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="item.subjectId as item.subjectName for item in topicStatistics"
-							required>
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p ng-show="topicRequestForm.studentSubject.$error.required && !topicRequestForm.studentSubject.$pristine">
-							Subject is required.
-						</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
-						<textarea class="form-control" id="topicTitle" name="topicTitle"
-							ng-model="topicRequestInfo.topicTitle" type="text"
-							placeholder="Topic Title" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="topicRequestForm.topicTitle.$invalid  && !topicRequestForm.topicTitle.$pristine">
-							<span ng-show="topicRequestForm.topicTitle.$error.required">Topic
-								Title is required.</span>
-						</span>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
-						<textarea class="form-control" id="topicDescription"
-							name="topicDescription" ng-model="topicRequestInfo.topicDescription"
-							type="text" placeholder="Topic Description" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine">
-							<span
-							ng-show="topicRequestForm.topicDescription.$error.required">Topic
-								Decription is required.</span>
-						</span>
-					</div>
-					
-					<div class="form-group">
-						<button type="button" class="btn btn-secondary btn-block"
-							ng-disabled="topicRequestForm.$invalid"
-							ng-click="requestCtrl.saveTopicRequest()">Submit</button>
-					</div>
-					
-				</div>
-			</form>
+	<div class="dr_main_detail">
+		<div class="dr_new_entery">
+			<h3>New Request</h3>
+			<table>
+				<tr>
+					<td class="right_one">Subject</td>
+					<td class="sub_size"><select name="Salect">
+							<option>Salect</option>
+							<option>Math</option>
+							<option>Science</option>
+							<option>English</option>
+							<option>Social Science</option>
+							<option>Physical</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td class="right_one end_text">Topic Title</td>
+					<td><textarea name="textarea" cols="" rows=""></textarea></td>
+				</tr>
+				<tr>
+					<td class="right_one">Topic Discription</td>
+					<td><textarea name="textarea" cols="" rows=""></textarea></td>
+				</tr>
+				<tr>
+					<td class="right_one">Image Upload</td>
+					<td><input name="upload" type="file" /></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><button>Submit</button></td>
+				</tr>
+			</table>
 
 		</div>
+		<div class="clear"></div>
+	    <nav class="navbar  navbar-fixed-bottom">
+			<div footer></div>
+		</nav>
 	</div>
 </div>
-
-<div class="clear"></div>
-    <nav class="navbar  navbar-fixed-bottom">
-<div footer></div>
-</nav>
