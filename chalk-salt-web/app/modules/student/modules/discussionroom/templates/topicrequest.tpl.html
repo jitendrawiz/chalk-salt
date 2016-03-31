@@ -22,7 +22,7 @@
 				<ul>
 					<li><a href="#"><span class="glyphicon glyphicon-plus"></span>New
 							Request</a></li>
-					<li><a href="#"><span
+					<li><a ng-click="requestCtrl.goBackToTopicsScreen()"><span
 							class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
 				</ul>
 			</div>
@@ -32,25 +32,57 @@
 	<div class="dr_main_detail">
 		<div class="dr_new_entery">
 			<h3>New Request</h3>
+			<form name="topicRequestForm" role="form" action="" method="post" novalidate>
 			<table>
 				<tr>
 					<td class="right_one">Subject</td>
-					<td class="sub_size"><select name="Salect">
-							<option>Salect</option>
-							<option>Math</option>
-							<option>Science</option>
-							<option>English</option>
-							<option>Social Science</option>
-							<option>Physical</option>
-					</select></td>
+					<td class="sub_size">
+						<div class="form-group"
+							ng-class="{ 'has-error' : topicRequestForm.studentSubject.$invalid && !topicRequestForm.studentSubject.$pristine }">
+							<select class="form-control" ng-model="topicRequestInfo.subjectId"
+								name="studentSubject" placeholder="Subject"
+								ng-options="item.subjectId as item.subjectName for item in topicStatistics"
+								required>
+								<option value="" disabled>Select Subject</option>
+							</select>
+							<p ng-show="topicRequestForm.studentSubject.$error.required && !topicRequestForm.studentSubject.$pristine">
+								Subject is required.
+							</p>
+						</div>	
+					</td>
 				</tr>
 				<tr>
 					<td class="right_one end_text">Topic Title</td>
-					<td><textarea name="textarea" cols="" rows=""></textarea></td>
+					<td>
+						<div class="form-group"
+							ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
+							<textarea class="form-control" id="topicTitle" name="topicTitle"
+								ng-model="topicRequestInfo.topicTitle" type="text"
+								placeholder="Topic Title" required></textarea>
+							<span style="color: red" class="help-block"
+								ng-show="topicRequestForm.topicTitle.$invalid  && !topicRequestForm.topicTitle.$pristine">
+								<span ng-show="topicRequestForm.topicTitle.$error.required">Topic
+									Title is required.</span>
+							</span>
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td class="right_one">Topic Discription</td>
-					<td><textarea name="textarea" cols="" rows=""></textarea></td>
+					<td>
+						<div class="form-group"
+							ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
+							<textarea class="form-control" id="topicDescription"
+								name="topicDescription" ng-model="topicRequestInfo.topicDescription"
+								type="text" placeholder="Topic Description" required></textarea>
+							<span style="color: red" class="help-block"
+								ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine">
+								<span
+								ng-show="topicRequestForm.topicDescription.$error.required">Topic
+									Decription is required.</span>
+							</span>
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td class="right_one">Image Upload</td>
@@ -58,10 +90,16 @@
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td><button>Submit</button></td>
+					<td>
+						<div class="form-group">
+							<button type="button" class="btn btn-secondary btn-block"
+								ng-disabled="topicRequestForm.$invalid"
+								ng-click="requestCtrl.saveTopicRequest()">Submit</button>
+						</div>
+					</td>
 				</tr>
 			</table>
-
+			</form>
 		</div>
 		<div class="clear"></div>
 	    <nav class="navbar  navbar-fixed-bottom">
