@@ -1,0 +1,83 @@
+<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="../../../../resources/css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="../../../../resources/css/bootstrap.min.css">
+<style>
+.main_bg_bg {
+	background-image: none;
+	background-size: 100%;
+	width: 0%;
+	height: 1000px;
+	top: 0;
+	z-index: 0;
+	position: fixed;
+}
+</style>
+<div class="dr_com_main">
+  <div class="dr_com_head">
+    <div class="dr_heading">
+      <ul>
+        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com </a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
+      </ul>
+      <div class="dr_search">
+        <ul>
+          <li><a href="#"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="dr_main_detail">
+    <div class="dr_subject">
+      <h4>Subject</h4>
+      <ul >
+        <li ng-repeat="item in topicStatistics"><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.subjectName}}<i class="fa-comments"></i></a></li>
+      </ul>
+    </div>
+    <div class="dr_sub_com">
+      <div class="dr_dis_head">
+        <ul>
+          <li><a href="#">Discussions</a></li>
+        </ul>
+      </div>
+      <div class="dr_bg_img_sub dr_bg"></div>
+      <div class="dr_bg_img_sub dr_main_bg">
+        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
+        <h3><a ui-sref="chalkanddust.discussionroomtopics({subjectId: 1})">Student Stories: Articles by current Engineering Students</a></h3>
+        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
+      </div>
+      <div class="dr_bg_img_sub dr_main_bg">
+        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
+        <h3>Student Stories: Articles by current Engineering Students</h3>
+        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
+      </div>
+      <div class="dr_bg_img_sub dr_main_bg">
+        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
+        <h3>Student Stories: Articles by current Engineering Students</h3>
+        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
+      </div>
+    </div>
+    <div class="dr_events">
+      <div class="dr_notification">
+        <h3>Notification</h3>
+        <span>
+        <ul>
+          <marquee direction="up" scrollamount="4">
+          <li>JEE Advanced 2016 Online Appli</li>
+          <li>JEE Advanced 2016 Online Appli</li>
+          <li>JEE Advanced 2016 Online Appli</li>
+          <li>JEE Advanced 2016 Online Appli</li>
+          <li>JEE Advanced 2016 Online Appli</li>
+          <li>JEE Advanced 2016 Online Appli</li>
+          </marquee>
+        </ul>
+        </span> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="dr_com_head footer_head">
+       <div footer></div>
+  </div>
+</div>
+

@@ -1,9 +1,9 @@
 'use strict';
-define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
-         'text!./templates/discussionroomtopics.tpl.html',
+define([ 'angular', 'text!./templates/firstPage.tpl.html',
+         'text!./templates/secondPage.tpl.html',
          'text!./templates/discussionroomcomments.tpl.html',
          'text!./templates/topicrequest.tpl.html'],
-		function(angular, templatediscussionroomsubjects,templatediscussionroomtopics,
+		function(angular, templatediscussionFirstPage,templatediscussionroomSecondPage,
 				templatediscussionroomcomments,templatetopicrequest) {
 
     var module = angular.module('Student.discussionroom.routing', []);
@@ -11,11 +11,11 @@ define([ 'angular', 'text!./templates/discussionroomsubjects.tpl.html',
     module.config([ '$stateProvider', function($stateProvider) {
         $stateProvider.state('chalkanddust.discussionroomsubjects', {
             url : '/discussionroom/subjects',            
-            template : templatediscussionroomsubjects,
+            template : templatediscussionFirstPage,
             controller : 'DiscussionRoomSubjectsController as disCtrl'
         }).state('chalkanddust.discussionroomtopics', {
             url : '/discussionroom/topics/:subjectId',
-            template : templatediscussionroomtopics,
+            template : templatediscussionroomSecondPage,
             controller : 'DiscussionRoomTopicController as topicCtrl'
         }).state('chalkanddust.discussionroomcomments',{
         	url : '/discussionroom/comments/:topicId',
