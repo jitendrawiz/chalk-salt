@@ -7,10 +7,7 @@ package com.chalk.salt.dao.user.manager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -443,5 +440,52 @@ public class UserManagerImpl implements UserManager {
 	            throw new UserException(ErrorCode.FAIL_TO_FETCH_TOPIC_IMAGE_PATH, "fail to fetch topic image path", exception);
 	        }
 	        return imagePath;
+	}
+
+	@Override
+	public String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)
+			throws UserException {
+		logger.info("Uploading Topic Request image");
+        try {
+			System.out.println("Inside topic request image upload section");
+			String destPath = userDao.getSystemSettings("TOPIC_IMAGE");
+			destPath += securUuid.toString();
+			File file = new File(destPath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			String fileName = "TOPIC_" + securUuid.toString();
+			String oldfileName = userDao.getPreviousTopicRequestImage(securUuid);
+			String destPathToDeleteFile = null;
+			String fileNameToSave = fileName + "."
+					+ getExtension(documentUploadData.getName());
+			if (oldfileName != null) {
+				destPathToDeleteFile = destPath + File.separator + fileName
+						+ "." + getExtension(oldfileName);
+			} else {
+				destPathToDeleteFile = destPath + File.separator
+						+ fileNameToSave;
+			}
+			destPath = destPath + File.separator + fileNameToSave;
+			File oldfile = new File(destPathToDeleteFile);
+			if (oldfile.exists()) {
+				oldfile.delete();
+			}
+			FileInputStream fin = new FileInputStream(
+					documentUploadData.getFile());
+			FileOutputStream fout = new FileOutputStream(destPath);
+			int i = 0;
+			while ((i = fin.read()) != -1) {
+				fout.write((byte) i);
+			}
+			fin.close();
+			fout.close();
+			userDao.updateTopicRequestImageDetails(fileNameToSave, securUuid);
+			logger.info("Topic Request Image updated successfully in database");
+        } catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_UPDATE_TOPIC_IMAGE, "Fail to update topic request image", exception);
+        }
+		return securUuid;	
+	
 	}
 }

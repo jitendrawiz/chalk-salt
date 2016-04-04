@@ -12,7 +12,6 @@ import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface UserManager.
  */
@@ -127,4 +126,14 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	String getTopicImageLink(String securUuid)throws UserException;
+
+	/**
+	 * Upload topic request image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param documentUploadData the document upload data
+	 * @return the string
+	 * @throws UserException the user exception
+	 */
+	String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)throws UserException;
 }

@@ -673,7 +673,30 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("securUuid", securUuid);
             query.executeUpdate();
         }
-		
 	}
 
+	@Override
+	public String getPreviousTopicRequestImage(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT topic_image from cst_topic_requests "
+	    		+ " WHERE secur_uuid =: securUuid ";
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(String.class);
+        }
+	}
+
+	@Override
+	public void updateTopicRequestImageDetails(String fileNameToSave, String securUuid) throws Exception {
+		final String sqlQuery = "UPDATE cst_topic_requests SET topic_image=:fileName "
+				+ " WHERE secur_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("fileName", fileNameToSave);          
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
+	}
 }

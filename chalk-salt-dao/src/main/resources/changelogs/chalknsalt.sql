@@ -478,6 +478,7 @@ $$
 DELIMITER ;
 
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `request_securuuid` VARCHAR(100) NOT NULL AFTER `approval_date`;
+ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `topic_image` VARCHAR(255) NULL AFTER `request_securuuid`;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

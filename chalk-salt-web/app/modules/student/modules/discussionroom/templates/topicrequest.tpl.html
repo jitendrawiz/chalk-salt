@@ -72,7 +72,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="right_one">Topic Discription</td>
+					<td class="right_one">Topic Description</td>
 					<td>
 						<div class="form-group"
 							ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
@@ -83,14 +83,18 @@
 								ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine">
 								<span
 								ng-show="topicRequestForm.topicDescription.$error.required">Topic
-									Decription is required.</span>
+									Description is required.</span>
 							</span>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td class="right_one">Image Upload</td>
-					<td><input name="upload" type="file" /></td>
+					<td>
+						<div class="form-group">
+							<input id="inputUploadTopicPhoto" type="file" file-model="topicImage"/>
+						</div>
+					</td>					
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -98,7 +102,7 @@
 						<div class="form-group">
 							<button type="button" class="btn btn-secondary btn-block"
 								ng-disabled="topicRequestForm.$invalid"
-								ng-click="requestCtrl.saveTopicRequest()">Submit</button>
+								ng-click="requestCtrl.saveTopicRequest(topicImage)">Submit</button>
 						</div>
 					</td>
 				</tr>

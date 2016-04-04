@@ -62,9 +62,11 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
             } ]);
 
     module.controller('DiscussionRoomTopicController',
-    		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams','GetTopicsService','getSubjectNameService','filterFilter',
+    		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams',
+    		 'GetTopicsService','getSubjectNameService','filterFilter', 
             
-            function($element,$timeout,$scope, CHALKNDUST, $state, $window,$stateParams,GetTopicsService,getSubjectNameService,filterFilter) {
+            function($element,$timeout,$scope, CHALKNDUST, $state, $window, $stateParams, GetTopicsService, 
+            		getSubjectNameService, filterFilter) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -142,6 +144,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	myElements.css("background", "Wheat");                
                     $timeout(showElement, 1000);
                 }
+                
                 showElement();
             } ]);
 
@@ -325,8 +328,8 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
             } ]);
     
     module.controller('DiscussionRoomTopicRequestController', ['$log','$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
-                                                               '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest',   
-       function($log,$element,$timeout,$scope, $state, $filter, CHALKNDUST, CandDModalService,$window,GetUserDetailsService,GetTopicStatistics,SaveTopicRequest) {
+                                                               '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest', 'UpdateTopicImageService',   
+       function($log, $element, $timeout, $scope, $state, $filter, CHALKNDUST, CandDModalService, $window, GetUserDetailsService, GetTopicStatistics, SaveTopicRequest, UpdateTopicImageService) {
 		
            $scope.alert = {};
            $scope.alert.show = false;
@@ -372,7 +375,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
            	$state.go('chalkanddust.topicrequest');
            };
            
-           this.saveTopicRequest = function() {
+           this.saveTopicRequest = function(fileData) {
                if($scope.topicRequestInfo!=null && $scope.topicRequestInfo!=""){
             	   $scope.topicRequestInfo.securUuid=$scope.securUuid; 
             	   $scope.topicRequestInfo.classId=$scope.classId;
@@ -383,12 +386,16 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                          response) {
                      if (response) {
                          console.log(response);
+                         
+                         if(!angular.isUndefined(fileData)){
+                          	updateTopicPhoto(fileData,response.securUuid);
+                          }
                          var modalOptions = {
                                  header : 'Note',
                                  body : 'Your topic request added Successfully',
                                  btn : 'OK'
                              };
-
+                         	
                          CandDModalService.showModal({}, modalOptions).then(function(result) {
                                  $log.info(result);
                              });
@@ -422,6 +429,21 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
            	myElements.css("background", "Wheat");                
                $timeout(showElement, 1000);
            }
+           
+           /**
+            * Function to upload Topic photo
+            */
+           var updateTopicPhoto = function (fileData,securUuid) {
+               var file = fileData;
+               var formData = new FormData();
+               formData.append('file', file);
+               formData.append('name', file.name);
+               formData.append('documentType', file.type);
+               UpdateTopicImageService.upload(formData, securUuid, function(response) {
+                   showAlert("success", "Topic Image updated successfully.");                        
+               }, onRequestFailure);
+           };
+           
            showElement();
        } ]);
 

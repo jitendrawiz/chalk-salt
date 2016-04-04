@@ -12,7 +12,6 @@ import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface UserDao.
  */
@@ -301,5 +300,21 @@ public interface UserDao {
 	 */
 	void updateTopicImageDetails(String fileNameToSave, String securUuid)throws Exception;
 
+	/**
+	 * Gets the previous topic request image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the previous topic request image
+	 * @throws Exception the exception
+	 */
+	String getPreviousTopicRequestImage(String securUuid)throws Exception;
 
+	/**
+	 * Update topic request image details.
+	 *
+	 * @param fileNameToSave the file name to save
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	void updateTopicRequestImageDetails(String fileNameToSave, String securUuid)throws Exception;
 }

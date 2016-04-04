@@ -426,6 +426,13 @@ public class UserResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the topic image.
+     *
+     * @param securUuid the secur uuid
+     * @return the topic image
+     * @throws UserException the user exception
+     */
     @GET
     @Path("/topic/image/{securUuid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -454,5 +461,52 @@ public class UserResource extends AbstractResource {
 			
 		}
 		return Response.ok(response).build();
+    }
+    
+    /**
+     * Upload topic request image.
+     *
+     * @param securUuid the secur uuid
+     * @param topicImageUploadRequest the topic image upload request
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/students/topics/request/photo/{securUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadTopicRequestImage(@PathParam("securUuid") final String securUuid,
+        @MultipartForm final TopicImageUploadModel topicImageUploadRequest) throws UserException {
+    	 if (topicImageUploadRequest == null || StringUtils.isBlank(securUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+    	  final File sourceFile = topicImageUploadRequest.getFile();
+          final String filename = topicImageUploadRequest.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final TopicImageUploadDto documentUploadData = new TopicImageUploadDto();
+          documentUploadData.setName(filename);
+          documentUploadData.setFile(sourceFile);
+          documentUploadData.setFilePath(sourceFile.getPath());
+        try
+        {
+        	final String TopicSecurUuid = userFacade.uploadTopicRequestImage(securUuid, documentUploadData);
+        	 final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("TopicSecurUuid", TopicSecurUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+        	
+	    } catch (final UserException userException) {
+	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+	    }
     }
 }

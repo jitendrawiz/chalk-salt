@@ -29,7 +29,6 @@ import com.chalk.salt.core.templating.TemplateConfig;
 import com.chalk.salt.dao.user.manager.UserManager;
 import com.chalk.salt.service.email.EmailService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UserFacadeImpl.
  */
@@ -188,6 +187,15 @@ public class UserFacadeImpl implements UserFacade {
 	@Override
 	public String getTopicImageLink(String securUuid) throws UserException {
 		return userManager.getTopicImageLink(securUuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#uploadTopicRequestImage(java.lang.String, com.chalk.salt.common.dto.TopicImageUploadDto)
+	 */
+	@Override
+	public String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)
+			throws UserException {
+		return userManager.uploadTopicRequestImage(securUuid,documentUploadData);
 	}
 
 	
