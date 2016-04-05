@@ -74,9 +74,10 @@ public interface UserFacade {
 	 * Save topic request.
 	 *
 	 * @param discussionDetails the discussion details
+	 * @return 
 	 * @throws UserException the user exception
 	 */
-	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws UserException;
+	String saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws UserException;
 
 	/**
 	 * Upload profile photo.

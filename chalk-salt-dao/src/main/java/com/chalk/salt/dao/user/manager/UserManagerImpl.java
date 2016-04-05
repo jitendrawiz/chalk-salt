@@ -254,13 +254,13 @@ public class UserManagerImpl implements UserManager {
 	 * @see com.chalk.salt.dao.user.manager.UserManager#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
 	 */
 	@Override
-	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
+	public String saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
 		
 		logger.info("Saving topic request for user {}",discussionDetails.getSecurUuid());
         //check for already available topic requests.
         try {
         		discussionDetails.setRequestSecurUuid(UUID.randomUUID().toString());
-        		userDao.saveTopicRequest(discussionDetails);
+        		return userDao.saveTopicRequest(discussionDetails);
 
         } catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_SAVE_TOPIC_REQUEST, "FAil to save topic request", exception);

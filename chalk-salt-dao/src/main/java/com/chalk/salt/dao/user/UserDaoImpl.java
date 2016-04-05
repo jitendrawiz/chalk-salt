@@ -520,7 +520,7 @@ public class UserDaoImpl implements UserDao {
 	 * @see com.chalk.salt.dao.user.UserDao#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
 	 */
 	@Override
-	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws Exception {
+	public String saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws Exception {
 		final String sqlQuery = "INSERT INTO cst_topic_requests(`topic_title`, `topic_description`, `secur_uuid`, "
 				+ "`subject_id`, `class_id`, `request_date`, `approval_date`, request_securuuid)"
 				+ "VALUES (:topicTitle, :topicDescription, :securUuid, :subjectId, :classId, "
@@ -538,6 +538,7 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("requestSecurUuid", discussionDetails.getRequestSecurUuid());
             
             query.executeUpdate();
+            return discussionDetails.getRequestSecurUuid();
         }
 	}
 
@@ -678,7 +679,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public String getPreviousTopicRequestImage(String securUuid) throws Exception {
 		final String sqlQuery = "SELECT topic_image from cst_topic_requests "
-	    		+ " WHERE secur_uuid =: securUuid ";
+	    		+ " WHERE secur_uuid =:securUuid ";
     	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
     	try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
@@ -690,7 +691,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateTopicRequestImageDetails(String fileNameToSave, String securUuid) throws Exception {
 		final String sqlQuery = "UPDATE cst_topic_requests SET topic_image=:fileName "
-				+ " WHERE secur_uuid=:securUuid";
+				+ " WHERE request_securuuid=:securUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);

@@ -260,10 +260,13 @@ public class UserResource extends AbstractResource {
     public Response saveTopicRequest(final @Valid DiscussionTopicRequestModel discussion)throws UserException{
     	
     	DiscussionTopicRequestDto discussionDetails = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	String securUuid = null;
     	try{
     		discussionDetails = beanMapper.map(discussion, DiscussionTopicRequestDto.class);
-    		userFacade.saveTopicRequest(discussionDetails);
-            return Response.ok().build();
+    		securUuid = userFacade.saveTopicRequest(discussionDetails);
+    		response.put("securUuid", securUuid);
+            return Response.ok(response).build();
 	    } catch (final UserException userException) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }

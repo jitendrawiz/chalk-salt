@@ -444,6 +444,9 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                }, onRequestFailure);
            };
            
+           function onRequestFailure(error) {
+               showAlert('danger', error.data.message);
+          };
            showElement();
        } ]);
 

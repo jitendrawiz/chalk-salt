@@ -223,9 +223,10 @@ public interface UserDao {
 	 * Save topic request.
 	 *
 	 * @param discussionDetails the discussion details
+	 * @return 
 	 * @throws Exception the exception
 	 */
-	void saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
+	String saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
 
 	/**
 	 * Gets the system settings.

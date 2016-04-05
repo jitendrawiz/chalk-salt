@@ -142,8 +142,8 @@ public class UserFacadeImpl implements UserFacade {
 	 * @see com.chalk.salt.core.user.UserFacade#saveTopicRequest(com.chalk.salt.common.dto.DiscussionTopicRequestDto)
 	 */
 	@Override
-	public void saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
-		userManager.saveTopicRequest(discussionDetails);
+	public String saveTopicRequest(DiscussionTopicRequestDto discussionDetails) throws UserException {
+		return userManager.saveTopicRequest(discussionDetails);
 	}
 
 	/* (non-Javadoc)
