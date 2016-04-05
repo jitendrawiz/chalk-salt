@@ -1,7 +1,7 @@
-<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/main.css">
+<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
 <style>
 .main_bg_bg {
 	background-image: none;
@@ -11,6 +11,16 @@
 	top: 0;
 	z-index: 0;
 	position: fixed;
+}
+.fa {
+	display: inline-block;
+	padding-left: 30px !important;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;	
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 </style>
 <div class="dr_com_main">
@@ -33,7 +43,7 @@
     <div class="dr_subject">
       <h4>Subject</h4>
       <ul >
-        <li ng-repeat="item in topicStatistics"><a href="#" ui-sref="chalkanddust.discussionroomtopics({subjectId: item.subjectId})">{{item.subjectName}}<i class="fa-comments"></i></a></li>
+        <li ng-class="{active: isActive(item.subjectId)}" ng-repeat="item in topicStatistics"><a href="javascript:void(0)" ng-click="getTopicsUsingSubject(item.subjectId)">{{item.subjectName}}<i class="fa-comments"></i></a></li>
       </ul>
     </div>
     <div class="dr_sub_com">
@@ -43,21 +53,14 @@
         </ul>
       </div>
       <div class="dr_bg_img_sub dr_bg"></div>
-      <div class="dr_bg_img_sub dr_main_bg">
-        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
-        <h3><a ui-sref="chalkanddust.discussionroomtopics({subjectId: 1})">Student Stories: Articles by current Engineering Students</a></h3>
-        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
-      </div>
-      <div class="dr_bg_img_sub dr_main_bg">
-        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
-        <h3>Student Stories: Articles by current Engineering Students</h3>
-        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
-      </div>
-      <div class="dr_bg_img_sub dr_main_bg">
-        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
-        <h3>Student Stories: Articles by current Engineering Students</h3>
-        <p>Students from engineering colleges across the country tell their stories and share a slice of their life with readers.</p>
-      </div>
+      <div class="dr_bg_img_sub dr_main_bg" ng-repeat="item in topicList">
+        <div class="dr_icon_list">
+         <i class="fa fa-clock-o"></i>  {{item.topicCreationDate}}  
+         <i class="fa fa-comments-o"></i>  {{item.comments}}
+         </div><br/>
+        <h3><a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})"><b>{{item.topicTitle}}</b></a></h3>
+        <p>{{item.topicDescription}}</p>
+      </div>      
     </div>
     <div class="dr_events">
       <div class="dr_notification">
@@ -77,8 +80,8 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div class="dr_com_head footer_head">
+<nav class="navbar  navbar-fixed-bottom">
        <div footer></div>
-  </div>
+  </nav>
 </div>
 

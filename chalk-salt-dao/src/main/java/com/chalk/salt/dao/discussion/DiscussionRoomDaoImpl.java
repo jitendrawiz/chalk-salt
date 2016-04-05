@@ -184,24 +184,18 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	@Override
 	public List<TopicDetailsDto> getTopicDetails(String classId, String subjectId) throws Exception {
 
-		final String sqlQuery = "SELECT DISTINCT topic_title AS topicTitle,discussion_topic_id AS topicId,  "
-				+ "(SELECT COUNT(cst_discussion_topic_comments.discussion_comment_id) "
-				+ "FROM cst_discussion_topic_comments "
-				+ "WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id "
-				//+ " AND cst_discussion_topic_comments.delete_status=1"
+		final String sqlQuery = "SELECT DISTINCT "
+				+ " discussion_topic_id AS topicId,"
+				+ " (SELECT COUNT(cst_discussion_topic_comments.discussion_comment_id)"
+				+ " FROM cst_discussion_topic_comments"
+				+ " WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id"
 				+ " )AS comments,"
-				+ "(SELECT MAX(cst_discussion_topic_comments.modified_date) FROM cst_discussion_topic_comments "
-				+ "WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id "
-				//+ " AND cst_discussion_topic_comments.delete_status=1"
-				+ " ) AS lastModifiedDate, "
-				+ "(SELECT DISTINCT CONCAT(cst_users.first_name,cst_users.middle_name,cst_users.last_name) "
-				+ "FROM cst_discussion_topics INNER JOIN cst_users ON cst_users.class_id = cst_discussion_topics.class_id "
-				+ "INNER JOIN cst_discussion_topic_comments ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
-				+ " WHERE cst_users.class_id = discussion_topics.class_id AND cst_discussion_topics.discussion_topic_id = discussion_topics.discussion_topic_id "
-				//+ " AND cst_discussion_topic_comments.delete_status=1 "
-				+ "HAVING MAX(cst_discussion_topic_comments.modified_date))AS lastModifiedUserName "
-				+ "FROM cst_discussion_topics AS discussion_topics "
-				+ "WHERE  discussion_topics.class_id=:classId AND discussion_topics.subject_id=:subjectId";
+				+ " topic_title AS topicTitle,"
+				+ " topic_description AS topicDescription,"
+				+ " DATE_FORMAT(discussion_topics.created_date,'%d-%M-%Y %H:%i:%S') AS topicCreationDate"
+				+ " FROM cst_discussion_topics AS discussion_topics"
+				+ " WHERE  discussion_topics.class_id=:classId AND discussion_topics.subject_id=:subjectId"
+				+ " ORDER BY topicCreationDate DESC LIMIT 5";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 

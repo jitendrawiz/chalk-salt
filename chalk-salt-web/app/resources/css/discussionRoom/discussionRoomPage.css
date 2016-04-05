@@ -1,6 +1,8 @@
 *{margin:0px; padding:0px;}
+body { padding-bottom: 140px; }
 .dr_com_main{
 	width:100%;
+	min-height:1000px;
 	height:auto;
 	margin:0 auto;
 	font-family: 'Open Sans', sans-serif;
@@ -141,6 +143,9 @@
 	padding-left:15px;
 	text-decoration:none;
 	color:#000;
+}
+.dr_subject ul li a:active{
+	   background-color: yellow !important;
 }
 .dr_bg img{
 	width:100%;

@@ -9,12 +9,12 @@ define([ 'angular', 'text!./templates/firstPage.tpl.html',
     var module = angular.module('Student.discussionroom.routing', []);
 
     module.config([ '$stateProvider', function($stateProvider) {
-        $stateProvider.state('chalkanddust.discussionroomsubjects', {
-            url : '/discussionroom/subjects',            
+        $stateProvider.state('chalkanddust.discussionroomfirstpage', {
+            url : '/discussionroom/firstPage',            
             template : templatediscussionFirstPage,
-            controller : 'DiscussionRoomSubjectsController as disCtrl'
-        }).state('chalkanddust.discussionroomtopics', {
-            url : '/discussionroom/topics/:subjectId',
+            controller : 'DiscussionRoomFirstController as disCtrl'
+        }).state('chalkanddust.discussionroomtopic', {
+            url : '/discussionroom/topic/:topicId',
             template : templatediscussionroomSecondPage,
             controller : 'DiscussionRoomTopicController as topicCtrl'
         }).state('chalkanddust.discussionroomcomments',{

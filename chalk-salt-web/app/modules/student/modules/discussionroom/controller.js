@@ -2,8 +2,9 @@
 define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalService' ], function(angular) {
     var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service','CandDModal' ]);
 
-    module.controller('DiscussionRoomSubjectsController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService', 'GetTopicStatistics',   
-            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics) {
+    module.controller('DiscussionRoomFirstController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService',
+                                                        'GetTopicStatistics','GetTopicsService',   
+            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics,GetTopicsService) {
     			
                 $scope.alert = {};
                 $scope.alert.show = false;
@@ -11,15 +12,23 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                $scope.defaultSubjectId=null;
                 
                 GetTopicStatistics.query({studentClassId:$scope.classId}, function(response) { 
                     if(response){
                     	 $scope.topicStatistics = response;
+                    	 $scope.defaultSubjectId=$scope.topicStatistics[0].subjectId;
+                    	 getDefaultSubjectTopic($scope.defaultSubjectId);
                     	console.log(response);
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
-                });                	
+                });
+                function getDefaultSubjectTopic(subjectId){
+                if(subjectId!=null){
+                	$scope.getTopicsUsingSubject(subjectId);
+                }
+                }
                
                 
                 var showAlert = function(type, message) {
@@ -38,6 +47,16 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     return true;
                 };
                 
+                $scope.getTopicsUsingSubject=function(subjectId){
+                $window.localStorage.setItem(CHALKNDUST.SUBJECTID,subjectId);
+               	 GetTopicsService.query({classId:$scope.classId, subjectId:subjectId}, function(response) { 
+                        if(response){
+                        	$scope.topicList = response;
+                        }
+                    }, function(error) {
+                    	showAlert('danger',error.data.message);
+                    });
+               }
                 this.goBackToProfileScreen = function() {
                 	console.log("Going back to profile screen");
                 	 $state.go('chalkanddust.profile');
@@ -88,11 +107,11 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     return true;
                 };
                                
-                $scope.subjectId = $stateParams.subjectId;
+                $scope.topicId= $stateParams.topicId;
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
-                $window.localStorage.setItem(CHALKNDUST.SUBJECTID,$scope.subjectId);
+                $scope.subjectId=$window.localStorage.getItem(CHALKNDUST.SUBJECTID);
                 
                 getSubjectNameService.get({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
                     if(response){

@@ -25,6 +25,27 @@ public class TopicDetailsModel extends ApiModel{
 	/** The topic description. */
 	private String topicDescription;
 	
+	/** The topic creation date. */
+	private String topicCreationDate;
+	
+	/**
+	 * Gets the topic creation date.
+	 *
+	 * @return the topic creation date
+	 */
+	public String getTopicCreationDate() {
+		return topicCreationDate;
+	}
+
+	/**
+	 * Sets the topic creation date.
+	 *
+	 * @param topicCreationDate the new topic creation date
+	 */
+	public void setTopicCreationDate(String topicCreationDate) {
+		this.topicCreationDate = topicCreationDate;
+	}
+
 	/**
 	 * Gets the topic description.
 	 *
