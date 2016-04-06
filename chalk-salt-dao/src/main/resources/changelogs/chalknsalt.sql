@@ -477,6 +477,33 @@ $$
 
 DELIMITER ;
 
+DELIMITER $$
+
+USE `chalkndust`$$
+
+DROP FUNCTION IF EXISTS `trim_spaces`$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `trim_spaces`(`dirty_string` TEXT, `trimChar` VARCHAR(1)) RETURNS TEXT CHARSET latin1
+BEGIN
+  DECLARE cnt,len INT(11) ;
+  DECLARE clean_string TEXT;
+  DECLARE chr,lst VARCHAR(1);
+  SET len=LENGTH(dirty_string);
+  SET cnt=1;  
+  SET clean_string='';
+ WHILE cnt <= len DO
+      SET  chr=RIGHT(LEFT(dirty_string,cnt),1);           
+      IF  chr <> trimChar OR (chr=trimChar AND lst <> trimChar ) THEN  
+          SET  clean_string =CONCAT(clean_string,chr);
+      SET  lst=chr;     
+     END IF;
+     SET cnt=cnt+1;  
+  END WHILE;
+  RETURN clean_string;
+END$$
+
+DELIMITER ;
+
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `request_securuuid` VARCHAR(100) NOT NULL AFTER `approval_date`;
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `topic_image` VARCHAR(255) NULL AFTER `request_securuuid`;
 
