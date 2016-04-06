@@ -191,9 +191,11 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " WHERE cst_discussion_topic_comments.discussion_topic_id = discussion_topics.discussion_topic_id"
 				+ " )AS comments,"
 				+ " topic_title AS topicTitle,"
-				+ " topic_description AS topicDescription,"
-				+ " DATE_FORMAT(discussion_topics.created_date,'%d-%M-%Y %H:%i:%S') AS topicCreationDate"
+				+ " SUBSTRING_INDEX(trim_spaces(topic_description,' '),' ', 30) AS topicDescription,"
+				+ " DATE_FORMAT(discussion_topics.created_date,'%d-%M-%Y %H:%i:%S') AS topicCreationDate,"
+				+ " cst_class_subjects.subject_name AS subjectName"
 				+ " FROM cst_discussion_topics AS discussion_topics"
+				+ " JOIN `cst_class_subjects` ON `cst_class_subjects`.subject_id=discussion_topics.subject_id"
 				+ " WHERE  discussion_topics.class_id=:classId AND discussion_topics.subject_id=:subjectId"
 				+ " ORDER BY topicCreationDate DESC LIMIT 5";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);

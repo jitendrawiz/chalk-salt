@@ -26,6 +26,27 @@ public class TopicDetailsDto {
 	/** The topic creation date. */
 	private String topicCreationDate;
 	
+	/** The subject name. */
+	private String subjectName;
+	
+	/**
+	 * Gets the subject name.
+	 *
+	 * @return the subject name
+	 */
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	/**
+	 * Sets the subject name.
+	 *
+	 * @param subjectName the new subject name
+	 */
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
 	/**
 	 * Gets the topic creation date.
 	 *

@@ -13,12 +13,14 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
                 $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
                 $scope.defaultSubjectId=null;
+                $scope.defaultSubject=null;
                 
                 GetTopicStatistics.query({studentClassId:$scope.classId}, function(response) { 
                     if(response){
                     	 $scope.topicStatistics = response;
                     	 $scope.defaultSubjectId=$scope.topicStatistics[0].subjectId;
                     	 getDefaultSubjectTopic($scope.defaultSubjectId);
+                    	 $scope.defaultSubject=$scope.topicStatistics[0].subjectName;
                     	console.log(response);
                     }
                 }, function(error) {
@@ -52,6 +54,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                	 GetTopicsService.query({classId:$scope.classId, subjectId:subjectId}, function(response) { 
                         if(response){
                         	$scope.topicList = response;
+                        	$scope.defaultSubject=$scope.topicList[0].subjectName;
                         }
                     }, function(error) {
                     	showAlert('danger',error.data.message);
@@ -78,6 +81,11 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     $timeout(showElement, 1000);
                 }
                 showElement();
+                
+                $scope.contactUs = function() {
+                    $state.go('chalkanddust.contactus');
+                    console.log("i am in");
+        };
             } ]);
 
     module.controller('DiscussionRoomTopicController',

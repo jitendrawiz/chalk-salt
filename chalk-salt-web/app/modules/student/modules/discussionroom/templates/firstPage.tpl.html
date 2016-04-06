@@ -1,7 +1,7 @@
+<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="../../../../resources/css/main.css">
-<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
 <style>
 .main_bg_bg {
 	background-image: none;
@@ -12,15 +12,9 @@
 	z-index: 0;
 	position: fixed;
 }
-.fa {
-	display: inline-block;
+
+.fa.fa-clock-o, .fa.fa-comments-o{
 	padding-left: 30px !important;
-	font-family: FontAwesome;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 1;	
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 </style>
 <div class="dr_com_main">
@@ -33,7 +27,7 @@
       <div class="dr_search">
         <ul>
           <li><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+          <li><a href="javscript:void(0)" ng-click="disCtrl.goBackToProfileScreen();"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
         </ul>
       </div>
     </div>
@@ -49,7 +43,7 @@
     <div class="dr_sub_com">
       <div class="dr_dis_head">
         <ul>
-          <li><a href="#">Discussions</a></li>
+         <b><li><a href="#" style="font-size: 30px;">Discussion Room - {{defaultSubject}}</a></li></b>
         </ul>
       </div>
       <div class="dr_bg_img_sub dr_bg"></div>
@@ -60,6 +54,10 @@
          </div><br/>
         <h3><a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})"><b>{{item.topicTitle}}</b></a></h3>
         <p>{{item.topicDescription}}</p>
+        <p><a  ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})" style="float: right; color: #99ccff;"><u>Read More >></u></a></p>
+      </div>
+      <div class="dr_bg_img_sub dr_main_bg" ng-if="topicList.length=='0'">
+           <p>No Topics Found.</p>
       </div>      
     </div>
     <div class="dr_events">
