@@ -16,7 +16,7 @@ define([ 'angular', 'text!./templates/firstPage.tpl.html',
         }).state('chalkanddust.discussionroomtopic', {
             url : '/discussionroom/topic/:topicId',
             template : templatediscussionroomSecondPage,
-            controller : 'DiscussionRoomTopicController as topicCtrl'
+            controller : 'DiscussionRoomSecondController as secondCtrl'
         }).state('chalkanddust.discussionroomcomments',{
         	url : '/discussionroom/comments/:topicId',
             template : templatediscussionroomcomments,

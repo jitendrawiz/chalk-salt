@@ -12,6 +12,9 @@
 	z-index: 0;
 	position: fixed;
 }
+.fa.fa-comments-o{
+	padding-left: 30px !important;
+}
 </style>
 <div class="dr_com_main">
   <div class="dr_com_head">
@@ -22,8 +25,8 @@
       </ul>
       <div class="dr_search">
         <ul>
-          <li><a href="#"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+          <li><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
+          <li><a href="javscript:void(0);" ng-click="secondCtrl.goBackToFirstPage();"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
         </ul>
       </div>
     </div>
@@ -44,31 +47,28 @@
     <div class="dr_sub_com">
       <div class="dr_dis_head">
         <ul>
-          <li><a href="#">Discussions</a></li>
+        <b><li><label style="font-size: 30px;">Discussion Room - {{subjectName}}</label></li></b>
         </ul>
       </div>
       <div class="dr_bg_img_sub dr_bg"><img src="../../../../resources/images/66A_Master-bedroom02.jpg" /></div>
       <div class="dr_bg_img_sub dr_main_bg">
-        <div class="dr_icon_list"> <span class="glyphicon glyphicon-time"> 01:20 pm</span> <span><i class="fa-comments"></i>18..</span> </div>
-        <h3>Student Stories: Articles by current Engineering Students</h3>
-        <p>"360 minutes hain tumhare paas!" 90 questions, 360 minutes, 4 minutes per question seems quite an ordinary task but in reality it's not. JEE Mains is one of most eloquent way of summarising two years of Physics, Chemistry and Mathematics in a small booklet. JEE Mains is the primary step to enter an IIT/NIT/IIIT. The paper consists of 90 multiple choice questions with single correct answers. The level of questions is as same as the NCERT level with some questions being a little tougher. The paper covers almost the full 2 years course with questions ranging from basic mechanics to advanced rotational mechanics. Cracking JEE Mains requires at least two years of dedicated as well as systematic preparation. Normally, the paper consists of about 25% of questions that are easy, 50% average and rest 25% difficult questions. Holding on to your nerves is very important during the exam..</p>
+        <div class="dr_icon_list">
+         <i class="fa fa-clock-o"></i>  hi
+		 <i class="fa fa-comments-o"></i> 20 
+		</div><br/>
+        <h3>{{topicTitle}}</h3>
+        <p>{{topicDescription}}</p>
         <div class="clear"></div>
       </div>
       
       
       
       <div class="dr_bg_img_sub dr_main_bg">
-      <div class="dr_student_com com_bg">
+      <div class="dr_student_com com_bg" ng-repeat="item in commentsList">
       	<div class="dr_stud_img"><img src="../../../../resources/images/useravatar.png" /></div>
-        <h5><a href="#">Ashish Poddar </a> <a href="#"> @a.poddar</a></h5>
-        <p><a href="#">@pratyay.nigam</a>  Is it not 180 minutes? A good article </p>
-        <p>A Good Artical however.....</p>
-      </div>
-      <div class="dr_student_com com_bg">
-      	<div class="dr_stud_img"><img src="../../../../resources/images/useravatar.png" /></div>
-        <h5><a href="#">Ashish Poddar </a> <a href="#"> @a.poddar</a></h5>
-        <p><a href="#">@pratyay.nigam</a>  Is it not 180 minutes? A good article </p>
-        <p>A Good Artical however.....</p>
+        <h5><b>{{item.userName}}</b></h5>
+        <p>Time will come here... </p>
+        <p>{{item.generalComments}}</p>
       </div>
       		<textarea name="text" cols="" rows="" placeholder="comment..."></textarea>
       </div>

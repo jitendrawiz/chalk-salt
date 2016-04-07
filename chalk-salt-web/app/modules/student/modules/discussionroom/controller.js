@@ -2,9 +2,9 @@
 define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalService' ], function(angular) {
     var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service','CandDModal' ]);
 
-    module.controller('DiscussionRoomFirstController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window', 'GetUserDetailsService',
+    module.controller('DiscussionRoomFirstController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window',
                                                         'GetTopicStatistics','GetTopicsService',   
-            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetUserDetailsService,GetTopicStatistics,GetTopicsService) {
+            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetTopicStatistics,GetTopicsService) {
     			
                 $scope.alert = {};
                 $scope.alert.show = false;
@@ -65,35 +65,19 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	 $state.go('chalkanddust.profile');
                 };
                 
-                this.openTopicRequest = function() {
-                	console.log("open topic request page");
-                	$state.go('chalkanddust.topicrequest');
-                };
-                
-                var myElements = $element.find('.requestTopicButton');
-                function showElement() {
-                	myElements.css("background", "Aqua");               
-                    $timeout(hideElement, 1000);
-                }
-
-                function hideElement() {
-                	myElements.css("background", "Wheat");                
-                    $timeout(showElement, 1000);
-                }
-                showElement();
-                
                 $scope.contactUs = function() {
                     $state.go('chalkanddust.contactus');
-                    console.log("i am in");
-        };
+                };
             } ]);
 
-    module.controller('DiscussionRoomTopicController',
+    module.controller('DiscussionRoomSecondController',
     		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams',
-    		 'GetTopicsService','getSubjectNameService','filterFilter', 
+    		 'getSubjectNameService','filterFilter', 'GetCommmentsOfTopicService','CommentService',
+             'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log',
             
-            function($element,$timeout,$scope, CHALKNDUST, $state, $window, $stateParams, GetTopicsService, 
-            		getSubjectNameService, filterFilter) {
+            function($element,$timeout,$scope, CHALKNDUST, $state, $window, $stateParams, 
+            		getSubjectNameService, filterFilter,GetCommmentsOfTopicService,CommentService,
+            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -129,50 +113,30 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	showAlert('danger',error.data.message);
                 });                
                 
-                GetTopicsService.query({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
+                this.goBackToFirstPage = function() {
+                    $state.go("chalkanddust.discussionroomfirstpage");
+                };
+                
+                /*Get Topic Details */
+                topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
-                    	$scope.topicList = response;
-                    	console.log(response);
-                    	// pagination controls
-                    	$scope.currentPage = 1;
-                    	$scope.totalItems = $scope.topicList.length;
-                    	$scope.itemsPerPage = 10; // items per page
-                    	$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
-
-                    	// $watch search to update pagination
-                    	$scope.$watch('search', function (newVal, oldVal) {
-                    		$scope.topicDetails = filterFilter($scope.topicList, newVal);
-                    		$scope.totalItems = $scope.topicDetails.length;
-                    		$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
-                    		$scope.currentPage = 1;
-                    	}, true);
-                    }
+                        console.log("response is---"+response);
+                    	$scope.topicTitle=response.topicTitle;
+                    	$scope.topicDescription=response.topicDescription;
+                	                    }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
                 
-                this.goBackToSubjectsScreen = function() {
-                	console.log("Going back to subjects screen");
-                    $state.go("chalkanddust.discussionroomsubjects");
-                };
-                
-                this.openTopicRequest = function() {
-                   	console.log("open topic request page");
-                   	$state.go('chalkanddust.topicrequest');
-                };
-                   
-                var myElements = $element.find('.requestTopicButton');
-                function showElement() {
-                	myElements.css("background", "Aqua");               
-                    $timeout(hideElement, 1000);
-                }
-
-                function hideElement() {
-                	myElements.css("background", "Wheat");                
-                    $timeout(showElement, 1000);
-                }
-                
-                showElement();
+                /*Get Comments of the particular Topic 
+                 * using ClassId,SubjectId,topicId */
+                GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
+                    if(response){
+                    	$scope.commentsList = response;
+                    }
+                }, function(error) {
+                	showAlert('danger',error.data.message);
+                });
             } ]);
 
     module.controller('DiscussionRoomCommentsController', ['$element','$timeout',
@@ -193,8 +157,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
                 $scope.topicId = $stateParams.topicId;
                 
-                
-                
                 var showAlert = function(type, message) {
                     $scope.alert = {};
                     $scope.alert.type = type;
@@ -210,16 +172,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
 
                     return true;
                 };
-                
-                topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
-                    if(response){
-                        console.log("resoibse aere"+response);
-                    	$scope.topicTitle=response.topicTitle;
-                    	$scope.topicDescription=response.topicDescription;
-                	                    }
-                }, function(error) {
-                	showAlert('danger',error.data.message);
-                });
                 
                 this.saveComment = function() {
                    if($scope.commentsinfo!=null && $scope.commentsinfo!=""){
@@ -260,28 +212,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
 
                    }
                 };
-                
-                GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
-                    if(response){
-                    	$scope.commentsList = response;
-                    	// pagination controls
-                    	$scope.currentPage = 1;
-                    	$scope.totalItems = $scope.commentsList.length;
-                    	$scope.itemsPerPage = 10; // items per page
-                    	$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
-
-                    	// $watch search to update pagination
-                    	$scope.$watch('search', function (newVal, oldVal) {
-                    		$scope.commentListDetails = filterFilter($scope.commentsList, newVal);
-                    		$scope.totalItems = $scope.commentListDetails.length;
-                    		$scope.maxSize = Math.ceil($scope.totalItems / $scope.itemsPerPage);
-                    		$scope.currentPage = 1;
-                    	}, true);
-
-                    }
-                }, function(error) {
-                	showAlert('danger',error.data.message);
-                });
                 
                 
                 this.editComment=function(commentUuid){
