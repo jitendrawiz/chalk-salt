@@ -15,12 +15,12 @@ import org.sql2o.data.Table;
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UserDaoImpl.
  */
@@ -676,6 +676,9 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getPreviousTopicRequestImage(java.lang.String)
+	 */
 	@Override
 	public String getPreviousTopicRequestImage(String securUuid) throws Exception {
 		final String sqlQuery = "SELECT topic_image from cst_topic_requests "
@@ -688,6 +691,9 @@ public class UserDaoImpl implements UserDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#updateTopicRequestImageDetails(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateTopicRequestImageDetails(String fileNameToSave, String securUuid) throws Exception {
 		final String sqlQuery = "UPDATE cst_topic_requests SET topic_image=:fileName "
@@ -698,6 +704,40 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("fileName", fileNameToSave);          
             query.addParameter("securUuid", securUuid);
             query.executeUpdate();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#saveGuestUserDetails(com.chalk.salt.common.dto.GuestUserDto)
+	 */
+	@Override
+	public boolean saveGuestUserDetails(GuestUserDto userDetails) throws Exception {
+		final String sqlQuery = "INSERT INTO cst_guestusers(`username`,	`email`, `mobileno`, `secur_uuid`)"
+				+ " VALUES(:userName, :email, :mobileNo, :securUuid)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("userName", userDetails.getUserName());
+            query.addParameter("email", userDetails.getEmail());
+            query.addParameter("mobileNo", userDetails.getMobileNo());
+            query.addParameter("securUuid", userDetails.getSecurUuid());
+            query.executeUpdate();
+        }
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#checkGuestUserExists(com.chalk.salt.common.dto.GuestUserDto)
+	 */
+	@Override
+	public String checkGuestUserExists(GuestUserDto userDetails) throws Exception {
+		final String sqlQuery = "SELECT secur_uuid as securUuid from cst_guestusers WHERE email=:email AND mobileno=:mobileNo limit 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("email", userDetails.getEmail());
+            query.addParameter("mobileNo", userDetails.getMobileNo());
+            return query.executeAndFetchFirst(String.class);
         }
 	}
 }

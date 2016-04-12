@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -223,7 +224,7 @@ public interface UserDao {
 	 * Save topic request.
 	 *
 	 * @param discussionDetails the discussion details
-	 * @return 
+	 * @return the string
 	 * @throws Exception the exception
 	 */
 	String saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws Exception;
@@ -318,4 +319,22 @@ public interface UserDao {
 	 * @throws Exception the exception
 	 */
 	void updateTopicRequestImageDetails(String fileNameToSave, String securUuid)throws Exception;
+
+	/**
+	 * Save guest user details.
+	 *
+	 * @param userDetails the user details
+	 * @return true, if successful
+	 * @throws Exception the exception
+	 */
+	boolean saveGuestUserDetails(GuestUserDto userDetails)throws Exception;
+
+	/**
+	 * Check guest user exists.
+	 *
+	 * @param userDetails the user details
+	 * @return the string
+	 * @throws Exception the exception
+	 */
+	String checkGuestUserExists(GuestUserDto userDetails)throws Exception;
 }

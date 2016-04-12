@@ -34,6 +34,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionTopicRequestModel;
+import com.chalk.salt.api.model.GuestUserModel;
 import com.chalk.salt.api.model.ProfilePhotoUploadModel;
 import com.chalk.salt.api.model.TopicImageUploadModel;
 import com.chalk.salt.api.model.UserModel;
@@ -42,6 +43,7 @@ import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -511,5 +513,22 @@ public class UserResource extends AbstractResource {
 	    } catch (final UserException userException) {
 	        throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
 	    }
+    }
+    
+    @POST
+    @Path("/guest/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response saveGuestUserDetails(final @Valid GuestUserModel userModel) throws UserException {
+        try {
+            final GuestUserDto userDetails = beanMapper.map(userModel, GuestUserDto.class); 
+            GuestUserDto userDto = beanMapper.map(userDetails, GuestUserDto.class);
+            GuestUserDto response = userFacade.saveGuestUserDetails(userDto);           
+            return Response.ok(response).build();
+
+        } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
     }
 }

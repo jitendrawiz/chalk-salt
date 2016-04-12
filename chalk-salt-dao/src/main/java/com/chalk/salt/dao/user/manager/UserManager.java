@@ -7,6 +7,7 @@ package com.chalk.salt.dao.user.manager;
 import java.util.List;
 
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
@@ -75,7 +76,7 @@ public interface UserManager {
 	 * Save topic request.
 	 *
 	 * @param discussionDetails the discussion details
-	 * @return 
+	 * @return the string
 	 * @throws UserException the user exception
 	 */
 	String saveTopicRequest(DiscussionTopicRequestDto discussionDetails)throws UserException;
@@ -137,4 +138,13 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)throws UserException;
+
+	/**
+	 * Save guest user details.
+	 *
+	 * @param userDetails the user details
+	 * @return the string
+	 * @throws UserException the user exception
+	 */
+	GuestUserDto saveGuestUserDetails(GuestUserDto userDetails)throws UserException;
 }

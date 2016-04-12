@@ -16,6 +16,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.EmailNotificationDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
@@ -196,6 +197,14 @@ public class UserFacadeImpl implements UserFacade {
 	public String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)
 			throws UserException {
 		return userManager.uploadTopicRequestImage(securUuid,documentUploadData);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#saveGuestUserDetails(com.chalk.salt.common.dto.GuestUserDto)
+	 */
+	@Override
+	public GuestUserDto saveGuestUserDetails(GuestUserDto userDetails) throws UserException {
+		return userManager.saveGuestUserDetails(userDetails);
 	}
 
 	

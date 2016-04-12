@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
+import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.SubjectDto;
@@ -487,5 +488,24 @@ public class UserManagerImpl implements UserManager {
         }
 		return securUuid;	
 	
+	}
+
+	@Override
+	public GuestUserDto saveGuestUserDetails(GuestUserDto userDetails) throws UserException {
+		logger.info("Registering new guest user ......");
+		String securUuid = null;
+        try {
+	        securUuid = userDao.checkGuestUserExists(userDetails);
+	        if(securUuid==null){
+		  		securUuid = UUID.randomUUID().toString();	  		
+				userDetails.setSecurUuid(securUuid);
+				if(!userDao.saveGuestUserDetails(userDetails)){
+					throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save Guest User Registration");
+				}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        return userDetails;
 	}
 }
