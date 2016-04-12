@@ -28,7 +28,27 @@ public class TopicDetailsDto {
 	
 	/** The subject name. */
 	private String subjectName;
+	/** The secur uuid. */
+	private String securUuid;
 	
+	
+	/**
+	 * Gets the secur uuid.
+	 *
+	 * @return the secur uuid
+	 */
+	public String getSecurUuid() {
+		return securUuid;
+	}
+
+	/**
+	 * Sets the secur uuid.
+	 *
+	 * @param securUuid the new secur uuid
+	 */
+	public void setSecurUuid(String securUuid) {
+		this.securUuid = securUuid;
+	}
 	/**
 	 * Gets the subject name.
 	 *

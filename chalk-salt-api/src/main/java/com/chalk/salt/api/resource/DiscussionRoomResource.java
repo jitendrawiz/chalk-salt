@@ -1,6 +1,8 @@
 package com.chalk.salt.api.resource;
 
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
@@ -40,6 +43,7 @@ import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.discussion.DiscussionRoomFacade;
+import com.chalk.salt.core.user.UserFacade;
 
 /**
  * The Class DiscussionRoomResource.
@@ -59,6 +63,10 @@ public class DiscussionRoomResource extends AbstractResource {
     /** The discussion room facade. */
     @Inject
     private DiscussionRoomFacade discussionRoomFacade;
+    
+    /** The user facade. */
+    @Inject
+    private UserFacade userFacade;
     
     /**
      * Save topic.
@@ -341,13 +349,28 @@ public class DiscussionRoomResource extends AbstractResource {
     @RequiresAuthentication    
     public Response getSingleTopicDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId,
     		@PathParam("topicId") final String topicId)throws DiscussionException{
-    	
+    	final Map<String, Object> response = new HashMap<String, Object>();
     	TopicDetailsModel discussionTopics = null;
     	TopicDetailsDto discussionTopic = null;
+    	String topicImage=null;
     	try{
     		discussionTopic = discussionRoomFacade.getSingleTopicDetails(classId,subjectId,topicId);
+    		try{
+    		topicImage=userFacade.getTopicImageLink(discussionTopic.getSecurUuid());
+    		if (topicImage != null) {
+    		File file=new File(topicImage);
+    	    final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+    	    final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+    	    response.put("photolink", "data:" + mediaType + ";base64," + encodedImageString);
+            }else{
+        	response.put("photolink", "noImage");
+            }
+            }catch(Exception e){
+    			e.printStackTrace();
+    		}
     		discussionTopics = beanMapper.map(discussionTopic, TopicDetailsModel.class);
-            return Response.ok(discussionTopics).build();
+    		response.put("discussionTopics", discussionTopics);
+            return Response.ok(response).build();
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }
@@ -457,7 +480,7 @@ public class DiscussionRoomResource extends AbstractResource {
     /**
      * Approve topic requests.
      *
-     * @param topicRequestId the topic request id
+     * @param requestSecurUuid the request secur uuid
      * @return the response
      * @throws DiscussionException the discussion exception
      */

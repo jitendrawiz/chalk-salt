@@ -117,12 +117,15 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     $state.go("chalkanddust.discussionroomfirstpage");
                 };
                 
-                /*Get Topic Details */
+                /*Get Topic Details only Topic Details*/
                 topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
-                        console.log("response is---"+response);
-                    	$scope.topicTitle=response.topicTitle;
-                    	$scope.topicDescription=response.topicDescription;
+                        console.log("response is---"+JSON.stringify(response));
+                    	$scope.topicDetails=response.discussionTopics;
+                    	$scope.imageLink=response.photolink;
+                    	if($scope.imageLink=="noImage"){
+                    		$scope.imageLink=undefined;
+                    	}
                 	                    }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
@@ -133,10 +136,15 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
                     	$scope.commentsList = response;
+                    	 console.log("Comments response is---\n"+JSON.stringify(response));
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
                 });
+                
+                $scope.isUndefined = function (thing) {
+                    return (typeof thing === "undefined");
+                };
             } ]);
 
     module.controller('DiscussionRoomCommentsController', ['$element','$timeout',

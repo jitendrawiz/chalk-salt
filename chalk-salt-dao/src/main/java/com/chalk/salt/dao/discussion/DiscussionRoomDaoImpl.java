@@ -244,6 +244,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " cst_discussion_topic_comments.discussion_topic_id AS discussionTopicId,"
 				+ " cst_discussion_topic_comments.general_comments AS generalComments,"
 				+ " cst_discussion_topic_comments.modified_date AS modifiedDate, "
+				+ " DATE_FORMAT(cst_discussion_topic_comments.created_date,'%d-%M-%Y %H:%i:%S') AS createdDate, "
 				+ " cst_discussion_topic_comments.user_securUuid AS userSecurUuid, "
 				+ " cst_discussion_topic_comments.comment_uuid  AS commentUuid,"
 				+ " cst_users.created_date as joinedDate "
@@ -255,9 +256,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " WHERE cst_discussion_topics.class_id =:classId AND "
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
 				+ " cst_discussion_topics.discussion_topic_id =:topicId "
-				//+ " AND  cst_discussion_topic_comments.delete_status = 1 "
 				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
-				+ " ORDER BY cst_discussion_topic_comments.modified_date DESC";
+				+ " ORDER BY cst_discussion_topic_comments.created_date ASC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -276,7 +276,14 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 			String subjectId, String topicId) throws Exception {
 		final String sqlQuery = "SELECT DISTINCT "
 				+ " cst_discussion_topics.topic_title AS topicTitle,"
-				+ " cst_discussion_topics.topic_description AS topicDescription "
+				+ " cst_discussion_topics.topic_description AS topicDescription, "
+                + " DATE_FORMAT(cst_discussion_topics.created_date,'%d-%M-%Y %H:%i:%S') AS topicCreationDate,"
+                + " (SELECT COUNT(discussion_comment_id) FROM `cst_discussion_topic_comments`"
+                + "  WHERE cst_discussion_topic_comments.discussion_topic_id=cst_discussion_topics.discussion_topic_id) AS comments,"
+                + "  (SELECT DATE_FORMAT(cst_discussion_topic_comments.modified_date,'%d-%M-%Y %H:%i:%S') FROM `cst_discussion_topic_comments`"
+                + "  WHERE cst_discussion_topic_comments.discussion_topic_id=cst_discussion_topics.discussion_topic_id "
+                + "  ORDER BY cst_discussion_topic_comments.discussion_comment_id DESC LIMIT 1) AS lastModifiedDate,"
+                + " cst_discussion_topics.secur_uuid as securUuid "
 				+ " FROM "
 				+ " cst_discussion_topics "
 				+ " WHERE "
