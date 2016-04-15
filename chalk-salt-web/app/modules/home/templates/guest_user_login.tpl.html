@@ -3,10 +3,7 @@
 </div>
 <div class="modal-body">
 	<form role="form" action="" method="post" name="GuestloginForm" novalidate>
-		<div class="col-xs-12 col-md-6 wow fadeInLeft"
-			style="visibility: visible; animation-name: fadeInLeft;">
-			<div class="row inner-grid">
-				<div class="user_log_detail">
+		
 					<h3>Log In</h3>
 					<div class="form-group"
 						ng-class="{ 'has-error' : GuestloginForm.username.$invalid && !GuestloginForm.username.$pristine }">
@@ -20,13 +17,11 @@
 					</div>
 					<div class="form-group"
 						ng-class="{ 'has-error' : GuestloginForm.email.$invalid && !GuestloginForm.email.$pristine }">
-						<input class="form-control" id="email"
-							name="email" ng-model="guestRequest.email"
-							type="text" placeholder="Email" required /> <span
+						<input class="form-control" id="email" name="email" ng-model="guestRequest.email"
+							type="email" placeholder="Email" required /> <span
 							style="color: red" class="help-block"
 							ng-show="GuestloginForm.email.$invalid  && !GuestloginForm.email.$pristine">
-							<span ng-show="GuestloginForm.email.$error.required">Email 
-								is required.</span>
+							<span ng-show="GuestloginForm.email.$error.required">Email is required.</span>
 						</span>
 					</div>
 					<div class="form-group"
@@ -40,13 +35,11 @@
 								is required.</span>
 						</span>
 					</div>
-					<button type="button" class="btn btn-secondary btn-block"
+					<button type="button" class="btn btn-primary"
 						ng-disabled="loginForm.$invalid"
 						ng-click="homeCtrl.checkGuestUser()">Log In</button>
 					<button class="btn btn-warning" type="button" ng-click="homeCtrl.close()">Cancel</button>
-				</div>
-			</div>
-		</div>
+				
 	</form>
 </div>
 <div class="modal-footer">

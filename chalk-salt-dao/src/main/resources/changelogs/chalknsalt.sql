@@ -507,6 +507,18 @@ DELIMITER ;
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `request_securuuid` VARCHAR(100) NOT NULL AFTER `approval_date`;
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `topic_image` VARCHAR(255) NULL AFTER `request_securuuid`;
 
+CREATE TABLE `cst_guestusers` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `mobileno` varchar(20) NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` datetime DEFAULT NULL,
+  `secur_uuid` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

@@ -138,8 +138,12 @@ define(
 										};
 										
 										
-										$scope.close = function ($modal) {
+										this.close = function ($modal) {
 											$modal.dismiss('cancel');
+										};
+										
+										this.checkGuestUser=function(){
+											console.log("Inside Check Guest User");
 										};
 									} ]);
 		});
