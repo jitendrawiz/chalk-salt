@@ -518,8 +518,7 @@ public class UserResource extends AbstractResource {
     @POST
     @Path("/guest/login")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @RequiresAuthentication
+    @Consumes(MediaType.APPLICATION_JSON)    
     public Response saveGuestUserDetails(final @Valid GuestUserModel userModel) throws UserException {
         try {
             final GuestUserDto userDetails = beanMapper.map(userModel, GuestUserDto.class); 

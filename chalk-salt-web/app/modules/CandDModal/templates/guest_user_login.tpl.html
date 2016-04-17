@@ -1,0 +1,61 @@
+<div class="modal-header">
+	<h3 class="modal-title">Guest User Login</h3>
+</div>
+<div class="modal-body">
+	<form role="form" action="" method="post" name="GuestloginForm"
+		novalidate>
+
+		<h3>Log In</h3>
+		<div class="form-group"
+			ng-class="{ 'has-error' : GuestloginForm.userName.$invalid && !GuestloginForm.userName.$pristine }">
+			<input class="form-control" id="userName" name="userName"
+				ng-model="guestRequest.userName" type="text"
+				placeholder="Guest User Full Name" required /> <span
+				style="color: red" class="help-block"
+				ng-show="GuestloginForm.userName.$invalid  && !GuestloginForm.userName.$pristine">
+				<span ng-show="GuestloginForm.userName.$error.required">Full
+					Name is required.</span>
+			</span>
+		</div>
+		<div class="form-group"
+			ng-class="{ 'has-error' : GuestloginForm.email.$invalid && !GuestloginForm.email.$pristine }">
+			<input class="form-control" id="email" name="email"
+				ng-model="guestRequest.email" type="email" placeholder="Email"
+				required /> <span style="color: red" class="help-block"
+				ng-show="GuestloginForm.email.$invalid  && !GuestloginForm.email.$pristine">
+				<span ng-show="GuestloginForm.email.$error.required">Email is
+					required.</span>
+			</span>
+		</div>
+		<div class="form-group"
+			ng-class="{ 'has-error' : GuestloginForm.mobileNo.$invalid && !GuestloginForm.mobileNo.$pristine }">
+			<input class="form-control" id="mobileNo" name="mobileNo"
+				ng-model="guestRequest.mobileNo" type="number"
+				placeholder="Mobile No" required /> <span style="color: red"
+				class="help-block"
+				ng-show="GuestloginForm.mobileNo.$invalid  && !GuestloginForm.mobileNo.$pristine">
+				<span ng-show="GuestloginForm.mobileNo.$error.required">Mobile
+					No is required.</span>
+			</span>
+		</div>
+		<div class="form-group"
+			ng-class="{ 'has-error' : GuestloginForm.classId.$invalid && !GuestloginForm.classId.$pristine }">
+			<select class="form-control" ng-model="guestRequest.classId"
+				name="classId" placeholder="Class"
+				ng-options="studentclass.classId as studentclass.className for studentclass in modalOptions"
+				ng-required="true">
+				<option value="" disabled>Select Class</option>
+			</select>
+			<p
+				ng-show="GuestloginForm.classId.$error.required && !GuestloginForm.classId.$pristine">User
+				Class is required.</p>
+		</div>
+
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary"
+		ng-disabled="GuestloginForm.$invalid" ng-click="ok(guestRequest)">Log
+		In</button>
+	<button class="btn btn-warning" type="button" ng-click="close(false)">Cancel</button>
+</div>

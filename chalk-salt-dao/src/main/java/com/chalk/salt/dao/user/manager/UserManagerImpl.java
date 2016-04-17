@@ -425,6 +425,9 @@ public class UserManagerImpl implements UserManager {
 		return securUuid;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#getTopicImageLink(java.lang.String)
+	 */
 	@Override
 	public String getTopicImageLink(String securUuid) throws UserException {
 		String imagePath=null;
@@ -443,6 +446,9 @@ public class UserManagerImpl implements UserManager {
 	        return imagePath;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#uploadTopicRequestImage(java.lang.String, com.chalk.salt.common.dto.TopicImageUploadDto)
+	 */
 	@Override
 	public String uploadTopicRequestImage(String securUuid, TopicImageUploadDto documentUploadData)
 			throws UserException {
@@ -490,6 +496,9 @@ public class UserManagerImpl implements UserManager {
 	
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#saveGuestUserDetails(com.chalk.salt.common.dto.GuestUserDto)
+	 */
 	@Override
 	public GuestUserDto saveGuestUserDetails(GuestUserDto userDetails) throws UserException {
 		logger.info("Registering new guest user ......");
@@ -502,6 +511,8 @@ public class UserManagerImpl implements UserManager {
 				if(!userDao.saveGuestUserDetails(userDetails)){
 					throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save Guest User Registration");
 				}
+	        }else{
+	        	userDetails=userDao.getGuestUserInfo(securUuid);
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();

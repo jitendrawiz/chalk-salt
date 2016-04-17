@@ -11,7 +11,8 @@
 	"USERNAME":"Username",
 	"CLASSID":"classId",
 	"SUBJECTID":"subjectId",
-	"TABNUMBER":"tabnumber"
+	"TABNUMBER":"tabnumber",
+	"GUESTCLASSID":"guestClassId"
     }
    
 }

@@ -1682,10 +1682,10 @@ button.mfp-close:after {
 	transition: all .5s ease-in 0s;
 }
 .control-one .owl-prev {
-	cursor: url("../img/icons/icon-arrow_l.png"), auto!important;
+	cursor: url("../images/icons/icon-arrow_l.png"), auto!important;
 }
 .control-one .owl-next {
-	cursor: url("../img/icons/icon-arrow_r.png"), auto!important;
+	cursor: url("../images/icons/icon-arrow_r.png"), auto!important;
 	left: auto;
 	right: 0;
 }

@@ -337,4 +337,13 @@ public interface UserDao {
 	 * @throws Exception the exception
 	 */
 	String checkGuestUserExists(GuestUserDto userDetails)throws Exception;
+
+	/**
+	 * Gets the guest user info.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the guest user info
+	 * @throws Exception the exception
+	 */
+	GuestUserDto getGuestUserInfo(String securUuid)throws Exception;
 }

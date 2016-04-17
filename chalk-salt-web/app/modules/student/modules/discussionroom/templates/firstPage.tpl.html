@@ -13,74 +13,81 @@
 	position: fixed;
 }
 
-.fa.fa-comments-o{
+.fa.fa-comments-o {
 	padding-left: 30px !important;
 }
 </style>
 <div class="dr_com_main">
-  <div class="dr_com_head">
-    <div class="dr_heading">
-      <ul>
-        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com </a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
-      </ul>
-      <div class="dr_search">
-        <ul>
-          <li><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
-          <li><a href="javscript:void(0)" ng-click="disCtrl.goBackToProfileScreen();"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="clear"></div>
-  <div class="dr_main_detail">
-    <div class="dr_subject">
-      <h4>Subject</h4>
-      <ul >
-        <li ng-class="{active: isActive(item.subjectId)}" ng-repeat="item in topicStatistics"><a href="javascript:void(0)" ng-click="getTopicsUsingSubject(item.subjectId)">{{item.subjectName}}<i class="fa-comments"></i></a></li>
-      </ul>
-    </div>
-    <div class="dr_sub_com">
-      <div class="dr_dis_head">
-        <ul>
-         <b><li><label style="font-size: 30px;">Discussion Room - {{defaultSubject}}</label></li></b>
-        </ul>
-      </div>
-      <div class="dr_bg_img_sub dr_bg"></div>
-      <div class="dr_bg_img_sub dr_main_bg" ng-repeat="item in topicList">
-      <br/>
-        <div class="dr_icon_list">
-         <i class="fa fa-clock-o"></i>  {{item.topicCreationDate}}  
-         <i class="fa fa-comments-o"></i>  {{item.comments}}
-         </div><br/>
-        <h3><a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})"><b>{{item.topicTitle}}</b></a></h3>
-        <p>{{item.topicDescription}}</p>
-        <p><a  ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})" style="float: right; color: #99ccff;"><u>Read More >></u></a></p>
-      </div>
-      <div class="dr_bg_img_sub dr_main_bg" ng-if="topicList.length=='0'">
-           <p>No Topics Found.</p>
-      </div>      
-    </div>
-    <div class="dr_events">
-      <div class="dr_notification">
-        <h3>Notification</h3>
-        <span>
-        <ul>
-          <marquee direction="up" scrollamount="4">
-          <li>JEE Advanced 2016 Online Appli</li>
-          <li>JEE Advanced 2016 Online Appli</li>
-          <li>JEE Advanced 2016 Online Appli</li>
-          <li>JEE Advanced 2016 Online Appli</li>
-          <li>JEE Advanced 2016 Online Appli</li>
-          <li>JEE Advanced 2016 Online Appli</li>
-          </marquee>
-        </ul>
-        </span> </div>
+    <div class="dr_com_head">
+        <div class="dr_heading">
+            <ul>
+                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
+            </ul>
+            <div class="dr_search">
+                <ul>
+                    <li ng-hide="isGuest"><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
+                    <li><a href="javscript:void(0)" ng-click="disCtrl.goBackToProfileScreen();"><span
+                            class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="clear"></div>
-  </div>
-<nav class="navbar  navbar-fixed-bottom">
-       <div footer></div>
-  </nav>
+    <div class="dr_main_detail">
+        <div class="dr_subject">
+            <h4>Subject</h4>
+            <ul>
+                <li ng-class="{active: isActive(item.subjectId)}" ng-repeat="item in topicStatistics"><a href="javascript:void(0)"
+                    ng-click="getTopicsUsingSubject(item.subjectId)">{{item.subjectName}}<i class="fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="dr_sub_com">
+            <div class="dr_dis_head">
+                <ul>
+                    <b><li><label style="font-size: 30px;">Discussion Room - {{defaultSubject}}</label></li></b>
+                </ul>
+            </div>
+            <div class="dr_bg_img_sub dr_bg"></div>
+            <div class="dr_bg_img_sub dr_main_bg" ng-repeat="item in topicList">
+                <br />
+                <div class="dr_icon_list">
+                    <i class="fa fa-clock-o"></i> {{item.topicCreationDate}} <i class="fa fa-comments-o"></i> {{item.comments}}
+                </div>
+                <br />
+                <h3>
+                    <a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})"><b>{{item.topicTitle}}</b></a>
+                </h3>
+                <p>{{item.topicDescription}}</p>
+                <p>
+                    <a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})" style="float: right; color: #99ccff;"><u>Read More
+                            >></u></a>
+                </p>
+            </div>
+            <div class="dr_bg_img_sub dr_main_bg" ng-if="topicList.length=='0'">
+                <p>No Topics Found.</p>
+            </div>
+        </div>
+        <div class="dr_events">
+            <div class="dr_notification">
+                <h3>Notification</h3>
+                <span>
+                    <ul>
+                        <marquee direction="up" scrollamount="4">
+                            <li>JEE Advanced 2016 Online Appli</li>
+                            <li>JEE Advanced 2016 Online Appli</li>
+                            <li>JEE Advanced 2016 Online Appli</li>
+                            <li>JEE Advanced 2016 Online Appli</li>
+                            <li>JEE Advanced 2016 Online Appli</li>
+                            <li>JEE Advanced 2016 Online Appli</li>
+                        </marquee>
+                    </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div footer></div>
+    </nav>
 </div>
-

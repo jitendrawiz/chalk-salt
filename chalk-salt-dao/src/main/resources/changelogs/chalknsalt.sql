@@ -46,7 +46,7 @@ CREATE TABLE `cst_class_subject_mapping` (
 
 /*Data for the table `cst_class_subject_mapping` */
 
-insert  into `cst_class_subject_mapping`(`class_subject_id`,`class_id`,`subject_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(11,3,1),(12,3,2),(13,3,3),(14,3,4),(16,4,1),(17,4,5),(18,4,6),(21,5,1),(22,5,5),(23,5,6),(26,6,7),(27,7,8),(28,8,9);
+insert  into `cst_class_subject_mapping`(`class_subject_id`,`class_id`,`subject_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(11,3,1),(12,3,2),(13,3,3),(14,3,4),(16,4,1),(17,4,5),(18,4,6),(21,5,1),(22,5,5),(23,5,6),(26,6,7),(27,7,8),(28,8,9),(29,1,10),(30,2,10),(31,3,10),(32,4,10),(33,5,10),(34,6,10),(35,7,10),(36,8,10);
 
 /*Table structure for table `cst_class_subjects` */
 
@@ -60,8 +60,7 @@ CREATE TABLE `cst_class_subjects` (
 
 /*Data for the table `cst_class_subjects` */
 
-insert  into `cst_class_subjects`(`subject_id`,`subject_name`) values (1,'Maths'),(2,'English'),(3,'Science'),(4,'Social Studies'),(5,'Physics'),(6,'Chemistry'),(7,'National Defence Academy'),(8,'NATA Coaching'),(9,'Olympiads/NTSE');
-
+insert  into `cst_class_subjects`(`subject_id`,`subject_name`) values (1,'Maths'),(2,'English'),(3,'Science'),(4,'Social Studies'),(5,'Physics'),(6,'Chemistry'),(7,'National Defence Academy'),(8,'NATA Coaching'),(9,'Olympiads/NTSE'),(10,'General');
 /*Table structure for table `cst_class_type` */
 
 DROP TABLE IF EXISTS `cst_class_type`;
@@ -512,11 +511,12 @@ CREATE TABLE `cst_guestusers` (
   `username` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
   `mobileno` varchar(20) NOT NULL,
-  `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` datetime DEFAULT NULL,
   `secur_uuid` varchar(100) NOT NULL,
+  `class_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -10,7 +10,7 @@ define([ 'angular', 'text!./templates/firstPage.tpl.html',
 
     module.config([ '$stateProvider', function($stateProvider) {
         $stateProvider.state('chalkanddust.discussionroomfirstpage', {
-            url : '/discussionroom/firstPage',            
+            url : '/discussionroom/firstPage/:classId',            
             template : templatediscussionFirstPage,
             controller : 'DiscussionRoomFirstController as disCtrl'
         }).state('chalkanddust.discussionroomtopic', {

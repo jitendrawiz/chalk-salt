@@ -712,8 +712,8 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public boolean saveGuestUserDetails(GuestUserDto userDetails) throws Exception {
-		final String sqlQuery = "INSERT INTO cst_guestusers(`username`,	`email`, `mobileno`, `secur_uuid`)"
-				+ " VALUES(:userName, :email, :mobileNo, :securUuid)";
+		final String sqlQuery = "INSERT INTO cst_guestusers(`username`,	`email`, `mobileno`, `secur_uuid`,class_id)"
+				+ " VALUES(:userName, :email, :mobileNo, :securUuid,:classId)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -721,6 +721,7 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("email", userDetails.getEmail());
             query.addParameter("mobileNo", userDetails.getMobileNo());
             query.addParameter("securUuid", userDetails.getSecurUuid());
+            query.addParameter("classId", userDetails.getClassId());
             query.executeUpdate();
         }
 		return true;
@@ -740,4 +741,19 @@ public class UserDaoImpl implements UserDao {
             return query.executeAndFetchFirst(String.class);
         }
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#getGuestUserInfo(java.lang.String)
+	 */
+	@Override
+	public GuestUserDto getGuestUserInfo(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT username AS userName,email,mobileno AS mobileNo,"
+				+ " class_id AS classId, secur_uuid AS securUuid  FROM `cst_guestusers` WHERE secur_uuid =:securUuid ";
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(GuestUserDto.class);
+	}
+}
 }

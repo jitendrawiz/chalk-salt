@@ -3,15 +3,29 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
     var module = angular.module('Student.discussionroom.controller', ['Student.discussionroom.routing', 'Student.discussionroom.service','CandDModal' ]);
 
     module.controller('DiscussionRoomFirstController', ['$element','$timeout', '$scope', '$state', 'CHALKNDUST',  '$window',
-                                                        'GetTopicStatistics','GetTopicsService',   
-            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetTopicStatistics,GetTopicsService) {
+                                                        'GetTopicStatistics','GetTopicsService','$stateParams','$rootScope',   
+            function($element,$timeout,$scope, $state, CHALKNDUST,$window,GetTopicStatistics,GetTopicsService,$stateParams,$rootScope) {
     			
                 $scope.alert = {};
                 $scope.alert.show = false;
                 $scope.currentDate = new Date();
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
-                $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                
+                var classId=null;
+                if($stateParams.classId!=""){
+                  classId= $stateParams.classId;
+                  $window.localStorage.setItem(CHALKNDUST.GUESTCLASSID,classId);
+                }else{
+                  classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                  $window.localStorage.removeItem(CHALKNDUST.GUESTCLASSID);
+                }
+                if($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID)!=null){
+                  $scope.isGuest=true;
+                 }else{
+                   $scope.isGuest=false;
+                 }
+                $scope.classId=classId;                
                 $scope.defaultSubjectId=null;
                 $scope.defaultSubject=null;
                 
@@ -62,7 +76,13 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                }
                 this.goBackToProfileScreen = function() {
                 	console.log("Going back to profile screen");
-                	 $state.go('chalkanddust.profile');
+                	if($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID)!=null){
+                	  $window.localStorage.removeItem(CHALKNDUST.GUESTCLASSID);
+                	  $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
+                	  $state.go('chalkanddust.home');
+                	 }else{
+                	   $state.go('chalkanddust.profile');
+                	 }
                 };
                 
                 $scope.contactUs = function() {
@@ -73,11 +93,11 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
     module.controller('DiscussionRoomSecondController',
     		['$element','$timeout', '$scope', 'CHALKNDUST', '$state',  '$window','$stateParams',
     		 'getSubjectNameService','filterFilter', 'GetCommmentsOfTopicService','CommentService',
-             'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log',
+             'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log','$rootScope',
             
             function($element,$timeout,$scope, CHALKNDUST, $state, $window, $stateParams, 
             		getSubjectNameService, filterFilter,GetCommmentsOfTopicService,CommentService,
-            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log) {
+            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log,$rootScope) {
 
     	        $scope.alert = {};
                 $scope.alert.show = false;
@@ -98,11 +118,21 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
 
                     return true;
                 };
-                               
+                if($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID)!=null){
+                  $scope.isGuest=true;
+                 }else{
+                   $scope.isGuest=false;
+                 }            
                 $scope.topicId= $stateParams.topicId;
                 $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
                 $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
-                $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                var classId=null;
+                if($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID)!=null){
+                  classId= $window.localStorage.getItem(CHALKNDUST.GUESTCLASSID);
+                }else{
+                  classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+                }
+                $scope.classId=classId;
                 $scope.subjectId=$window.localStorage.getItem(CHALKNDUST.SUBJECTID);
                 
                 getSubjectNameService.get({classId:$scope.classId, subjectId:$scope.subjectId}, function(response) { 
@@ -114,7 +144,12 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 });                
                 
                 this.goBackToFirstPage = function() {
-                    $state.go("chalkanddust.discussionroomfirstpage");
+                    if($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID)!=null){
+                      $state.go('chalkanddust.discussionroomfirstpage', {'classId': classId});
+                    }else{
+                      $state.go('chalkanddust.discussionroomfirstpage');
+                    }
+                    
                 };
                 
                 /*Get Topic Details only Topic Details*/

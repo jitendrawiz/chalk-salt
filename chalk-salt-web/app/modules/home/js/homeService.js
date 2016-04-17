@@ -11,4 +11,16 @@ define([ 'angular' ], function(angular) {
             }
         });
     } ]);
+    
+    homeService.factory('HomeGuestService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/guest/login',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+    } ]);
+    
+    homeService.factory('userClassLookUpService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/classes', {}, {});
+    } ]);
 });
