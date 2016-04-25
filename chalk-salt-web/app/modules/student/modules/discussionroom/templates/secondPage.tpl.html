@@ -81,8 +81,9 @@
                     </h5>
                     <p style="margin-top: 10px;">{{item.createdDate}}</p>
                     <p>{{item.generalComments}}</p>
-                </div>
-                <textarea name="text" cols="" rows="" placeholder="comment..."></textarea>
+                </div>                
+                <textarea name="textarea" id="commentTextArea" ng-model="commentsinfo.generalComments" cols="" rows="" placeholder="comment..." ng-enter="commCtrl.saveComment()"></textarea>
+                
             </div>
         </div>
         <div class="dr_events">

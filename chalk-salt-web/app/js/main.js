@@ -16,7 +16,8 @@ require.config({
     fontAwesome: '/lib/fontawesome/css/font-awesome',
     angularTranslate: 'lib/angular-translate/angular-translate.min',
     angularTranslateStaticFile: 'lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min',
-    angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min'
+    angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min',
+    ngAnimate:'lib/angular-animate/angular-animate.min'
     	//angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
     },
   /**
@@ -27,6 +28,7 @@ require.config({
     angular: {'exports': 'angular'},
     angularResource: ['angular'],
     angularSanitize: ['angular'],
+    ngAnimate: ['angular'],
     uiRouter: ['angular'],
     uiBootstrap: ['angular'],
     angularTranslate: ['angular'],

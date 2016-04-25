@@ -221,7 +221,8 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	   $scope.commentsinfo.classId=$scope.classId;
                 	   $scope.commentsinfo.subjectId=$scope.subjectId;
                 	   $scope.commentsinfo.discussionTopicId=$scope.topicId;
-                	   $scope.commentsinfo.userSecurUuid=$scope.securUuid;                	   
+                	   $scope.commentsinfo.userSecurUuid=$scope.securUuid; 
+                	   $scope.commentsinfo.isGuest=$scope.isGuest; 
                 	   console.log($scope.commentsinfo);
                      CommentService.save({}, $scope.commentsinfo, function(
                              response) {

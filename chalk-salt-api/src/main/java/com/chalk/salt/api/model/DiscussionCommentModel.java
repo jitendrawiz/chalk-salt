@@ -50,6 +50,8 @@ public class DiscussionCommentModel extends ApiModel{
 	/** The joined date. */
 	private String joinedDate;
 	
+	private Boolean isGuest;
+	
 	/**
 	 * Gets the joined date.
 	 *
@@ -300,5 +302,19 @@ public class DiscussionCommentModel extends ApiModel{
 	 */
 	public void setCommentUuid(String commentUuid) {
 		this.commentUuid = commentUuid;
+	}
+
+	/**
+	 * @return the isGuest
+	 */
+	public Boolean isGuest() {
+		return isGuest;
+	}
+
+	/**
+	 * @param isGuest the isGuest to set
+	 */
+	public void isGuest(Boolean isGuest) {
+		this.isGuest = isGuest;
 	}
 }

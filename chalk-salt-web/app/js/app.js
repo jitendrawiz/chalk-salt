@@ -1,9 +1,9 @@
 'use strict';
 
 define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
-        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome'], function(angular) {
+        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome','ngAnimate'], function(angular) {
 
-    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','Student.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap']);
+    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','Student.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap','ngAnimate']);
 
     chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         /*
