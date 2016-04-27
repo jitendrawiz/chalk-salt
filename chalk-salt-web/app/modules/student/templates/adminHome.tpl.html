@@ -57,6 +57,7 @@
                             <span class="selected"></span>
                         </a>
 				</li>
+				
 				<li ng-class="{ active:isSet(2)}">
 						 <a ng-click="setTab(2);" href="">
                             <i class="fa fa-files-o"></i>
@@ -93,6 +94,14 @@
                             <span class="selected"></span>
                         </a>
 				</li>
+				<li ng-class="{ active:isSet(9)}">
+					  <a ng-click="setTab(9);" href="">
+                            <i class="fa fa-tachometer"></i>
+                            <span class="menu-text">Student Registration</span>
+                            <span class="selected"></span>
+                        </a>
+				</li>
+				<!-- <a ui-sref="chalkanddust.registration">Register</a> -->
 				<li ng-class="{ active:isSet(7)}">
                         <a ng-click="setTab(7);" href="">
                             <i class="fa fa-files-o"></i>
@@ -108,37 +117,8 @@
                             <span class="selected"></span>
                         </a>
 				</li>
-                    <!-- <li class="active">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-tachometer"></i>
-                            <span class="menu-text">Dashboard</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Class Master</span>
-                            <span class="selected"></span>
-                        </a>
-                     </li>
-                                        
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Subjects Master</span>
-                            <span class="selected"></span>
-                        </a>
-                     </li>
-                                        
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Discussion Room Topic Master</span>
-                            <span class="selected"></span>
-                        </a>
-                     </li> -->
-                    </ul>
+                    
+              </ul>
             </aside>
             <section id="main-content">
 				
@@ -172,6 +152,9 @@
 				</div>
 				<div ng-switch-when="8">
 				 <div ng-include="'modules/student/templates/admin/TopicRequestList.tpl.html'"></div>
+				</div>
+				<div ng-switch-when="9">
+				 <div ng-include="'modules/registration/templates/registration.tpl.html'"></div>
 				</div>
 			</div>
                              

@@ -325,6 +325,14 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 	myElements.css("background", "Wheat");                
                     $timeout(showElement, 1000);
                 }
+                
+               this.process=function(e) {
+                    var code = (e.keyCode ? e.keyCode : e.which);
+                    if (code == 13 && !e.shiftKey) { //Enter keycode
+                        alert("Sending your Message : " + document.getElementById('txt').value);
+                    }
+                };
+                
                 showElement();
             } ]);
     
