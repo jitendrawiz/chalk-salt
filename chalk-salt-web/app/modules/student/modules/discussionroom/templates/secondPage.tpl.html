@@ -82,10 +82,14 @@
                     <p style="margin-top: 10px;">{{item.createdDate}}</p>
                     <p>{{item.generalComments}}</p>
                 </div>                
-                <textarea name="textarea" id="commentTextArea" ng-model="commentsinfo.generalComments" cols="" rows="" placeholder="comment..." onkeypress="commCtrl.process($event, $this)"></textarea>
+                <div>
+                   <textarea name="textarea" id="comment" ng-model="commentsinfo.generalComments" cols="" rows="" placeholder="comment..." ng-keypress="secondCtrl.process($event, $this)"></textarea>
                 <!-- <input type="text" id="commentTextArea" ng-model="commentsinfo.generalComments" placeholder="comment..." ng-enter="commCtrl.saveComment()"/> -->
-                
+          
+                </div>   
             </div>
+            
+             
         </div>
         <div class="dr_events">
             <div class="dr_notification">

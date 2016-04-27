@@ -155,7 +155,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 /*Get Topic Details only Topic Details*/
                 topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
-                        console.log("response is---"+JSON.stringify(response));
                     	$scope.topicDetails=response.discussionTopics;
                     	$scope.imageLink=response.photolink;
                     	if($scope.imageLink=="noImage"){
@@ -171,7 +170,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
                     	$scope.commentsList = response;
-                    	 console.log("Comments response is---\n"+JSON.stringify(response));
                     }
                 }, function(error) {
                 	showAlert('danger',error.data.message);
@@ -179,6 +177,13 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 
                 $scope.isUndefined = function (thing) {
                     return (typeof thing === "undefined");
+                };
+                
+                this.process=function(e) {
+                    var code = (e.keyCode ? e.keyCode : e.which);
+                    if (code == 13 && !e.shiftKey) { //Enter keycode
+                        alert("Sending your Message : " + document.getElementById('comment').value);
+                    }
                 };
             } ]);
 
@@ -326,12 +331,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     $timeout(showElement, 1000);
                 }
                 
-               this.process=function(e) {
-                    var code = (e.keyCode ? e.keyCode : e.which);
-                    if (code == 13 && !e.shiftKey) { //Enter keycode
-                        alert("Sending your Message : " + document.getElementById('txt').value);
-                    }
-                };
+              
                 
                 showElement();
             } ]);
