@@ -68,8 +68,10 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                	 GetTopicsService.query({classId:$scope.classId, subjectId:subjectId}, function(response) { 
                         if(response){
                         	$scope.topicList = response;
+                        	if($scope.topicList.length!=0){
                         	$scope.defaultSubject=$scope.topicList[0].subjectName;
                         }
+                       }
                     }, function(error) {
                     	showAlert('danger',error.data.message);
                     });
@@ -375,7 +377,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
            
            this.goBackToTopicsScreen = function() {
            	console.log("Going back to Topics screen");
-           	$state.go('chalkanddust.discussionroomsubjects');
+           	$state.go('chalkanddust.discussionroomfirstpage');
                       
            };
            
