@@ -50,6 +50,17 @@ public class DiscussionTopicRequestDto {
 	/** The request secur uuid. */
 	private String requestSecurUuid;
 	
+	/** The topic image. */
+	private String topicImage;
+	
+	public String getTopicImage() {
+		return topicImage;
+	}
+
+	public void setTopicImage(String topicImage) {
+		this.topicImage = topicImage;
+	}
+
 	/**
 	 * Gets the topic title.
 	 *

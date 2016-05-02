@@ -411,7 +411,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ "JOIN `cst_class_type` AS classType ON classType.class_id = topicRequest.class_id "
 				+ "JOIN `cst_class_subjects` AS subjects ON subjects.subject_id = topicRequest.subject_id "
 				+ "JOIN `cst_users` AS users ON users.secur_uuid = topicRequest.secur_uuid "
-				+ "JOIN `cst_contacts` AS contacts ON contacts.id = users.contact_id";
+				+ "JOIN `cst_contacts` AS contacts ON contacts.id = users.contact_id ORDER BY topic_request_id DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -436,4 +436,48 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
             
         }
 	}
+
+	@Override
+	public DiscussionTopicRequestDto getTopicRequestedData(
+			String requestSecurUuid) throws Exception {
+		final String sqlQuery = " SELECT topic_title AS topicTitle,"
+				+ " topic_description AS topicDescription,"
+				+ " approved,"
+				+ " subject_id AS subjectId, "
+				+ " class_id AS classId, "
+				+ " request_securuuid AS requestSecurUuid, "
+				+ " topic_image AS topicImage "
+				+ " FROM `cst_topic_requests` WHERE request_securuuid=:requestSecurUuid";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("requestSecurUuid", requestSecurUuid);
+            return query.executeAndFetchFirst(DiscussionTopicRequestDto.class);
+        }	
+	}
+
+	@Override
+	public void saveNewTopicRequested(
+			DiscussionTopicRequestDto topicRequestData, String createdDate)
+			throws Exception {
+		final String sqlQuery = "INSERT into cst_discussion_topics "
+				+ " (`class_id`, `subject_id`, `topic_title`, `topic_description`, `created_date`, `secur_uuid`,modified_date,topic_image) "
+				+ " VALUES(:classId, :subjectId, :topicTitle, :topicDescription, :createdDate, :securUuid,:modifiedDate,:topicImage)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("classId", topicRequestData.getClassId());
+            query.addParameter("subjectId", topicRequestData.getSubjectId());
+            query.addParameter("topicTitle", topicRequestData.getTopicTitle());
+            query.addParameter("topicDescription", topicRequestData.getTopicDescription());
+            query.addParameter("createdDate", createdDate);
+            query.addParameter("securUuid", topicRequestData.getRequestSecurUuid());
+            query.addParameter("modifiedDate", createdDate);
+            query.addParameter("topicImage", topicRequestData.getTopicImage());
+            query.executeUpdate();
+        }
+		
+	}
+
+	
 }

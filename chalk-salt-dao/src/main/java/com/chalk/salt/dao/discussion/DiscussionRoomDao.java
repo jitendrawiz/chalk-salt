@@ -177,5 +177,24 @@ public interface DiscussionRoomDao {
 	 */
 	void approveTopicRequests(String requestSecurUuid)throws Exception;
 
+	/**
+	 * Gets the topic requested data.
+	 *
+	 * @param requestSecurUuid the request secur uuid
+	 * @return the topic requested data
+	 * @throws Exception the exception
+	 */
+	DiscussionTopicRequestDto getTopicRequestedData(String requestSecurUuid)throws Exception;
+
+	/**
+	 * Save new topic requested.
+	 *
+	 * @param topicRequestData the topic request data
+	 * @param createdDate 
+	 * @throws Exception the exception
+	 */
+	void saveNewTopicRequested(DiscussionTopicRequestDto topicRequestData, String createdDate)throws Exception;
+
+
 	
 }

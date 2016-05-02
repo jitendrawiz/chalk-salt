@@ -293,6 +293,12 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		logger.info("approving topic request...");
 		try{
 			discussionDao.approveTopicRequests(requestSecurUuid);
+			DiscussionTopicRequestDto topicRequestData=discussionDao.getTopicRequestedData(requestSecurUuid);
+			if(topicRequestData.getApproved()){
+				final Date date = new Date();
+				final String createdDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);			
+				discussionDao.saveNewTopicRequested(topicRequestData,createdDate);
+			}
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_APPROVE_TOPIC_REQUESTS, "Fail to approve topic requests", exception);
         }

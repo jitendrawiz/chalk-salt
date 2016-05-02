@@ -452,30 +452,6 @@ DELIMITER $$
 
 DELIMITER ;
 
-
-/* Trigger structure for table `cst_topic_requests` */
-DELIMITER $$
-
-USE `chalkndust`$$
-
-DROP TRIGGER /*!50032 IF EXISTS */ `after_cst_topic_request_approved`$$
-
-CREATE
-    /*!50017 DEFINER = 'root'@'localhost' */
-    TRIGGER `after_cst_topic_request_approved` AFTER UPDATE ON `cst_topic_requests` 
-    FOR EACH ROW BEGIN
-	INSERT INTO `cst_discussion_topics`
-	SET class_id=OLD.class_id,
-	subject_id=OLD.subject_id,
-	topic_title=OLD.topic_title,
-	topic_description=OLD.topic_description,
-	secur_uuid=OLD.request_securuuid,
-	created_date=NOW();	
-   END;
-$$
-
-DELIMITER ;
-
 DELIMITER $$
 
 USE `chalkndust`$$
