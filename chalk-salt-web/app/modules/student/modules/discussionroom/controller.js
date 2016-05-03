@@ -180,13 +180,57 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 $scope.isUndefined = function (thing) {
                     return (typeof thing === "undefined");
                 };
-                
+                /*Comments Code will start from here*/
                 this.process=function(e) {
                     var code = (e.keyCode ? e.keyCode : e.which);
                     if (code == 13 && !e.shiftKey) { //Enter keycode
-                        alert("Sending your Message : " + document.getElementById('comment').value);
+                        saveComment(document.getElementById('comment').value);
                     }
                 };
+
+                var saveComment =  function(commentValue) {
+                    if($scope.commentsinfo!=null && $scope.commentsinfo!=""){
+                      $scope.commentsinfo.classId=$scope.classId;
+                      $scope.commentsinfo.subjectId=$scope.subjectId;
+                      $scope.commentsinfo.discussionTopicId=$scope.topicId;
+                      $scope.commentsinfo.userSecurUuid=$scope.securUuid; 
+                      $scope.commentsinfo.isGuest=$scope.isGuest; 
+                      console.log(JSON.stringify($scope.commentsinfo));
+                      
+                      CommentService.save({}, $scope.commentsinfo, function(
+                              response) {
+                          if (response) {
+                              console.log(response);
+                              var modalOptions = {
+                                      header : 'Note',
+                                      body : 'Your comment added Successfully',
+                                      btn : 'OK'
+                                  };
+
+                              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                      $log.info(result);
+                                  });
+                              $state.reload();
+                          }
+                          
+                      }, function(error) {
+                          showAlert('danger', error.data.message);
+                      });                   
+                      }else{
+                        var modalOptions = {
+                                    header : 'Note',
+                                    body : 'Please fill your comments!!',
+                                    btn : 'OK'
+                                };
+
+                            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                    $log.info(result);
+                                });
+
+                    }
+                 };
+                
+                /*Comments code will ends here*/
             } ]);
 
     module.controller('DiscussionRoomCommentsController', ['$element','$timeout',
@@ -223,46 +267,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     return true;
                 };
                 
-                this.saveComment = function() {
-                   if($scope.commentsinfo!=null && $scope.commentsinfo!=""){
-                	   $scope.commentsinfo.classId=$scope.classId;
-                	   $scope.commentsinfo.subjectId=$scope.subjectId;
-                	   $scope.commentsinfo.discussionTopicId=$scope.topicId;
-                	   $scope.commentsinfo.userSecurUuid=$scope.securUuid; 
-                	   $scope.commentsinfo.isGuest=$scope.isGuest; 
-                	   console.log($scope.commentsinfo);
-                     CommentService.save({}, $scope.commentsinfo, function(
-                             response) {
-                         if (response) {
-                             console.log(response);
-                             var modalOptions = {
-                                     header : 'Note',
-                                     body : 'Your comment added Successfully',
-                                     btn : 'OK'
-                                 };
 
-                             CandDModalService.showModal({}, modalOptions).then(function(result) {
-                                     $log.info(result);
-                                 });
-                             $state.reload();
-                         }
-                         
-                     }, function(error) {
-                         showAlert('danger', error.data.message);
-                     });                   
-                	   }else{
-                		   var modalOptions = {
-                                   header : 'Note',
-                                   body : 'Please fill your comments!!',
-                                   btn : 'OK'
-                               };
-
-                           CandDModalService.showModal({}, modalOptions).then(function(result) {
-                                   $log.info(result);
-                               });
-
-                   }
-                };
                 
                 
                 this.editComment=function(commentUuid){
