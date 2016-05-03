@@ -175,12 +175,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
-      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService',
+      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService',
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
-       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService) {
+       deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
+       RegistrationService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -716,10 +717,54 @@ var updateTopicPhoto = function (fileData,securUuid) {
     }, onRequestFailure);
 };
 
+/*
+ * 
+ * 
+ * Registration code will start from here.
+ * */
 
 
+$scope.userDetails = {};
 
 
+$scope.inputType = 'password';
+$scope.hideShowPassword = function() {
+    if ($scope.inputType === 'password') {
+        $scope.inputType = 'text';
+    } else {
+        $scope.inputType = 'password';
+    }
+};
+
+
+this.register = function() {
+                            
+    RegistrationService.save({}, $scope.userDetails, function(
+            response) {
+        if (response) {
+          var modalOptions = {
+                    header : 'Note',
+                    body : 'New user has been created and an email has been sent to their registered email address.',
+                    btn : 'OK'
+                };
+
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+                    $log.info(result);
+                });
+            console.log(response);
+            $state.reload();
+        }
+        
+    }, function(error) {
+        showAlert('danger', error.data.message);
+    });
+};
+
+/*
+ * 
+ * 
+ * Registration Code ends here
+ * */
 var Id = $stateParams.id;
 //Show Student's Details
 
