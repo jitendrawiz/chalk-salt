@@ -286,16 +286,17 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/comments/statistics/{classId}/{subjectId}/{topicId}")
+    @Path("/discussion/comments/statistics/{classId}/{subjectId}/{topicId}/{isGuestUser}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication    
     public Response getTopicCommentDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId,
-    		@NotBlank @PathParam("topicId") final String topicId)throws DiscussionException{
+    		@NotBlank @PathParam("topicId") final String topicId,@NotBlank @PathParam("isGuest") final String isGuest)throws DiscussionException{
     	
     	List<DiscussionCommentModel> discussionComments = null;
     	List<DiscussionCommentDto> discussionCommentsList = null;
     	try{
-    		discussionCommentsList = discussionRoomFacade.getTopicCommentDetails(classId,subjectId,topicId);
+    		boolean guestUserFlag = Boolean.parseBoolean(isGuest);
+    		discussionCommentsList = discussionRoomFacade.getTopicCommentDetails(classId,subjectId,topicId,guestUserFlag);
     		discussionComments = DozerMapperUtil.mapCollection(beanMapper, discussionCommentsList, DiscussionCommentModel.class);
             return Response.ok(discussionComments).build();
 	    } catch (final DiscussionException discussionException) {

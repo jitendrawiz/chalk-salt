@@ -188,10 +188,14 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 	 */
 	@Override
 	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
-			String subjectId, String topicId) throws DiscussionException {
+			String subjectId, String topicId, boolean guestUserFlag) throws DiscussionException {
 		logger.info("fetch details of dicussion topics comments using class, subject and topic ...");
 		try{
-			return  discussionDao.getTopicCommentDetails(classId, subjectId,topicId);
+			if(guestUserFlag){
+				return  discussionDao.getGuestTopicCommentDetails(classId, subjectId,topicId);
+			} else {
+				return  discussionDao.getTopicCommentDetails(classId, subjectId,topicId);
+			}			
 		} catch (final Exception exception) {
             throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_COMMENTS_DETAILS, "Fail to Fetch details Discussion Topic comments", exception);
         }

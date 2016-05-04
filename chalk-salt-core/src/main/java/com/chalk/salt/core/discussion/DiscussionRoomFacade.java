@@ -101,11 +101,12 @@ public interface DiscussionRoomFacade {
 	 * @param classId the class id
 	 * @param subjectId the subject id
 	 * @param topicId the topic id
+	 * @param guestUserFlag 
 	 * @return the topic comment details
 	 * @throws DiscussionException the discussion exception
 	 */
 	List<DiscussionCommentDto> getTopicCommentDetails(String classId,
-			String subjectId, String topicId)throws DiscussionException;
+			String subjectId, String topicId, boolean guestUserFlag)throws DiscussionException;
 
 	/**
 	 * Gets the single topic details.

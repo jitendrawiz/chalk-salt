@@ -99,8 +99,8 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 */
 	@Override
 	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
-			String subjectId, String topicId) throws DiscussionException {
-		return discussionManager.getTopicCommentDetails(classId, subjectId,topicId);
+			String subjectId, String topicId, boolean guestUserFlag) throws DiscussionException {
+		return discussionManager.getTopicCommentDetails(classId, subjectId,topicId,guestUserFlag);
 	}
 
 	/* (non-Javadoc)

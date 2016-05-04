@@ -482,6 +482,7 @@ DELIMITER ;
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `request_securuuid` VARCHAR(100) NOT NULL AFTER `approval_date`;
 ALTER TABLE `chalkndust`.`cst_topic_requests`     ADD COLUMN `topic_image` VARCHAR(255) NULL AFTER `request_securuuid`;
 
+DROP TABLE IF EXISTS `cst_guestusers`;
 CREATE TABLE `cst_guestusers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,

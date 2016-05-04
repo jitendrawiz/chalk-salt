@@ -154,6 +154,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     
                 };
                 
+                
                 /*Get Topic Details only Topic Details*/
                 topicDetailsService.get({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
                     if(response){
@@ -169,7 +170,8 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 
                 /*Get Comments of the particular Topic 
                  * using ClassId,SubjectId,topicId */
-                GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId}, function(response) { 
+                	
+                GetCommmentsOfTopicService.query({classId:$scope.classId, subjectId:$scope.subjectId,topicId:$scope.topicId,isGuest:$scope.isGuest}, function(response) { 
                     if(response){
                     	$scope.commentsList = response;
                     }
@@ -180,6 +182,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 $scope.isUndefined = function (thing) {
                     return (typeof thing === "undefined");
                 };
+                
                 /*Comments Code will start from here*/
                 this.process=function(e) {
                     var code = (e.keyCode ? e.keyCode : e.which);

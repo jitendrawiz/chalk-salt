@@ -32,10 +32,11 @@ define([ 'angular' ], function(angular) {
     
     
     module.factory('GetCommmentsOfTopicService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/discussion/comments/statistics/:classId/:subjectId/:topicId',{
+        return $resource(ENV.API_END_POINT + 'private/discussion/comments/statistics/:classId/:subjectId/:topicId/:isGuest',{
             classId : '@classId',
             subjectId : '@subjectId',
-            topicId :'@topicId'
+            topicId :'@topicId',
+            isGuest:'@isGuest'
         }, {
             get : {
                 method : 'GET'

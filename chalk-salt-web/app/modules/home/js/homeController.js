@@ -120,6 +120,11 @@ define(
                                   
                                   CandDModalService.showModal({}, modalOptions).then(function(result)
                                     {
+                                	  $rootScope.username = res.userName;
+                                      $window.localStorage.setItem(CHALKNDUST.SECURUUID,res.securUuid);
+                                      $window.localStorage.setItem(CHALKNDUST.USERFULLNAME,res.userName);
+                                      $window.localStorage.setItem(CHALKNDUST.EDITFLAG,false);
+                                      $window.localStorage.setItem(CHALKNDUST.USERNAME,res.userName);
                                       $state.go('chalkanddust.discussionroomfirstpage', {'classId': res.classId});
                                     });
                                   
