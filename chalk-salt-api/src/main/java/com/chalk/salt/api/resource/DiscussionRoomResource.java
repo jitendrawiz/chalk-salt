@@ -286,7 +286,7 @@ public class DiscussionRoomResource extends AbstractResource {
      * @throws DiscussionException the discussion exception
      */
     @GET
-    @Path("/discussion/comments/statistics/{classId}/{subjectId}/{topicId}/{isGuestUser}")
+    @Path("/discussion/comments/statistics/{classId}/{subjectId}/{topicId}/{isGuest}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication    
     public Response getTopicCommentDetails(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId,

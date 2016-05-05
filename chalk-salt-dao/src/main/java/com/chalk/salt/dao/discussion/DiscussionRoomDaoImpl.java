@@ -234,7 +234,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 	@Override
 	public List<DiscussionCommentDto> getTopicCommentDetails(String classId,
 			String subjectId, String topicId) throws Exception {
-		final String sqlQuery = "SELECT DISTINCT "
+		final String sqlQuery = "SELECT * FROM (SELECT DISTINCT "
 				+ " cst_discussion_topics.topic_title AS topicTitle,"
 				+ " cst_discussion_topics.topic_description AS topicDescription,"
 				+ " cst_discussion_topics.class_id AS classId,"
@@ -257,7 +257,31 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
 				+ " cst_discussion_topics.discussion_topic_id =:topicId "
 				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
-				+ " ORDER BY cst_discussion_topic_comments.created_date ASC";
+				+ " UNION ALL"
+				+ " SELECT DISTINCT "
+				+ " cst_discussion_topics.topic_title AS topicTitle,"
+				+ " cst_discussion_topics.topic_description AS topicDescription,"
+				+ " cst_discussion_topics.class_id AS classId,"
+				+ " cst_discussion_topics.subject_id AS subjectId,"
+				+ " cst_guestusers.username AS userName,"
+				+ " cst_discussion_topic_comments.discussion_comment_id AS discussionCommentId,"
+				+ " cst_discussion_topic_comments.discussion_topic_id AS discussionTopicId,"
+				+ " cst_discussion_topic_comments.general_comments AS generalComments,"
+				+ " cst_discussion_topic_comments.modified_date AS modifiedDate, "
+				+ " DATE_FORMAT(cst_discussion_topic_comments.created_date,'%d-%M-%Y %H:%i:%S') AS createdDate, "
+				+ " cst_discussion_topic_comments.user_securUuid AS userSecurUuid, "
+				+ " cst_discussion_topic_comments.comment_uuid  AS commentUuid,"
+				+ " cst_guestusers.create_at AS joinedDate "
+				+ " FROM "
+				+ " cst_discussion_topics "
+				+ " INNER JOIN cst_guestusers ON cst_discussion_topics.class_id = cst_guestusers.class_id "
+				+ " INNER JOIN cst_discussion_topic_comments ON cst_discussion_topic_comments.discussion_topic_id = cst_discussion_topics.discussion_topic_id "
+				+ " AND cst_guestusers.secur_uuid = cst_discussion_topic_comments.user_securUuid "
+				+ " WHERE cst_discussion_topics.class_id =:classId AND "
+				+ " cst_discussion_topics.subject_id =:subjectId AND "
+				+ " cst_discussion_topics.discussion_topic_id =:topicId "
+				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
+				+ " ) AS comments ORDER BY createdDate DESC ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
