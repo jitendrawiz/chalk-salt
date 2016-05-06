@@ -187,11 +187,12 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                 this.process=function(e) {
                     var code = (e.keyCode ? e.keyCode : e.which);
                     if (code == 13 && !e.shiftKey) { //Enter keycode
-                        saveComment(document.getElementById('comment').value);
+                        saveComment(document.getElementById('commentTextArea').value);
                     }
                 };
 
                 var saveComment =  function(commentValue) {
+                	
                     if($scope.commentsinfo!=null && $scope.commentsinfo!=""){
                       $scope.commentsinfo.classId=$scope.classId;
                       $scope.commentsinfo.subjectId=$scope.subjectId;
@@ -200,39 +201,81 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                       $scope.commentsinfo.isGuest=$scope.isGuest; 
                       console.log(JSON.stringify($scope.commentsinfo));
                       
-                      CommentService.save({}, $scope.commentsinfo, function(
-                              response) {
-                          if (response) {
-                              console.log(response);
-                              var modalOptions = {
-                                      header : 'Note',
-                                      body : 'Your comment added Successfully',
-                                      btn : 'OK'
-                                  };
+                      if($scope.commentsinfo.commentUuid!=null){
+                    	  updateComment();
+                      } else {
+                    	  	  CommentService.save({}, $scope.commentsinfo, function(
+                                  response) {
+                              if (response) {
+                                  console.log(response);
+                                  var modalOptions = {
+                                          header : 'Note',
+                                          body : 'Your comment added Successfully',
+                                          btn : 'OK'
+                                      };
 
-                              CandDModalService.showModal({}, modalOptions).then(function(result) {
-                                      $log.info(result);
-                                  });
-                              $state.reload();
-                          }
-                          
-                      }, function(error) {
-                          showAlert('danger', error.data.message);
-                      });                   
-                      }else{
-                        var modalOptions = {
-                                    header : 'Note',
-                                    body : 'Please fill your comments!!',
-                                    btn : 'OK'
-                                };
+                                  CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                          $log.info(result);
+                                      });
+                                  $state.reload();
+                              }
+                              
+                          }, function(error) {
+                              showAlert('danger', error.data.message);
+                          }); 
+                      }
+                    	  
+                                       
+                  }else{
+                    var modalOptions = {
+                                header : 'Note',
+                                body : 'Please fill your comments!!',
+                                btn : 'OK'
+                            };
 
-                            CandDModalService.showModal({}, modalOptions).then(function(result) {
-                                    $log.info(result);
-                                });
-
-                    }
+                        CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                $log.info(result);
+                            });
+                }
+                };
+                 
+                 /*Edit Comment*/
+                 $scope.editComment=function(commentUuid){
+                     getDetailsOfCommentService.get({commentUuid:commentUuid}, function(response) { 
+                         if(response){
+                         	$scope.commentsinfo=response;
+                         	console.log(response);
+                         	$window.scrollTo(0, angular.element(document.getElementById('commentTextArea')).offsetTop);  
+                         	$window.document.getElementById('commentTextArea').focus();
+                         }
+                     }, function(error) {
+                     	showAlert('danger',error.data.message);
+                     });
                  };
-                
+                 
+                 /*Update Comment*/
+                 var updateComment = function() {
+                     updateCommentDetailsService.save({}, $scope.commentsinfo, function(
+                             response) {
+                         if (response) {
+                             console.log(response);
+                             var modalOptions = {
+                                     header : 'Note',
+                                     body : 'Your Comment is updated successfully',
+                                     btn : 'OK'
+                                 };
+
+                             CandDModalService.showModal({}, modalOptions).then(function(result) {
+                                     $log.info(result);
+                                 });
+                             $state.reload();
+                         }
+                         
+                     }, function(error) {
+                         showAlert('danger', error.data.message);
+                     });
+                 };
+                 
                 /*Comments code will ends here*/
             } ]);
 
@@ -284,8 +327,6 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                     }, function(error) {
                     	showAlert('danger',error.data.message);
                     });
-                	
-                	
                 };
                 
                 $scope.isEmpty = function(obj) {

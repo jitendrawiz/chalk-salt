@@ -1,7 +1,12 @@
-<link href="../../../../resources/css/discussionRoom/discussionRoomPage.css" rel="stylesheet" type="text/css" />
-<link type="text/css" rel="stylesheet" href="../../../../resources/css/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="../../../../resources/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="../../../../resources/css/main.css">
+<link
+	href="../../../../resources/css/discussionRoom/discussionRoomPage.css"
+	rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="../../../../resources/css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet"
+	href="../../../../resources/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet"
+	href="../../../../resources/css/main.css">
 <style>
 .main_bg_bg {
 	background-image: none;
@@ -18,99 +23,117 @@
 }
 </style>
 <div class="dr_com_main">
-    <div class="dr_com_head">
-        <div class="dr_heading">
-            <ul>
-                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com </a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
-            </ul>
-            <div class="dr_search">
-                <ul>
-                    <li ng-hide="isGuest"><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic
-                            Request</a></li>
-                    <li><a href="javscript:void(0);" ng-click="secondCtrl.goBackToFirstPage();"><span
-                            class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="dr_main_detail">
-        <div class="dr_subject main_border" style="background-color: white;">
-            <h4>ABOUT THIS DISCUSSION</h4>
-            <div class="dr_update" style="margin-top: 10px;">
-                <h3>&nbsp;&nbsp;&nbsp;Last Update</h3>
-                <p>
-                    &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time">&nbsp;</span> <span ng-if="isUndefined(topicDetails.lastModifiedDate)">{{topicDetails.topicCreationDate}}</span>
-                    <span ng-if="!isUndefined(topicDetails.lastModifiedDate)">{{topicDetails.lastModifiedDate}}</span>
-                </p>
-            </div>
-            <div class="dr_update" style="margin-top: 5px;">
-                <h3>&nbsp;&nbsp;&nbsp;Author</h3>
-                <p>&nbsp;&nbsp;&nbsp;Chalk N Dust Admin</p>
-            </div>
-        </div>
-        <div class="dr_sub_com">
-            <div class="dr_dis_head">
-                <ul>
-                    <b><li><label style="font-size: 30px;">Discussion Room - {{subjectName}}</label></li></b>
-                </ul>
-            </div>
-            <div class="dr_bg_img_sub dr_bg">
-                <p ng-show="!isUndefined(imageLink)">
-                    <img ng-src="{{imageLink}}" alt="Topic Image" class="img-responsive" width="250" height="250">
-                </p>
-            </div>
-            <div class="dr_bg_img_sub dr_main_bg">
-                <br />
-                <div class="dr_icon_list">
-                    <i class="fa fa-clock-o"></i> {{topicDetails.topicCreationDate}} <i class="fa fa-comments-o"></i> {{topicDetails.comments}}
-                </div>
-                <br />
-                <h3>{{topicDetails.topicTitle}}</h3>
-                <p>{{topicDetails.topicDescription}}</p>
-                <div class="clear"></div>
-            </div>
-            <div class="dr_bg_img_sub dr_main_bg">
-                <div class="dr_student_com com_bg" ng-repeat="item in commentsList">
-                    <div class="dr_stud_img">
-                        <img src="../../../../resources/images/useravatar.png" />
-                    </div>
-                    <h5>
-                        <b>{{item.userName}}</b>
-                    </h5>
-                    <p style="margin-top: 10px;">{{item.createdDate}}</p>
-                    <p>{{item.generalComments}}</p>
-                </div>                
-                <div>
-                   <textarea name="textarea" id="comment" ng-model="commentsinfo.generalComments" cols="" rows="" placeholder="comment..." ng-keypress="secondCtrl.process($event, $this)"></textarea>
-                <!-- <input type="text" id="commentTextArea" ng-model="commentsinfo.generalComments" placeholder="comment..." ng-enter="commCtrl.saveComment()"/> -->
-          
-                </div>   
-            </div>
-            
-             
-        </div>
-        <div class="dr_events">
-            <div class="dr_notification">
-                <h3>Notification</h3>
-                <span>
-                    <ul>
-                        <marquee direction="up" scrollamount="4">
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                        </marquee>
-                    </ul>
-                </span>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <nav class="navbar  navbar-fixed-bottom">
-        <div footer></div>
-    </nav>
+	<div class="dr_com_head">
+		<div class="dr_heading">
+			<ul>
+				<li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com
+				</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
+			</ul>
+			<div class="dr_search">
+				<ul>
+					<li ng-hide="isGuest"><a ui-sref="chalkanddust.topicrequest"><span
+							class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
+					<li><a href="javscript:void(0);"
+						ng-click="secondCtrl.goBackToFirstPage();"><span
+							class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="dr_main_detail">
+		<div class="dr_subject main_border" style="background-color: white;">
+			<h4>ABOUT THIS DISCUSSION</h4>
+			<div class="dr_update" style="margin-top: 10px;">
+				<h3>&nbsp;&nbsp;&nbsp;Last Update</h3>
+				<p>
+					&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time">&nbsp;</span>
+					<span ng-if="isUndefined(topicDetails.lastModifiedDate)">{{topicDetails.topicCreationDate}}</span>
+					<span ng-if="!isUndefined(topicDetails.lastModifiedDate)">{{topicDetails.lastModifiedDate}}</span>
+				</p>
+			</div>
+			<div class="dr_update" style="margin-top: 5px;">
+				<h3>&nbsp;&nbsp;&nbsp;Author</h3>
+				<p>&nbsp;&nbsp;&nbsp;Chalk N Dust Admin</p>
+			</div>
+		</div>
+		<div class="dr_sub_com">
+			<div class="dr_dis_head">
+				<ul>
+					<b><li><label style="font-size: 30px;">Discussion
+								Room - {{subjectName}}</label></li></b>
+				</ul>
+			</div>
+			<div class="dr_bg_img_sub dr_bg">
+				<p ng-show="!isUndefined(imageLink)">
+					<img ng-src="{{imageLink}}" alt="Topic Image"
+						class="img-responsive" width="250" height="250">
+				</p>
+			</div>
+			<div class="dr_bg_img_sub dr_main_bg">
+				<br />
+				<div class="dr_icon_list">
+					<i class="fa fa-clock-o"></i> {{topicDetails.topicCreationDate}} <i
+						class="fa fa-comments-o"></i> {{topicDetails.comments}}
+				</div>
+				<br />
+				<h3>{{topicDetails.topicTitle}}</h3>
+				<p>{{topicDetails.topicDescription}}</p>
+				<div class="clear"></div>
+			</div>
+			<div class="dr_bg_img_sub dr_main_bg">
+				<div class="dr_student_com com_bg" ng-repeat="item in commentsList">
+					
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="dr_stud_img">
+								<img src="../../../../resources/images/useravatar.png" />
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<b>{{item.userName}}</b>
+						</div>
+						<div class="col-sm-1" align="right">
+							<a href="javascript:void(0)" ng-click="editComment(item.commentUuid)"><i class="glyphicon glyphicon-pencil"></i></a>
+						</div>
+					</div>
+					
+					<p style="margin-top: 10px;">{{item.createdDate}}</p>
+					<p>{{item.generalComments}}</p>
+				</div>
+				<div>
+					<textarea name="textarea" id="commentTextArea"
+						ng-model="commentsinfo.generalComments" cols="" rows=""
+						placeholder="comment..."
+						ng-keypress="secondCtrl.process($event, $this)"></textarea>
+					<!-- <input type="text" id="commentTextArea" ng-model="commentsinfo.generalComments" placeholder="comment..." ng-enter="commCtrl.saveComment()"/> -->
+
+				</div>
+			</div>
+
+
+		</div>
+		<div class="dr_events">
+			<div class="dr_notification">
+				<h3>Notification</h3>
+				<span>
+					<ul>
+						<marquee direction="up" scrollamount="4">
+							<li>JEE Advanced 2016 Online Appli</li>
+							<li>JEE Advanced 2016 Online Appli</li>
+							<li>JEE Advanced 2016 Online Appli</li>
+							<li>JEE Advanced 2016 Online Appli</li>
+							<li>JEE Advanced 2016 Online Appli</li>
+							<li>JEE Advanced 2016 Online Appli</li>
+						</marquee>
+					</ul>
+				</span>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<nav class="navbar  navbar-fixed-bottom">
+		<div footer></div>
+	</nav>
 </div>

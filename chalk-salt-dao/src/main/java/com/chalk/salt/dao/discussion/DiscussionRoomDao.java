@@ -195,8 +195,4 @@ public interface DiscussionRoomDao {
 	 */
 	void saveNewTopicRequested(DiscussionTopicRequestDto topicRequestData, String createdDate)throws Exception;
 
-	List<DiscussionCommentDto> getGuestTopicCommentDetails(String classId, String subjectId, String topicId)throws Exception;
-
-
-	
 }
