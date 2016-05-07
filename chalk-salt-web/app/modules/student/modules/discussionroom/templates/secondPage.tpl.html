@@ -86,15 +86,15 @@
 				<div class="dr_student_com com_bg" ng-repeat="item in commentsList">
 					
 					<div class="row">
-						<div class="col-sm-2">
+						<div class="col-sm-1">
 							<div class="dr_stud_img">
 								<img src="../../../../resources/images/useravatar.png" />
 							</div>
 						</div>
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 							<b>{{item.userName}}</b>
 						</div>
-						<div class="col-sm-1" align="right">
+						<div class="col-sm-3" align="right" ng-if="securUuid==item.userSecurUuid">
 							<a href="javascript:void(0)" ng-click="editComment(item.commentUuid)"><i class="glyphicon glyphicon-pencil"></i></a>
 						</div>
 					</div>
