@@ -17,10 +17,6 @@ define([ 'angular', 'text!./templates/firstPage.tpl.html',
             url : '/discussionroom/topic/:topicId',
             template : templatediscussionroomSecondPage,
             controller : 'DiscussionRoomSecondController as secondCtrl'
-        }).state('chalkanddust.discussionroomcomments',{
-        	url : '/discussionroom/comments/:topicId',
-            template : templatediscussionroomcomments,
-            controller : 'DiscussionRoomCommentsController as commCtrl'        		
         }).state('chalkanddust.topicrequest',{
         	url : '/discussionroom/topicsrequest',
             template : templatetopicrequest,

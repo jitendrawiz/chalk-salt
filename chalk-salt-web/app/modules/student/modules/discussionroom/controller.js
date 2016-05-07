@@ -275,117 +275,17 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                          showAlert('danger', error.data.message);
                      });
                  };
-                 
+                 $scope.isEmpty = function(obj) {
+                     for(var prop in obj) {
+                          if(obj.hasOwnProperty(prop))
+                              return false;
+                      }
+                      return true;
+                    };
                 /*Comments code will ends here*/
             } ]);
 
-    module.controller('DiscussionRoomCommentsController', ['$element','$timeout',
-            '$scope',
-            'CHALKNDUST',
-            '$state',
-            '$stateParams',
-            '$window','GetCommmentsOfTopicService','CommentService',
-            'topicDetailsService','getDetailsOfCommentService','updateCommentDetailsService','CandDModalService','$log','filterFilter',
-            function($element,$timeout,$scope, CHALKNDUST,$state,$stateParams,$window,GetCommmentsOfTopicService,CommentService,
-            		topicDetailsService,getDetailsOfCommentService,updateCommentDetailsService,CandDModalService,$log,filterFilter) {
-                $scope.alert = {};
-                $scope.alert.show = false;
-                $scope.currentDate = new Date();
-                $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
-                $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
-                $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
-                $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
-                $scope.topicId = $stateParams.topicId;
-                
-                var showAlert = function(type, message) {
-                    $scope.alert = {};
-                    $scope.alert.type = type;
-                    $scope.alert.message = message;
-                    $scope.alert.show = true;
 
-                    $window.scrollTo(0, 0);
-                };
-
-                $scope.closeAlert = function() {
-                    $scope.alert = {};
-                    $scope.alert.show = false;
-
-                    return true;
-                };
-                
-
-                
-                
-                this.editComment=function(commentUuid){
-                    getDetailsOfCommentService.get({commentUuid:commentUuid}, function(response) { 
-                        if(response){
-                        	$scope.commentsinfo=response;
-                        	console.log(response);
-                        	$window.scrollTo(0, angular.element(document.getElementById('commentTextArea')).offsetTop);  
-                        	$window.document.getElementById('commentTextArea').focus();
-                        }
-                    }, function(error) {
-                    	showAlert('danger',error.data.message);
-                    });
-                };
-                
-                $scope.isEmpty = function(obj) {
-               	 for(var prop in obj) {
-               	      if(obj.hasOwnProperty(prop))
-               	          return false;
-               	  }
-               	  return true;
-                };
-                
-
-                this.updateComment = function() {
-                    updateCommentDetailsService.save({}, $scope.commentsinfo, function(
-                            response) {
-                        if (response) {
-                            console.log(response);
-                            var modalOptions = {
-                                    header : 'Note',
-                                    body : 'Your Comment is updated successfully',
-                                    btn : 'OK'
-                                };
-
-                            CandDModalService.showModal({}, modalOptions).then(function(result) {
-                                    $log.info(result);
-                                });
-                            $state.reload();
-                        }
-                        
-                    }, function(error) {
-                        showAlert('danger', error.data.message);
-                    });
-                };
-                
-                this.goBackToTopicsScreen = function() {
-                	console.log("Going back to Topics screen");
-                	$state.go('chalkanddust.discussionroomtopics', {'subjectId': $scope.subjectId});
-                           
-                };
-                
-                this.openTopicRequest = function() {
-                	console.log("open topic request page");
-                	$state.go('chalkanddust.topicrequest');
-                };
-                
-                var myElements = $element.find('.requestTopicButton');
-                function showElement() {
-                	myElements.css("background", "Aqua");               
-                    $timeout(hideElement, 1000);
-                }
-
-                function hideElement() {
-                	myElements.css("background", "Wheat");                
-                    $timeout(showElement, 1000);
-                }
-                
-              
-                
-                showElement();
-            } ]);
     
     module.controller('DiscussionRoomTopicRequestController', ['$log','$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
                                                                '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest', 'UpdateTopicImageService',   
