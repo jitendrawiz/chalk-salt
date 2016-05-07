@@ -19,7 +19,7 @@ DEMO URL: http://gohooey.com/demo/sidebar/hoedemo.html
 
 /********** 1. IMPORTS **********/
 /********************************/
-@import url('../bootstrap.min.css');
+
 @import url('hoe-overlay-effect.css');
 @import url('hoe-push-effect.css');
 @import url('hoe-shrink-effect.css');

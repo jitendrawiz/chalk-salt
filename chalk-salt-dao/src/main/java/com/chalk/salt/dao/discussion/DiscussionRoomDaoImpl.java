@@ -197,7 +197,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " FROM cst_discussion_topics AS discussion_topics"
 				+ " JOIN `cst_class_subjects` ON `cst_class_subjects`.subject_id=discussion_topics.subject_id"
 				+ " WHERE  discussion_topics.class_id=:classId AND discussion_topics.subject_id=:subjectId"
-				+ " ORDER BY topicCreationDate DESC LIMIT 5";
+				+ " ORDER BY discussion_topics.created_date DESC LIMIT 5";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -281,7 +281,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
 				+ " cst_discussion_topics.discussion_topic_id =:topicId "
 				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
-				+ " ) AS comments ORDER BY createdDate DESC ";
+				+ " ) AS comments ORDER BY comments.createdDate DESC ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
