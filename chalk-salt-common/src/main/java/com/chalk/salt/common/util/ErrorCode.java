@@ -145,7 +145,10 @@ public enum ErrorCode {
     FAIL_TO_FETCH_USER_IMAGE_PATH(1043),
     
     /** The fail to fetch topic image path. */
-    FAIL_TO_FETCH_TOPIC_IMAGE_PATH(1044);
+    FAIL_TO_FETCH_TOPIC_IMAGE_PATH(1044),
+	
+	/** The fail to save question. */
+	FAIL_TO_SAVE_QUESTION(1045);
 	
 	/** The value. */
     private final int value;

@@ -1,8 +1,9 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/studentHome.tpl.html',
-         'text!../templates/adminProfile.tpl.html','text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html'],
-		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate) {
+define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templates/adminProfile.tpl.html',
+         'text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html',
+         'text!../templates/admin/ExamQuestionMaster.tpl.html'],
+		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate, examQuestionMasterTemplate) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -27,6 +28,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
         	url : '/admin/:id/students',
             template : studentdetailstemplate,
             controller : 'AdminController as adminCtrl'        		
+        }).state('chalkanddust.questionmaster',{
+        	url : '/admin/exam/questionmaster',
+            template : examQuestionMasterTemplate,
+            controller : 'ExamController as examCtrl'        		
         });
     } ]);
 });

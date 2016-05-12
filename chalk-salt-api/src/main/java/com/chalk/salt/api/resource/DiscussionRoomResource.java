@@ -304,9 +304,6 @@ public class DiscussionRoomResource extends AbstractResource {
 	    }
     }
     
-    
-    
-    
     /**
      * Save comments.
      *

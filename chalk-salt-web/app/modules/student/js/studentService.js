@@ -219,5 +219,13 @@ define([ 'angular' ], function(angular) {
             
         });
         } ]); 
+    
+    studentService.factory('SaveQuestionDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/exam/questions/add',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+    } ]); 
 
 });

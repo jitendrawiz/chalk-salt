@@ -166,22 +166,77 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                     	    })
                         });
                 };
-            }
-    ]);
+    }]);
     
+    //* Exam Controller
+    
+    homeModule.controller('ExamController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
+    'SaveQuestionDetailsService',
+    function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
+    		SaveQuestionDetailsService) {
+ 
+		   var showAlert = function(type, message){
+            $scope.alert = {};
+            $scope.alert.type = type;
+            $scope.alert.message = message;
+            $scope.alert.show = true;
+        };
+        
+        $scope.closeAlert = function(){
+            $scope.alert = {};
+            $scope.alert.show = false;
+            return true;
+        };
+        
+        if($window.localStorage.getItem(CHALKNDUST.TABNUMBER)!=null){
+        	
+        $scope.tab = $window.localStorage.getItem(CHALKNDUST.TABNUMBER);
+        
+        }else{
+        	$scope.tab=1;
+        }
+        
+        $scope.setTab = function(newTab){
+          $scope.tab = newTab; 
+          $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);
+        };
+
+        $scope.isSet = function(tabNum){
+          return $scope.tab === tabNum;
+        };
+        
+        $scope.securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
+        $scope.fullName=$window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+        
+        if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="false"){
+        	$scope.editFlag=false;
+        }
+        else  if($window.localStorage.getItem(CHALKNDUST.EDITFLAG)=="true"){
+        	$scope.editFlag=true;
+        }
+        
+        $scope.backToAdminDashBoard=function(){
+     	   $state.go('chalkanddust.adminhome');  
+        };
+        
+         $scope.version = CHALKNDUST.VERSION;
+         $scope.build = CHALKNDUST.BUILD;
+         $scope.email = CHALKNDUST.EMAIL;
+         $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
+    }]);
     //* Admin Controller
     
     homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
-      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService',
+      'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
     function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
-       RegistrationService) {
+       RegistrationService,SaveQuestionDetailsService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -205,6 +260,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);
           $scope.topicsList=[];
           $scope.commentsList=[];
+          $scope.questionDetails={};          
         };
 
         $scope.isSet = function(tabNum){
@@ -249,6 +305,30 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
          	showAlert('danger',error.data.message);
          });
          
+         /******* Save Question********/
+         
+         $scope.saveQuestion = function() {
+        	 SaveQuestionDetailsService.save({}, $scope.questionDetails, function(
+        	            response) {
+        	        if (response) {
+        	          var modalOptions = {
+        	                    header : 'Note',
+        	                    body : 'New Question has been saved.',
+        	                    btn : 'OK'
+        	                };
+
+        	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+        	                    $log.info(result);
+        	                });
+        	            console.log(response);
+        	            $state.go('chalkanddust.questionmaster');
+        	        }
+        	        
+        	    }, function(error) {
+        	        showAlert('danger', error.data.message);
+        	    });
+        	};
+        	
          this.updateProfile = function() {
              $scope.userInfo.academicInfo = $scope.academicInfo;
              $scope.userInfo.parentsInfo = $scope.parentsInfo;
@@ -296,6 +376,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      $scope.commentDetails=[];
      $scope.studentList=[];
      $scope.topicRequestListDetails=[];
+     $scope.questionDetails={};
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 

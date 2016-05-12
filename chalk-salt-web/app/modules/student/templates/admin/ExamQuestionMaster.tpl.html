@@ -1,0 +1,227 @@
+<style>
+.title_text {
+	width: 70%;
+	float: left;
+}
+
+.title_name {
+	width: 30%;
+	float: left;
+}
+
+.title_name {
+	text-align: right;
+	padding-right: 20px;
+	padding-top: 5px;
+}
+
+.title_name_class {
+	padding-top: 5px;
+}
+
+.title_name_sub {
+	padding-top: 35px;
+}
+
+.title_name_question {
+	padding-top: 25px;
+}
+
+.title_name_option_a {
+	padding-top: 90px;
+}
+
+.title_name_option_b {
+	padding-top: 90px;
+}
+
+.title_name_option_c {
+	padding-top: 90px;
+}
+
+.title_name_option_d {
+	padding-top: 90px;
+}
+
+.title_name_answer {
+	padding-top: 68px;
+}
+
+.title_text textarea {
+	width: 100%;
+	height: 100px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
+
+.title_text select {
+	width: 60%;
+	height: 40px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
+
+.title_text button a {
+	color: #FFF;
+	padding: 0px 40px;
+}
+
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
+
+.title_text button {
+	padding: 8px 0px;
+	cursor: pointer;
+	background: #2f889a;
+	color: #FFF;
+	width: 100%;
+	border-radius: 5px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-10 wow fadeInLeft"
+	style="visibility: visible; animation-name: fadeInLeft;">
+	<div class="row inner-grid">
+		<div class="user_log_detail">
+			<form name="questionForm"  role="form" action="" method="post"
+				novalidate>
+				<h3>Question Master</h3>
+				<div class="title_name">
+					<label class="title_name_class">Class : </label><br> 
+					<label class="title_name_sub">Subject : </label><br> 
+					<label class="title_name_question">Question : </label><br> 
+					<label class="title_name_option_a">Option A : </label><br> 
+					<label class="title_name_option_b">Option B : </label><br> 
+					<label class="title_name_option_c">Option C : </label><br/>
+					<label class="title_name_option_d">Option D : </label><br/><br/>
+					<label class="title_name_answer">Answer : </label><br/>
+				</div>
+				<div class="title_text">
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.studentClass.$invalid && !tquestionForm.studentClass.$pristine }">
+						<select class="form-control" ng-model="questionDetails.classId"
+							name="studentClass" placeholder="Class"
+							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
+							ng-required="true"
+							ng-change="showSubjectsList(questionDetails.classId)">
+							<option value="" disabled>Select Class</option>
+						</select>
+						<p
+							ng-show="questionForm.studentClass.$error.required && !questionForm.studentClass.$pristine">Class
+							is required.</p>
+					</div>
+					<div ng-if="isEmpty(questionDetails.securUuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.studentSubject.$invalid && !questionForm.studentSubject.$pristine }">
+						<select class="form-control" ng-model="questionDetails.subjectId"
+							name="studentSubject" placeholder="Subject"
+							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
+							ng-required="true">
+							<option value="" disabled>Select Subject</option>
+						</select>
+						<p
+							ng-show="topicCreationForm.studentSubject.$error.required && !topicCreationForm.studentSubject.$pristine">Subject
+							is required.</p>
+					</div>
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.question.$invalid && !questionForm.question.$pristine }">
+						<textarea class="form-control" id="question" name="question"
+							ng-model="questionDetails.question" type="text"
+							placeholder="Question" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.question.$invalid  && !questionForm.question.$pristine">
+							<span ng-show="questionForm.question.$error.required">Question is required.</span>
+						</span>
+					</div>
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.optionA.$invalid && !questionForm.optionA.$pristine }">
+						<textarea class="form-control" id="optionA" name="optionA"
+							ng-model="questionDetails.optionA" type="text"
+							placeholder="Option A" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.optionA.$invalid  && !questionForm.optionA.$pristine">
+							<span ng-show="questionForm.optionA.$error.required">Option A is required.</span>
+						</span>
+					</div>
+
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.optionB.$invalid && !questionForm.optionB.$pristine }">
+						<textarea class="form-control" id="optionB" name="optionB"
+							ng-model="questionDetails.optionB" type="text"
+							placeholder="Option B" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.optionB.$invalid  && !questionForm.optionB.$pristine">
+							<span ng-show="questionForm.optionB.$error.required">Option B is required.</span>
+						</span>
+					</div>
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.optionC.$invalid && !questionForm.optionC.$pristine }">
+						<textarea class="form-control" id="optionC" name="optionC"
+							ng-model="questionDetails.optionC" type="text"
+							placeholder="Option C" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.optionC.$invalid  && !questionForm.optionC.$pristine">
+							<span ng-show="questionForm.optionC.$error.required">Option C is required.</span>
+						</span>
+					</div>
+
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.optionD.$invalid && !questionForm.optionD.$pristine }">
+						<textarea class="form-control" id="optionD" name="optionD"
+							ng-model="questionDetails.optionD" type="text"
+							placeholder="Option D" required></textarea>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.optionD.$invalid  && !questionForm.optionD.$pristine">
+							<span ng-show="questionForm.optionD.$error.required">Option D is required.</span>
+						</span>
+					</div>
+					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+						ng-class="{ 'has-error' : questionForm.answer.$invalid && !questionForm.answer.$pristine }">
+						<input type="text" class="form-control" id="answer" name="answer"
+							ng-model="questionDetails.answer"
+							placeholder="Answer : Enter A/B/C/D respectively as answer" required/>
+						<span style="color: red" class="help-block"
+							ng-show="questionForm.answer.$invalid  && !questionForm.answer.$pristine">
+							<span ng-show="questionForm.answer.$error.required">Answer is required.</span>
+						</span>
+					</div>
+
+					<div class="form-group">
+						<button type="button" class="btn btn-secondary btn-block"
+							
+							ng-click="saveQuestion()">Submit</button>
+					</div>
+					
+					<div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group">
+						<button type="button" class="btn btn-secondary btn-block"
+							ng-disabled="questionForm.$invalid"
+							ng-click="updateQuestion()">Update</button>
+					</div>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
