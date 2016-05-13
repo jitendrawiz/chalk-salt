@@ -12,19 +12,19 @@ public class ExamDaoImpl implements ExamDao {
 
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws Exception {
-		final String sqlQuery = "INSERT INTO `chalkndust`.`cst_questions` (`question_id`, `class_id`, `subject_id`, `question`, "
-				+ "`option1`, `option2`, `option3`, `option4`, `answer`, `marks`, `deleted`, `modified_at`, `question_uuid`)"
-				+ "VALUES(:classId, :subjectId, :question, :option1, :option2, :option3, :option4, :answer, :questionUuid);";
+		final String sqlQuery = "INSERT INTO `cst_questions` (`class_id`, `subject_id`, `question`, "
+				+ "`option1`, `option2`, `option3`, `option4`, `answer`, `question_uuid`)"
+				+ "VALUES(:classId, :subjectId, :question, :optionA, :optionB, :optionC, :optionD, :answer, :questionUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("classId", questionDetails.getClassId());
             query.addParameter("subjectId", questionDetails.getSubjectId());
-            query.addParameter("question", questionDetails.getQuestionId());
+            query.addParameter("question", questionDetails.getQuestion());
             query.addParameter("optionA", questionDetails.getOptionA());
-            query.addParameter("optionA", questionDetails.getOptionB());
-            query.addParameter("optionA", questionDetails.getOptionC());
-            query.addParameter("optionA", questionDetails.getOptionD());
+            query.addParameter("optionB", questionDetails.getOptionB());
+            query.addParameter("optionC", questionDetails.getOptionC());
+            query.addParameter("optionD", questionDetails.getOptionD());
             query.addParameter("answer", questionDetails.getAnswer());
             query.addParameter("questionUuid", questionDetails.getQuestionSecuruuid());            
             query.executeUpdate();

@@ -46,7 +46,7 @@ public class ExamManagerImpl implements ExamManager {
 	 */
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws ExamException {
-		logger.info("fetch dicussion topic using secur uuid...");
+		logger.info("Saving Question ...");
 		try{
 			questionDetails.setQuestionSecuruuid(UUID.randomUUID().toString());
 			
