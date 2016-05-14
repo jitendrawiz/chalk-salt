@@ -1,0 +1,24 @@
+<div class="col-md-3 column right-navbar-right">
+    <div class="notification">
+        <h3>
+            <i class="fa-circle"></i>Notification
+        </h3>
+        <p>
+            <span>Coming Soon</span>
+        </p>
+        <div class="clearfix"></div>
+        <div class="disc-room">
+            <br> <br> <a ui-sref="chalkanddust.discussionroomfirstpage"> <i class="fa-group"></i><br>
+                <h3>Discussion Room</h3>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-md-9 column" ng-repeat="item in subjects">
+    <div class="feature-box">
+        <span class="feature-icon feature-icon_01"> <a ng-click="setTabSubject(2,item);" href="javascript:void(0)"> <i
+                class="fa fa-file"></i></a></span> <a ng-click="setTabSubject(2,item)" href="javascript:void(0)">
+            <h3>{{item.subjectName}}</h3>
+        </a>
+    </div>
+</div>
