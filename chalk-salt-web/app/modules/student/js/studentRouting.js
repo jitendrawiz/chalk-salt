@@ -2,8 +2,9 @@
 
 define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/studentHome.tpl.html',
          'text!../templates/adminProfile.tpl.html','text!../templates/adminHome.tpl.html',
-         'text!../templates/admin/StudentDetails.tpl.html'],
-		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate) {
+         'text!../templates/admin/StudentDetails.tpl.html','text!../templates/studentDashboard/testInstruction.tpl.html'],
+		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate,
+		  testInstructionTemplate) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -28,6 +29,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
         	url : '/admin/:id/students',
             template : studentdetailstemplate,
             controller : 'AdminController as adminCtrl'        		
-        });
+        }).state('chalkanddust.testInstruction',{
+          url : '/student/testInstruction',
+          template : testInstructionTemplate,
+          controller : 'StudentController as stdCtrl'           
+      });
     } ]);
 });

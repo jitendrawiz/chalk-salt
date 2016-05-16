@@ -1090,7 +1090,7 @@ input:checked + label {
 	padding-top:7px;
 }
 .t_instruction{
-	background-color:rgba(52, 152, 219, 0.61);
+	background-color:#3498DB;
 }
 .t_instruction h3{
 	font-size:30px;
@@ -1103,6 +1103,7 @@ input:checked + label {
 	margin-top:5px;
 	min-height:80px;
 	max-height:800px;
+	height:110px;
 }
 .t_instruction_ans a{
 	float:right;
