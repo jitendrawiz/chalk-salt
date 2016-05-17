@@ -195,17 +195,18 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     
     //* Admin Controller
     
-    homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
+    homeModule.controller('AdminController', ['$stateParams','$window', '$scope', '$filter', '$state', '$resource', '$location', '$rootScope', 'CHALKNDUST','$log',
       'GetUserDetailsService','StudentProfileUpdateService','ChangePasswordService','userClassLookUpService','GetSubjectsList',
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
-    function($stateParams,$window,$scope, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
+      'GetQuestionList', 'updateQuestionDetailsService', 
+    function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
-       RegistrationService,SaveQuestionDetailsService) {
+       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -282,7 +283,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
         	        if (response) {
         	          var modalOptions = {
         	                    header : 'Note',
-        	                    body : 'New Question has been saved.',
+        	                    body : 'Question has been saved.',
         	                    btn : 'OK'
         	                };
 
@@ -368,6 +369,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
         	 resetOptionsComments();
         	 $scope.topicsList=[];
         	 $scope.commentsList=[];
+        	 $scope.questionList=[];
         	 console.log(classId);
              $scope.subjectsList = response;
          }, onRequestFailure);
@@ -512,8 +514,87 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
              }
          }, onRequestFailure);
      };
-         
-        $scope.isEmpty = function(obj) {
+     
+     //To show question List
+     $scope.showQuestionDetails = function(classId,subjectId, classes, subjectsList) {
+    	 console.log("Fetching questions detailed list "+classId+"-"+classId+" & "+subjectId+"-"+subjectId);
+    	 
+    	 $scope.classes=classes;
+    	 $scope.subjectsList=subjectsList;
+    	 
+    	if (!classId) {
+    		resetOptions();
+    		if(!subjectId){
+    			return;
+    		}             
+         }
+    	
+         GetQuestionList.query({classId:classId,subjectId:subjectId}, function(response) {
+        	 
+        	 if(response){
+        		 $scope.questionListDetails = response;
+             	$scope.totalItemsQuestionList = $scope.questionListDetails.length;
+                 $scope.currentPageQuestionList = 1;
+                 $scope.itemsPerPageQuestionList = 5;
+                 $scope.maxSizeQuestionList = 5;
+                 
+                 $scope.$watch('search', function (newVal, oldVal) {
+             		$scope.questionList = filterFilter($scope.questionListDetails, newVal);
+             		$scope.totalItemsQuestionList = $scope.questionList.length;
+             		//$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+             		$scope.currentPageQuestionList = 1;
+             	}, true);
+ 	              $scope.getQuestionData = function () {
+ 	                  // keep a reference to the current instance "this" as the context is changing
+ 	                  var self = this;
+ 	                  console.log(self.currentPageQuestionList);
+ 	                  var itemsPerPageQuestionList = self.itemsPerPageQuestionList; 
+ 	                  var offset = (self.currentPageQuestionList-1) * itemsPerPageQuestionList;
+ 	                  $scope.questionList = $scope.questionListDetails.slice(offset, offset + itemsPerPageQuestionList)
+ 	
+ 	              };
+               $scope.getQuestionData();
+             }
+         }, onRequestFailure);
+
+     };
+     
+     $scope.editQuestion = function(quesSecurUuid){
+    	 $scope.questionDetails={};
+    	 var found = $filter('filter')($scope.questionListDetails, {questionSecuruuid: quesSecurUuid}, true);
+         if (found.length) {
+        	 $scope.questionDetails = found[0];
+        	 $scope.setTab(10);
+         } else{
+        	 console.log("question data not found");
+        	 $state.go('chalkanddust.questionlist');
+         }
+     };
+     
+     $scope.updateQuestion=function(questionDetails){
+    	 console.log("updating question :"+questionDetails.questionSecuruuid);
+    	 
+    	 updateQuestionDetailsService.save({}, $scope.questionDetails, function(response) {
+ 	        if (response) {
+ 	            console.log(response);
+ 	            if(!angular.isUndefined(fileData)){
+ 	             	updateTopicPhoto(fileData,$scope.topicDetails.securUuid);
+ 	             }
+ 	        	var modalOptions = {
+ 	                    header : 'Note',
+ 	                    body : 'Question is updated successfully',
+ 	                    btn : 'OK'
+ 	                };
+ 	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+ 	            	$state.go('chalkanddust.question.list');
+ 	            });
+ 	        }
+ 	    }, function(error) {
+ 	        showAlert('danger', error.data.message);
+ 	    });
+     };
+     
+     $scope.isEmpty = function(obj) {
     	 for(var prop in obj) {
     	      if(obj.hasOwnProperty(prop))
     	          return false;
@@ -785,7 +866,6 @@ $scope.hideShowPassword = function() {
         $scope.inputType = 'password';
     }
 };
-
 
 this.register = function() {
                             

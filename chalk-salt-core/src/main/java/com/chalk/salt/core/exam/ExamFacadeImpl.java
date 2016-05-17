@@ -3,6 +3,8 @@
  */
 package com.chalk.salt.core.exam;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.QuestionDto;
@@ -26,6 +28,19 @@ public class ExamFacadeImpl implements ExamFacade {
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws ExamException {
 		return examManager.saveQuestion(questionDetails);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getQuestions(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<QuestionDto> getQuestions(String classId, String subjectId) throws ExamException {
+		return examManager.getQuestions(classId, subjectId);
+	}
+
+	@Override
+	public String updateQuestionDetails(QuestionDto question) throws ExamException {
+		return examManager.updateQuestionDetails(question);
 	}
 
 }

@@ -13,9 +13,6 @@ public class QuestionModel extends ApiModel {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1019511861887882236L;
 
-	/** The question id. */
-	private int questionId;
-
 	/** The question. */
 	private String question;
 
@@ -48,25 +45,6 @@ public class QuestionModel extends ApiModel {
 
 	/** The subject id. */
 	private int subjectId;
-
-	/**
-	 * Gets the question id.
-	 *
-	 * @return the question id
-	 */
-	public int getQuestionId() {
-		return questionId;
-	}
-
-	/**
-	 * Sets the question id.
-	 *
-	 * @param questionId
-	 *            the new question id
-	 */
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
-	}
 
 	/**
 	 * Gets the question.

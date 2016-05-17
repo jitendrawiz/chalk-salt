@@ -22,11 +22,11 @@ button.btn-block {
 	color: white;
 }
 
-#topicList th:last-child, td:last-child {
+#studentList th:last-child, td:last-child {
 	width: 10%;
 }
 
-#topicList th{
+#studentList th{
 	color:#fff;
 }
 </style>
@@ -38,12 +38,12 @@ button.btn-block {
 		<div class="table-responsive ">
 		 <div class="number_scroll">
     	
-        <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
+        <input ng-model="search" type="text" style="width: 40%" placeholder="Search student" />
         <div class="num_s">
           <uib-pagination total-items="$parent.totalItemsstudentList" ng-change="getData()" ng-model="$parent.currentPageStudentList" max-size="$parent.maxSizeStudentList" items-per-page="$parent.itemsPerPageStudentList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div> 
-			<table id="topicList" class="table table-bordered">
+			<table id="studentList" class="table table-bordered">
 				<thead>
 					<tr>
 						<th>Student Name</th>

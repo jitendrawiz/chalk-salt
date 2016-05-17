@@ -3,6 +3,7 @@
  */
 package com.chalk.salt.dao.exam.manager;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -53,6 +54,26 @@ public class ExamManagerImpl implements ExamManager {
 			return examDao.saveQuestion(questionDetails);
 		} catch (final Exception exception) {
             throw new ExamException(ErrorCode.FAIL_TO_SAVE_QUESTION, "Fail to Fetch Question", exception);
+        }
+	}
+
+	@Override
+	public List<QuestionDto> getQuestions(String classId, String subjectId) throws ExamException {
+		logger.info("Fetching list of questions ...");
+		try{
+			return examDao.getQuestions(classId, subjectId);
+		} catch (final Exception exception) {
+            throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST, "Fail to fetch question list", exception);
+        }
+	}
+
+	@Override
+	public String updateQuestionDetails(QuestionDto question) throws ExamException {
+		logger.info("Updating Question ...");
+		try{
+			return examDao.updateQuestionDetails(question);
+		} catch (final Exception exception) {
+            throw new ExamException(ErrorCode.FAIL_TO_UPDATE_QUESTION, "Fail to update question", exception);
         }
 	}
 

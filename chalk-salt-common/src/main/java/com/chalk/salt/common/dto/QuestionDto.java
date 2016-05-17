@@ -5,9 +5,6 @@ package com.chalk.salt.common.dto;
  */
 public class QuestionDto {
 
-	/** The question id. */
-	private int questionId;
-
 	/** The question. */
 	private String question;
 
@@ -40,25 +37,6 @@ public class QuestionDto {
 
 	/** The subject id. */
 	private int subjectId;
-
-	/**
-	 * Gets the question id.
-	 *
-	 * @return the question id
-	 */
-	public int getQuestionId() {
-		return questionId;
-	}
-
-	/**
-	 * Sets the question id.
-	 *
-	 * @param questionId
-	 *            the new question id
-	 */
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
-	}
 
 	/**
 	 * Gets the question.

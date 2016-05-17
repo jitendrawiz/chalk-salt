@@ -141,7 +141,7 @@ button, input, select, textarea {
 							<option value="" disabled>Select Subject</option>
 						</select>
 						<p
-							ng-show="topicCreationForm.studentSubject.$error.required && !topicCreationForm.studentSubject.$pristine">Subject
+							ng-show="questionForm.studentSubject.$error.required && !questionForm.studentSubject.$pristine">Subject
 							is required.</p>
 					</div>
 					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
@@ -209,7 +209,6 @@ button, input, select, textarea {
 
 					<div class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"
-							
 							ng-click="saveQuestion()">Submit</button>
 					</div>
 					

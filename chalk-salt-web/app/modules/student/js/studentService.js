@@ -226,6 +226,25 @@ define([ 'angular' ], function(angular) {
                 method : 'POST'
             }
         });
+    } ]);
+    
+    studentService.factory('GetQuestionList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/exam/questions/:classId/:subjectId',{
+            classId : '@classId',
+            subjectId:'@subjectId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
     } ]); 
+    
+    studentService.factory('updateQuestionDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/exam/questions/update',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+    } ]);
 
 });

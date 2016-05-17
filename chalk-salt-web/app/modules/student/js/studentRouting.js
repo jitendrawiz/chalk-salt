@@ -1,10 +1,10 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/studentHome.tpl.html',
-         'text!../templates/adminProfile.tpl.html','text!../templates/adminHome.tpl.html',
-         'text!../templates/admin/StudentDetails.tpl.html','text!../templates/studentDashboard/testInstruction.tpl.html'],
-		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate,
-		  testInstructionTemplate) {
+define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templates/adminProfile.tpl.html',
+         'text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html',
+         'text!../templates/admin/ExamQuestionMaster.tpl.html','text!../templates/admin/ExamQuestionList.tpl.html',,'text!../templates/studentDashboard/testInstruction.tpl.html'],
+		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate, 
+				examQuestionMasterTemplate, examQuestionListTemplate, testInstructionTemplate) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -33,6 +33,14 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
           url : '/student/testInstruction',
           template : testInstructionTemplate,
           controller : 'StudentController as stdCtrl'           
-      });
+      }).state('chalkanddust.questioncreate',{
+        	url : '/admin/exams/questions/create',
+            template : examQuestionMasterTemplate,
+            controller : 'AdminController as adminCtrl'        		
+        }).state('chalkanddust.questionlist',{
+        	url : '/admin/exams/questions/list',
+            template : examQuestionListTemplate,
+            controller : 'AdminController as adminCtrl'        		
+        });
     } ]);
 });

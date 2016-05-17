@@ -125,6 +125,13 @@
                             <span class="selected"></span>
                         </a>
 				</li>    
+				<li ng-class="{ active:isSet(11)}">
+                        <a ng-click="setTab(11);" href="">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Question List</span>
+                            <span class="selected"></span>
+                        </a>
+				</li>
               </ul>
             </aside>
             <section id="main-content">
@@ -165,6 +172,9 @@
 				</div>
 				<div ng-switch-when="10">
 				 <div ng-include="'modules/student/templates/admin/ExamQuestionMaster.tpl.html'"></div>
+				</div>
+				<div ng-switch-when="11">
+				 <div ng-include="'modules/student/templates/admin/ExamQuestionList.tpl.html'"></div>
 				</div>
 			</div>
                              
