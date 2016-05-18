@@ -167,7 +167,7 @@ button.btn-block {
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in questionList=questionListDetails | filter:search|startFrom:(currentPageQuestionList-1)*itemsPerPageQuestionList | limitTo:itemsPerPageQuestionList">
-						<td>{{item.qNo}}</td>
+						<td>{{$index+1}}</td>
 						<td>{{item.question}}</td>
 						<td>{{item.optionA}}</td>
 						<td>{{item.optionB}}</td>

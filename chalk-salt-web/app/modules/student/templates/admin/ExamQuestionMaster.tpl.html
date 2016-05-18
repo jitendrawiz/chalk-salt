@@ -109,7 +109,7 @@ button, input, select, textarea {
 				novalidate>
 				<h3>Question Master</h3>
 				<div class="title_name">
-					<label class="title_name_class">Class : {{questionDetails.questionSecuruuid}}</label><br> 
+					<label class="title_name_class">Class : </label><br> 
 					<label class="title_name_sub">Subject : </label><br> 
 					<label class="title_name_question">Question : </label><br> 
 					<label class="title_name_option_a">Option A : </label><br> 
@@ -132,20 +132,7 @@ button, input, select, textarea {
 							ng-show="questionForm.studentClass.$error.required && !questionForm.studentClass.$pristine">Class
 							is required.</p>
 					</div>
-                    <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group"
-                        ng-class="{ 'has-error' : questionForm.studentClass.$invalid && !tquestionForm.studentClass.$pristine }">
-                        <select class="form-control" ng-model="questionDetails.classId"
-                            name="studentClass" placeholder="Class"
-                            ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-                            ng-required="true"
-                            ng-change="showSubjectsList(questionDetails.classId)">
-                            <option value="" disabled>Select Class</option>
-                        </select>
-                        <p
-                            ng-show="questionForm.studentClass.$error.required && !questionForm.studentClass.$pristine">Class
-                            is required.</p>
-                    </div>
-					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group"
+					<div class="form-group"
 						ng-class="{ 'has-error' : questionForm.studentSubject.$invalid && !questionForm.studentSubject.$pristine }">
 						<select class="form-control" ng-model="questionDetails.subjectId"
 							name="studentSubject" placeholder="Subject"
@@ -177,17 +164,6 @@ button, input, select, textarea {
 							<span ng-show="questionForm.optionA.$error.required">Option A is required.</span>
 						</span>
 					</div>
-                    <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group"
-                        ng-class="{ 'has-error' : questionForm.optionA.$invalid && !questionForm.optionA.$pristine }">
-                        <textarea class="form-control" id="optionA" name="optionA"
-                            ng-model="questionDetails.optionA" type="text"
-                            placeholder="Option A" required></textarea>
-                        <span style="color: red" class="help-block"
-                            ng-show="questionForm.optionA.$invalid  && !questionForm.optionA.$pristine">
-                            <span ng-show="questionForm.optionA.$error.required">Option A is required.</span>
-                        </span>
-                    </div>
-
 					<div  class="form-group"
 						ng-class="{ 'has-error' : questionForm.optionB.$invalid && !questionForm.optionB.$pristine }">
 						<textarea class="form-control" id="optionB" name="optionB"
@@ -208,16 +184,6 @@ button, input, select, textarea {
 							<span ng-show="questionForm.optionC.$error.required">Option C is required.</span>
 						</span>
 					</div>
-                    <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group"
-                        ng-class="{ 'has-error' : questionForm.optionC.$invalid && !questionForm.optionC.$pristine }">
-                        <textarea class="form-control" id="optionC" name="optionC"
-                            ng-model="questionDetails.optionC" type="text"
-                            placeholder="Option C" required></textarea>
-                        <span style="color: red" class="help-block"
-                            ng-show="questionForm.optionC.$invalid  && !questionForm.optionC.$pristine">
-                            <span ng-show="questionForm.optionC.$error.required">Option C is required.</span>
-                        </span>
-                    </div>
 
 					<div  class="form-group"
 						ng-class="{ 'has-error' : questionForm.optionD.$invalid && !questionForm.optionD.$pristine }">
@@ -239,17 +205,6 @@ button, input, select, textarea {
 							<span ng-show="questionForm.answer.$error.required">Answer is required.</span>
 						</span>
 					</div>
-                    <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group"
-                        ng-class="{ 'has-error' : questionForm.answer.$invalid && !questionForm.answer.$pristine }">
-                        <input type="text" class="form-control" id="answer" name="answer"
-                            ng-model="questionDetails.answer"
-                            placeholder="Answer : Enter A/B/C/D respectively as answer" required/>
-                        <span style="color: red" class="help-block"
-                            ng-show="questionForm.answer.$invalid  && !questionForm.answer.$pristine">
-                            <span ng-show="questionForm.answer.$error.required">Answer is required.</span>
-                        </span>
-                    </div>
-
 					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group">
 						<button type="button" class="btn btn-secondary btn-block"
 							ng-click="saveQuestion()" ng-disabled="questionForm.$invalid">Submit</button>

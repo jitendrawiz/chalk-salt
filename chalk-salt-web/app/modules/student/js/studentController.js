@@ -490,7 +490,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      };
      
      /******* Save Question********/
-     
+     $scope.questionDetails={};
      $scope.saveQuestion = function() {
     	 SaveQuestionDetailsService.save({}, $scope.questionDetails, function(
     	            response) {
@@ -597,10 +597,10 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      };
      
      /******* Delete Question ********/	
-     this.deleteQuestion=function(questionSecuruuid){
+     $scope.deleteQuestion=function(questionSecuruuid){
   	   var modalOptionsConfirm = {
   	            header : 'Note',
-  	            body : 'Deleting Question :'+questionSecuruuid+ ' Do you want to continue?',
+  	            body : 'Do you want to delete the question?',
   	            btn : 'OK'
   	        };
   	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
