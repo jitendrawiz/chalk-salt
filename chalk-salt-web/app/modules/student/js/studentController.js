@@ -230,7 +230,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);
           $scope.topicsList=[];
           $scope.commentsList=[];
-          $scope.questionDetails={};          
+          //$scope.questionDetails={};          
         };
 
         $scope.isSet = function(tabNum){

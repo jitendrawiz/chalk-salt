@@ -1,6 +1,6 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templates/adminProfile.tpl.html',
+define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/studentHome.tpl.html', 'text!../templates/adminProfile.tpl.html',
          'text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html',
          'text!../templates/admin/ExamQuestionMaster.tpl.html','text!../templates/admin/ExamQuestionList.tpl.html',,'text!../templates/studentDashboard/testInstruction.tpl.html'],
 		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate, 
