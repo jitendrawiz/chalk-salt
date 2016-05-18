@@ -30,8 +30,10 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.exceptions.ExamException;
+import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.core.exam.ExamFacade;
 import com.chalk.salt.core.user.UserFacade;
@@ -55,6 +57,13 @@ public class ExamResource extends AbstractResource {
     @Inject
     private ExamFacade examFacade;
     
+    /**
+     * Save question.
+     *
+     * @param questionModel the question model
+     * @return the response
+     * @throws ExamException the exam exception
+     */
     @POST
     @Path("/exam/questions/add")
     @Produces(MediaType.APPLICATION_JSON)
@@ -76,6 +85,14 @@ public class ExamResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Gets the questions.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the questions
+     * @throws ExamException the exam exception
+     */
     @GET
     @Path("/exam/questions/{classId}/{subjectId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -93,17 +110,55 @@ public class ExamResource extends AbstractResource {
 	    }
     }
     
-    @GET
+    /**
+     * Update question details.
+     *
+     * @param questionDetail the question detail
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    @POST
     @Path("/exam/questions/update")
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresAuthentication    
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication  
     public Response updateQuestionDetails(QuestionModel questionDetail) throws ExamException{
     	QuestionDto question = null;
+    	Map<String, String> response= new HashMap<String,String>();
     	try{
-    		beanMapper.map(questionDetail, question);
+    		question = beanMapper.map(questionDetail, QuestionDto.class);
     		String securUuid = examFacade.updateQuestionDetails(question);
-    		return Response.ok(questionDetail).build();
+    		response.put("questionSecuruuid",securUuid);
+    		return Response.ok(response).build();
 	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * Delete question.
+     *
+     * @param questionSecuruuid the question securuuid
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/exam/questions/delete/{questionSecuruuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteQuestion(@NotBlank @PathParam("questionSecuruuid") final String questionSecuruuid) throws ExamException {
+
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean deleteStatus = false;
+        try {
+        	deleteStatus = examFacade.deleteQuestion(questionSecuruuid);
+            if (deleteStatus == null) {
+                return Response.noContent().build();
+            }
+            response.put("deleteStatus", deleteStatus.toString());
+            return Response.ok(response).build();
+
+        } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }
     }

@@ -28,6 +28,22 @@ public interface ExamDao {
 	 */
 	public List<QuestionDto> getQuestions(String classId, String subjectId)throws Exception;
 
-	public String updateQuestionDetails(QuestionDto question)throws Exception;
+	/**
+	 * Update question details.
+	 *
+	 * @param question the question
+	 * @return the string
+	 * @throws Exception the exception
+	 */
+	public String updateQuestionDetails(QuestionDto question) throws Exception;
+
+	/**
+	 * Delete question.
+	 *
+	 * @param questionSecuruuid the question securuuid
+	 * @return the boolean
+	 * @throws Exception the exception
+	 */
+	public Boolean deleteQuestion(String questionSecuruuid) throws Exception;
 
 }

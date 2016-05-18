@@ -245,6 +245,15 @@ define([ 'angular' ], function(angular) {
                 method : 'POST'
             }
         });
-    } ]);
-
+    }]);
+    
+    studentService.factory('deleteQuestionService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/exam/questions/delete/:questionSecuruuid',{
+            securUuid : '@questionSecuruuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
+    }]);
 });

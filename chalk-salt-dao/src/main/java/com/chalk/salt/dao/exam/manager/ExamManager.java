@@ -41,6 +41,15 @@ public interface ExamManager {
 	 * @return the string
 	 * @throws ExamException the exam exception
 	 */
-	String updateQuestionDetails(QuestionDto question)throws ExamException;
+	String updateQuestionDetails(QuestionDto question) throws ExamException;
+
+	/**
+	 * Delete question.
+	 *
+	 * @param questionSecuruuid the question securuuid
+	 * @return the boolean
+	 * @throws ExamException the exam exception
+	 */
+	Boolean deleteQuestion(String questionSecuruuid) throws ExamException;
 
 }

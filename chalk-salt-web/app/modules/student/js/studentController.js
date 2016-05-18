@@ -200,13 +200,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
-      'GetQuestionList', 'updateQuestionDetailsService', 
+      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
-       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService) {
+       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -229,8 +229,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
           $scope.tab = newTab; 
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab);
           $scope.topicsList=[];
-          $scope.commentsList=[];
-          //$scope.questionDetails={};          
+          $scope.commentsList=[];         
         };
 
         $scope.isSet = function(tabNum){
@@ -275,30 +274,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
          	showAlert('danger',error.data.message);
          });
          
-         /******* Save Question********/
-         
-         $scope.saveQuestion = function() {
-        	 SaveQuestionDetailsService.save({}, $scope.questionDetails, function(
-        	            response) {
-        	        if (response) {
-        	          var modalOptions = {
-        	                    header : 'Note',
-        	                    body : 'Question has been saved.',
-        	                    btn : 'OK'
-        	                };
-
-        	            CandDModalService.showModal({}, modalOptions).then(function(result) {
-        	                    $log.info(result);
-        	                });
-        	            console.log(response);
-        	            $state.reload();
-        	        }
-        	        
-        	    }, function(error) {
-        	        showAlert('danger', error.data.message);
-        	    });
-        	};
-        	
          this.updateProfile = function() {
              $scope.userInfo.academicInfo = $scope.academicInfo;
              $scope.userInfo.parentsInfo = $scope.parentsInfo;
@@ -346,7 +321,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      $scope.commentDetails=[];
      $scope.studentList=[];
      $scope.topicRequestListDetails=[];
-     $scope.questionDetails={};
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -515,7 +489,32 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
          }, onRequestFailure);
      };
      
-     //To show question List
+     /******* Save Question********/
+     
+     $scope.saveQuestion = function() {
+    	 SaveQuestionDetailsService.save({}, $scope.questionDetails, function(
+    	            response) {
+    	        if (response) {
+    	          var modalOptions = {
+    	                    header : 'Note',
+    	                    body : 'Question has been saved.',
+    	                    btn : 'OK'
+    	                };
+
+    	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+    	                    $log.info(result);
+    	                });
+    	            console.log(response);
+    	            $state.reload();
+    	        }
+    	        
+    	    }, function(error) {
+    	        showAlert('danger', error.data.message);
+    	    });
+    	};
+     
+
+     /******* Show Question List ********/	
      $scope.showQuestionDetails = function(classId,subjectId, classes, subjectsList) {
     	 console.log("Fetching questions detailed list "+classId+"-"+classId+" & "+subjectId+"-"+subjectId);
     	 
@@ -528,9 +527,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     			return;
     		}             
          }
-    	
          GetQuestionList.query({classId:classId,subjectId:subjectId}, function(response) {
-        	 
         	 if(response){
         		 $scope.questionListDetails = response;
              	$scope.totalItemsQuestionList = $scope.questionListDetails.length;
@@ -559,10 +556,12 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
 
      };
      
+     /******* Edit Question ********/	
      $scope.editQuestion = function(quesSecurUuid){
     	 $scope.questionDetails={};
     	 var found = $filter('filter')($scope.questionListDetails, {questionSecuruuid: quesSecurUuid}, true);
          if (found.length) {
+        	 //var tempObj = found[0];
         	 $scope.questionDetails = found[0];
         	 $scope.setTab(10);
          } else{
@@ -571,27 +570,58 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
          }
      };
      
-     $scope.updateQuestion=function(questionDetails){
-    	 console.log("updating question :"+questionDetails.questionSecuruuid);
+     /******* Update Question ********/	
+     $scope.updateQuestion=function(classes, subjectsList){
+    	 console.log("updating question :"+$scope.questionDetails.questionSecuruuid);
+    	 $scope.classes=classes;
+    	 $scope.subjectsList=subjectsList;
     	 
     	 updateQuestionDetailsService.save({}, $scope.questionDetails, function(response) {
  	        if (response) {
  	            console.log(response);
- 	            if(!angular.isUndefined(fileData)){
+ 	            /*if(!angular.isUndefined(fileData)){
  	             	updateTopicPhoto(fileData,$scope.topicDetails.securUuid);
- 	             }
+ 	             }*/
  	        	var modalOptions = {
  	                    header : 'Note',
  	                    body : 'Question is updated successfully',
  	                    btn : 'OK'
  	                };
- 	            CandDModalService.showModal({}, modalOptions).then(function(result) {
- 	            	$state.go('chalkanddust.question.list');
+ 	            	CandDModalService.showModal({}, modalOptions).then(function(result) {
+ 	            	$scope.setTab(11);
  	            });
  	        }
  	    }, function(error) {
- 	        showAlert('danger', error.data.message);
+ 	        showAlert('danger', error.message);
  	    });
+     };
+     
+     /******* Delete Question ********/	
+     this.deleteQuestion=function(questionSecuruuid){
+  	   var modalOptionsConfirm = {
+  	            header : 'Note',
+  	            body : 'Deleting Question :'+questionSecuruuid+ ' Do you want to continue?',
+  	            btn : 'OK'
+  	        };
+  	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+    	 deleteQuestionService.get({questionSecuruuid:questionSecuruuid},  function(response) {
+             if(response){
+             	 console.log(response);
+             	var modalOptions = {
+                      header : 'Note',
+                      body : 'Question deleted successfully',
+                      btn : 'OK'
+                  };
+
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                      $log.info(result);
+                  });
+             	 $state.reload();
+             	 }
+  	       }, function(error) {
+  	       	showAlert('danger',error.message);
+  	       })
+  	    });
      };
      
      $scope.isEmpty = function(obj) {
@@ -601,6 +631,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     	  }
     	  return true;
      };
+     
      $scope.topicDetailsToSave = {};
      this.createTopic = function(fileData) {   	
     	 angular.extend($scope.topicDetailsToSave,$scope.topicDetails);    	 
@@ -648,7 +679,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
    )};
    
    
-//delete topic
+   //delete topic
    this.deleteTopic=function(securUuid){
 	   var modalOptionsConfirm = {
 	            header : 'Note',
@@ -670,14 +701,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                 });
            	 $state.reload();
            	 }
-       }, function(error) {
-       	showAlert('danger',error.data.message);
-       })
-    });
- };
- //update Topic
+	       }, function(error) {
+	       	showAlert('danger',error.data.message);
+	       })
+	    });
+   };
+   //update Topic
 
-this.updateTopic = function(fileData) {
+   this.updateTopic = function(fileData) {
     updateTopicDetailsService.save({}, $scope.topicDetails, function(
             response) {
         if (response) {
@@ -696,19 +727,19 @@ this.updateTopic = function(fileData) {
                 });
         }
         
-    }, function(error) {
-        showAlert('danger', error.data.message);
-    });
-};
+	    }, function(error) {
+	        showAlert('danger', error.data.message);
+	    });
+   };
 
-//delete comment
-this.deleteComment=function(commentUuid){
-	var modalOptionsConfirm = {
+   //delete comment
+   this.deleteComment=function(commentUuid){
+	   var modalOptionsConfirm = {
             header : 'Note',
             body : 'Do you want to delete this Comment ?',
             btn : 'OK'
         };
-    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+	   CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
     	 deleteCommentDetailsService.get({commentUuid:commentUuid},  function(response) {
     	        if(response){
     	        	 console.log(response);
@@ -727,16 +758,16 @@ this.deleteComment=function(commentUuid){
     	    })
 
         });
-};
+   };
 
-//delete student
-this.deleteStudent=function(securUuid){
-	var modalOptionsConfirm = {
+	//delete student
+	this.deleteStudent=function(securUuid){
+		var modalOptionsConfirm = {
             header : 'Note',
             body : 'Do you want to delete this Student ?',
             btn : 'OK'
         };
-    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+		CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
     	 deleteStudentDetailsService.get({securUuid:securUuid},  function(response) {
 	        if(response){
 	        	 console.log(response);
@@ -755,49 +786,49 @@ this.deleteStudent=function(securUuid){
     	    })
 
         });
-};
+	};
 
-//show topic request list
-function showTopicRequestList () {
+	//show topic request list
+	function showTopicRequestList () {
 	
-    GetTopicRequestList.query({}, function(response) {
+		GetTopicRequestList.query({}, function(response) {
    	 
-   	 if(response){
-   		 $scope.topicRequestListDetails = response;
-        	$scope.totalItemsTopicRequestList = $scope.topicRequestListDetails.length;
-            $scope.currentPageTopicRequestList = 1;
-            $scope.itemsPerPageTopicRequestList = 5;
-            $scope.maxSizeTopicRequestList = 5;
-            
-            $scope.$watch('search', function (newVal, oldVal) {
-        		$scope.topicRequestList = filterFilter($scope.topicRequestListDetails, newVal);
-        		$scope.totalItemsTopicRequestList = $scope.topicRequestList.length;
-        		//$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
-        		$scope.currentPageTopicRequestList = 1;
-        	}, true);
-              $scope.getTopicRequestData = function () {
-                  // keep a reference to the current instance "this" as the context is changing
-                  var self = this;
-                  console.log(self.currentPageTopicRequestList);
-                  var itemsPerPageTopicRequestList = self.itemsPerPageTopicRequestList; 
-                  var offset = (self.currentPageTopicRequestList-1) * itemsPerPageTopicRequestList;
-                  $scope.topicRequestList = $scope.topicRequestListDetails.slice(offset, offset + itemsPerPageTopicRequestList)
+			if(response){
+	   		 $scope.topicRequestListDetails = response;
+	        	$scope.totalItemsTopicRequestList = $scope.topicRequestListDetails.length;
+	            $scope.currentPageTopicRequestList = 1;
+	            $scope.itemsPerPageTopicRequestList = 5;
+	            $scope.maxSizeTopicRequestList = 5;
+	            
+	            $scope.$watch('search', function (newVal, oldVal) {
+	        		$scope.topicRequestList = filterFilter($scope.topicRequestListDetails, newVal);
+	        		$scope.totalItemsTopicRequestList = $scope.topicRequestList.length;
+	        		//$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+	        		$scope.currentPageTopicRequestList = 1;
+	        	}, true);
+	              $scope.getTopicRequestData = function () {
+	                  // keep a reference to the current instance "this" as the context is changing
+	                  var self = this;
+	                  console.log(self.currentPageTopicRequestList);
+	                  var itemsPerPageTopicRequestList = self.itemsPerPageTopicRequestList; 
+	                  var offset = (self.currentPageTopicRequestList-1) * itemsPerPageTopicRequestList;
+	                  $scope.topicRequestList = $scope.topicRequestListDetails.slice(offset, offset + itemsPerPageTopicRequestList)
+	
+	              };
+	          $scope.getTopicRequestData();
+			}
+		}, onRequestFailure);
+	};
 
-              };
-          $scope.getTopicRequestData();
-        }
-    }, onRequestFailure);
-};
-
-//approve topic request
-this.approveTopicRequest=function(requestSecurUuid){
-	var modalOptionsConfirm = {
+	//approve topic request
+	this.approveTopicRequest=function(requestSecurUuid){
+		var modalOptionsConfirm = {
             header : 'Note',
             body : 'Do you want to approve this Topic Request?',
             btn : 'OK'
-    };
-    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
-    	approveTopicRequestService.get({requestSecurUuid:requestSecurUuid},  function(response) {
+	    };
+	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+	    	approveTopicRequestService.get({requestSecurUuid:requestSecurUuid},  function(response) {
 	        if(response){
 	        	 console.log(response);
 	         	var modalOptions = {
@@ -815,116 +846,116 @@ this.approveTopicRequest=function(requestSecurUuid){
     	    })
 
         });
-};	
+	};	
 
 
 
-showStudentList();
-showTopicRequestList();
-
-this.goBackToAdminHomePage=function(){
-	$state.go('chalkanddust.adminhome');
-};
+	showStudentList();
+	showTopicRequestList();
 	
+	this.goBackToAdminHomePage=function(){
+		$state.go('chalkanddust.adminhome');
+	};
+		
+	
+	
+	$scope.isUndefined = function (thing) {
+	    return (typeof thing === "undefined");
+	};
 
 
-$scope.isUndefined = function (thing) {
-    return (typeof thing === "undefined");
-};
 
-
-
-/**
- * Function to upload Topic photo
- */
-var updateTopicPhoto = function (fileData,securUuid) {
-    var file = fileData;
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('name', file.name);
-    formData.append('documentType', file.type);
-    UpdateTopicImageService.upload(formData, securUuid, function(response) {
-        showAlert("success", "Topic Image updated successfully.");                        
-    }, onRequestFailure);
-};
-
-/*
- * 
- * 
- * Registration code will start from here.
- * */
-
-
-$scope.userDetails = {};
-
-
-$scope.inputType = 'password';
-$scope.hideShowPassword = function() {
-    if ($scope.inputType === 'password') {
-        $scope.inputType = 'text';
-    } else {
-        $scope.inputType = 'password';
-    }
-};
-
-this.register = function() {
-                            
-    RegistrationService.save({}, $scope.userDetails, function(
-            response) {
-        if (response) {
-          var modalOptions = {
-                    header : 'Note',
-                    body : 'New user has been created and an email has been sent to their registered email address.',
-                    btn : 'OK'
-                };
-
-            CandDModalService.showModal({}, modalOptions).then(function(result) {
-                    $log.info(result);
-                });
-            console.log(response);
-            $state.reload();
-        }
-        
-    }, function(error) {
-        showAlert('danger', error.data.message);
-    });
-};
-
-/*
- * 
- * 
- * Registration Code ends here
- * */
-var Id = $stateParams.id;
-//Show Student's Details
-
-	if (!Id) {
-		return;
-	}
-	GetUserDetailsService.get({securUuid:Id},  function(response) {
-        if(response){
-        	 $scope.userInfoToShow = response;
-        	 $scope.subjectsToShow =$scope.userInfoToShow.subjects;
-
-        	 $scope.academicInfoToShow =$scope.userInfoToShow.academicInfo;
-        	 
-        	 $scope.parentsInfoToShow =$scope.userInfoToShow.parentsInfo;
-        	 $scope.studentSubjectsToShow=""; 
-        	 if($scope.subjectsToShow!=null){
-        	 for(var i=0;i<$scope.subjectsToShow.length;i++){
-        		 if($scope.studentSubjectsToShow==""){
-        			 $scope.studentSubjectsToShow=$scope.subjectsToShow[i].subjectName;
-        		 }else{
-        			 $scope.studentSubjectsToShow=$scope.studentSubjectsToShow+", "+$scope.subjectsToShow[i].subjectName;
-        		 }
-        		 
-        	 }}
-        	
-        }
-    }, function(error) {
-    	showAlert('danger',error.data.message);
-    });
-
-
-}]);
+	/**
+	 * Function to upload Topic photo
+	 */
+	var updateTopicPhoto = function (fileData,securUuid) {
+	    var file = fileData;
+	    var formData = new FormData();
+	    formData.append('file', file);
+	    formData.append('name', file.name);
+	    formData.append('documentType', file.type);
+	    UpdateTopicImageService.upload(formData, securUuid, function(response) {
+	        showAlert("success", "Topic Image updated successfully.");                        
+	    }, onRequestFailure);
+	};
+	
+	/*
+	 * 
+	 * 
+	 * Registration code will start from here.
+	 * */
+	
+	
+	$scope.userDetails = {};
+	
+	
+	$scope.inputType = 'password';
+	$scope.hideShowPassword = function() {
+	    if ($scope.inputType === 'password') {
+	        $scope.inputType = 'text';
+	    } else {
+	        $scope.inputType = 'password';
+	    }
+	};
+	
+	this.register = function() {
+	                            
+	    RegistrationService.save({}, $scope.userDetails, function(
+	            response) {
+	        if (response) {
+	          var modalOptions = {
+	                    header : 'Note',
+	                    body : 'New user has been created and an email has been sent to their registered email address.',
+	                    btn : 'OK'
+	                };
+	
+	            CandDModalService.showModal({}, modalOptions).then(function(result) {
+	                    $log.info(result);
+	                });
+	            console.log(response);
+	            $state.reload();
+	        }
+	        
+	    }, function(error) {
+	        showAlert('danger', error.data.message);
+	    });
+	};
+	
+	/*
+	 * 
+	 * 
+	 * Registration Code ends here
+	 * */
+	var Id = $stateParams.id;
+	//Show Student's Details
+	
+		if (!Id) {
+			return;
+		}
+		GetUserDetailsService.get({securUuid:Id},  function(response) {
+	        if(response){
+	        	 $scope.userInfoToShow = response;
+	        	 $scope.subjectsToShow =$scope.userInfoToShow.subjects;
+	
+	        	 $scope.academicInfoToShow =$scope.userInfoToShow.academicInfo;
+	        	 
+	        	 $scope.parentsInfoToShow =$scope.userInfoToShow.parentsInfo;
+	        	 $scope.studentSubjectsToShow=""; 
+	        	 if($scope.subjectsToShow!=null){
+	        	 for(var i=0;i<$scope.subjectsToShow.length;i++){
+	        		 if($scope.studentSubjectsToShow==""){
+	        			 $scope.studentSubjectsToShow=$scope.subjectsToShow[i].subjectName;
+	        		 }else{
+	        			 $scope.studentSubjectsToShow=$scope.studentSubjectsToShow+", "+$scope.subjectsToShow[i].subjectName;
+	        		 }
+	        		 
+	        	 }}
+	        	
+	        }
+	    }, function(error) {
+	    	showAlert('danger',error.data.message);
+	    });
+	
+	
+	}]);
 });    

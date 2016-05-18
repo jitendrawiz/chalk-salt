@@ -154,7 +154,10 @@ public enum ErrorCode {
 	FAIL_TO_UPDATE_QUESTION(1046),
 	
 	/** The fail to fetch question list. */
-	FAIL_TO_FETCH_QUESTION_LIST(1047);
+	FAIL_TO_FETCH_QUESTION_LIST(1047),
+	
+	/** The fail to delete question. */
+	FAIL_TO_DELETE_QUESTION(1048);
 	
 	/** The value. */
     private final int value;

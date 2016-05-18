@@ -38,9 +38,20 @@ public class ExamFacadeImpl implements ExamFacade {
 		return examManager.getQuestions(classId, subjectId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#updateQuestionDetails(com.chalk.salt.common.dto.QuestionDto)
+	 */
 	@Override
 	public String updateQuestionDetails(QuestionDto question) throws ExamException {
 		return examManager.updateQuestionDetails(question);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#deleteQuestion(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteQuestion(String questionSecuruuid) throws ExamException {
+		return examManager.deleteQuestion(questionSecuruuid);
 	}
 
 }

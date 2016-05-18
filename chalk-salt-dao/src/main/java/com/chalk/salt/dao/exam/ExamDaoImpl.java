@@ -59,11 +59,14 @@ public class ExamDaoImpl implements ExamDao {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#updateQuestionDetails(com.chalk.salt.common.dto.QuestionDto)
+	 */
 	@Override
 	public String updateQuestionDetails(QuestionDto question) throws Exception {
 		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question, "
 				+ "`option1`=:optionA, `option2`=:optionB, `option3`=:optionC, `option4`=:optionD, "
-				+ "`answer`=:answer WHERE `question_uuid`=:questionUuid";
+				+ "`answer`=:answer, `modified_at`=:modifiedAt WHERE `question_uuid`=:questionUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -73,9 +76,25 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("optionC", question.getOptionC());
             query.addParameter("optionD", question.getOptionD());
             query.addParameter("answer", question.getAnswer());
-            query.addParameter("questionUuid", question.getQuestionSecuruuid());            
+            query.addParameter("questionUuid", question.getQuestionSecuruuid());   
+            query.addParameter("modifiedAt", question.getModifiedDate());
             query.executeUpdate();
             return question.getQuestionSecuruuid();
         }
 	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#deleteQuestion(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteQuestion(String questionSecuruuid) throws Exception {
+		final String sqlQuery = "DELETE FROM `cst_questions` WHERE `question_uuid`=:questionUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("questionUuid", questionSecuruuid);   
+            query.executeUpdate();
+            return true;
+        }
+	}     
 }
