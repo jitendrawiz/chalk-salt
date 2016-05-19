@@ -496,6 +496,8 @@ CREATE TABLE `cst_guestusers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 ALTER TABLE `chalkndust`.`cst_questions`     CHANGE `answer` `answer` CHAR(1) NOT NULL;
+ALTER TABLE `chalkndust`.`cst_questions`     ADD COLUMN `question_image` VARCHAR(100) NULL AFTER `question_uuid`;
+INSERT INTO `chalkndust`.`cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) VALUES ( NULL,'QUESTION_IMAGE','G:\\CHALKANDDUST\\QuestionPhoto\\','To save question image.');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

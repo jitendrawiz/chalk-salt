@@ -6,6 +6,7 @@ package com.chalk.salt.core.exam;
 import java.util.List;
 
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
 
 /**
@@ -51,5 +52,15 @@ public interface ExamFacade {
 	 * @throws ExamException the exam exception
 	 */
 	Boolean deleteQuestion(String questionSecuruuid) throws ExamException;
+
+	/**
+	 * Upload question image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param documentUploadData the document upload data
+	 * @return the string
+	 * @throws ExamException the exam exception
+	 */
+	String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)throws ExamException;
 
 }

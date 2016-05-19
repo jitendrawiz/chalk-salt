@@ -157,7 +157,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_QUESTION_LIST(1047),
 	
 	/** The fail to delete question. */
-	FAIL_TO_DELETE_QUESTION(1048);
+	FAIL_TO_DELETE_QUESTION(1048),
+	
+	/** The fail to update question image. */
+	FAIL_TO_UPDATE_QUESTION_IMAGE(1049);
 	
 	/** The value. */
     private final int value;

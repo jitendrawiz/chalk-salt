@@ -651,12 +651,12 @@ public class UserDaoImpl implements UserDao {
 		final String sqlQuery = "SELECT topic_image from cst_discussion_topics "
 	    		+ " WHERE secur_uuid =:securUuid ";
 	           
-	    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
-	    	try (final Connection connection = dataSource.open()) {
-	            final Query query = connection.createQuery(sqlQuery);
-	            query.addParameter("securUuid", securUuid);
-	            return query.executeAndFetchFirst(String.class);
-	        }
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(String.class);
+        }
 	}
 
 	/* (non-Javadoc)

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.dao.exam.manager.ExamManager;
 
@@ -52,6 +53,15 @@ public class ExamFacadeImpl implements ExamFacade {
 	@Override
 	public Boolean deleteQuestion(String questionSecuruuid) throws ExamException {
 		return examManager.deleteQuestion(questionSecuruuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#uploadQuestionImage(java.lang.String, com.chalk.salt.common.dto.QuestionImageUploadDto)
+	 */
+	@Override
+	public String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)
+			throws ExamException {
+		return examManager.uploadQuestionImage(securUuid,documentUploadData);
 	}
 
 }

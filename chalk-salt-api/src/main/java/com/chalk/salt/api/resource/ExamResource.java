@@ -1,6 +1,7 @@
 package com.chalk.salt.api.resource;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,24 +18,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.DiscussionTopicModel;
+import com.chalk.salt.api.model.QuestionImageUploadModel;
 import com.chalk.salt.api.model.QuestionModel;
+import com.chalk.salt.api.model.TopicImageUploadModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicDto;
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.QuestionImageUploadDto;
+import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.DozerMapperUtil;
+import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.exam.ExamFacade;
 import com.chalk.salt.core.user.UserFacade;
 
@@ -78,7 +86,7 @@ public class ExamResource extends AbstractResource {
     	try{
     		questionDetails = beanMapper.map(questionModel, QuestionDto.class);
     		questionSecurUuid = examFacade.saveQuestion(questionDetails);
-    		response.put("questionSecurUuid", questionSecurUuid);
+    		response.put("questionSecuruuid", questionSecurUuid);
             return Response.ok(response).build();
 	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
@@ -159,6 +167,45 @@ public class ExamResource extends AbstractResource {
             return Response.ok(response).build();
 
         } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    @POST
+    @RequiresAuthentication
+    @Path("/exam/questions/update/photo/{securUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadQuestionImage(@PathParam("securUuid") final String securUuid,
+        @MultipartForm final QuestionImageUploadModel questionImageUploadRequest) throws ExamException {
+    	 if (questionImageUploadRequest == null || StringUtils.isBlank(securUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+    	  final File sourceFile = questionImageUploadRequest.getFile();
+          final String filename = questionImageUploadRequest.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final QuestionImageUploadDto documentUploadData = new QuestionImageUploadDto();
+          documentUploadData.setName(filename);
+          documentUploadData.setFile(sourceFile);
+          documentUploadData.setFilePath(sourceFile.getPath());
+        try
+        {
+        	final String QuestionSecurUuid = examFacade.uploadQuestionImage(securUuid, documentUploadData);
+        	 final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("QuestionSecuruuid", QuestionSecurUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+        	
+	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }
     }

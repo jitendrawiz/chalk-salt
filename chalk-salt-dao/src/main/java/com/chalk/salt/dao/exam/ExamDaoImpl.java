@@ -96,5 +96,52 @@ public class ExamDaoImpl implements ExamDao {
             query.executeUpdate();
             return true;
         }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getQuestionIdUsingSecurUuid(java.lang.String)
+	 */
+	@Override
+	public Integer getQuestionIdUsingSecurUuid(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT question_id FROM `cst_questions` WHERE secur_uuid=:securUuid";
+	
+		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(Integer.class);
+    	}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getPreviousQuestionImage(java.lang.String)
+	 */
+	@Override
+	public String getPreviousQuestionImage(String securUuid) throws Exception {
+		final String sqlQuery = "SELECT question_image from cst_questions "
+	    		+ " WHERE question_uuid =:securUuid ";
+	           
+    	final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetchFirst(String.class);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#updateQuestionImageDetails(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void updateQuestionImageDetails(String fileNameToSave, String securUuid) throws Exception {
+		final String sqlQuery = "UPDATE cst_questions SET question_image=:fileName "
+				+ " WHERE question_uuid=:securUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("fileName", fileNameToSave);          
+            query.addParameter("securUuid", securUuid);
+            query.executeUpdate();
+        }
 	}     
 }

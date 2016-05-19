@@ -46,4 +46,31 @@ public interface ExamDao {
 	 */
 	public Boolean deleteQuestion(String questionSecuruuid) throws Exception;
 
+	/**
+	 * Gets the question id using secur uuid.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the question id using secur uuid
+	 * @throws Exception the exception
+	 */
+	public Integer getQuestionIdUsingSecurUuid(String securUuid) throws Exception;
+
+	/**
+	 * Gets the previous question image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @return the previous question image
+	 * @throws Exception the exception
+	 */
+	public String getPreviousQuestionImage(String securUuid) throws Exception;
+
+	/**
+	 * Update question image details.
+	 *
+	 * @param fileNameToSave the file name to save
+	 * @param securUuid the secur uuid
+	 * @throws Exception the exception
+	 */
+	public void updateQuestionImageDetails(String fileNameToSave, String securUuid) throws Exception;
+
 }

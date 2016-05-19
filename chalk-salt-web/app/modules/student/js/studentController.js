@@ -174,7 +174,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                     $scope.tab=1;
                   }
                 
-                
                 $scope.setTab = function(newTab){
                     $scope.tab = newTab; 
                     $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newTab); 
@@ -200,13 +199,13 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
-      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 
+      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService', 
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
-       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService) {
+       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -491,20 +490,23 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      
      /******* Save Question********/
      $scope.questionDetails={};
-     $scope.saveQuestion = function() {
+     $scope.saveQuestion = function(fileData) {
     	 SaveQuestionDetailsService.save({}, $scope.questionDetails, function(
     	            response) {
     	        if (response) {
     	          var modalOptions = {
-    	                    header : 'Note',
-    	                    body : 'Question has been saved.',
-    	                    btn : 'OK'
-    	                };
-
+	                    header : 'Note',
+	                    body : 'Question has been saved.',
+	                    btn : 'OK'
+	                };
+    	          
     	            CandDModalService.showModal({}, modalOptions).then(function(result) {
-    	                    $log.info(result);
-    	                });
+	                    $log.info(result);
+	                });
     	            console.log(response);
+    	            if(!angular.isUndefined(fileData)){
+                     	updateQuestionPhoto(fileData,response.questionSecuruuid);
+                     }
     	            $state.reload();
     	        }
     	        
@@ -548,7 +550,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
  	                  var itemsPerPageQuestionList = self.itemsPerPageQuestionList; 
  	                  var offset = (self.currentPageQuestionList-1) * itemsPerPageQuestionList;
  	                  $scope.questionList = $scope.questionListDetails.slice(offset, offset + itemsPerPageQuestionList)
- 	
  	              };
                $scope.getQuestionData();
              }
@@ -561,7 +562,6 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     	 $scope.questionDetails={};
     	 var found = $filter('filter')($scope.questionListDetails, {questionSecuruuid: quesSecurUuid}, true);
          if (found.length) {
-        	 //var tempObj = found[0];
         	 $scope.questionDetails = found[0];
         	 $scope.setTab(10);
          } else{
@@ -571,7 +571,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      };
      
      /******* Update Question ********/	
-     $scope.updateQuestion=function(classes, subjectsList){
+     $scope.updateQuestion=function(fileData, classes, subjectsList){
     	 console.log("updating question :"+$scope.questionDetails.questionSecuruuid);
     	 $scope.classes=classes;
     	 $scope.subjectsList=subjectsList;
@@ -579,9 +579,9 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     	 updateQuestionDetailsService.save({}, $scope.questionDetails, function(response) {
  	        if (response) {
  	            console.log(response);
- 	            /*if(!angular.isUndefined(fileData)){
- 	             	updateTopicPhoto(fileData,$scope.topicDetails.securUuid);
- 	             }*/
+ 	            if(!angular.isUndefined(fileData)){
+ 	            	updateQuestionPhoto(fileData,$scope.questionDetails.questionSecuruuid);
+ 	             }
  	        	var modalOptions = {
  	                    header : 'Note',
  	                    body : 'Question is updated successfully',
@@ -595,6 +595,18 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
  	        showAlert('danger', error.message);
  	    });
      };
+     
+     /******* Update Question Photo ********/
+ 	var updateQuestionPhoto = function (fileData,securUuid) {
+ 	    var file = fileData;
+ 	    var formData = new FormData();
+ 	    formData.append('file', file);
+ 	    formData.append('name', file.name);
+ 	    formData.append('documentType', file.type);
+ 	    UpdateQuestionImageService.upload(formData, securUuid, function(response) {
+ 	        showAlert("success", "Question Image updated successfully.");                        
+ 	    }, onRequestFailure);
+ 	};
      
      /******* Delete Question ********/	
      $scope.deleteQuestion=function(questionSecuruuid){
