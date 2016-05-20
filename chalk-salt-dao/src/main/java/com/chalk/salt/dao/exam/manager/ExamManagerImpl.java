@@ -111,7 +111,6 @@ public class ExamManagerImpl implements ExamManager {
 			throws ExamException {
 		logger.info("Uploading Question image");
         try {
-			System.out.println("Inside Question image upload section");
 			String destPath = userDao.getSystemSettings("QUESTION_IMAGE");
 			destPath += securUuid.toString();
 			File file = new File(destPath);
@@ -166,5 +165,29 @@ public class ExamManagerImpl implements ExamManager {
 		    extension = fileName.substring(i+1);
 		}
 		return extension; 
+	}
+
+	@Override
+	public void deleteQuestionImage(String questionSecuruuid) throws ExamException {
+		
+		logger.info("Deleting Question image");
+        try {
+			String destPath = userDao.getSystemSettings("QUESTION_IMAGE");
+			destPath += questionSecuruuid.toString();
+			String fileName = "QUESTION_" + questionSecuruuid.toString();
+			String oldfileName = examDao.getPreviousQuestionImage(questionSecuruuid);
+			String destPathToDeleteFile = null;
+			if (oldfileName != null) {
+				destPathToDeleteFile = destPath + File.separator + fileName
+						+ "." + getExtension(oldfileName);
+			}
+			File oldfile = new File(destPathToDeleteFile);
+			if (oldfile.exists()) {
+				oldfile.delete();
+			}
+			logger.info("Question Image deleted successfully");
+        } catch (final Exception exception) {
+            throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE, "Fail to update question image", exception);
+        }		
 	}
 }

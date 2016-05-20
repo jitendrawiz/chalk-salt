@@ -160,7 +160,10 @@ public enum ErrorCode {
 	FAIL_TO_DELETE_QUESTION(1048),
 	
 	/** The fail to update question image. */
-	FAIL_TO_UPDATE_QUESTION_IMAGE(1049);
+	FAIL_TO_UPDATE_QUESTION_IMAGE(1049), 
+	
+	/** The fail to delete question image. */
+	FAIL_TO_DELETE_QUESTION_IMAGE(1050);
 	
 	/** The value. */
     private final int value;

@@ -63,4 +63,12 @@ public interface ExamManager {
 	 */
 	String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData) throws ExamException;
 
+	/**
+	 * Delete question image.
+	 *
+	 * @param questionSecuruuid the question securuuid
+	 * @throws ExamException the exam exception
+	 */
+	void deleteQuestionImage(String questionSecuruuid) throws ExamException;
+
 }

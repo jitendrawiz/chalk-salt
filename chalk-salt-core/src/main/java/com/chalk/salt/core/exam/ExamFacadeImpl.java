@@ -52,6 +52,7 @@ public class ExamFacadeImpl implements ExamFacade {
 	 */
 	@Override
 	public Boolean deleteQuestion(String questionSecuruuid) throws ExamException {
+		examManager.deleteQuestionImage(questionSecuruuid);
 		return examManager.deleteQuestion(questionSecuruuid);
 	}
 
