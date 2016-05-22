@@ -1,196 +1,206 @@
 <!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css"> -->
 <link type="text/css" rel="stylesheet" href="../../../resources/css/main.css">
 <style>
-.main_bg_bg{
-background-size:100%;
-	width:0%;
-	height:1000px;
-	top:0;
-	z-index:0;
-	position:fixed;
+.main_bg_bg {
+	background-size: 100%;
+	width: 0%;
+	height: 1000px;
+	top: 0;
+	z-index: 0;
+	position: fixed;
 }
 
-#contact{
-background: url(./resources/images/contactus.jpg) no-repeat center center;
--webkit-background-size:cover;
--moz-background-size:cover;
--o-background-size:cover;
-background-size:cover;
-
+#contact {
+	background: url(./resources/images/contactus.jpg) no-repeat center
+		center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 </style>
 <div id="wrapper" class="main-wrapper">
-  <header id="masthead" class="site-header navigation navbar-default">
-    <div class="header-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-md-6">
-            <nav class="top-nav">
-              <ul class="inline">
-                <li><a href="#"><i class="fa fa-envelope-o"></i>username@mailid.com</a></li>
-                <li><a href="#"><i class="fa fa-phone"></i> +91-445533654</a><a id="home"></a></li>
-              </ul>
-            </nav>
-          </div>
-          </div>
-      </div>
-    </div>
-    <div class="header-bottom">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/logo2.png" alt=""> </a> </div>
-        <nav class="collapse navbar-collapse navbar-right" id="navigation">
-          
-        </nav>
-      </div>
-    </div>
-  </header>
-  
-  <!--slider-->
-  <section id="start"> </section>
-  <!--slider--> 
-  
-  <!--contact-->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="row grid-blogg">
-        <div class="col-sm-12 col-md-12">
-          <div class="sec-head text-left wow fadeInDown">
-            <h2>Get in Touch</h2>
-            <p>Our Experts will resolve your query.Feel free to send your enquiry or opinions. </p>
-          </div>
+    <header id="masthead" class="site-header navigation navbar-default">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline">
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>username@mailid.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +91-445533654</a><a id="home"></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4 col-md-4 wow fadeInLeft">
-          <div class="contact-block">
-            <h4 class="title-style">Our Address</h4>
-            <div class="media">
-              <div class="media-left"> <i class="ion ion-map"></i> </div>
-              <div class="media-body">
-                <p>D-1/6,Sector-11,YMCA Road,Faridabad</p>
-              </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/logo2.png" alt="">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse navbar-right" id="navigation"></nav>
             </div>
-          </div>
-          <div class="contact-block">
-            <h4 class="title-style">Call us</h4>
-            <div class="media">
-              <div class="media-left"> <i class="ion-ios-telephone-outline"></i> </div>
-              <div class="media-body">
-                <p>+91 44 4444 4444 <br>
-                  +91 22223 555555</p>
-              </div>
-            </div>
-          </div>
-          <div class="contact-block">
-            <h4 class="title-style">Mail Us</h4>
-            <div class="media">
-              <div class="media-left"> <i class="ion-ios-email-outline"></i> </div>
-              <div class="media-body">
-                <p><a class="__cf_email__" href="#">username@mailid.com</a><br>
-                  <a class="__cf_email__" href="#">username@mailid.com</a></p>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="col-sm-8 col-md-8 wow fadeInRight">
-          <form  class="contact-form" name="EnquiryForm" role="form" action="" method="post" novalidate>
-                  <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>               
-            <div class="row">
-            <div class="col-sm-6 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.enquiryName.$invalid && !EnquiryForm.enquiryName.$pristine }">
-              	<input class="form-control" id="enquiryName" name="enquiryName" ng-model="enquiryDetails.enquiryName"  type="text" placeholder="Name" required/>
-              	<span style="color:red" class="help-block" ng-show="EnquiryForm.enquiryName.$invalid  && !EnquiryForm.enquiryName.$pristine">
-              		<span ng-show="EnquiryForm.enquiryName.$error.required">Name is required.</span>           
-              	</span>
-             </div>
-             <div class="col-sm-6 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine  }">
-              <input class="form-control" name="email" id="email" ng-model="enquiryDetails.email"  type="email" placeholder="E-mail" required/>
-             <span style="color:red" ng-show="EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine">
-             <span ng-show="EnquiryForm.email.$error.required">Email is required.</span>
-             <span ng-show="EnquiryForm.email.$error.email">Invalid email address.</span>
-             </span>
-              </div>
-               <div class="col-sm-12 input-wrap"  ng-class="{ 'has-error' : EnquiryForm.enquirySubject.$invalid && !EnquiryForm.enquirySubject.$pristine }">
-              	<input class="form-control" id="enquirySubject" name="enquirySubject" ng-model="enquiryDetails.enquirySubject"  type="text" placeholder="Subject" required/>
-              	<span style="color:red" class="help-block" ng-show="EnquiryForm.enquirySubject.$invalid  && !EnquiryForm.enquirySubject.$pristine">
-              		<span ng-show="EnquiryForm.enquirySubject.$error.required">Subject is required.</span>           
-              	</span>
-             </div>
-             <div class="col-sm-12 input-wrap"
-						ng-class="{ 'has-error' : EnquiryForm.enquiryMessage.$invalid && !EnquiryForm.enquiryMessage.$pristine }">
-						<textarea class="form-control" id="enquiryMessage" name="enquiryMessage"
-							ng-model="enquiryDetails.enquiryMessage" type="text"
-							placeholder="Message" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="EnquiryForm.enquiryMessage.$invalid  && !EnquiryForm.enquiryMessage.$pristine">
-							<span ng-show="EnquiryForm.enquiryMessage.$error.required">Message
-								is required.</span>
-						</span>
-					</div>
-					           
-              <div class="col-sm-12 text-right">
-              <button type="button" class="btn btn-main btn-shadow shutter-both" ng-disabled="EnquiryForm.$invalid" ng-click="homeCtrl.sendMessage()">Send Message</button>
-              </div>
+    </header>
+    <!--slider-->
+    <section id="start"></section>
+    <!--slider-->
+    <!--contact-->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="row grid-blogg">
+                <div class="col-sm-12 col-md-12">
+                    <div class="sec-head text-left wow fadeInDown">
+                        <h2>Get in Touch</h2>
+                        <p>Our Experts will resolve your query.Feel free to send your enquiry or opinions.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 wow fadeInLeft">
+                    <div class="contact-block">
+                        <h4 class="title-style">Our Address</h4>
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="ion ion-map"></i>
+                            </div>
+                            <div class="media-body">
+                                <p>D-1/6,Sector-11,YMCA Road,Faridabad</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-block">
+                        <h4 class="title-style">Call us</h4>
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="ion-ios-telephone-outline"></i>
+                            </div>
+                            <div class="media-body">
+                                <p>
+                                    +91 44 4444 4444 <br> +91 22223 555555
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-block">
+                        <h4 class="title-style">Mail Us</h4>
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="ion-ios-email-outline"></i>
+                            </div>
+                            <div class="media-body">
+                                <p>
+                                    <a class="__cf_email__" href="#">username@mailid.com</a><br> <a class="__cf_email__" href="#">username@mailid.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8 wow fadeInRight">
+                    <form class="contact-form" name="EnquiryForm" role="form" action="" method="post" novalidate>
+                        <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                        <div class="row">
+                            <div class="col-sm-6 input-wrap"
+                                ng-class="{ 'has-error' : EnquiryForm.enquiryName.$invalid && !EnquiryForm.enquiryName.$pristine }">
+                                <input class="form-control" id="enquiryName" name="enquiryName" ng-model="enquiryDetails.enquiryName" type="text"
+                                    placeholder="Name" required /> <span style="color: red" class="help-block"
+                                    ng-show="EnquiryForm.enquiryName.$invalid  && !EnquiryForm.enquiryName.$pristine"> <span
+                                    ng-show="EnquiryForm.enquiryName.$error.required">Name is required.</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-6 input-wrap" ng-class="{ 'has-error' : EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine  }">
+                                <input class="form-control" name="email" id="email" ng-model="enquiryDetails.email" type="email" placeholder="E-mail"
+                                    required /> <span style="color: red" ng-show="EnquiryForm.email.$invalid && !EnquiryForm.email.$pristine">
+                                    <span ng-show="EnquiryForm.email.$error.required">Email is required.</span> <span
+                                    ng-show="EnquiryForm.email.$error.email">Invalid email address.</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-12 input-wrap"
+                                ng-class="{ 'has-error' : EnquiryForm.enquirySubject.$invalid && !EnquiryForm.enquirySubject.$pristine }">
+                                <input class="form-control" id="enquirySubject" name="enquirySubject" ng-model="enquiryDetails.enquirySubject"
+                                    type="text" placeholder="Subject" required /> <span style="color: red" class="help-block"
+                                    ng-show="EnquiryForm.enquirySubject.$invalid  && !EnquiryForm.enquirySubject.$pristine"> <span
+                                    ng-show="EnquiryForm.enquirySubject.$error.required">Subject is required.</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-12 input-wrap"
+                                ng-class="{ 'has-error' : EnquiryForm.enquiryMessage.$invalid && !EnquiryForm.enquiryMessage.$pristine }">
+                                <textarea class="form-control" id="enquiryMessage" name="enquiryMessage" ng-model="enquiryDetails.enquiryMessage"
+                                    type="text" placeholder="Message" required></textarea>
+                                <span style="color: red" class="help-block"
+                                    ng-show="EnquiryForm.enquiryMessage.$invalid  && !EnquiryForm.enquiryMessage.$pristine"> <span
+                                    ng-show="EnquiryForm.enquiryMessage.$error.required">Message is required.</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-12 text-right">
+                                <button type="button" class="btn btn-main btn-shadow shutter-both" ng-disabled="EnquiryForm.$invalid"
+                                    ng-click="homeCtrl.sendMessage()">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
-    </div>
-  </section>
-  <!--contact_closed--> 
-  
-  <!--map-->
-  <section class="map-wrapper">
-    <div class="wow bounceIn">
-      <div id="map-canvas">
-      	<iframe src="https://www.google.com/maps/embed/v1/place?q=Brilliant+Tutorials,+Faridabad,+Haryana,+India&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
-  <!--map_closed--> 
-  
-  <!--Footer-->
-  <footer id="colophon" class="section site-footer wow fadeInUp" role="contentinfo">
-    <div class="container">
-      <div class="footer-logo"> </div>
-      <div class="footer-social">
-        <ul class="inline text-center">
-          <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-          <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-          <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-          <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-          <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-          <li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
-        </ul>
-      </div>
-      <div class="copyright text-center">
-        <p>Copyright &copy; 2016 Chalk N Dust - All Rights Reserved.</p>
-        <ul class="new_foot_nav">         
-          <li><a href="term.html">Terms & Conditions</a></li>
-          <li class="last"><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-  <!--Footer--> 
-  
-   </div>
-<script src="./resources/js/jquery-1.11.2.min.js"></script> 
-<script src="./resources/js/bootstrap.min.js"></script> 
-<script src="./resources/js/jquery.sticky.js"></script> 
-<script src="./resources/js/retina.js"></script> 
-<script src="./resources/js/singlepagenav.js"></script> 
-<script src="./resources/js/owl.carousel.min.js"></script> 
-<script src="./resources/js/jquery.parallax-1.1.3.js"></script> 
-<script src="./resources/js/isotope.pkgd.min.js"></script> 
-<script src="./resources/js/jquery.magnific-popup.min.js"></script> 
-<script src="./resources/js/wow.min.js"></script> 
-<script src="./resources/js/jquery.easing-1.3.pack.js"></script> 
-<script src="./resources/js/jquery.appear.js"></script> 
-<script src="./resources/js/jquery.countTo.js"></script> 
-<script src="./resources/js/jquery.form.min.js"></script> 
-<script src="./resources/js/jquery.validate.min.js"></script> 
-<script src="./resources/js/jflickrfeed.min.js"></script> 
-<script src="./resources/js/main.js"></script> 
+    </section>
+    <!--contact_closed-->
+    <!--map-->
+    <section class="map-wrapper">
+        <div class="wow bounceIn">
+            <div id="map-canvas">
+                <iframe
+                    src="https://www.google.com/maps/embed/v1/place?q=Brilliant+Tutorials,+Faridabad,+Haryana,+India&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"
+                    width="100%" height="400px" frameborder="0" style="border: 0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <!--map_closed-->
+    <!--Footer-->
+    <footer id="colophon" class="section site-footer wow fadeInUp" role="contentinfo">
+        <div class="container">
+            <div class="footer-logo"></div>
+            <div class="footer-social">
+                <ul class="inline text-center">
+                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="copyright text-center">
+                <p>Copyright &copy; 2016 Chalk N Dust - All Rights Reserved.</p>
+                <ul class="new_foot_nav">
+                    <li><a ui-sref="chalkanddust.termsandconditions">Terms & Conditions</a></li>
+                    <li class="last"><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!--Footer-->
+</div>
+<script src="./resources/js/jquery-1.11.2.min.js"></script>
+<script src="./resources/js/bootstrap.min.js"></script>
+<script src="./resources/js/jquery.sticky.js"></script>
+<script src="./resources/js/retina.js"></script>
+<script src="./resources/js/singlepagenav.js"></script>
+<script src="./resources/js/owl.carousel.min.js"></script>
+<script src="./resources/js/jquery.parallax-1.1.3.js"></script>
+<script src="./resources/js/isotope.pkgd.min.js"></script>
+<script src="./resources/js/jquery.magnific-popup.min.js"></script>
+<script src="./resources/js/wow.min.js"></script>
+<script src="./resources/js/jquery.easing-1.3.pack.js"></script>
+<script src="./resources/js/jquery.appear.js"></script>
+<script src="./resources/js/jquery.countTo.js"></script>
+<script src="./resources/js/jquery.form.min.js"></script>
+<script src="./resources/js/jquery.validate.min.js"></script>
+<script src="./resources/js/jflickrfeed.min.js"></script>
+<script src="./resources/js/main.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();

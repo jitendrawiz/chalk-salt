@@ -1,7 +1,8 @@
 'use strict';
 
-define([ 'angular', 'text!../templates/home.tpl.html', 'text!../templates/contact_us.tpl.html'], 
-		function(angular, templateHome, templateContactUs) {
+define([ 'angular', 'text!../templates/home.tpl.html', 'text!../templates/contact_us.tpl.html',
+         'text!../templates/termAndConditions.tpl.html'], 
+		function(angular, templateHome, templateContactUs,templateTermAndConditions) {
     
     var homeRouter = angular.module('Home.router', []);
 
@@ -14,6 +15,10 @@ define([ 'angular', 'text!../templates/home.tpl.html', 'text!../templates/contac
             url : '/contactus',
             template : templateContactUs,
             controller : 'HomeController as homeCtrl'
-        });
+        }).state('chalkanddust.termsandconditions', {
+          url : '/termsandconditions',
+          template : templateTermAndConditions,
+          controller : 'HomeController as homeCtrl'
+      });
     } ]);
 });

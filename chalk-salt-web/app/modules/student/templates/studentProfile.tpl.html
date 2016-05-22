@@ -6,7 +6,6 @@
 <link type="text/css" rel="stylesheet" href="../../../resources/css/owl.carousel.css">
 <link type="text/css" rel="stylesheet" href="../../../resources/css/animate.css">
 <link type="text/css" rel="stylesheet" href="../../../resources/css/main.css">
-
 <script src="./resources/js/jquery-1.11.2.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
 <script src="./resources/js/jquery.sticky.js"></script>
@@ -29,625 +28,678 @@
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
 /* ]]> */
-</script> 
- 
+</script>
 <div id="wrapper" class="main-wrapper">
-<div id="masthead" class="site-header navigation navbar-default">
-
-<div class="header-top">
-<div class="container">
-<div class="row">
-<div class="col-sm-6 col-md-6">
-<nav class="top-nav">
-<ul class="inline">
-<li><a href="#"><i class="fa fa-envelope-o"></i>username@mailid.com</a></li>
-<li><a href="#"><i class="fa fa-phone"></i> +91-445533654</a><a id="home"></a></li>
-</ul>
-</nav>
-</div>
-<div class="col-sm-6 col-md-6">
-<nav class="top-nav">
- <ul class="inline text-right">
-<li><a ui-sref="chalkanddust.student" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
-<li><a ui-sref="chalkanddust.logout">Log Out</a></li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="header-bottom">
-<div class="container">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
- 
-<a class="navbar-brand" ui-sref="chalkanddust.home">
-<img src="../resources/images/icons/logo2.png" alt="">
-</a>
- 
-</div>
-<nav class="collapse navbar-collapse navbar-right" id="navigation">
-<ul class="nav navbar-nav">
- <li><a href="#" ng-click="editProfile()" class="fa fa-edit">Edit Profile</a></li>
-<!--<li><a href="#module">OUR MODULE</a></li>
+    <div id="masthead" class="site-header navigation navbar-default">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline">
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>username@mailid.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +91-445533654</a><a id="home"></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline text-right">
+                                <li><a ui-sref="chalkanddust.student" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
+                                <li><a ui-sref="chalkanddust.logout">Log Out</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="../resources/images/icons/logo2.png" alt="">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse navbar-right" id="navigation">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" ng-click="editProfile()" class="fa fa-edit">Edit Profile</a></li>
+                        <!--<li><a href="#module">OUR MODULE</a></li>
 <li><a href="#courses">COURSES</a></li>
 <li><a href="#team">TEAM</a></li>
 <li><a href="contact.html">CONTACT</a></li>-->
-</ul>
-</nav>
-</div>
-</div>
-</div>
- 
-<!--slider-->
-<section id="start">
-
-</section>
-<!--slider-->
-
-<!--Module-->
-<section id="blog" class="section">
-<div class="container">
-<div class="row grid-blog">
- 
-<div class="col-sm-12 col-md-12">
-<div class="sec-head text-left wow bounce">
-<h2><a href="#" name="module" id="module"></a>USER PROFILE</h2>
-<p>  </p>
-</div>
-</div>
-<div id="demo">
-<uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
-		<section id="tabbed">
-			<!-- First tab input and label -->
-			<input id="t-1" name="tabbed-tabs" type="radio" checked="checked" />
-			<label for="t-1" class="tabs shadow entypo-users">General Details</label>
-			<!-- Second tab input and label -->
-			<input id="t-2" name="tabbed-tabs" type="radio" />
-			<label for="t-2" class="tabs shadow entypo-home">Academic Details</label>
-			<!-- Third tab input and label -->
-			<input id="t-3" name="tabbed-tabs" type="radio" />
-			<label for="t-3" class="tabs shadow entypo-menu">Parents Details</label>
-			<!-- Fourth tab input and label -->
-			<input id="t-4" name="tabbed-tabs" type="radio" />
-			<label for="t-4" class="tabs shadow entypo-star">Accounts Details</label>
-			<div class="wrapper shadow">
-			
-				<!-- Tab 1 content -->
-				<div class="tab-1">
-					<div class="row">
-						<div class="cell w-100">
-							<div class="title large">General Details</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell w-100">
-						</div>
-					</div>
-					<div class="row">
-						<form name="generalDetailsForm" role="form" action=""  method="post" novalidate>
-							<div class="cell w-49">
-							
-								<!-- First name -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="firstName" ng-model="userInfo.firstName"><p ng-bind="userInfo.firstName"></p><span class="empty" ng-show="!userInfo.firstName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.firstName.$invalid && !generalDetailsForm.firstName.$pristine }">
-							              	<input class="form-control" id="firstName" name="firstName" ng-model="userInfo.firstName"  type="text" placeholder="First Name" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.firstName.$invalid  && !generalDetailsForm.firstName.$pristine">
-							              		<span ng-show="generalDetailsForm.firstName.$error.required">First Name is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-								
-								
-                                <!-- Last name -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p><span class="empty" ng-show="!userInfo.lastName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.lastName.$invalid && !generalDetailsForm.lastName.$pristine }">
-							              	<input class="form-control" id="lastName" name="lastName" ng-model="userInfo.lastName"  type="text" placeholder="Last Name" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.lastName.$invalid  && !generalDetailsForm.lastName.$pristine">
-							              		<span ng-show="generalDetailsForm.firstName.$error.required">Last Name is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                               
-                                
-                                <!-- Permanent Address -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p><span class="empty" ng-show="!userInfo.address">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.address.$invalid && !generalDetailsForm.address.$pristine }">
-							              	<input class="form-control" id="address" name="address" ng-model="userInfo.address"  type="text" placeholder="Permanent Address" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.address.$invalid  && !generalDetailsForm.address.$pristine">
-							              		<span ng-show="generalDetailsForm.address.$error.required">Permanent Address is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                
-
-								<!-- Phone input -->
-								<div class="cell w-100">
-							        <div ng-if="!editFlag">
-										<label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p><span class="empty" ng-show="!userInfo.mobile">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.mobile.$invalid && !generalDetailsForm.mobile.$pristine }">
-							              	<input class="form-control" id="mobile" name="mobile" ng-model="userInfo.mobile" phone-number maxlength="10" type="text" placeholder="Mobile No." required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.mobile.$invalid  && !generalDetailsForm.mobile.$pristine">
-							              		<span ng-show="generalDetailsForm.mobile.$error.required">Mobile No. is required.</span>   
-							              		<span ng-show="generalDetailsForm.mobile.$error.phonenumber">Please enter valid mobile number.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                
-                                
-								<!-- Email input -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p><span class="empty" ng-show="!userInfo.email">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.email.$invalid && !generalDetailsForm.email.$pristine }">
-							              	<input class="form-control" id="email" name="email" ng-model="userInfo.email"  type="email" placeholder="your@email.com" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.email.$invalid  && !generalDetailsForm.email.$pristine">
-							              		<span ng-show="generalDetailsForm.email.$error.required">Email Address is required.</span>   
-							              		<span ng-show="generalDetailsForm.email.$error.email">Invalid email address.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-						</div>
-						<!-- Map -->
-						<div class="cell w-49">
-							<!-- Middle name -->
-								<div class="cell w-100">
-							        <div ng-if="!editFlag">
-										<label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p><span class="empty" ng-show="!userInfo.middleName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.middleName.$invalid && !generalDetailsForm.middleName.$pristine }">
-							              	<input class="form-control" id="middleName" name="middleName" ng-model="userInfo.middleName"  type="text" placeholder="Middle Name" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.middleName.$invalid  && !generalDetailsForm.middleName.$pristine">
-							              		<span ng-show="generalDetailsForm.middleName.$error.required">Middle Address is required.</span>           
-							              	</span>
-							             </div>
-									</div>	
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                 <!-- Contact Details -->
-								<div class="cell w-100">
-									<label for="contactDetails"><p>Contact Details</p></label>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                <!-- Correspondence Address  -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p ng-bind="userInfo.correspondenceAddress"></p><span class="empty" ng-show="!userInfo.correspondenceAddress">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.correspondenceAddress.$invalid && !generalDetailsForm.correspondenceAddress.$pristine }">
-							              	<input class="form-control" id="correspondenceAddress" name="correspondenceAddress" ng-model="userInfo.correspondenceAddress"  type="text" placeholder="Correspondence Address" required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.correspondenceAddress.$invalid  && !generalDetailsForm.correspondenceAddress.$pristine">
-							              		<span ng-show="generalDetailsForm.correspondenceAddress.$error.required">Correspondence Address is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                <!-- Telephone input -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline "></p><span class="empty" ng-show="!userInfo.landline">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : generalDetailsForm.landline.$invalid && !generalDetailsForm.landline.$pristine }">
-							              	<input class="form-control" id="landline" name="landline" ng-model="userInfo.landline" phone-number maxlength="11"  type="text" placeholder="Landline No." required/>
-							              	<span style="color:red" class="help-block" ng-show="generalDetailsForm.landline.$invalid  && !generalDetailsForm.landline.$pristine">
-							              		<span ng-show="generalDetailsForm.landline.$error.required">Landline No. is required.</span>           
-							              		<span ng-show="generalDetailsForm.landline.$error.phonenumber">Please enter valid landline number.</span>
-							              	
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                <div class="cell w-100">
-									<div ng-if="!editFlag">										
-	                                    <div>
-	                                    <p ng-show="isUndefined(userProfilePhoto)">No Image Available</p>
-	                                      <p ng-show="!isUndefined(userProfilePhoto)">
-	                                        <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive" width="250" height="250">
-	                                 </p>   </div>
-									</div>
-									<div ng-if="editFlag">
-										<div class="input-group">
-							              	<label for="ProfilePhoto">Profile Photo: </label><input id="inputUploadProfilePhoto" type="file" file-model="uploadedlogo"/>
-							          <span class="input-group-btn">
-							           <button type="button" class="btn btn-secondary btn-block button black" ng-disabled="disableUploadPhotoButton()" ng-click="updateProfilePhoto(uploadedlogo)"
-		                                        >Upload</button>
-							          </span>
-							             </div>							           
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-								
-                                <!-- Send button -->
-								<div class="cell w-32">								
-									<div ng-if="editFlag">
-										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
-										<button type="button" class="btn btn-secondary btn-block button black" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()">Submit</button>
-									</div>
-								</div>
-								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
-								</div>
-								<div class="cell w-32">								
-									<div ng-if="!editFlag">
-										<!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
-										<button ng-show="!isUndefined(userProfilePhoto)" type="button" class="btn btn-secondary btn-block button black"  ng-click="stdCtrl.deleteProfilePhoto()">Delete Photo</button>
-									</div>
-								</div>
-                                <!--<div id="map-canvas" class="map fl-right"></div>-->
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- / Tab 1 content -->
-
-				<!-- Tab 2 content -->
-				<div class="tab-2">
-					<div class="row">
-						<div class="cell w-100">
-							<div class="title large">Academic Details</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell w-100">
-						</div>
-					</div>
-					<div class="row">
-						<!-- Form -->
-						<form name="academicDetailsForm" role="form" action="" method="post" novalidate>
-							<div class="cell w-49">
-							
-								<!-- Class input -->								
-								<div class="cell w-100">
-																										
-									<div ng-if="!editFlag">
-										<label for="studentClassName" ng-model="academicInfo.studentClassName"><p ng-bind="academicInfo.studentClassName"></p><span class="empty" ng-show="!academicInfo.studentClassName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.studentClassName.$invalid && !academicDetailsForm.studentClassName.$pristine }">
-							              	<input class="form-control" id="studentClassName" name="studentClassName" ng-model="academicInfo.studentClassName"  type="text" placeholder="Class"  readonly/>
-							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.studentClassName.$invalid  && !academicDetailsForm.studentClassName.$pristine">
-							              		<span ng-show="academicDetailsForm.studentClassName.$error.required">Class is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-                                
-                                <!-- Marks Details  input -->
-                                <div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="percentage" ng-model="academicInfo.percentage"><p ng-bind="academicInfo.percentage"></p></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.percentage.$invalid && !academicDetailsForm.percentage.$pristine }">
-							              	<input class="form-control" id="percentage" name="percentage" ng-model="academicInfo.percentage" maxlength="5"  type="text" placeholder="Percentage" required/>
-							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.percentage.$invalid  && !academicDetailsForm.percentage.$pristine">
-							              		<span ng-show="academicDetailsForm.percentage.$error.required">Last Class Percentage is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-							
-							</div>
-							<!-- Map -->
-							<div class="cell w-49">
-                        		<!-- Subjects input -->
-                        		<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="subjects" ng-model="studentSubjects"><p ng-bind="studentSubjects"></p><span class="empty" ng-show="!studentSubjects">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group">
-							              	<input class="form-control" id="subjects" name="subjects" ng-model="studentSubjects"  type="text" placeholder="Subjects" readonly/>
-							             </div>
-									</div>
-								</div>
-								
-								<div class="clrfx mt-10"></div>
-                                
-                                <!-- Previous School input -->
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="previousSchool" ng-model="academicInfo.previousSchool"><p ng-bind="academicInfo.previousSchool"></p><span class="empty" ng-show="!academicInfo.previousSchool">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : academicDetailsForm.previousSchool.$invalid && !academicDetailsForm.previousSchool.$pristine }">
-							              	<input class="form-control" id="previousSchool" name="previousSchool" ng-model="academicInfo.previousSchool"  type="text" placeholder="Previous School" required/>
-							              	<span style="color:red" class="help-block" ng-show="academicDetailsForm.previousSchool.$invalid  && !academicDetailsForm.previousSchool.$pristine">
-							              		<span ng-show="academicDetailsForm.previousSchool.$error.required">Previous School is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>                        
-                        
-								<!-- Send button -->
-								<div class="cell w-32">								
-									<div ng-if="editFlag">
-										<input type="submit" value="Submit" class="button black" form="academicDetailsForm" ng-disabled="academicDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/>
-									</div>
-								</div>
-								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- / Tab 2 content -->
-
-				<!-- Tab 3 content -->
-				<div class="tab-3">
-					<div class="row">
-						<div class="cell w-100">
-							<div class="title large">Parents Details</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell w-100">
-						</div>
-					</div>
-					<div class="row">
-						<!-- Form -->
-						<form name="parentDetailsForm" role="form" action="" method="post" novalidate>
-							<div class="cell w-49">
-								<!-- Name input -->								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="fatherName" ng-model="parentsInfo.fatherName"><p ng-bind="parentsInfo.fatherName"></p><span class="empty" ng-show="!parentsInfo.fatherName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherName.$invalid && !parentDetailsForm.fatherName.$pristine }">
-							              	<input class="form-control" id="fatherName" name="fatherName" ng-model="parentsInfo.fatherName"  type="text" placeholder="Father Name" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherName.$invalid  && !parentDetailsForm.fatherName.$pristine">
-							              		<span ng-show="parentDetailsForm.fatherName.$error.required">Father Name is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-						
-                                <!-- Father’s Occupation  -->								
-								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="fatherOccupation" ng-model="parentsInfo.fatherOccupation"><p ng-bind="parentsInfo.fatherOccupation"></p><span class="empty" ng-show="!parentsInfo.fatherOccupation">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherOccupation.$invalid && !parentDetailsForm.fatherOccupation.$pristine }">
-							              	<input class="form-control" id="fatherOccupation" name="fatherOccupation" ng-model="parentsInfo.fatherOccupation"  type="text" placeholder="Father Occupation" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherOccupation.$invalid  && !parentDetailsForm.fatherOccupation.$pristine">
-							              		<span ng-show="parentDetailsForm.fatherOccupation.$error.required">Father Occupation is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								
-								<div class="clrfx mt-10"></div>
-                                								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="fatherEmail" ng-model="parentsInfo.fatherEmail"><p ng-bind="parentsInfo.fatherEmail"></p><span class="empty" ng-show="!parentsInfo.fatherEmail">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherEmail.$invalid && !parentDetailsForm.fatherEmail.$pristine }">
-							              	<input class="form-control" id="fatherEmail" name="fatherEmail" ng-model="parentsInfo.fatherEmail"  type="email" placeholder="Father Email" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherEmail.$invalid  && !parentDetailsForm.fatherEmail.$pristine">
-							              		<span ng-show="parentDetailsForm.fatherEmail.$error.required">Father Email is required.</span>           
-							              		<span ng-show="parentDetailsForm.fatherEmail.$error.email">Invalid email address.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-								
-								
-								<!-- Phone input -->																
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="fatherMobile" ng-model="parentsInfo.fatherMobile"><p ng-bind="parentsInfo.fatherMobile"></p><span class="empty" ng-show="!parentsInfo.fatherMobile">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherMobile.$invalid && !parentDetailsForm.fatherMobile.$pristine }">
-							              	<input class="form-control" id="fatherMobile" name="fatherMobile" phone-number maxlength="10" ng-model="parentsInfo.fatherMobile"  type="text" placeholder="Father Mobile No." required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherMobile.$invalid  && !parentDetailsForm.fatherMobile.$pristine">
-							              		<span ng-show="parentDetailsForm.fatherMobile.$error.required">Father Mobile is required.</span>           
-							              	    <span ng-show="parentDetailsForm.fatherMobile.$error.phonenumber">Please enter valid mobile number.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-																
-								<div class="clrfx mt-10"></div>
-								
-                                <!-- Office Contact Details   -->															
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="fatherOfficeAddress" ng-model="parentsInfo.fatherOfficeAddress"><p ng-bind="parentsInfo.fatherOfficeAddress"></p><span class="empty" ng-show="!parentsInfo.fatherOfficeAddress">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.fatherOfficeAddress.$invalid && !parentDetailsForm.fatherOfficeAddress.$pristine }">
-							              	<input class="form-control" id="fatherOfficeAddress" name="fatherOfficeAddress" ng-model="parentsInfo.fatherOfficeAddress"  type="text" placeholder="Father Office Address" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.fatherOfficeAddress.$invalid  && !parentDetailsForm.fatherOfficeAddress.$pristine">
-							              		<span ng-show="parentDetailsForm.fatherOfficeAddress.$error.required">Father Office Address is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								
-								<div class="clrfx mt-10"></div>								
-							</div>
-							<!-- Map -->
-							<div class="cell w-49">
-								<!-- Name input -->								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="motherName" ng-model="parentsInfo.motherName"><p ng-bind="parentsInfo.motherName"></p><span class="empty" ng-show="!parentsInfo.motherName">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherName.$invalid && !parentDetailsForm.motherName.$pristine }">
-							              	<input class="form-control" id="motherName" name="motherName" ng-model="parentsInfo.motherName"  type="text" placeholder="Mother Name" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherName.$invalid  && !parentDetailsForm.motherName.$pristine">
-							              		<span ng-show="parentDetailsForm.motherName.$error.required">Mother Name is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								<div class="clrfx mt-10"></div>
-						
-                                <!-- Mother’s Occupation  -->								
-								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="motherOccupation" ng-model="parentsInfo.motherOccupation"><p ng-bind="parentsInfo.motherOccupation"></p><span class="empty" ng-show="!parentsInfo.motherOccupation">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherOccupation.$invalid && !parentDetailsForm.motherOccupation.$pristine }">
-							              	<input class="form-control" id="motherOccupation" name="motherOccupation" ng-model="parentsInfo.motherOccupation"  type="text" placeholder="Mother Occupation" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherOccupation.$invalid  && !parentDetailsForm.motherOccupation.$pristine">
-							              		<span ng-show="parentDetailsForm.motherOccupation.$error.required">Mother Occupation is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								
-								<div class="clrfx mt-10"></div>
-                                
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="motherEmail" ng-model="parentsInfo.motherEmail"><p ng-bind="parentsInfo.motherEmail"></p><span class="empty" ng-show="!parentsInfo.motherEmail">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherEmail.$invalid && !parentDetailsForm.motherEmail.$pristine }">
-							              	<input class="form-control" id="motherEmail" name="motherEmail" ng-model="parentsInfo.motherEmail"  type="email" placeholder="Mother Email" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherEmail.$invalid  && !parentDetailsForm.motherEmail.$pristine">
-							              		<span ng-show="parentDetailsForm.motherEmail.$error.required">Mother Email is required.</span>           
-							              		<span ng-show="parentDetailsForm.motherEmail.$error.email">Invalid email address.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								
-								
-								<div class="clrfx mt-10"></div>
-								<!-- Phone input -->
-																
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="motherMobile" ng-model="parentsInfo.motherMobile"><p ng-bind="parentsInfo.motherMobile"></p><span class="empty" ng-show="!parentsInfo.motherMobile">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherMobile.$invalid && !parentDetailsForm.motherMobile.$pristine }">
-							              	<input class="form-control" id="motherMobile" phone-number maxlength="10" name="motherMobile" ng-model="parentsInfo.motherMobile"  type="text" placeholder="Mother Mobile" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherMobile.$invalid  && !parentDetailsForm.motherMobile.$pristine">
-							              		<span ng-show="parentDetailsForm.motherMobile.$error.required">Mother Mobile is required.</span>           
-							              	    <span ng-show="parentDetailsForm.motherMobile.$error.phonenumber">Please enter valid mobile number.</span>
-							              	</span>
-							             </div>
-									</div>
-								</div>
-								
-								<div class="clrfx mt-10"></div>
-                                <!-- Office Contact Details   -->
-																
-								
-								<div class="cell w-100">
-									<div ng-if="!editFlag">
-										<label for="motherOfficeAddress" ng-model="parentsInfo.motherOfficeAddress"><p ng-bind="parentsInfo.motherOfficeAddress"></p><span class="empty" ng-show="!parentsInfo.motherOfficeAddress">N/A</span></label>
-									</div>
-									<div ng-if="editFlag">
-										<div class="form-group"  ng-class="{ 'has-error' : parentDetailsForm.motherOfficeAddress.$invalid && !parentDetailsForm.motherOfficeAddress.$pristine }">
-							              	<input class="form-control" id="motherOfficeAddress" name="motherOfficeAddress" ng-model="parentsInfo.motherOfficeAddress"  type="text" placeholder="Mother Office Address" required/>
-							              	<span style="color:red" class="help-block" ng-show="parentDetailsForm.motherOfficeAddress.$invalid  && !parentDetailsForm.motherOfficeAddress.$pristine">
-							              		<span ng-show="parentDetailsForm.motherOfficeAddress.$error.required">Mother Office Address is required.</span>           
-							              	</span>
-							             </div>
-									</div>
-								</div>
-							
-								<div class="clrfx mt-10"></div>
-								<!-- Send button -->
-								<div class="cell w-32">								
-									<div ng-if="editFlag">
-										<input type="submit" value="Submit" class="button black" form="parentDetailsForm" ng-disabled="parentDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/>
-									</div>
-								</div>
-								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- / Tab 3 content -->
-
-				<!-- Tab 4 content -->
-				<div class="tab-4">
-					<div class="row">
-						<div class="cell w-100">
-							<div class="title large">Accounts Details</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell w-100">
-						</div>
-					</div>
-					<div class="row">
-						<!-- Form -->
-						<form name="accountDetailsForm" role="form" action="" method="post" novalidate>
-							<div class="cell w-49">
-							
-								<!-- user name -->
-								<div class="cell w-100">
-									Username : {{userInfo.userName}}									
-								</div>
-							<!-- 	<div class="clrfx mt-10"></div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--slider-->
+    <section id="start"></section>
+    <!--slider-->
+    <!--Module-->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="row grid-blog">
+                <div class="col-sm-12 col-md-12">
+                    <div class="sec-head text-left wow bounce">
+                        <h2>
+                            <a href="#" name="module" id="module"></a>USER PROFILE
+                        </h2>
+                        <p></p>
+                    </div>
+                </div>
+                <div id="demo">
+                    <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                    <section id="tabbed">
+                        <!-- First tab input and label -->
+                        <input id="t-1" name="tabbed-tabs" type="radio" checked="checked" /> <label for="t-1" class="tabs shadow entypo-users">General
+                            Details</label>
+                        <!-- Second tab input and label -->
+                        <input id="t-2" name="tabbed-tabs" type="radio" /> <label for="t-2" class="tabs shadow entypo-home">Academic Details</label>
+                        <!-- Third tab input and label -->
+                        <input id="t-3" name="tabbed-tabs" type="radio" /> <label for="t-3" class="tabs shadow entypo-menu">Parents Details</label>
+                        <!-- Fourth tab input and label -->
+                        <input id="t-4" name="tabbed-tabs" type="radio" /> <label for="t-4" class="tabs shadow entypo-star">Accounts Details</label>
+                        <div class="wrapper shadow">
+                            <!-- Tab 1 content -->
+                            <div class="tab-1">
+                                <div class="row">
+                                    <div class="cell w-100">
+                                        <div class="title large">General Details</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="cell w-100"></div>
+                                </div>
+                                <div class="row">
+                                    <form name="generalDetailsForm" role="form" action="" method="post" novalidate>
+                                        <div class="cell w-49">
+                                            <!-- First name -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="firstName" ng-model="userInfo.firstName"><p ng-bind="userInfo.firstName"></p>
+                                                        <span class="empty" ng-show="!userInfo.firstName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.firstName.$invalid && !generalDetailsForm.firstName.$pristine }">
+                                                        <input class="form-control" id="firstName" name="firstName" ng-model="userInfo.firstName"
+                                                            type="text" placeholder="First Name" required /> <span style="color: red"
+                                                            class="help-block"
+                                                            ng-show="generalDetailsForm.firstName.$invalid  && !generalDetailsForm.firstName.$pristine">
+                                                            <span ng-show="generalDetailsForm.firstName.$error.required">First Name is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Last name -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="lastName" ng-model="userInfo.lastName"><p ng-bind="userInfo.lastName"></p> <span
+                                                        class="empty" ng-show="!userInfo.lastName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.lastName.$invalid && !generalDetailsForm.lastName.$pristine }">
+                                                        <input class="form-control" id="lastName" name="lastName" ng-model="userInfo.lastName"
+                                                            type="text" placeholder="Last Name" required /> <span style="color: red"
+                                                            class="help-block"
+                                                            ng-show="generalDetailsForm.lastName.$invalid  && !generalDetailsForm.lastName.$pristine">
+                                                            <span ng-show="generalDetailsForm.firstName.$error.required">Last Name is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Permanent Address -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="address" ng-model="userInfo.address"><p ng-bind="userInfo.address"></p> <span
+                                                        class="empty" ng-show="!userInfo.address">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.address.$invalid && !generalDetailsForm.address.$pristine }">
+                                                        <input class="form-control" id="address" name="address" ng-model="userInfo.address"
+                                                            type="text" placeholder="Permanent Address" required /> <span style="color: red"
+                                                            class="help-block"
+                                                            ng-show="generalDetailsForm.address.$invalid  && !generalDetailsForm.address.$pristine">
+                                                            <span ng-show="generalDetailsForm.address.$error.required">Permanent Address is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Phone input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="mobile" ng-model="userInfo.mobile"><p ng-bind="userInfo.mobile"></p> <span
+                                                        class="empty" ng-show="!userInfo.mobile">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.mobile.$invalid && !generalDetailsForm.mobile.$pristine }">
+                                                        <input class="form-control" id="mobile" name="mobile" ng-model="userInfo.mobile" phone-number
+                                                            maxlength="10" type="text" placeholder="Mobile No." required /> <span style="color: red"
+                                                            class="help-block"
+                                                            ng-show="generalDetailsForm.mobile.$invalid  && !generalDetailsForm.mobile.$pristine">
+                                                            <span ng-show="generalDetailsForm.mobile.$error.required">Mobile No. is required.</span> <span
+                                                            ng-show="generalDetailsForm.mobile.$error.phonenumber">Please enter valid mobile
+                                                                number.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Email input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="email" ng-model="userInfo.email"><p ng-bind="userInfo.email"></p> <span
+                                                        class="empty" ng-show="!userInfo.email">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.email.$invalid && !generalDetailsForm.email.$pristine }">
+                                                        <input class="form-control" id="email" name="email" ng-model="userInfo.email" type="email"
+                                                            placeholder="your@email.com" required /> <span style="color: red" class="help-block"
+                                                            ng-show="generalDetailsForm.email.$invalid  && !generalDetailsForm.email.$pristine">
+                                                            <span ng-show="generalDetailsForm.email.$error.required">Email Address is required.</span>
+                                                            <span ng-show="generalDetailsForm.email.$error.email">Invalid email address.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                        </div>
+                                        <!-- Map -->
+                                        <div class="cell w-49">
+                                            <!-- Middle name -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="middleName" ng-model="userInfo.middleName"><p ng-bind="userInfo.middleName"></p>
+                                                        <span class="empty" ng-show="!userInfo.middleName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.middleName.$invalid && !generalDetailsForm.middleName.$pristine }">
+                                                        <input class="form-control" id="middleName" name="middleName" ng-model="userInfo.middleName"
+                                                            type="text" placeholder="Middle Name" required /> <span style="color: red"
+                                                            class="help-block"
+                                                            ng-show="generalDetailsForm.middleName.$invalid  && !generalDetailsForm.middleName.$pristine">
+                                                            <span ng-show="generalDetailsForm.middleName.$error.required">Middle Address is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Contact Details -->
+                                            <div class="cell w-100">
+                                                <label for="contactDetails"><p>Contact Details</p></label>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Correspondence Address  -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="correspondenceAddress" ng-model="userInfo.correspondenceAddress "><p
+                                                            ng-bind="userInfo.correspondenceAddress"></p> <span class="empty"
+                                                        ng-show="!userInfo.correspondenceAddress">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.correspondenceAddress.$invalid && !generalDetailsForm.correspondenceAddress.$pristine }">
+                                                        <input class="form-control" id="correspondenceAddress" name="correspondenceAddress"
+                                                            ng-model="userInfo.correspondenceAddress" type="text" placeholder="Correspondence Address"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="generalDetailsForm.correspondenceAddress.$invalid  && !generalDetailsForm.correspondenceAddress.$pristine">
+                                                            <span ng-show="generalDetailsForm.correspondenceAddress.$error.required">Correspondence
+                                                                Address is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Telephone input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="landline" ng-model="userInfo.landline"><p ng-bind="userInfo.landline "></p> <span
+                                                        class="empty" ng-show="!userInfo.landline">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : generalDetailsForm.landline.$invalid && !generalDetailsForm.landline.$pristine }">
+                                                        <input class="form-control" id="landline" name="landline" ng-model="userInfo.landline"
+                                                            phone-number maxlength="11" type="text" placeholder="Landline No." required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="generalDetailsForm.landline.$invalid  && !generalDetailsForm.landline.$pristine">
+                                                            <span ng-show="generalDetailsForm.landline.$error.required">Landline No. is
+                                                                required.</span> <span ng-show="generalDetailsForm.landline.$error.phonenumber">Please
+                                                                enter valid landline number.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <div>
+                                                        <p ng-show="isUndefined(userProfilePhoto)">No Image Available</p>
+                                                        <p ng-show="!isUndefined(userProfilePhoto)">
+                                                            <img ng-src="{{userProfilePhoto}}" alt="Profile Photo" class="img-responsive" width="250"
+                                                                height="250">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="input-group">
+                                                        <label for="ProfilePhoto">Profile Photo: </label><input id="inputUploadProfilePhoto"
+                                                            type="file" file-model="uploadedlogo" /> <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-secondary btn-block button black"
+                                                                ng-disabled="disableUploadPhotoButton()" ng-click="updateProfilePhoto(uploadedlogo)">Upload</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Send button -->
+                                            <div class="cell w-32">
+                                                <div ng-if="editFlag">
+                                                    <!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
+                                                    <button type="button" class="btn btn-secondary btn-block button black"
+                                                        ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()">Submit</button>
+                                                </div>
+                                            </div>
+                                            <div class="cell w-32">
+                                                <input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()" />
+                                            </div>
+                                            <div class="cell w-32">
+                                                <div ng-if="!editFlag">
+                                                    <!-- <input type="submit" value="Submit" class="button black" form="generalDetailsForm" ng-disabled="generalDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()"/> -->
+                                                    <button ng-show="!isUndefined(userProfilePhoto)" type="button"
+                                                        class="btn btn-secondary btn-block button black" ng-click="stdCtrl.deleteProfilePhoto()">Delete
+                                                        Photo</button>
+                                                </div>
+                                            </div>
+                                            <!--<div id="map-canvas" class="map fl-right"></div>-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- / Tab 1 content -->
+                            <!-- Tab 2 content -->
+                            <div class="tab-2">
+                                <div class="row">
+                                    <div class="cell w-100">
+                                        <div class="title large">Academic Details</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="cell w-100"></div>
+                                </div>
+                                <div class="row">
+                                    <!-- Form -->
+                                    <form name="academicDetailsForm" role="form" action="" method="post" novalidate>
+                                        <div class="cell w-49">
+                                            <!-- Class input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="studentClassName" ng-model="academicInfo.studentClassName"><p
+                                                            ng-bind="academicInfo.studentClassName"></p> <span class="empty"
+                                                        ng-show="!academicInfo.studentClassName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : academicDetailsForm.studentClassName.$invalid && !academicDetailsForm.studentClassName.$pristine }">
+                                                        <input class="form-control" id="studentClassName" name="studentClassName"
+                                                            ng-model="academicInfo.studentClassName" type="text" placeholder="Class" readonly /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="academicDetailsForm.studentClassName.$invalid  && !academicDetailsForm.studentClassName.$pristine">
+                                                            <span ng-show="academicDetailsForm.studentClassName.$error.required">Class is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Marks Details  input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="percentage" ng-model="academicInfo.percentage"><p
+                                                            ng-bind="academicInfo.percentage"></p></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : academicDetailsForm.percentage.$invalid && !academicDetailsForm.percentage.$pristine }">
+                                                        <input class="form-control" id="percentage" name="percentage"
+                                                            ng-model="academicInfo.percentage" maxlength="5" type="text" placeholder="Percentage"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="academicDetailsForm.percentage.$invalid  && !academicDetailsForm.percentage.$pristine">
+                                                            <span ng-show="academicDetailsForm.percentage.$error.required">Last Class
+                                                                Percentage is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                        </div>
+                                        <!-- Map -->
+                                        <div class="cell w-49">
+                                            <!-- Subjects input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="subjects" ng-model="studentSubjects"><p ng-bind="studentSubjects"></p> <span
+                                                        class="empty" ng-show="!studentSubjects">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="subjects" name="subjects" ng-model="studentSubjects"
+                                                            type="text" placeholder="Subjects" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Previous School input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="previousSchool" ng-model="academicInfo.previousSchool"><p
+                                                            ng-bind="academicInfo.previousSchool"></p> <span class="empty"
+                                                        ng-show="!academicInfo.previousSchool">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : academicDetailsForm.previousSchool.$invalid && !academicDetailsForm.previousSchool.$pristine }">
+                                                        <input class="form-control" id="previousSchool" name="previousSchool"
+                                                            ng-model="academicInfo.previousSchool" type="text" placeholder="Previous School" required />
+                                                        <span style="color: red" class="help-block"
+                                                            ng-show="academicDetailsForm.previousSchool.$invalid  && !academicDetailsForm.previousSchool.$pristine">
+                                                            <span ng-show="academicDetailsForm.previousSchool.$error.required">Previous School
+                                                                is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Send button -->
+                                            <div class="cell w-32">
+                                                <div ng-if="editFlag">
+                                                    <input type="submit" value="Submit" class="button black" form="academicDetailsForm"
+                                                        ng-disabled="academicDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()" />
+                                                </div>
+                                            </div>
+                                            <div class="cell w-32">
+                                                <input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- / Tab 2 content -->
+                            <!-- Tab 3 content -->
+                            <div class="tab-3">
+                                <div class="row">
+                                    <div class="cell w-100">
+                                        <div class="title large">Parents Details</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="cell w-100"></div>
+                                </div>
+                                <div class="row">
+                                    <!-- Form -->
+                                    <form name="parentDetailsForm" role="form" action="" method="post" novalidate>
+                                        <div class="cell w-49">
+                                            <!-- Name input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="fatherName" ng-model="parentsInfo.fatherName"><p
+                                                            ng-bind="parentsInfo.fatherName"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.fatherName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.fatherName.$invalid && !parentDetailsForm.fatherName.$pristine }">
+                                                        <input class="form-control" id="fatherName" name="fatherName"
+                                                            ng-model="parentsInfo.fatherName" type="text" placeholder="Father Name" required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.fatherName.$invalid  && !parentDetailsForm.fatherName.$pristine">
+                                                            <span ng-show="parentDetailsForm.fatherName.$error.required">Father Name is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Father’s Occupation  -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="fatherOccupation" ng-model="parentsInfo.fatherOccupation"><p
+                                                            ng-bind="parentsInfo.fatherOccupation"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.fatherOccupation">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.fatherOccupation.$invalid && !parentDetailsForm.fatherOccupation.$pristine }">
+                                                        <input class="form-control" id="fatherOccupation" name="fatherOccupation"
+                                                            ng-model="parentsInfo.fatherOccupation" type="text" placeholder="Father Occupation"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.fatherOccupation.$invalid  && !parentDetailsForm.fatherOccupation.$pristine">
+                                                            <span ng-show="parentDetailsForm.fatherOccupation.$error.required">Father
+                                                                Occupation is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="fatherEmail" ng-model="parentsInfo.fatherEmail"><p
+                                                            ng-bind="parentsInfo.fatherEmail"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.fatherEmail">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.fatherEmail.$invalid && !parentDetailsForm.fatherEmail.$pristine }">
+                                                        <input class="form-control" id="fatherEmail" name="fatherEmail"
+                                                            ng-model="parentsInfo.fatherEmail" type="email" placeholder="Father Email" required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.fatherEmail.$invalid  && !parentDetailsForm.fatherEmail.$pristine">
+                                                            <span ng-show="parentDetailsForm.fatherEmail.$error.required">Father Email is
+                                                                required.</span> <span ng-show="parentDetailsForm.fatherEmail.$error.email">Invalid
+                                                                email address.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Phone input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="fatherMobile" ng-model="parentsInfo.fatherMobile"><p
+                                                            ng-bind="parentsInfo.fatherMobile"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.fatherMobile">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.fatherMobile.$invalid && !parentDetailsForm.fatherMobile.$pristine }">
+                                                        <input class="form-control" id="fatherMobile" name="fatherMobile" phone-number maxlength="10"
+                                                            ng-model="parentsInfo.fatherMobile" type="text" placeholder="Father Mobile No." required />
+                                                        <span style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.fatherMobile.$invalid  && !parentDetailsForm.fatherMobile.$pristine">
+                                                            <span ng-show="parentDetailsForm.fatherMobile.$error.required">Father Mobile is
+                                                                required.</span> <span ng-show="parentDetailsForm.fatherMobile.$error.phonenumber">Please
+                                                                enter valid mobile number.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Office Contact Details   -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="fatherOfficeAddress" ng-model="parentsInfo.fatherOfficeAddress"><p
+                                                            ng-bind="parentsInfo.fatherOfficeAddress"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.fatherOfficeAddress">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.fatherOfficeAddress.$invalid && !parentDetailsForm.fatherOfficeAddress.$pristine }">
+                                                        <input class="form-control" id="fatherOfficeAddress" name="fatherOfficeAddress"
+                                                            ng-model="parentsInfo.fatherOfficeAddress" type="text" placeholder="Father Office Address"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.fatherOfficeAddress.$invalid  && !parentDetailsForm.fatherOfficeAddress.$pristine">
+                                                            <span ng-show="parentDetailsForm.fatherOfficeAddress.$error.required">Father Office
+                                                                Address is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                        </div>
+                                        <!-- Map -->
+                                        <div class="cell w-49">
+                                            <!-- Name input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="motherName" ng-model="parentsInfo.motherName"><p
+                                                            ng-bind="parentsInfo.motherName"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.motherName">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.motherName.$invalid && !parentDetailsForm.motherName.$pristine }">
+                                                        <input class="form-control" id="motherName" name="motherName"
+                                                            ng-model="parentsInfo.motherName" type="text" placeholder="Mother Name" required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.motherName.$invalid  && !parentDetailsForm.motherName.$pristine">
+                                                            <span ng-show="parentDetailsForm.motherName.$error.required">Mother Name is
+                                                                required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Mother’s Occupation  -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="motherOccupation" ng-model="parentsInfo.motherOccupation"><p
+                                                            ng-bind="parentsInfo.motherOccupation"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.motherOccupation">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.motherOccupation.$invalid && !parentDetailsForm.motherOccupation.$pristine }">
+                                                        <input class="form-control" id="motherOccupation" name="motherOccupation"
+                                                            ng-model="parentsInfo.motherOccupation" type="text" placeholder="Mother Occupation"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.motherOccupation.$invalid  && !parentDetailsForm.motherOccupation.$pristine">
+                                                            <span ng-show="parentDetailsForm.motherOccupation.$error.required">Mother
+                                                                Occupation is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="motherEmail" ng-model="parentsInfo.motherEmail"><p
+                                                            ng-bind="parentsInfo.motherEmail"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.motherEmail">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.motherEmail.$invalid && !parentDetailsForm.motherEmail.$pristine }">
+                                                        <input class="form-control" id="motherEmail" name="motherEmail"
+                                                            ng-model="parentsInfo.motherEmail" type="email" placeholder="Mother Email" required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.motherEmail.$invalid  && !parentDetailsForm.motherEmail.$pristine">
+                                                            <span ng-show="parentDetailsForm.motherEmail.$error.required">Mother Email is
+                                                                required.</span> <span ng-show="parentDetailsForm.motherEmail.$error.email">Invalid
+                                                                email address.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Phone input -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="motherMobile" ng-model="parentsInfo.motherMobile"><p
+                                                            ng-bind="parentsInfo.motherMobile"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.motherMobile">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.motherMobile.$invalid && !parentDetailsForm.motherMobile.$pristine }">
+                                                        <input class="form-control" id="motherMobile" phone-number maxlength="10" name="motherMobile"
+                                                            ng-model="parentsInfo.motherMobile" type="text" placeholder="Mother Mobile" required /> <span
+                                                            style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.motherMobile.$invalid  && !parentDetailsForm.motherMobile.$pristine">
+                                                            <span ng-show="parentDetailsForm.motherMobile.$error.required">Mother Mobile is
+                                                                required.</span> <span ng-show="parentDetailsForm.motherMobile.$error.phonenumber">Please
+                                                                enter valid mobile number.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Office Contact Details   -->
+                                            <div class="cell w-100">
+                                                <div ng-if="!editFlag">
+                                                    <label for="motherOfficeAddress" ng-model="parentsInfo.motherOfficeAddress"><p
+                                                            ng-bind="parentsInfo.motherOfficeAddress"></p> <span class="empty"
+                                                        ng-show="!parentsInfo.motherOfficeAddress">N/A</span></label>
+                                                </div>
+                                                <div ng-if="editFlag">
+                                                    <div class="form-group"
+                                                        ng-class="{ 'has-error' : parentDetailsForm.motherOfficeAddress.$invalid && !parentDetailsForm.motherOfficeAddress.$pristine }">
+                                                        <input class="form-control" id="motherOfficeAddress" name="motherOfficeAddress"
+                                                            ng-model="parentsInfo.motherOfficeAddress" type="text" placeholder="Mother Office Address"
+                                                            required /> <span style="color: red" class="help-block"
+                                                            ng-show="parentDetailsForm.motherOfficeAddress.$invalid  && !parentDetailsForm.motherOfficeAddress.$pristine">
+                                                            <span ng-show="parentDetailsForm.motherOfficeAddress.$error.required">Mother Office
+                                                                Address is required.</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Send button -->
+                                            <div class="cell w-32">
+                                                <div ng-if="editFlag">
+                                                    <input type="submit" value="Submit" class="button black" form="parentDetailsForm"
+                                                        ng-disabled="parentDetailsForm.$invalid" ng-click="stdCtrl.updateProfile()" />
+                                                </div>
+                                            </div>
+                                            <div class="cell w-32">
+                                                <input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- / Tab 3 content -->
+                            <!-- Tab 4 content -->
+                            <div class="tab-4">
+                                <div class="row">
+                                    <div class="cell w-100">
+                                        <div class="title large">Accounts Details</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="cell w-100"></div>
+                                </div>
+                                <div class="row">
+                                    <!-- Form -->
+                                    <form name="accountDetailsForm" role="form" action="" method="post" novalidate>
+                                        <div class="cell w-49">
+                                            <!-- user name -->
+                                            <div class="cell w-100">Username : {{userInfo.userName}}</div>
+                                            <!-- 	<div class="clrfx mt-10"></div>
 								
                                
 								<div class="cell w-100">
@@ -659,104 +711,93 @@
 						             </div>
 								</div>
 								-->
-								<div class="clrfx mt-10"></div>
-			
-			      
-           
-                                <!-- New Password -->
-								<div class="cell w-100">
-									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.newPassword.$invalid && !accountDetailsForm.newPassword.$pristine }">
-						              	<input class="form-control" id="newPassword" name="newPassword" ng-model="userInfo.newPassword"  type="password" placeholder="New Password"
-						              	 tooltip-enable="!inputModel"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
-             							 tooltip="Please note: Strong password strength requires 2 upper case letters, 2 numbers and 2 lower case letters."
-                							password-strength required/>
-                  <password-strength ng-model="userInfo.newPassword"  ng-show="accountDetailsForm.newPassword.$dirty"></password-strength>
-						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.newPassword.$invalid  && !accountDetailsForm.newPassword.$pristine">
-						              		<span ng-show="accountDetailsForm.newPassword.$error.required">New Password is required.</span>           
-						              	</span>
-						             </div>
-								</div>								
-								<div class="clrfx mt-10"></div>
-                                
-                                <!-- Confirm Password -->
-                                <div class="cell w-100">
-									<div class="form-group"  ng-class="{ 'has-error' : accountDetailsForm.confirmPassword.$invalid && !accountDetailsForm.confirmPassword.$pristine }">
-						              	<input class="form-control" id="confirmPassword" name="confirmPassword"
-						              	 ng-model="userInfo.confirmPassword" match="userInfo.newPassword"  type="password" placeholder="Confirm Password" required/>
-						               
-						              	<span style="color:red" class="help-block" ng-show="accountDetailsForm.confirmPassword.$invalid  && !accountDetailsForm.confirmPassword.$pristine">
-						              		<span ng-show="accountDetailsForm.confirmPassword.$error.required">Confirm Password is required.</span> 
-						              		 <div ng-show="accountDetailsForm.confirmPassword.$error.match">
-                                              <span>Passwords do not match!</span>
-                                              </div>
-                        
-						              	</span>
-						             </div>
-								</div>
-								<div class="clrfx mt-10"></div>                                
-								
-								<!-- Send button -->
-								<div class="cell w-32">
-									<input type="submit" value="Change Password" class="button black" form="accountDetailsForm" ng-disabled="accountDetailsForm.$invalid" ng-click="stdCtrl.changePassword()"/>
-								</div>
-								<div class="cell w-32">
-									<input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()"/>
-								</div>
-							</form>
-						</div>
-						<!-- Map -->
-						<div class="cell w-49">
-							<!-- Google maps -->
-							<div id="map-canvas" class="map fl-right"></div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="clrfx mt-30"></div>
-			<div class="clrfx mt-30"></div>
-			<!-- / Tabs wrapper -->
-		</section>
-
-	</div>
-</div>  
-</div>  
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- New Password -->
+                                            <div class="cell w-100">
+                                                <div class="form-group"
+                                                    ng-class="{ 'has-error' : accountDetailsForm.newPassword.$invalid && !accountDetailsForm.newPassword.$pristine }">
+                                                    <input class="form-control" id="newPassword" name="newPassword" ng-model="userInfo.newPassword"
+                                                        type="password" placeholder="New Password" tooltip-enable="!inputModel"
+                                                        tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                                        tooltip="Please note: Strong password strength requires 2 upper case letters, 2 numbers and 2 lower case letters."
+                                                        password-strength required />
+                                                    <password-strength ng-model="userInfo.newPassword" ng-show="accountDetailsForm.newPassword.$dirty"></password-strength>
+                                                    <span style="color: red" class="help-block"
+                                                        ng-show="accountDetailsForm.newPassword.$invalid  && !accountDetailsForm.newPassword.$pristine">
+                                                        <span ng-show="accountDetailsForm.newPassword.$error.required">New Password is
+                                                            required.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Confirm Password -->
+                                            <div class="cell w-100">
+                                                <div class="form-group"
+                                                    ng-class="{ 'has-error' : accountDetailsForm.confirmPassword.$invalid && !accountDetailsForm.confirmPassword.$pristine }">
+                                                    <input class="form-control" id="confirmPassword" name="confirmPassword"
+                                                        ng-model="userInfo.confirmPassword" match="userInfo.newPassword" type="password"
+                                                        placeholder="Confirm Password" required /> <span style="color: red" class="help-block"
+                                                        ng-show="accountDetailsForm.confirmPassword.$invalid  && !accountDetailsForm.confirmPassword.$pristine">
+                                                        <span ng-show="accountDetailsForm.confirmPassword.$error.required">Confirm Password is
+                                                            required.</span>
+                                                        <div ng-show="accountDetailsForm.confirmPassword.$error.match">
+                                                            <span>Passwords do not match!</span>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="clrfx mt-10"></div>
+                                            <!-- Send button -->
+                                            <div class="cell w-32">
+                                                <input type="submit" value="Change Password" class="button black" form="accountDetailsForm"
+                                                    ng-disabled="accountDetailsForm.$invalid" ng-click="stdCtrl.changePassword()" />
+                                            </div>
+                                            <div class="cell w-32">
+                                                <input type="button" value="Dashboard" class="button black" ng-click="backToDashBoard()" />
+                                            </div>
+                                    </form>
+                                </div>
+                                <!-- Map -->
+                                <div class="cell w-49">
+                                    <!-- Google maps -->
+                                    <div id="map-canvas" class="map fl-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="clrfx mt-30"></div>
+                <div class="clrfx mt-30"></div>
+                <!-- / Tabs wrapper -->
+    </section>
+</div>
+</div>
+</div>
 </section>
 <!--Module-->
-
-
-
-
-
- 
 <!--Footer-->
 <footer id="colophon" class="section site-footer wow fadeInUp" role="contentinfo">
-<div class="container">
-<div class="footer-logo">
-
-</div>
-<div class="footer-social">
-<ul class="inline text-center">
-<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-<li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-<li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-<li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-<li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
-</ul>
-</div>
-<div class="copyright text-center">
-<p>Copyright &copy; 2016 Chalk N Dust - All Rights Reserved.</p>
-<ul class="new_foot_nav">
-    <li><a href="term.html">Terms & Conditions</a></li>
-    <li class="last"><a href="contact_us.html">Contact Us</a></li>
-</ul>
-</div>
-</div>
+    <div class="container">
+        <div class="footer-logo"></div>
+        <div class="footer-social">
+            <ul class="inline text-center">
+                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="copyright text-center">
+            <p>Copyright &copy; 2016 Chalk N Dust - All Rights Reserved.</p>
+            <ul class="new_foot_nav">
+                <li><a ui-sref="chalkanddust.termsandconditions">Terms & Conditions</a></li>
+                <li class="last"><a ui-sref="chalkanddust.contactus">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
 </footer>
 <!--Footer-->
-
-<a href="#home" id="back-top">
-<i class="fa fa-angle-up"></i>
+<a href="#home" id="back-top"> <i class="fa fa-angle-up"></i>
 </a>
 </div>

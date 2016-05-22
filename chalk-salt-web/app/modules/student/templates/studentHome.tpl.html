@@ -1,8 +1,8 @@
 <!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/font-awesome.min.css"> -->
 <link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<script src="./resources/js/jquery-1.11.2.min.js"></script>
-<script src="./resources/js/bootstrap.min.js"></script>
-<script src="./resources/js/hoe.js"></script>
+<script src="../../../resources/js/jquery-1.11.2.min.js"></script>
+<script src="../../../resources/js/bootstrap.min.js"></script>
+<script src="../../../resources/js/hoe.js"></script>
 <div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
@@ -15,7 +15,9 @@
                 <ul class="left-navbar">
                     <li>
                         <form method="post" class="hoe-searchbar">
-                            <h4 style="padding-top: 7px;"><a ng-click="setTab(1);" href="javascript:void(0)">Dashboard </a> {{subjectName}}</h4>
+                            <h4 style="padding-top: 7px;">
+                                <a ng-click="setTab(1);" href="javascript:void(0)">Dashboard </a> {{subjectName}}
+                            </h4>
                         </form>
                     </li>
                 </ul>
@@ -54,8 +56,8 @@
                     <li ng-class="{ active:isSet(1)}"><a ng-click="setTab(1);" href="javascript:void(0)"> <i class="fa fa-tachometer"></i> <span
                             class="menu-text">Dashboard</span>
                     </a></li>
-                    <li  ng-repeat="item in subjects"><a ng-click="setTabSubject(2,item);" href="javascript:void(0)"> <i
-                            class="fa fa-files-o"></i> <span class="menu-text">{{item.subjectName}}</span> <span class="selected"></span>
+                    <li ng-repeat="item in subjects"><a ng-click="setTabSubject(2,item);" href="javascript:void(0)"> <i class="fa fa-files-o"></i>
+                            <span class="menu-text">{{item.subjectName}}</span> <span class="selected"></span>
                     </a> <!--                         <ul class="hoe-sub-menu"> --> <!--                             <li ng-class="{ active:isSet(2)}"><a ng-click="setTab(2);" href="javascript:void(0)"> <span class="menu-text">Notes</span> -->
                         <!--                                     <span class="selected"></span> --> <!--                             </a></li> --> <!--                             <li ng-class="{ active:isSet(3)}"><a ng-click="setTab(3);" href="javascript:void(0)"> <span class="menu-text">Videos</span> -->
                         <!--                                     <span class="selected"></span> --> <!--                             </a></li> --> <!--                             <li ng-class="{ active:isSet(4)}"><a ng-click="setTab(4);" href="javascript:void(0)"> <span class="menu-text">Test</span> -->

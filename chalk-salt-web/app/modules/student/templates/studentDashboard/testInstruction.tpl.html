@@ -1,65 +1,55 @@
 <link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1" >
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
-                <a ui-sref="chalkanddust.home" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a>
-                <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+                <a ui-sref="chalkanddust.home" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
+                    class="hoe-sidebar-toggle"><a href="#"></a></span>
             </div>
-
-            <div class="hoe-right-header" hoe-position-type="relative" >
-<!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
+            <div class="hoe-right-header" hoe-position-type="relative">
+                <!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
                 <ul class="left-navbar">
-					<li>	
-						<form method="post" class="hoe-searchbar">
-							<h4><a ui-sref="chalkanddust.profile" href="javascript:void(0);">Dashboard</a></h4>
-						</form>
-					</li>
-				</ul> 
-				
+                    <li>
+                        <form method="post" class="hoe-searchbar">
+                            <h4>
+                                <a ui-sref="chalkanddust.profile" href="javascript:void(0);">Dashboard</a>
+                            </h4>
+                        </form>
+                    </li>
+                </ul>
                 <ul class="right-navbar">
-					<li class="dropdown hoe-rheader-submenu hoe-header-profile">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<span><img cla	ss="img-circle " src="images/avatar-1.jpg"></span>
-                            <span>Ankit <b>Bhardwaj</b> <i class=" fa fa-angle-down"></i></span>
-						</a> 
-						<ul class="dropdown-menu ">
-							<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-							<li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-				
+                    <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span><img
+                                cla ss="img-circle " src="images/avatar-1.jpg"></span> <span>Ankit <b>Bhardwaj</b> <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                        <ul class="dropdown-menu ">
+                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
+                        </ul></li>
+                </ul>
             </div>
         </header>
         <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
-           
             <section id="main-content">
-				
                 <div class="inner-content">
                     <div class="col-md-9 column t_instruction">
-                       <h3>Instruction for this Test</h3>
+                        <h3>Instruction for this Test</h3>
                     </div>
                     <div class="col-md-9 column t_instruction_ans">
-                    <br/>
-                    	<p>Read And Answer</p>
-                        
-                        <button><a href="test_one.html">Start Test</a></button>
+                        <br />
+                        <p>Read And Answer</p>
+                        <button>
+                            <a href="test_one.html">Start Test</a>
+                        </button>
                         <a ui-sref="chalkanddust.profile" href="javascript:void(0);">Back To Dashboard</a>
                     </div>
-                      
-                    
-                </div>  
+                </div>
             </section>
-			
         </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/1.11.2.jquery.min.js"></script>
+    <script src="../../../../resources/js/1.11.2.jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/hoe.js"></script>
+    <script src="../../../../resources/js/bootstrap.min.js"></script>
+    <script src="../../../../resources/js/hoe.js"></script>
 </body>
-
 </html>
