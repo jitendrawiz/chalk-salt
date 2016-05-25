@@ -36,6 +36,7 @@ public class ExamManagerImpl implements ExamManager {
 	@Inject
 	private ExamDao examDao;
 	
+	/** The user dao. */
 	@Inject
 	private UserDao userDao;
 	
@@ -106,6 +107,9 @@ public class ExamManagerImpl implements ExamManager {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#uploadQuestionImage(java.lang.String, com.chalk.salt.common.dto.QuestionImageUploadDto)
+	 */
 	@Override
 	public String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)
 			throws ExamException {
@@ -167,6 +171,9 @@ public class ExamManagerImpl implements ExamManager {
 		return extension; 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#deleteQuestionImage(java.lang.String)
+	 */
 	@Override
 	public void deleteQuestionImage(String questionSecuruuid) throws ExamException {
 		
@@ -180,14 +187,16 @@ public class ExamManagerImpl implements ExamManager {
 			if (oldfileName != null) {
 				destPathToDeleteFile = destPath + File.separator + fileName
 						+ "." + getExtension(oldfileName);
-			}
-			File oldfile = new File(destPathToDeleteFile);
-			if (oldfile.exists()) {
-				oldfile.delete();
+			
+				File oldfile = new File(destPathToDeleteFile);
+				if (oldfile.exists()) {
+					oldfile.delete();
+					new File(destPath).delete();
+				}
 			}
 			logger.info("Question Image deleted successfully");
         } catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE, "Fail to update question image", exception);
+            throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE, "Fail to delete question image", exception);
         }		
 	}
 }

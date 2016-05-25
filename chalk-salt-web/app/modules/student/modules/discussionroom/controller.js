@@ -288,8 +288,8 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
 
     
     module.controller('DiscussionRoomTopicRequestController', ['$log','$element','$timeout', '$scope', '$state', '$filter', 'CHALKNDUST', 'CandDModalService',  
-                                                               '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest', 'UpdateTopicImageService',   
-       function($log, $element, $timeout, $scope, $state, $filter, CHALKNDUST, CandDModalService, $window, GetUserDetailsService, GetTopicStatistics, SaveTopicRequest, UpdateTopicImageService) {
+                                                               '$window', 'GetUserDetailsService', 'GetTopicStatistics','SaveTopicRequest', 'UpdateTopicRequestImageService',   
+       function($log, $element, $timeout, $scope, $state, $filter, CHALKNDUST, CandDModalService, $window, GetUserDetailsService, GetTopicStatistics, SaveTopicRequest, UpdateTopicRequestImageService) {
 		
            $scope.alert = {};
            $scope.alert.show = false;
@@ -399,7 +399,7 @@ define([ 'angular', './routing', './service','../../../CandDModal/js/CandDModalS
                formData.append('file', file);
                formData.append('name', file.name);
                formData.append('documentType', file.type);
-               UpdateTopicImageService.upload(formData, securUuid, function(response) {
+               UpdateTopicRequestImageService.upload(formData, securUuid, function(response) {
                    showAlert("success", "Topic Image updated successfully.");                        
                }, onRequestFailure);
            };

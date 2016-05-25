@@ -112,7 +112,7 @@ define([ 'angular' ], function(angular) {
             
         });
         } ]); 
-    module.factory('UpdateTopicImageService', [ '$http', 'ENV', function($http, ENV) {
+    module.factory('UpdateTopicRequestImageService', [ '$http', 'ENV', function($http, ENV) {
         return {
             upload : function(formData, securUuid, successCallback, errorCallback) {
                 var uploadUrl = ENV.API_END_POINT + "private/students/topics/request/photo/" + securUuid;

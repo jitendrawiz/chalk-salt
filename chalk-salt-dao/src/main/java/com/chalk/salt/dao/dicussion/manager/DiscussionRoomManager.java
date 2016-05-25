@@ -174,5 +174,12 @@ public interface DiscussionRoomManager {
 	 */
 	void approveTopicRequests(String requestSecurUuid)throws DiscussionException;
 
+	/**
+	 * Delete topic image.
+	 *
+	 * @param securUuid the secur uuid
+	 * @throws DiscussionException the discussion exception
+	 */
+	void deleteTopicImage(String securUuid)throws DiscussionException;
 
 }

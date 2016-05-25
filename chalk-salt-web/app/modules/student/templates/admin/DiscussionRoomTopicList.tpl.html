@@ -12,11 +12,15 @@
 .title_name {
 	text-align: right;
 	padding-right: 20px;
-	padding-top: 25px;
+	padding-top: 20px;
+}
+
+.title_name_class {
+	padding-top: 0px;
 }
 
 .title_name_sub {
-	padding-top: 25px;
+	padding-top: 15px;
 }
 
 .title_name_title {
@@ -165,9 +169,13 @@ button.btn-block {
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
 						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.editTopic(item.securUuid)">Edit</button> |
-							<button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.deleteTopic(item.securUuid)">Delete</button>
+								ng-click="adminCtrl.editTopic(item.securUuid)">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-secondary btn-block "
+								ng-click="adminCtrl.deleteTopic(item.securUuid)">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
 						</td>
 					</tr>
 				</tbody>

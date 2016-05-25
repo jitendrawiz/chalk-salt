@@ -50,6 +50,7 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 	 */
 	@Override
 	public Boolean deleteTopic(String securUuid) throws DiscussionException {
+		discussionManager.deleteTopicImage(securUuid);
 		return discussionManager.deleteTopic(securUuid);
 	}
 

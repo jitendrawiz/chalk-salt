@@ -12,19 +12,27 @@
 .title_name {
 	text-align: right;
 	padding-right: 20px;
-	padding-top: 25px;
+	padding-top: 10px;
+}
+
+.title_name_class {
+	padding-top: 0px;
 }
 
 .title_name_sub {
-	padding-top: 25px;
+	padding-top: 20px;
 }
 
 .title_name_title {
-	padding-top: 85px;
+	padding-top: 15px;
 }
 
 .title_name_des {
-	padding-top: 88px;
+	padding-top: 80px;
+}
+
+.title_name_photo{
+	padding-top: 56px;
 }
 
 .title_text textarea {
@@ -94,7 +102,7 @@ button, input, select, textarea {
 						class="title_name_sub">Subject</label><br> <label
 						class="title_name_title">Topic Title</label><br> <label
 						class="title_name_des">Topic Description</label><br/><br/>
-						 <label>Topic Image</label>
+						 <label class="title_name_photo">Topic Image</label>
 				</div>
 				<div class="title_text">
 					<div ng-if="isEmpty(topicDetails.securUuid)" class="form-group"

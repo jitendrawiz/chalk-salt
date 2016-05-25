@@ -591,7 +591,6 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("securUuid", securUuid);
             query.executeUpdate();
         }
-		
 	}
 
 	/* (non-Javadoc)

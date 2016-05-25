@@ -1,5 +1,6 @@
 package com.chalk.salt.dao.dicussion.manager;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,10 @@ import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
+import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.discussion.DiscussionRoomDao;
+import com.chalk.salt.dao.user.UserDao;
 
 /**
  * The Class DiscussionRoomManagerImpl.
@@ -39,6 +42,9 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
     @Inject
     @BeanMapper
     protected Mapper beanMapper;
+    
+    @Inject
+	private UserDao userDao;
 	
 	/* (non-Javadoc)
 	 * @see com.chalk.salt.dao.dicussion.manager.DiscussionRoomManager#saveTopic(com.chalk.salt.dao.dto.DiscussionDto)
@@ -303,6 +309,48 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
             throw new DiscussionException(ErrorCode.FAIL_TO_APPROVE_TOPIC_REQUESTS, "Fail to approve topic requests", exception);
         }
 		
+	}
+
+	@Override
+	public void deleteTopicImage(String securUuid) throws DiscussionException {
+		logger.info("Deleting Topic image");
+        try {
+			String destPath = userDao.getSystemSettings("TOPIC_IMAGE");
+			destPath += securUuid.toString();
+			String fileName = "TOPIC_" + securUuid.toString();
+			String oldfileName = userDao.getPreviousTopicImage(securUuid);
+			String destPathToDeleteFile = null;
+			if (oldfileName != null) {
+				destPathToDeleteFile = destPath + File.separator + fileName
+						+ "." + getExtension(oldfileName);
+				File oldfile = new File(destPathToDeleteFile);
+				if (oldfile!=null && oldfile.exists()) {
+					oldfile.delete();
+					new File(destPath).delete();
+				}
+				logger.info("Topic Image deleted successfully");
+			} else{
+				logger.info("Topic Image not available.");
+			}
+        } catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_DELETE_TOPIC_IMAGE, "Fail  to delete topic image", exception);
+        }
+	}
+
+	/**
+	 * Gets the extension.
+	 *
+	 * @param fileName the file name
+	 * @return the extension
+	 */
+	private String getExtension(String fileName){
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		}
+		return extension; 
 	}
 
 }
