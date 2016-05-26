@@ -2,6 +2,7 @@ package com.chalk.salt.dao.exam;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 
 /**
@@ -72,5 +73,14 @@ public interface ExamDao {
 	 * @throws Exception the exception
 	 */
 	public void updateQuestionImageDetails(String fileNameToSave, String securUuid) throws Exception;
+
+	/**
+	 * Gets the vedios list by class and subject id.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the vedios list by class and subject id
+	 */
+	public List<DashBoardVediosContentDto> getVediosListByClassAndSubjectId(String classId, String subjectId)throws Exception;
 
 }

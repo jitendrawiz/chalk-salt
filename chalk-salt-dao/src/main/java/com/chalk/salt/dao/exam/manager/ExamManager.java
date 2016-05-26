@@ -5,6 +5,7 @@ package com.chalk.salt.dao.exam.manager;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -70,5 +71,15 @@ public interface ExamManager {
 	 * @throws ExamException the exam exception
 	 */
 	void deleteQuestionImage(String questionSecuruuid) throws ExamException;
+
+	/**
+	 * Gets the dash board data.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the dash board data
+	 * @throws ExamException the exam exception
+	 */
+	DashBoardDataDto getDashBoardData(String classId, String subjectId)throws ExamException;
 
 }

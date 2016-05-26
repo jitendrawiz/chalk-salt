@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.DashBoardDataDto;
+import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -198,5 +200,27 @@ public class ExamManagerImpl implements ExamManager {
         } catch (final Exception exception) {
             throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE, "Fail to delete question image", exception);
         }		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getDashBoardData(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public DashBoardDataDto getDashBoardData(String classId, String subjectId)
+			throws ExamException {
+		logger.info("Dashboard data fetch start from here ......");
+		DashBoardDataDto dashBoardDataDto=null;
+		List<DashBoardVediosContentDto> dashBoardVedioList=null;
+		try{
+			dashBoardDataDto=new DashBoardDataDto();			
+			dashBoardVedioList=examDao.getVediosListByClassAndSubjectId(classId,subjectId);
+			dashBoardDataDto.setVideos(dashBoardVedioList);
+			logger.info("Dashboard data fetch ends here ......");
+			return dashBoardDataDto;
+		} catch (final Exception exception) {
+			logger.error("Dashboard data fetch exception ......"+exception);
+            throw new ExamException(ErrorCode.FAIL_TO_FETCH_DASHBOARD_DATA, "Fail to fetch dashboard data", exception);
+        }
+	
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -63,6 +64,14 @@ public class ExamFacadeImpl implements ExamFacade {
 	public String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)
 			throws ExamException {
 		return examManager.uploadQuestionImage(securUuid,documentUploadData);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getDashBoardData(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public DashBoardDataDto getDashBoardData(String classId, String subjectId) throws ExamException{
+		return examManager.getDashBoardData(classId,subjectId);
 	}
 
 }

@@ -12,7 +12,8 @@
 	"CLASSID":"classId",
 	"SUBJECTID":"subjectId",
 	"TABNUMBER":"tabnumber",
-	"GUESTCLASSID":"guestClassId"
+	"GUESTCLASSID":"guestClassId",
+	"SUBJECTNAME":"subjectName"
     }
    
 }

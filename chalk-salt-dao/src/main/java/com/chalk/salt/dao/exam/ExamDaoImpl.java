@@ -7,6 +7,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
@@ -142,6 +143,33 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("fileName", fileNameToSave);          
             query.addParameter("securUuid", securUuid);
             query.executeUpdate();
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getVediosListByClassAndSubjectId(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<DashBoardVediosContentDto> getVediosListByClassAndSubjectId(
+			String classId, String subjectId) throws Exception {
+		final String sqlQuery = "SELECT video_id AS videoId,"
+				+ " video_embedded_link AS videoEmbedLink,"
+				+ " video_title AS videoTitle,"
+				+ " video_description AS videoDescription,"
+				+ " created_time AS createdTime,"
+				+ " modified_time AS modifiedTime,"
+				+ " video_uuid AS videoUuid,"
+				+ " class_id AS classId,"
+				+ " subject_id AS subjectId"
+				+ " FROM cst_videos"
+				+ " WHERE class_id =:classId AND subject_id=:subjectId"
+				+ " ORDER BY created_time DESC LIMIT 4";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(DashBoardVediosContentDto.class);
         }
 	}     
 }

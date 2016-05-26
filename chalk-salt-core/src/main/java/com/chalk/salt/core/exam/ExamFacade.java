@@ -5,6 +5,7 @@ package com.chalk.salt.core.exam;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -62,5 +63,14 @@ public interface ExamFacade {
 	 * @throws ExamException the exam exception
 	 */
 	String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)throws ExamException;
+
+	/**
+	 * Gets the dash board data.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the dash board data
+	 */
+	DashBoardDataDto getDashBoardData(String classId, String subjectId)throws ExamException;
 
 }

@@ -25,26 +25,20 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
-import com.chalk.salt.api.model.DiscussionTopicModel;
+import com.chalk.salt.api.model.DashBoardDataModel;
 import com.chalk.salt.api.model.QuestionImageUploadModel;
 import com.chalk.salt.api.model.QuestionModel;
-import com.chalk.salt.api.model.TopicImageUploadModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
-import com.chalk.salt.common.dto.DiscussionTopicDto;
+import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
-import com.chalk.salt.common.dto.TopicImageUploadDto;
-import com.chalk.salt.common.dto.UserDto;
-import com.chalk.salt.common.exceptions.DiscussionException;
 import com.chalk.salt.common.exceptions.ExamException;
-import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.exam.ExamFacade;
-import com.chalk.salt.core.user.UserFacade;
 
 /**
  * The Class ExamResource.
@@ -171,6 +165,14 @@ public class ExamResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Upload question image.
+     *
+     * @param securUuid the secur uuid
+     * @param questionImageUploadRequest the question image upload request
+     * @return the response
+     * @throws ExamException the exam exception
+     */
     @POST
     @RequiresAuthentication
     @Path("/exam/questions/update/photo/{securUuid}")
@@ -205,6 +207,33 @@ public class ExamResource extends AbstractResource {
              responseMap.put("QuestionSecuruuid", QuestionSecurUuid);
              return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
         	
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * Gets the dash board data by subject.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the dash board data by subject
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/exam/data/{classId}/{subjectId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getDashBoardData(@NotBlank @PathParam("classId") final String classId,
+    		@NotBlank @PathParam("subjectId") final String subjectId) throws ExamException{
+    	DashBoardDataModel dashBoardDataModel=null;
+    	DashBoardDataDto dashBoardDataDto=null;
+    	try{
+    		dashBoardDataDto = examFacade.getDashBoardData(classId,subjectId);
+    		//Need to check this
+    		//DozerMapperUtil.mapCollection(beanMapper, dashBoardDataDto, DashBoardDataModel.class);
+    		//dashBoardDataModel=	beanMapper.map(dashBoardDataDto, DashBoardDataModel.class);
+            return Response.ok(dashBoardDataDto).build();
 	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }

@@ -3,7 +3,7 @@
 define([ 'angular' ], function(angular) {
 
     var studentService = angular.module('Student.service', [ 'System.configuration','ngResource' ]);
-
+      /* General Services starts here*/
     
     studentService.factory('GetUserDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/users/:securUuid',{
@@ -43,6 +43,9 @@ define([ 'angular' ], function(angular) {
             }
         });
         } ]); 
+    
+    /* General Services ends here*/
+    /* Discussion Room Services starts here*/
     
     studentService.factory('createNewTopic', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/discussion/topics',{}, {
@@ -114,6 +117,10 @@ define([ 'angular' ], function(angular) {
         });
    } ]);
     
+    /* Discussion Room Services ends here*/
+    
+    /* Student Related/Discussion Room topic request Services starts here*/
+    
     studentService.factory('GetStudentListService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/students',{}, {
             get : {
@@ -149,7 +156,9 @@ define([ 'angular' ], function(angular) {
             }
         });
    } ]);
-           
+    /* Student Related/Discussion Room topic request Services ends here*/   
+    
+    /* All media/photo update/delete/upload Services starts here*/
     studentService.factory('UpdateProfilePhotoService', [ '$http', 'ENV', function($http, ENV) {
         return {
             upload : function(formData, securUuid, successCallback, errorCallback) {
@@ -168,7 +177,9 @@ define([ 'angular' ], function(angular) {
             }
         };
     } ]);
-
+    
+    
+    
     studentService.factory('GetUserPhotoService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/user/photo/:securUuid',{
             securUuid : '@securUuid'
@@ -219,7 +230,9 @@ define([ 'angular' ], function(angular) {
             
         });
         } ]); 
+    /* All media/photo update/delete/upload Services ends here*/
     
+    /* All Exam Services starts here*/
     studentService.factory('SaveQuestionDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/exam/questions/add',{}, {
             save : {
@@ -275,4 +288,18 @@ define([ 'angular' ], function(angular) {
             }
         };
     } ]);
+    
+    /*Get Dashboard details according to subject*/
+    studentService.factory('GetDashboardDataBySubject', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/exam/data/:classId/:subjectId',{
+            classId : '@classId',
+            subjectId:'@subjectId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
+    } ]);
+    
+    /* All Exam Services ends here*/
 });

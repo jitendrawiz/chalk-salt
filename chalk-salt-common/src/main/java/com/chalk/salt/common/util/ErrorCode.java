@@ -166,7 +166,10 @@ public enum ErrorCode {
 	FAIL_TO_DELETE_QUESTION_IMAGE(1050), 
 	
 	/** The fail to delete topic image. */
-	FAIL_TO_DELETE_TOPIC_IMAGE(1051);
+	FAIL_TO_DELETE_TOPIC_IMAGE(1051),
+	
+	/** The fail to fetch dashboard data. */
+	FAIL_TO_FETCH_DASHBOARD_DATA(1052);
 	
 	/** The value. */
     private final int value;

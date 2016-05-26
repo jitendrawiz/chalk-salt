@@ -5,7 +5,7 @@ define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap
 
     var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','Student.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap','ngAnimate']);
 
-    chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+    chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider,$sceProvider) {
         /*
          * https://scotch.io/tutorials/internationalization-of-angularjs-applications
          */$translateProvider.useStaticFilesLoader({
@@ -14,6 +14,7 @@ define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap
         });
         $translateProvider.preferredLanguage('en_US');
         $translateProvider.useSanitizeValueStrategy('sanitize');
+        $sceProvider.enabled(false);
 
         $stateProvider.state('chalkanddust', {
             url : '/chalkanddust',

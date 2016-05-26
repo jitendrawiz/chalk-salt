@@ -1,77 +1,55 @@
 <link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<main class="tab_with"> <input id="tab1" type="radio" name="tabs" checked> <label for="tab1">Note</label> <input id="tab2" type="radio"
-    name="tabs"> <label for="tab2">Video</label> <input id="tab3" type="radio" name="tabs"> <label for="tab3">Test</label>
+<main class="tab_with"> <input id="tab1" type="radio" name="tabs" checked> <label for="tab1">Video</label> <input id="tab2" type="radio"
+    name="tabs"> <label for="tab2">Notes</label> <input id="tab3" type="radio" name="tabs"> <label for="tab3">Test</label>
 <section class="section_tab" id="content1">
-    <div class="col-md-12 column">
+    <div ng-show="!showVideoDiv" class="col-md-12 column" ng-repeat="item in videoObject">
         <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a href="#">Download</a>
-            </h4>
+           <iframe width="600" height="315" ng-src="{{item.videoEmbedLink}}" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a href="#">Download</a>
-            </h4>
+     <div ng-show="showVideoDiv" class="col-md-12 column">
+     <div class="feature-box pdf_space">
+        No videos right now ,coming soon.
         </div>
-    </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a href="#">Download</a>
-            </h4>
-        </div>
-    </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a href="#">Download</a>
-            </h4>
-        </div>
-    </div>
+    </div>    
 </section>
 <section class="section_tab" id="content2">
     <div class="col-md-12 column">
         <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-movie-o"></i></span>
+            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Watch on youtube</a>
+                <a href="#">Download</a>
             </h4>
         </div>
     </div>
     <div class="col-md-12 column">
         <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-movie-o"></i></span>
+            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Watch on youtube</a>
+                <a href="#">Download</a>
             </h4>
         </div>
     </div>
     <div class="col-md-12 column">
         <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-movie-o"></i></span>
+            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Watch on youtube</a>
+                <a href="#">Download</a>
             </h4>
         </div>
     </div>
     <div class="col-md-12 column">
         <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-video-o"></i></span>
+            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Watch on youtube</a>
+                <a href="#">Download</a>
             </h4>
         </div>
     </div>
 </section>
 <section class="section_tab" id="content3">
     <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
+        <div class="feature-box">
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>20 Min Test</h4>
             <h4>

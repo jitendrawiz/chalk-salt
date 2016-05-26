@@ -7,9 +7,12 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 
                                                 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
                                                 'ChangePasswordService','UpdateProfilePhotoService','GetUserPhotoService','DeletePhotoService','CandDModalService',
+                                                'GetDashboardDataBySubject',
             function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
-            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,GetUserPhotoService,DeletePhotoService,CandDModalService) {
+            		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,
+            		GetUserPhotoService,DeletePhotoService,CandDModalService,GetDashboardDataBySubject) {
     	       $scope.uploadedlogo = {};
+    	       $scope.showVideoDiv=false;
     		  
     		   var showAlert = function(type, message){
                    $scope.alert = {};
@@ -170,6 +173,10 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                 
                 if($window.localStorage.getItem(CHALKNDUST.TABNUMBER)!=null){
                   $scope.tab = $window.localStorage.getItem(CHALKNDUST.TABNUMBER);
+                  var item={};
+                  item.subjectId=$window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+                  item.subjectName=$window.localStorage.getItem(CHALKNDUST.SUBJECTNAME);
+                  updatePageDetailsOnClick(item);
                   }else{
                     $scope.tab=1;
                   }
@@ -185,10 +192,34 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                     };
                     
                     $scope.setTabSubject=function(newtab,item){
-                    //    alert(item.subjectId+"--------------"+item.subjectName);
                         $scope.tab=newtab;
+                        $window.localStorage.setItem(CHALKNDUST.TABNUMBER,newtab);                        
+                        updatePageDetailsOnClick(item);
+                    }
+                    
+                    
+                    function updatePageDetailsOnClick(item){
+                        $window.localStorage.setItem(CHALKNDUST.SUBJECTID,item.subjectId);
+                        $window.localStorage.setItem(CHALKNDUST.SUBJECTNAME,item.subjectName);
                         $scope.subjectName="/ " + item.subjectName;
-                        
+                        $scope.showVideoDiv=false;                     
+                        $scope.videoObject=[];                       
+                        $scope.notesObject=[];
+                        $scope.classId=$window.localStorage.getItem(CHALKNDUST.CLASSID);
+                        GetDashboardDataBySubject.get({classId:$scope.classId,subjectId:item.subjectId},function(response){
+                            if(response){
+                              $scope.videoObject=response.videos;
+                              if($scope.videoObject.length===0){
+                                $scope.showVideoDiv=true;
+                              }
+                              angular.forEach($scope.videoObject, function(value, key) {
+                                  value.videoEmbedLink= value.videoEmbedLink.replace("watch?v=", "embed/");
+                                });
+                              
+                            }
+                        },function(error){
+                            showAlert('danger',error.data.message);
+                        });
                     }
     }]);
     
