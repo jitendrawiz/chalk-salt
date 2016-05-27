@@ -48,6 +48,7 @@ import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.common.exceptions.UserException;
+import com.chalk.salt.common.util.CryptoUtil;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.user.UserFacade;
 
@@ -515,6 +516,13 @@ public class UserResource extends AbstractResource {
 	    }
     }
     
+    /**
+     * Save guest user details.
+     *
+     * @param userModel the user model
+     * @return the response
+     * @throws UserException the user exception
+     */
     @POST
     @Path("/guest/login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -525,6 +533,34 @@ public class UserResource extends AbstractResource {
             GuestUserDto userDto = beanMapper.map(userDetails, GuestUserDto.class);
             GuestUserDto response = userFacade.saveGuestUserDetails(userDto);           
             return Response.ok(response).build();
+
+        } catch (final UserException userException) {
+            throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
+        }
+    }
+    
+    /**
+     * Reset password.
+     *
+     * @param securUuid the secur uuid
+     * @return the response
+     * @throws UserException the user exception
+     */
+    @GET
+    @Path("/users/reset-password/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response resetPassword(@NotBlank @PathParam("securUuid") final String securUuid) throws UserException {
+
+    	final Map<String, String> responseMap = new HashMap<String, String>();
+    	Boolean response;
+        try {
+        	//final String encryptedPassword = Utility.getEncodedBCryptHash(user.getPassword());
+        	String tempPassword = new CryptoUtil().generateRandomString(); 
+        	final String encryptedTempPassword = Utility.getEncodedBCryptHash(tempPassword);
+        	response = userFacade.resetPassword(securUuid, tempPassword, encryptedTempPassword);
+        	responseMap.put("response", response.toString());
+            return Response.ok(responseMap).build();
 
         } catch (final UserException userException) {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);

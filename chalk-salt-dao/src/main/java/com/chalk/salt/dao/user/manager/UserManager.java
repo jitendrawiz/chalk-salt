@@ -147,4 +147,14 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	GuestUserDto saveGuestUserDetails(GuestUserDto userDetails)throws UserException;
+
+	/**
+	 * Reset password.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param encryptedTempPassword 
+	 * @return the user dto
+	 * @throws UserException the user exception
+	 */
+	UserDto resetPassword(String securUuid, String encryptedTempPassword)throws UserException;
 }

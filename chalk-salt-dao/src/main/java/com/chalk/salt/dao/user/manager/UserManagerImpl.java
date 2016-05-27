@@ -28,7 +28,6 @@ import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.user.UserDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UserManagerImpl.
  */
@@ -514,9 +513,28 @@ public class UserManagerImpl implements UserManager {
 	        }else{
 	        	userDetails=userDao.getGuestUserInfo(securUuid);
 	        }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save Guest User Registration", exception);
+        }
         return userDetails;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.manager.UserManager#resetPassword(java.lang.String)
+	 */
+	@Override
+	public UserDto resetPassword(String securUuid, String encryptedTempPassword) throws UserException {
+		logger.info("Reset Password of student ......");
+		UserDto user = null;
+        try {
+	        user = userDao.getUserInfo(securUuid);
+	        if(user!=null){
+		  	   	Long userId = user.getUserId();
+	        	userDao.resetPassword(userId, encryptedTempPassword);
+	        }
+		} catch (final Exception exception) {
+            throw new UserException(ErrorCode.FAIL_TO_FETCH_STUDENT_DETAIL, "Fail to fetch student details", exception);
+        }
+        return user;
 	}
 }

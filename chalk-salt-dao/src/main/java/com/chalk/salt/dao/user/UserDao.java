@@ -346,4 +346,13 @@ public interface UserDao {
 	 * @throws Exception the exception
 	 */
 	GuestUserDto getGuestUserInfo(String securUuid)throws Exception;
+
+	/**
+	 * Reset password.
+	 *
+	 * @param userId the user id
+	 * @param tempPassword the temp password
+	 * @throws Exception the exception
+	 */
+	void resetPassword(Long userId, String tempPassword)throws Exception;
 }

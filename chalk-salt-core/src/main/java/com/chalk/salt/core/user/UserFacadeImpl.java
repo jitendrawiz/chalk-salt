@@ -207,6 +207,15 @@ public class UserFacadeImpl implements UserFacade {
 		return userManager.saveGuestUserDetails(userDetails);
 	}
 
-	
-
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.user.UserFacade#resetPassword(java.lang.String)
+	 */
+	@Override
+	public Boolean resetPassword(String securUuid, String tempPassword, String encryptedTempPassword) throws UserException {
+		final UserDto userDto = userManager.resetPassword(securUuid, encryptedTempPassword);
+		userDto.setPassword(tempPassword);
+        final EmailNotificationDto emailNotification = getEmailNotification(userDto);
+        emailService.sendMail(emailNotification);
+        return true;
+	}
 }

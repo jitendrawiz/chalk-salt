@@ -169,7 +169,10 @@ public enum ErrorCode {
 	FAIL_TO_DELETE_TOPIC_IMAGE(1051),
 	
 	/** The fail to fetch dashboard data. */
-	FAIL_TO_FETCH_DASHBOARD_DATA(1052);
+	FAIL_TO_FETCH_DASHBOARD_DATA(1052),
+	
+	/** The fail to fetch student detail. */
+	FAIL_TO_FETCH_STUDENT_DETAIL(1053);
 	
 	/** The value. */
     private final int value;

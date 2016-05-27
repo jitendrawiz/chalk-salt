@@ -171,13 +171,13 @@ button.btn-block {
 						<td>{{item.optionD}}</td>
 						<td>{{item.answer}}</td>						
 						<td>							
-							<button type="button" class="btn btn-default" ng-click="editQuestion(item.questionSecuruuid)">
-							  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-							</button>
+							<a type="button" ng-click="editQuestion(item.questionSecuruuid)" title="Edit">
+							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+							</a>
 							
-							<button type="button" class="btn btn-default" ng-click="deleteQuestion(item.questionSecuruuid)">
-							  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
+							<a type="button" ng-click="deleteQuestion(item.questionSecuruuid)" title="Delete">
+							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							</a>
 						</td>
 					</tr>
 				</tbody>

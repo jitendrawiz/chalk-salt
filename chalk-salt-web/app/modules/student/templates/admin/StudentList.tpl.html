@@ -60,15 +60,18 @@ button.btn-block {
 						<td>{{item.studentClass}}</td>
 						<td>{{item.mobile}}</td>
 						<td>{{item.email}}</td>
-						<td><a ui-sref="chalkanddust.studentdetails({id: item.securUuid})">Show</a> 
+						<td>
+							<a ui-sref="chalkanddust.studentdetails({id: item.securUuid})" title="View">
+								<i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i>
+							</a> 
 						</td>
-						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.deleteStudent(item.securUuid)">Delete</button></td>
-						<!-- <td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.showStudentDetails(item.securUuid)">Show</button> |
-							
-						</td>-->
-						
+						<td><a type="button" ng-click="adminCtrl.deleteStudent(item.securUuid)" title="Delete">
+								<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							</a>
+							<a type="button" ng-click="adminCtrl.resetPassword(item.securUuid)" title="Reset Password">
+								<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

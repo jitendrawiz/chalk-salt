@@ -755,4 +755,17 @@ public class UserDaoImpl implements UserDao {
             return query.executeAndFetchFirst(GuestUserDto.class);
 	}
 }
+
+	@Override
+	public void resetPassword(Long userId, String tempPassword) throws Exception {
+		final String sqlQuery = "UPDATE cst_logins SET password=:tempPassword "
+				+ " WHERE user_id=:userId";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("tempPassword", tempPassword);          
+            query.addParameter("userId", userId);
+            query.executeUpdate();
+        }
+	}
 }

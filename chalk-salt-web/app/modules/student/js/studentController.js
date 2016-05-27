@@ -230,13 +230,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
-      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService', 
+      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService','ResetPasswordService', 
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
-       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService) {
+       RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, 
+       ResetPasswordService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -517,6 +518,34 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
               $scope.getData();
              }
          }, onRequestFailure);
+     };
+     
+     /*******Reset Student Login Password ********/
+     $this.resetPassword(securUuid){
+    	 var modalOptionsConfirm = {
+   	            header : 'Note',
+   	            body : 'Do you want to reset student login password?',
+   	            btn : 'OK'
+   	        };
+   	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+   	    	resetPasswordService.get({securUuid:securUuid},  function(response) {
+              if(response){
+              	 console.log(response);
+              	var modalOptions = {
+                       header : 'Note',
+                       body : 'Password has been reset successfully and new Password has been sent to the student via email.',
+                       btn : 'OK'
+                   };
+
+               CandDModalService.showModal({}, modalOptions).then(function(result) {
+                       $log.info(result);
+                   });
+              	 $state.reload();
+              	 }
+   	       }, function(error) {
+   	       	showAlert('danger',error.message);
+   	       })
+   	    });
      };
      
      /******* Save Question********/
@@ -803,7 +832,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
         });
    };
 
-	//delete student
+	/****** delete student ********/
 	this.deleteStudent=function(securUuid){
 		var modalOptionsConfirm = {
             header : 'Note',

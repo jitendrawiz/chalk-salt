@@ -177,9 +177,7 @@ define([ 'angular' ], function(angular) {
             }
         };
     } ]);
-    
-    
-    
+
     studentService.factory('GetUserPhotoService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/user/photo/:securUuid',{
             securUuid : '@securUuid'
@@ -302,4 +300,15 @@ define([ 'angular' ], function(angular) {
     } ]);
     
     /* All Exam Services ends here*/
+    
+
+    studentService.factory('resetPasswordService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/users/reset-password/:securuuid',{
+            securUuid : '@securuuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
+    }]);
 });

@@ -144,5 +144,16 @@ public interface UserFacade {
 	 * @throws UserException the user exception
 	 */
 	GuestUserDto saveGuestUserDetails(GuestUserDto userDetails)throws UserException;
+
+	/**
+	 * Reset password.
+	 *
+	 * @param securUuid the secur uuid
+	 * @param tempPassword 
+	 * @param encryptedTempPassword2 
+	 * @return the boolean
+	 * @throws UserException the user exception
+	 */
+	Boolean resetPassword(String securUuid, String tempPassword, String encryptedTempPassword2)throws UserException;
 	
 }

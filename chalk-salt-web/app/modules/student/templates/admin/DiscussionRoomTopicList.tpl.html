@@ -12,7 +12,7 @@
 .title_name {
 	text-align: right;
 	padding-right: 20px;
-	padding-top: 20px;
+	padding-top: 15px;
 }
 
 .title_name_class {
@@ -168,14 +168,12 @@ button.btn-block {
 					<tr ng-repeat="item in topicsList=topicsListDetails | filter:search|startFrom:(currentPagetopicsList-1)*itemsPerPagetopicsList | limitTo:itemsPerPagetopicsList">
 						<td>{{item.topicTitle}}</td>
 						<td>{{item.topicDescription}}</td>
-						<td><button type="button" class="btn btn-secondary btn-block"
-								ng-click="adminCtrl.editTopic(item.securUuid)">
-								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-secondary btn-block "
-								ng-click="adminCtrl.deleteTopic(item.securUuid)">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
+						<td><a type="button" ng-click="adminCtrl.editTopic(item.securUuid)" title="Edit">
+								<i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+							</a>
+							<a type="button" ng-click="adminCtrl.deleteTopic(item.securUuid)" title="Delete">
+								<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							</a>
 						</td>
 					</tr>
 				</tbody>

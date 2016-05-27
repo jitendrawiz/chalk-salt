@@ -27,6 +27,14 @@
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
 /* ]]> */
 </script>
+<style type="text/css">
+	.alignleft {
+		float: left;
+	}
+	.alignright {
+		float: right;
+	}
+</style>
 <div id="wrapper" class="main-wrapper">
     <div id="masthead" class="site-header navigation navbar-default">
         <div class="header-top">
@@ -118,8 +126,19 @@
                                         ng-show="loginForm.signinpassword.$error.required">Password is required.</span>
                                     </span>
                                 </div>
-                                <br> <input type="checkbox" id="remember-me" ng-model="authRequest.rememberMe"> <label for="remember-me">Remember
-                                    me</label>
+                                <br> 
+                                    
+                                    <div>
+									  <p class="alignleft">
+										<input type="checkbox" id="remember-me" ng-model="authRequest.rememberMe"> 
+										<label for="remember-me">Remember me</label>
+									  </p>
+									  <p class="alignright">
+									    <i class="glyphicon glyphicon-lock"></i>
+									  	<a ui-sref="chalkanddust.contactus">Forgot Password</a>
+									  </p>
+									</div>
+								
                                 <button type="button" class="btn btn-secondary btn-block" ng-disabled="loginForm.$invalid"
                                     ng-click="loginCtrl.authenticateUser()">Log In</button>
                             </div>
