@@ -300,10 +300,9 @@ define([ 'angular' ], function(angular) {
     } ]);
     
     /* All Exam Services ends here*/
-    
 
-    studentService.factory('resetPasswordService', [ '$resource', 'ENV', function($resource, ENV) {
-        return $resource(ENV.API_END_POINT + 'private/users/reset-password/:securuuid',{
+    studentService.factory('ResetPasswordService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/users/reset-password/:securUuid',{
             securUuid : '@securuuid'
         }, {
             get : {

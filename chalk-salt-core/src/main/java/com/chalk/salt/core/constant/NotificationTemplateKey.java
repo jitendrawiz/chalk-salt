@@ -7,7 +7,11 @@ public enum NotificationTemplateKey {
 
 	/** The user registration successful. */
 	USER_REGISTRATION_SUCCESSFUL,
+	
 	/** The new enquiry. */
-	NEW_ENQUIRY;
+	NEW_ENQUIRY,
+	
+	/** The reset password. */
+	RESET_PASSWORD;
 
 }

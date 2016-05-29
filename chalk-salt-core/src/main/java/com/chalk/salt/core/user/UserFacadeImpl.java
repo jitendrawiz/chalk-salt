@@ -66,23 +66,27 @@ public class UserFacadeImpl implements UserFacade {
      * @return the email notification
      * @throws UserException the user exception
      */
-    private EmailNotificationDto getEmailNotification(final UserDto user) throws UserException {
+    private EmailNotificationDto getEmailNotification(final UserDto user, String notificationTemplateKey, String subject) throws UserException {
         final EmailNotificationDto emailNotification = new EmailNotificationDto();
         emailNotification.setTo(user.getEmail());
-        emailNotification.setSubject("New User created over Chalk N Dust");
+        emailNotification.setSubject(subject);
 
         final Map<String, Object> userDataModel = beanMapper.map(user, Map.class);
 
         String processedNotificationTemplate = null;
         try {
             final NotificationTemplateRequest notificationTemplateRequest = new NotificationTemplateRequest();
-            notificationTemplateRequest.setTemplateKey(NotificationTemplateKey.USER_REGISTRATION_SUCCESSFUL.name());
+            notificationTemplateRequest.setTemplateKey(notificationTemplateKey);
             notificationTemplateRequest.setDataMap(userDataModel);
             notificationTemplateRequest.setMergeBodyInTemplate(true);
             processedNotificationTemplate = databaseTemplateConfiguration.processTemplate(notificationTemplateRequest);
 
         } catch (final TemplateProcessingException e) {
-            throw new UserException(ErrorCode.USER_REGISTRATION_FAILURE, "user_registration_failure");
+        	if(notificationTemplateKey.equals(NotificationTemplateKey.USER_REGISTRATION_SUCCESSFUL.name())){
+        		throw new UserException(ErrorCode.USER_REGISTRATION_FAILURE, "user_registration_failure");
+        	} else if(notificationTemplateKey.equals(NotificationTemplateKey.RESET_PASSWORD.name())){
+        		throw new UserException(ErrorCode.FAIL_TO_SEND_EMAIL_FOR_RESET_PASSWORD, "Failt to send email for reset password.");
+        	}
         }
         emailNotification.setBody(processedNotificationTemplate);
         return emailNotification;
@@ -102,7 +106,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public String saveUserInfo(final UserDto userDetails) throws UserException {
         final String securUuid = userManager.saveUserInfo(userDetails);
-        final EmailNotificationDto emailNotification = getEmailNotification(userDetails);
+        final EmailNotificationDto emailNotification = getEmailNotification(userDetails, NotificationTemplateKey.USER_REGISTRATION_SUCCESSFUL.name(), "Chalk N Dust | User Registration");
         emailService.sendMail(emailNotification);
         return securUuid;
     }
@@ -214,7 +218,7 @@ public class UserFacadeImpl implements UserFacade {
 	public Boolean resetPassword(String securUuid, String tempPassword, String encryptedTempPassword) throws UserException {
 		final UserDto userDto = userManager.resetPassword(securUuid, encryptedTempPassword);
 		userDto.setPassword(tempPassword);
-        final EmailNotificationDto emailNotification = getEmailNotification(userDto);
+        final EmailNotificationDto emailNotification = getEmailNotification(userDto, NotificationTemplateKey.RESET_PASSWORD.name(), "Chalk N Dust | Reset Password");
         emailService.sendMail(emailNotification);
         return true;
 	}

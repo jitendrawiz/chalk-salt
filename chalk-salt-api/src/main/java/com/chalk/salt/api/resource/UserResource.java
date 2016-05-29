@@ -555,7 +555,6 @@ public class UserResource extends AbstractResource {
     	final Map<String, String> responseMap = new HashMap<String, String>();
     	Boolean response;
         try {
-        	//final String encryptedPassword = Utility.getEncodedBCryptHash(user.getPassword());
         	String tempPassword = new CryptoUtil().generateRandomString(); 
         	final String encryptedTempPassword = Utility.getEncodedBCryptHash(tempPassword);
         	response = userFacade.resetPassword(securUuid, tempPassword, encryptedTempPassword);

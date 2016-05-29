@@ -172,7 +172,13 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_DASHBOARD_DATA(1052),
 	
 	/** The fail to fetch student detail. */
-	FAIL_TO_FETCH_STUDENT_DETAIL(1053);
+	FAIL_TO_FETCH_STUDENT_DETAIL(1053),
+	
+	/** The fail to send email for reset password. */
+	FAIL_TO_SEND_EMAIL_FOR_RESET_PASSWORD(1054),
+	
+	/** The fail to reset password. */
+	FAIL_TO_RESET_PASSWORD(1055);
 	
 	/** The value. */
     private final int value;

@@ -521,14 +521,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      };
      
      /*******Reset Student Login Password ********/
-     $this.resetPassword(securUuid){
+     this.resetPassword = function(securUuid){
     	 var modalOptionsConfirm = {
    	            header : 'Note',
    	            body : 'Do you want to reset student login password?',
    	            btn : 'OK'
    	        };
    	    CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
-   	    	resetPasswordService.get({securUuid:securUuid},  function(response) {
+   	    	ResetPasswordService.get({securUuid:securUuid},  function(response) {
               if(response){
               	 console.log(response);
               	var modalOptions = {
