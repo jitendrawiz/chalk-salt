@@ -500,7 +500,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
              }
          }
     	
-         GetCommentsList.query({classId:classId,subjectId:subjectId,topicId:topicId}, function(response) {
+         GetCommentsList.query({classId:classId,subjectId:subjectId,topicId:topicId,isGuest:true}, function(response) {
              if(response){
             	 $scope.commentsListDetails = response;
              	 $scope.totalItemscommentsList = $scope.commentsListDetails.length;
