@@ -10,9 +10,9 @@
 
     <organization>
         <name>Chalk Salt</name>
-        <url>http://www.newhomedecores.com/</url>
+        <url>http://chalkndust.com/</url>
     </organization>
-    <url>http://www.newhomedecores.com/</url>
+    <url>http://chalkndust.com/</url>
 
     <modules>
         <module>chalk-salt-common</module>

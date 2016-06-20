@@ -1,0 +1,63 @@
+<style>
+* {
+	box-sizing: border-box;
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.pdf-controls {
+	width: 100%;
+	display: block;
+	background: #eee;
+	padding: 1em;
+}
+
+.rotate0 {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+.rotate90 {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.rotate180 {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.rotate270 {
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
+}
+
+.fixed {
+	position: fixed;
+	top: 0;
+	left: calc(50% - 480px);
+	z-index: 100;
+	width: 100%;
+	padding: 1em;
+	background: rgba(238, 238, 238, .9);
+	width: 960px;
+}
+.pdfinput{display: inline-block;}
+
+</style>
+<nav ng-class="getNavStyle(scroll)">
+    <a href="javascript:void(0)" ng-click="goPrevious()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-step-backward"></span> Step
+        Backward
+    </a> <a href="javascript:void(0)" ng-click="goNext()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-step-forward"></span> Step
+        Forward
+    </a> <a href="javascript:void(0)" ng-click="zoomIn()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-plus"></span> Zoom In
+    </a> <a href="javascript:void(0)" ng-click="fit()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-fullscreen"></span> Fit
+    </a> <a href="javascript:void(0)" ng-click="zoomOut()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-minus"></span> Zoom Out
+    </a> <span>Page: </span> <input class="pdfinput" type="text" min=1 ng-model="pageNum"/> <span> / {{pageCount}}</span> &nbsp;&nbsp; 
+</nav>
+<hr>
+{{loading}}
+<canvas id="pdf"></canvas>

@@ -2,9 +2,13 @@
 
 define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templates/studentHome.tpl.html', 'text!../templates/adminProfile.tpl.html',
          'text!../templates/adminHome.tpl.html','text!../templates/admin/StudentDetails.tpl.html',
-         'text!../templates/admin/ExamQuestionMaster.tpl.html','text!../templates/admin/ExamQuestionList.tpl.html','text!../templates/studentDashboard/testInstruction.tpl.html'],
+         'text!../templates/admin/ExamQuestionMaster.tpl.html',
+         'text!../templates/admin/ExamQuestionList.tpl.html',
+         'text!../templates/studentDashboard/testInstruction.tpl.html',
+         'text!../templates/studentDashboard/notes.tpl.html'],
 		function(angular, templateHome,templateProfile,adminprofiletemplate,adminhometemplate,studentdetailstemplate, 
-				examQuestionMasterTemplate, examQuestionListTemplate, testInstructionTemplate) {
+				examQuestionMasterTemplate, examQuestionListTemplate, testInstructionTemplate,
+				notesTemplate) {
     
     var homeRouter = angular.module('Student.router', []);
 
@@ -41,6 +45,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
         	url : '/admin/exams/questions/list',
             template : examQuestionListTemplate,
             controller : 'AdminController as adminCtrl'        		
-        });
+        }).state('chalkanddust.shownotes',{
+          url : '/student/notes/:pdfName/:pdfUrl',
+          template : notesTemplate,
+          controller : 'StudentController as stdCtrl'           
+      });
     } ]);
 });

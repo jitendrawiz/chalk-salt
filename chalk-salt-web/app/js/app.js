@@ -1,9 +1,12 @@
 'use strict';
 
-define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss', 'jquery', 'jqueryUI', 'angularTranslate',
-        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome','ngAnimate'], function(angular) {
+define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss',
+         'jquery', 'jqueryUI', 'angularTranslate',
+        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome','ngAnimate','angularPdf','pdfjs'], function(angular) {
 
-    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource','Home.controller', 'Login.controller', 'Registration.controller','Student.controller','httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap','ngAnimate']);
+    var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource',
+     'Home.controller', 'Login.controller', 'Registration.controller','Student.controller',
+     'httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap','ngAnimate','pdf']);
 
     chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider,$sceProvider) {
         /*

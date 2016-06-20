@@ -1,24 +1,22 @@
 <link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<main class="tab_with"> <input id="tab1" type="radio" name="tabs" checked> <label for="tab1">Video</label> <input id="tab2" type="radio"
-    name="tabs"> <label for="tab2">Notes</label> <input id="tab3" type="radio" name="tabs"> <label for="tab3">Test</label>
+<main class="tab_with"> <input id="tab1" type="radio" name="tabs" checked> <label for="tab1">Video</label> <input id="tab2"
+    type="radio" name="tabs"> <label for="tab2">Notes</label> <input id="tab3" type="radio" name="tabs"> <label for="tab3">Test</label>
 <section class="section_tab" id="content1">
     <div ng-show="!showVideoDiv" class="col-md-12 column" ng-repeat="item in videoObject">
         <div class="feature-box pdf_space">
-           <iframe width="600" height="315" ng-src="{{item.videoEmbedLink}}" frameborder="0" allowfullscreen></iframe>
+            <iframe width="600" height="315" ng-src="{{item.videoEmbedLink}}" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-     <div ng-show="showVideoDiv" class="col-md-12 column">
-     <div class="feature-box pdf_space">
-        No videos right now ,coming soon.
-        </div>
-    </div>    
+    <div ng-show="showVideoDiv" class="col-md-12 column">
+        <div class="feature-box pdf_space">No videos right now ,coming soon.</div>
+    </div>
 </section>
 <section class="section_tab" id="content2">
     <div class="col-md-12 column">
         <div class="feature-box pdf_space">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Download</a>
+                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal1'})">Notes</a>
             </h4>
         </div>
     </div>
@@ -26,7 +24,7 @@
         <div class="feature-box pdf_space">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Download</a>
+                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal2'})">Notes</a>
             </h4>
         </div>
     </div>
@@ -34,7 +32,7 @@
         <div class="feature-box pdf_space">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Download</a>
+                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal3'})">Notes</a>
             </h4>
         </div>
     </div>
@@ -42,7 +40,7 @@
         <div class="feature-box pdf_space">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a href="#">Download</a>
+                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal4'})">Notes</a>
             </h4>
         </div>
     </div>
@@ -75,7 +73,6 @@
             </h4>
         </div>
     </div>
-    
 </section>
 </main>
 <div class="col-md-3 column right-navbar-right">

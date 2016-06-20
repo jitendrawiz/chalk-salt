@@ -13,11 +13,13 @@ require.config({
     jqueryUI: 'lib/jquery-ui/jquery-ui.min',
     candDCss: 'resources/css/chalk-Dust',
     uiBootstrap: 'lib/angular-bootstrap/ui-bootstrap-tpls',
-    fontAwesome: '/lib/fontawesome/css/font-awesome',
+    fontAwesome: 'lib/fontawesome/css/font-awesome',
     angularTranslate: 'lib/angular-translate/angular-translate.min',
     angularTranslateStaticFile: 'lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min',
     angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min',
-    ngAnimate:'lib/angular-animate/angular-animate.min'
+    ngAnimate:'lib/angular-animate/angular-animate.min',
+    angularPdf:'lib/angular-pdf/dist/angular-pdf.min',
+    pdfjs:'lib/pdfjs-dist/build/pdf'
     	//angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
     },
   /**
@@ -33,6 +35,7 @@ require.config({
     uiBootstrap: ['angular'],
     angularTranslate: ['angular'],
     angularTranslateStaticFile: ['angular','angularTranslate'],
+    angularPdf:['angular','pdfjs'],
   },
   map: {
     '*': {

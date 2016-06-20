@@ -1,0 +1,60 @@
+<style>
+* {
+	box-sizing: border-box;
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.pdf-controls {
+	width: 100%;
+	display: block;
+	background: #eee;
+	padding: 1em;
+}
+
+.rotate0 {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+.rotate90 {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.rotate180 {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.rotate270 {
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
+}
+
+.fixed {
+	position: fixed;
+	top: 0;
+	left: calc(50% - 480px);
+	z-index: 100;
+	width: 100%;
+	padding: 1em;
+	background: rgba(238, 238, 238, .9);
+	width: 960px;
+}
+.main_bg_bg{
+display: none;
+}
+h1, .h1, h2, .h2, h3, .h3{
+margin-top: 0px;
+}
+</style>
+<div prevent-right-click style="background-color: gray;">
+    <div class="wrapper">
+        <h1 style="padding-top: 20px">{{pdfName}}</h1>
+        <ng-pdf template-url="modules/student/templates/studentDashboard/viewer.tpl.html" canvasid="pdf" scale="page-fit" page=1></ng-pdf>
+    </div>
+</div>

@@ -7,10 +7,10 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
     homeModule.controller('StudentController', ['$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 
                                                 'CHALKNDUST', 'GetUserDetailsService','StudentProfileUpdateService',
                                                 'ChangePasswordService','UpdateProfilePhotoService','GetUserPhotoService','DeletePhotoService','CandDModalService',
-                                                'GetDashboardDataBySubject',
+                                                'GetDashboardDataBySubject','$stateParams',
             function($window,$scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService,
             		StudentProfileUpdateService,ChangePasswordService,UpdateProfilePhotoService,
-            		GetUserPhotoService,DeletePhotoService,CandDModalService,GetDashboardDataBySubject) {
+            		GetUserPhotoService,DeletePhotoService,CandDModalService,GetDashboardDataBySubject,$stateParams) {
     	       $scope.uploadedlogo = {};
     	       $scope.showVideoDiv=false;
     		  
@@ -221,6 +221,46 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                             showAlert('danger',error.data.message);
                         });
                     }
+                    
+                    
+                    /*Code to display pdf files in website*/
+                    
+                    if($stateParams.pdfName!=null && $stateParams.pdfName!= undefined){
+                      $scope.pdfName=$stateParams.pdfName;
+                    }else{
+                    $scope.pdfName = 'Relativity: The Special and General Theory by Albert Einstein';
+                    }
+                    if($stateParams.pdfUrl!=null &&  $stateParams.pdfUrl!= undefined){
+                      $scope.pdfUrl=$stateParams.pdfUrl;
+                    }else{
+                      $scope.pdfUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf';
+                    }
+                    $scope.scroll = 0;
+                    $scope.loading = 'loading';
+
+                    $scope.getNavStyle = function(scroll) {
+                      if(scroll > 100) return 'pdf-controls fixed';
+                      else return 'pdf-controls';
+                    }
+
+                    $scope.onError = function(error) {
+                      console.log(error);
+                    }
+
+                    $scope.onLoad = function() {
+                      $scope.loading = '';
+                    }
+
+                    $scope.onProgress = function(progress) {
+                      console.log(progress);
+                    }
+                    
+                    
+                    /*pdf code ends here*/
+                    
+                    
+                    
+                    
     }]);
     
     //* Admin Controller
