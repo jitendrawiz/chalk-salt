@@ -311,4 +311,63 @@ define([ 'angular' ], function(angular) {
             }
         });
     }]);
+    
+    
+    
+    /*Video Master/List services starts from here*/
+    
+    
+    studentService.factory('saveVideoMasterData', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/video-master/details/add',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+    }]);
+
+    
+    studentService.factory('GetVideoContentList', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/video-master/details/:classId/:subjectId',{
+          classId : '@classId',
+          subjectId:'@subjectId'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
+    }]);
+   
+    studentService.factory('GetVideoDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/video-master/details/edit/:videoUuid',{
+          videoUuid : '@videoUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+            
+        });
+    } ]); 
+    
+    
+    studentService.factory('updateVideoDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/video-master/details/update',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+    } ]);
+  
+    studentService.factory('deleteVideoDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/video-master/details/delete/:videoUuid',{
+          videoUuid : '@videoUuid'
+        }, {
+            get : {
+                method : 'GET'
+            }
+        });
+    } ]); 
+  
+    /*Video master/List services ends here*/
+    
+    
 });

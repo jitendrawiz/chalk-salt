@@ -270,14 +270,15 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'createNewTopic','GetTopicsList','GetTopicDetailsService','deleteTopicDetailsService','updateTopicDetailsService','GetCommentsList',
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
-      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService','ResetPasswordService', 
+      'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService','ResetPasswordService', 'saveVideoMasterData',
+      'GetVideoContentList','GetVideoDetailsService','updateVideoDetailsService','deleteVideoDetailsService',
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
        RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, 
-       ResetPasswordService) {
+       ResetPasswordService,saveVideoMasterData,GetVideoContentList,GetVideoDetailsService,updateVideoDetailsService,deleteVideoDetailsService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -392,6 +393,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      $scope.commentDetails=[];
      $scope.studentList=[];
      $scope.topicRequestListDetails=[];
+     $scope.videoDetails=[];
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -1038,7 +1040,156 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
 	 * 
 	 * Registration Code ends here
 	 * */
-	var Id = $stateParams.id;
+	
+	/*
+	 * 
+	 * Video Master Code starts here
+	 * 
+	 * */
+	
+	/********** Create Video data*************/
+	$scope.videoDetailsToSave = {};
+	   this.createVideoData = function() {
+	   angular.extend($scope.videoDetailsToSave,$scope.videoDetails);      
+      saveVideoMasterData.save({},$scope.videoDetailsToSave, function(response) {
+          if (response) {
+              console.log(response);
+            var modalOptions = {
+                      header : 'Note',
+                      body : 'Your Video data is saved successfully',
+                      btn : 'OK'
+                  };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+                  });
+          }
+        }, function(error) {
+            showAlert('danger', error.data.message);
+        });
+     };
+	
+
+     
+     
+     
+     
+     /******* Show video List ********/  
+     $scope.showVideoDetails = function(classId,subjectId, classes, subjectsList) {
+       console.log("Fetching video detailed list "+classId+"-"+classId+" & "+subjectId+"-"+subjectId);
+       
+       $scope.classes=classes;
+       $scope.subjectsList=subjectsList;
+       
+      if (!classId) {
+        resetOptions();
+        if(!subjectId){
+          return;
+        }             
+         }
+         GetVideoContentList.query({classId:classId,subjectId:subjectId}, function(response) {
+           if(response){
+             $scope.videoListDetails = response;
+              $scope.totalItemsVideoList = $scope.videoListDetails.length;
+                 $scope.currentPageVideoList = 1;
+                 $scope.itemsPerPageVideoList = 5;
+                 $scope.maxSizeVideoList = 5;
+                 
+                 $scope.$watch('search', function (newVal, oldVal) {
+                $scope.videoList = filterFilter($scope.videoListDetails, newVal);
+                $scope.totalItemsVideoList = $scope.videoList.length;
+                //$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+                $scope.currentPageVideoList = 1;
+              }, true);
+                $scope.getVideoContentData = function () {
+                    // keep a reference to the current instance "this" as the context is changing
+                    var self = this;
+                    console.log(self.currentPageVideoList);
+                    var itemsPerPageVideoList = self.itemsPerPageVideoList; 
+                    var offset = (self.currentPageVideoList-1) * itemsPerPageVideoList;
+                    $scope.questionList = $scope.videoListDetails.slice(offset, offset + itemsPerPageVideoList)
+                };
+               $scope.getVideoContentData();
+             }
+         }, onRequestFailure);
+
+     };
+
+     
+     /********Edit video data************/
+     
+     $scope.editVideoContent=function(videoUuid){
+         GetVideoDetailsService.get({videoUuid:videoUuid},  function(response) {
+               if(response){
+                 $scope.videoDetails = response;
+                 console.log($scope.videoDetails);
+                }
+                 $scope.setTab(12);
+           }, function(error) {
+            showAlert('danger',error.data.message);
+           }
+     )};
+     
+          
+      /*************Update Video data****************/
+     this.updatevideoData = function() {
+      updateVideoDetailsService.save({}, $scope.videoDetails, function(
+              response) {
+          if (response) {
+              console.log(response);
+            var modalOptions = {
+                      header : 'Note',
+                      body : 'Your Video data is updated successfully',
+                      btn : 'OK'
+                  };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+                  });
+          }
+          
+        }, function(error) {
+            showAlert('danger', error.data.message);
+        });
+     };
+
+
+     /*************Delete Video data****************/
+     $scope.deleteVideoContent=function(videoUuid){
+       var modalOptionsConfirm = {
+                header : 'Note',
+                body : 'Deleting Video data,Do you want to continue?',
+                btn : 'OK'
+            };
+        CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+       deleteVideoDetailsService.get({videoUuid:videoUuid},  function(response) {
+             if(response){
+               console.log(response);
+              var modalOptions = {
+                      header : 'Note',
+                      body : 'Video data deleted successfully',
+                      btn : 'OK'
+                  };
+
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                      $log.info(result);
+                  });
+               $state.reload();
+               }
+           }, function(error) {
+            showAlert('danger',error.data.message);
+           })
+        });
+     };
+
+     /*
+      * 
+      * Video Master Code ends here
+      * 
+      * */
+     
+     var Id = $stateParams.id;
+
+	
+	
 	//Show Student's Details
 	
 		if (!Id) {
@@ -1067,7 +1218,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
 	    }, function(error) {
 	    	showAlert('danger',error.data.message);
 	    });
-	
+		
 	
 	}]);
 });    

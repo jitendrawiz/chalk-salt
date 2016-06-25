@@ -143,7 +143,7 @@ public class DiscussionRoomResource extends AbstractResource {
     		if(discussionTopic!=null)
     			return Response.ok(discussionTopic).build();
     		else
-    			throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to fetch discussion topic.");
+    			throw new DiscussionException(ErrorCode.FAIL_TO_FETCH_DISCUSSION_TOPIC_DETAILS, "Fail to fetch discussion topic details");
 	    } catch (final DiscussionException discussionException) {
 	        throw Utility.buildResourceException(discussionException.getErrorCode(), discussionException.getMessage(), Status.INTERNAL_SERVER_ERROR, DiscussionException.class, discussionException);
 	    }

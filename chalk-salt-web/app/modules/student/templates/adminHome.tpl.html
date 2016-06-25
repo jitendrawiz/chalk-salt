@@ -132,6 +132,21 @@
                             <span class="selected"></span>
                         </a>
 				</li>
+                <li ng-class="{ active:isSet(12)}">
+                      <a ng-click="setTab(12);" href="">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Video Master</span>
+                            <span class="selected"></span>
+                        </a>
+                </li>
+                <li ng-class="{ active:isSet(13)}">
+                      <a ng-click="setTab(13);" href="">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Video List</span>
+                            <span class="selected"></span>
+                        </a>
+                </li>
+                
               </ul>
             </aside>
             <section id="main-content">
@@ -176,6 +191,12 @@
 				<div ng-switch-when="11">
 				 <div ng-include="'modules/student/templates/admin/ExamQuestionList.tpl.html'"></div>
 				</div>
+                <div ng-switch-when="12">
+                 <div ng-include="'modules/student/templates/admin/VideoMaster.tpl.html'"></div>
+                </div>
+                <div ng-switch-when="13">
+                 <div ng-include="'modules/student/templates/admin/VideoContentList.tpl.html'"></div>
+                </div>
 			</div>
                              
                              

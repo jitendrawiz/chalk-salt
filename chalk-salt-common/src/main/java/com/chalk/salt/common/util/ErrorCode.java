@@ -178,7 +178,19 @@ public enum ErrorCode {
 	FAIL_TO_SEND_EMAIL_FOR_RESET_PASSWORD(1054),
 	
 	/** The fail to reset password. */
-	FAIL_TO_RESET_PASSWORD(1055);
+	FAIL_TO_RESET_PASSWORD(1055),
+	
+	/** The fail to save study material. */
+	FAIL_TO_SAVE_STUDY_MATERIAL(1056),
+	
+	/** The fail to fetch study material. */
+	FAIL_TO_FETCH_STUDY_MATERIAL(1057),
+	
+	/** The fail to update study material. */
+	FAIL_TO_UPDATE_STUDY_MATERIAL(1058),
+	
+	/** The fail to delete study material. */
+	FAIL_TO_DELETE_STUDY_MATERIAL(1059);
 	
 	/** The value. */
     private final int value;
