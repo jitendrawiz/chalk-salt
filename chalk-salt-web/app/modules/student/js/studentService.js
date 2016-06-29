@@ -370,4 +370,36 @@ define([ 'angular' ], function(angular) {
     /*Video master/List services ends here*/
     
     
+    /*notes services starts from here*/
+    studentService.factory('createNotesContentService', [ '$resource', 'ENV', function($resource, ENV) {
+        return $resource(ENV.API_END_POINT + 'private/notes-master/details/save',{}, {
+            save : {
+                method : 'POST'
+            }
+        });
+        } ]);  
+    
+    studentService.factory('UpdateNotesFileService', [ '$http', 'ENV', function($http, ENV) {
+        return {
+            upload : function(formData, notesUuid, successCallback, errorCallback) {
+                var uploadUrl = ENV.API_END_POINT + "private/notes-master/details/update/notes/file/" + notesUuid;
+
+                $http.post(uploadUrl, formData, {
+                    transformRequest : angular.identity,
+                    headers : {
+                        'Content-Type' : undefined
+                    }
+                }).success(function(response) {
+                    successCallback(response);
+                }).error(function(error) {
+                    errorCallback(error);
+                });
+            }
+        };
+    } ]);
+    
+    
+    
+    /*notes services ends here*/
+    
 });

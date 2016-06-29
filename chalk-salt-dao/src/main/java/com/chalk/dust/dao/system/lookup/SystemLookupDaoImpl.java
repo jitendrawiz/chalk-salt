@@ -60,4 +60,21 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
 			return query.executeAndFetch(SubjectDto.class);
 		}	}
 
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#getSystemSettings(java.lang.String)
+     */
+    @Override
+    public String getSystemSettings(String settingsKey) throws Exception
+    {
+        final String sqlQuery = "SELECT `settings_value` AS settingsValue "
+                + "FROM `cst_system_settings` AS systemSettings WHERE systemSettings.settings_key=:settingsKey";
+    
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("settingsKey", settingsKey);
+            return query.executeAndFetchFirst(String.class);
+        }
+    }
+
 }

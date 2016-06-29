@@ -358,7 +358,9 @@ CREATE TABLE `cst_system_settings` (
 
 /*Data for the table `cst_system_settings` */
 
-insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo'),(2,'TOPIC_IMAGE','G:\\CHALKANDDUST\\TopicPhoto\\','TO save topic image.');
+
+insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo'),(2,'TOPIC_IMAGE','G:\\CHALKANDDUST\\TopicPhoto\\','TO save topic image.'),(3,'QUESTION_IMAGE','G:\\CHALKANDDUST\\QuestionPhoto\\','To save question image.'),(4,'NOTES_FILE','G:\\CHALKANDDUST\\Notes\\','To save notes content w.r.t class and subject');
+
 
 /*Table structure for table `cst_test_master` */
 
@@ -497,7 +499,6 @@ CREATE TABLE `cst_guestusers` (
 
 ALTER TABLE `chalkndust`.`cst_questions`     CHANGE `answer` `answer` CHAR(1) NOT NULL;
 ALTER TABLE `chalkndust`.`cst_questions`     ADD COLUMN `question_image` VARCHAR(100) NULL AFTER `question_uuid`;
-INSERT INTO `chalkndust`.`cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) VALUES ( NULL,'QUESTION_IMAGE','G:\\CHALKANDDUST\\QuestionPhoto\\','To save question image.');
 
 
 DROP TABLE IF EXISTS `cst_videos`;
@@ -519,6 +520,20 @@ CREATE TABLE `cst_videos` (
 
 insert  into `cst_videos`(`video_id`,`video_embedded_link`,`video_title`,`video_description`,`created_time`,`modified_time`,`video_uuid`,`class_id`,`subject_id`) values (1,'https://www.youtube.com/watch?v=C5Z8WQv1Wf4','English 2nd Paper Class 8 Article ','English 2nd Paper Class 8 Article ','2016-05-26 23:59:51','2016-05-26 23:59:51','qeurajkfajdkfajdfkaldfjakld',1,1),(2,'https://www.youtube.com/watch?v=t7buUbo_1Qs','English 2nd Paper Class 8 Article ','English 2nd Paper Class 8 Article ','2016-05-27 00:54:52','2016-05-27 00:54:52','adfadfadfadfadsfadsfasdfdsfa',1,1),(3,'https://www.youtube.com/watch?v=hgumbCaV2g4','we','we','2016-05-27 01:24:24','2016-05-27 01:24:24','fgsrtdgsrdssasdhdfhsdg',1,1),(4,'https://www.youtube.com/watch?v=dDwNZA2bGs8','2','2','2016-05-27 01:26:08','2016-05-27 01:26:08','55',1,1),(5,'https://www.youtube.com/watch?v=2eliQ_KR8yA','4','4','2016-05-27 01:27:14','2016-05-27 01:27:14','4',1,1);
 
+
+DROP TABLE IF EXISTS `cst_notes`;
+
+CREATE TABLE `cst_notes` (
+  `notes_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `notes_title` varchar(500) NOT NULL,
+  `notes_file_name` varchar(500) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` datetime DEFAULT NULL,
+  `notes_uuid` varchar(100) NOT NULL,
+  PRIMARY KEY (`notes_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

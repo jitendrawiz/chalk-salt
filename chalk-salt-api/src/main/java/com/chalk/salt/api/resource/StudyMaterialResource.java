@@ -1,5 +1,6 @@
 package com.chalk.salt.api.resource;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,19 +17,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
+import com.chalk.salt.api.model.NotesContentModel;
+import com.chalk.salt.api.model.NotesFileModel;
 import com.chalk.salt.api.model.VideoContentModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
 import com.chalk.salt.common.util.DozerMapperUtil;
+import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.studymaterial.StudyMaterialFacade;
 
 /**
@@ -171,5 +179,81 @@ public class StudyMaterialResource {
 	        throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
 	    }
     }
+    
+    /**
+     * **********Notes code starts from here***************.
+     *
+     * @param notesContentModel the notes content model
+     * @return the response
+     * @throws StudyMaterialException the study material exception
+     */
+    
+    @POST
+    @Path("/notes-master/details/save")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response saveNotes(final @Valid NotesContentModel notesContentModel)throws StudyMaterialException{
+        NotesContentDto notesContentDto = null;
+        final Map<String, String> response = new HashMap<String, String>();
+        String notesUuid = null;
+        try{
+            notesContentDto = beanMapper.map(notesContentModel, NotesContentDto.class);
+            notesUuid = studyMaterialFacade.saveNotes(notesContentDto);
+            response.put("notesUuid", notesUuid);
+            return Response.ok(response).build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
+   
+    /**
+     * Upload notes file.
+     *
+     * @param notesUuid the notes uuid
+     * @param notesFileModel the notes file model
+     * @return the response
+     * @throws StudyMaterialException the study material exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/notes-master/details/update/notes/file/{notesUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadNotesFile(@PathParam("notesUuid") final String notesUuid,
+        @MultipartForm final NotesFileModel notesFileModel) throws StudyMaterialException {
+         if (notesFileModel == null || StringUtils.isBlank(notesUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+          final File sourceFile = notesFileModel.getFile();
+          final String filename = notesFileModel.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final NotesFileDto notesFileData = new NotesFileDto();
+          notesFileData.setName(filename);
+          notesFileData.setFile(sourceFile);
+          notesFileData.setFilePath(sourceFile.getPath());
+        try
+        {
+            final String resNotesUuid = studyMaterialFacade.uploadNotesFile(notesUuid, notesFileData);
+             final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("notesUuid", resNotesUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+            
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
     
 }

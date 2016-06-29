@@ -2,6 +2,8 @@ package com.chalk.salt.dao.studymaterial.manager;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
 
@@ -54,5 +56,24 @@ public interface StudyMaterialManager {
 	 * @throws StudyMaterialException the study material exception
 	 */
 	Boolean deleteVideoContentData(String videoUuid)throws StudyMaterialException;
+
+    /**
+     * Save notes.
+     *
+     * @param notesContentDto the notes content dto
+     * @return the string
+     * @throws StudyMaterialException the study material exception
+     */
+    String saveNotes(NotesContentDto notesContentDto)throws StudyMaterialException;
+
+    /**
+     * Upload notes file.
+     *
+     * @param notesUuid the notes uuid
+     * @param notesFileData the notes file data
+     * @return the string
+     * @throws StudyMaterialException the study material exception
+     */
+    String uploadNotesFile(String notesUuid, NotesFileDto notesFileData)throws StudyMaterialException;
 
 }

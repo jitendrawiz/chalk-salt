@@ -7,6 +7,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.NotesContentDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
@@ -119,4 +120,45 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
             query.executeUpdate();
         }		
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#saveNotes(com.chalk.salt.common.dto.NotesContentDto)
+     */
+    @Override
+    public String saveNotes(NotesContentDto notesContentDetails) throws Exception
+    {
+        final String sqlQuery = "INSERT INTO `cst_notes` (`notes_title`, `notes_file_name`, `modified_date`, "
+                + "`class_id`, `subject_id`, `notes_uuid`)"
+                + "VALUES(:notesTitle, :notesFileName, :modifiedDate, :classId, :subjectId, :notesUuid)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("notesTitle", notesContentDetails.getNotesTitle());
+            query.addParameter("notesFileName", notesContentDetails.getNotesFileName());
+            query.addParameter("modifiedDate", notesContentDetails.getModifiedDate());
+            query.addParameter("classId", notesContentDetails.getClassId());
+            query.addParameter("subjectId", notesContentDetails.getSubjectId());
+            query.addParameter("notesUuid", notesContentDetails.getNotesUuid());
+            query.executeUpdate();
+            return notesContentDetails.getNotesUuid();
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getPathOfNotesUsingNotesUuid(java.lang.String)
+     */
+    @Override
+    public String getPathOfNotesUsingNotesUuid(String notesUuid) throws Exception
+    {
+        final String sqlQuery = "SELECT CONCAT(cst_class_type.class_name,'$',cst_class_subjects.subject_name) FROM `cst_notes` "
+                + " JOIN cst_class_type ON cst_class_type.class_id=cst_notes.class_id "
+                + " JOIN cst_class_subjects ON cst_class_subjects.subject_id=cst_notes.subject_id "
+                + " WHERE cst_notes.notes_uuid= :notesUuid ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            query.addParameter("notesUuid", notesUuid);
+            return (String)query.executeScalar();
+        }   
+    }
 }

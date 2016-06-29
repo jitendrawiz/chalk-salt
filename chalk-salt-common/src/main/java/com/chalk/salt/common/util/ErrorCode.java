@@ -190,7 +190,10 @@ public enum ErrorCode {
 	FAIL_TO_UPDATE_STUDY_MATERIAL(1058),
 	
 	/** The fail to delete study material. */
-	FAIL_TO_DELETE_STUDY_MATERIAL(1059);
+	FAIL_TO_DELETE_STUDY_MATERIAL(1059),
+	
+	/** The fail to save notes file. */
+	FAIL_TO_SAVE_NOTES_FILE(1060);
 	
 	/** The value. */
     private final int value;

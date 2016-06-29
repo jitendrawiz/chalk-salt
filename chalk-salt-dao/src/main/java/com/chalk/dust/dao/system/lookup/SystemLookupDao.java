@@ -29,4 +29,13 @@ public interface SystemLookupDao {
 	 */
 	List<SubjectDto> getSubjectsListByClassId(String classId) throws Exception;
 
+    /**
+     * Gets the system settings.
+     *
+     * @param settingsKey the settings key
+     * @return the system settings
+     * @throws Exception the exception
+     */
+    String getSystemSettings(String settingsKey) throws Exception;
+
 }

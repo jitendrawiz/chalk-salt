@@ -271,14 +271,15 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
       'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService','ResetPasswordService', 'saveVideoMasterData',
-      'GetVideoContentList','GetVideoDetailsService','updateVideoDetailsService','deleteVideoDetailsService',
+      'GetVideoContentList','GetVideoDetailsService','updateVideoDetailsService','deleteVideoDetailsService','createNotesContentService','UpdateNotesFileService',
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
        GetCommentsList,deleteCommentDetailsService,GetStudentListService,CandDModalService,
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
        RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, 
-       ResetPasswordService,saveVideoMasterData,GetVideoContentList,GetVideoDetailsService,updateVideoDetailsService,deleteVideoDetailsService) {
+       ResetPasswordService,saveVideoMasterData,GetVideoContentList,GetVideoDetailsService,updateVideoDetailsService,deleteVideoDetailsService,
+       createNotesContentService,UpdateNotesFileService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -394,6 +395,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      $scope.studentList=[];
      $scope.topicRequestListDetails=[];
      $scope.videoDetails=[];
+     $scope.notesDetails=[];
      
      var resetOptions = function() {
     	 $scope.topicDetails.subjectId = ""; 
@@ -1183,6 +1185,79 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      /*
       * 
       * Video Master Code ends here
+      * 
+      * */
+     
+     
+     /*
+      * 
+      * Notes Master Code starts here
+      * 
+      * */
+     
+     /*****************Save Notes***********************/
+     $scope.notesDetailsToSave = {};
+     this.createNotesData = function(fileData) {
+         
+       angular.extend($scope.notesDetailsToSave,$scope.notesDetails);      
+       var fileName= fileData.name;
+       var i = fileName.lastIndexOf('.');
+       var extension="";
+       if (i > 0) {
+           extension = fileName.substring(i+1);
+       }
+       if(extension!="pdf" && extension!="Pdf" && extension!="PDF"){
+         var modalOptions = {
+           header : 'Note',
+           body : 'Please upload notes in pdf format only',
+           btn : 'OK'
+       };
+           CandDModalService.showModal({}, modalOptions).then(function(result) {
+               return false;
+           });
+
+       }
+       $scope.notesDetailsToSave.notesFileName=fileName;
+       createNotesContentService.save({}, $scope.notesDetailsToSave, function(
+                 response) {
+             if (response) {
+                 console.log(response);
+                 
+                 if(!angular.isUndefined(fileData)){
+                  updateNotesDataFile(fileData,response.notesUuid);
+                 }
+             }
+         }, function(error) {
+             showAlert('danger', error.data.message);
+         });
+     };
+     
+     /**
+      * Function to upload Notes File
+      */
+     var updateNotesDataFile = function (fileData,notesUuid) {
+         var file = fileData;
+         var formData = new FormData();
+         formData.append('file', file);
+         formData.append('name', file.name);
+         formData.append('documentType', file.type);
+         UpdateNotesFileService.upload(formData, notesUuid, function(response) {
+             var modalOptions = {
+               header : 'Note',
+               body : 'Notes saved successfully',
+               btn : 'OK'
+           };
+               CandDModalService.showModal({}, modalOptions).then(function(result) {
+                   $state.reload();
+                 });                   
+         }, onRequestFailure);
+     };
+     
+
+
+     /*
+      * 
+      * Notes Master Code ends here
       * 
       * */
      

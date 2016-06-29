@@ -2,6 +2,7 @@ package com.chalk.salt.dao.study.material;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.NotesContentDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 
 /**
@@ -52,4 +53,22 @@ public interface StudyMaterialDao {
 	 * @throws Exception the exception
 	 */
 	void deleteVideoContentData(String videoUuid)throws Exception;
+
+    /**
+     * Save notes.
+     *
+     * @param notesContentDetails the notes content details
+     * @return the string
+     * @throws Exception the exception
+     */
+    String saveNotes(NotesContentDto notesContentDetails)throws Exception;
+
+    /**
+     * Gets the path of notes using notes uuid.
+     *
+     * @param notesUuid the notes uuid
+     * @return the path of notes using notes uuid
+     * @throws Exception the exception
+     */
+    String getPathOfNotesUsingNotesUuid(String notesUuid)throws Exception;
 }
