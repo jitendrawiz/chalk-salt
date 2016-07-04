@@ -97,4 +97,58 @@ public class StudyMaterialFacadeImpl implements StudyMaterialFacade {
         return studyMaterialManager.uploadNotesFile(notesUuid,notesFileData);
     }
 
+
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#getNotesListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<NotesContentDto> getNotesListUsingIds(String classId, String subjectId) throws StudyMaterialException
+    {
+        return studyMaterialManager.getNotesListUsingIds(classId,subjectId);
+    }
+
+
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#getNotesContentById(java.lang.String)
+     */
+    @Override
+    public NotesContentDto getNotesContentById(String notesUuid) throws StudyMaterialException
+    {
+        return studyMaterialManager.getNotesContentById(notesUuid);
+    }
+
+    
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#updateNotesContentDetails(com.chalk.salt.common.dto.NotesContentDto)
+     */
+    @Override
+    public void updateNotesContentDetails(NotesContentDto notesContentDetails) throws StudyMaterialException
+    {
+        studyMaterialManager.updateNotesContentDetails(notesContentDetails);
+    }
+
+
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#updateAnduploadNotesFile(java.lang.String, com.chalk.salt.common.dto.NotesFileDto)
+     */
+    @Override
+    public String updateAnduploadNotesFile(String notesUuid, NotesFileDto notesFileData) throws StudyMaterialException
+    {
+        return studyMaterialManager.updateAnduploadNotesFile(notesUuid,notesFileData);
+    }
+
+
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#deleteNotesContentData(java.lang.String)
+     */
+    @Override
+    public Boolean deleteNotesContentData(String notesUuid) throws StudyMaterialException
+    {
+        return studyMaterialManager.deleteNotesContentData(notesUuid);
+    }
+
 }

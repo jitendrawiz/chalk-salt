@@ -84,11 +84,11 @@
  	color: white; 
  } 
 
- #videoList th:last-child, td:last-child { 
+ #NotesList th:last-child, td:last-child { 
  	width: 10%; 
  } 
 
- #videoList th{ 
+ #NotesList th{ 
  	color:#fff; 
  } 
  input { 
@@ -99,9 +99,9 @@
 	style="visibility: visible; animation-name: fadeInLeft;">
 	<div class="row inner-grid">
 		<div class="user_log_detail">
-			<form name="videoListForm" role="form" action="" method="post"
+			<form name="notesListForm" role="form" action="" method="post"
 				novalidate>
-				<h3>Video Content List</h3>
+				<h3>Notes Content List</h3>
 				<div class="title_name">
 
 					<label class="title_name_class">Class</label><br> <label
@@ -109,29 +109,29 @@
 				</div>
 				<div class="title_text">
 					<div class="form-group"
-						ng-class="{ 'has-error' : videoListForm.studentClass.$invalid && !videoListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="videoDetails.listclassId"
+						ng-class="{ 'has-error' : notesListForm.studentClass.$invalid && !notesListForm.studentClass.$pristine }">
+						<select class="form-control" ng-model="notesDetails.listclassId"
 							name="studentClass" placeholder="Class"
 							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
 							ng-required="true"
-							ng-change="showSubjectsList(videoDetails.listclassId)">
+							ng-change="showSubjectsList(notesDetails.listclassId)">
 							<option value="" disabled>Select Class</option>
 						</select>
 						<p
-							ng-show="videoListForm.studentClass.$error.required && !videoListForm.studentClass.$pristine">Class
+							ng-show="notesListForm.studentClass.$error.required && !notesListForm.studentClass.$pristine">Class
 							is required.</p>
 					</div>
 					<div class="form-group"
-						ng-class="{ 'has-error' : videoListForm.studentSubject.$invalid && !videoListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="videoDetails.listsubjectId"
+						ng-class="{ 'has-error' : notesListForm.studentSubject.$invalid && !notesListForm.studentSubject.$pristine }">
+						<select class="form-control" ng-model="notesDetails.listsubjectId"
 							name="studentSubject" placeholder="Subject"
 							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
 							ng-required="true"
-							ng-change="showVideoDetails(videoDetails.listclassId,videoDetails.listsubjectId, classes, subjectsList)">
+							ng-change="showNotesDetails(notesDetails.listclassId,notesDetails.listsubjectId, classes, subjectsList)">
 							<option value="" disabled>Select Subject</option>
 						</select>
 						<p
-							ng-show="videoListForm.studentSubject.$error.required && !videoListForm.studentSubject.$pristine">Subject
+							ng-show="notesListForm.studentSubject.$error.required && !notesListForm.studentSubject.$pristine">Subject
 							is required.</p>
 					</div>
 			</form>
@@ -145,36 +145,36 @@
 
 		<div class="table-responsive ">
 		<div class="number_scroll">
-    	        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Video" />
+    	        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Notes" />
         
         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsVideoList"
-           ng-change="getVideoContentData()" ng-model="$parent.currentPageVideoList" 
-           max-size="$parent.maxSizeVideoList" items-per-page="$parent.itemsPerPageVideoList
+          <uib-pagination total-items="$parent.totalItemsNotesList"
+           ng-change="getNotesContentData()" ng-model="$parent.currentPageNotesList" 
+           max-size="$parent.maxSizeNotesList" items-per-page="$parent.itemsPerPageNotesList
            " 
             boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
-			<table id="videoList" class="table table-bordered">
+			<table id="NotesList" class="table table-bordered">
 				<thead>
 					<tr>
 						<th>S.No.</th>
-						<th>Video Title</th>
-						<th>Video Link</th>
+						<th>Notes Title</th>
+						<th>Notes File Name</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in videoList=videoListDetails | filter:search|startFrom:(currentPageVideoList-1)*itemsPerPageVideoList | limitTo:itemsPerPageVideoList">
+					<tr ng-repeat="item in NotesList=NotesListDetails | filter:search|startFrom:(currentPageNotesList-1)*itemsPerPageNotesList | limitTo:itemsPerPageNotesList">
 						<td>{{$index+1}}</td>
-						<td>{{item.videoTitle}}</td>
-						<td>{{item.videoLink}}</td>												
+						<td>{{item.notesTitle}}</td>
+						<td>{{item.notesFileName}}</td>												
 						<td>							
-							<a type="button" ng-click="editVideoContent(item.videoUuid)" title="Edit">
+							<a type="button" ng-click="editNotesContent(item.notesUuid)" title="Edit">
 							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
 							</a>
 							
-							<a type="button" ng-click="deleteVideoContent(item.videoUuid)" title="Delete">
+							<a type="button" ng-click="deleteNotesContent(item.notesUuid)" title="Delete">
 							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
 							</a>
 						</td>
@@ -183,9 +183,9 @@
 			</table>
 			<div class="number_scroll">     
          <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsVideoList" ng-change="getVideoContentData()" 
-          ng-model="$parent.currentPageVideoList" max-size="$parent.maxSizeVideoList" 
-          items-per-page="$parent.itemsPerPageVideoList"  boundary-link-numbers="true"></uib-pagination>      
+          <uib-pagination total-items="$parent.totalItemsNotesList" ng-change="getNotesContentData()" 
+          ng-model="$parent.currentPageNotesList" max-size="$parent.maxSizeNotesList" 
+          items-per-page="$parent.itemsPerPageNotesList"  boundary-link-numbers="true"></uib-pagination>      
          </div> 
     </div>
 		</div>

@@ -71,4 +71,58 @@ public interface StudyMaterialDao {
      * @throws Exception the exception
      */
     String getPathOfNotesUsingNotesUuid(String notesUuid)throws Exception;
+
+    /**
+     * Gets the notes list using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the notes list using ids
+     * @throws Exception the exception
+     */
+    List<NotesContentDto> getNotesListUsingIds(String classId, String subjectId)throws Exception;
+
+    /**
+     * Gets the notes content by id.
+     *
+     * @param notesUuid the notes uuid
+     * @return the notes content by id
+     * @throws Exception the exception
+     */
+    NotesContentDto getNotesContentById(String notesUuid)throws Exception;
+
+    
+    /**
+     * Update notes content details.
+     *
+     * @param notesContentDetails the notes content details
+     * @throws Exception the exception
+     */
+    void updateNotesContentDetails(NotesContentDto notesContentDetails)throws Exception;
+
+    /**
+     * Gets the old file name.
+     *
+     * @param notesUuid the notes uuid
+     * @return the old file name
+     * @throws Exception the exception
+     */
+    String getOldFileName(String notesUuid)throws Exception;
+
+    /**
+     * Delete notes content data.
+     *
+     * @param notesUuid the notes uuid
+     * @throws Exception the exception
+     */
+    void deleteNotesContentData(String notesUuid)throws Exception;
+
+    /**
+     * Update file name in db.
+     *
+     * @param name the name
+     * @param notesUuid the notes uuid
+     * @throws Exception the exception
+     */
+    void updateFileNameInDB(String name, String notesUuid)throws Exception;
 }

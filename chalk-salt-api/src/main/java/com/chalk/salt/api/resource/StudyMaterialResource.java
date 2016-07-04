@@ -218,7 +218,7 @@ public class StudyMaterialResource {
      */
     @POST
     @RequiresAuthentication
-    @Path("/notes-master/details/update/notes/file/{notesUuid}")
+    @Path("/notes-master/details/save/notes/file/{notesUuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadNotesFile(@PathParam("notesUuid") final String notesUuid,
@@ -256,4 +256,147 @@ public class StudyMaterialResource {
     }
     
     
+    /**
+     * Gets the notes list using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the notes list using ids
+     * @throws StudyMaterialException the study material exception
+     */
+    @GET
+    @Path("/notes-master/details/{classId}/{subjectId}")   
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getNotesListUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws StudyMaterialException{
+        
+        List<NotesContentModel> notesContent = null;
+        List<NotesContentDto> notesContentList = null;
+        try{
+            notesContentList = studyMaterialFacade.getNotesListUsingIds(classId,subjectId);
+            notesContent = DozerMapperUtil.mapCollection(beanMapper, notesContentList, NotesContentModel.class);
+            return Response.ok(notesContent).build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
+    
+   
+    /**
+     * Gets the notes content by id.
+     *
+     * @param notesUuid the notes uuid
+     * @return the notes content by id
+     * @throws StudyMaterialException the study material exception
+     */
+    @GET
+    @Path("/notes-master/details/edit/{notesUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getNotesContentById(@NotBlank @PathParam("notesUuid") final String notesUuid)throws StudyMaterialException{
+        NotesContentModel notesContent = null;
+        NotesContentDto notesContentDetails = null;
+        try{
+            notesContentDetails = studyMaterialFacade.getNotesContentById(notesUuid);
+            notesContent = beanMapper.map(notesContentDetails, NotesContentModel.class);
+            return Response.ok(notesContent).build();
+        } catch (final StudyMaterialException StudyMaterialException) {
+            throw Utility.buildResourceException(StudyMaterialException.getErrorCode(), StudyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, StudyMaterialException);
+        }
+    }
+    
+    /**
+     * Update notes content details.
+     *
+     * @param notesContentModel the notes content model
+     * @return the response
+     * @throws StudyMaterialException the study material exception
+     */
+    @POST
+    @Path("/notes-master/details/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response updateNotesContentDetails(final @Valid NotesContentModel notesContentModel)throws StudyMaterialException{
+        NotesContentDto notesContentDetails = null;
+        try{
+            notesContentDetails = beanMapper.map(notesContentModel, NotesContentDto.class);
+            studyMaterialFacade.updateNotesContentDetails(notesContentDetails);         
+            return Response.ok().build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
+    /**
+     * Update andupload notes file.
+     *
+     * @param notesUuid the notes uuid
+     * @param notesFileModel the notes file model
+     * @return the response
+     * @throws StudyMaterialException the study material exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/notes-master/details/update/notes/file/{notesUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateAnduploadNotesFile(@PathParam("notesUuid") final String notesUuid,
+        @MultipartForm final NotesFileModel notesFileModel) throws StudyMaterialException {
+         if (notesFileModel == null || StringUtils.isBlank(notesUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+          final File sourceFile = notesFileModel.getFile();
+          final String filename = notesFileModel.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final NotesFileDto notesFileData = new NotesFileDto();
+          notesFileData.setName(filename);
+          notesFileData.setFile(sourceFile);
+          notesFileData.setFilePath(sourceFile.getPath());
+        try
+        {
+            final String resNotesUuid = studyMaterialFacade.updateAnduploadNotesFile(notesUuid, notesFileData);
+             final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("notesUuid", resNotesUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+            
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
+    
+    /**
+     * Delete notes content data.
+     *
+     * @param notesUuid the notes uuid
+     * @return the response
+     * @throws StudyMaterialException the study material exception
+     */
+    @GET
+    @Path("/notes-master/details/delete/{notesUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteNotesContentData(@NotBlank @PathParam("notesUuid") final String notesUuid)throws StudyMaterialException{
+        final Map<String, String> response = new HashMap<String, String>();
+        Boolean deleteStatus = false;
+        try{
+            deleteStatus = studyMaterialFacade.deleteNotesContentData(notesUuid);
+            response.put("deleteStatus", deleteStatus.toString());
+            return Response.ok(deleteStatus).build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
 }

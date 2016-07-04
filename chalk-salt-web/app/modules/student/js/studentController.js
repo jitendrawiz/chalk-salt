@@ -202,12 +202,14 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                         $window.localStorage.setItem(CHALKNDUST.SUBJECTID,item.subjectId);
                         $window.localStorage.setItem(CHALKNDUST.SUBJECTNAME,item.subjectName);
                         $scope.subjectName="/ " + item.subjectName;
-                        $scope.showVideoDiv=false;                     
+                        $scope.showVideoDiv=false;
+                        $scope.showNotesDiv=false;
                         $scope.videoObject=[];                       
                         $scope.notesObject=[];
                         $scope.classId=$window.localStorage.getItem(CHALKNDUST.CLASSID);
                         GetDashboardDataBySubject.get({classId:$scope.classId,subjectId:item.subjectId},function(response){
                             if(response){
+                              //Video data
                               $scope.videoObject=response.videos;
                               if($scope.videoObject.length===0){
                                 $scope.showVideoDiv=true;
@@ -215,7 +217,11 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                               angular.forEach($scope.videoObject, function(value, key) {
                                   value.videoEmbedLink= value.videoEmbedLink.replace("watch?v=", "embed/");
                                 });
-                              
+                              // notes data
+                              $scope.notesObject=response.notes;
+                              if($scope.notesObject.length===0){
+                                $scope.showNotesDiv=true;
+                              }
                             }
                         },function(error){
                             showAlert('danger',error.data.message);
@@ -271,7 +277,8 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
       'deleteCommentDetailsService','GetStudentListService','CandDModalService','deleteStudentDetailsService','filterFilter', 
       'GetTopicRequestList','approveTopicRequestService', 'UpdateTopicImageService','GetTopicImageService','RegistrationService', 'SaveQuestionDetailsService',
       'GetQuestionList', 'updateQuestionDetailsService', 'deleteQuestionService', 'UpdateQuestionImageService','ResetPasswordService', 'saveVideoMasterData',
-      'GetVideoContentList','GetVideoDetailsService','updateVideoDetailsService','deleteVideoDetailsService','createNotesContentService','UpdateNotesFileService',
+      'GetVideoContentList','GetVideoDetailsService','updateVideoDetailsService','deleteVideoDetailsService','createNotesContentService','SaveNotesFileService','UpdateNotesFileService',
+      'GetNotesContentList','GetNotesDetailsService','updateNotesDetailsService','deleteNotesDetailsService',
     function($stateParams,$window,$scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST,$log,
        GetUserDetailsService,StudentProfileUpdateService,ChangePasswordService,userClassLookUpService,GetSubjectsList,
        createNewTopic,GetTopicsList,GetTopicDetailsService,deleteTopicDetailsService,updateTopicDetailsService,
@@ -279,7 +286,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
        deleteStudentDetailsService,filterFilter,GetTopicRequestList,approveTopicRequestService,UpdateTopicImageService,GetTopicImageService,
        RegistrationService,SaveQuestionDetailsService, GetQuestionList, updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, 
        ResetPasswordService,saveVideoMasterData,GetVideoContentList,GetVideoDetailsService,updateVideoDetailsService,deleteVideoDetailsService,
-       createNotesContentService,UpdateNotesFileService) {
+       createNotesContentService,SaveNotesFileService,UpdateNotesFileService,GetNotesContentList,GetNotesDetailsService,updateNotesDetailsService,deleteNotesDetailsService) {
  
 		   var showAlert = function(type, message){
             $scope.alert = {};
@@ -1216,7 +1223,7 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                return false;
            });
 
-       }
+       }else{
        $scope.notesDetailsToSave.notesFileName=fileName;
        createNotesContentService.save({}, $scope.notesDetailsToSave, function(
                  response) {
@@ -1224,24 +1231,25 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
                  console.log(response);
                  
                  if(!angular.isUndefined(fileData)){
-                  updateNotesDataFile(fileData,response.notesUuid);
+                  saveNotesDataFile(fileData,response.notesUuid);
                  }
              }
          }, function(error) {
              showAlert('danger', error.data.message);
          });
+       }
      };
      
      /**
       * Function to upload Notes File
       */
-     var updateNotesDataFile = function (fileData,notesUuid) {
+     var saveNotesDataFile = function (fileData,notesUuid) {
          var file = fileData;
          var formData = new FormData();
          formData.append('file', file);
          formData.append('name', file.name);
          formData.append('documentType', file.type);
-         UpdateNotesFileService.upload(formData, notesUuid, function(response) {
+         SaveNotesFileService.upload(formData, notesUuid, function(response) {
              var modalOptions = {
                header : 'Note',
                body : 'Notes saved successfully',
@@ -1254,6 +1262,152 @@ define([ 'angular', './studentRouting', './studentService','../../CandDModal/js/
      };
      
 
+     /******* Show Notes List ********/  
+     $scope.showNotesDetails = function(classId,subjectId, classes, subjectsList) {
+       console.log("Fetching notes detailed list "+classId+"-"+classId+" & "+subjectId+"-"+subjectId);
+       
+       $scope.classes=classes;
+       $scope.subjectsList=subjectsList;
+       
+      if (!classId) {
+        notesDetails.listsubjectId = "";
+        $scope.NotesListDetails=null;
+        $scope.NotesList=null;
+        if(!subjectId){
+          return;
+        }             
+         }
+         GetNotesContentList.query({classId:classId,subjectId:subjectId}, function(response) {
+           if(response){
+             $scope.NotesListDetails = response;
+              $scope.totalItemsNotesList = $scope.NotesListDetails.length;
+                 $scope.currentPageNotesList = 1;
+                 $scope.itemsPerPageNotesList = 5;
+                 $scope.maxSizeNotesList = 5;
+                 
+                 $scope.$watch('search', function (newVal, oldVal) {
+                $scope.NotesList = filterFilter($scope.NotesListDetails, newVal);
+                $scope.totalItemsNotesList = $scope.NotesList.length;
+                //$scope.maxSizetopicsList = Math.ceil($scope.totalItemstopicsList / $scope.itemsPerPagetopicsList);
+                $scope.currentPageNotesList = 1;
+              }, true);
+                $scope.getNotesContentData = function () {
+                    // keep a reference to the current instance "this" as the context is changing
+                    var self = this;
+                    console.log(self.currentPageNotesList);
+                    var itemsPerPageNotesList = self.itemsPerPageNotesList; 
+                    var offset = (self.currentPageNotesList-1) * itemsPerPageNotesList;
+                    $scope.questionList = $scope.NotesListDetails.slice(offset, offset + itemsPerPageNotesList)
+                };
+               $scope.getNotesContentData();
+             }
+         }, onRequestFailure);
+
+     };
+
+     
+     /********Edit notes data************/
+     
+     $scope.editNotesContent=function(notesUuid){
+         GetNotesDetailsService.get({notesUuid:notesUuid},  function(response) {
+               if(response){
+                 $scope.notesDetails = response;
+                 console.log($scope.notesDetails);
+                }
+                 $scope.setTab(14);
+           }, function(error) {
+            showAlert('danger',error.data.message);
+           }
+     )};
+     
+          
+      /*************Update Notes data****************/
+     $scope.notesDetailsToUpdate={};
+     this.updateNotesData = function(fileData) {
+         angular.extend($scope.notesDetailsToUpdate,$scope.notesDetails);      
+         var fileName= fileData.name;
+         var i = fileName.lastIndexOf('.');
+         var extension="";
+         if (i > 0) {
+             extension = fileName.substring(i+1);
+         }
+         if(extension!="pdf" && extension!="Pdf" && extension!="PDF"){
+           var modalOptions = {
+             header : 'Note',
+             body : 'Please upload notes in pdf format only',
+             btn : 'OK'
+         };
+             CandDModalService.showModal({}, modalOptions).then(function(result) {
+                 return false;
+             });
+
+         }else{
+         $scope.notesDetailsToUpdate.notesFileName=fileName;
+        updateNotesDetailsService.save({}, $scope.notesDetailsToUpdate, function(
+                response) {
+            if (response) {
+                console.log(response);
+                if(!angular.isUndefined(fileData)){
+                  updateNotesDataFile(fileData,response.notesUuid);
+                 }
+            }
+            
+          }, function(error) {
+              showAlert('danger', error.data.message);
+          });
+        }
+     };
+     
+     /**
+      * Function to update Notes File
+      */
+     var updateNotesDataFile = function (fileData,notesUuid) {
+         var file = fileData;
+         var formData = new FormData();
+         formData.append('file', file);
+         formData.append('name', file.name);
+         formData.append('documentType', file.type);
+         UpdateNotesFileService.upload(formData, notesUuid, function(response) {
+             var modalOptions = {
+               header : 'Note',
+               body : 'Notes updated successfully',
+               btn : 'OK'
+           };
+               CandDModalService.showModal({}, modalOptions).then(function(result) {
+                   $state.reload();
+                 });                   
+         }, onRequestFailure);
+     };
+
+     /*************Delete Notes data****************/
+     $scope.deleteNotesContent=function(notesUuid){
+       var modalOptionsConfirm = {
+                header : 'Note',
+                body : 'Deleting Notes data,Do you want to continue?',
+                btn : 'OK'
+            };
+        CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+       deleteNotesDetailsService.get({notesUuid:notesUuid},  function(response) {
+             if(response){
+               console.log(response);
+              var modalOptions = {
+                      header : 'Note',
+                      body : 'Notes data deleted successfully',
+                      btn : 'OK'
+                  };
+
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                      $log.info(result);
+                  });
+               $state.reload();
+               }
+           }, function(error) {
+            showAlert('danger',error.data.message);
+           })
+        });
+     };
+
+     
 
      /*
       * 

@@ -23,7 +23,6 @@ import com.chalk.salt.common.exceptions.StudyMaterialException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.common.util.SystemSettingsKey;
 import com.chalk.salt.dao.study.material.StudyMaterialDao;
-import com.chalk.salt.dao.user.UserDao;
 
 /**
  * The Class StudyMaterialManagerImpl.
@@ -43,10 +42,6 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
     @Inject
     @BeanMapper
     protected Mapper beanMapper;
-    
-    /** The user dao. */
-    @Inject
-    private UserDao userDao;
     
     /** The system lookup dao. */
     @Inject
@@ -184,6 +179,125 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
             throw new StudyMaterialException(ErrorCode.FAIL_TO_SAVE_NOTES_FILE, "Fail to save notes file", exception);
         }
         return notesUuid;
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#getNotesListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<NotesContentDto> getNotesListUsingIds(String classId, String subjectId) throws StudyMaterialException
+    {
+        logger.info("fetch list of notes...");
+        try{
+            return studyMaterialDao.getNotesListUsingIds(classId,subjectId);
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_FETCH_STUDY_MATERIAL, "Fail to Fetch list of Notes", exception);
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#getNotesContentById(java.lang.String)
+     */
+    @Override
+    public NotesContentDto getNotesContentById(String notesUuid) throws StudyMaterialException
+    {
+        logger.info("fetch notes content using notesUuid..");
+        try{
+            return studyMaterialDao.getNotesContentById(notesUuid);
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_FETCH_STUDY_MATERIAL, "Fail to Fetch notes content", exception);
+        }
+    }
+
+    
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#updateNotesContentDetails(com.chalk.salt.common.dto.NotesContentDto)
+     */
+    @Override
+    public void updateNotesContentDetails(NotesContentDto notesContentDetails) throws StudyMaterialException
+    {
+        logger.info("Update notes content details....");
+        try {
+            final Date date = new Date();
+            final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            notesContentDetails.setModifiedDate(modifiedDate);
+            studyMaterialDao.updateNotesContentDetails(notesContentDetails);
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_UPDATE_STUDY_MATERIAL, "Fail to update notes content", exception);
+        }
+        
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#updateAnduploadNotesFile(java.lang.String, com.chalk.salt.common.dto.NotesFileDto)
+     */
+    @Override
+    public String updateAnduploadNotesFile(String notesUuid, NotesFileDto notesFileData) throws StudyMaterialException
+    {
+        logger.info("Uploading Notes file");
+        try {
+            String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+            String appendedPath=studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
+            String appPath[]=appendedPath.split("\\$");
+            destPath += String.join(File.separator, appPath[0],appPath[1],notesUuid);
+            //Code to delete old file
+            String oldFileName=studyMaterialDao.getOldFileName(notesUuid);
+            String oldfilePath=destPath+File.separator+oldFileName;
+            File oldfile = new File(oldfilePath);
+            if (oldfile.exists()) {
+                oldfile.delete();
+            }            
+            String fileName = notesFileData.getName();
+            destPath = destPath + File.separator + fileName;
+            File oldfileWithCurrentName = new File(destPath);
+            if (oldfileWithCurrentName.exists()) {
+                oldfileWithCurrentName.delete();
+            }
+            FileInputStream fin = new FileInputStream(
+                    notesFileData.getFile());
+            FileOutputStream fout = new FileOutputStream(destPath);
+            int i = 0;
+            while ((i = fin.read()) != -1) {
+                fout.write((byte) i);
+            }
+            fin.close();
+            fout.close();
+            studyMaterialDao.updateFileNameInDB(notesFileData.getName(),notesUuid);
+            logger.info("Notes file uploaded successfully");
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_SAVE_NOTES_FILE, "Fail to update notes file", exception);
+        }
+        return notesUuid;
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#deleteNotesContentData(java.lang.String)
+     */
+    @Override
+    public Boolean deleteNotesContentData(String notesUuid) throws StudyMaterialException
+    {
+        logger.info("delete notes content details...");
+        try{
+            //delete old uploaded file with the old name.
+            String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+            String appendedPath=studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
+            String appPath[]=appendedPath.split("\\$");
+            destPath += String.join(File.separator, appPath[0],appPath[1],notesUuid);
+            File folderPathToDelete=new File(destPath);
+            String oldFileName=studyMaterialDao.getOldFileName(notesUuid);
+            String oldfilePath=destPath+File.separator+oldFileName;
+            File oldfile = new File(oldfilePath);
+            if (oldfile.exists()) {
+                oldfile.delete();
+            }
+            if (folderPathToDelete.exists()) {
+            folderPathToDelete.delete();
+            }
+            studyMaterialDao.deleteNotesContentData(notesUuid);
+            return true; 
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_DELETE_STUDY_MATERIAL, "Fail to delete notes content data and file", exception);
+        }
     }
     
 	

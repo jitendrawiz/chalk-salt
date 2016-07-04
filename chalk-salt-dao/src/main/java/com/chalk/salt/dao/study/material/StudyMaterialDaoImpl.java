@@ -161,4 +161,117 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
             return (String)query.executeScalar();
         }   
     }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getNotesListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<NotesContentDto> getNotesListUsingIds(String classId, String subjectId)throws Exception
+    {
+        final String sqlQuery = "SELECT notes_title AS notesTitle,"
+                + " notes_file_name AS notesFileName, "
+                + " notes_uuid AS notesUuid "
+                + " FROM cst_notes "
+                + " WHERE class_id= :classId AND subject_id= :subjectId  ORDER BY created_date DESC";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(NotesContentDto.class);
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getNotesContentById(java.lang.String)
+     */
+    @Override
+    public NotesContentDto getNotesContentById(String notesUuid) throws Exception
+    {
+        final String sqlQuery = "SELECT notes_id AS notesId,"
+                + " notes_title AS notesTitle,"
+                + " notes_file_name AS notesFileName,"
+                + " DATE_FORMAT(created_date ,'%d-%M-%Y %H:%i:%S')AS createdDate,"
+                + " DATE_FORMAT(modified_date ,'%d-%M-%Y %H:%i:%S')AS modifiedDate,"
+                + " notes_uuid AS notesUuid,"
+                + " class_id AS classId, subject_id AS subjectId"
+                + " FROM cst_notes WHERE notes_uuid= :notesUuid ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            query.addParameter("notesUuid", notesUuid);
+            return query.executeAndFetchFirst(NotesContentDto.class);
+        }   
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#updateVideoContentDetails(com.chalk.salt.common.dto.NotesContentDto)
+     */
+    @Override
+    public void updateNotesContentDetails(NotesContentDto notesContentDetails) throws Exception
+    {
+        final String sqlQuery = "UPDATE `cst_notes` SET notes_title=:notesTitle,  "               
+                + " modified_date=:modifiedDate"
+                + " WHERE notes_uuid=:notesUuid LIMIT 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("notesTitle", notesContentDetails.getNotesTitle());
+            query.addParameter("modifiedDate", notesContentDetails.getModifiedDate());            
+            query.addParameter("notesUuid", notesContentDetails.getNotesUuid());
+            query.executeUpdate();
+        }
+        
+        
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getOldFileName(java.lang.String)
+     */
+    @Override
+    public String getOldFileName(String notesUuid) throws Exception
+    {
+        final String sqlQuery = "SELECT cst_notes.notes_file_name from cst_notes "
+                + " WHERE cst_notes.notes_uuid= :notesUuid ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            query.addParameter("notesUuid", notesUuid);
+            return (String)query.executeScalar();
+        }   
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#deleteNotesContentData(java.lang.String)
+     */
+    @Override
+    public void deleteNotesContentData(String notesUuid) throws Exception
+    {
+        final String sqlQuery = "delete from cst_notes where notes_uuid=:notesUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("notesUuid", notesUuid);
+            query.executeUpdate();
+        }   
+        
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#updateFileNameInDB(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void updateFileNameInDB(String notesFileName, String notesUuid) throws Exception
+    {
+        final String sqlQuery = "UPDATE `cst_notes` SET notes_file_name=:notesFileName  "               
+                + " WHERE notes_uuid=:notesUuid LIMIT 1";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("notesFileName", notesFileName);
+            query.addParameter("notesUuid", notesUuid);
+            query.executeUpdate();
+        }
+        
+    }
 }

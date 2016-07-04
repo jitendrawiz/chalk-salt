@@ -12,37 +12,16 @@
     </div>
 </section>
 <section class="section_tab" id="content2">
-    <div class="col-md-12 column">
+    <div ng-show="!showNotesDiv" class="col-md-12 column" ng-repeat="item in notesObject">
         <div class="feature-box pdf_space">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
-                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal1'})">Notes</a>
+                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: item.fileUrl, pdfName: item.notesTitle})">Notes</a>
             </h4>
         </div>
     </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal2'})">Notes</a>
-            </h4>
-        </div>
-    </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal3'})">Notes</a>
-            </h4>
-        </div>
-    </div>
-    <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
-            <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
-            <h4>
-                <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf', pdfName: 'barVal4'})">Notes</a>
-            </h4>
-        </div>
+    <div ng-show="showNotesDiv" class="col-md-12 column">
+        <div class="feature-box pdf_space">No notes right now ,coming soon.</div>
     </div>
 </section>
 <section class="section_tab" id="content3">

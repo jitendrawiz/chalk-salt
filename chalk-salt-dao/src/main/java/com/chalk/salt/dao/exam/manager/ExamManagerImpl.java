@@ -19,12 +19,15 @@ import org.slf4j.Logger;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DashBoardDataDto;
+import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
+import com.chalk.salt.common.util.SystemSettingsKey;
 import com.chalk.salt.dao.exam.ExamDao;
+import com.chalk.salt.dao.study.material.StudyMaterialDao;
 import com.chalk.salt.dao.user.UserDao;
 
 /**
@@ -41,6 +44,10 @@ public class ExamManagerImpl implements ExamManager {
 	/** The user dao. */
 	@Inject
 	private UserDao userDao;
+	
+	/** The study material dao. */
+	@Inject 
+	private StudyMaterialDao studyMaterialDao;
 	
 	/** The logger. */
     @Inject
@@ -211,10 +218,25 @@ public class ExamManagerImpl implements ExamManager {
 		logger.info("Dashboard data fetch start from here ......");
 		DashBoardDataDto dashBoardDataDto=null;
 		List<DashBoardVediosContentDto> dashBoardVedioList=null;
+		List<DashBoardNotesDto> dashBoardNotesList=null;
 		try{
 			dashBoardDataDto=new DashBoardDataDto();			
 			dashBoardVedioList=examDao.getVediosListByClassAndSubjectId(classId,subjectId);
+			dashBoardNotesList=examDao.getNotesListByClassAndSubjectId(classId,subjectId);
 			dashBoardDataDto.setVideos(dashBoardVedioList);
+			if(dashBoardNotesList.size()>0){
+			for(int i=0;i<dashBoardNotesList.size();i++){
+			String notesUuid=dashBoardNotesList.get(i).getNotesUuid();
+        			String destPath = userDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+        			String appendedPath=studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
+                    String appPath[]=appendedPath.split("\\$");
+                    destPath += String.join(File.separator, appPath[0],appPath[1],notesUuid);
+                    String fileName=studyMaterialDao.getOldFileName(notesUuid);
+                    String filePathUrl=destPath+File.separator+fileName;
+                    dashBoardNotesList.get(i).setFileUrl(filePathUrl);
+                    }
+			}
+			dashBoardDataDto.setNotes(dashBoardNotesList);
 			logger.info("Dashboard data fetch ends here ......");
 			return dashBoardDataDto;
 		} catch (final Exception exception) {

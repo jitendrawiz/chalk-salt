@@ -13,7 +13,8 @@ public class DashBoardDataModel extends ApiModel{
 	/** The notes. */
 	private List<DashBoardNotesModel> notes;
 	
-	/** The vedios. */
+	
+	/** The videos. */
 	private List<DashBoardVediosContentModel> videos;
 
 	/**

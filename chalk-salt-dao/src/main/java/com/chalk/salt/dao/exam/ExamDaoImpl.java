@@ -7,6 +7,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -171,5 +172,29 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("subjectId", subjectId);
             return query.executeAndFetch(DashBoardVediosContentDto.class);
         }
-	}     
+	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.exam.ExamDao#getNotesListByClassAndSubjectId(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<DashBoardNotesDto> getNotesListByClassAndSubjectId(String classId, String subjectId) throws Exception
+    {
+        final String sqlQuery = "SELECT notes_id AS notesId,"
+                + " notes_title AS notesTitle,"
+                + " notes_file_name AS notesFileName,"
+                + " DATE_FORMAT(created_date ,'%d-%M-%Y %H:%i:%S')AS createdDate,"
+                + " DATE_FORMAT(modified_date ,'%d-%M-%Y %H:%i:%S')AS modifiedDate,"
+                + " notes_uuid AS notesUuid,"
+                + " class_id AS classId, subject_id AS subjectId"
+                + " FROM cst_notes "
+                + " WHERE class_id= :classId AND subject_id= :subjectId  ORDER BY created_date DESC LIMIT 4";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(DashBoardNotesDto.class);
+        }
+    }     
 }
