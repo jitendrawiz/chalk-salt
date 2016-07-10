@@ -34,7 +34,7 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html','text!../templat
             template : studentdetailstemplate,
             controller : 'AdminController as adminCtrl'        		
         }).state('chalkanddust.testInstruction',{
-          url : '/student/testInstruction',
+          url : '/student/testInstruction/:type',
           template : testInstructionTemplate,
           controller : 'StudentController as stdCtrl'           
       }).state('chalkanddust.questioncreate',{

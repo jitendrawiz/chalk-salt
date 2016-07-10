@@ -13,7 +13,7 @@
 </section>
 <section class="section_tab" id="content2">
     <div ng-show="!showNotesDiv" class="col-md-12 column" ng-repeat="item in notesObject">
-        <div class="feature-box pdf_space">
+        <div class="feature-box">
             <span class="feature-icon"><i class="fa fa-file-pdf-o"></i></span>
             <h4>
                 <a target="_blank"  ui-sref="chalkanddust.shownotes({pdfUrl: item.fileUrl, pdfName: item.notesTitle})">Notes</a>
@@ -30,25 +30,25 @@
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>20 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:1})">Take Test</a>
             </h4>
         </div>
     </div>
     <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
+        <div class="feature-box">
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>40 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:2})">Take Test</a>
             </h4>
         </div>
     </div>
     <div class="col-md-12 column">
-        <div class="feature-box pdf_space">
+        <div class="feature-box">
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>60 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:3})">Take Test</a>
             </h4>
         </div>
     </div>

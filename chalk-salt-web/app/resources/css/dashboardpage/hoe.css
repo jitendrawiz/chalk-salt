@@ -40,7 +40,7 @@ body{position:relative;}
     outline: none;
 }
 #hoeapp-wrapper {
-    background: #eef1f6;
+    
     color: #7e7e7e;
     margin: 0;
     padding: 0;
@@ -1103,7 +1103,6 @@ input:checked + label {
 	margin-top:5px;
 	min-height:80px;
 	max-height:800px;
-	height:110px;
 }
 .t_instruction_ans a{
 	float:right;
@@ -1112,9 +1111,10 @@ input:checked + label {
 }
 .t_instruction_ans button{
 	float:right;
-	background:#39F;
+	background:#3498DB;
 	border:1px solid#666;
 	border-radius:4px;
+    margin-left: 5px;
 	
 }
 .t_instruction_ans button a{
