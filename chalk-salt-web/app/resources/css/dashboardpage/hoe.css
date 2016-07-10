@@ -1115,6 +1115,7 @@ input:checked + label {
 	border:1px solid#666;
 	border-radius:4px;
     margin-left: 5px;
+    color:white;
 	
 }
 .t_instruction_ans button a{

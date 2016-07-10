@@ -2,9 +2,9 @@
    "CHALKNDUST": { 
       "NAME":"Chalk And Dust",
       "EMAIL":"abhishek.kumar627@gmail.com",
-      "VERSION":"3",
-      "BUILD":"0.0",
-      "RELEASE_DATE": "November 2015",
+      "VERSION":"1",
+      "BUILD":"1.0",
+      "RELEASE_DATE": "JULY 2016",
 	"SECURUUID":"securUuid",
 	"USERFULLNAME":"userFullName",
 	"EDITFLAG":"Flag",
@@ -13,7 +13,8 @@
 	"SUBJECTID":"subjectId",
 	"TABNUMBER":"tabnumber",
 	"GUESTCLASSID":"guestClassId",
-	"SUBJECTNAME":"subjectName"
+	"SUBJECTNAME":"subjectName",
+	"TESTTYPE":"testtype"
     }
    
 }
