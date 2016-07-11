@@ -238,4 +238,32 @@ public class ExamResource extends AbstractResource {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }
     }
+    
+    
+    /**
+     * Gets the test questions list.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param type the type
+     * @return the test questions list
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/test/list/{classId}/{subjectId}/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getTestQuestionsList(@NotBlank @PathParam("classId") final String classId,
+            @NotBlank @PathParam("subjectId") final String subjectId,
+            @NotBlank @PathParam("type") final String type) throws ExamException{
+        List<QuestionModel> questions = null;
+        List<QuestionDto> questionList = null;
+        try{
+            questionList = examFacade.getQuestionsUsingType(classId,subjectId,type);
+            questions = DozerMapperUtil.mapCollection(beanMapper, questionList, QuestionModel.class);
+            return Response.ok(questions).build();
+        } catch (final ExamException examException) {
+            throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+        }
+    }
 }

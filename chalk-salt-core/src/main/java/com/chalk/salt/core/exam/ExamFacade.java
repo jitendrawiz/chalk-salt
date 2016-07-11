@@ -70,7 +70,19 @@ public interface ExamFacade {
 	 * @param classId the class id
 	 * @param subjectId the subject id
 	 * @return the dash board data
+	 * @throws ExamException the exam exception
 	 */
 	DashBoardDataDto getDashBoardData(String classId, String subjectId)throws ExamException;
+
+    /**
+     * Gets the questions using type.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param type the type
+     * @return the questions using type
+     * @throws ExamException the exam exception
+     */
+    List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type)throws ExamException;
 
 }

@@ -245,4 +245,24 @@ public class ExamManagerImpl implements ExamManager {
         }
 	
 	}
+
+    @Override
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException {
+        logger.info("Fetching list of questions ...");
+        int limitOfQuestions=0;
+        if(type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77")){
+            limitOfQuestions=40;
+        }
+        else if(type.equals("cf92fc16-4684-11e6-beb8-9e71128cae77")){
+            limitOfQuestions=60;        
+        }else{
+            limitOfQuestions=20;
+        }
+        try {
+            return examDao.getQuestionsUsingType(classId, subjectId,limitOfQuestions);
+        }
+        catch (final Exception exception) {
+            throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST, "Fail to fetch question list", exception);
+        }
+    }
 }

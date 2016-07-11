@@ -36,25 +36,47 @@
         <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
             <section id="main-content">
                 <div class="inner-content">
-                    <div class="col-md-9 column t_instruction">
-                        <h3>Instructions For This Test</h3>
+                    <div class="col-md-9 column t_instruction t_one">
+                        <h3>Online Test</h3>
+                        <article>
+                            <h4>
+                                </>Time Remaining <i class="fa fa-times"></i> 02:30 h
+                            </h4>
+                        </article>
                     </div>
                     <div class="col-md-9 column t_instruction_ans">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"
+                            boundary-link-numbers="true"></uib-pagination>
+                    </div>
+                    <div class="col-md-9 column t_instruction_ans" ng-repeat="item in questionList">
                         <br />
-                        <div style="margin-left: 30px;">
-                            <h3>Before beginning the exam:</h3>
-                            <div style="font-size: 16px;">
-                                <p>
-                                    1. <b>Minimum Browser Requirements</b> Internet Explorer 9, Firefox 1, or Google Chrome are required to log into
-                                    the exam
-                                </p>
-                                <p>2. Make sure you have a good internet connection.</p>
-                                <p>3. Check for hardware with suitable power supply.</p>
-                                <p>4. Click on Submit button to submit the exam.</p>
+                        <div style="margin-left: 30px; font-size: 16px;">
+                            <p>{{item.question}}</p>
+                            <div class="col-md-12 column answer_label">
+                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionA"> &nbsp;&nbsp;{{item.optionA}}</label>
+                                <div class="clearfix"></div>
+                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionB"> &nbsp;&nbsp;{{item.optionB}}</label>
+                                <div class="clearfix"></div>
+                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionC"> &nbsp;&nbsp;{{item.optionC}}</label>
+                                <div class="clearfix"></div>
+                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionD"> &nbsp;&nbsp;{{item.optionD}}</label> <br> <br> <br>
+                                <br> <br>.
                             </div>
                         </div>
-                        <button type="button" class="btn btn-secondary" ng-click="startTest();">Start Test</button>
-                        <button type="button" class="btn btn-secondary" ng-click="goBackToDashBoard();">Back To Dashboard</button>
+                        
+                        <div class="col-md-9 column t_instruction_ans t_one test_b_mark">
+                        <button type="button" class="btn btn-secondary" style="float: left; margin-left: 40px; margin-top: 20px;" ng-click="submitAnswer(item.questionSecuruuid,SelectedOption)">Submit
+                            Answer</button>
+                    </div>
+                    </div>
+                    
+                    <div class="col-md-9 column t_instruction t_one test_next">
+                        <p>
+                            <a href="#">Exit Exam</a>
+                        </p>
+                        <article>
+                            <a href="#">Next <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </article>
                     </div>
                 </div>
             </section>

@@ -1,9 +1,9 @@
 'use strict';
 
-define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js/CandDModalService', './testController' ], function(angular) {
+define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js/CandDModalService', './testController','./testService' ], function(angular) {
 
   var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service', 'Student.discussionroom.controller', 'CandDModal',
-      'Student.testcontroller' ]);
+      'Student.testcontroller','Student.testservice' ]);
 
   homeModule.controller('StudentController', [
       '$window',

@@ -196,5 +196,24 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("subjectId", subjectId);
             return query.executeAndFetch(DashBoardNotesDto.class);
         }
+    }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.exam.ExamDao#getQuestionsUsingType(java.lang.String, java.lang.String, int)
+     */
+    @Override
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions) throws Exception {
+        final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `option1` as optionA, `option2`  as optionB, "
+                + "`option3`  as optionC, `option4`  as optionD, `answer`, `created_at` as creationDate, `modified_at` as modifiedDate, "
+                + "`question_uuid` as questionSecuruuid FROM `cst_questions` "
+                + "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
+
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(QuestionDto.class);
+        }
     }     
 }

@@ -74,4 +74,14 @@ public class ExamFacadeImpl implements ExamFacade {
 		return examManager.getDashBoardData(classId,subjectId);
 	}
 
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.exam.ExamFacade#getQuestionsUsingType(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException
+    {
+        return examManager.getQuestionsUsingType(classId,subjectId,type);
+
+    }
+
 }

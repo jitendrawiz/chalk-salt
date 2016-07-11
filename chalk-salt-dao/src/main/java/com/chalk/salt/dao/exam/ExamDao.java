@@ -95,4 +95,15 @@ public interface ExamDao {
      */
     public List<DashBoardNotesDto> getNotesListByClassAndSubjectId(String classId, String subjectId)throws Exception;
 
+    /**
+     * Gets the questions using type.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param limitOfQuestions the limit of questions
+     * @return the questions using type
+     * @throws Exception the exception
+     */
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions)throws Exception;
+
 }
