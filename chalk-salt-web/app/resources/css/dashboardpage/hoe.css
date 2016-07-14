@@ -1102,7 +1102,6 @@ input:checked + label {
 	background-color:#FFF;
 	margin-top:5px;
 	min-height:80px;
-	max-height:800px;
 }
 .t_instruction_ans a{
 	float:right;

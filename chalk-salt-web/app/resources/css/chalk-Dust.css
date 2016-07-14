@@ -47,6 +47,34 @@
   background-color: #F5F5F5 !important;
   border-color: #F5F5F5 !important; }
 
+#classdiv .col-xs-15,
+#classdiv .col-sm-15,
+#classdiv .col-md-15,
+#classdiv .col-lg-15 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 2px;
+  padding-left: 2px; }
+
+#classdiv .col-xs-15 {
+  width: 20%;
+  float: left; }
+
+@media (min-width: 768px) {
+  #classdiv .col-sm-15 {
+    width: 20%;
+    float: left; } }
+
+@media (min-width: 992px) {
+  #classdiv .col-md-15 {
+    width: 20%;
+    float: left; } }
+
+@media (min-width: 1200px) {
+  #classdiv .col-lg-15 {
+    width: 20%;
+    float: left; } }
+
 * {
   margin: 0;
   padding: 0; }

@@ -1,0 +1,139 @@
+<link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
+<link href="../../../resources/css/testing.css" rel="stylesheet">
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+    <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
+        <header id="hoe-header" hoe-lpanel-effect="shrink">
+            <div class="hoe-left-header">
+                <a ui-sref="chalkanddust.home" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
+                    class="hoe-sidebar-toggle"><a href="#"></a></span>
+            </div>
+            <div class="hoe-right-header" hoe-position-type="relative">
+                <!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
+                <ul class="left-navbar">
+                    <li>
+                        <form method="post" class="hoe-searchbar">
+                            <h4>
+                                <a ui-sref="chalkanddust.profile" href="javascript:void(0);">Dashboard</a>
+                            </h4>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="right-navbar">
+                    <!-- <li><a href="#" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
+                    <li><a ui-sref="chalkanddust.student">My Profile</a></li>
+                    <li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
+                    <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
+                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="../resources/images/user.png"
+                                alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img class="img-circle "
+                                ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a ui-sref="chalkanddust.student"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+        </header>
+        <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+            <section id="main-content">
+                <div class="inner-content">
+                    <div class="col-md-9 column t_instruction t_one">
+                        <h3>Online Test</h3>
+                        <article>
+                            <h4>
+                                </>Time Remaining <i class="fa fa-times"></i> 02:30 h
+                            </h4>
+                        </article>
+                    </div>
+                    <div class="col-md-9 column t_instruction_ans" >
+                    <div ng-show="mode=='result'">
+                    <button class="btn btn-default" ng-click="mode = 'quiz'">Back</button>
+                    </div>
+                    <div ng-show="mode!='result'">
+                        <pagination direction-links="false" total-items="totalItems" items-per-page="itemsPerPage"
+                            ng-model="currentPage"></pagination>
+                        <div style="margin: auto;text-align: center;">
+                            <div>
+                                <button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(totalItems);">Last</button>
+                                <button class="btn btn-primary" ng-click="goTo(currentPage + 1);">Next</button>
+                                <button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Prev</button>
+                            
+                                <button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(1);">First</button>
+                            
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-9 column t_instruction_ans">
+                        <div id="quiz">
+                            <div ng-show="mode=='quiz'">
+                                <div ng-repeat="question in filteredQuestions">
+                                    <div class="label label-warning" style="font-size: 20px;">Question {{currentPage}} of {{totalItems}}.</div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h2>
+                                                {{currentPage}}. <span ng-bind-html="question.Name"></span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="row text-left options">
+                                        <div class="col-md-6" ng-repeat="option in question.Options">
+                                            <div class="option">
+                                                 <input id="{{option.Id}}" type="checkbox"
+                                                    ng-model="option.Selected" ng-change="onSelect(question, option);" /> {{option.Name}}
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                            <div class="row review" ng-show="mode=='review'">
+                                <div class="col-sm-4" ng-repeat="question in questions">
+                                    <div ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Answered'? 'answered': 'not-answered' }}">{{$index
+                                        + 1}}. {{ isAnswered($index) }}</div>
+                                </div>
+                            </div>
+                            <div class="result" ng-show="mode=='result'">
+                                <h2>Result</h2>
+                                <div ng-repeat="question in questions">
+                                    <div class="result-question">
+                                        <h4>{{$index + 1}}. {{question.Name}}</h4>
+                                        <div class="row">
+                                            <div class="col-md-6" ng-repeat="Option in question.Options">
+                                                <div>
+                                                    <input id="{{Option.Id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected" style="display:inline;"/>
+                                                    {{Option.Name}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is
+                                            {{isCorrect(question)}}.</h4>
+                                    </div>
+                                </div>
+                                <h4 class="alert alert-info text-center">You may close this window now.</h4>
+                            </div>
+                            <div style="margin-top: 10px;" ng-show="mode!='result'">
+                                <button class="btn btn-default" ng-click="onSubmit();">Submit Quiz</button>
+                               <button class="btn btn-default" ng-click="mode = 'quiz'">Quiz</button>
+                                <button class="btn btn-default" ng-click="mode = 'review'">Review</button>
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-9 column t_instruction_ans t_one test_b_mark"></div>
+                    </div>
+                    <div class="col-md-9 column t_instruction t_one test_next">
+                        <p></p>
+                        <article></article>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../../../../resources/js/1.11.2.jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../../../resources/js/bootstrap.min.js"></script>
+    <script src="../../../../resources/js/hoe.js"></script>
+</body>

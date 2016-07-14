@@ -14,7 +14,9 @@
 	"TABNUMBER":"tabnumber",
 	"GUESTCLASSID":"guestClassId",
 	"SUBJECTNAME":"subjectName",
-	"TESTTYPE":"testtype"
+	"TESTTYPE":"testtype",
+	"QUIZDATA":"quizData",
+	"QUESTIONDATA":"questiondata"
     }
    
 }

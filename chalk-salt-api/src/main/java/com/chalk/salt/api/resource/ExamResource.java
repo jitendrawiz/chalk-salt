@@ -261,7 +261,11 @@ public class ExamResource extends AbstractResource {
         try{
             questionList = examFacade.getQuestionsUsingType(classId,subjectId,type);
             questions = DozerMapperUtil.mapCollection(beanMapper, questionList, QuestionModel.class);
-            return Response.ok(questions).build();
+            HashMap<String, QuestionModel> questionMap = new HashMap<String, QuestionModel>();
+            for (QuestionModel question : questions) {
+                questionMap.put(question.getQuestionSecuruuid(),question);
+            }
+            return Response.ok(questionMap, MediaType.APPLICATION_JSON).build();
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
         }

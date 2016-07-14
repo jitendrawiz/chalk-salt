@@ -45,31 +45,42 @@
                         </article>
                     </div>
                     <div class="col-md-9 column t_instruction_ans">
-                        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage"
-                            boundary-link-numbers="true"></uib-pagination>
+                        <div ng-repeat="itemButton in btnList">
+                            <button type="button" class="btn btn-secondary" style="float: left; margin-left: 10px; margin-top: 20px;"
+                                ng-click="changeQuestion(itemButton.id)">{{itemButton.index}}</button>
+                        </div>
+                        <!--                         <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" -->
+                        <!--                             boundary-link-numbers="true"></uib-pagination> -->
                     </div>
-                    <div class="col-md-9 column t_instruction_ans" ng-repeat="item in questionList">
+                    <div class="col-md-9 column t_instruction_ans">
                         <br />
-                        <div style="margin-left: 30px; font-size: 16px;">
+                        <div style="margin-left: 30px; font-size: 20px;">
                             <p>{{item.question}}</p>
                             <div class="col-md-12 column answer_label">
-                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionA"> &nbsp;&nbsp;{{item.optionA}}</label>
+                                <div ng-if="item.SelectedOption.optionA=='true'">
+                                    <label><input name="{{item.questionSecuruuid}}" type="checkbox" ng-model="SelectedOption.optionA" selected="true">
+                                        &nbsp;&nbsp;{{item.optionA}}</label>
+                                </div>
+                                <div ng-if="item.SelectedOption.optionA==='undefined'">
+                                    <label><input name="{{item.questionSecuruuid}}" type="checkbox" ng-model="SelectedOption.optionA">
+                                        &nbsp;&nbsp;{{item.optionA}}</label>
+                                </div>
                                 <div class="clearfix"></div>
-                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionB"> &nbsp;&nbsp;{{item.optionB}}</label>
+                                <label><input name="{{item.questionSecuruuid}}" type="checkbox" ng-model="SelectedOption.optionB">
+                                    &nbsp;&nbsp;{{item.optionB}}</label>
                                 <div class="clearfix"></div>
-                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionC"> &nbsp;&nbsp;{{item.optionC}}</label>
+                                <label><input name="{{item.questionSecuruuid}}" type="checkbox" ng-model="SelectedOption.optionC">
+                                    &nbsp;&nbsp;{{item.optionC}}</label>
                                 <div class="clearfix"></div>
-                                <label><input name="questionAnswer{{$index}}" type="checkbox" ng-model="SelectedOption.optionD"> &nbsp;&nbsp;{{item.optionD}}</label> <br> <br> <br>
-                                <br> <br>.
+                                <label><input name="{{item.questionSecuruuid}}" type="checkbox" ng-model="SelectedOption.optionD">
+                                    &nbsp;&nbsp;{{item.optionD}}</label> <br> <br> <br> <br> <br>.
                             </div>
                         </div>
-                        
                         <div class="col-md-9 column t_instruction_ans t_one test_b_mark">
-                        <button type="button" class="btn btn-secondary" style="float: left; margin-left: 40px; margin-top: 20px;" ng-click="submitAnswer(item.questionSecuruuid,SelectedOption)">Submit
-                            Answer</button>
+                            <button type="button" class="btn btn-secondary" style="float: left; margin-left: 40px; margin-top: 20px;"
+                                ng-click="submitAnswer(item.questionSecuruuid,SelectedOption)">Submit Answer</button>
+                        </div>
                     </div>
-                    </div>
-                    
                     <div class="col-md-9 column t_instruction t_one test_next">
                         <p>
                             <a href="#">Exit Exam</a>
