@@ -35,6 +35,7 @@ import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
+import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
@@ -256,16 +257,11 @@ public class ExamResource extends AbstractResource {
     public Response getTestQuestionsList(@NotBlank @PathParam("classId") final String classId,
             @NotBlank @PathParam("subjectId") final String subjectId,
             @NotBlank @PathParam("type") final String type) throws ExamException{
-        List<QuestionModel> questions = null;
-        List<QuestionDto> questionList = null;
+
+        List<QuestionListDto> questionList = null;
         try{
             questionList = examFacade.getQuestionsUsingType(classId,subjectId,type);
-            questions = DozerMapperUtil.mapCollection(beanMapper, questionList, QuestionModel.class);
-            HashMap<String, QuestionModel> questionMap = new HashMap<String, QuestionModel>();
-            for (QuestionModel question : questions) {
-                questionMap.put(question.getQuestionSecuruuid(),question);
-            }
-            return Response.ok(questionMap, MediaType.APPLICATION_JSON).build();
+            return Response.ok(questionList).build();
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
         }

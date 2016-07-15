@@ -73,15 +73,15 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h2>
-                                                {{currentPage}}. <span ng-bind-html="question.Name"></span>
+                                                {{currentPage}}. <span ng-bind-html="question.name"></span>
                                             </h2>
                                         </div>
                                     </div>
                                     <div class="row text-left options">
-                                        <div class="col-md-6" ng-repeat="option in question.Options">
+                                        <div class="col-md-6" ng-repeat="option in question.options">
                                             <div class="option">
-                                                 <input id="{{option.Id}}" type="checkbox"
-                                                    ng-model="option.Selected" ng-change="onSelect(question, option);" /> {{option.Name}}
+                                                 <input id="{{option.id}}" type="checkbox"
+                                                    ng-model="option.Selected" ng-change="onSelect(question, option);" /> {{option.name}}
                                                 
                                             </div>
                                         </div>
@@ -99,12 +99,12 @@
                                 <h2>Result</h2>
                                 <div ng-repeat="question in questions">
                                     <div class="result-question">
-                                        <h4>{{$index + 1}}. {{question.Name}}</h4>
+                                        <h4>{{$index + 1}}. {{question.name}}</h4>
                                         <div class="row">
-                                            <div class="col-md-6" ng-repeat="Option in question.Options">
+                                            <div class="col-md-6" ng-repeat="Option in question.options">
                                                 <div>
-                                                    <input id="{{Option.Id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected" style="display:inline;"/>
-                                                    {{Option.Name}}
+                                                    <input id="{{Option.id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected" style="display:inline;"/>
+                                                    {{Option.name}}
                                                 </div>
                                             </div>
                                         </div>

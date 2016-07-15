@@ -313,18 +313,36 @@ CREATE TABLE `cst_questions` (
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `question` text NOT NULL,
-  `option1` text NOT NULL,
-  `option2` text NOT NULL,
-  `option3` text NOT NULL,
-  `option4` text NOT NULL,
-  `answer` int(11) NOT NULL,
   `marks` int(11) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` datetime DEFAULT NULL,
   `question_uuid` varchar(100) NOT NULL,
+  `question_image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_questions` */
+
+insert  into `cst_questions`(`question_id`,`class_id`,`subject_id`,`question`,`marks`,`deleted`,`created_at`,`modified_at`,`question_uuid`,`question_image`) values (1,1,1,'12312ADFADF',NULL,0,'2016-07-15 22:39:45','2016-07-15 23:15:19','d192a8d1-51ab-4a9d-9a60-f35839e8344d',NULL),(2,1,1,'question',NULL,0,'2016-07-15 23:15:50','2016-07-15 23:17:51','ca98d346-fd55-41b8-b3b5-6cf033ea76d5','QUESTION_ca98d346-fd55-41b8-b3b5-6cf033ea76d5.jpg');
+
+/*Table structure for table `cst_questions_options` */
+
+DROP TABLE IF EXISTS `cst_questions_options`;
+
+CREATE TABLE `cst_questions_options` (
+  `options_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `isAnswer` tinyint(1) DEFAULT '0',
+  `answer` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`options_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cst_questions_options` */
+
+insert  into `cst_questions_options`(`options_id`,`question_id`,`name`,`isAnswer`,`answer`) values (17,1,'Aa',0,NULL),(18,1,'Bb',0,NULL),(19,1,'Cc',1,'C'),(20,1,'Dd',0,NULL),(29,2,'akdfja',0,NULL),(30,2,'kadjfjl',0,NULL),(31,2,'falksdjkj',1,'C'),(32,2,'kfdj',0,NULL);
+
 
 /*Data for the table `cst_questions` */
 

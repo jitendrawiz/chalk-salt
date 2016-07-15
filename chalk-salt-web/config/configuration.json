@@ -15,7 +15,6 @@
 	"GUESTCLASSID":"guestClassId",
 	"SUBJECTNAME":"subjectName",
 	"TESTTYPE":"testtype",
-	"QUIZDATA":"quizData",
 	"QUESTIONDATA":"questiondata"
     }
    

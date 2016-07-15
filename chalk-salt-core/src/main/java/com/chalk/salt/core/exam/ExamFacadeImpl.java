@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
+import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.dao.exam.manager.ExamManager;
 
@@ -78,7 +79,7 @@ public class ExamFacadeImpl implements ExamFacade {
      * @see com.chalk.salt.core.exam.ExamFacade#getQuestionsUsingType(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException
+    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException
     {
         return examManager.getQuestionsUsingType(classId,subjectId,type);
 

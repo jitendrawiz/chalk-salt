@@ -5,6 +5,7 @@ import java.util.List;
 import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.QuestionOptionsDto;
 
 /**
  * The Interface ExamDao.
@@ -49,13 +50,13 @@ public interface ExamDao {
 	public Boolean deleteQuestion(String questionSecuruuid) throws Exception;
 
 	/**
-	 * Gets the question id using secur uuid.
+	 * Gets the question secur uuid using id.
 	 *
-	 * @param securUuid the secur uuid
-	 * @return the question id using secur uuid
+	 * @param id the id
+	 * @return the question secur uuid using id
 	 * @throws Exception the exception
 	 */
-	public Integer getQuestionIdUsingSecurUuid(String securUuid) throws Exception;
+	public String getQuestionSecurUuidUsingId(Integer id) throws Exception;
 
 	/**
 	 * Gets the previous question image.
@@ -105,5 +106,40 @@ public interface ExamDao {
      * @throws Exception the exception
      */
     public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions)throws Exception;
+
+	/**
+	 * Save question options.
+	 *
+	 * @param optionDto1 the option dto1
+	 * @throws Exception the exception
+	 */
+	public void saveQuestionOptions(QuestionOptionsDto optionDto1) throws Exception;
+
+	/**
+	 * Gets the question options using question id.
+	 *
+	 * @param questionId the question id
+	 * @return the question options using question id
+	 * @throws Exception the exception
+	 */
+	public List<QuestionOptionsDto> getQuestionOptionsUsingQuestionId(
+			Integer questionId)throws Exception;
+
+	/**
+	 * Gets the question id using secur uuid.
+	 *
+	 * @param questionSecuruuid the question securuuid
+	 * @return the question id using secur uuid
+	 * @throws Exception the exception
+	 */
+	public String getQuestionIdUsingSecurUuid(String questionSecuruuid)throws Exception;
+
+	/**
+	 * Delete question options.
+	 *
+	 * @param questionId the question id
+	 * @throws Exception the exception
+	 */
+	public void deleteQuestionOptions(String questionId)throws Exception;
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
+import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.exceptions.ExamException;
 
 /**
@@ -74,6 +75,7 @@ public interface ExamFacade {
 	 */
 	DashBoardDataDto getDashBoardData(String classId, String subjectId)throws ExamException;
 
+    
     /**
      * Gets the questions using type.
      *
@@ -83,6 +85,6 @@ public interface ExamFacade {
      * @return the questions using type
      * @throws ExamException the exam exception
      */
-    List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type)throws ExamException;
+    List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type)throws ExamException;
 
 }

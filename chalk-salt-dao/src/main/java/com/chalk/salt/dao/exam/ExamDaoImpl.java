@@ -10,6 +10,7 @@ import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
+import com.chalk.salt.common.dto.QuestionOptionsDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
@@ -23,33 +24,46 @@ public class ExamDaoImpl implements ExamDao {
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws Exception {
 		final String sqlQuery = "INSERT INTO `cst_questions` (`class_id`, `subject_id`, `question`, "
-				+ "`option1`, `option2`, `option3`, `option4`, `answer`, `question_uuid`)"
-				+ "VALUES(:classId, :subjectId, :question, :optionA, :optionB, :optionC, :optionD, :answer, :questionUuid)";
+				+ "`question_uuid`)"
+				+ "VALUES(:classId, :subjectId, :question, :questionUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("classId", questionDetails.getClassId());
             query.addParameter("subjectId", questionDetails.getSubjectId());
             query.addParameter("question", questionDetails.getQuestion());
-            query.addParameter("optionA", questionDetails.getOptionA());
-            query.addParameter("optionB", questionDetails.getOptionB());
-            query.addParameter("optionC", questionDetails.getOptionC());
-            query.addParameter("optionD", questionDetails.getOptionD());
-            query.addParameter("answer", questionDetails.getAnswer());
             query.addParameter("questionUuid", questionDetails.getQuestionSecuruuid());            
-            query.executeUpdate();
-            return questionDetails.getQuestionSecuruuid();
+            return String.valueOf(query.executeUpdate().getKey());
+           
         }
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#saveQuestionOptions(com.chalk.salt.common.dto.QuestionOptionsDto)
+	 */
+	@Override
+	public void saveQuestionOptions(QuestionOptionsDto options) throws Exception {
+		final String sqlQuery = "INSERT INTO `cst_questions_options` (`question_id`, `name`, `isAnswer`, "
+				+ "`answer`)"
+				+ "VALUES(:questionId, :name, :isAnswer, :answer)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("questionId", options.getQuestionId());
+            query.addParameter("name", options.getName());
+            query.addParameter("isAnswer", options.getIsAnswer());
+            query.addParameter("answer", options.getAnswer());
+            query.executeUpdate();
+	}    
+	}
 	/* (non-Javadoc)
 	 * @see com.chalk.salt.dao.exam.ExamDao#getQuestions(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<QuestionDto> getQuestions(String classId, String subjectId) throws Exception {
-		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `option1` as optionA, `option2`  as optionB, "
-				+ "`option3`  as optionC, `option4`  as optionD, `answer`, `created_at` as creationDate, `modified_at` as modifiedDate, "
-				+ "`question_uuid` as questionSecuruuid FROM `cst_questions` "
+		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, question, "
+				+ "`created_at` as creationDate, `modified_at` as modifiedDate, "
+				+ "`question_uuid` as questionSecuruuid, question_id as questionId FROM `cst_questions` "
 				+ "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -66,18 +80,12 @@ public class ExamDaoImpl implements ExamDao {
 	 */
 	@Override
 	public String updateQuestionDetails(QuestionDto question) throws Exception {
-		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question, "
-				+ "`option1`=:optionA, `option2`=:optionB, `option3`=:optionC, `option4`=:optionD, "
-				+ "`answer`=:answer, `modified_at`=:modifiedAt WHERE `question_uuid`=:questionUuid";
+		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question, "				
+				+ " `modified_at`=:modifiedAt WHERE `question_uuid`=:questionUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
-            query.addParameter("question", question.getQuestion());
-            query.addParameter("optionA", question.getOptionA());
-            query.addParameter("optionB", question.getOptionB());
-            query.addParameter("optionC", question.getOptionC());
-            query.addParameter("optionD", question.getOptionD());
-            query.addParameter("answer", question.getAnswer());
+            query.addParameter("question", question.getQuestion());           
             query.addParameter("questionUuid", question.getQuestionSecuruuid());   
             query.addParameter("modifiedAt", question.getModifiedDate());
             query.executeUpdate();
@@ -104,14 +112,14 @@ public class ExamDaoImpl implements ExamDao {
 	 * @see com.chalk.salt.dao.exam.ExamDao#getQuestionIdUsingSecurUuid(java.lang.String)
 	 */
 	@Override
-	public Integer getQuestionIdUsingSecurUuid(String securUuid) throws Exception {
-		final String sqlQuery = "SELECT question_id FROM `cst_questions` WHERE secur_uuid=:securUuid";
+	public String getQuestionSecurUuidUsingId(Integer id) throws Exception {
+		final String sqlQuery = "SELECT question_uuid FROM `cst_questions` WHERE question_id=:id";
 	
 		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
     	try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);
-            query.addParameter("securUuid", securUuid);
-            return query.executeAndFetchFirst(Integer.class);
+            query.addParameter("id", id);
+            return query.executeAndFetchFirst(String.class);
     	}
 	}
 
@@ -203,11 +211,9 @@ public class ExamDaoImpl implements ExamDao {
      */
     @Override
     public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions) throws Exception {
-        final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `option1` as optionA, `option2`  as optionB, "
-                + "`option3`  as optionC, `option4`  as optionD, `answer`, `created_at` as creationDate, `modified_at` as modifiedDate, "
-                + "`question_uuid` as questionSecuruuid FROM `cst_questions` "
+        final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
+                + "`question_uuid` as questionSecuruuid,question_id as questionId FROM `cst_questions` "
                 + "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
-
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -215,5 +221,53 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("subjectId", subjectId);
             return query.executeAndFetch(QuestionDto.class);
         }
-    }     
+    }
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getQuestionOptionsUsingQuestionId(java.lang.Integer)
+	 */
+	@Override
+	public List<QuestionOptionsDto> getQuestionOptionsUsingQuestionId(
+			Integer questionId) throws Exception {
+		final String sqlQuery = "SELECT options_id AS Id,question_id AS QuestionId,"
+				+ " cst_questions_options.name AS Name,isAnswer AS IsAnswer,answer AS answer "
+				+ " FROM cst_questions_options WHERE cst_questions_options.question_id=:questionId";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("questionId", questionId);
+            return query.executeAndFetch(QuestionOptionsDto.class);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getQuestionIdUsingSecurUuid(java.lang.String)
+	 */
+	@Override
+	public String getQuestionIdUsingSecurUuid(String questionSecuruuid)
+			throws Exception {
+		final String sqlQuery = "SELECT question_id FROM `cst_questions` WHERE question_uuid=:questionSecuruuid";
+		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("questionSecuruuid", questionSecuruuid);
+            return query.executeAndFetchFirst(String.class);
+    	}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#deleteQuestionOptions(java.lang.String)
+	 */
+	@Override
+	public void deleteQuestionOptions(String questionId) throws Exception {
+		final String sqlQuery = "DELETE FROM `cst_questions_options` WHERE `question_id`=:questionId";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("questionId", questionId);   
+            query.executeUpdate();
+        }		
+	}
+
+ 
 }

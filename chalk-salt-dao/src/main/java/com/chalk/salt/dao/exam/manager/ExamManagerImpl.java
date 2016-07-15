@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +24,8 @@ import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
+import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.QuestionOptionsDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.common.util.SystemSettingsKey;
@@ -40,27 +43,31 @@ public class ExamManagerImpl implements ExamManager {
 	/** The exam dao. */
 	@Inject
 	private ExamDao examDao;
-	
+
 	/** The user dao. */
 	@Inject
 	private UserDao userDao;
-	
+
 	/** The study material dao. */
-	@Inject 
+	@Inject
 	private StudyMaterialDao studyMaterialDao;
-	
+
 	/** The logger. */
-    @Inject
-    @AppLogger
-    private Logger logger;
-    
-    /** The bean mapper. */
-    @Inject
-    @BeanMapper
-    protected Mapper beanMapper;
-    
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#saveQuestion(com.chalk.salt.common.dto.QuestionDto)
+	@Inject
+	@AppLogger
+	private Logger logger;
+
+	/** The bean mapper. */
+	@Inject
+	@BeanMapper
+	protected Mapper beanMapper;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#saveQuestion(com.chalk.salt
+	 * .common.dto.QuestionDto)
 	 */
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws ExamException {
@@ -68,62 +75,235 @@ public class ExamManagerImpl implements ExamManager {
 		try{
 			questionDetails.setQuestionSecuruuid(UUID.randomUUID().toString());
 			
-			return examDao.saveQuestion(questionDetails);
+			String questionId= examDao.saveQuestion(questionDetails);
+			if(questionId!=null){
+				
+				QuestionOptionsDto optionDto1=new QuestionOptionsDto();
+				optionDto1.setName(questionDetails.getOptionA());
+				optionDto1.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto2=new QuestionOptionsDto();
+				optionDto2.setName(questionDetails.getOptionB());
+				optionDto2.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto3=new QuestionOptionsDto();
+				optionDto3.setName(questionDetails.getOptionC());
+				optionDto3.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto4=new QuestionOptionsDto();
+				optionDto4.setName(questionDetails.getOptionD());
+				optionDto4.setQuestionId(Integer.parseInt(questionId));
+				
+			switch(questionDetails.getAnswer()){
+			case "A" :
+				optionDto1.setIsAnswer(true);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(false);
+				optionDto1.setAnswer("A");
+				break;
+			case "B" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(true);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(false);
+				optionDto2.setAnswer("B");
+				break;
+			case "C" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(true);
+				optionDto4.setIsAnswer(false);
+				optionDto3.setAnswer("C");
+				break;            
+			case "D" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(true);
+				optionDto4.setAnswer("D");
+				break;
+			default :
+				System.out.println("Invalid grade");
+			}
+			examDao.saveQuestionOptions(optionDto1);
+			examDao.saveQuestionOptions(optionDto2);
+			examDao.saveQuestionOptions(optionDto3);
+			examDao.saveQuestionOptions(optionDto4);
+		}
+			
+			return examDao.getQuestionSecurUuidUsingId(Integer.parseInt(questionId));
 		} catch (final Exception exception) {
             throw new ExamException(ErrorCode.FAIL_TO_SAVE_QUESTION, "Fail to Fetch Question", exception);
         }
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getQuestions(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#getQuestions(java.lang.String
+	 * , java.lang.String)
 	 */
 	@Override
-	public List<QuestionDto> getQuestions(String classId, String subjectId) throws ExamException {
-		logger.info("Fetching list of questions ...");
-		try{
-			return examDao.getQuestions(classId, subjectId);
-		} catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST, "Fail to fetch question list", exception);
-        }
-	}
-
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#updateQuestionDetails(com.chalk.salt.common.dto.QuestionDto)
-	 */
-	@Override
-	public String updateQuestionDetails(QuestionDto question) throws ExamException {
-		logger.info("Updating Question ...");
-		try{
-			final Date date = new Date();
-			final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-			question.setModifiedDate(modifiedDate);
-			return examDao.updateQuestionDetails(question);
-		} catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_UPDATE_QUESTION, "Fail to update question", exception);
-        }
-	}
-
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#deleteQuestion(java.lang.String)
-	 */
-	@Override
-	public Boolean deleteQuestion(String questionSecuruuid) throws ExamException {
-		logger.info("Deleting Question ...");
-		try{
-			return examDao.deleteQuestion(questionSecuruuid);
-		} catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION, "Fail to delete question", exception);
-        }
-	}
-
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#uploadQuestionImage(java.lang.String, com.chalk.salt.common.dto.QuestionImageUploadDto)
-	 */
-	@Override
-	public String uploadQuestionImage(String securUuid, QuestionImageUploadDto documentUploadData)
+	public List<QuestionDto> getQuestions(String classId, String subjectId)
 			throws ExamException {
+		logger.info("Fetching list of questions ...");
+		try {
+		List<QuestionDto> questions= examDao.getQuestions(classId, subjectId);
+			for(int index=0;index<questions.size();index++){
+				QuestionDto questionDto=questions.get(index);
+				List<QuestionOptionsDto> quesOptionsDto=examDao.getQuestionOptionsUsingQuestionId(questionDto.getQuestionId());
+			for(int j=0;j<quesOptionsDto.size();j++){
+				QuestionOptionsDto optionsDto=quesOptionsDto.get(j);
+				if(j==0){
+					questionDto.setOptionA(optionsDto.getName());
+					if(optionsDto.getIsAnswer()){
+						questionDto.setAnswer(optionsDto.getAnswer());
+					}
+				}else if(j==1){
+					questionDto.setOptionB(optionsDto.getName());
+					if(optionsDto.getIsAnswer()){
+						questionDto.setAnswer(optionsDto.getAnswer());
+					}
+				}else if(j==2){
+					questionDto.setOptionC(optionsDto.getName());
+					if(optionsDto.getIsAnswer()){
+						questionDto.setAnswer(optionsDto.getAnswer());
+					}
+				}else if(j==3){
+					questionDto.setOptionD(optionsDto.getName());
+					if(optionsDto.getIsAnswer()){
+						questionDto.setAnswer(optionsDto.getAnswer());
+					}
+				}
+			}
+			}
+			return questions;
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST,
+					"Fail to fetch question list", exception);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#updateQuestionDetails(com
+	 * .chalk.salt.common.dto.QuestionDto)
+	 */
+	@Override
+	public String updateQuestionDetails(QuestionDto question)
+			throws ExamException {
+		logger.info("Updating Question ...");
+		try {
+			final Date date = new Date();
+			final String modifiedDate = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss").format(date);
+			question.setModifiedDate(modifiedDate);
+			String questionUuid= examDao.updateQuestionDetails(question);
+			String questionId=examDao.getQuestionIdUsingSecurUuid(questionUuid);
+			examDao.deleteQuestionOptions(questionId);
+			if(questionId!=null){
+
+				
+				QuestionOptionsDto optionDto1=new QuestionOptionsDto();
+				optionDto1.setName(question.getOptionA());
+				optionDto1.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto2=new QuestionOptionsDto();
+				optionDto2.setName(question.getOptionB());
+				optionDto2.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto3=new QuestionOptionsDto();
+				optionDto3.setName(question.getOptionC());
+				optionDto3.setQuestionId(Integer.parseInt(questionId));
+				
+				QuestionOptionsDto optionDto4=new QuestionOptionsDto();
+				optionDto4.setName(question.getOptionD());
+				optionDto4.setQuestionId(Integer.parseInt(questionId));
+				
+			switch(question.getAnswer()){
+			case "A" :
+				optionDto1.setIsAnswer(true);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(false);
+				optionDto1.setAnswer("A");
+				break;
+			case "B" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(true);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(false);
+				optionDto2.setAnswer("B");
+				break;
+			case "C" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(true);
+				optionDto4.setIsAnswer(false);
+				optionDto3.setAnswer("C");
+				break;            
+			case "D" :
+				optionDto1.setIsAnswer(false);
+				optionDto2.setIsAnswer(false);
+				optionDto3.setIsAnswer(false);
+				optionDto4.setIsAnswer(true);
+				optionDto4.setAnswer("D");
+				break;
+			default :
+				System.out.println("Invalid grade");
+			}
+			examDao.saveQuestionOptions(optionDto1);
+			examDao.saveQuestionOptions(optionDto2);
+			examDao.saveQuestionOptions(optionDto3);
+			examDao.saveQuestionOptions(optionDto4);
+		
+			}
+			return questionUuid;
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_UPDATE_QUESTION,
+					"Fail to update question", exception);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#deleteQuestion(java.lang.
+	 * String)
+	 */
+	@Override
+	public Boolean deleteQuestion(String questionSecuruuid)
+			throws ExamException {
+		logger.info("Deleting Question ...");
+		try {
+			
+			String questionId=examDao.getQuestionIdUsingSecurUuid(questionSecuruuid);
+			examDao.deleteQuestionOptions(questionId);
+			return examDao.deleteQuestion(questionSecuruuid);
+			
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION,
+					"Fail to delete question", exception);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#uploadQuestionImage(java.
+	 * lang.String, com.chalk.salt.common.dto.QuestionImageUploadDto)
+	 */
+	@Override
+	public String uploadQuestionImage(String securUuid,
+			QuestionImageUploadDto documentUploadData) throws ExamException {
 		logger.info("Uploading Question image");
-        try {
+		try {
 			String destPath = userDao.getSystemSettings("QUESTION_IMAGE");
 			destPath += securUuid.toString();
 			File file = new File(destPath);
@@ -158,45 +338,53 @@ public class ExamManagerImpl implements ExamManager {
 			fout.close();
 			examDao.updateQuestionImageDetails(fileNameToSave, securUuid);
 			logger.info("Question Image updated successfully in database");
-        } catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_UPDATE_QUESTION_IMAGE, "Fail to update question image", exception);
-        }
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_UPDATE_QUESTION_IMAGE,
+					"Fail to update question image", exception);
+		}
 		return securUuid;
 	}
 
 	/**
 	 * Gets the extension.
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the extension
 	 */
-	private String getExtension(String fileName){
+	private String getExtension(String fileName) {
 		String extension = "";
 
 		int i = fileName.lastIndexOf('.');
 		if (i > 0) {
-		    extension = fileName.substring(i+1);
+			extension = fileName.substring(i + 1);
 		}
-		return extension; 
+		return extension;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#deleteQuestionImage(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#deleteQuestionImage(java.
+	 * lang.String)
 	 */
 	@Override
-	public void deleteQuestionImage(String questionSecuruuid) throws ExamException {
-		
+	public void deleteQuestionImage(String questionSecuruuid)
+			throws ExamException {
+
 		logger.info("Deleting Question image");
-        try {
+		try {
 			String destPath = userDao.getSystemSettings("QUESTION_IMAGE");
 			destPath += questionSecuruuid.toString();
 			String fileName = "QUESTION_" + questionSecuruuid.toString();
-			String oldfileName = examDao.getPreviousQuestionImage(questionSecuruuid);
+			String oldfileName = examDao
+					.getPreviousQuestionImage(questionSecuruuid);
 			String destPathToDeleteFile = null;
 			if (oldfileName != null) {
 				destPathToDeleteFile = destPath + File.separator + fileName
 						+ "." + getExtension(oldfileName);
-			
+
 				File oldfile = new File(destPathToDeleteFile);
 				if (oldfile.exists()) {
 					oldfile.delete();
@@ -204,65 +392,92 @@ public class ExamManagerImpl implements ExamManager {
 				}
 			}
 			logger.info("Question Image deleted successfully");
-        } catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE, "Fail to delete question image", exception);
-        }		
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_DELETE_QUESTION_IMAGE,
+					"Fail to delete question image", exception);
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getDashBoardData(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.chalk.salt.dao.exam.manager.ExamManager#getDashBoardData(java.lang
+	 * .String, java.lang.String)
 	 */
 	@Override
 	public DashBoardDataDto getDashBoardData(String classId, String subjectId)
 			throws ExamException {
 		logger.info("Dashboard data fetch start from here ......");
-		DashBoardDataDto dashBoardDataDto=null;
-		List<DashBoardVediosContentDto> dashBoardVedioList=null;
-		List<DashBoardNotesDto> dashBoardNotesList=null;
-		try{
-			dashBoardDataDto=new DashBoardDataDto();			
-			dashBoardVedioList=examDao.getVediosListByClassAndSubjectId(classId,subjectId);
-			dashBoardNotesList=examDao.getNotesListByClassAndSubjectId(classId,subjectId);
+		DashBoardDataDto dashBoardDataDto = null;
+		List<DashBoardVediosContentDto> dashBoardVedioList = null;
+		List<DashBoardNotesDto> dashBoardNotesList = null;
+		try {
+			dashBoardDataDto = new DashBoardDataDto();
+			dashBoardVedioList = examDao.getVediosListByClassAndSubjectId(
+					classId, subjectId);
+			dashBoardNotesList = examDao.getNotesListByClassAndSubjectId(
+					classId, subjectId);
 			dashBoardDataDto.setVideos(dashBoardVedioList);
-			if(dashBoardNotesList.size()>0){
-			for(int i=0;i<dashBoardNotesList.size();i++){
-			String notesUuid=dashBoardNotesList.get(i).getNotesUuid();
-        			String destPath = userDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
-        			String appendedPath=studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
-                    String appPath[]=appendedPath.split("\\$");
-                    destPath += String.join(File.separator, appPath[0],appPath[1],notesUuid);
-                    String fileName=studyMaterialDao.getOldFileName(notesUuid);
-                    String filePathUrl=destPath+File.separator+fileName;
-                    dashBoardNotesList.get(i).setFileUrl(filePathUrl);
-                    }
+			if (dashBoardNotesList.size() > 0) {
+				for (int i = 0; i < dashBoardNotesList.size(); i++) {
+					String notesUuid = dashBoardNotesList.get(i).getNotesUuid();
+					String destPath = userDao
+							.getSystemSettings(SystemSettingsKey.NOTES_FILE
+									.name());
+					String appendedPath = studyMaterialDao
+							.getPathOfNotesUsingNotesUuid(notesUuid);
+					String appPath[] = appendedPath.split("\\$");
+					destPath += String.join(File.separator, appPath[0],
+							appPath[1], notesUuid);
+					String fileName = studyMaterialDao
+							.getOldFileName(notesUuid);
+					String filePathUrl = destPath + File.separator + fileName;
+					dashBoardNotesList.get(i).setFileUrl(filePathUrl);
+				}
 			}
 			dashBoardDataDto.setNotes(dashBoardNotesList);
 			logger.info("Dashboard data fetch ends here ......");
 			return dashBoardDataDto;
 		} catch (final Exception exception) {
-			logger.error("Dashboard data fetch exception ......"+exception);
-            throw new ExamException(ErrorCode.FAIL_TO_FETCH_DASHBOARD_DATA, "Fail to fetch dashboard data", exception);
-        }
-	
+			logger.error("Dashboard data fetch exception ......" + exception);
+			throw new ExamException(ErrorCode.FAIL_TO_FETCH_DASHBOARD_DATA,
+					"Fail to fetch dashboard data", exception);
+		}
+
 	}
 
-    @Override
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException {
-        logger.info("Fetching list of questions ...");
-        int limitOfQuestions=0;
-        if(type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77")){
-            limitOfQuestions=40;
-        }
-        else if(type.equals("cf92fc16-4684-11e6-beb8-9e71128cae77")){
-            limitOfQuestions=60;        
-        }else{
-            limitOfQuestions=20;
-        }
-        try {
-            return examDao.getQuestionsUsingType(classId, subjectId,limitOfQuestions);
-        }
-        catch (final Exception exception) {
-            throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST, "Fail to fetch question list", exception);
-        }
-    }
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getQuestionsUsingType(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<QuestionListDto> getQuestionsUsingType(String classId,
+			String subjectId, String type) throws ExamException {
+		logger.info("Fetching list of questions ...");
+		int limitOfQuestions = 0;
+		if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77")) {
+			limitOfQuestions = 40;
+		} else if (type.equals("cf92fc16-4684-11e6-beb8-9e71128cae77")) {
+			limitOfQuestions = 60;
+		} else {
+			limitOfQuestions = 20;
+		}
+		try {
+			List<QuestionListDto> questionsListDto=new ArrayList<QuestionListDto>();
+			List<QuestionDto> questionsList = examDao.getQuestionsUsingType(
+					classId, subjectId, limitOfQuestions);
+			for (int index = 0; index < questionsList.size(); index++) {
+				QuestionDto questionDto=questionsList.get(index);
+				QuestionListDto questionListObject = new QuestionListDto();
+				questionListObject.setId(questionDto.getQuestionId());
+				questionListObject.setName(questionDto.getQuestion());
+				questionListObject.setOptions(examDao.getQuestionOptionsUsingQuestionId(questionDto.getQuestionId()));
+				questionsListDto.add(questionListObject);
+			}
+			return questionsListDto;
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST,
+					"Fail to fetch question list", exception);
+		}
+	}
 }
