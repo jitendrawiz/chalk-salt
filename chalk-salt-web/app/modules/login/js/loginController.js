@@ -88,6 +88,9 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
                 $window.localStorage.removeItem(CHALKNDUST.SUBJECTNAME);
                 $window.localStorage.removeItem(CHALKNDUST.QUESTIONDATA);
                 $window.localStorage.removeItem(CHALKNDUST.TESTTYPE);
+                clearTimeout($rootScope.timeoutvariable);
+                $window.localStorage.removeItem(CHALKNDUST.TIMERTIME);
+                
             };
             /**
              * Service call to logging out of the application

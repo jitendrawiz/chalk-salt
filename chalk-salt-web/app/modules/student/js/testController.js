@@ -135,15 +135,6 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             });
           });
 
-          var isUnanswered = false;
-          answers.forEach(function(q, index) {
-            if (q.answered == undefined) {
-              isUnanswered = true;
-            } else {
-              isUnanswered = false;
-            }
-          });
-
           // Post your data to the server here. answers contains the questionId
           // and the users' answer.
           // $http.post('api/Quiz/Submit', answers).success(function (data,
@@ -158,17 +149,15 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             answers : $scope.answers,
             testTypeId : $scope.type
           };
-          if (!isUnanswered) {
-            saveAnswersService.save({}, answerObject, function(response) {
-              if (response) {
-                $scope.mode = 'result';
-              }
-            }, function(error) {
-              showAlert('danger', error.data.message);
-            });
-          } else {
-            alert("Please answer all the questions")
-          }
+
+          saveAnswersService.save({}, answerObject, function(response) {
+            if (response) {
+              $scope.mode = 'result';
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+
         }
 
         $scope.pageCount = function() {
@@ -247,6 +236,8 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         function resetData() {
           $window.localStorage.removeItem(CHALKNDUST.QUESTIONDATA);
           $window.localStorage.removeItem(CHALKNDUST.TESTTYPE);
+          clearTimeout(timeout);
+          $window.localStorage.removeItem(CHALKNDUST.TIMERTIME);
         }
 
         $scope.backToDashboard = function() {
@@ -258,6 +249,64 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           resetData();
           $state.go('chalkanddust.home');
 
+        }
+
+        var localtime = $window.localStorage.getItem(CHALKNDUST.TIMERTIME);
+        if (localtime != null && localtime != undefined) {
+          CreateTimer("timer", localtime);
+        } else {
+          if ($scope.type == 'cf92f98c-4684-11e6-beb8-9e71128cae77') {
+            CreateTimer("timer", 1200);
+          } else if ($scope.type == 'cf92fe46-4684-11e6-beb8-9e71128cae77') {
+            CreateTimer("timer", 2400);
+          } else if ($scope.type == 'cf92fc16-4684-11e6-beb8-9e71128cae77') {
+            CreateTimer("timer", 3600);
+          } else {
+            CreateTimer("timer", 1200);
+          }
+        }
+
+        var Timer;
+        var TotalSeconds;
+        var timeout;
+        function CreateTimer(TimerID, Time) {
+          Timer = document.getElementById(TimerID);
+          TotalSeconds = Time;
+
+          UpdateTimer();
+          timeout = setTimeout(Tick, 1000);
+          $rootScope.timeoutvariable = timeout;
+        }
+
+        function Tick() {
+          if (TotalSeconds <= 0) {
+            alert("Your time's up, thus submitting the exam");
+            $window.localStorage.removeItem(CHALKNDUST.TIMERTIME);
+            $scope.onSubmit();
+            return;
+
+          }
+          TotalSeconds -= 1;
+          $window.localStorage.setItem(CHALKNDUST.TIMERTIME, TotalSeconds);
+          UpdateTimer()
+          timeout = setTimeout(Tick, 1000);
+          $rootScope.timeoutvariable = timeout;
+        }
+        function UpdateTimer() {
+
+          var Seconds = TotalSeconds;
+          var Days = Math.floor(Seconds / 86400);
+          Seconds -= Days * 86400;
+          var Hours = Math.floor(Seconds / 3600);
+          Seconds -= Hours * (3600);
+          var Minutes = Math.floor(Seconds / 60);
+          Seconds -= Minutes * (60);
+          var TimeStr = ((Days > 0) ? Days + " days " : "") + LeadingZero(Hours) + ":" + LeadingZero(Minutes) + ":" + LeadingZero(Seconds)
+          Timer.innerHTML = TimeStr;
+        }
+
+        function LeadingZero(Time) {
+          return (Time < 10) ? "0" + Time : +Time;
         }
 
       } ]);

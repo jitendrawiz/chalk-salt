@@ -367,7 +367,7 @@ CREATE TABLE `cst_student_test_answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cst_student_test_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
-  `question_option_selected_id` int(11) NOT NULL,
+  `question_option_selected_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
