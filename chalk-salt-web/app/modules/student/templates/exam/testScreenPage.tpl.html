@@ -4,7 +4,7 @@
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
-                <a ui-sref="chalkanddust.home" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
+                <a ng-click="GoToHomePage();" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
                     class="hoe-sidebar-toggle"><a href="#"></a></span>
             </div>
             <div class="hoe-right-header" hoe-position-type="relative">
@@ -13,7 +13,7 @@
                     <li>
                         <form method="post" class="hoe-searchbar">
                             <h4>
-                                <a ui-sref="chalkanddust.profile" href="javascript:void(0);">Dashboard</a>
+                                <a ng-click="backToDashboard();" href="javascript:void(0);">Dashboard</a>
                             </h4>
                         </form>
                     </li>
@@ -28,7 +28,6 @@
                                 ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
                     </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li><a ui-sref="chalkanddust.student"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
                         </ul></li>
                 </ul>
@@ -47,7 +46,7 @@
                     </div>
                     <div class="col-md-9 column t_instruction_ans" >
                     <div ng-show="mode=='result'">
-                    <button class="btn btn-default" ng-click="mode = 'quiz'">Back</button>
+                    <button class="btn btn-default" ng-click="closeWindow()">Back To Dashboard</button>
                     </div>
                     <div ng-show="mode!='result'">
                         <pagination direction-links="false" total-items="totalItems" items-per-page="itemsPerPage"
@@ -112,7 +111,9 @@
                                             {{isCorrect(question)}}.</h4>
                                     </div>
                                 </div>
+                                <a ng-click="closeWindow();" href="javascript:void(0)">
                                 <h4 class="alert alert-info text-center">You may close this window now.</h4>
+                                </a>
                             </div>
                             <div style="margin-top: 10px;" ng-show="mode!='result'">
                                 <button class="btn btn-default" ng-click="onSubmit();">Submit Quiz</button>

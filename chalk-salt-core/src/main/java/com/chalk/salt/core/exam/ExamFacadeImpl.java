@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
@@ -84,5 +85,10 @@ public class ExamFacadeImpl implements ExamFacade {
         return examManager.getQuestionsUsingType(classId,subjectId,type);
 
     }
+
+	@Override
+	public String saveAnswerDetails(AnswersDto answer)throws ExamException {
+		 return examManager.saveAnswerDetails(answer);
+	}
 
 }

@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -25,6 +26,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 
+import com.chalk.salt.api.model.AnswersModel;
 import com.chalk.salt.api.model.DashBoardDataModel;
 import com.chalk.salt.api.model.QuestionImageUploadModel;
 import com.chalk.salt.api.model.QuestionModel;
@@ -32,6 +34,7 @@ import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
@@ -265,5 +268,31 @@ public class ExamResource extends AbstractResource {
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
         }
+    }
+    
+    
+    /**
+     * Save answer details.
+     *
+     * @param answerModel the answer model
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    @PUT
+    @Path("/test/answers/saveOnSubmit")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication  
+    public Response saveAnswerDetails(AnswersModel answerModel) throws ExamException{
+    	AnswersDto answer = null;
+    	Map<String, String> response= new HashMap<String,String>();
+    	try{
+    		answer = beanMapper.map(answerModel, AnswersDto.class);
+    		String securUuid = examFacade.saveAnswerDetails(answer);
+    		response.put("answerSecurUuid",securUuid);
+    		return Response.ok(response).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
     }
 }

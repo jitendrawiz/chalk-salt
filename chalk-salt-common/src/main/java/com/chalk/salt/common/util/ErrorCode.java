@@ -193,7 +193,10 @@ public enum ErrorCode {
 	FAIL_TO_DELETE_STUDY_MATERIAL(1059),
 	
 	/** The fail to save notes file. */
-	FAIL_TO_SAVE_NOTES_FILE(1060);
+	FAIL_TO_SAVE_NOTES_FILE(1060),
+	
+	/** The fail to save answers list. */
+	FAIL_TO_SAVE_ANSWERS_LIST(1061);
 	
 	/** The value. */
     private final int value;

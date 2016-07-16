@@ -6,6 +6,8 @@ import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
+import com.chalk.salt.common.dto.AnswerDto;
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
@@ -267,6 +269,42 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("questionId", questionId);   
             query.executeUpdate();
         }		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#saveAnswerDetails(com.chalk.salt.common.dto.AnswerDto, java.lang.String)
+	 */
+	@Override
+	public void saveAnswerDetails(AnswerDto answer, String testId)throws Exception {
+		final String sqlQuery = "INSERT INTO `cst_student_test_answers` (`cst_student_test_id`, `question_id`, `question_option_selected_id` )"
+				+ "VALUES(:studentTestId, :questionId, :selectedOptionId)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("studentTestId", testId);   
+            query.addParameter("questionId", answer.getQuestionId());   
+            query.addParameter("selectedOptionId", answer.getAnswered());   
+            query.executeUpdate();
+	}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#saveAnswerTestRecord(com.chalk.salt.common.dto.AnswersDto)
+	 */
+	@Override
+	public String saveAnswerTestRecord(AnswersDto answers)throws Exception {
+		final String sqlQuery = "INSERT INTO `cst_student_test` (`student_id`, `class_id`, `subject_id`, "
+				+ " test_type_id)"
+				+ "VALUES(:studentId, :classId, :subjectId, :testTypeId)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("studentId", answers.getStudentId());   
+            query.addParameter("classId", answers.getClassId());   
+            query.addParameter("subjectId", answers.getSubjectId());   
+            query.addParameter("testTypeId", answers.getTestTypeId());   
+            return  String.valueOf(query.executeUpdate().getKey());
+        }
 	}
 
  

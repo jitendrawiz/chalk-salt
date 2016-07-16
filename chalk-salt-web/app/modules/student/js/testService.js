@@ -57,5 +57,14 @@ define([ 'angular' ], function(angular) {
         return out;
     };
 });
+  
+  
+  testService.factory('saveAnswersService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/test/answers/saveOnSubmit', {}, {
+      save : {
+        method : 'PUT'
+      }
+    });
+  } ]);
 
 });

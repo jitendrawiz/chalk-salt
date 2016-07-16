@@ -346,21 +346,31 @@ insert  into `cst_questions_options`(`options_id`,`question_id`,`name`,`isAnswer
 
 /*Data for the table `cst_questions` */
 
-/*Table structure for table `cst_student_test` */
-
 DROP TABLE IF EXISTS `cst_student_test`;
 
 CREATE TABLE `cst_student_test` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `student_id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `test_id` int(11) NOT NULL,
-  `answer` int(11) DEFAULT NULL,
-  `updt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `student_id` varchar(100) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `test_type_id` varchar(100) DEFAULT NULL,
+  `test_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_student_test` */
+/*Table structure for table `cst_student_test_answers` */
+
+DROP TABLE IF EXISTS `cst_student_test_answers`;
+
+CREATE TABLE `cst_student_test_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cst_student_test_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `question_option_selected_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
 
 /*Table structure for table `cst_system_settings` */
 

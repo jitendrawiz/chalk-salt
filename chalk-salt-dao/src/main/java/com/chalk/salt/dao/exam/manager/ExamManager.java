@@ -5,6 +5,7 @@ package com.chalk.salt.dao.exam.manager;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
@@ -94,5 +95,14 @@ public interface ExamManager {
      * @throws ExamException the exam exception
      */
     List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type)throws ExamException;
+
+	/**
+	 * Save answer details.
+	 *
+	 * @param answer the answer
+	 * @return the string
+	 * @throws ExamException the exam exception
+	 */
+	String saveAnswerDetails(AnswersDto answer)throws ExamException;
 
 }

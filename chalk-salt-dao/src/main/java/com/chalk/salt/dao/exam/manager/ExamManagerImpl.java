@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.AnswerDto;
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
@@ -478,6 +480,26 @@ public class ExamManagerImpl implements ExamManager {
 		} catch (final Exception exception) {
 			throw new ExamException(ErrorCode.FAIL_TO_FETCH_QUESTION_LIST,
 					"Fail to fetch question list", exception);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#saveAnswerDetails(com.chalk.salt.common.dto.AnswersDto)
+	 */
+	@Override
+	public String saveAnswerDetails(AnswersDto answers) throws ExamException {
+		logger.info("Saving Answers of test..");		
+		try {
+			String testId= examDao.saveAnswerTestRecord(answers);
+			List<AnswerDto> answersData=answers.getAnswers();
+			for(int i=0;i<answersData.size();i++){
+				AnswerDto answer=answersData.get(i);
+				examDao.saveAnswerDetails(answer,testId);
+			}
+			return "success";
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_SAVE_ANSWERS_LIST,
+					"Fail to save answers list", exception);
 		}
 	}
 }

@@ -41,9 +41,22 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         });
       } ]);
 
-  testModule.controller('TestDetailController', [ '$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 'CHALKNDUST', '$stateParams',
-      'GetUserPhotoService', 'GetTestQuestionsListService', 'helperService',
-      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, $stateParams, GetUserPhotoService, GetTestQuestionsListService, helperService) {
+  testModule.controller('TestDetailController', [
+      '$window',
+      '$scope',
+      '$state',
+      '$resource',
+      '$http',
+      '$location',
+      '$rootScope',
+      'CHALKNDUST',
+      '$stateParams',
+      'GetUserPhotoService',
+      'GetTestQuestionsListService',
+      'helperService',
+      'saveAnswersService',
+      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, $stateParams, GetUserPhotoService, GetTestQuestionsListService, helperService,
+          saveAnswersService) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -77,13 +90,13 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           'allowBack' : true,
           'allowReview' : true,
           'autoMove' : true, // if true, it will move to next question
-                              // automatically when answered.
+          // automatically when answered.
           'duration' : 0, // indicates the time in which quiz needs to be
-                          // completed. post that, quiz will be automatically
-                          // submitted. 0 means unlimited.
+          // completed. post that, quiz will be automatically
+          // submitted. 0 means unlimited.
           'pageSize' : 1,
           'requiredAll' : true, // indicates if you must answer all the
-                                // questions before submitting.
+          // questions before submitting.
           'richText' : false,
           'shuffleQuestions' : false,
           'shuffleOptions' : false,
@@ -100,14 +113,14 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         }
 
         $scope.onSelect = function(question, option) {
-         
-            question.options.forEach(function(element, index, array) {
-              if (element.id != option.id) {
-                element.Selected = false;
-                question.Answered = element.id;
-              }
-            });
-         
+
+          question.options.forEach(function(element, index, array) {
+            if (element.id != option.id) {
+              element.Selected = false;
+              question.Answered = option.id;
+            }
+          });
+
           $window.localStorage.setItem(CHALKNDUST.QUESTIONDATA, JSON.stringify($scope.questions));
           if ($scope.config.autoMove == true && $scope.currentPage < $scope.totalItems)
             $scope.currentPage++;
@@ -117,15 +130,14 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           var answers = [];
           $scope.questions.forEach(function(q, index) {
             answers.push({
-              //'QuizId' : $scope.quiz.id,
-              'QuestionId' : q.id,
-              'Answered' : q.Answered
+              'questionId' : q.id,
+              'answered' : q.Answered
             });
           });
 
           var isUnanswered = false;
           answers.forEach(function(q, index) {
-            if (q.Answered == undefined) {
+            if (q.answered == undefined) {
               isUnanswered = true;
             } else {
               isUnanswered = false;
@@ -138,10 +150,22 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           // status) {
           // alert(data);
           // });
-          console.log($scope.questions);
-          console.log(isUnanswered);
+          $scope.answers = answers;
+          var answerObject = {
+            studentId : $scope.securUuid,
+            classId : $scope.classId,
+            subjectId : $scope.subjectId,
+            answers : $scope.answers,
+            testTypeId : $scope.type
+          };
           if (!isUnanswered) {
-            $scope.mode = 'result';
+            saveAnswersService.save({}, answerObject, function(response) {
+              if (response) {
+                $scope.mode = 'result';
+              }
+            }, function(error) {
+              showAlert('danger', error.data.message);
+            });
           } else {
             alert("Please answer all the questions")
           }
@@ -214,6 +238,27 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           });
           return result;
         };
+
+        $scope.closeWindow = function() {
+          resetData();
+          $state.go('chalkanddust.profile');
+        }
+
+        function resetData() {
+          $window.localStorage.removeItem(CHALKNDUST.QUESTIONDATA);
+          $window.localStorage.removeItem(CHALKNDUST.TESTTYPE);
+        }
+
+        $scope.backToDashboard = function() {
+          resetData();
+          $state.go('chalkanddust.profile');
+        }
+
+        $scope.GoToHomePage = function() {
+          resetData();
+          $state.go('chalkanddust.home');
+
+        }
 
       } ]);
 });

@@ -2,6 +2,8 @@ package com.chalk.salt.dao.exam;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.AnswerDto;
+import com.chalk.salt.common.dto.AnswersDto;
 import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
@@ -141,5 +143,22 @@ public interface ExamDao {
 	 * @throws Exception the exception
 	 */
 	public void deleteQuestionOptions(String questionId)throws Exception;
+
+	/**
+	 * Save answer details.
+	 *
+	 * @param answer the answer
+	 * @param testId the test id
+	 * @throws Exception the exception
+	 */
+	public void saveAnswerDetails(AnswerDto answer, String testId)throws Exception;
+
+	/**
+	 * Save answer test record.
+	 *
+	 * @param answers the answers
+	 * @return the string
+	 */
+	public String saveAnswerTestRecord(AnswersDto answers)throws Exception;
 
 }
