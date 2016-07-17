@@ -319,6 +319,7 @@ CREATE TABLE `cst_questions` (
   `modified_at` datetime DEFAULT NULL,
   `question_uuid` varchar(100) NOT NULL,
   `question_image` varchar(100) DEFAULT NULL,
+  `question_type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`question_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
