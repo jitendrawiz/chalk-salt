@@ -38,7 +38,7 @@
                 <div class="inner-content">
                     <div class="col-md-9 column t_instruction t_one">
                         <h3>Online Test</h3>
-                        <article>
+                        <article ng-show="mode!='result' && questions.length!=0">
                             <h4>
                                 Time Remaining <div id="timer" style="display: inline;"></div>
                             </h4>
@@ -48,7 +48,7 @@
                     <div ng-show="mode=='result'">
                     <button class="btn btn-default" ng-click="closeWindow()">Back To Dashboard</button>
                     </div>
-                    <div ng-show="mode!='result'">
+                    <div ng-show="mode!='result' && questions.length!=0">
                         <pagination direction-links="false" total-items="totalItems" items-per-page="itemsPerPage"
                             ng-model="currentPage"></pagination>
                         <div style="margin: auto;text-align: center;">
@@ -115,11 +115,14 @@
                                 <h4 class="alert alert-info text-center">You may close this window now.</h4>
                                 </a>
                             </div>
-                            <div style="margin-top: 10px;" ng-show="mode!='result'">
+                            <div ng-hide="questions.length==0" style="margin-top: 10px;" ng-show="mode!='result'">
                                 <button class="btn btn-default" ng-click="onSubmit();">Submit Quiz</button>
                                <button class="btn btn-default" ng-click="mode = 'quiz'">Quiz</button>
                                 <button class="btn btn-default" ng-click="mode = 'review'">Review</button>
                             
+                            </div>
+                            <div ng-show="questions.length==0">
+                           <h2> Sorry, No questions found.</h2>
                             </div>
                         </div>
                         <div class="col-md-9 column t_instruction_ans t_one test_b_mark"></div>
