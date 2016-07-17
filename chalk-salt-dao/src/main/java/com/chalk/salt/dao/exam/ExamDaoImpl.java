@@ -26,15 +26,16 @@ public class ExamDaoImpl implements ExamDao {
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws Exception {
 		final String sqlQuery = "INSERT INTO `cst_questions` (`class_id`, `subject_id`, `question`, "
-				+ "`question_uuid`)"
-				+ "VALUES(:classId, :subjectId, :question, :questionUuid)";
+				+ "`question_uuid`,question_type)"
+				+ "VALUES(:classId, :subjectId, :question, :questionUuid,:questionType)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("classId", questionDetails.getClassId());
             query.addParameter("subjectId", questionDetails.getSubjectId());
             query.addParameter("question", questionDetails.getQuestion());
-            query.addParameter("questionUuid", questionDetails.getQuestionSecuruuid());            
+            query.addParameter("questionUuid", questionDetails.getQuestionSecuruuid());  
+            query.addParameter("questionType", questionDetails.getQuestionType());          
             return String.valueOf(query.executeUpdate().getKey());
            
         }
@@ -65,7 +66,7 @@ public class ExamDaoImpl implements ExamDao {
 	public List<QuestionDto> getQuestions(String classId, String subjectId) throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, question, "
 				+ "`created_at` as creationDate, `modified_at` as modifiedDate, "
-				+ "`question_uuid` as questionSecuruuid, question_id as questionId FROM `cst_questions` "
+				+ "`question_uuid` as questionSecuruuid, question_id as questionId,question_type as questionType FROM `cst_questions` "
 				+ "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -82,7 +83,7 @@ public class ExamDaoImpl implements ExamDao {
 	 */
 	@Override
 	public String updateQuestionDetails(QuestionDto question) throws Exception {
-		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question, "				
+		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question,question_type=:questionType, "				
 				+ " `modified_at`=:modifiedAt WHERE `question_uuid`=:questionUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -90,6 +91,7 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("question", question.getQuestion());           
             query.addParameter("questionUuid", question.getQuestionSecuruuid());   
             query.addParameter("modifiedAt", question.getModifiedDate());
+            query.addParameter("questionType", question.getQuestionType());
             query.executeUpdate();
             return question.getQuestionSecuruuid();
         }
@@ -215,7 +217,7 @@ public class ExamDaoImpl implements ExamDao {
     public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions) throws Exception {
         final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
                 + "`question_uuid` as questionSecuruuid,question_id as questionId FROM `cst_questions` "
-                + "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
+                + "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId AND question_type='Practice Question' ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);

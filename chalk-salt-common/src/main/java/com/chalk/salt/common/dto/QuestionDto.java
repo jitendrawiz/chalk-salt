@@ -47,6 +47,28 @@ public class QuestionDto {
 	/** The question id. */
 	private Integer questionId;
 
+	/** The question type. */
+	private String questionType;
+
+	/**
+	 * Gets the question type.
+	 *
+	 * @return the question type
+	 */
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	/**
+	 * Sets the question type.
+	 *
+	 * @param questionType
+	 *            the new question type
+	 */
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+
 	/**
 	 * Gets the question id.
 	 *
