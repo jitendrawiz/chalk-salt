@@ -30,6 +30,8 @@ import com.chalk.salt.api.model.AnswersModel;
 import com.chalk.salt.api.model.DashBoardDataModel;
 import com.chalk.salt.api.model.QuestionImageUploadModel;
 import com.chalk.salt.api.model.QuestionModel;
+import com.chalk.salt.api.model.ScheduleTestModel;
+import com.chalk.salt.api.model.TestTypeModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
@@ -39,6 +41,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
@@ -291,6 +295,56 @@ public class ExamResource extends AbstractResource {
     		String securUuid = examFacade.saveAnswerDetails(answer);
     		response.put("answerSecurUuid",securUuid);
     		return Response.ok(response).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    
+    /**
+     * Gets the exam test type.
+     *
+     * @return the exam test type
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/exam/testType/details")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getExamTestType()throws ExamException{
+    	List<TestTypeModel> testType = null;
+    	List<TestTypeDto> testTypeList = null;
+    	try{
+    		testTypeList = examFacade.getTestTypeList();
+    		testType = DozerMapperUtil.mapCollection(beanMapper, testTypeList, TestTypeModel.class);
+            return Response.ok(testType).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * *******SCHEDULE TEST WORK BEGINS FROM HERE***************.
+     *
+     * @param scheduleTestModel the schedule test model
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    
+    @POST
+    @Path("/schedule-test/details/save")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response saveScheduleTestData(final @Valid ScheduleTestModel scheduleTestModel)throws ExamException{
+    	ScheduleTestDto scheduleTestDetails = null;
+    	final Map<String, String> response = new HashMap<String, String>();
+    	String scheduleTestUuid = null;
+    	try{
+    		scheduleTestDetails = beanMapper.map(scheduleTestModel, ScheduleTestDto.class);
+    		scheduleTestUuid = examFacade.saveScheduleTestData(scheduleTestDetails);
+    		response.put("scheduleTestUuid", scheduleTestUuid);
+            return Response.ok(response).build();
 	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }

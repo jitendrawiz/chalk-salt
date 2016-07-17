@@ -450,5 +450,25 @@ define([ 'angular' ], function(angular) {
   } ]);
 
   /*notes services ends here*/
+  
+  studentService.factory('getTestTypeService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/exam/testType/details', {}, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
+  
+  /*Schedule test services starts from here*/
+  
+  studentService.factory('saveScheduleTestMasterData', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/details/save', {}, {
+      save : {
+        method : 'POST'
+      }
+    });
+  } ]);
+  
+  /*schedule test services ends here*/
 
 });

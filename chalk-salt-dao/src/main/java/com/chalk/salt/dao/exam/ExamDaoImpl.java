@@ -1,5 +1,6 @@
 package com.chalk.salt.dao.exam;
 
+import java.util.Date;
 import java.util.List;
 
 import org.sql2o.Connection;
@@ -13,6 +14,9 @@ import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
+import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
@@ -306,6 +310,47 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("subjectId", answers.getSubjectId());   
             query.addParameter("testTypeId", answers.getTestTypeId());   
             return  String.valueOf(query.executeUpdate().getKey());
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getTestTypeList()
+	 */
+	@Override
+	public List<TestTypeDto> getTestTypeList() throws Exception {
+		final String sqlQuery = "SELECT test_type_uuid AS testTypeUuid,"
+				+ " test_duration AS testDuration, "
+				+ " no_of_questions AS noOfQuestions,"
+				+ " test_type_id AS testTypeId "
+				+ " FROM cst_test_type ORDER BY cst_test_type.test_type_id ASC";
+		final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+    	try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            return query.executeAndFetch(TestTypeDto.class);
+    	}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#saveScheduleTestData(com.chalk.salt.common.dto.ScheduleTestDto, java.util.Date)
+	 */
+	@Override
+	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails,
+			Date date) throws UserException {
+		final String sqlQuery = "INSERT INTO `cst_schedule_test_master` (`test_title`, `test_date`, `test_time`, "
+				+ " test_type_uuid,class_id,subject_id,test_uuid)"
+				+ "VALUES(:testTitle, :testDate, :testTime, :testTypeUuid, :classId, :subjectId, :testUuid)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("testTitle", scheduleTestDetails.getTestTitle());   
+            query.addParameter("testDate", scheduleTestDetails.getTestDate());   
+            query.addParameter("testTime", scheduleTestDetails.getTestTime());   
+            query.addParameter("testTypeUuid", scheduleTestDetails.getTestTypeUuid());   
+            query.addParameter("classId", scheduleTestDetails.getClassId());   
+            query.addParameter("subjectId", scheduleTestDetails.getSubjectId());   
+            query.addParameter("testUuid", scheduleTestDetails.getScheduleTestUuid());   
+            query.executeUpdate();
+            return scheduleTestDetails.getScheduleTestUuid();
         }
 	}
 

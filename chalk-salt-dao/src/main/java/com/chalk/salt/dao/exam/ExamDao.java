@@ -1,5 +1,6 @@
 package com.chalk.salt.dao.exam;
 
+import java.util.Date;
 import java.util.List;
 
 import com.chalk.salt.common.dto.AnswerDto;
@@ -8,6 +9,8 @@ import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
 
 /**
  * The Interface ExamDao.
@@ -158,7 +161,27 @@ public interface ExamDao {
 	 *
 	 * @param answers the answers
 	 * @return the string
+	 * @throws Exception the exception
 	 */
 	public String saveAnswerTestRecord(AnswersDto answers)throws Exception;
+
+	/**
+	 * Gets the test type list.
+	 *
+	 * @return the test type list
+	 * @throws Exception the exception
+	 */
+	public List<TestTypeDto> getTestTypeList()throws Exception;
+
+	/**
+	 * Save schedule test data.
+	 *
+	 * @param scheduleTestDetails the schedule test details
+	 * @param date the date
+	 * @return the string
+	 * @throws Exception the exception
+	 */
+	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails,
+			Date date)throws Exception;
 
 }

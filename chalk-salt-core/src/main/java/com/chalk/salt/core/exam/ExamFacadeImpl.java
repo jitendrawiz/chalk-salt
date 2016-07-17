@@ -12,6 +12,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.dao.exam.manager.ExamManager;
 
@@ -86,9 +88,26 @@ public class ExamFacadeImpl implements ExamFacade {
 
     }
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#saveAnswerDetails(com.chalk.salt.common.dto.AnswersDto)
+	 */
 	@Override
 	public String saveAnswerDetails(AnswersDto answer)throws ExamException {
 		 return examManager.saveAnswerDetails(answer);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getTestTypeList()
+	 */
+	@Override
+	public List<TestTypeDto> getTestTypeList() throws ExamException {
+		return examManager.getTestTypeList();
+	}
+
+	@Override
+	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails)
+			throws ExamException {
+		return examManager.saveScheduleTestData(scheduleTestDetails);
 	}
 
 }

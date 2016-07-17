@@ -1,0 +1,189 @@
+<style>
+.title_text {
+	width: 70%;
+	float: left;
+}
+
+.title_name {
+	width: 30%;
+	float: left;
+}
+
+.title_name {
+	text-align: right;
+	padding-right: 20px;
+	padding-top: 10px;
+}
+
+.title_name_class {
+	padding-top: 0px;
+}
+
+.title_name_sub {
+	padding-top: 20px;
+}
+
+.title_name_title {
+	padding-top: 15px;
+}
+
+.title_name_des {
+	padding-top: 80px;
+}
+
+.title_name_photo {
+	padding-top: 56px;
+}
+
+.title_text input {
+	width: 30%;
+}
+
+.title_text select {
+	width: 60%;
+	height: 40px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
+
+.title_text button a {
+	color: #FFF;
+	padding: 0px 40px;
+}
+
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
+
+.title_text button {
+	padding: 8px 0px;
+	cursor: pointer;
+	background: #2f889a;
+	color: #FFF;
+	width: 60%;
+	border-radius: 5px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-10 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="scheduleTestMasterForm" role="form" action="" method="post" novalidate>
+                <h3>Schedule Test Master</h3>
+                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
+                    <label class="title_name_class">Class</label><br /> <label class="title_name_sub">Subject</label><br /> <label
+                        class="title_name_sub">Test Type</label><br /> <label class="title_name_title">Test Title</label><br /><label class="title_name_title">Test Date</label><br /> <label
+                        class="title_name_title">Test Time</label><br /> <br />
+                </div>
+                <div class="title_text">
+                    <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.studentClass.$invalid && !scheduleTestMasterForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="scheduleTestDetails.classId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(scheduleTestDetails.classId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.studentClass.$error.required && !scheduleTestMasterForm.studentClass.$pristine">Class
+                            is required.</p>
+                    </div>
+                    <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.studentClass.$invalid && !scheduleTestMasterForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="scheduleTestDetails.classId" disabled="true" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(scheduleTestDetails.classId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.studentClass.$error.required && !scheduleTestMasterForm.studentClass.$pristine">Class
+                            is required.</p>
+                    </div>
+                    <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group">
+                        <select class="form-control" ng-model="scheduleTestDetails.subjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.studentSubject.$error.required && !scheduleTestMasterForm.studentSubject.$pristine">Subject
+                            is required.</p>
+                    </div>
+                    <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.studentSubject.$invalid && !scheduleTestMasterForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="scheduleTestDetails.subjectId" disabled="true" name="studentSubject"
+                            placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.studentSubject.$error.required && !scheduleTestMasterForm.studentSubject.$pristine">Subject
+                            is required.</p>
+                    </div>
+                    <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.testType.$invalid && !scheduleTestMasterForm.testType.$pristine }">
+                        <select class="form-control" ng-model="scheduleTestDetails.testTypeUuid" name="testType" placeholder="Test type"
+                            ng-options="testType.testTypeUuid as testType.testDuration for testType in testTypeList" ng-required="true">
+                            <option value="" disabled>Select Test Type</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.testType.$error.required && !scheduleTestMasterForm.testType.$pristine">Test Type is
+                            required.</p>
+                    </div>
+                    <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.testType.$invalid && !scheduleTestMasterForm.testType.$pristine }">
+                        <select class="form-control" ng-model="scheduleTestDetails.testTypeUuid" name="testType" placeholder="Test Type"
+                            ng-options="testType.testTypeUuid as testType.testDuration for testType in testTypeList" ng-required="true">
+                            <option value="" disabled>Select Test Type</option>
+                        </select>
+                        <p ng-show="scheduleTestMasterForm.testType.$error.required && !scheduleTestMasterForm.testType.$pristine">Test Type is
+                            required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.testTitle.$invalid && !scheduleTestMasterForm.testTitle.$pristine  }">
+                        <input class="form-control" id="testTitle" name="testTitle" ng-model="scheduleTestDetails.testTitle" type="text"
+                            placeholder="Test Title" required /> <span style="color: red"
+                            ng-show="scheduleTestMasterForm.testTitle.$invalid && !scheduleTestMasterForm.testTitle.$pristine"> <span
+                            ng-show="scheduleTestMasterForm.testTitle.$error.required">Test Title is required.</span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.testDate.$invalid && !scheduleTestMasterForm.testDate.$pristine }">
+                        <input class="form-control" id="testDate" name="testDate" ng-model="scheduleTestDetails.testDate" type="text"
+                            placeholder="Test date (YYYY-MM-DD)" required /> <span style="color: red"
+                            ng-show="scheduleTestMasterForm.testDate.$invalid && !scheduleTestMasterForm.testDate.$pristine "> <span
+                            ng-show="scheduleTestMasterForm.testDate.$error.required">Test date is required.</span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : scheduleTestMasterForm.testTime.$invalid && !scheduleTestMasterForm.testTime.$pristine  }">
+                        <input class="form-control" id="testTime" name="testTime" ng-model="scheduleTestDetails.testTime" type="text"
+                            placeholder="Test time (HH:MM:SS)" required /> <span style="color: red"
+                            ng-show="scheduleTestMasterForm.testTime.$invalid && !scheduleTestMasterForm.testTime.$pristine"> <span
+                            ng-show="scheduleTestMasterForm.testTime.$error.required">Test Time is required.</span>
+                        </span>
+                    </div>
+                    <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="scheduleTestMasterForm.$invalid"
+                            ng-click="adminCtrl.createScheduleTestData(scheduleTestDetails)">Submit</button>
+                    </div>
+                    <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="scheduleTestMasterForm.$invalid"
+                            ng-click="adminCtrl.updateScheduleTestData(scheduleTestDetails)">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

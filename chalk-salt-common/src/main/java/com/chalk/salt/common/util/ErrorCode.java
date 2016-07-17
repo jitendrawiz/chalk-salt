@@ -196,7 +196,13 @@ public enum ErrorCode {
 	FAIL_TO_SAVE_NOTES_FILE(1060),
 	
 	/** The fail to save answers list. */
-	FAIL_TO_SAVE_ANSWERS_LIST(1061);
+	FAIL_TO_SAVE_ANSWERS_LIST(1061),
+	
+	/** The fail to fetch test type list. */
+	FAIL_TO_FETCH_TEST_TYPE_LIST(1062),
+	
+	/** The fail to save schedule test. */
+	FAIL_TO_SAVE_SCHEDULE_TEST(1063);
 	
 	/** The value. */
     private final int value;

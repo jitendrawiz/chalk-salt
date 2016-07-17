@@ -160,6 +160,13 @@
                             <span class="selected"></span>
                         </a>
                 </li>
+                <li ng-class="{ active:isSet(16)}">
+                      <a ng-click="setTab(16);" href="">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Schedule Test</span>
+                            <span class="selected"></span>
+                        </a>
+                </li>
                 
               </ul>
             </aside>
@@ -216,6 +223,9 @@
                 </div>
                 <div ng-switch-when="15">
                  <div ng-include="'modules/student/templates/admin/notesContentList.tpl.html'"></div>
+                </div>
+                 <div ng-switch-when="16">
+                 <div ng-include="'modules/student/templates/admin/scheduleTestMaster.tpl.html'"></div>
                 </div>
 			</div>
                              

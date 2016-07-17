@@ -10,6 +10,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 
 /**
@@ -93,7 +95,25 @@ public interface ExamFacade {
 	 *
 	 * @param answer the answer
 	 * @return the string
+	 * @throws ExamException the exam exception
 	 */
 	String saveAnswerDetails(AnswersDto answer)throws ExamException;
+
+	/**
+	 * Gets the test type list.
+	 *
+	 * @return the test type list
+	 * @throws ExamException the exam exception
+	 */
+	List<TestTypeDto> getTestTypeList()throws ExamException;
+
+	/**
+	 * Save schedule test data.
+	 *
+	 * @param scheduleTestDetails the schedule test details
+	 * @return the string
+	 * @throws ExamException the exam exception
+	 */
+	String saveScheduleTestData(ScheduleTestDto scheduleTestDetails)throws ExamException;
 
 }

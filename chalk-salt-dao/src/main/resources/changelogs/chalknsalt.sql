@@ -390,25 +390,24 @@ CREATE TABLE `cst_system_settings` (
 
 insert  into `cst_system_settings`(`settings_id`,`settings_key`,`settings_value`,`description`) values (1,'PROFILE_PHOTO','G:\\CHALKANDDUST\\ProfilePhoto\\','To store Profile photo'),(2,'TOPIC_IMAGE','G:\\CHALKANDDUST\\TopicPhoto\\','TO save topic image.'),(3,'QUESTION_IMAGE','G:\\CHALKANDDUST\\QuestionPhoto\\','To save question image.'),(4,'NOTES_FILE','G:\\CHALKANDDUST\\Notes\\','To save notes content w.r.t class and subject');
 
+/*Table structure for table `cst_schedule_test_master` */
 
-/*Table structure for table `cst_test_master` */
 
-DROP TABLE IF EXISTS `cst_test_master`;
+DROP TABLE IF EXISTS `cst_schedule_test_master`;
 
-CREATE TABLE `cst_test_master` (
+CREATE TABLE `cst_schedule_test_master` (
   `test_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `test_title` varchar(100) NOT NULL,
-  `test_description` text,
   `test_date` date NOT NULL,
   `test_time` time DEFAULT NULL,
   `test_type_uuid` varchar(100) NOT NULL,
-  `marks` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `test_uuid` varchar(100) NOT NULL,
+  `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`test_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cst_test_master` */
 

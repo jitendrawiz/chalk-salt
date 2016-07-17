@@ -6,6 +6,7 @@ package com.chalk.salt.dao.exam.manager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +29,8 @@ import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.common.util.SystemSettingsKey;
@@ -500,6 +503,48 @@ public class ExamManagerImpl implements ExamManager {
 		} catch (final Exception exception) {
 			throw new ExamException(ErrorCode.FAIL_TO_SAVE_ANSWERS_LIST,
 					"Fail to save answers list", exception);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getTestTypeList()
+	 */
+	@Override
+	public List<TestTypeDto> getTestTypeList() throws ExamException {
+		logger.info("Fetching list of test type...");		
+		try {			
+			return examDao.getTestTypeList();
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_FETCH_TEST_TYPE_LIST,
+					"Fail to fetch test type list", exception);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#saveScheduleTestData(com.chalk.salt.common.dto.ScheduleTestDto)
+	 */
+	@Override
+	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails)
+			throws ExamException {
+		logger.info("Saving schedule test data...");	
+		SimpleDateFormat dataFormat=new SimpleDateFormat("YYYY-dd-mm");
+		Date date=null;
+		try{
+			date=dataFormat.parse(scheduleTestDetails.getTestDate());
+		}catch(ParseException exp){
+			throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST,
+					"Fail to save schedule test data");
+		}
+		if(date.before(new Date())){
+			throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST,
+					"Data input is not valid,please input valid date before current date");
+		}
+		try {
+			scheduleTestDetails.setScheduleTestUuid(UUID.randomUUID().toString());
+			return examDao.saveScheduleTestData(scheduleTestDetails,date);
+		} catch (final Exception exception) {
+			throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST,
+					"Fail to save schedule test data", exception);
 		}
 	}
 }

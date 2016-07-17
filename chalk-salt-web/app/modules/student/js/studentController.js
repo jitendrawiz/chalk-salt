@@ -1,9 +1,9 @@
 'use strict';
 
-define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js/CandDModalService', './testController','./testService' ], function(angular) {
+define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js/CandDModalService', './testController', './testService' ], function(angular) {
 
   var homeModule = angular.module('Student.controller', [ 'Student.router', 'System.configuration', 'Student.service', 'Student.discussionroom.controller', 'CandDModal',
-      'Student.testcontroller','Student.testservice' ]);
+      'Student.testcontroller', 'Student.testservice' ]);
 
   homeModule.controller('StudentController', [
       '$window',
@@ -337,13 +337,15 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetNotesDetailsService',
       'updateNotesDetailsService',
       'deleteNotesDetailsService',
+      'getTestTypeService',
+      'saveScheduleTestMasterData',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
           GetTopicRequestList, approveTopicRequestService, UpdateTopicImageService, GetTopicImageService, RegistrationService, SaveQuestionDetailsService, GetQuestionList,
           updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, ResetPasswordService, saveVideoMasterData, GetVideoContentList, GetVideoDetailsService,
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
-          GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService) {
+          GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService,getTestTypeService,saveScheduleTestMasterData) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -461,6 +463,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.topicRequestListDetails = [];
         $scope.videoDetails = [];
         $scope.notesDetails = [];
+        $scope.scheduleTestDetails=[];
 
         var resetOptions = function() {
           $scope.topicDetails.subjectId = "";
@@ -1511,6 +1514,46 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          * 
          */
 
+        /*
+         * 
+         * Get test type details
+         * 
+         * 
+         */
+        getTestTypeService.query(function(testType) {
+          $scope.testTypeList = testType;
+          // console.log(classes);
+        }, onRequestFailure);
+
+        /*
+         * 
+         * ends here
+         * 
+         */
+        
+        /********Schedule Test Methods starts from here************/
+        $scope.scheduleTestDetailsToSave = {};
+        this.createScheduleTestData = function(scheduleTestDetails) {
+          angular.extend($scope.scheduleTestDetailsToSave, $scope.scheduleTestDetails);
+          saveScheduleTestMasterData.save({}, $scope.scheduleTestDetailsToSave, function(response) {
+            if (response) {
+              console.log(response);
+              var modalOptions = {
+                header : 'Note',
+                body : 'Test has been scheduled successfully',
+                btn : 'OK'
+              };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+              });
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+        
+        
+        /********Schedule Test Methods ends from here************/
         var Id = $stateParams.id;
 
         // Show Student's Details
