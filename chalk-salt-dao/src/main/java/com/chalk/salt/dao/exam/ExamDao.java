@@ -184,4 +184,62 @@ public interface ExamDao {
 	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails,
 			Date date)throws Exception;
 
+	/**
+	 * Gets the schedule tests list using ids.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the schedule tests list using ids
+	 * @throws Exception the exception
+	 */
+	public List<ScheduleTestDto> getScheduleTestsListUsingIds(String classId,
+			String subjectId)throws Exception;
+
+	/**
+	 * Gets the schedule test content by id.
+	 *
+	 * @param scheduleTestUuid the schedule test uuid
+	 * @return the schedule test content by id
+	 * @throws Exception the exception
+	 */
+	public ScheduleTestDto getScheduleTestContentById(String scheduleTestUuid)throws Exception;
+
+	/**
+	 * Update schedule test content details.
+	 *
+	 * @param scheduleTestContentDetails the schedule test content details
+	 * @param date the date
+	 * @throws Exception the exception
+	 */
+	public void updateScheduleTestContentDetails(
+			ScheduleTestDto scheduleTestContentDetails, Date date)throws Exception;
+
+	/**
+	 * Delete schedule test content data.
+	 *
+	 * @param scheduleTestUuid the schedule test uuid
+	 * @throws Exception the exception
+	 */
+	public void deleteScheduleTestContentData(String scheduleTestUuid)throws Exception;
+
+	/**
+	 * Check list of schedule test.
+	 *
+	 * @param scheduleTestDetails the schedule test details
+	 * @param date the date
+	 * @return the list
+	 * @throws Exception the exception
+	 */
+	public List<ScheduleTestDto> checkListOfScheduleTest(
+			ScheduleTestDto scheduleTestDetails, Date date)throws Exception;
+
+	/**
+	 * Gets the test duration from test type uuid.
+	 *
+	 * @param testTypeUuid the test type uuid
+	 * @return the test duration from test type uuid
+	 * @throws Exception the exception
+	 */
+	public String getTestDurationFromTestTypeUuid(String testTypeUuid)throws Exception;
+
 }

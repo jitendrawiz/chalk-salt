@@ -104,10 +104,49 @@ public class ExamFacadeImpl implements ExamFacade {
 		return examManager.getTestTypeList();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#saveScheduleTestData(com.chalk.salt.common.dto.ScheduleTestDto)
+	 */
 	@Override
 	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails)
 			throws ExamException {
 		return examManager.saveScheduleTestData(scheduleTestDetails);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getScheduleTestsListUsingIds(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ScheduleTestDto> getScheduleTestsListUsingIds(String classId,
+			String subjectId) throws ExamException {
+		return examManager.getScheduleTestsListUsingIds(classId,subjectId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getScheduleTestContentById(java.lang.String)
+	 */
+	@Override
+	public ScheduleTestDto getScheduleTestContentById(String scheduleTestUuid)
+			throws ExamException {
+		return examManager.getScheduleTestContentById(scheduleTestUuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#updateScheduleTestContentDetails(com.chalk.salt.common.dto.ScheduleTestDto)
+	 */
+	@Override
+	public void updateScheduleTestContentDetails(
+			ScheduleTestDto scheduleTestContentDetails) throws ExamException {
+		examManager.updateScheduleTestContentDetails(scheduleTestContentDetails);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#deleteScheduleTestContentData(java.lang.String)
+	 */
+	@Override
+	public Boolean deleteScheduleTestContentData(String scheduleTestUuid)
+			throws ExamException {
+		return examManager.deleteScheduleTestContentData(scheduleTestUuid);
 	}
 
 }

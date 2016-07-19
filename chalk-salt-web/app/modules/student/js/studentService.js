@@ -469,6 +469,46 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
   
+  studentService.factory('GetScheduleTestContentList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/details/:classId/:subjectId', {
+      classId : '@classId',
+      subjectId : '@subjectId'
+    }, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
+
+  studentService.factory('GetScheduleTestDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/details/edit/:scheduleTestUuid', {
+      scheduleTestUuid : '@scheduleTestUuid'
+    }, {
+      get : {
+        method : 'GET'
+      }
+
+    });
+  } ]);
+
+  studentService.factory('updateScheduleDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/details/update', {}, {
+      save : {
+        method : 'PUT'
+      }
+    });
+  } ]);
+
+  studentService.factory('deleteScheduleTestDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/details/delete/:scheduleTestUuid', {
+      scheduleTestUuid : '@scheduleTestUuid'
+    }, {
+      remove : {
+        method : 'DELETE'
+      }
+    });
+  } ]);
+  
   /*schedule test services ends here*/
 
 });

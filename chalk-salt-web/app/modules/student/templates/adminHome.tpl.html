@@ -3,245 +3,166 @@
 <script src="./resources/js/jquery-1.11.2.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
 <script src="./resources/js/hoe.js"></script>
-<div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1" >
+<div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
-                <a href="#"><i class="fa fa-graduation-cap"></i> <span>Chalk N Dust</span></a>
-                <span class="hoe-sidebar-toggle"><a href="javascript:void(0)"></a></span>
+                <a href="#"><i class="fa fa-graduation-cap"></i> <span>Chalk N Dust</span></a> <span class="hoe-sidebar-toggle"><a
+                    href="javascript:void(0)"></a></span>
             </div>
-
-            <div class="hoe-right-header" hoe-position-type="relative" >
+            <div class="hoe-right-header" hoe-position-type="relative">
                 <span class="hoe-sidebar-toggle"><a href="javascript:void(0)"></a></span>
                 <ul class="left-navbar">
-					
-				</ul> 
-				
+                </ul>
                 <ul class="right-navbar">
-                	<!-- <li><a href="#" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
+                    <!-- <li><a href="#" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
                 	<li><a ui-sref="chalkanddust.student">My Profile</a></li>
                 	<li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
-					<li class="dropdown hoe-rheader-submenu hoe-header-profile">
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-							<span><img class="img-circle " src="./resources/images/avatar-1.jpg"></span>
-                            <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
-						</a> 
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-
-							<li><a ui-sref="chalkanddust.adminprofile"><i class="fa fa-user"></i>My Profile</a></li>
-							<li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-				
+                    <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
+                        data-toggle="dropdown"> <span><img class="img-circle " src="./resources/images/avatar-1.jpg"></span> <span><b>{{fullName}}</b>
+                                <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a ui-sref="chalkanddust.adminprofile"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
+                        </ul></li>
+                </ul>
             </div>
         </header>
         <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
             <aside id="hoe-left-panel" hoe-position-type="absolute">
                 <div class="profile-box">
                     <div class="media">
-                        <a class="pull-left" href="user-profile.html">
-                            <img class="img-circle" src="./resources/images/avatar-1.jpg">
+                        <a class="pull-left" href="user-profile.html"> <img class="img-circle" src="./resources/images/avatar-1.jpg">
                         </a>
                         <div class="media-body">
-                            <h5 class="media-heading">Welcome <span>{{fullName}}</span></h5>                            
+                            <h5 class="media-heading">
+                                Welcome <span>{{fullName}}</span>
+                            </h5>
                         </div>
                     </div>
                 </div>
                 <ul class="nav panel-list">
-                <li ng-class="{ active:isSet(1)}">
-					  <a ng-click="setTab(1);" href="">
-                            <i class="fa fa-tachometer"></i>
-                            <span class="menu-text">Dashboard</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				
-				<li ng-class="{ active:isSet(2)}">
-						 <a ng-click="setTab(2);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Class Master</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				<li ng-class="{ active:isSet(3)}">
-                        <a ng-click="setTab(3);"  href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Subjects Master</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				<li ng-class="{ active:isSet(4)}">
-                        <a ng-click="setTab(4);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Discussion Room Topic Master</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				<li ng-class="{ active:isSet(5)}">
-                        <a ng-click="setTab(5);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Discussion Room Topic List</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				
-				<li ng-class="{ active:isSet(6)}">
-                        <a ng-click="setTab(6);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Discussion Room Comment List</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				<li ng-class="{ active:isSet(9)}">
-					  <a ng-click="setTab(9);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Student Registration</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				<!-- <a ui-sref="chalkanddust.registration">Register</a> -->
-				<li ng-class="{ active:isSet(7)}">
-                        <a ng-click="setTab(7);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Student List</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-				
-				<li ng-class="{ active:isSet(8)}">
-                        <a ng-click="setTab(8);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Topic Requests</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-                
-                <li ng-class="{ active:isSet(10)}">
-                        <a ng-click="setTab(10);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Question Master</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>    
-				<li ng-class="{ active:isSet(11)}">
-                        <a ng-click="setTab(11);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Question List</span>
-                            <span class="selected"></span>
-                        </a>
-				</li>
-                <li ng-class="{ active:isSet(12)}">
-                      <a ng-click="setTab(12);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Video Master</span>
-                            <span class="selected"></span>
-                        </a>
-                </li>
-                <li ng-class="{ active:isSet(13)}">
-                      <a ng-click="setTab(13);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Video List</span>
-                            <span class="selected"></span>
-                        </a>
-                </li>
-                <li ng-class="{ active:isSet(14)}">
-                      <a ng-click="setTab(14);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Notes Master</span>
-                            <span class="selected"></span>
-                        </a>
-                </li>
-                <li ng-class="{ active:isSet(15)}">
-                      <a ng-click="setTab(15);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Notes List</span>
-                            <span class="selected"></span>
-                        </a>
-                </li>
-                <li ng-class="{ active:isSet(16)}">
-                      <a ng-click="setTab(16);" href="">
-                            <i class="fa fa-files-o"></i>
-                            <span class="menu-text">Schedule Test</span>
-                            <span class="selected"></span>
-                        </a>
-                </li>
-                
-              </ul>
+                    <li ng-class="{ active:isSet(1)}"><a ng-click="setTab(1);" href=""> <i class="fa fa-tachometer"></i> <span
+                            class="menu-text">Dashboard</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(2)}"><a ng-click="setTab(2);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Class
+                                Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(3)}"><a ng-click="setTab(3);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Subjects
+                                Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(4)}"><a ng-click="setTab(4);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Discussion
+                                Room Topic Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(5)}"><a ng-click="setTab(5);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Discussion
+                                Room Topic List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(6)}"><a ng-click="setTab(6);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Discussion
+                                Room Comment List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(9)}"><a ng-click="setTab(9);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Student
+                                Registration</span> <span class="selected"></span>
+                    </a></li>
+                    <!-- <a ui-sref="chalkanddust.registration">Register</a> -->
+                    <li ng-class="{ active:isSet(7)}"><a ng-click="setTab(7);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Student
+                                List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(8)}"><a ng-click="setTab(8);" href=""> <i class="fa fa-files-o"></i> <span class="menu-text">Topic
+                                Requests</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(10)}"><a ng-click="setTab(10);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Question Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(11)}"><a ng-click="setTab(11);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Question List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(12)}"><a ng-click="setTab(12);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Video Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(13)}"><a ng-click="setTab(13);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Video List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(14)}"><a ng-click="setTab(14);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Notes Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(15)}"><a ng-click="setTab(15);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Notes List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(16)}"><a ng-click="setTab(16);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Schedule Test</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(17)}"><a ng-click="setTab(17);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Schedule Test List</span> <span class="selected"></span>
+                    </a></li>
+                </ul>
             </aside>
             <section id="main-content">
-				
                 <div class="inner-content">
                     <div class="panel theme-panel">
-                       
-                        <div class="panel-body" style="min-height:800px;">
+                        <div class="panel-body" style="min-height: 800px;">
                             <div class="col-md-12 column right-navbar-right">
-              <div ng-switch="tab">
-				<div ng-switch-when="1">
-					<h3>Welcome</h3>
-				</div>
-				<div ng-switch-when="2">
-					<h3></h3>
-				 <div ng-include="'modules/student/templates/admin/classMaster.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="3">
-				 <div ng-include="'modules/student/templates/admin/subjectsMaster.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="4">
-				 <div ng-include="'modules/student/templates/admin/DiscussionRoomTopicMaster.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="5">
-				 <div ng-include="'modules/student/templates/admin/DiscussionRoomTopicList.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="6">
-				 <div ng-include="'modules/student/templates/admin/DiscussionRoomCommentList.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="7">
-				 <div ng-include="'modules/student/templates/admin/StudentList.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="8">
-				 <div ng-include="'modules/student/templates/admin/TopicRequestList.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="9">
-				 <div ng-include="'modules/registration/templates/registration.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="10">
-				 <div ng-include="'modules/student/templates/admin/ExamQuestionMaster.tpl.html'"></div>
-				</div>
-				<div ng-switch-when="11">
-				 <div ng-include="'modules/student/templates/admin/ExamQuestionList.tpl.html'"></div>
-				</div>
-                <div ng-switch-when="12">
-                 <div ng-include="'modules/student/templates/admin/VideoMaster.tpl.html'"></div>
-                </div>
-                <div ng-switch-when="13">
-                 <div ng-include="'modules/student/templates/admin/VideoContentList.tpl.html'"></div>
-                </div>
-                <div ng-switch-when="14">
-                 <div ng-include="'modules/student/templates/admin/notesMaster.tpl.html'"></div>
-                </div>
-                <div ng-switch-when="15">
-                 <div ng-include="'modules/student/templates/admin/notesContentList.tpl.html'"></div>
-                </div>
-                 <div ng-switch-when="16">
-                 <div ng-include="'modules/student/templates/admin/scheduleTestMaster.tpl.html'"></div>
-                </div>
-			</div>
-                             
-                             
-                             
-                                    
-                                   
+                                <div ng-switch="tab">
+                                    <div ng-switch-when="1">
+                                        <h3>Welcome</h3>
+                                    </div>
+                                    <div ng-switch-when="2">
+                                        <h3></h3>
+                                        <div ng-include="'modules/student/templates/admin/classMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="3">
+                                        <div ng-include="'modules/student/templates/admin/subjectsMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="4">
+                                        <div ng-include="'modules/student/templates/admin/DiscussionRoomTopicMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="5">
+                                        <div ng-include="'modules/student/templates/admin/DiscussionRoomTopicList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="6">
+                                        <div ng-include="'modules/student/templates/admin/DiscussionRoomCommentList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="7">
+                                        <div ng-include="'modules/student/templates/admin/StudentList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="8">
+                                        <div ng-include="'modules/student/templates/admin/TopicRequestList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="9">
+                                        <div ng-include="'modules/registration/templates/registration.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="10">
+                                        <div ng-include="'modules/student/templates/admin/ExamQuestionMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="11">
+                                        <div ng-include="'modules/student/templates/admin/ExamQuestionList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="12">
+                                        <div ng-include="'modules/student/templates/admin/VideoMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="13">
+                                        <div ng-include="'modules/student/templates/admin/VideoContentList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="14">
+                                        <div ng-include="'modules/student/templates/admin/notesMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="15">
+                                        <div ng-include="'modules/student/templates/admin/notesContentList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="16">
+                                        <div ng-include="'modules/student/templates/admin/scheduleTestMaster.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="17">
+                                        <div ng-include="'modules/student/templates/admin/scheduleTestContentList.tpl.html'"></div>
+                                    </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </section>
-			
         </div>
     </div>
-  
 </div>
 <script>
      $(document).ready(function(){

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.chalk.salt</groupId>
-    	<artifactId>chalk-salt</artifactId>
+		<artifactId>chalk-salt</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>chalk-salt-dao</artifactId>
@@ -50,6 +50,10 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
 		</dependency>
 	</dependencies>
 </project>

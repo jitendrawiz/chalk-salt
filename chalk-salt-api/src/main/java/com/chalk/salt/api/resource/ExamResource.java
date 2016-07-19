@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -345,6 +346,101 @@ public class ExamResource extends AbstractResource {
     		scheduleTestUuid = examFacade.saveScheduleTestData(scheduleTestDetails);
     		response.put("scheduleTestUuid", scheduleTestUuid);
             return Response.ok(response).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * Gets the schedule tests list using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the schedule tests list using ids
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/schedule-test/details/{classId}/{subjectId}")   
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getScheduleTestsListUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws ExamException{
+    	
+    	List<ScheduleTestModel> scheduleTestContent = null;
+    	List<ScheduleTestDto> scheduleTestContentList = null;
+    	try{
+    		scheduleTestContentList = examFacade.getScheduleTestsListUsingIds(classId,subjectId);
+    		scheduleTestContent = DozerMapperUtil.mapCollection(beanMapper, scheduleTestContentList, ScheduleTestModel.class);
+            return Response.ok(scheduleTestContent).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    
+    /**
+     * Gets the schedule test content by id.
+     *
+     * @param scheduleTestUuid the schedule test uuid
+     * @return the schedule test content by id
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/schedule-test/details/edit/{scheduleTestUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getScheduleTestContentById(@NotBlank @PathParam("scheduleTestUuid") final String scheduleTestUuid)throws ExamException{
+    	ScheduleTestModel scheduleTestContent = null;
+    	ScheduleTestDto scheduleTestContentDetails = null;
+    	try{
+    		scheduleTestContentDetails = examFacade.getScheduleTestContentById(scheduleTestUuid);
+    		scheduleTestContent = beanMapper.map(scheduleTestContentDetails, ScheduleTestModel.class);
+   			return Response.ok(scheduleTestContent).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * Update schedule test content details.
+     *
+     * @param scheduleTestContentModel the schedule test content model
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    @PUT
+    @Path("/schedule-test/details/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response updateScheduleTestContentDetails(final @Valid ScheduleTestModel scheduleTestContentModel)throws ExamException{
+    	ScheduleTestDto scheduleTestContentDetails = null;
+    	try{
+    		scheduleTestContentDetails = beanMapper.map(scheduleTestContentModel, ScheduleTestDto.class);
+    		examFacade.updateScheduleTestContentDetails(scheduleTestContentDetails);    		
+            return Response.ok().build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    /**
+     * Delete schedule test content data.
+     *
+     * @param scheduleTestUuid the schedule test uuid
+     * @return the response
+     * @throws ExamException the exam exception
+     */
+    @DELETE
+    @Path("/schedule-test/details/delete/{scheduleTestUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteScheduleTestContentData(@NotBlank @PathParam("scheduleTestUuid") final String scheduleTestUuid)throws ExamException{
+    	final Map<String, String> response = new HashMap<String, String>();
+    	Boolean deleteStatus = false;
+    	try{
+    		deleteStatus = examFacade.deleteScheduleTestContentData(scheduleTestUuid);
+    		response.put("deleteStatus", deleteStatus.toString());
+    		return Response.ok(deleteStatus).build();
 	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }

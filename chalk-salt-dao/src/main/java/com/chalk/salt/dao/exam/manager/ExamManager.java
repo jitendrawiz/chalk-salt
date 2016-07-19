@@ -124,4 +124,42 @@ public interface ExamManager {
 	 */
 	String saveScheduleTestData(ScheduleTestDto scheduleTestDetails)throws ExamException;
 
+	/**
+	 * Gets the schedule tests list using ids.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @return the schedule tests list using ids
+	 * @throws ExamException the exam exception
+	 */
+	List<ScheduleTestDto> getScheduleTestsListUsingIds(String classId,
+			String subjectId)throws ExamException;
+
+	/**
+	 * Gets the schedule test content by id.
+	 *
+	 * @param scheduleTestUuid the schedule test uuid
+	 * @return the schedule test content by id
+	 * @throws ExamException the exam exception
+	 */
+	ScheduleTestDto getScheduleTestContentById(String scheduleTestUuid)throws ExamException;
+
+	/**
+	 * Update schedule test content details.
+	 *
+	 * @param scheduleTestContentDetails the schedule test content details
+	 * @throws ExamException the exam exception
+	 */
+	void updateScheduleTestContentDetails(
+			ScheduleTestDto scheduleTestContentDetails)throws ExamException;
+
+	/**
+	 * Delete schedule test content data.
+	 *
+	 * @param scheduleTestUuid the schedule test uuid
+	 * @return the boolean
+	 * @throws ExamException the exam exception
+	 */
+	Boolean deleteScheduleTestContentData(String scheduleTestUuid)throws ExamException;
+
 }

@@ -25,13 +25,34 @@ public class ScheduleTestDto {
 
 	/** The schedule test uuid. */
 	private String scheduleTestUuid;
-	
+
 	/** The schedule test created date. */
 	private String scheduleTestCreatedDate;
-	
+
 	/** The schedule test modified data. */
 	private String scheduleTestModifiedData;
-	
+
+	/** The test duration. */
+	private String testDuration;
+
+	/**
+	 * Gets the test duration.
+	 *
+	 * @return the test duration
+	 */
+	public String getTestDuration() {
+		return testDuration;
+	}
+
+	/**
+	 * Sets the test duration.
+	 *
+	 * @param testDuration
+	 *            the new test duration
+	 */
+	public void setTestDuration(String testDuration) {
+		this.testDuration = testDuration;
+	}
 
 	/**
 	 * Gets the schedule test uuid.
@@ -45,7 +66,8 @@ public class ScheduleTestDto {
 	/**
 	 * Sets the schedule test uuid.
 	 *
-	 * @param scheduleTestUuid the new schedule test uuid
+	 * @param scheduleTestUuid
+	 *            the new schedule test uuid
 	 */
 	public void setScheduleTestUuid(String scheduleTestUuid) {
 		this.scheduleTestUuid = scheduleTestUuid;
@@ -63,7 +85,8 @@ public class ScheduleTestDto {
 	/**
 	 * Sets the schedule test created date.
 	 *
-	 * @param scheduleTestCreatedDate the new schedule test created date
+	 * @param scheduleTestCreatedDate
+	 *            the new schedule test created date
 	 */
 	public void setScheduleTestCreatedDate(String scheduleTestCreatedDate) {
 		this.scheduleTestCreatedDate = scheduleTestCreatedDate;
@@ -81,7 +104,8 @@ public class ScheduleTestDto {
 	/**
 	 * Sets the schedule test modified data.
 	 *
-	 * @param scheduleTestModifiedData the new schedule test modified data
+	 * @param scheduleTestModifiedData
+	 *            the new schedule test modified data
 	 */
 	public void setScheduleTestModifiedData(String scheduleTestModifiedData) {
 		this.scheduleTestModifiedData = scheduleTestModifiedData;
@@ -99,7 +123,8 @@ public class ScheduleTestDto {
 	/**
 	 * Sets the test title.
 	 *
-	 * @param testTitle the new test title
+	 * @param testTitle
+	 *            the new test title
 	 */
 	public void setTestTitle(String testTitle) {
 		this.testTitle = testTitle;

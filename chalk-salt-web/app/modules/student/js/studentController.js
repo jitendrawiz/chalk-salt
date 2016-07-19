@@ -339,13 +339,18 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'deleteNotesDetailsService',
       'getTestTypeService',
       'saveScheduleTestMasterData',
+      'GetScheduleTestContentList',
+      'GetScheduleTestDetailsService',
+      'updateScheduleDetailsService',
+      'deleteScheduleTestDetailsService',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
           GetTopicRequestList, approveTopicRequestService, UpdateTopicImageService, GetTopicImageService, RegistrationService, SaveQuestionDetailsService, GetQuestionList,
           updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, ResetPasswordService, saveVideoMasterData, GetVideoContentList, GetVideoDetailsService,
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
-          GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService,getTestTypeService,saveScheduleTestMasterData) {
+          GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
+          GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -463,7 +468,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.topicRequestListDetails = [];
         $scope.videoDetails = [];
         $scope.notesDetails = [];
-        $scope.scheduleTestDetails=[];
+        $scope.scheduleTestDetails = [];
 
         var resetOptions = function() {
           $scope.topicDetails.subjectId = "";
@@ -489,6 +494,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.topicsList = [];
             $scope.commentsList = [];
             $scope.questionList = [];
+            $scope.studentList = [];
+            $scope.videoListDetails = [];
+            $scope.NotesListDetails = [];
+            $scope.ScheduleListDetails = [];
             console.log(classId);
             $scope.subjectsList = response;
           }, onRequestFailure);
@@ -789,7 +798,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 btn : 'OK'
               };
               CandDModalService.showModal({}, modalOptions).then(function(result) {
-                $scope.setTab(11);
+                $state.reload();
               });
             }
           }, function(error) {
@@ -1212,7 +1221,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 console.log(self.currentPageVideoList);
                 var itemsPerPageVideoList = self.itemsPerPageVideoList;
                 var offset = (self.currentPageVideoList - 1) * itemsPerPageVideoList;
-                $scope.questionList = $scope.videoListDetails.slice(offset, offset + itemsPerPageVideoList)
+                $scope.videoList = $scope.videoListDetails.slice(offset, offset + itemsPerPageVideoList)
               };
               $scope.getVideoContentData();
             }
@@ -1397,7 +1406,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 console.log(self.currentPageNotesList);
                 var itemsPerPageNotesList = self.itemsPerPageNotesList;
                 var offset = (self.currentPageNotesList - 1) * itemsPerPageNotesList;
-                $scope.questionList = $scope.NotesListDetails.slice(offset, offset + itemsPerPageNotesList)
+                $scope.NotesList = $scope.NotesListDetails.slice(offset, offset + itemsPerPageNotesList)
               };
               $scope.getNotesContentData();
             }
@@ -1531,9 +1540,168 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          * 
          */
         
-        /********Schedule Test Methods starts from here************/
+        function testSchedularDetails(scheduleTestData){
+          var testDate = scheduleTestData.testDate;
+          var testTime = scheduleTestData.testTime;
+          if(!testDate.contains("-")){
+            showAlert('danger', "Please input a valid date");
+            return false;
+          }
+
+          var testTimeSplit = testDate.split("-");
+          var year = testTimeSplit[0];
+          var month = testTimeSplit[1];
+          var day = testTimeSplit[2];
+        
+          if (year.length != 4) {
+            showAlert('danger', "Please input a valid year in date");
+            return false;
+          }
+          if (month.length != 2) {
+            showAlert('danger', "Please input valid month in date");
+            return false;
+          }
+          if (day.length != 2) {
+            showAlert('danger', "Please input valid day in date");
+            return false;
+          }
+          if (year.length == 4) {
+            if (Number(year) > 3000) {
+              showAlert('danger', "Please input a valid year in date");
+              return false;
+            }
+          }
+          year = Number(testTimeSplit[0]);
+          month = Number(testTimeSplit[1]);
+          day = Number(testTimeSplit[2]);
+        
+          if (month > 12) {
+            showAlert('danger', "Please input valid month in date");
+            return false;
+          }
+          if (year % 4 == 0) {
+            if (month == 1 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 2 && day > 29) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 3 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 4 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 5 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 6 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 7 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 8 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 9 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 10 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 11 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 12 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            }
+          } else {
+            if (month == 1 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 2 && day > 28) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 3 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 4 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 5 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 6 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 7 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 8 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 9 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 10 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 11 && day > 30) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            } else if (month == 12 && day > 31) {
+              showAlert('danger', "Please input valid day in date");
+              return false;
+            }
+          }
+          var currentDate=new Date();          
+          var inputDate=new Date(testDate);
+          if(inputDate.getTime()<currentDate.getTime()){
+            showAlert('danger', "Please input valid date greater than currentdate");
+            return false;
+          }
+
+          if(!testTime.contains(":")){
+            showAlert('danger', "Please input a valid time");
+            return false;
+          }
+          
+          var testTimeDetail=testTime.split(":");
+          var hour=Number(testTimeDetail[0]);
+          var minutes=Number(testTimeDetail[1]);
+          var seconds=Number(testTimeDetail[2]);
+          
+          
+          if(hour<0 || hour>23){
+            showAlert('danger', "Please input valid hours");
+            return false;
+          }
+          if(minutes<0 || minutes>59){
+            showAlert('danger', "Please input valid minutes");
+            return false;
+          }
+          if(seconds<0 || seconds>59){
+            showAlert('danger', "Please input valid seconds");
+            return false;
+          }
+          else{
+            return true;
+          }
+        }
+        
+        String.prototype.contains=function(it){
+          return this.indexOf(it)!= -1;
+        }
+
+        /** ******Schedule Test Methods starts from here*********** */
         $scope.scheduleTestDetailsToSave = {};
         this.createScheduleTestData = function(scheduleTestDetails) {
+          if(!testSchedularDetails($scope.scheduleTestDetails)){
+            return false;
+          }          
+          var schdeuleTestDetails = $scope.scheduleTestDetails;
           angular.extend($scope.scheduleTestDetailsToSave, $scope.scheduleTestDetails);
           saveScheduleTestMasterData.save({}, $scope.scheduleTestDetailsToSave, function(response) {
             if (response) {
@@ -1551,9 +1719,123 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-        
-        
-        /********Schedule Test Methods ends from here************/
+
+        $scope.showScheduleTestDetails = function(classId, subjectId, classes, subjectsList) {
+          console.log("Fetching Schedule test detailed list " + classId + "-" + classId + " & " + subjectId + "-" + subjectId);
+
+          $scope.classes = classes;
+          $scope.subjectsList = subjectsList;
+
+          if (!classId) {
+            resetOptions();
+            if (!subjectId) {
+              return;
+            }
+          }
+          GetScheduleTestContentList.query({
+            classId : classId,
+            subjectId : subjectId
+          }, function(response) {
+            if (response) {
+              $scope.ScheduleListDetails = response;
+              $scope.totalItemsScheduleList = $scope.ScheduleListDetails.length;
+              $scope.currentPageScheduleList = 1;
+              $scope.itemsPerPageScheduleList = 5;
+              $scope.maxSizeScheduleList = 5;
+
+              $scope.$watch('search', function(newVal, oldVal) {
+                $scope.ScheduleList = filterFilter($scope.ScheduleListDetails, newVal);
+                $scope.totalItemsScheduleList = $scope.ScheduleList.length;
+                // $scope.maxSizetopicsList =
+                // Math.ceil($scope.totalItemstopicsList /
+                // $scope.itemsPerPagetopicsList);
+                $scope.currentPageScheduleList = 1;
+              }, true);
+              $scope.getScheduleContentData = function() {
+                // keep a reference to the current instance "this" as the
+                // context is changing
+                var self = this;
+                console.log(self.currentPageScheduleList);
+                var itemsPerPageScheduleList = self.itemsPerPageScheduleList;
+                var offset = (self.currentPageScheduleList - 1) * itemsPerPageScheduleList;
+                $scope.ScheduleList = $scope.ScheduleListDetails.slice(offset, offset + itemsPerPageScheduleList)
+              };
+              $scope.getScheduleContentData();
+            }
+          }, onRequestFailure);
+
+        };
+
+        /** ******Edit Schedule data*********** */
+
+        $scope.editScheduleTestContent = function(scheduleTestUuid) {
+          GetScheduleTestDetailsService.get({
+            scheduleTestUuid : scheduleTestUuid
+          }, function(response) {
+            if (response) {
+              $scope.scheduleTestDetails = response;
+              console.log($scope.scheduleTestDetails);
+            }
+            $scope.setTab(16);
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          })
+        };
+
+        /** ***********Update Schedule data*************** */
+        this.updateScheduleTestData = function() {
+          if(!testSchedularDetails($scope.scheduleTestDetails)){
+            return false;
+          }
+          updateScheduleDetailsService.save({}, $scope.scheduleTestDetails, function(response) {
+            if (response) {
+              console.log(response);
+              var modalOptions = {
+                header : 'Note',
+                body : 'Schedule Test details is updated successfully',
+                btn : 'OK'
+              };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+              });
+            }
+
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+
+        /** ***********Delete Schedule data*************** */
+        $scope.deleteScheduleTestContent = function(scheduleTestUuid) {
+          var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Deleting Schedule Test data,Do you want to continue?',
+            btn : 'OK'
+          };
+          CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+            deleteScheduleTestDetailsService.remove({
+              scheduleTestUuid : scheduleTestUuid
+            }, function(response) {
+              if (response) {
+                console.log(response);
+                var modalOptions = {
+                  header : 'Note',
+                  body : 'Schedule test data deleted successfully',
+                  btn : 'OK'
+                };
+
+                CandDModalService.showModal({}, modalOptions).then(function(result) {
+                  $log.info(result);
+                });
+                $state.reload();
+              }
+            }, function(error) {
+              showAlert('danger', error.data.message);
+            })
+          });
+        };
+
+        /** ******Schedule Test Methods ends from here*********** */
         var Id = $stateParams.id;
 
         // Show Student's Details
