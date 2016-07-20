@@ -447,14 +447,19 @@ public class ExamDaoImpl implements ExamDao {
 	 */
 	@Override
 	public List<ScheduleTestDto> checkListOfScheduleTest(
-			ScheduleTestDto scheduleTestDetails, Date date) throws Exception {
+			ScheduleTestDto scheduleTestDetails, Date date,String scheduleTestUuid) throws Exception {
+			String appendString="";
+			if(scheduleTestUuid!=null){
+			appendString=" AND test_uuid!=\""+scheduleTestUuid+"\"";
+			}
 		final String sqlQuery = "SELECT test_date AS testDate,test_time AS testTime,"
 				+ " cst_schedule_test_master.test_type_uuid AS testTypeUuid, "
 				+ " test_duration AS testDuration ,test_uuid AS scheduleTestUuid"
 				+ " FROM `cst_schedule_test_master` "
 				+ " JOIN `cst_test_type` ON cst_test_type.test_type_uuid=cst_schedule_test_master.test_type_uuid "
-				+ " WHERE test_date=:date AND class_id=:classId AND subject_id=:subjectId ";
+				+ " WHERE test_date=:date AND class_id=:classId AND subject_id=:subjectId "+appendString;
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("date", date);

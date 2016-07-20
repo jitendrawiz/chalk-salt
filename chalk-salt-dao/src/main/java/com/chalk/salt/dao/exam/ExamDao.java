@@ -227,11 +227,12 @@ public interface ExamDao {
 	 *
 	 * @param scheduleTestDetails the schedule test details
 	 * @param date the date
+	 * @param scheduleTestUuid 
 	 * @return the list
 	 * @throws Exception the exception
 	 */
 	public List<ScheduleTestDto> checkListOfScheduleTest(
-			ScheduleTestDto scheduleTestDetails, Date date)throws Exception;
+			ScheduleTestDto scheduleTestDetails, Date date, String scheduleTestUuid)throws Exception;
 
 	/**
 	 * Gets the test duration from test type uuid.

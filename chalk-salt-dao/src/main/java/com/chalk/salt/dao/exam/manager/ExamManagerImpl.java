@@ -608,7 +608,7 @@ public class ExamManagerImpl implements ExamManager
             List<ScheduleTestDto> listOfSchedulerTest = null;
             try
                 {
-                listOfSchedulerTest = examDao.checkListOfScheduleTest(scheduleTestDetails, date);
+                listOfSchedulerTest = examDao.checkListOfScheduleTest(scheduleTestDetails, date,scheduleTestDetails.getScheduleTestUuid());
                 }
             catch (Exception exception)
                 {
@@ -636,7 +636,7 @@ public class ExamManagerImpl implements ExamManager
                     ScheduleTestDto databaseData = listOfSchedulerTest.get(i);
                     DateTime databaseinputStartTime = formatter.parseDateTime(databaseData.getTestDate() + " " + databaseData.getTestTime());
                     Integer dbDuration = getTestDuration(databaseData.getTestDuration());
-                    DateTime databaseinputEndTime = inputDateStartTime.plusMinutes(dbDuration);
+                    DateTime databaseinputEndTime = databaseinputStartTime.plusMinutes(dbDuration);
                     if ((inputDateStartTime.compareTo(databaseinputStartTime) >= 0 && inputDateStartTime.compareTo(databaseinputEndTime) < 0)
                             || (inputDateEndTime.compareTo(databaseinputStartTime) >= 0 && inputDateEndTime.compareTo(databaseinputEndTime) < 0)) { throw new ExamException(
                             ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST, "Data input is not valid,there is already one scheduled test for this time range."); }
@@ -733,7 +733,7 @@ public class ExamManagerImpl implements ExamManager
             List<ScheduleTestDto> listOfSchedulerTest = null;
             try
                 {
-                listOfSchedulerTest = examDao.checkListOfScheduleTest(scheduleTestContentDetails, date);
+                listOfSchedulerTest = examDao.checkListOfScheduleTest(scheduleTestContentDetails, date,scheduleTestContentDetails.getScheduleTestUuid());
                 }
             catch (Exception exception)
                 {
@@ -762,7 +762,7 @@ public class ExamManagerImpl implements ExamManager
                     ScheduleTestDto databaseData = listOfSchedulerTest.get(i);
                     DateTime databaseinputStartTime = formatter.parseDateTime(databaseData.getTestDate() + " " + databaseData.getTestTime());
                     Integer dbDuration = getTestDuration(databaseData.getTestDuration());
-                    DateTime databaseinputEndTime = inputDateStartTime.plusMinutes(dbDuration);
+                    DateTime databaseinputEndTime = databaseinputStartTime.plusMinutes(dbDuration);
                     if ((inputDateStartTime.compareTo(databaseinputStartTime) >= 0 && inputDateStartTime.compareTo(databaseinputEndTime) < 0)
                             || (inputDateEndTime.compareTo(databaseinputStartTime) >= 0 && inputDateEndTime.compareTo(databaseinputEndTime) < 0)) { throw new ExamException(
                             ErrorCode.FAIL_TO_UPDATE_SCHEDULE_TEST_DATA, "Data input is not valid,there is already one scheduled test for this time range."); }
