@@ -30,7 +30,7 @@
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>20 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction({type:'cf92f98c-4684-11e6-beb8-9e71128cae77'})">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:'cf92f98c-4684-11e6-beb8-9e71128cae77',scheduletestuuid:1,subjectId:1})">Take Test</a>
             </h4>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>40 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction({type:'cf92fe46-4684-11e6-beb8-9e71128cae77'})">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:'cf92fe46-4684-11e6-beb8-9e71128cae77',scheduletestuuid:1,subjectId:1})">Take Test</a>
             </h4>
         </div>
     </div>
@@ -48,7 +48,7 @@
             <span class="feature-icon"><i class="fa fa-file-text-o"></i></span>
             <h4>60 Min Test</h4>
             <h4>
-                <a ui-sref="chalkanddust.testInstruction({type:'cf92fc16-4684-11e6-beb8-9e71128cae77'})">Take Test</a>
+                <a ui-sref="chalkanddust.testInstruction({type:'cf92fc16-4684-11e6-beb8-9e71128cae77',scheduletestuuid:1,subjectId:1})">Take Test</a>
             </h4>
         </div>
     </div>
@@ -59,9 +59,11 @@
         <h3>
             <i class="fa-circle"></i>Notification
         </h3>
-        <p>
-            <span>Coming Soon</span>
-        </p>
+        <div style="min-height: 200px;">
+            <p ng-repeat="item in notificationList">
+            <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
+            </p>
+        </div>
         <div class="clearfix"></div>
         <div class="disc-room">
             <br> <br> <a ui-sref="chalkanddust.discussionroomfirstpage"> <i class="fa-group"></i><br>

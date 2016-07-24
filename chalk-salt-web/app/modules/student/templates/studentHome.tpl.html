@@ -1,6 +1,6 @@
 <!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/font-awesome.min.css"> -->
 <link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<script src="../../../resources/js/jquery-1.11.2.min.js"></script>
+<!-- <script src="../../../resources/js/jquery-1.11.2.min.js"></script> -->
 <script src="../../../resources/js/bootstrap.min.js"></script>
 <script src="../../../resources/js/hoe.js"></script>
 <div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
@@ -73,10 +73,12 @@
                                 <div ng-switch="tab">
                                     <div ng-switch-when="1">
                                         <!--                                         <h3>Welcome <span>{{fullName}}</span></h3> -->
-                                        <div ng-include="'modules/student/templates/studentDashboard/dashboard.tpl.html'"></div>
+                                        <div ng-include="'modules/student/templates/studentDashboard/dashboard.tpl.html'"
+                                            ng-controller="NotificationController"></div>
                                     </div>
                                     <div ng-switch-when="2">
-                                        <div ng-include="'modules/student/templates/studentDashboard/subjectDetails.tpl.html'"></div>
+                                        <div ng-include="'modules/student/templates/studentDashboard/subjectDetails.tpl.html'"
+                                            ng-controller="NotificationController"></div>
                                     </div>
                                 </div>
                             </div>

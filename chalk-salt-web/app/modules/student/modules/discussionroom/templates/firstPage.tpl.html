@@ -26,7 +26,8 @@
             </ul>
             <div class="dr_search">
                 <ul>
-                    <li ng-hide="isGuest"><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic Request</a></li>
+                    <li ng-hide="isGuest"><a ui-sref="chalkanddust.topicrequest"><span class="glyphicon glyphicon-plus"></span>New Topic
+                            Request</a></li>
                     <li><a href="javscript:void(0)" ng-click="disCtrl.goBackToProfileScreen();"><span
                             class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
                 </ul>
@@ -68,18 +69,17 @@
                 <p>No Topics Found.</p>
             </div>
         </div>
-        <div class="dr_events">
+        <div class="dr_events" ng-controller="NotificationController">
             <div class="dr_notification">
                 <h3>Notification</h3>
                 <span>
                     <ul>
                         <marquee direction="up" scrollamount="4">
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
-                            <li>JEE Advanced 2016 Online Appli</li>
+                            <div style="min-height: 200px;">
+                                <p ng-repeat="item in notificationList">
+            <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
+                                </p>
+                            </div>
                         </marquee>
                     </ul>
                 </span>

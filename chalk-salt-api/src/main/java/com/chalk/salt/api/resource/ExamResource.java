@@ -259,16 +259,17 @@ public class ExamResource extends AbstractResource {
      * @throws ExamException the exam exception
      */
     @GET
-    @Path("/test/list/{classId}/{subjectId}/{type}")
+    @Path("/test/list/{classId}/{subjectId}/{type}/{scheduleTestUuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     public Response getTestQuestionsList(@NotBlank @PathParam("classId") final String classId,
             @NotBlank @PathParam("subjectId") final String subjectId,
-            @NotBlank @PathParam("type") final String type) throws ExamException{
+            @NotBlank @PathParam("type") final String type,
+            @NotBlank @PathParam("scheduleTestUuid") final String scheduleTestUuid) throws ExamException{
 
         List<QuestionListDto> questionList = null;
         try{
-            questionList = examFacade.getQuestionsUsingType(classId,subjectId,type);
+            questionList = examFacade.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid);
             return Response.ok(questionList).build();
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
@@ -445,4 +446,29 @@ public class ExamResource extends AbstractResource {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }
     }
-}
+    
+    /**
+     * Gets the nofification list of scheduled tests.
+     *
+     * @param classId the class id
+     * @param studentId the student id
+     * @return the nofification list of scheduled tests
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/schedule-test/notification/list/{classId}/{studentId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getNofificationListOfScheduledTests(@NotBlank @PathParam("classId") final String classId,
+            @NotBlank @PathParam("studentId") final String studentId)throws ExamException{
+    List<ScheduleTestModel> scheduleTestContent = null;
+    List<ScheduleTestDto> scheduleTestContentList = null;
+    try{
+        scheduleTestContentList = examFacade.getScheduleTestsListUsingClassId(classId,studentId);
+        scheduleTestContent = DozerMapperUtil.mapCollection(beanMapper, scheduleTestContentList, ScheduleTestModel.class);
+        return Response.ok(scheduleTestContent).build();
+    } catch (final ExamException examException) {
+        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+    }
+    }
+            }

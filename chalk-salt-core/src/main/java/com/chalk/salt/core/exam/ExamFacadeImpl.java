@@ -82,9 +82,9 @@ public class ExamFacadeImpl implements ExamFacade {
      * @see com.chalk.salt.core.exam.ExamFacade#getQuestionsUsingType(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException
+    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid) throws ExamException
     {
-        return examManager.getQuestionsUsingType(classId,subjectId,type);
+        return examManager.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid);
 
     }
 
@@ -148,5 +148,14 @@ public class ExamFacadeImpl implements ExamFacade {
 			throws ExamException {
 		return examManager.deleteScheduleTestContentData(scheduleTestUuid);
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.exam.ExamFacade#getScheduleTestsListUsingClassId(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId,String studentId) throws ExamException
+        {
+        return examManager.getScheduleTestsListUsingClassId(classId,studentId);
+        }
 
 }

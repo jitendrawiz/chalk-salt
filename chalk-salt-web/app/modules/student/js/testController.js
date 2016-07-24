@@ -23,6 +23,10 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
 
         $window.localStorage.setItem(CHALKNDUST.TESTTYPE, $stateParams.type);
+        if($window.localStorage.getItem(CHALKNDUST.SUBJECTID)==null || $window.localStorage.getItem(CHALKNDUST.SUBJECTID)==undefined){
+        $window.localStorage.setItem(CHALKNDUST.SUBJECTID, $stateParams.subjectId);
+        }
+        $window.localStorage.setItem(CHALKNDUST.SCHEDULETESTUUID, $stateParams.scheduletestuuid);
 
         $scope.goBackToDashBoard = function() {
           $state.go('chalkanddust.profile');
@@ -55,8 +59,9 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
       'GetTestQuestionsListService',
       'helperService',
       'saveAnswersService',
+      'GetNotificationList',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, $stateParams, GetUserPhotoService, GetTestQuestionsListService, helperService,
-          saveAnswersService) {
+          saveAnswersService,GetNotificationList) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -75,6 +80,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
         $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
         $scope.type = $window.localStorage.getItem(CHALKNDUST.TESTTYPE);
+        $scope.scheduleTestUuid = $window.localStorage.getItem(CHALKNDUST.SCHEDULETESTUUID);
 
         /* Get User Profile Photo */
         GetUserPhotoService.get({
@@ -141,22 +147,30 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           // status) {
           // alert(data);
           // });
-          $scope.answers = answers;
-          var answerObject = {
-            studentId : $scope.securUuid,
-            classId : $scope.classId,
-            subjectId : $scope.subjectId,
-            answers : $scope.answers,
-            testTypeId : $scope.type
-          };
+          console.log($scope.questions);
+          if($scope.scheduleTestUuid!=1){
+            $scope.answers = answers;
+            var answerObject = {
+              studentId : $scope.securUuid,
+              classId : $scope.classId,
+              subjectId : $scope.subjectId,
+              answers : $scope.answers,
+              testTypeId : $scope.type,
+              scheduleTestUuid:$scope.scheduleTestUuid
+            };
 
-          saveAnswersService.save({}, answerObject, function(response) {
-            if (response) {
-              $scope.mode = 'result';
-            }
-          }, function(error) {
-            showAlert('danger', error.data.message);
-          });
+            saveAnswersService.save({}, answerObject, function(response) {
+              if (response) {
+                $scope.mode = 'result';
+              }
+            }, function(error) {
+              showAlert('danger', error.data.message);
+            });
+          }else{
+            $scope.mode = 'result';
+          }
+         
+         
 
         }
 
@@ -169,7 +183,8 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           GetTestQuestionsListService.query({
             classId : $scope.classId,
             subjectId : $scope.subjectId,
-            type : $scope.type
+            type : $scope.type,
+            scheduleTestUuid: $scope.scheduleTestUuid
           }, function(res) {
             var questiondata = window.localStorage.getItem(CHALKNDUST.QUESTIONDATA);
             $scope.config = $scope.defaultConfig;
@@ -230,6 +245,16 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
 
         $scope.closeWindow = function() {
           resetData();
+          GetNotificationList.query({
+            classId : $scope.classId,
+            studentId : $scope.securUuid
+          }, function(response) {
+            if (response) {
+              $rootScope.notificationList=response;
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
           $state.go('chalkanddust.profile');
         }
 

@@ -1539,11 +1539,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          * ends here
          * 
          */
-        
-        function testSchedularDetails(scheduleTestData){
+
+        function testSchedularDetails(scheduleTestData) {
           var testDate = scheduleTestData.testDate;
           var testTime = scheduleTestData.testTime;
-          if(!testDate.contains("-")){
+          if (!testDate.contains("-")) {
             showAlert('danger', "Please input a valid date");
             return false;
           }
@@ -1552,7 +1552,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           var year = testTimeSplit[0];
           var month = testTimeSplit[1];
           var day = testTimeSplit[2];
-        
+
           if (year.length != 4) {
             showAlert('danger', "Please input a valid year in date");
             return false;
@@ -1574,7 +1574,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           year = Number(testTimeSplit[0]);
           month = Number(testTimeSplit[1]);
           day = Number(testTimeSplit[2]);
-        
+
           if (month > 12) {
             showAlert('danger', "Please input valid month in date");
             return false;
@@ -1656,51 +1656,49 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               return false;
             }
           }
-          var currentDate=new Date();          
-          var inputDate=new Date(testDate);
-          if(inputDate.getTime()<currentDate.getTime()){
+          var currentDate = new Date();
+          var inputDate = new Date(testDate);
+          if (inputDate.getTime() < currentDate.getTime()) {
             showAlert('danger', "Please input valid date greater than currentdate");
             return false;
           }
 
-          if(!testTime.contains(":")){
+          if (!testTime.contains(":")) {
             showAlert('danger', "Please input a valid time");
             return false;
           }
-          
-          var testTimeDetail=testTime.split(":");
-          var hour=Number(testTimeDetail[0]);
-          var minutes=Number(testTimeDetail[1]);
-          var seconds=Number(testTimeDetail[2]);
-          
-          
-          if(hour<0 || hour>23){
+
+          var testTimeDetail = testTime.split(":");
+          var hour = Number(testTimeDetail[0]);
+          var minutes = Number(testTimeDetail[1]);
+          var seconds = Number(testTimeDetail[2]);
+
+          if (hour < 0 || hour > 23) {
             showAlert('danger', "Please input valid hours");
             return false;
           }
-          if(minutes<0 || minutes>59){
+          if (minutes < 0 || minutes > 59) {
             showAlert('danger', "Please input valid minutes");
             return false;
           }
-          if(seconds<0 || seconds>59){
+          if (seconds < 0 || seconds > 59) {
             showAlert('danger', "Please input valid seconds");
             return false;
-          }
-          else{
+          } else {
             return true;
           }
         }
-        
-        String.prototype.contains=function(it){
-          return this.indexOf(it)!= -1;
+
+        String.prototype.contains = function(it) {
+          return this.indexOf(it) != -1;
         }
 
         /** ******Schedule Test Methods starts from here*********** */
         $scope.scheduleTestDetailsToSave = {};
         this.createScheduleTestData = function(scheduleTestDetails) {
-          if(!testSchedularDetails($scope.scheduleTestDetails)){
+          if (!testSchedularDetails($scope.scheduleTestDetails)) {
             return false;
-          }          
+          }
           var schdeuleTestDetails = $scope.scheduleTestDetails;
           angular.extend($scope.scheduleTestDetailsToSave, $scope.scheduleTestDetails);
           saveScheduleTestMasterData.save({}, $scope.scheduleTestDetailsToSave, function(response) {
@@ -1784,7 +1782,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** ***********Update Schedule data*************** */
         this.updateScheduleTestData = function() {
-          if(!testSchedularDetails($scope.scheduleTestDetails)){
+          if (!testSchedularDetails($scope.scheduleTestDetails)) {
             return false;
           }
           updateScheduleDetailsService.save({}, $scope.scheduleTestDetails, function(response) {
@@ -1870,5 +1868,39 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           showAlert('danger', error.data.message);
         });
 
+      } ]);
+
+  homeModule.controller('NotificationController', [ '$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 'CHALKNDUST', 'CandDModalService', '$stateParams','$interval','GetNotificationList',
+      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, CandDModalService, $stateParams, $interval,GetNotificationList) {
+       
+        var showAlert = function(type, message) {
+          $scope.alert = {};
+          $scope.alert.type = type;
+          $scope.alert.message = message;
+          $scope.alert.show = true;
+        };
+
+        $scope.closeAlert = function() {
+          $scope.alert = {};
+          $scope.alert.show = false;
+          return true;
+        };
+        $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+        $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+        $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+        $interval(function(){
+        
+        GetNotificationList.query({
+          classId : $scope.classId,
+          studentId : $scope.securUuid
+        }, function(response) {
+          if (response) {
+            $rootScope.notificationList=response;
+          }
+        }, function(error) {
+          showAlert('danger', error.data.message);
+        });
+        },60000);
+        
       } ]);
 });

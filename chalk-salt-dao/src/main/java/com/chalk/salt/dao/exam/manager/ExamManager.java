@@ -93,10 +93,11 @@ public interface ExamManager {
      * @param classId the class id
      * @param subjectId the subject id
      * @param type the type
+     * @param scheduleTestUuid the schedule test uuid
      * @return the questions using type
      * @throws ExamException the exam exception
      */
-    List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type)throws ExamException;
+    List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid)throws ExamException;
 
 	/**
 	 * Save answer details.
@@ -161,5 +162,15 @@ public interface ExamManager {
 	 * @throws ExamException the exam exception
 	 */
 	Boolean deleteScheduleTestContentData(String scheduleTestUuid)throws ExamException;
+
+    /**
+     * Gets the schedule tests list using class id.
+     *
+     * @param classId the class id
+     * @param studentId 
+     * @return the schedule tests list using class id
+     * @throws ExamException the exam exception
+     */
+    List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId)throws ExamException;
 
 }

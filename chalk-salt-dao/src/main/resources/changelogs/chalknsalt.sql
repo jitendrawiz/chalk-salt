@@ -356,6 +356,7 @@ CREATE TABLE `cst_student_test` (
   `subject_id` int(11) NOT NULL,
   `test_type_id` varchar(100) DEFAULT NULL,
   `test_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  scheduled_test_uuid varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 

@@ -107,10 +107,11 @@ public interface ExamDao {
      * @param classId the class id
      * @param subjectId the subject id
      * @param limitOfQuestions the limit of questions
+     * @param typeOfQuestion the type of question
      * @return the questions using type
      * @throws Exception the exception
      */
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions)throws Exception;
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions,String typeOfQuestion)throws Exception;
 
 	/**
 	 * Save question options.
@@ -227,7 +228,7 @@ public interface ExamDao {
 	 *
 	 * @param scheduleTestDetails the schedule test details
 	 * @param date the date
-	 * @param scheduleTestUuid 
+	 * @param scheduleTestUuid the schedule test uuid
 	 * @return the list
 	 * @throws Exception the exception
 	 */
@@ -242,5 +243,15 @@ public interface ExamDao {
 	 * @throws Exception the exception
 	 */
 	public String getTestDurationFromTestTypeUuid(String testTypeUuid)throws Exception;
+
+    /**
+     * Gets the schedule tests list using class id.
+     *
+     * @param classId the class id
+     * @param studentId the student id
+     * @return the schedule tests list using class id
+     * @throws Exception the exception
+     */
+    public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId)throws Exception;
 
 }

@@ -510,5 +510,17 @@ define([ 'angular' ], function(angular) {
   } ]);
   
   /*schedule test services ends here*/
+  
+  /*Nofitication service*/
+  studentService.factory('GetNotificationList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/schedule-test/notification/list/:classId/:studentId', {
+      classId : '@classId',
+      studentId : '@studentId'
+    }, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
 
 });

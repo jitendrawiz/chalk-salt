@@ -497,16 +497,16 @@ public class ExamManagerImpl implements ExamManager
      * .lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type) throws ExamException
+    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid) throws ExamException
         {
             logger.info("Fetching list of questions ...");
             int limitOfQuestions = 0;
+            String typeOfQuestion="Practice Question";
             if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77"))
                 {
                 limitOfQuestions = 40;
                 }
-            else
-                if (type.equals("cf92fc16-4684-11e6-beb8-9e71128cae77"))
+            else if (type.equals("cf92fc16-4684-11e6-beb8-9e71128cae77"))
                     {
                     limitOfQuestions = 60;
                     }
@@ -514,10 +514,16 @@ public class ExamManagerImpl implements ExamManager
                     {
                     limitOfQuestions = 20;
                     }
+            
+            if(scheduleTestUuid.equals("1")){
+            typeOfQuestion="Practice Question";
+            }else{
+            typeOfQuestion="Scheduled Exam Question";
+            }
             try
                 {
                 List<QuestionListDto> questionsListDto = new ArrayList<QuestionListDto>();
-                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, limitOfQuestions);
+                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, limitOfQuestions,typeOfQuestion);
                 for (int index = 0; index < questionsList.size(); index++)
                     {
                     QuestionDto questionDto = questionsList.get(index);
@@ -804,5 +810,22 @@ public class ExamManagerImpl implements ExamManager
                 {
                 throw new ExamException(ErrorCode.FAIL_TO_DELETE_SCHEDULE_TEST_CONTENT, "Fail to delete schedule test content", exception);
                 }
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.exam.manager.ExamManager#getScheduleTestsListUsingClassId(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId) throws ExamException
+        {
+        logger.info("fetch list of scheduled tests...");
+        try
+            {
+            return examDao.getScheduleTestsListUsingClassId(classId,studentId);
+            }
+        catch (final Exception exception)
+            {
+            throw new ExamException(ErrorCode.FAIL_TO_FETCH_SCHEDULE_TEST_LIST, "Fail to Fetch list of Scheduled tests", exception);
+            }
         }
 }

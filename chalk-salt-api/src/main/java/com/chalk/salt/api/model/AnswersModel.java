@@ -24,8 +24,32 @@ public class AnswersModel extends ApiModel {
 
 	/** The test type id. */
 	private String testTypeId;
+	
+	/** The schedule test uuid. */
+	private String scheduleTestUuid;
+	
 
 	/**
+	 * Gets the schedule test uuid.
+	 *
+	 * @return the schedule test uuid
+	 */
+	public String getScheduleTestUuid()
+        {
+            return scheduleTestUuid;
+        }
+
+    /**
+     * Sets the schedule test uuid.
+     *
+     * @param scheduleTestUuid the new schedule test uuid
+     */
+    public void setScheduleTestUuid(String scheduleTestUuid)
+        {
+            this.scheduleTestUuid = scheduleTestUuid;
+        }
+
+    /**
 	 * Gets the test type id.
 	 *
 	 * @return the test type id

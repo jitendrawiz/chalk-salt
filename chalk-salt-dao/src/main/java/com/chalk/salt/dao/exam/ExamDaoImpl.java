@@ -214,14 +214,16 @@ public class ExamDaoImpl implements ExamDao {
         }
     }
 
+    
     /* (non-Javadoc)
-     * @see com.chalk.salt.dao.exam.ExamDao#getQuestionsUsingType(java.lang.String, java.lang.String, int)
+     * @see com.chalk.salt.dao.exam.ExamDao#getQuestionsUsingType(java.lang.String, java.lang.String, int, java.lang.String)
      */
     @Override
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions) throws Exception {
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions,String typeOfQuestion) throws Exception {
         final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
                 + "`question_uuid` as questionSecuruuid,question_id as questionId FROM `cst_questions` "
-                + "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId AND question_type='Practice Question' ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
+                + " WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId "
+                + " AND question_type=\""+typeOfQuestion+"\" ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -300,15 +302,16 @@ public class ExamDaoImpl implements ExamDao {
 	@Override
 	public String saveAnswerTestRecord(AnswersDto answers)throws Exception {
 		final String sqlQuery = "INSERT INTO `cst_student_test` (`student_id`, `class_id`, `subject_id`, "
-				+ " test_type_id)"
-				+ "VALUES(:studentId, :classId, :subjectId, :testTypeId)";
+				+ " test_type_id,scheduled_test_uuid)"
+				+ "VALUES(:studentId, :classId, :subjectId, :testTypeId,:scheduleTestUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("studentId", answers.getStudentId());   
             query.addParameter("classId", answers.getClassId());   
             query.addParameter("subjectId", answers.getSubjectId());   
-            query.addParameter("testTypeId", answers.getTestTypeId());   
+            query.addParameter("testTypeId", answers.getTestTypeId());
+            query.addParameter("scheduleTestUuid", answers.getScheduleTestUuid());
             return  String.valueOf(query.executeUpdate().getKey());
         }
 	}
@@ -483,6 +486,33 @@ public class ExamDaoImpl implements ExamDao {
             return query.executeAndFetchFirst(String.class);
         }
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.exam.ExamDao#getScheduleTestsListUsingClassId(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId) throws Exception
+        {
+        final String sqlQuery = "SELECT class_id AS classId, "
+                + " subject_id AS subjectId,"
+                + " test_date AS testDate,"
+                + " test_time AS testTime,"
+                + " test_title AS testTitle,"
+                + " DATE_FORMAT(created_at ,'%d-%M-%Y %H:%i:%S') AS  scheduleTestCreatedDate,"
+                + " test_type_uuid AS testTypeUuid, "
+                + " test_uuid AS scheduleTestUuid "
+                + " FROM `cst_schedule_test_master` "
+                + " WHERE class_id= :classId and test_date=CURRENT_DATE() AND test_time<CURRENT_TIME()   "
+                + " AND test_uuid NOT IN (SELECT scheduled_test_uuid FROM `cst_student_test` WHERE student_id=:studentId AND scheduled_test_uuid IS NOT NULL)"
+                + " ORDER BY test_id DESC";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("studentId", studentId);
+            return query.executeAndFetch(ScheduleTestDto.class);
+        }
+        }
 
  
 }
