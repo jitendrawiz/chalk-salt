@@ -1900,7 +1900,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         }, function(error) {
           showAlert('danger', error.data.message);
         });
-        },60000);
+        },120000);
         
       } ]);
 });
