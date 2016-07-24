@@ -23,8 +23,8 @@
     <div class="dr_com_head">
         <div class="dr_heading">
             <ul>
-                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com </a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
+                <li><a href="mailto:info@chalkndust.com"><i class="fa fa-envelope-o"></i>info@chalkndust.com</a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-phone"></i>+91 080104 33013</a><a id="home"></a></li>
             </ul>
             <div class="dr_search">
                 <ul>
@@ -106,7 +106,8 @@
                         <marquee direction="up" scrollamount="4">
                             <div style="min-height: 200px;">
                                 <p ng-repeat="item in notificationList">
-            <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
+                                    <a
+                                        ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
                                 </p>
                             </div>
                         </marquee>

@@ -13,105 +13,91 @@
 	position: fixed;
 }
 </style>
-
 <div class="dr_com_main">
-	<div class="dr_com_head">
-		<div class="dr_heading">
-			<ul>
-				<li><a href="#"><span class="glyphicon glyphicon-envelope"></span>username@mailid.com
-				</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-earphone"></span>+91-445533654</a></li>
-			</ul>
-			<div class="dr_search">
-				<ul>
-					<li><a href="#"><span class="glyphicon glyphicon-plus"></span>New
-							Request</a></li>
-					<li><a ng-click="requestCtrl.goBackToTopicsScreen()"><span
-							class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="clear"></div>
-	<div class="dr_main_detail">
-		<div class="dr_new_entery">
-			<h3>New Request</h3>
-			<form name="topicRequestForm" role="form" action="" method="post" novalidate>
-			<table>
-				<tr>
-					<td class="right_one">Subject</td>
-					<td class="sub_size">
-						<div class="form-group"
-							ng-class="{ 'has-error' : topicRequestForm.studentSubject.$invalid && !topicRequestForm.studentSubject.$pristine }">
-							<select class="form-control" ng-model="topicRequestInfo.subjectId"
-								name="studentSubject" placeholder="Subject"
-								ng-options="item.subjectId as item.subjectName for item in topicStatistics"
-								required>
-								<option value="" disabled>Select Subject</option>
-							</select>
-							<p ng-show="topicRequestForm.studentSubject.$error.required && !topicRequestForm.studentSubject.$pristine">
-								Subject is required.
-							</p>
-						</div>	
-					</td>
-				</tr>
-				<tr>
-					<td class="right_one end_text">Topic Title</td>
-					<td>
-						<div class="form-group"
-							ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
-							<textarea class="form-control" id="topicTitle" name="topicTitle"
-								ng-model="topicRequestInfo.topicTitle" type="text"
-								placeholder="Topic Title" required></textarea>
-							<span style="color: red" class="help-block"
-								ng-show="topicRequestForm.topicTitle.$invalid  && !topicRequestForm.topicTitle.$pristine">
-								<span ng-show="topicRequestForm.topicTitle.$error.required">Topic
-									Title is required.</span>
-							</span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="right_one">Topic Description</td>
-					<td>
-						<div class="form-group"
-							ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
-							<textarea class="form-control" id="topicDescription"
-								name="topicDescription" ng-model="topicRequestInfo.topicDescription"
-								type="text" placeholder="Topic Description" required></textarea>
-							<span style="color: red" class="help-block"
-								ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine">
-								<span
-								ng-show="topicRequestForm.topicDescription.$error.required">Topic
-									Description is required.</span>
-							</span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="right_one">Image Upload</td>
-					<td>
-						<div class="form-group">
-							<input id="inputUploadTopicPhoto" type="file" file-model="topicImage"/>
-						</div>
-					</td>					
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>
-						<div class="form-group">
-							<button type="button" class="btn btn-secondary btn-block"
-								ng-disabled="topicRequestForm.$invalid"
-								ng-click="requestCtrl.saveTopicRequest(topicImage)">Submit</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-			</form>
-		</div>
-		<div class="clear"></div>
-	    <nav class="navbar  navbar-fixed-bottom">
-			<div footer></div>
-		</nav>
-	</div>
+    <div class="dr_com_head">
+        <div class="dr_heading">
+            <ul>
+                <li><a href="mailto:info@chalkndust.com"><i class="fa fa-envelope-o"></i>info@chalkndust.com</a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-phone"></i>+91 080104 33013</a><a id="home"></a></li>
+            </ul>
+            <div class="dr_search">
+                <ul>
+                    <li><a href="javscript:void(0)" ng-click="requestCtrl.goBackToTopicsScreen()"><span class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="dr_main_detail">
+        <div class="dr_new_entery">
+            <h3>New Request</h3>
+            <form name="topicRequestForm" role="form" action="" method="post" novalidate>
+                <table>
+                    <tr>
+                        <td class="right_one">Subject</td>
+                        <td class="sub_size">
+                            <div class="form-group"
+                                ng-class="{ 'has-error' : topicRequestForm.studentSubject.$invalid && !topicRequestForm.studentSubject.$pristine }">
+                                <select class="form-control" ng-model="topicRequestInfo.subjectId" name="studentSubject" placeholder="Subject"
+                                    ng-options="item.subjectId as item.subjectName for item in topicStatistics" required>
+                                    <option value="" disabled>Select Subject</option>
+                                </select>
+                                <p ng-show="topicRequestForm.studentSubject.$error.required && !topicRequestForm.studentSubject.$pristine">
+                                    Subject is required.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right_one end_text">Topic Title</td>
+                        <td>
+                            <div class="form-group"
+                                ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
+                                <textarea class="form-control" id="topicTitle" name="topicTitle" ng-model="topicRequestInfo.topicTitle" type="text"
+                                    placeholder="Topic Title" required></textarea>
+                                <span style="color: red" class="help-block"
+                                    ng-show="topicRequestForm.topicTitle.$invalid  && !topicRequestForm.topicTitle.$pristine"> <span
+                                    ng-show="topicRequestForm.topicTitle.$error.required">Topic Title is required.</span>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right_one">Topic Description</td>
+                        <td>
+                            <div class="form-group"
+                                ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
+                                <textarea class="form-control" id="topicDescription" name="topicDescription"
+                                    ng-model="topicRequestInfo.topicDescription" type="text" placeholder="Topic Description" required></textarea>
+                                <span style="color: red" class="help-block"
+                                    ng-show="topicRequestForm.topicDescription.$invalid  && !topicRequestForm.topicDescription.$pristine"> <span
+                                    ng-show="topicRequestForm.topicDescription.$error.required">Topic Description is required.</span>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right_one">Image Upload</td>
+                        <td>
+                            <div class="form-group">
+                                <input id="inputUploadTopicPhoto" type="file" file-model="topicImage" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary btn-block" ng-disabled="topicRequestForm.$invalid"
+                                    ng-click="requestCtrl.saveTopicRequest(topicImage)">Submit</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="clear"></div>
+        <nav class="navbar  navbar-fixed-bottom">
+            <div footer></div>
+        </nav>
+    </div>
 </div>
