@@ -844,3 +844,86 @@
     border-top: 0px solid #5d99cd;
 }
 /*#####################navigation panel with lpanel-bg9 theme Color close*################*/
+
+/*################ Theme Content Section Style Start Here ############################*/
+#hoeapp-wrapper[hoe-device-type="phone"] #styleSelector {
+    top: 6px;
+}
+#main-content {
+    margin-left: 230px;
+	position:relative;
+}
+
+.content-title {
+    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 20px;
+}
+.content-title .main-title {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+}
+.inner-content {
+    padding: 20px;
+}
+.theme-panel .panel-heading {
+    border-bottom: 1px solid #e3e3e3;
+    text-align: center;
+}
+.theme-panel .panel-heading .panel-title {
+    font-size: 18px;
+}
+.feature-box {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    min-height: 20px;
+    padding: 19px;
+    text-align: center;
+}
+.feature-box:hover {
+    background-color: #101525;
+    border: 1px solid #e3e3e3;
+    color: #959fae;
+}
+.feature-icon i {
+    font-size: 50px;
+}
+.feature-box .h4,
+.feature-box .h5,
+.feature-box .h6,
+.feature-box h4,
+.feature-box h5,
+.feature-box h6 {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    font-size: 16px;
+}
+.hoe-minimized-lpanel #main-content {
+    margin-left: 50px;
+}
+#hoeapp-container[hoe-lpanel-effect="shrink"] #main-content{
+	margin-left: 230px;
+}
+#hoeapp-container[hoe-lpanel-effect="shrink"].hoe-minimized-lpanel #main-content{
+	margin-left: 50px;
+}
+#hoeapp-container[hoe-lpanel-effect="overlay"] #main-content{
+	 margin-left: 50px;
+}
+#hoeapp-container[hoe-lpanel-effect="overlay"].hoe-minimized-lpanel #main-content{
+	 margin-left: 50px;
+}
+#hoeapp-container[hoe-lpanel-effect="push"] #main-content{
+	margin-left: 230px;
+	margin-right: -230px;
+}
+#hoeapp-container[hoe-lpanel-effect="push"].hoe-minimized-lpanel #main-content{
+	 margin-left: 50px;
+     margin-right: 0px;	 
+}
+/*################ Theme Content Section Style Close Here ############################*/
+
+/*################## Style Selector Theme Color Start ###########################*/

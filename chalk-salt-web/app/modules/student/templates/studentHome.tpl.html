@@ -1,8 +1,17 @@
-<!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/font-awesome.min.css"> -->
-<link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
-<script src="../../../resources/js/jquery-1.11.2.min.js"></script>
-<script src="../../../resources/js/bootstrap.min.js"></script>
-<script src="../../../resources/js/hoe.js"></script>
+<script src="./resources/js/jquery-1.11.2.min.js"></script>
+<script src="./resources/js/bootstrap.min.js"></script>
+<script src="./resources/js/hoe.js"></script>
+<style>
+.main_bg_bg {
+    background-image: none;
+    background-size: 100%;
+    width: 0%;
+    height: 1000px;
+    top: 0;
+    z-index: 0;
+    position: fixed;
+}
+</style>
 <div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
@@ -26,7 +35,7 @@
                 	<li><a ui-sref="chalkanddust.student">My Profile</a></li>
                 	<li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
                     <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
-                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="../resources/images/user.png"
+                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="./resources/images/user.png"
                                 alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img class="img-circle "
                                 ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
                     </a>
@@ -42,7 +51,7 @@
                 <div class="profile-box">
                     <div class="media">
                         <a class="pull-left" href="javascript:void(0)"> <span ng-show="isUndefined(userProfilePhoto)"><img
-                                src="../resources/images/user.png" alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img
+                                src="./resources/images/user.png" alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img
                                 class="img-circle " ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span>
                         </a>
                         <div class="media-body">
@@ -105,11 +114,11 @@
                                     <a charset="#">HAVE A QUERY? REACH OUT TO US</a>
                                 </h4>
                                 <h5>
-                                    <a href="#"> <i><img src="../../../resources/images/facebook.png"></i> Facebook
+                                    <a href="#"> <i><img src="./resources/images/facebook.png"></i> Facebook
                                     </a>
                                 </h5>
                                 <h5>
-                                    <a href="#"> <i><img src="../../../resources/images/whatsapp.gif"></i> +91 080104 33013
+                                    <a href="#"> <i><img src="./resources/images/whatsapp.gif"></i> +91 080104 33013
                                     </a>
                                 </h5>
                             </div>
@@ -120,8 +129,3 @@
         </div>
     </div>
 </div>
-<script>
-     $(document).ready(function(){
-        $('.dropdown-toggle').dropdown();
-    });
-</script>

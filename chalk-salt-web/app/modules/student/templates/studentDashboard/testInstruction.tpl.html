@@ -1,4 +1,8 @@
-<link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
+<style>
+.main_bg_bg {
+background-image: none;
+}
+</style>
 <body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
@@ -22,7 +26,7 @@
                 	<li><a ui-sref="chalkanddust.student">My Profile</a></li>
                 	<li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
                     <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
-                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="../resources/images/user.png"
+                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="./resources/images/user.png"
                                 alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img class="img-circle "
                                 ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
                     </a>
@@ -61,8 +65,8 @@
         </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../../../../resources/js/1.11.2.jquery.min.js"></script>
+    <script src="./resources/js/jquery-1.11.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../../../../resources/js/bootstrap.min.js"></script>
-    <script src="../../../../resources/js/hoe.js"></script>
+    <script src="./resources/js/bootstrap.min.js"></script>
+    <script src="./resources/js/hoe.js"></script>
 </body>

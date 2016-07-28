@@ -19,7 +19,8 @@ require.config({
     angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min',
     ngAnimate:'lib/angular-animate/angular-animate.min',
     angularPdf:'lib/angular-pdf/dist/angular-pdf.min',
-    pdfjs:'lib/pdfjs-dist/build/pdf'
+    pdfjs:'lib/pdfjs-dist/build/pdf',
+    ionicons:'lib/ionicons/css/ionicons.min'
     	//angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
     },
   /**

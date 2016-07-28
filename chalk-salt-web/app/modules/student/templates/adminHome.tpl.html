@@ -1,8 +1,17 @@
-<!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/font-awesome.min.css"> -->
-<link href="../../../resources/css/dashboardpage/hoe.css" rel="stylesheet">
 <script src="./resources/js/jquery-1.11.2.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
 <script src="./resources/js/hoe.js"></script>
+<style>
+.main_bg_bg {
+    background-image: none;
+    background-size: 100%;
+    width: 0%;
+    height: 1000px;
+    top: 0;
+    z-index: 0;
+    position: fixed;
+}
+</style>
 <div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
@@ -153,7 +162,7 @@
                                         <div ng-include="'modules/student/templates/admin/scheduleTestMaster.tpl.html'"></div>
                                     </div>
                                     <div ng-switch-when="17">
-                                        <div ng-include="'modules/student/templates/admin/scheduleTestContentList.tpl.html'"></div>
+                                        <div ng-include="'modules/student/templates/admin/ScheduleTestContentList.tpl.html'"></div>
                                     </div>
                                 </div>
                             </div>

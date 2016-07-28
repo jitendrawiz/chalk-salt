@@ -8,7 +8,7 @@
 
 *****************************************************/
 
-/* Entypo pictograms by Daniel Bruce — www.entypo.com */
+/* Entypo pictograms by Daniel Bruce â€” www.entypo.com */
 @charset "UTF-8";
 @font-face {
 	font-family: 'entypo';
@@ -27,6 +27,7 @@
 body {
 	background-size: cover;
     background-attachment: fixed;
+    background-image:url(../image/bg.jpg);
     background-position: center center;
 }
 #demo{margin:50px auto 0;width:1000px;position:relative}#tabbed p.demo-cell{background:#f0f0f0;padding:10px;color:#999;font-size:12px}#demo .demo-head{float:left}#demo .m-title{font-family:'Lato',Arial,Helvetica,sans-serif;font-size:30px;color:#6E98E3;text-transform:uppercase;font-weight:300}#demo h1{font-size:14px;font-weight:400;font-family:'Lato',Arial,Helvetica,sans-serif;color:#999;margin:4px 0 0}#demo .colors{float:left;margin:30px 0 40px;display:block;width:100%}#demo .colors a{display:inline-block;width:20px;height:20px;text-indent:100%;white-space:nowrap;overflow:hidden;margin:0 6px 0 0;float:left;}a.yellow{background:#EAE177}a.blue{background:#6E98E3}a.red{background:#f44343}a.green{background:#A2D763}a.orange{background:#ffb347}a.sweet{background:#fe6f5e}a.black{background:#444}

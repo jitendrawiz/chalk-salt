@@ -2,7 +2,7 @@
 
 define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap', 'css!candDCss',
          'jquery', 'jqueryUI', 'angularTranslate',
-        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome','ngAnimate','angularPdf','pdfjs'], function(angular) {
+        'angularTranslateStaticFile', 'angularSanitize', 'css!fontAwesome','ngAnimate','angularPdf','pdfjs','css!ionicons'], function(angular) {
 
     var chalkAndDust = angular.module('chalkAndDust', [ 'ui.router', 'ngResource',
      'Home.controller', 'Login.controller', 'Registration.controller','Student.controller',
