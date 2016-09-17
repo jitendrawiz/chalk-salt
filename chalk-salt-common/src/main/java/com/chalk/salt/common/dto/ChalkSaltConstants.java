@@ -6,7 +6,7 @@ package com.chalk.salt.common.dto;
 public interface ChalkSaltConstants {
 
     /** The Constant DOMAIN_DATASOURCE_JNDI_NAME. */
-    public static final String DOMAIN_DATASOURCE_JNDI_NAME = "chalk-salt";
+    public static final String DOMAIN_DATASOURCE_JNDI_NAME = "chalkndust";
 
     /** The Constant JNDI_PREFIX. */
     public static final String JNDI_PREFIX = "java:jboss/datasources/";

@@ -39,7 +39,7 @@ public class EmailService {
     private static final String EMAIL_DELIMITER_REGEX = "[ ,;:]+";
 
     /** The Constant executorService. */
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     /**
      * Send mail.
