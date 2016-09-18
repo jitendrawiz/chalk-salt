@@ -14,7 +14,6 @@ define(
         '$window',
         '$scope',
         '$state',
-        '$modal',
         '$resource',
         '$rootScope',
         'CHALKNDUST',
@@ -23,7 +22,7 @@ define(
         '$log',
         'HomeGuestService',
         'userClassLookUpService',
-        function($window, $scope, $state, $modal, $resource, $rootScope, CHALKNDUST, HomeService, CandDModalService, $log, HomeGuestService,
+        function($window, $scope, $state, $resource, $rootScope, CHALKNDUST, HomeService, CandDModalService, $log, HomeGuestService,
           userClassLookUpService)
           {
             $window.scrollTo(0, 0);
@@ -47,7 +46,6 @@ define(
               };
             $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
             $scope.userName = $window.localStorage.getItem(CHALKNDUST.USERNAME);
-            console.log($scope.userName);
             $scope.version = CHALKNDUST.VERSION;
             $scope.build = CHALKNDUST.BUILD;
             $scope.email = CHALKNDUST.EMAIL;

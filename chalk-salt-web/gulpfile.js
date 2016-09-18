@@ -54,10 +54,6 @@ gulp.task('test', function(){
   karma.once();
 });
 
-gulp.task('i18n', function(){
-  return gulp.src(yeoman.app + 'resources/i18n/**')
-      .pipe(livereload());
-});
 
 gulp.task('images', function(){
     return gulp.src(yeoman.app + 'resources/img/**').
@@ -95,10 +91,6 @@ gulp.task('fonts:dist', ['clean', 'config'], function(){
            pipe(gulp.dest(yeoman.dist + 'fonts/'));
 });
 
-gulp.task('i18n:dist', function(){
-    return gulp.src(yeoman.app + 'resources/i18n/**')
-            .pipe(gulp.dest(yeoman.dist + 'i18n/'))
-});
 
 gulp.task('images:dist', function(){
     return gulp.src(yeoman.app + 'resources/img/**').
@@ -126,7 +118,6 @@ gulp.task('watch', function() {
     gulp.watch(yeoman.scss+'*.scss', ['sass']); 
     gulp.watch(yeoman.app +'resources/img/**', ['images']);
     gulp.watch(yeoman.app+'modules/**/*.html', ['templates']);
-    gulp.watch(yeoman.app+'resources/i18n/**', ['i18n']);
 });
 
 gulp.task('usemin', ['images', 'sass'], function(){

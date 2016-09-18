@@ -14,14 +14,10 @@ require.config({
     candDCss: 'resources/css/chalk-Dust',
     uiBootstrap: 'lib/angular-bootstrap/ui-bootstrap-tpls',
     fontAwesome: 'lib/fontawesome/css/font-awesome',
-    angularTranslate: 'lib/angular-translate/angular-translate.min',
-    angularTranslateStaticFile: 'lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min',
-    angularDragDrop:'lib/angular-dragdrop/src/angular-dragdrop.min',
     ngAnimate:'lib/angular-animate/angular-animate.min',
     angularPdf:'lib/angular-pdf/dist/angular-pdf.min',
     pdfjs:'lib/pdfjs-dist/build/pdf',
     ionicons:'lib/ionicons/css/ionicons.min'
-    	//angularPrettyCheckable: 'lib/angular-pretty-checkable/dist/angular-pretty-checkable.min'
     },
   /**
    * for lib that either do not support AMD out of the box, or
@@ -34,8 +30,6 @@ require.config({
     ngAnimate: ['angular'],
     uiRouter: ['angular'],
     uiBootstrap: ['angular'],
-    angularTranslate: ['angular'],
-    angularTranslateStaticFile: ['angular','angularTranslate'],
     angularPdf:['angular','pdfjs'],
   },
   map: {
