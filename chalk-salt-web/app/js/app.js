@@ -8,15 +8,8 @@ define([ 'angular', 'uiRouter', 'uiBootstrap', 'angularResource', 'css!bootstrap
      'Home.controller', 'Login.controller', 'Registration.controller','Student.controller',
      'httpInterceptor', 'System.configuration', 'pascalprecht.translate', 'ngSanitize', 'ui.bootstrap','ngAnimate','pdf']);
 
-    chalkAndDust.config(function($stateProvider, $urlRouterProvider, $translateProvider,$sceProvider) {
-        /*
-         * https://scotch.io/tutorials/internationalization-of-angularjs-applications
-         */$translateProvider.useStaticFilesLoader({
-            prefix : './resources/i18n/locale-',
-            suffix : '.json'
-        });
-        $translateProvider.preferredLanguage('en_US');
-        $translateProvider.useSanitizeValueStrategy('sanitize');
+    chalkAndDust.config(function($stateProvider, $urlRouterProvider, $sceProvider) {
+
         $sceProvider.enabled(false);
 
         $stateProvider.state('chalkanddust', {

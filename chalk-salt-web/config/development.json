@@ -1,6 +1,6 @@
 {
 	"ENV":{
 		"NAME": "development",
-		"API_END_POINT": "http://0.0.0.0:8080/chalk-salt-api/"
+		"API_END_POINT": "http://localhost:8080/chalk-salt-api/"
 	}
 }

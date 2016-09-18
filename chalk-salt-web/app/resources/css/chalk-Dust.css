@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
   font-weight: 400; }
@@ -6734,7 +6735,7 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
 - profile:   http://codecanyon.net/user/Capelle
 
 *****************************************************/
-/* Entypo pictograms by Daniel Bruce — www.entypo.com */
+/* Entypo pictograms by Daniel Bruce â€” www.entypo.com */
 @font-face {
   font-family: 'entypo';
   font-style: normal;
@@ -11341,7 +11342,7 @@ body {
 #hoeapp-wrapper[hoe-device-type="phone"] .hoe-left-header .hoe-sidebar-toggle a:after {
   background: transparent;
   border-radius: 4px;
-  content: "ïƒ‰";
+  content: "Ã¯Æ’â€°";
   font-family: FontAwesome;
   font-size: 16px;
   left: 5px;
