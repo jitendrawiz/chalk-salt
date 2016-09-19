@@ -95,13 +95,13 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
             /**
              * Service call to logging out of the application
              */
-            LogoutService.logout({}, function() {
+            LogoutService.logout({}, function(res) {
             	$rootScope.fullName="";
             	$rootScope.username="";
             	$rootScope.securUuid="";
             	resetLocalStorage();            	
                 $state.go('chalkanddust.home');
-            }, function() {
+            }, function(error) {
                 showAlert('danger', 'There was some problem while logging out.');
             });
             

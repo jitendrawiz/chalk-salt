@@ -1,12 +1,12 @@
 'use strict';
 define([ 'angular' ], function(angular) {
   var CandDModal = angular.module('CandDModal', [ 'System.configuration' ]);
-  CandDModal.service('CandDModalService', [ '$modal', function($modal) {
+  CandDModal.service('CandDModalService', [ '$uibModal', function($uibModal) {
 
     var modalDefaults = {
       backdrop : true,
       keyboard : true,
-      modalFade : true,
+      //modalFade : true,
       templateUrl : './modules/CandDModal/templates/CandDModal.tpl.html'
     };
 
@@ -67,22 +67,22 @@ define([ 'angular' ], function(angular) {
 
       if (!tempModalDefaults.controller) {
 
-        tempModalDefaults.controller = function($scope, $modalInstance) {
+        tempModalDefaults.controller = function($scope, $uibModalInstance) {
           $scope.modalOptions = tempModalOptions;
           $scope.ok = function(result) {
-            $modalInstance.close(result);
+            $uibModalInstance.close(result);
           };
           $scope.close = function() {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
           };
           $scope.cancel = function(result) {
-            $modalInstance.close(result);
+            $uibModalInstance.close(result);
           };
 
         }
       }
 
-      return $modal.open(tempModalDefaults).result;
+      return $uibModal.open(tempModalDefaults).result;
     };
 
     this.showGuest = function(customModalDefaults, customModalOptions) {
@@ -101,24 +101,24 @@ define([ 'angular' ], function(angular) {
 
       if (!tempModalDefaults.controller) {
 
-        tempModalDefaults.controller = function($scope, $modalInstance) {
+        tempModalDefaults.controller = function($scope, $uibModalInstance) {
 
           $scope.modalOptions = tempModalOptions;
 
           $scope.ok = function(result) {
-            $modalInstance.close(result);
+            $uibModalInstance.close(result);
           };
           $scope.close = function() {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
           };
           $scope.cancel = function(result) {
-            $modalInstance.close(result);
+            $uibModalInstance.close(result);
           };
 
         }
       }
 
-      return $modal.open(tempModalDefaults).result;
+      return $uibModal.open(tempModalDefaults).result;
     };
 
   } ]);

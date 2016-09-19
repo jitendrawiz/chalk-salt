@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -126,12 +125,14 @@ public class AuthResource extends AbstractResource {
     @POST
     @Path("/logout")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response logout() {
     	logger.info("User Logout service ....");
         final boolean result = userService.logout();
+        final Map<String, String> response = new HashMap<String, String>();
+        
         if (result) {
-            return Response.ok().build();
+        response.put("response","User Logged Out Successfully");
+            return Response.ok().entity(response).build();
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON)
             .entity(Utility.buildErrorResponse(ErrorCode.GENERIC_SERVER_ERROR, "An internal server error occurred")).build();
