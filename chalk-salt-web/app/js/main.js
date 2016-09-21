@@ -1,5 +1,6 @@
 require.config({
   baseUrl: '.',
+  waitSeconds: 0,
   paths: {
     angular: 'lib/angular/angular.min',
     domReady: 'lib/requirejs-domready/domReady',
