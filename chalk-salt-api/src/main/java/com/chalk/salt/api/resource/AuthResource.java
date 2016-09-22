@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.api.resource;
 
 import java.util.Arrays;
@@ -37,13 +33,6 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AuthStatus;
 import com.chalk.salt.common.exceptions.CoreException;
 import com.chalk.salt.common.util.ErrorCode;
-
-
-/**
- * The Class AuthResource.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
 @Path(ApiConstants.API_PRIVATE_BASEPATH)
 public class AuthResource extends AbstractResource {
 

@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.util;
 
 import java.lang.annotation.Annotation;
@@ -10,11 +6,6 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * The Class AnnotationUtils.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public abstract class AnnotationUtils {
 
     /** The Constant LOGGER. */

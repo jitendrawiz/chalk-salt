@@ -1,14 +1,7 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.common.dto;
 
 import java.util.List;
 
-/**
- * The Class UserDto.
- */
 public class UserDto {
 
 	/** The user id. */

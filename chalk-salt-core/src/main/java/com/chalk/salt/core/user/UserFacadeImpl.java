@@ -1,7 +1,3 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.core.user;
 
 import java.util.List;
@@ -63,6 +59,8 @@ public class UserFacadeImpl implements UserFacade {
      * Gets the email notification.
      *
      * @param user the user
+     * @param notificationTemplateKey the notification template key
+     * @param subject the subject
      * @return the email notification
      * @throws UserException the user exception
      */

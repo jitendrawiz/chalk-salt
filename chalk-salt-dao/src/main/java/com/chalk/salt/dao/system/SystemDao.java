@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.dao.system;
 
 import com.chalk.salt.common.exceptions.UserException;
@@ -9,8 +5,6 @@ import com.chalk.salt.dao.dto.SystemDetail;
 
 /**
  * The Interface SystemDao.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
  */
 public interface SystemDao {
 

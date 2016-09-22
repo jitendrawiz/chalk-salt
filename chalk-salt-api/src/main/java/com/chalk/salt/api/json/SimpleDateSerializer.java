@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.json;
 
 import java.io.IOException;
@@ -13,11 +9,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
-/**
- * The Class SimpleDateSerializer.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class SimpleDateSerializer extends JsonSerializer<Date> {
 
     /*

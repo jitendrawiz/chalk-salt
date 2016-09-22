@@ -13,11 +13,6 @@ import com.chalk.salt.api.security.DomainAuthRealm;
 import com.chalk.salt.core.security.AuthFacade;
 import com.chalk.salt.core.user.UserFacade;
 
-/**
- * The Class SecurityRealmsProducer.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
 @Singleton
 public class SecurityRealmsProducer {
 
@@ -28,11 +23,6 @@ public class SecurityRealmsProducer {
     /** The user facade. */
     @Inject
     private UserFacade userFacade;
-
-    /** The default cache manager. */
-    // @Produces
-    // @Resource(lookup = "java:jboss/infinispan/container/propco-cache-container")
-    // private EmbeddedCacheManager defaultCacheManager;
 
     /** The Constant AUTHENTICATION_CACHE_NAME. */
     private static final String AUTHENTICATION_CACHE_NAME = "rest-authentication-cache";

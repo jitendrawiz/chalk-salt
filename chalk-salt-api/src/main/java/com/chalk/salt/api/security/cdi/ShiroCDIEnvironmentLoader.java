@@ -13,11 +13,7 @@ import org.apache.shiro.web.env.DefaultWebEnvironment;
 import org.apache.shiro.web.env.EnvironmentLoaderListener;
 import org.apache.shiro.web.env.WebEnvironment;
 
-/**
- * The Class ShiroCDIEnvironmentLoader.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
+
 @WebListener
 public class ShiroCDIEnvironmentLoader extends EnvironmentLoaderListener {
 

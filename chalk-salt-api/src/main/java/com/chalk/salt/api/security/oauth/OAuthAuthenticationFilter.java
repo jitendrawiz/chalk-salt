@@ -8,11 +8,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 
-/**
- * The Class OAuthAuthenticationFilter.
- * 
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
+
 public class OAuthAuthenticationFilter extends AuthenticatingFilter {
 
     /** The Constant DEFAULT_ERROR_KEY_ATTRIBUTE_NAME. */

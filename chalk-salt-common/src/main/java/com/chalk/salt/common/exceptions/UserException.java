@@ -2,11 +2,6 @@ package com.chalk.salt.common.exceptions;
 
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class CoreException.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
 public class UserException extends CoreException {
 
     /** The Constant serialVersionUID. */

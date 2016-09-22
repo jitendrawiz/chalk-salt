@@ -1,16 +1,7 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.common.dto;
 
 import java.util.List;
 
-/**
- * The Class EmailNotification.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class EmailNotificationDto extends NotificationMessageDto {
 
     /** The subject. */

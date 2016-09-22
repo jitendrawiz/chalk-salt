@@ -10,12 +10,6 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-/**
- * The Annotation Secured.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ METHOD, TYPE })
 @InterceptorBinding

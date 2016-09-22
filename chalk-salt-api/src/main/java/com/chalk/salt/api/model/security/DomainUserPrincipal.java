@@ -1,14 +1,5 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.model.security;
 
-/**
- * The Class DomainUserPrincipal.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class DomainUserPrincipal extends UserPrincipal {
 
     /** The Constant serialVersionUID. */

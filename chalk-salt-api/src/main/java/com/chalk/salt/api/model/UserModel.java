@@ -1,7 +1,4 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
+
 package com.chalk.salt.api.model;
 
 import java.util.List;

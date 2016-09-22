@@ -5744,10 +5744,6 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   .csslider1 > .cs_bullets {
     display: none; } }
 
-#discussionRoomPage * {
-  margin: 0px;
-  padding: 0px; }
-
 #discussionRoomPage body {
   padding-bottom: 140px; }
 

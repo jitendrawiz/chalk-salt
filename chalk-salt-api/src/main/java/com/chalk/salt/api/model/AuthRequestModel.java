@@ -1,17 +1,8 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * The Class AuthRequestDto.
- *
- * @author <a href="mailto:ritesh.wadhwa@techblue.co.uk">Ritesh Wadhwa</a>
- */
 public class AuthRequestModel extends ApiModel {
 
     /** The Constant serialVersionUID. */

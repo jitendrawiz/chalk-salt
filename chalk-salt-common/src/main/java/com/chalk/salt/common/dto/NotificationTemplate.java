@@ -1,14 +1,5 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.common.dto;
 
-/**
- * The Class NotificationTemplate.
- * 
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class NotificationTemplate extends BaseDto {
 
     /** The notification template id. */

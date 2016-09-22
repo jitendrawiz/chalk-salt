@@ -44,7 +44,11 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                            
                         }
                     }, function(error) {
+                      if(error.data==null){
+                        showAlert('danger',"Oops it seems like network problem has occurred.Please revisit once network is back");
+                      }else{
                     	showAlert('danger',error.data.message);
+                    	}
                     });
                 };
                

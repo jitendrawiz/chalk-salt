@@ -1,17 +1,8 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.common.dto;
 
 import java.util.List;
 import java.util.Map;
 
-/**
- * The Class UserDetail.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
 public class UserDetailDto {
 
     /** The user id. */

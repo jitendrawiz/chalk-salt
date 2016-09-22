@@ -1,10 +1,6 @@
 package com.chalk.salt.api.model;
 
-/**
- * The Class UserHomeIcon.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
+
 public class UserIconModel extends ApiModel {
 
     /** The Constant serialVersionUID. */

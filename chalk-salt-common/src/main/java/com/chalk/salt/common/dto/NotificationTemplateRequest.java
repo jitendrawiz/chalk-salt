@@ -1,18 +1,9 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.common.dto;
 
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * The Class NotificationTemplateRequest.
- * 
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class NotificationTemplateRequest extends BaseDto {
 
     /** The template key. */

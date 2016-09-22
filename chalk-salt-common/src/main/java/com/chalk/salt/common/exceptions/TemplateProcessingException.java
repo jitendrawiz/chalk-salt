@@ -1,14 +1,5 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.common.exceptions;
 
-/**
- * The Class TemplateConfigurationException.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
- */
 public class TemplateProcessingException extends Exception {
 
     /** The Constant serialVersionUID. */

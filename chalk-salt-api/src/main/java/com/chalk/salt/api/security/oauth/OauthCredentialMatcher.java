@@ -23,11 +23,7 @@ import com.chalk.salt.api.exceptions.security.ApplicationAuthenticationException
 import com.chalk.salt.common.dto.ErrorResponse;
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class OauthCredentialMatcher.
- * 
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
+
 public class OauthCredentialMatcher implements CredentialsMatcher {
 
     /** The logger. */

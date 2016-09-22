@@ -1,12 +1,7 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
+
 package com.chalk.salt.api.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -18,14 +13,8 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.UserModel;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
-import com.chalk.salt.common.dto.UserDto;
 
 
-/**
- * The Class UserService.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
- */
 public class UserService {
 
 	/** The logger. */

@@ -5,12 +5,6 @@ import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.infinispan.manager.CacheContainer;
 
-/**
- * The Class InfinispanCacheManager.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
 public class InfinispanCacheManager implements CacheManager {
 
     /** The cache container. */

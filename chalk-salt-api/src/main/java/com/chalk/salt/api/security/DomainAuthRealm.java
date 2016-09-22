@@ -30,12 +30,7 @@ import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.core.security.AuthFacade;
 import com.chalk.salt.core.user.UserFacade;
 
-/**
- * The Class DatabaseAuthRealm.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
+
 public class DomainAuthRealm extends AuthorizingRealm {
 
     /** The user facade. */

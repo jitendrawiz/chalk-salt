@@ -1,17 +1,8 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.common.exceptions;
 
 import com.chalk.salt.common.util.ErrorCode;
 
 
-/**
- * The Class MaxLicenseExceedException.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
- */
 public class MaxLicenseExceedException extends UserException{
         
     /** The Constant serialVersionUID. */

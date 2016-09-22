@@ -6,14 +6,7 @@ import java.util.Set;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 
-/**
- * The Class InfinispanCache.
- *
- * @param <K> the key type
- * @param <V> the value type
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
+
 public class InfinispanCache<K, V> implements Cache<K, V> {
 
     /** The cache proxy. */

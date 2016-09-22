@@ -1,7 +1,3 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.core.templating;
 
 import java.io.IOException;
@@ -16,11 +12,6 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-/**
- * The Class DatabaseTemplateConfiguration.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
- */
 public class DatabaseTemplateConfiguration extends Configuration {
 
     /** The Constant DEFAULT_ENCODING. */

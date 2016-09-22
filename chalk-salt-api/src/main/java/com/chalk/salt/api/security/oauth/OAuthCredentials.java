@@ -2,12 +2,7 @@ package com.chalk.salt.api.security.oauth;
 
 import java.util.Map;
 
-/**
- * The Class OAuthCredentials.
- * 
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- * 
- */
+
 public class OAuthCredentials {
 
     /** The http method. */

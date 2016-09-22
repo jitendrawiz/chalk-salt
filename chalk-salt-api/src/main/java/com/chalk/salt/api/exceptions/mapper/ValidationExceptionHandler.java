@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.exceptions.mapper;
 
 import javax.validation.ConstraintViolationException;
@@ -14,11 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.chalk.salt.api.util.Utility;
 
-/**
- * The Class ValidationExceptionHandler.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 @Provider
 public class ValidationExceptionHandler implements ExceptionMapper<ConstraintViolationException> {
 

@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.dao.system;
 
 import java.util.List;
@@ -17,16 +13,12 @@ import com.chalk.salt.dao.dto.SystemDetail;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
- * The Class UserDaoImpl.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
+ * The Class SystemDaoImpl.
  */
 public class SystemDaoImpl implements SystemDao {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.techblue.propco.enterprise.dao.system.SystemDao#obtainUserSystemDetails(java.lang.String, java.lang.Long)
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.system.SystemDao#obtainUserSystemDetails(java.lang.String, java.lang.Long)
      */
     @Override
     public SystemDetail obtainUserSystemDetails(final String systemJndiName, final Long iRef) throws UserException {
@@ -43,11 +35,8 @@ public class SystemDaoImpl implements SystemDao {
         return systemDetail;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.techblue.propco.enterprise.dao.system.SystemDao#isIPAddressAllowed(java.lang.Long, java.lang.String,
-     * java.lang.String)
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.system.SystemDao#isIPAddressAllowed(java.lang.Long, java.lang.String, java.lang.String)
      */
     @Override
     public boolean isIPAddressAllowed(final Long iRef, final String commaSeperatedIpAddress, final String systemJndiName) throws UserException {

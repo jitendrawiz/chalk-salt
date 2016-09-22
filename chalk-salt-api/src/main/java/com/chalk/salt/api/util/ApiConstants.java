@@ -1,14 +1,5 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.util;
 
-/**
- * The Interface ApiConstants.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public interface ApiConstants {
 
     /** The AP i_ versio n_ v1. */

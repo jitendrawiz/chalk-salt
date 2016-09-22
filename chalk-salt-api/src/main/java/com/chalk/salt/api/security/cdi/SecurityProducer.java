@@ -9,12 +9,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-/**
- * The Class SecurityProducer.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
+
 @Singleton
 public class SecurityProducer {
 

@@ -11,11 +11,7 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-/**
- * The Annotation Shiro API Config.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ METHOD, FIELD, PARAMETER, TYPE })
 @Qualifier

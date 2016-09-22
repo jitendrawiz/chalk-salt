@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.dao.sql2o.connection.factory;
 
 import java.util.HashMap;
@@ -34,18 +30,6 @@ public class ConnectionFactory {
     /** The sql2o connections. */
     private static final Map<String, Sql2o> sql2oConnections = new HashMap<String, Sql2o>();
 
-    /**
-     * Provide sql2o instance.
-     *
-     * @param jndiName the jndi name
-     * @return the sql2o
-     * @throws UserException the user exception
-     */
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.techblue.propco.enterprise.dao.sql2o.Sql2oManager#provideSql2oInstance(java.lang.String)
-     */
     public static synchronized Sql2o provideSql2oInstance(final String jndiName) throws UserException {
         if (sql2oConnections.containsKey(jndiName)) {
             return sql2oConnections.get(jndiName);

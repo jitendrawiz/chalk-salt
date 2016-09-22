@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.exceptions.mapper;
 
 import javax.ws.rs.core.MediaType;
@@ -19,11 +15,6 @@ import com.chalk.salt.api.exceptions.security.ApplicationAuthorizationException;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class SecurityExceptionMapper.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 @Provider
 public class SecurityExceptionMapper implements ExceptionMapper<ShiroException> {
 

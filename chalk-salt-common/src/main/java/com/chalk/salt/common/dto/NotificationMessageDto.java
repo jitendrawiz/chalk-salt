@@ -1,9 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this coimport java.util.Date;
-
-import co.rentr.common.dto.BaseDto;
- *************************************************************************/
 package com.chalk.salt.common.dto;
 
 import java.util.Date;

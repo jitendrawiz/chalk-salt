@@ -4,11 +4,6 @@ import java.util.Map;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
-/**
- * The Class OAuthToken.
- * 
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- */
 public class OAuthToken implements AuthenticationToken {
 
     /** The Constant serialVersionUID. */

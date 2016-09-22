@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.dao.domain;
 
 import org.sql2o.Connection;
@@ -15,15 +11,11 @@ import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
  * The Class DomainDaoImpl.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
  */
 public class DomainDaoImpl implements DomainDao {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see uk.co.techblue.propco.enterprise.dao.domain.DomainDao#obtainUserDomainDetails(java.lang.String, boolean)
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.domain.DomainDao#obtainUserLoginDetails(java.lang.String)
      */
     @Override
     public UserDto obtainUserLoginDetails(final String userName) throws UserException {

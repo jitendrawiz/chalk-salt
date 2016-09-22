@@ -1,10 +1,5 @@
 package com.chalk.salt.api.model;
 
-/**
- * The Class DomainDetailModel.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
 public class DomainDetailModel extends ApiModel {
 
     /** The Constant serialVersionUID. */

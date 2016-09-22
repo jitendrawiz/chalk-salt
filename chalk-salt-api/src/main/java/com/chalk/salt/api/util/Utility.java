@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.api.util;
 
 import java.io.IOException;
@@ -35,11 +31,6 @@ import com.chalk.salt.common.dto.ErrorResponse;
 import com.chalk.salt.common.exceptions.CoreException;
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class Utility.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class Utility {
 
     /** The Constant LOGGER. */

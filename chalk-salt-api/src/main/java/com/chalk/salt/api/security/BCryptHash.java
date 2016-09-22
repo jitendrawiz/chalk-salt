@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.security;
 
 import org.apache.shiro.codec.CodecException;
@@ -10,12 +6,6 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 
 import com.chalk.salt.api.util.Utility;
 
-
-/**
- * The Class BCryptHash.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
 public class BCryptHash extends SimpleHash {
 
     /** The Constant serialVersionUID. */

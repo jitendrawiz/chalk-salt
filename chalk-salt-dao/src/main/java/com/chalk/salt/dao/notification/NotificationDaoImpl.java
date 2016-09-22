@@ -1,7 +1,3 @@
-/*
-* Copyright 2015, Techblue. All Rights Reserved.
-* No part of this content may be used without Techblue's express consent.
-*/
 package com.chalk.salt.dao.notification;
 
 import org.sql2o.Connection;
@@ -15,9 +11,7 @@ import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 /**
- * The Class NotificationTemplateDaoImpl.
- *
- * @author <a href="mailto:jitendra.pareek@techblue.co.uk">Jitendra Pareek</a>
+ * The Class NotificationDaoImpl.
  */
 public class NotificationDaoImpl implements NotificationDao {
 

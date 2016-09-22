@@ -30,18 +30,7 @@ import com.chalk.salt.api.docs.swagger.ApiOriginFilter;
 import com.chalk.salt.api.security.oauth.OAuthToken;
 import com.chalk.salt.api.util.ApiRequestWrapper;
 
-/**
- * The listener interface for receiving CDIServletRequestProducing events. The class that is interested in processing a
- * CDIServletRequestProducing event implements this interface, and the object created with that class is registered with a
- * component using the component's <code>addCDIServletRequestProducingListener<code> method. When
- * the CDIServletRequestProducing event occurs, that object's appropriate
- * method is invoked.
- *
- * @see CDIServletRequestProducingEvent
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
+
 @WebListener
 public class CDIServletRequestProducingListener implements ServletRequestListener {
 

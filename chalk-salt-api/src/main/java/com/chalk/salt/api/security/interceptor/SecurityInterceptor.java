@@ -21,12 +21,6 @@ import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.dto.ErrorResponse;
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class SecurityInterceptor.
- *
- * @author <a href="mailto:ajay.deshwal@techblue.co.uk">Ajay Deshwal</a>
- *
- */
 @Secured
 @Interceptor
 public class SecurityInterceptor {

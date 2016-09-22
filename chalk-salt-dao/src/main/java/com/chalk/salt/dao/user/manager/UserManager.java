@@ -1,7 +1,3 @@
-/*
- * Copyright 2015, Techblue. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- */
 package com.chalk.salt.dao.user.manager;
 
 import java.util.List;
@@ -152,7 +148,7 @@ public interface UserManager {
 	 * Reset password.
 	 *
 	 * @param securUuid the secur uuid
-	 * @param encryptedTempPassword 
+	 * @param encryptedTempPassword the encrypted temp password
 	 * @return the user dto
 	 * @throws UserException the user exception
 	 */

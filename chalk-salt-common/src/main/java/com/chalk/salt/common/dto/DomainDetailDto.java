@@ -1,10 +1,5 @@
 package com.chalk.salt.common.dto;
 
-/**
- * The Class DomainDetailDto.
- *
- * @author <a href="mailto:preeti.barthwal@techblue.co.uk">Preeti Barthwal</a>
- */
 public class DomainDetailDto {
 
     /** The iref uuid. */

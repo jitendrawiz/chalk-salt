@@ -24,12 +24,9 @@ public class AuthFacadeImpl implements AuthFacade {
     @AppLogger
     private Logger logger;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * uk.co.techblue.propco.enterprise.common.facade.interfaces.SecurityFacade#authenticate(uk.co.techblue.propco.enterprise
-     * .common.dto.AuthRequest)
+    
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.security.AuthFacade#getUserAuthenticationDetails(com.chalk.salt.common.dto.AuthRequest)
      */
     @Override
     public UserDto getUserAuthenticationDetails(final AuthRequest authRequest) throws UserException {

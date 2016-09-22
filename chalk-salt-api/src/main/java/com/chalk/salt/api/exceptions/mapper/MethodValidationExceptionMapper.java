@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright 2015, Techblue Software Pvt Ltd. All Rights Reserved.
- * No part of this content may be used without Techblue's express consent.
- ******************************************************************************/
 package com.chalk.salt.api.exceptions.mapper;
 
 import javax.validation.ConstraintViolation;
@@ -19,11 +15,7 @@ import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.dto.ErrorResponse;
 import com.chalk.salt.common.util.ErrorCode;
 
-/**
- * The Class MethodValidationExceptionMapper.
- *
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
- */
+
 @Provider
 public class MethodValidationExceptionMapper implements ExceptionMapper<MethodConstraintViolationException> {
 
