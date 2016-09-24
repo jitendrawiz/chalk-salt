@@ -18,7 +18,7 @@
 	font-size:60px;
 	color:#069;
 	padding-left:30px;
-	text-shadow:0px 2px 2px 0px;
+	text-shadow:0px 2px 2px green;
 }
 .menu_d_room{
 	float:right;
@@ -215,15 +215,7 @@ table tr td a:hover{
 	transition:0.3s;
 	color:#F30;
 }
-.powered{
-	width:100;
-	clear:both;
-	padding-top:10px;
-	border-top:1px solid #900;
-	font-size:12px;
-	text-align:center;
-	font-family:"Roboto Condensed";
-}
+
 table td h5 a{
 	font-size:14px;
 	font-stretch:normal;
