@@ -3,6 +3,7 @@ package com.chalk.salt.core.studymaterial;
 import java.util.List;
 
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
@@ -122,5 +123,14 @@ public interface StudyMaterialFacade {
      * @throws StudyMaterialException the study material exception
      */
     Boolean deleteNotesContentData(String notesUuid)throws StudyMaterialException;
+
+    /**
+     * Gets the notes list using class ids.
+     *
+     * @param classId the class id
+     * @return the notes list using class ids
+     * @throws StudyMaterialException the study material exception
+     */
+    List<NotesDto> getNotesListUsingClassIds(String classId)throws StudyMaterialException;
 
 }

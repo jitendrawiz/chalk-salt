@@ -6,6 +6,7 @@ define([ 'angular' ], function(angular) {
     var modalDefaults = {
       backdrop : true,
       keyboard : true,
+      size: 'lg',
       //modalFade : true,
       templateUrl : './modules/CandDModal/templates/CandDModal.tpl.html'
     };
@@ -24,6 +25,17 @@ define([ 'angular' ], function(angular) {
       return this.show(customModalDefaults, customModalOptions);
     };
 
+    this.showNotes = function(customModalDefaults, customModalOptions) {
+      if (!customModalDefaults) {
+        customModalDefaults = {};
+      }
+      customModalDefaults.backdrop = 'static';
+      customModalDefaults.keyboard = 'false';
+      customModalDefaults.templateUrl = './modules/CandDModal/templates/CandDNotesModal.tpl.html';
+      return this.show(customModalDefaults, customModalOptions);
+    };
+    
+    
     this.showConfirm = function(customModalDefaults, customModalOptions) {
       if (!customModalDefaults) {
         customModalDefaults = {};

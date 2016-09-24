@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title text-center" id="modal-title">Notes</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <ul>
+        <h2>
+            <li ng-repeat="item in modalOptions" ng-if="item.fileUri!=null"><a
+                ui-sref="chalkanddust.shownotes({pdfUrl: item.fileUri, pdfName: item.notesTitle})" target="_blank">Note {{$index+1}}</a></li>
+        </h2>
+    </ul>
+</div>
+<div class="modal-footer" style="text-align: center;">
+    <button class="btn btn-primary text-center" ng-click="ok(true)">Ok</button>
+</div>

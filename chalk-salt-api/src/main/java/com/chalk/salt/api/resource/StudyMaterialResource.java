@@ -26,12 +26,14 @@ import org.slf4j.Logger;
 
 import com.chalk.salt.api.model.NotesContentModel;
 import com.chalk.salt.api.model.NotesFileModel;
+import com.chalk.salt.api.model.NotesModel;
 import com.chalk.salt.api.model.VideoContentModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
@@ -395,6 +397,30 @@ public class StudyMaterialResource {
             deleteStatus = studyMaterialFacade.deleteNotesContentData(notesUuid);
             response.put("deleteStatus", deleteStatus.toString());
             return Response.ok(deleteStatus).build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
+    
+    /**
+     * Gets the notes list using class ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the notes list using class ids
+     * @throws StudyMaterialException the study material exception
+     */
+    @GET
+    @Path("/notes-master/details/{classId}")   
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getNotesListUsingClassIds(@NotBlank @PathParam("classId") final String classId)throws StudyMaterialException{
+        
+        List<NotesModel> notesContent = null;
+        List<NotesDto> notesContentList = null;
+        try{
+            notesContentList = studyMaterialFacade.getNotesListUsingClassIds(classId);
+            notesContent = DozerMapperUtil.mapCollection(beanMapper, notesContentList, NotesModel.class);
+            return Response.ok(notesContent).build();
         } catch (final StudyMaterialException studyMaterialException) {
             throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
         }

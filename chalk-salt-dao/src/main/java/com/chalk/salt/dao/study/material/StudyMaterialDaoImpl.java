@@ -8,6 +8,7 @@ import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
@@ -274,4 +275,28 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
         }
         
     }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getNotesListUsingClassIds(java.lang.String)
+     */
+    @Override
+    public List<NotesDto> getNotesListUsingClassIds(String classId) throws Exception
+        {
+        final String sqlQuery = "SELECT "
+                + " notes_uuid as notesUuid,"
+                + " notes_file_name as notesFileName,"
+                + " notes_title as notesTitle,"
+                + " class_name as className,"
+                + " subject_name as subjectName"
+                + " FROM `cst_notes` "
+                + " JOIN  `cst_class_type` ON cst_class_type.class_id=  cst_notes.class_id "
+                + " JOIN `cst_class_subjects` ON cst_class_subjects.subject_id=cst_notes.subject_id "
+                + " WHERE cst_notes.class_id=:classId ORDER BY notes_id ASC LIMIT 3  ";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            query.addParameter("classId", classId);
+            return query.executeAndFetch(NotesDto.class);
+        }   
+        }
 }

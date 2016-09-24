@@ -17,12 +17,14 @@ import com.chalk.dust.dao.system.lookup.SystemLookupDao;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.common.util.SystemSettingsKey;
 import com.chalk.salt.dao.study.material.StudyMaterialDao;
+import com.chalk.salt.dao.user.UserDao;
 
 /**
  * The Class StudyMaterialManagerImpl.
@@ -42,6 +44,11 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
     @Inject
     @BeanMapper
     protected Mapper beanMapper;
+    
+
+    /** The user dao. */
+    @Inject
+    private UserDao userDao;
     
     /** The system lookup dao. */
     @Inject
@@ -299,6 +306,35 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
             throw new StudyMaterialException(ErrorCode.FAIL_TO_DELETE_STUDY_MATERIAL, "Fail to delete notes content data and file", exception);
         }
     }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.studymaterial.manager.StudyMaterialManager#getNotesListUsingClassIds(java.lang.String)
+     */
+    @Override
+    public List<NotesDto> getNotesListUsingClassIds(String classId) throws StudyMaterialException
+        {
+        logger.info("fetch list of notes...");
+        List<NotesDto> notesList=null;
+        try{
+        notesList= studyMaterialDao.getNotesListUsingClassIds(classId);
+            
+            if (notesList.size() > 0)
+                {
+                for (int i = 0; i < notesList.size(); i++)
+                    {
+                    String notesUuid = notesList.get(i).getNotesUuid();
+                    String destPath = userDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+                    destPath += String.join(File.separator, notesList.get(i).getClassName(),notesList.get(i).getSubjectName() , notesUuid);
+                    String fileName = studyMaterialDao.getOldFileName(notesUuid);
+                    String filePathUrl = destPath + File.separator + fileName;
+                    notesList.get(i).setFileUri(filePathUrl);
+                    }
+                }
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_FETCH_STUDY_MATERIAL, "Fail to Fetch list of Notes", exception);
+        }
+        return notesList;
+        }
     
 	
 }

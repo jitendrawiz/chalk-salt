@@ -23,4 +23,14 @@ define([ 'angular' ], function(angular) {
     homeService.factory('userClassLookUpService', [ '$resource', 'ENV', function($resource, ENV) {
         return $resource(ENV.API_END_POINT + 'private/classes', {}, {});
     } ]);
+    
+    homeService.factory('userNotesLookupService', [ '$resource', 'ENV', function($resource, ENV) {
+      return $resource(ENV.API_END_POINT + 'private/notes-master/details/:classId', {
+        classId : '@classId'
+      }, {
+        get : {
+          method : 'GET'
+        }
+      });
+    } ]);
 });

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.NotesFileDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 import com.chalk.salt.common.exceptions.StudyMaterialException;
@@ -150,5 +151,16 @@ public class StudyMaterialFacadeImpl implements StudyMaterialFacade {
     {
         return studyMaterialManager.deleteNotesContentData(notesUuid);
     }
+
+
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.studymaterial.StudyMaterialFacade#getNotesListUsingClassIds(java.lang.String)
+     */
+    @Override
+    public List<NotesDto> getNotesListUsingClassIds(String classId) throws StudyMaterialException
+        {
+        return studyMaterialManager.getNotesListUsingClassIds(classId);
+        }
 
 }

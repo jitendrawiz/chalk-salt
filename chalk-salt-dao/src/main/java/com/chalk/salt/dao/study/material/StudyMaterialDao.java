@@ -3,6 +3,7 @@ package com.chalk.salt.dao.study.material;
 import java.util.List;
 
 import com.chalk.salt.common.dto.NotesContentDto;
+import com.chalk.salt.common.dto.NotesDto;
 import com.chalk.salt.common.dto.VideoContentDto;
 
 /**
@@ -125,4 +126,13 @@ public interface StudyMaterialDao {
      * @throws Exception the exception
      */
     void updateFileNameInDB(String name, String notesUuid)throws Exception;
+
+    /**
+     * Gets the notes list using class ids.
+     *
+     * @param classId the class id
+     * @return the notes list using class ids
+     * @throws Exception the exception
+     */
+    List<NotesDto> getNotesListUsingClassIds(String classId)throws Exception;
 }
