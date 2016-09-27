@@ -9,10 +9,10 @@ require.config({
     angularResource: 'lib/angular-resource/angular-resource.min',
     text: 'lib/requirejs-text/text',
     css: 'lib/require-css/css',
-    bootstrapCSS: 'lib/bootstrap/dist/css/bootstrap',
-    bootstrap:'lib/bootstrap/dist/js/bootstrap.min',
     jquery: 'lib/jquery/dist/jquery.min',
     jqueryUI: 'lib/jquery-ui/jquery-ui.min',
+    bootstrapCSS: 'lib/bootstrap/dist/css/bootstrap',
+    bootstrap:'lib/bootstrap/dist/js/bootstrap.min',
     candDCss: 'resources/css/chalk-Dust',
     uiBootstrap: 'lib/angular-bootstrap/ui-bootstrap-tpls',
     fontAwesome: 'lib/fontawesome/css/font-awesome',
@@ -32,7 +32,8 @@ require.config({
     ngAnimate: ['angular'],
     uiRouter: ['angular'],
     uiBootstrap: ['angular'],
-    angularPdf:['angular','pdfjs']
+    angularPdf:['angular','pdfjs'],
+    bootstrap: ['jquery']
   },
   map: {
     '*': {

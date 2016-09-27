@@ -26,7 +26,7 @@ define([ 'angular' ], function(angular) {
           return $q.when(config);
         },
         response : function(response) {
-          if (!/^(f|ht)tps?:\/\//i.test(response.config.url)) {
+          if (!/^(f|ht)tp?:\/\//i.test(response.config.url)) {
             $('#loading').hide();
             $('#loading img').hide();
 

@@ -33,20 +33,6 @@ $(document).ready(function() {
     smartSpeed : 800,
     autoplayHoverPause : true,
   });
-  $(window).on("load", function() {
-    var $container = $('.project-wrapper');
-    $container.isotope({
-      filter : '*',
-      animationOptions : {
-        duration : 5050,
-        easing : 'easeInOutExpo',
-        queue : false
-      },
-      masonry : {
-        columnWidth : 0
-      }
-    });
-  });
   $(window).scroll(function() {
     $('.sec-head').each(function() {
       if (isScrolledIntoView(this) === true) {
@@ -55,12 +41,6 @@ $(document).ready(function() {
         $(this).removeClass('in-view')
       }
     });
-  });
-  $(window).on("load", function() {
-    if ($(window).width() > 1024) {
-      $(".parallax1").parallax("50%", 0.5);
-      $(".parallax2").parallax("50%", 0.5);
-    }
   });
   $(window).scroll(function() {
     if ($(window).scrollTop() > 400) {
