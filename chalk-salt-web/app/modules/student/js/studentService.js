@@ -288,9 +288,10 @@ define([ 'angular' ], function(angular) {
 
   /*Get Dashboard details according to subject*/
   studentService.factory('GetDashboardDataBySubject', [ '$resource', 'ENV', function($resource, ENV) {
-    return $resource(ENV.API_END_POINT + 'private/exam/data/:classId/:subjectId', {
+    return $resource(ENV.API_END_POINT + 'private/exam/data/:classId/:subjectId/:securUuid', {
       classId : '@classId',
-      subjectId : '@subjectId'
+      subjectId : '@subjectId',
+      securUuid : '@securUuid'
     }, {
       get : {
         method : 'GET'
@@ -505,6 +506,32 @@ define([ 'angular' ], function(angular) {
     }, {
       remove : {
         method : 'DELETE'
+      }
+    });
+  } ]);
+  
+  studentService.factory('GetResultsByClassSubject', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/test/results/list/:classId/:subjectId/:securUuid', {
+    	classId : '@classId',
+        subjectId : '@subjectId',
+        securUuid : '@securUuid'
+    }, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
+  
+  
+  studentService.factory('GetResultDetailsByTestUuid', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/test/results/:classId/:subjectId/:securUuid/:testUuid', {
+    	classId : '@classId',
+        subjectId : '@subjectId',
+        securUuid : '@securUuid',
+        testUuid : '@testUuid'
+    }, {
+      get : {
+        method : 'GET'
       }
     });
   } ]);

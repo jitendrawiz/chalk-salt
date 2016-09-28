@@ -1,5 +1,11 @@
+<style>
+	#content4 th{
+		color:#fff;
+	}
+</style>
 <main class="tab_with"> <input id="tab1" type="radio" name="tabs" checked> <label for="tab1">Video</label> <input id="tab2"
     type="radio" name="tabs"> <label for="tab2">Notes</label> <input id="tab3" type="radio" name="tabs"> <label for="tab3">Test</label>
+    <input id="tab4" type="radio" name="tabs"> <label for="tab4">Result</label>
 <section class="section_tab" id="content1">
     <div ng-show="!showVideoDiv" class="col-md-12 column" ng-repeat="item in videoObject">
         <div class="feature-box pdf_space">
@@ -50,6 +56,71 @@
                 <a ui-sref="chalkanddust.testInstruction({type:'cf92fc16-4684-11e6-beb8-9e71128cae77',scheduletestuuid:1,subjectId:1})">Take Test</a>
             </h4>
         </div>
+    </div>
+</section>
+<section class="section_tab" id="content4">
+    <div ng-show="showResultDiv" class="col-md-12 column">
+		<div class="row">
+			<div class="table-responsive ">
+				<table id="ResultListTable" class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Test</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Total Marks</th>
+							<th>Show</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="result in resultList">
+							<td>{{result.testTitle}}</td>
+							<td>{{result.testDate}}</td>
+							<td>{{result.testTime}}</td>
+							<td>{{result.totalMarks}}</td>
+							<td>
+								<a ng-click="detailedResult(result.testUuid)" title="View">
+									<i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i>
+								</a> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div ng-show="showResultDetailsDiv" class="col-md-12 column">
+		<div class="row">
+			<div class="table-responsive ">
+				<table id="ResultListTable" class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>Option A</th>
+							<th>Option B</th>
+							<th>Option C</th>
+							<th>Option D</th>
+							<th>Answer Opted</th>
+							<th>Answer</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="resultDetail in resultDetailList">
+							<td>{{resultDetail.question}}</td>
+							<td>{{resultDetail.optionA}}</td>
+							<td>{{resultDetail.optionB}}</td>
+							<td>{{resultDetail.optionC}}</td>
+							<td>{{resultDetail.optionD}}</td>
+							<td>{{resultDetail.answerOpted}}</td>
+							<td>{{resultDetail.answer}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+    <div ng-show="!showResultDiv && !showResultDetailsDiv" class="col-md-12 column">
+        <div class="feature-box pdf_space">Result data not available.</div>
     </div>
 </section>
 </main>

@@ -42,6 +42,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -238,7 +240,7 @@ public class ExamResource extends AbstractResource {
     	DashBoardDataModel dashBoardDataModel=null;
     	DashBoardDataDto dashBoardDataDto=null;
     	try{
-    		dashBoardDataDto = examFacade.getDashBoardData(classId,subjectId);
+    		dashBoardDataDto = examFacade.getDashBoardData(classId, subjectId);
     		//Need to check this
     		//DozerMapperUtil.mapCollection(beanMapper, dashBoardDataDto, DashBoardDataModel.class);
     		//dashBoardDataModel=	beanMapper.map(dashBoardDataDto, DashBoardDataModel.class);
@@ -255,6 +257,7 @@ public class ExamResource extends AbstractResource {
      * @param classId the class id
      * @param subjectId the subject id
      * @param type the type
+     * @param scheduleTestUuid the schedule test uuid
      * @return the test questions list
      * @throws ExamException the exam exception
      */
@@ -471,4 +474,50 @@ public class ExamResource extends AbstractResource {
         throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
     }
     }
-            }
+    
+    /**
+     * Gets the results by class subject.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @param securUuid the secur uuid
+     * @return the results by class subject
+     * @throws ExamException the exam exception
+     */
+    @GET
+    @Path("/test/results/list/{classId}/{subjectId}/{securUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getResultsByClassSubject(
+    		@NotBlank @PathParam("classId") final String classId,
+            @NotBlank @PathParam("subjectId") final String subjectId, 
+            @NotBlank @PathParam("securUuid") final String securUuid)throws ExamException{
+	    List<ResultMasterDto> resultList = null;
+	    try{
+	    	logger.info("getResultsByClassSubject service called.........");
+	    	resultList = examFacade.getResultsByClassSubject(classId, subjectId, securUuid);
+	        return Response.ok(resultList).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+    
+    @GET
+    @Path("/test/results/{classId}/{subjectId}/{securUuid}/{testUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getResultDetailsByTestUuid(
+    		@NotBlank @PathParam("classId") final String classId,
+            @NotBlank @PathParam("subjectId") final String subjectId, 
+            @NotBlank @PathParam("securUuid") final String securUuid,
+            @NotBlank @PathParam("testUuid") final String testUuid)throws ExamException{
+	    List<ResultContentDto> resultDetails = null;
+	    try{
+	    	logger.info("GetResultDetailsByTestUuid service called.........");
+	    	resultDetails = examFacade.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid);
+	        return Response.ok(resultDetails).build();
+	    } catch (final ExamException examException) {
+	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+	    }
+    }
+}

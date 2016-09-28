@@ -23,8 +23,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'CandDModalService',
       'GetDashboardDataBySubject',
       '$stateParams',
+      'GetResultsByClassSubject', 
+      'GetResultDetailsByTestUuid',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService, StudentProfileUpdateService, ChangePasswordService,
-          UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams) {
+          UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams, GetResultsByClassSubject,
+          GetResultDetailsByTestUuid) {
         $scope.uploadedlogo = {};
         $scope.showVideoDiv = false;
 
@@ -102,7 +105,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-
+        
         $scope.editProfile = function() {
           $window.localStorage.setItem(CHALKNDUST.EDITFLAG, true);
           $state.reload();
@@ -212,6 +215,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.tab = newtab;
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER, newtab);
           updatePageDetailsOnClick(item);
+          getResults();
         }
 
         function updatePageDetailsOnClick(item) {
@@ -222,10 +226,13 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.showNotesDiv = false;
           $scope.videoObject = [];
           $scope.notesObject = [];
+          
           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+          $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
           GetDashboardDataBySubject.get({
             classId : $scope.classId,
             subjectId : item.subjectId
+           
           }, function(response) {
             if (response) {
               // Video data
@@ -246,6 +253,52 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }
+        
+        /* Show Result */
+        $scope.resultList=[];
+        $scope.resultDetailList=[];
+        $scope.showResultDiv = false;
+        $scope.showResultDetailsDiv = false;
+        
+        function getResults(){
+	        GetResultsByClassSubject.query({
+	            classId : $scope.classId,
+	            subjectId : item.subjectId,
+	            securUuid : $scope.securUuid               
+	          }, function(response) {
+	            if(response) {
+	              $scope.resultList = response;
+	              if($scope.resultList) {
+	                $scope.showResultDiv = true;
+	                $scope.showResultDetailsDiv = false;
+	              } 
+	            }
+	          }, function(error) {
+	            showAlert('danger', error.data.message);
+	          });
+	      }
+        
+        $scope.detailedResult = function(testSecuruuid){
+        	console.log(testSecuruuid);
+        	GetResultDetailsByTestUuid.query({
+	            classId : $scope.classId,
+	            subjectId : item.subjectId,
+	            securUuid : $scope.securUuid,
+	            testUuid : testSecuruuid
+	          }, function(response) {
+	            if(response) {
+	              $scope.resultDetailList = response;
+	              if($scope.resultDetailList) {
+	                $scope.showResultDetailsDiv = true;
+	                $scope.showResultDiv = false;
+	              } 
+	            }
+	          }, function(error) {
+	            showAlert('danger', error.data.message);
+	          });
+	      };
+        
+        /***************/
 
         /* Code to display pdf files in website */
 

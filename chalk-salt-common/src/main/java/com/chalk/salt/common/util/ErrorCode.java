@@ -210,7 +210,13 @@ public enum ErrorCode {
 	FAIL_TO_UPDATE_SCHEDULE_TEST_DATA(1066),
 
 	/** The fail to delete schedule test content. */
-	FAIL_TO_DELETE_SCHEDULE_TEST_CONTENT(1067);
+	FAIL_TO_DELETE_SCHEDULE_TEST_CONTENT(1067),
+	
+	/** The fail to fetch result list. */
+	FAIL_TO_FETCH_RESULT_LIST(1068),
+	
+	/** The fail to fetch result details. */
+	FAIL_TO_FETCH_RESULT_DETAILS(1069);
 
 	/** The value. */
 	private final int value;

@@ -32,6 +32,8 @@ import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -475,6 +477,7 @@ public class ExamManagerImpl implements ExamManager
                         String fileName = studyMaterialDao.getOldFileName(notesUuid);
                         String filePathUrl = destPath + File.separator + fileName;
                         dashBoardNotesList.get(i).setFileUrl(filePathUrl);
+                        
                         }
                     }
                 dashBoardDataDto.setNotes(dashBoardNotesList);
@@ -486,7 +489,6 @@ public class ExamManagerImpl implements ExamManager
                 logger.error("Dashboard data fetch exception ......" + exception);
                 throw new ExamException(ErrorCode.FAIL_TO_FETCH_DASHBOARD_DATA, "Fail to fetch dashboard data", exception);
                 }
-
         }
 
     /*
@@ -828,4 +830,38 @@ public class ExamManagerImpl implements ExamManager
             throw new ExamException(ErrorCode.FAIL_TO_FETCH_SCHEDULE_TEST_LIST, "Fail to Fetch list of Scheduled tests", exception);
             }
         }
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getResultsByClassSubject(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)
+			throws ExamException {
+		logger.info("fetch test results using ClassId, SubjectId and SecurUuid.");
+        try
+        {
+        	return examDao.getResultsByClassSubject(classId, subjectId, securUuid);
+        }
+        catch (final Exception exception)
+        {
+        	throw new ExamException(ErrorCode.FAIL_TO_FETCH_RESULT_LIST, "Fail to fetch result list", exception);
+        }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.manager.ExamManager#getResultDetailsByTestUuid(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid,
+			String testUuid) throws ExamException {
+		logger.info("fetch test result details using ClassId, SubjectId, SecurUuid and TestUuid.");
+        try
+        {
+        	return examDao.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid);
+        }
+        catch (final Exception exception)
+        {
+        	throw new ExamException(ErrorCode.FAIL_TO_FETCH_RESULT_DETAILS, "Fail to fetch result details", exception);
+        }
+	}
 }

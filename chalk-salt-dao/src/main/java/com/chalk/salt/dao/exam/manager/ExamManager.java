@@ -10,6 +10,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -167,10 +169,33 @@ public interface ExamManager {
      * Gets the schedule tests list using class id.
      *
      * @param classId the class id
-     * @param studentId 
+     * @param studentId the student id
      * @return the schedule tests list using class id
      * @throws ExamException the exam exception
      */
     List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId)throws ExamException;
+
+	/**
+	 * Gets the results by class subject.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param securUuid the secur uuid
+	 * @return the results by class subject
+	 * @throws ExamException the exam exception
+	 */
+	List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)throws ExamException;
+
+	/**
+	 * Gets the result details by test uuid.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param securUuid the secur uuid
+	 * @param testUuid the test uuid
+	 * @return the result details by test uuid
+	 * @throws ExamException the exam exception
+	 */
+	List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid)throws ExamException;
 
 }

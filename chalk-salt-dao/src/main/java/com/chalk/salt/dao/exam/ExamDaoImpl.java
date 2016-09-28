@@ -14,6 +14,8 @@ import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.UserException;
@@ -492,7 +494,7 @@ public class ExamDaoImpl implements ExamDao {
      */
     @Override
     public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId) throws Exception
-        {
+    {
         final String sqlQuery = "SELECT class_id AS classId, "
                 + " subject_id AS subjectId,"
                 + " test_date AS testDate,"
@@ -512,7 +514,73 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("studentId", studentId);
             return query.executeAndFetch(ScheduleTestDto.class);
         }
+    }
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getResultDetailsByTestUuid(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid) throws Exception {
+		
+		final String sqlQuery = "SELECT DISTINCT "
+				+ "`cst_schedule_test_master`.`test_title` AS testTitle, "
+				+ "`cst_student_test`.`scheduled_test_uuid` AS testUuid, "
+				+ "cst_questions.`question`, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 0,1) AS optionA, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 1,1) AS optionB, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 2,1) AS optionC, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 3,1) AS optionD, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` AND cst_questions_options.`isAnswer`) AS answer, "
+				+ "(SELECT `cst_questions_options`.`name` FROM `cst_student_test_answers` "
+				+ "JOIN cst_questions_options ON cst_questions_options.`options_id`=cst_student_test_answers.`question_option_selected_id` "
+				+ "WHERE `cst_student_test_answers`.`question_id` = cst_questions.question_id LIMIT 1) AS answerOpted "
+				+ "FROM `cst_questions` "
+				+ "JOIN `cst_student_test` ON `cst_student_test`.`class_id`=`cst_questions`.`class_id` "
+				+ "AND `cst_student_test`.`subject_id`=`cst_questions`.`subject_id` "
+				+ "JOIN `cst_schedule_test_master` ON `cst_schedule_test_master`.`test_uuid` = `cst_student_test`.`scheduled_test_uuid` "
+				+ "JOIN `cst_student_test_answers` ON  `cst_student_test_answers`.`question_id` = `cst_questions`.`question_id` "
+				+ "WHERE `cst_questions`.`class_id`=:classId AND `cst_questions`.`subject_id` =:subjectId AND `cst_student_test`.`student_id`=:securUuid "
+				+ "AND `cst_student_test`.`scheduled_test_uuid`=:testUuid";
+		
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            query.addParameter("securUuid", securUuid);
+            query.addParameter("testUuid", testUuid);
+            return query.executeAndFetch(ResultContentDto.class);
         }
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.exam.ExamDao#getResultsByClassSubject(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)
+			throws Exception {
+		final String sqlQuery = "SELECT `cst_schedule_test_master`.`test_title` AS testTitle,"
+				+ "`cst_schedule_test_master`.`test_date` AS testDate, `cst_schedule_test_master`.`test_time` AS testTime,"
+				+ "`cst_schedule_test_master`.`test_uuid` AS testUuid, `cst_schedule_test_master`.`class_id` AS classId,"
+				+ "`cst_schedule_test_master`.`subject_id` AS subjectId, (SELECT COUNT(*) FROM `cst_student_test_answers` "
+				+ "JOIN `cst_student_test` ON `cst_student_test`.`id` = `cst_student_test_answers`.`cst_student_test_id` "
+				+ "JOIN `cst_questions_options` ON `cst_questions_options`.`options_id` = `cst_student_test_answers`.`question_option_selected_id` "
+				+ "WHERE `cst_questions_options`.`isAnswer` AND `cst_student_test`.`class_id` =:classId "
+				+ "AND `cst_student_test`.`subject_id` =:subjectId AND `cst_student_test`.`student_id` =:securUuid "
+				+ "AND `cst_student_test`.`scheduled_test_uuid` IS NOT NULL) AS totalMarks FROM `cst_schedule_test_master` "
+				+ "JOIN `cst_student_test` ON `cst_student_test`.`scheduled_test_uuid` = `cst_schedule_test_master`.`test_uuid` "
+				+ "WHERE `cst_schedule_test_master`.`class_id` =:classId AND`cst_schedule_test_master`.`subject_id` =:subjectId "
+				+ "AND `cst_student_test`.`student_id` =:securUuid";
+		
+		Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            query.addParameter("securUuid", securUuid);
+            return query.executeAndFetch(ResultMasterDto.class);
+        }
+	}
 
  
 }

@@ -12,6 +12,8 @@ import com.chalk.salt.common.dto.DashBoardDataDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionImageUploadDto;
 import com.chalk.salt.common.dto.QuestionListDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
@@ -75,7 +77,7 @@ public class ExamFacadeImpl implements ExamFacade {
 	 */
 	@Override
 	public DashBoardDataDto getDashBoardData(String classId, String subjectId) throws ExamException{
-		return examManager.getDashBoardData(classId,subjectId);
+		return examManager.getDashBoardData(classId, subjectId);
 	}
 
     /* (non-Javadoc)
@@ -157,5 +159,23 @@ public class ExamFacadeImpl implements ExamFacade {
         {
         return examManager.getScheduleTestsListUsingClassId(classId,studentId);
         }
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getResultsByClassSubject(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)
+			throws ExamException {
+		return examManager.getResultsByClassSubject(classId, subjectId, securUuid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.core.exam.ExamFacade#getResultDetailsByTestUuid(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid,
+			String testUuid) throws ExamException {
+		return examManager.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid);
+	}
 
 }

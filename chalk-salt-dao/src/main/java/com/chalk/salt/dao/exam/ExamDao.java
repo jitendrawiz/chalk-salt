@@ -9,6 +9,8 @@ import com.chalk.salt.common.dto.DashBoardNotesDto;
 import com.chalk.salt.common.dto.DashBoardVediosContentDto;
 import com.chalk.salt.common.dto.QuestionDto;
 import com.chalk.salt.common.dto.QuestionOptionsDto;
+import com.chalk.salt.common.dto.ResultContentDto;
+import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 
@@ -253,5 +255,29 @@ public interface ExamDao {
      * @throws Exception the exception
      */
     public List<ScheduleTestDto> getScheduleTestsListUsingClassId(String classId, String studentId)throws Exception;
+
+	/**
+	 * Gets the result list by class and subject id.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param securUuid the secur uuid
+	 * @param testUuid the test uuid
+	 * @return the result list by class and subject id
+	 * @throws Exception the exception
+	 */
+	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid) throws Exception;
+
+	
+	/**
+	 * Gets the results by class subject.
+	 *
+	 * @param classId the class id
+	 * @param subjectId the subject id
+	 * @param securUuid the secur uuid
+	 * @return the results by class subject
+	 * @throws Exception the exception
+	 */
+	public List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)throws Exception;
 
 }
