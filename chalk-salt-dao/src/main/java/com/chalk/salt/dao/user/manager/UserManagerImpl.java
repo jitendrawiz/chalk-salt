@@ -3,7 +3,9 @@ package com.chalk.salt.dao.user.manager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,17 +13,22 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import com.chalk.dust.dao.system.lookup.SystemLookupDao;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
+import com.chalk.salt.common.dto.StudentAchievementFileDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
+import com.chalk.salt.common.exceptions.StudentAchievementException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
+import com.chalk.salt.common.util.SystemSettingsKey;
 import com.chalk.salt.dao.user.UserDao;
 
 /**
@@ -32,6 +39,10 @@ public class UserManagerImpl implements UserManager {
     /** The office dao. */
     @Inject
     private UserDao userDao;
+    
+    /** The system lookup dao. */
+    @Inject
+    private SystemLookupDao systemLookupDao;
 
     /** The logger. */
     @Inject
@@ -533,4 +544,101 @@ public class UserManagerImpl implements UserManager {
         }
         return user;
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#saveStudentAchievementDetails(com.chalk.salt.common.dto.StudentAchievementDto)
+     */
+    @Override
+    public String saveStudentAchievementDetails(StudentAchievementDto studentAchievementetails) throws StudentAchievementException
+        {
+        logger.info("save student achievements content details...");
+        try{
+        studentAchievementetails.setAchievementUuid(UUID.randomUUID().toString());
+        final Date date = new Date();
+        final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+        studentAchievementetails.setModified_date(modifiedDate);
+        return userDao.saveStudentAchievementDetails(studentAchievementetails);
+        } catch (final Exception exception) {
+            throw new StudentAchievementException(ErrorCode.FAIL_TO_SAVE_STUDENT_ACHIEVEMENT_CONTENT, "Fail to save student achievement content", exception);
+        }        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#uploadStudentImageFile(java.lang.String, com.chalk.salt.common.dto.StudentAchievementFileDto)
+     */
+    @Override
+    public String uploadStudentImageFile(String achievementUuid, StudentAchievementFileDto achvData) throws StudentAchievementException
+        {
+        logger.info("Uploading Notes file");
+        try {
+            String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
+            String studentId= userDao.getUserIdUsingAchievementUuid(achievementUuid);
+            destPath += String.join(File.separator, studentId,achievementUuid);
+            File file = new File(destPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String fileName = achvData.getName();
+            destPath = destPath + File.separator + fileName;
+            File oldfile = new File(destPath);
+            if (oldfile.exists()) {
+                oldfile.delete();
+            }
+            FileInputStream fin = new FileInputStream(
+                    achvData.getFile());
+            FileOutputStream fout = new FileOutputStream(destPath);
+            int i = 0;
+            while ((i = fin.read()) != -1) {
+                fout.write((byte) i);
+            }
+            fin.close();
+            fout.close();
+            logger.info("Student Image uploaded successfully");
+        } catch (final Exception exception) {
+            throw new StudentAchievementException(ErrorCode.FAIL_TO_SAVE_STUDENT_ACHIEVEMENT_CONTENT, "Fail to save student achievement file", exception);
+        }
+        return achievementUuid;
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#getStudentAchievmentListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentListUsingIds(String classId, String studentId) throws StudentAchievementException
+        {
+        logger.info("fetch list of students achievements list...");
+        try{
+            return userDao.getStudentAchievmentListUsingIds(classId,studentId);
+        } catch (final Exception exception) {
+            throw new StudentAchievementException(ErrorCode.FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT, "Fail to Fetch list of students achievements", exception);
+        }
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#deleteStudentAchievementContentData(java.lang.String)
+     */
+    @Override
+    public Boolean deleteStudentAchievementContentData(String achievementUuid) throws StudentAchievementException
+        {
+        logger.info("delete notes content details...");
+        try{
+            //delete old uploaded file with the old name.
+            String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
+            String studentId= userDao.getUserIdUsingAchievementUuid(achievementUuid);
+            destPath += String.join(File.separator, studentId,achievementUuid);
+            File folderPathToDelete=new File(destPath);
+            String oldFileName=userDao.getOldAchievementFileName(achievementUuid);
+            String oldfilePath=destPath+File.separator+oldFileName;
+            File oldfile = new File(oldfilePath);
+            if (oldfile.exists()) {
+                oldfile.delete();
+            }
+            if (folderPathToDelete.exists()) {
+            folderPathToDelete.delete();
+            }
+            userDao.deleteStudentAchievementContentData(achievementUuid);
+            return true; 
+        } catch (final Exception exception) {
+            throw new StudentAchievementException(ErrorCode.FAIL_TO_DELETE_STUDENT_ACHIEVEMENT_CONTENT, "Fail to delete student achievement content data and file", exception);
+        }
+        }
 }

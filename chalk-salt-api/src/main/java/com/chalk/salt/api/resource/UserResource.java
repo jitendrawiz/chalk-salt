@@ -32,6 +32,8 @@ import org.slf4j.Logger;
 import com.chalk.salt.api.model.DiscussionTopicRequestModel;
 import com.chalk.salt.api.model.GuestUserModel;
 import com.chalk.salt.api.model.ProfilePhotoUploadModel;
+import com.chalk.salt.api.model.StudentAchievementFileModel;
+import com.chalk.salt.api.model.StudentAchievementModel;
 import com.chalk.salt.api.model.TopicImageUploadModel;
 import com.chalk.salt.api.model.UserModel;
 import com.chalk.salt.api.util.ApiConstants;
@@ -41,10 +43,14 @@ import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
+import com.chalk.salt.common.dto.StudentAchievementFileDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
+import com.chalk.salt.common.exceptions.StudentAchievementException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.CryptoUtil;
+import com.chalk.salt.common.util.DozerMapperUtil;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.core.user.UserFacade;
 
@@ -561,4 +567,131 @@ public class UserResource extends AbstractResource {
             throw Utility.buildResourceException(userException.getErrorCode(), userException.getMessage(), Status.INTERNAL_SERVER_ERROR, UserException.class, userException);
         }
     }
+    
+    /*Achievement Details data*/
+    
+    /**
+     * Save student achievement details.
+     *
+     * @param studentAchievementModel the student achievement model
+     * @return the response
+     * @throws StudentAchievementException the student achievement exception
+     */
+    @POST
+    @Path("students/achievement-details/save")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response saveStudentAchievementDetails(final @Valid StudentAchievementModel studentAchievementModel)throws StudentAchievementException{
+        StudentAchievementDto studentAchievementDto = null;
+        final Map<String, String> response = new HashMap<String, String>();
+        String achievementUuid = null;
+        try{
+        studentAchievementDto = beanMapper.map(studentAchievementModel, StudentAchievementDto.class);
+            achievementUuid = userFacade.saveStudentAchievementDetails(studentAchievementDto);
+            response.put("achievementUuid", achievementUuid);
+            return Response.ok(response).build();
+        } catch (final StudentAchievementException studentAchievementException) {
+            throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
+        }
+    }
+    
+   
+   
+    /**
+     * Upload student achievement file.
+     *
+     * @param achievementUuid the achievement uuid
+     * @param achievedFileModel the achieved file model
+     * @return the response
+     * @throws StudentAchievementException the student achievement exception
+     */
+    @POST
+    @RequiresAuthentication
+    @Path("/students/achievement-details/file/{achievementUuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadStudentAchievementFile(@PathParam("achievementUuid") final String achievementUuid,
+        @MultipartForm final StudentAchievementFileModel achievedFileModel) throws StudentAchievementException {
+         if (achievedFileModel == null || StringUtils.isBlank(achievementUuid)) {
+             return Response
+                 .status(Status.BAD_REQUEST)
+                 .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                     "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+         }
+         
+          final File sourceFile = achievedFileModel.getFile();
+          final String filename = achievedFileModel.getName();
+          if (sourceFile == null || StringUtils.isBlank(filename)) {
+              return Response
+                  .status(Status.BAD_REQUEST)
+                  .entity(Utility.buildErrorResponse(ErrorCode.PARAMETER_MISSING_INVALID,
+                      "Required parameters are invalid or missing")).type(MediaType.APPLICATION_JSON).build();
+          }
+          
+          final StudentAchievementFileDto achvData = new StudentAchievementFileDto();
+          achvData.setName(filename);
+          achvData.setFile(sourceFile);
+          achvData.setFilePath(sourceFile.getPath());
+        try
+        {
+            final String resAchievedUuid = userFacade.uploadStudentImageFile(achievementUuid, achvData);
+             final Map<String, String> responseMap = new HashMap<String, String>();
+             responseMap.put("resAchievedUuid", resAchievedUuid);
+             return Response.ok(responseMap, MediaType.APPLICATION_JSON).build();
+            
+        } catch (final StudentAchievementException studentAchievementException) {
+            throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
+        }
+    }
+    
+    /**
+     * Gets the student achievment list using ids.
+     *
+     * @param classId the class id
+     * @param studentId the student id
+     * @return the student achievment list using ids
+     * @throws StudentAchievementException the student achievement exception
+     */
+    @GET
+    @Path("/students/achievement-details/{classId}/{studentId}")   
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication    
+    public Response getStudentAchievmentListUsingIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("studentId") final String studentId)throws StudentAchievementException{
+    
+        List<StudentAchievementModel> stuAchvContent = null;
+        List<StudentAchievementDto> stuAchvList = null;
+        try{
+            stuAchvList = userFacade.getStudentAchievmentListUsingIds(classId,studentId);
+            stuAchvContent = DozerMapperUtil.mapCollection(beanMapper, stuAchvList, StudentAchievementModel.class);
+            return Response.ok(stuAchvContent).build();
+        } catch (final StudentAchievementException studentAchievementException) {
+            throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
+        }
+    }
+    
+    
+    /**
+     * Delete student achievement content data.
+     *
+     * @param achievementUuid the achievement uuid
+     * @return the response
+     * @throws StudentAchievementException the student achievement exception
+     */
+    @DELETE
+    @Path("/students/achievement-details/delete/{achievementUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteStudentAchievementContentData(@NotBlank @PathParam("achievementUuid") final String achievementUuid)throws StudentAchievementException{
+        final Map<String, String> response = new HashMap<String, String>();
+        Boolean deleteStatus = false;
+        try{
+            deleteStatus = userFacade.deleteStudentAchievementContentData(achievementUuid);
+            response.put("deleteStatus", deleteStatus.toString());
+            return Response.ok(deleteStatus).build();
+        } catch (final StudentAchievementException studentAchievementException) {
+            throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
+        }
+    }
+    
 }

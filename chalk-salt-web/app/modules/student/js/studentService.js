@@ -549,5 +549,70 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
+  
+  
+  /***Student Photos Service starts here***/
+
+  studentService.factory('GetStudentsList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/students/:classId', {
+      classId : '@classId'
+    }, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
+
+  
+  studentService.factory('createStudentAchievementContentService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/students/achievement-details/save', {}, {
+      save : {
+        method : 'POST'
+      }
+    });
+  } ]);
+
+  studentService.factory('SaveStudentAchievementFileService', [ '$http', 'ENV', function($http, ENV) {
+    return {
+      upload : function(formData, achievementUuid, successCallback, errorCallback) {
+        var uploadUrl = ENV.API_END_POINT + "private/students/achievement-details/file/" + achievementUuid;
+
+        $http.post(uploadUrl, formData, {
+          transformRequest : angular.identity,
+          headers : {
+            'Content-Type' : undefined
+          }
+        }).success(function(response) {
+          successCallback(response);
+        }).error(function(error) {
+          errorCallback(error);
+        });
+      }
+    };
+  } ]);
+
+  studentService.factory('GetAchievementContentList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/students/achievement-details/:classId/:studentId', {
+      classId : '@classId',
+      studentId : '@studentId'
+    }, {
+      get : {
+        method : 'GET'
+      }
+    });
+  } ]);
+  
+  studentService.factory('deleteAchievementDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/students/achievement-details/delete/:achievementUuid', {
+      achievementUuid : '@achievementUuid'
+    }, {
+      erase : {
+        method : 'DELETE'
+      }
+    });
+  } ]);
+
+  
+  /*Student Photos Service ends here*/
 
 });

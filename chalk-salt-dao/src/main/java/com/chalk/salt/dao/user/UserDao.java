@@ -6,6 +6,7 @@ import com.chalk.salt.common.dto.AcademicInfoDto;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 
@@ -351,4 +352,49 @@ public interface UserDao {
 	 * @throws Exception the exception
 	 */
 	void resetPassword(Long userId, String tempPassword)throws Exception;
+
+    /**
+     * Save student achievement details.
+     *
+     * @param studentAchievementetails the student achievementetails
+     * @return the string
+     * @throws Exception the exception
+     */
+    String saveStudentAchievementDetails(StudentAchievementDto studentAchievementetails)throws Exception;
+
+    /**
+     * Gets the user id using achievement uuid.
+     *
+     * @param achievementUuid the achievement uuid
+     * @return the user id using achievement uuid
+     * @throws Exception the exception
+     */
+    String getUserIdUsingAchievementUuid(String achievementUuid)throws Exception;
+
+    /**
+     * Gets the student achievment list using ids.
+     *
+     * @param classId the class id
+     * @param studentId the student id
+     * @return the student achievment list using ids
+     * @throws Exception the exception
+     */
+    List<StudentAchievementDto> getStudentAchievmentListUsingIds(String classId, String studentId)throws Exception;
+
+    /**
+     * Gets the old achievement file name.
+     *
+     * @param achievementUuid the achievement uuid
+     * @return the old achievement file name
+     * @throws Exception the exception
+     */
+    String getOldAchievementFileName(String achievementUuid)throws Exception;
+
+    /**
+     * Delete student achievement content data.
+     *
+     * @param achievementUuid the achievement uuid
+     * @throws Exception the exception
+     */
+    void deleteStudentAchievementContentData(String achievementUuid)throws Exception;
 }

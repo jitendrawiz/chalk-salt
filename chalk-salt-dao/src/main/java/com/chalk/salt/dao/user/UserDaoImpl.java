@@ -13,6 +13,7 @@ import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ParentsInfoDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -752,6 +753,9 @@ public class UserDaoImpl implements UserDao {
 	}
 }
 
+	/* (non-Javadoc)
+	 * @see com.chalk.salt.dao.user.UserDao#resetPassword(java.lang.Long, java.lang.String)
+	 */
 	@Override
 	public void resetPassword(Long userId, String tempPassword) throws Exception {
 		final String sqlQuery = "UPDATE cst_logins SET password=:tempPassword "
@@ -764,4 +768,94 @@ public class UserDaoImpl implements UserDao {
             query.executeUpdate();
         }
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#saveStudentAchievementDetails(com.chalk.salt.common.dto.StudentAchievementDto)
+     */
+    @Override
+    public String saveStudentAchievementDetails(StudentAchievementDto studentAchievementetails) throws Exception
+        {
+        final String sqlQuery = "INSERT INTO `cst_achievements` (`class_id`, `student_id`, `achievement_description`, "
+                + "`file_name`, `modified_date` ,achievement_uuid)"
+                + "VALUES(:classId, :studentId, :achvDesc, :fileName, :modifiedDate,:achvUuid)";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("classId", studentAchievementetails.getClassId());
+            query.addParameter("studentId", studentAchievementetails.getStudentId());
+            query.addParameter("achvDesc", studentAchievementetails.getAchievementDesc());
+            query.addParameter("fileName", studentAchievementetails.getFileName());
+            query.addParameter("modifiedDate", studentAchievementetails.getModified_date());
+            query.addParameter("achvUuid", studentAchievementetails.getAchievementUuid());
+            query.executeUpdate();
+            return studentAchievementetails.getAchievementUuid();
+        }        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#getUserIdUsingAchievementUuid(java.lang.String)
+     */
+    @Override
+    public String getUserIdUsingAchievementUuid(String achievementUuid) throws Exception
+        {
+        final String sqlQuery = "SELECT student_id AS userId FROM  `cst_achievements` WHERE achievement_uuid=:achievementUuid";
+    
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("achievementUuid", achievementUuid);
+            return query.executeAndFetchFirst(String.class);
+        }
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#getStudentAchievmentListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentListUsingIds(String classId, String studentId) throws Exception
+        {
+        final String sqlQuery = " SELECT achievement_uuid AS achievementUuid,class_id AS classId,student_id AS studentId,"
+                + " achievement_description AS achievementDesc, "
+                + " file_name AS fileName,created_date,DATE_FORMAT(modified_date,'%d-%M-%Y %H:%i:%S')as modified_date FROM `cst_achievements`"
+                + " WHERE class_id=:classId AND student_id=:studentId ORDER BY modified_date DESC";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("studentId", studentId);
+            return query.executeAndFetch(StudentAchievementDto.class);
+        }
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#getOldAchievementFileName(java.lang.String)
+     */
+    @Override
+    public String getOldAchievementFileName(String achievementUuid) throws Exception
+        {
+        final String sqlQuery = " SELECT  file_name AS fileName FROM `cst_achievements` "
+                + "   WHERE achievement_uuid=:achievementUuid";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);   
+            query.addParameter("achievementUuid", achievementUuid);
+            return (String)query.executeScalar();
+        }   
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#deleteStudentAchievementContentData(java.lang.String)
+     */
+    @Override
+    public void deleteStudentAchievementContentData(String achievementUuid) throws Exception
+        {
+        final String sqlQuery = "delete from cst_achievements where achievement_uuid=:achievementUuid";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("achievementUuid", achievementUuid);
+            query.executeUpdate();
+        }   
+        
+            
+        }
 }

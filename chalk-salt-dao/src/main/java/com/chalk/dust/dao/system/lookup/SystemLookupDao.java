@@ -2,6 +2,7 @@ package com.chalk.dust.dao.system.lookup;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
 
@@ -37,5 +38,14 @@ public interface SystemLookupDao {
      * @throws Exception the exception
      */
     String getSystemSettings(String settingsKey) throws Exception;
+
+    /**
+     * Gets the students list by class id.
+     *
+     * @param classId the class id
+     * @return the students list by class id
+     * @throws Exception the exception
+     */
+    List<StudentsDto> getStudentsListByClassId(String classId)throws Exception;
 
 }

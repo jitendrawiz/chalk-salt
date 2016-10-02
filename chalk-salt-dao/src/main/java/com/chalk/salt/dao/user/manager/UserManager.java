@@ -5,8 +5,11 @@ import java.util.List;
 import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
+import com.chalk.salt.common.dto.StudentAchievementFileDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
+import com.chalk.salt.common.exceptions.StudentAchievementException;
 import com.chalk.salt.common.exceptions.UserException;
 
 /**
@@ -153,4 +156,42 @@ public interface UserManager {
 	 * @throws UserException the user exception
 	 */
 	UserDto resetPassword(String securUuid, String encryptedTempPassword)throws UserException;
+
+    /**
+     * Save student achievement details.
+     *
+     * @param studentAchievementDto the student achievement dto
+     * @return the string
+     * @throws StudentAchievementException the student achievement exception
+     */
+    String saveStudentAchievementDetails(StudentAchievementDto studentAchievementDto) throws StudentAchievementException;
+
+    /**
+     * Upload student image file.
+     *
+     * @param achievementUuid the achievement uuid
+     * @param achvData the achv data
+     * @return the string
+     * @throws StudentAchievementException the student achievement exception
+     */
+    String uploadStudentImageFile(String achievementUuid, StudentAchievementFileDto achvData) throws StudentAchievementException;
+
+    /**
+     * Gets the student achievment list using ids.
+     *
+     * @param classId the class id
+     * @param studentId the student id
+     * @return the student achievment list using ids
+     * @throws StudentAchievementException the student achievement exception
+     */
+    List<StudentAchievementDto> getStudentAchievmentListUsingIds(String classId, String studentId) throws StudentAchievementException;
+
+    /**
+     * Delete student achievement content data.
+     *
+     * @param achievementUuid the achievement uuid
+     * @return the boolean
+     * @throws StudentAchievementException the student achievement exception
+     */
+    Boolean deleteStudentAchievementContentData(String achievementUuid)throws StudentAchievementException;
 }

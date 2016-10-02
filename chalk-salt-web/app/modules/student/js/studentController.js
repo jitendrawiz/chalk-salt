@@ -23,7 +23,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'CandDModalService',
       'GetDashboardDataBySubject',
       '$stateParams',
-      'GetResultsByClassSubject', 
+      'GetResultsByClassSubject',
       'GetResultDetailsByTestUuid',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService, StudentProfileUpdateService, ChangePasswordService,
           UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams, GetResultsByClassSubject,
@@ -96,7 +96,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.userInfo.parentsInfo = $scope.parentsInfo;
           StudentProfileUpdateService.save({}, $scope.userInfo, function(response) {
             if (response) {
-              console.log(response);
               $window.localStorage.setItem(CHALKNDUST.EDITFLAG, false);
               $state.reload();
             }
@@ -105,7 +104,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-        
+
         $scope.editProfile = function() {
           $window.localStorage.setItem(CHALKNDUST.EDITFLAG, true);
           $state.reload();
@@ -114,7 +113,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         this.changePassword = function() {
           ChangePasswordService.save({}, $scope.userInfo, function(response) {
             if (response) {
-              console.log(response);
               $window.localStorage.setItem(CHALKNDUST.EDITFLAG, false);
               $state.reload();
             }
@@ -174,7 +172,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               securUuid : $scope.securUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : response.message,
@@ -226,13 +223,13 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.showNotesDiv = false;
           $scope.videoObject = [];
           $scope.notesObject = [];
-          
+
           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
           $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
           GetDashboardDataBySubject.get({
             classId : $scope.classId,
             subjectId : item.subjectId
-           
+
           }, function(response) {
             if (response) {
               // Video data
@@ -253,52 +250,51 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }
-        
+
         /* Show Result */
-        $scope.resultList=[];
-        $scope.resultDetailList=[];
+        $scope.resultList = [];
+        $scope.resultDetailList = [];
         $scope.showResultDiv = false;
         $scope.showResultDetailsDiv = false;
-        
-        function getResults(){
-	        GetResultsByClassSubject.query({
-	            classId : $scope.classId,
-	            subjectId : item.subjectId,
-	            securUuid : $scope.securUuid               
-	          }, function(response) {
-	            if(response) {
-	              $scope.resultList = response;
-	              if($scope.resultList) {
-	                $scope.showResultDiv = true;
-	                $scope.showResultDetailsDiv = false;
-	              } 
-	            }
-	          }, function(error) {
-	            showAlert('danger', error.data.message);
-	          });
-	      }
-        
-        $scope.detailedResult = function(testSecuruuid){
-        	console.log(testSecuruuid);
-        	GetResultDetailsByTestUuid.query({
-	            classId : $scope.classId,
-	            subjectId : item.subjectId,
-	            securUuid : $scope.securUuid,
-	            testUuid : testSecuruuid
-	          }, function(response) {
-	            if(response) {
-	              $scope.resultDetailList = response;
-	              if($scope.resultDetailList) {
-	                $scope.showResultDetailsDiv = true;
-	                $scope.showResultDiv = false;
-	              } 
-	            }
-	          }, function(error) {
-	            showAlert('danger', error.data.message);
-	          });
-	      };
-        
-        /***************/
+
+        function getResults() {
+          GetResultsByClassSubject.query({
+            classId : $scope.classId,
+            subjectId : item.subjectId,
+            securUuid : $scope.securUuid
+          }, function(response) {
+            if (response) {
+              $scope.resultList = response;
+              if ($scope.resultList) {
+                $scope.showResultDiv = true;
+                $scope.showResultDetailsDiv = false;
+              }
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        }
+
+        $scope.detailedResult = function(testSecuruuid) {
+          GetResultDetailsByTestUuid.query({
+            classId : $scope.classId,
+            subjectId : item.subjectId,
+            securUuid : $scope.securUuid,
+            testUuid : testSecuruuid
+          }, function(response) {
+            if (response) {
+              $scope.resultDetailList = response;
+              if ($scope.resultDetailList) {
+                $scope.showResultDetailsDiv = true;
+                $scope.showResultDiv = false;
+              }
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+
+        /** ************ */
 
         /* Code to display pdf files in website */
 
@@ -396,6 +392,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetScheduleTestDetailsService',
       'updateScheduleDetailsService',
       'deleteScheduleTestDetailsService',
+      'GetStudentsList',
+      'createStudentAchievementContentService',
+      'SaveStudentAchievementFileService',
+      'GetAchievementContentList',
+      'deleteAchievementDetailsService',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -403,7 +404,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateQuestionDetailsService, deleteQuestionService, UpdateQuestionImageService, ResetPasswordService, saveVideoMasterData, GetVideoContentList, GetVideoDetailsService,
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
-          GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService) {
+          GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -478,7 +480,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.userInfo.parentsInfo = $scope.parentsInfo;
           StudentProfileUpdateService.save({}, $scope.userInfo, function(response) {
             if (response) {
-              console.log(response);
               $window.localStorage.setItem(CHALKNDUST.EDITFLAG, false);
               $state.reload();
             }
@@ -496,7 +497,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         this.changePassword = function() {
           ChangePasswordService.save({}, $scope.userInfo, function(response) {
             if (response) {
-              console.log(response);
               $window.localStorage.setItem(CHALKNDUST.EDITFLAG, false);
               $state.reload();
             }
@@ -508,7 +508,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         userClassLookUpService.query(function(classes) {
           $scope.classes = classes;
-          // console.log(classes);
         }, onRequestFailure);
 
         function onRequestFailure(error) {
@@ -551,15 +550,13 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.videoListDetails = [];
             $scope.NotesListDetails = [];
             $scope.ScheduleListDetails = [];
-            console.log(classId);
+            $scope.achievementListDetails = [];
             $scope.subjectsList = response;
           }, onRequestFailure);
 
         };
 
         $scope.showTopicDetails = function(classId, subjectId) {
-          console.log(classId + "--------------------------" + classId);
-          console.log(subjectId + "--------------------------" + subjectId);
           if (!classId) {
             resetOptions();
             if (!subjectId) {
@@ -594,7 +591,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPagetopicsList);
                 var itemsPerPagetopicsList = self.itemsPerPagetopicsList;
                 var offset = (self.currentPagetopicsList - 1) * itemsPerPagetopicsList;
                 $scope.topicsList = $scope.topicsListDetails.slice(offset, offset + itemsPerPagetopicsList)
@@ -607,8 +603,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         $scope.showTopicDetailsForCommentsPage = function(classId, subjectId) {
-          console.log(classId + "--------------------------" + classId);
-          console.log(subjectId + "--------------------------" + subjectId);
           if (!classId) {
             resetOptions();
             if (!subjectId) {
@@ -631,9 +625,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         $scope.showCommentDetails = function(classId, subjectId, topicId) {
-          console.log("classId--------------------------" + classId);
-          console.log("subjectId--------------------------" + subjectId);
-          console.log("TopicId--------------------------" + topicId);
           if (!topicId) {
             resetOptions();
             if (!subjectId) {
@@ -669,7 +660,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPagecommentsList);
                 var itemsPerPagecommentsList = self.itemsPerPagecommentsList;
                 var offset = (self.currentPagecommentsList - 1) * itemsPerPagecommentsList;
                 $scope.commentsList = $scope.commentsListDetails.slice(offset, offset + itemsPerPagecommentsList)
@@ -703,7 +693,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageStudentList);
                 var itemsPerPageStudentList = self.itemsPerPageStudentList;
                 var offset = (self.currentPageStudentList - 1) * itemsPerPageStudentList;
                 $scope.studentList = $scope.studentListDetails.slice(offset, offset + itemsPerPageStudentList)
@@ -727,7 +716,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               securUuid : securUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Password has been reset successfully and new Password has been sent to the student via email.',
@@ -759,7 +747,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               CandDModalService.showModal({}, modalOptions).then(function(result) {
                 $log.info(result);
               });
-              console.log(response);
               if (!angular.isUndefined(fileData)) {
                 updateQuestionPhoto(fileData, response.questionSecuruuid);
               }
@@ -773,7 +760,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** ***** Show Question List ******* */
         $scope.showQuestionDetails = function(classId, subjectId, classes, subjectsList) {
-          console.log("Fetching questions detailed list " + classId + "-" + classId + " & " + subjectId + "-" + subjectId);
 
           $scope.classes = classes;
           $scope.subjectsList = subjectsList;
@@ -807,7 +793,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageQuestionList);
                 var itemsPerPageQuestionList = self.itemsPerPageQuestionList;
                 var offset = (self.currentPageQuestionList - 1) * itemsPerPageQuestionList;
                 $scope.questionList = $scope.questionListDetails.slice(offset, offset + itemsPerPageQuestionList)
@@ -828,20 +813,17 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.questionDetails = found[0];
             $scope.setTab(10);
           } else {
-            console.log("question data not found");
             $state.go('chalkanddust.questionlist');
           }
         };
 
         /** ***** Update Question ******* */
         $scope.updateQuestion = function(fileData, classes, subjectsList) {
-          console.log("updating question :" + $scope.questionDetails.questionSecuruuid);
           $scope.classes = classes;
           $scope.subjectsList = subjectsList;
 
           updateQuestionDetailsService.save({}, $scope.questionDetails, function(response) {
             if (response) {
-              console.log(response);
               if (!angular.isUndefined(fileData)) {
                 updateQuestionPhoto(fileData, $scope.questionDetails.questionSecuruuid);
               }
@@ -883,7 +865,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               questionSecuruuid : questionSecuruuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Question deleted successfully',
@@ -914,8 +895,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           angular.extend($scope.topicDetailsToSave, $scope.topicDetails);
           createNewTopic.save({}, $scope.topicDetailsToSave, function(response) {
             if (response) {
-              console.log(response);
-
               if (!angular.isUndefined(fileData)) {
                 updateTopicPhoto(fileData, response.securUuid);
               }
@@ -941,7 +920,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }, function(response) {
             if (response) {
               $scope.topicDetails = response;
-              console.log($scope.topicDetails);
               if ($scope.topicDetails.topicImage != null) {
                 GetTopicImageService.get({
                   securUuid : $scope.topicDetails.securUuid
@@ -970,7 +948,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               securUuid : securUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Topic deleted successfully',
@@ -992,7 +969,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         this.updateTopic = function(fileData) {
           updateTopicDetailsService.save({}, $scope.topicDetails, function(response) {
             if (response) {
-              console.log(response);
               if (!angular.isUndefined(fileData)) {
                 updateTopicPhoto(fileData, $scope.topicDetails.securUuid);
               }
@@ -1024,7 +1000,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               commentUuid : commentUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Comment deleted successfully',
@@ -1054,7 +1029,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               securUuid : securUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Student deleted successfully',
@@ -1096,7 +1070,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageTopicRequestList);
                 var itemsPerPageTopicRequestList = self.itemsPerPageTopicRequestList;
                 var offset = (self.currentPageTopicRequestList - 1) * itemsPerPageTopicRequestList;
                 $scope.topicRequestList = $scope.topicRequestListDetails.slice(offset, offset + itemsPerPageTopicRequestList)
@@ -1120,7 +1093,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               requestSecurUuid : requestSecurUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Topic request approved successfully',
@@ -1193,7 +1165,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               CandDModalService.showModal({}, modalOptions).then(function(result) {
                 $log.info(result);
               });
-              console.log(response);
               $state.reload();
             }
 
@@ -1220,7 +1191,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           angular.extend($scope.videoDetailsToSave, $scope.videoDetails);
           saveVideoMasterData.save({}, $scope.videoDetailsToSave, function(response) {
             if (response) {
-              console.log(response);
               var modalOptions = {
                 header : 'Note',
                 body : 'Your Video data is saved successfully',
@@ -1237,7 +1207,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** ***** Show video List ******* */
         $scope.showVideoDetails = function(classId, subjectId, classes, subjectsList) {
-          console.log("Fetching video detailed list " + classId + "-" + classId + " & " + subjectId + "-" + subjectId);
 
           $scope.classes = classes;
           $scope.subjectsList = subjectsList;
@@ -1271,7 +1240,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageVideoList);
                 var itemsPerPageVideoList = self.itemsPerPageVideoList;
                 var offset = (self.currentPageVideoList - 1) * itemsPerPageVideoList;
                 $scope.videoList = $scope.videoListDetails.slice(offset, offset + itemsPerPageVideoList)
@@ -1290,7 +1258,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }, function(response) {
             if (response) {
               $scope.videoDetails = response;
-              console.log($scope.videoDetails);
             }
             $scope.setTab(12);
           }, function(error) {
@@ -1302,7 +1269,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         this.updatevideoData = function() {
           updateVideoDetailsService.save({}, $scope.videoDetails, function(response) {
             if (response) {
-              console.log(response);
               var modalOptions = {
                 header : 'Note',
                 body : 'Your Video data is updated successfully',
@@ -1330,7 +1296,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               videoUuid : videoUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Video data deleted successfully',
@@ -1385,8 +1350,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.notesDetailsToSave.notesFileName = fileName;
             createNotesContentService.save({}, $scope.notesDetailsToSave, function(response) {
               if (response) {
-                console.log(response);
-
                 if (!angular.isUndefined(fileData)) {
                   saveNotesDataFile(fileData, response.notesUuid);
                 }
@@ -1420,8 +1383,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** ***** Show Notes List ******* */
         $scope.showNotesDetails = function(classId, subjectId, classes, subjectsList) {
-          console.log("Fetching notes detailed list " + classId + "-" + classId + " & " + subjectId + "-" + subjectId);
-
           $scope.classes = classes;
           $scope.subjectsList = subjectsList;
 
@@ -1456,7 +1417,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageNotesList);
                 var itemsPerPageNotesList = self.itemsPerPageNotesList;
                 var offset = (self.currentPageNotesList - 1) * itemsPerPageNotesList;
                 $scope.NotesList = $scope.NotesListDetails.slice(offset, offset + itemsPerPageNotesList)
@@ -1475,7 +1435,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }, function(response) {
             if (response) {
               $scope.notesDetails = response;
-              console.log($scope.notesDetails);
             }
             $scope.setTab(14);
           }, function(error) {
@@ -1507,7 +1466,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.notesDetailsToUpdate.notesFileName = fileName;
             updateNotesDetailsService.save({}, $scope.notesDetailsToUpdate, function(response) {
               if (response) {
-                console.log(response);
                 if (!angular.isUndefined(fileData)) {
                   updateNotesDataFile(fileData, response.notesUuid);
                 }
@@ -1552,7 +1510,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               notesUuid : notesUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Notes data deleted successfully',
@@ -1584,7 +1541,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          */
         getTestTypeService.query(function(testType) {
           $scope.testTypeList = testType;
-          // console.log(classes);
         }, onRequestFailure);
 
         /*
@@ -1756,7 +1712,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           angular.extend($scope.scheduleTestDetailsToSave, $scope.scheduleTestDetails);
           saveScheduleTestMasterData.save({}, $scope.scheduleTestDetailsToSave, function(response) {
             if (response) {
-              console.log(response);
               var modalOptions = {
                 header : 'Note',
                 body : 'Test has been scheduled successfully',
@@ -1772,7 +1727,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         $scope.showScheduleTestDetails = function(classId, subjectId, classes, subjectsList) {
-          console.log("Fetching Schedule test detailed list " + classId + "-" + classId + " & " + subjectId + "-" + subjectId);
 
           $scope.classes = classes;
           $scope.subjectsList = subjectsList;
@@ -1806,7 +1760,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
                 // keep a reference to the current instance "this" as the
                 // context is changing
                 var self = this;
-                console.log(self.currentPageScheduleList);
                 var itemsPerPageScheduleList = self.itemsPerPageScheduleList;
                 var offset = (self.currentPageScheduleList - 1) * itemsPerPageScheduleList;
                 $scope.ScheduleList = $scope.ScheduleListDetails.slice(offset, offset + itemsPerPageScheduleList)
@@ -1825,7 +1778,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }, function(response) {
             if (response) {
               $scope.scheduleTestDetails = response;
-              console.log($scope.scheduleTestDetails);
             }
             $scope.setTab(16);
           }, function(error) {
@@ -1840,7 +1792,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }
           updateScheduleDetailsService.save({}, $scope.scheduleTestDetails, function(response) {
             if (response) {
-              console.log(response);
               var modalOptions = {
                 header : 'Note',
                 body : 'Schedule Test details is updated successfully',
@@ -1868,7 +1819,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               scheduleTestUuid : scheduleTestUuid
             }, function(response) {
               if (response) {
-                console.log(response);
                 var modalOptions = {
                   header : 'Note',
                   body : 'Schedule test data deleted successfully',
@@ -1887,6 +1837,131 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         /** ******Schedule Test Methods ends from here*********** */
+
+        /**
+         * *************Home Page Student images work starts from
+         * here*************************8
+         */
+
+        /** *********Show Achievement Student List ***************** */
+        $scope.showStudentsList = function(classId) {
+          if (!classId) {
+            return;
+          }
+          GetStudentsList.query({
+            classId : classId
+          }, function(response) {
+            $scope.studentsList = response;
+          }, onRequestFailure);
+
+        };
+        $scope.achievementDetailsToSave = {};
+        $scope.studentPhotosDetails = {};
+        this.createAchievementsData = function(fileData) {
+          angular.extend($scope.achievementDetailsToSave, $scope.studentPhotosDetails);
+          var fileName = fileData.name;
+          $scope.achievementDetailsToSave.fileName = fileName;
+          createStudentAchievementContentService.save({}, $scope.achievementDetailsToSave, function(response) {
+            if (response) {
+              if (!angular.isUndefined(fileData)) {
+                saveStudentImageDataFile(fileData, response.achievementUuid);
+              }
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+
+        var saveStudentImageDataFile = function(fileData, achievementUuid) {
+          var file = fileData;
+          var formData = new FormData();
+          formData.append('file', file);
+          formData.append('name', file.name);
+          formData.append('documentType', file.type);
+          SaveStudentAchievementFileService.upload(formData, achievementUuid, function(response) {
+            var modalOptions = {
+              header : 'Note',
+              body : 'Data saved successfully',
+              btn : 'OK'
+            };
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+              $state.reload();
+            });
+          }, onRequestFailure);
+        };
+
+        /** *********Show Achievement List Details***************** */
+
+        $scope.showAchievementDetails = function(classId, studentId, classes, studentsList) {
+
+          $scope.classes = classes;
+          $scope.studentsList = studentsList;
+
+          if (!classId) {
+            achievementDetails.liststudentId = "";
+            $scope.achievementListDetails = null;
+            $scope.achvList = null;
+            if (!studentId) {
+              return;
+            }
+          }
+          GetAchievementContentList.query({
+            classId : classId,
+            studentId : studentId
+          }, function(response) {
+            if (response) {
+              $scope.achievementListDetails = response;
+              $scope.totalItemsAchvList = $scope.achievementListDetails.length;
+              $scope.currentPageAchvList = 1;
+              $scope.itemsPerPageAchvList = 5;
+              $scope.maxSizeAchvList = 5;
+
+              $scope.$watch('search', function(newVal, oldVal) {
+                $scope.achvList = filterFilter($scope.achievementListDetails, newVal);
+                $scope.totalItemsAchvList = $scope.achvList.length;
+
+                $scope.currentPageAchvList = 1;
+              }, true);
+              $scope.getAchvContentData = function() {
+                var self = this;
+                var itemsPerPageAchvList = self.itemsPerPageAchvList;
+                var offset = (self.currentPageAchvList - 1) * itemsPerPageAchvList;
+                $scope.achvList = $scope.achievementListDetails.slice(offset, offset + itemsPerPageAchvList)
+              };
+              $scope.getAchvContentData();
+            }
+          }, onRequestFailure);
+
+        };
+
+        $scope.deleteAchievementContent = function(achievementUuid) {
+          var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Deleting Student achievement record,Do you want to continue?',
+            btn : 'OK'
+          };
+          CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+            deleteAchievementDetailsService.erase({
+              achievementUuid : achievementUuid
+            }, function(response) {
+              if (response) {
+                var modalOptions = {
+                  header : 'Note',
+                  body : 'Achievement record deleted successfully',
+                  btn : 'OK'
+                };
+
+                CandDModalService.showModal({}, modalOptions).then(function(result) {
+                  $log.info(result);
+                });
+                $state.reload();
+              }
+            }, onRequestFailure)
+          });
+        };
+
+        /** *Home Page Student images work ends here** */
+
         var Id = $stateParams.id;
 
         // Show Student's Details
@@ -1923,9 +1998,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
       } ]);
 
-  homeModule.controller('NotificationController', [ '$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 'CHALKNDUST', 'CandDModalService', '$stateParams','$interval','GetNotificationList',
-      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, CandDModalService, $stateParams, $interval,GetNotificationList) {
-       
+  homeModule.controller('NotificationController', [ '$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 'CHALKNDUST', 'CandDModalService',
+      '$stateParams', '$interval', 'GetNotificationList',
+      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, CandDModalService, $stateParams, $interval, GetNotificationList) {
+
         var showAlert = function(type, message) {
           $scope.alert = {};
           $scope.alert.type = type;
@@ -1941,19 +2017,19 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
         $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
-        $interval(function(){
-        
-        GetNotificationList.query({
-          classId : $scope.classId,
-          studentId : $scope.securUuid
-        }, function(response) {
-          if (response) {
-            $rootScope.notificationList=response;
-          }
-        }, function(error) {
-          showAlert('danger', error.data.message);
-        });
-        },120000);
-        
+        $interval(function() {
+
+          GetNotificationList.query({
+            classId : $scope.classId,
+            studentId : $scope.securUuid
+          }, function(response) {
+            if (response) {
+              $rootScope.notificationList = response;
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        }, 120000);
+
       } ]);
 });

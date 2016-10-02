@@ -15,8 +15,11 @@ import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.GuestUserDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.ProfilePhotoUploadDto;
+import com.chalk.salt.common.dto.StudentAchievementDto;
+import com.chalk.salt.common.dto.StudentAchievementFileDto;
 import com.chalk.salt.common.dto.TopicImageUploadDto;
 import com.chalk.salt.common.dto.UserDto;
+import com.chalk.salt.common.exceptions.StudentAchievementException;
 import com.chalk.salt.common.exceptions.TemplateProcessingException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -220,4 +223,42 @@ public class UserFacadeImpl implements UserFacade {
         emailService.sendMail(emailNotification);
         return true;
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#saveStudentAchievementDetails(com.chalk.salt.common.dto.StudentAchievementDto)
+     */
+    @Override
+    public String saveStudentAchievementDetails(StudentAchievementDto studentAchievementDto) throws StudentAchievementException
+        {
+            // TODO Auto-generated method stub
+            return userManager.saveStudentAchievementDetails(studentAchievementDto);
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#uploadStudentImageFile(java.lang.String, com.chalk.salt.common.dto.StudentAchievementFileDto)
+     */
+    @Override
+    public String uploadStudentImageFile(String achievementUuid, StudentAchievementFileDto achvData) throws StudentAchievementException
+        {
+            // TODO Auto-generated method stub
+            return userManager.uploadStudentImageFile(achievementUuid,achvData);
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#getStudentAchievmentListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentListUsingIds(String classId, String studentId) throws StudentAchievementException
+        {
+            return  userManager.getStudentAchievmentListUsingIds(classId,studentId) ;
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#deleteStudentAchievementContentData(java.lang.String)
+     */
+    @Override
+    public Boolean deleteStudentAchievementContentData(String achievementUuid)throws StudentAchievementException
+        {
+            return userManager.deleteStudentAchievementContentData(achievementUuid);
+        }
 }

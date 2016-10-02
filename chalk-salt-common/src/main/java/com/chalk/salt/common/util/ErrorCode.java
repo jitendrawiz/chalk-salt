@@ -216,7 +216,19 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_RESULT_LIST(1068),
 	
 	/** The fail to fetch result details. */
-	FAIL_TO_FETCH_RESULT_DETAILS(1069);
+	FAIL_TO_FETCH_RESULT_DETAILS(1069),
+	
+	/** The fail to fetch students. */
+	FAIL_TO_FETCH_STUDENTS(1070),
+	
+	/** The fail to save student achievement content. */
+	FAIL_TO_SAVE_STUDENT_ACHIEVEMENT_CONTENT(1071),
+	
+	/** The fail to fetch student achievement content. */
+	FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT(1072),
+	
+	/** The fail to delete student achievement content. */
+	FAIL_TO_DELETE_STUDENT_ACHIEVEMENT_CONTENT(1073);
 
 	/** The value. */
 	private final int value;

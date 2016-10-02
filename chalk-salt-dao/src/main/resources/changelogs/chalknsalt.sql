@@ -563,6 +563,22 @@ CREATE TABLE `cst_notes` (
   `notes_uuid` varchar(100) NOT NULL,
   PRIMARY KEY (`notes_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `cst_achievements`;
+
+CREATE TABLE `cst_achievements` (
+  `achievement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `achievement_uuid` varchar(100) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `achievement_description` text,
+  `file_name` varchar(100) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`achievement_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

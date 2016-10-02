@@ -27,6 +27,7 @@ import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
 import com.chalk.salt.common.dto.UserClassDto;
@@ -129,6 +130,32 @@ public class SystemResource extends AbstractResource {
 
         } catch (final SystemException systemException) {
             throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+        }
+    }
+	
+	/**
+	 * Gets the students list by class id.
+	 *
+	 * @param classId the class id
+	 * @return the students list by class id
+	 * @throws SystemException the system exception
+	 */
+	@GET
+    @Path("/students/{classId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStudentsListByClassId(@NotBlank @PathParam("classId") final String classId) throws SystemException {
+        List<StudentsDto> students = null;
+        try {
+            students = systemFacade.getStudentsListByClassId(classId);
+            if (CollectionUtils.isEmpty(students)) {
+                return Response.noContent().build();
+            }
+            return Response.ok(students).build();
+        } catch (final SystemException systemException) {
+            throw Utility.buildResourceException(
+                    systemException.getErrorCode(),
+                    systemException.getMessage(), Status.INTERNAL_SERVER_ERROR,
+                    SystemException.class, systemException);
         }
     }
 }

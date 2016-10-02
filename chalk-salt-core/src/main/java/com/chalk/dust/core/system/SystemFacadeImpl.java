@@ -13,6 +13,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
+import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
 import com.chalk.salt.common.dto.UserClassDto;
@@ -112,5 +113,14 @@ public class SystemFacadeImpl implements SystemFacade {
         emailNotification.setBody(processedNotificationTemplate);
         return emailNotification;
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.dust.core.system.SystemFacade#getStudentsListByClassId(java.lang.String)
+     */
+    @Override
+    public List<StudentsDto> getStudentsListByClassId(String classId) throws SystemException
+        {
+        return systemManager.getStudentsListByClassId(classId);
+        }
 
 }

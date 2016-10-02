@@ -10,6 +10,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -76,5 +77,25 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
             return query.executeAndFetchFirst(String.class);
         }
     }
+
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#getStudentsListByClassId(java.lang.String)
+     */
+    @Override
+    public List<StudentsDto> getStudentsListByClassId(String classId) throws Exception
+        {
+        final String sqlQuery = " SELECT cst_users.user_id AS studentId, "
+                + " CONCAT_WS(' ',first_name,last_name) AS studentName "
+                + " FROM `cst_users` "
+                + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id "
+                + " AND cst_logins.active WHERE class_id=:classId ORDER BY studentName";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("classId", classId);
+            return query.executeAndFetch(StudentsDto.class);
+        }
+        }
 
 }

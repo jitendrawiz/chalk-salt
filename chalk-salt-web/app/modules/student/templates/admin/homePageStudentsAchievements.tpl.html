@@ -1,0 +1,144 @@
+<style>
+.title_text {
+    width: 70%;
+    float: left;
+}
+
+.title_name {
+    width: 30%;
+    float: left;
+}
+
+.title_name {
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+.title_name_class {
+    padding-top: 0px;
+}
+
+.title_name_sub {
+    padding-top: 20px;
+}
+
+.title_name_title {
+    padding-top: 15px;
+}
+
+.title_name_des {
+    padding-top: 80px;
+}
+
+.title_name_photo {
+    padding-top: 56px;
+}
+
+.title_text textarea {
+    width: 100%;
+    height: 100px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+
+.title_text select {
+    width: 60%;
+    height: 40px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+
+.title_text button a {
+    color: #FFF;
+    padding: 0px 40px;
+}
+
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+.title_text button {
+    padding: 8px 0px;
+    cursor: pointer;
+    background: #2f889a;
+    color: #FFF;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-10 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="studentHomePhotosForm" role="form" action="" method="post" novalidate>
+                <h3>Student Achievement Master</h3>
+                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>               
+                <div class="title_name">
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Student Name</label><br> <label
+                        class="title_name_title">Student Achievements Description</label><br> <label class="title_name_des">Student Image</label><br /> <br />
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : studentHomePhotosForm.studentClass.$invalid && !studentHomePhotosForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="studentPhotosDetails.classId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showStudentsList(studentPhotosDetails.classId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="studentHomePhotosForm.studentClass.$error.required && !studentHomePhotosForm.studentClass.$pristine">Class is
+                            required.</p>
+                    </div>
+                    <div  class="form-group">
+                        <select class="form-control" ng-model="studentPhotosDetails.studentId" name="student" placeholder="Student"
+                            ng-options="student.studentId as student.studentName for student in studentsList" ng-required="true">
+                            <option value="" disabled>Select Student</option>
+                        </select>
+                        <p ng-show="studentHomePhotosForm.student.$error.required && !studentHomePhotosForm.student.$pristine">Student Name is
+                            required.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : studentHomePhotosForm.achievementDesc.$invalid && !studentHomePhotosForm.achievementDesc.$pristine }">
+                        <textarea class="form-control" id="achievementDesc" name="achievementDesc" ng-model="studentPhotosDetails.achievementDesc" type="text"
+                            placeholder="Student Achievement Description" required></textarea>
+                        <span style="color: red" class="help-block"
+                            ng-show="studentHomePhotosForm.achievementDesc.$invalid  && !studentHomePhotosForm.achievementDesc.$pristine"> <span
+                            ng-show="studentHomePhotosForm.achievementDesc.$error.required">Student Achievement Description is required.</span>
+                        </span>
+                    </div>
+                        <div class="form-group">
+                        <input id="fileName" type="file" file-model="fileName" ng-model="fileName" name="fileName" required/>
+                    <span style="color: red" class="help-block"
+                            ng-show="studentHomePhotosForm.fileName.$invalid  && !studentHomePhotosForm.fileName.$pristine"> <span
+                            ng-show="studentHomePhotosForm.fileName.$error.required">Student Image is required.</span>
+                        </span>
+                    </div>
+                    <div  class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="studentHomePhotosForm.$invalid"
+                            ng-click="adminCtrl.createAchievementsData(fileName)">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

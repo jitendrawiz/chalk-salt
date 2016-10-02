@@ -1,13 +1,13 @@
 <script src="./resources/js/hoe.js"></script>
 <style>
 .main_bg_bg {
-    background-image: none;
-    background-size: 100%;
-    width: 0%;
-    height: 1000px;
-    top: 0;
-    z-index: 0;
-    position: fixed;
+	background-image: none;
+	background-size: 100%;
+	width: 0%;
+	height: 1000px;
+	top: 0;
+	z-index: 0;
+	position: fixed;
 }
 </style>
 <div hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
@@ -102,6 +102,12 @@
                     <li ng-class="{ active:isSet(17)}"><a ng-click="setTab(17);" href=""> <i class="fa fa-files-o"></i> <span
                             class="menu-text">Schedule Test List</span> <span class="selected"></span>
                     </a></li>
+                    <li ng-class="{ active:isSet(18)}"><a ng-click="setTab(18);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Student Achievement Master</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{ active:isSet(19)}"><a ng-click="setTab(19);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Student Achievement List</span> <span class="selected"></span>
+                    </a></li>
                 </ul>
             </aside>
             <section id="main-content">
@@ -161,6 +167,12 @@
                                     </div>
                                     <div ng-switch-when="17">
                                         <div ng-include="'modules/student/templates/admin/ScheduleTestContentList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="18">
+                                        <div ng-include="'modules/student/templates/admin/homePageStudentsAchievements.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="19">
+                                        <div ng-include="'modules/student/templates/admin/homePageStudentsAchievementsList.tpl.html'"></div>
                                     </div>
                                 </div>
                             </div>

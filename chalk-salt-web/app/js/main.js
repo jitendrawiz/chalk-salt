@@ -19,7 +19,10 @@ require.config({
     ngAnimate:'lib/angular-animate/angular-animate.min',
     angularPdf:'lib/angular-pdf/dist/angular-pdf.min',
     pdfjs:'lib/pdfjs-dist/build/pdf',
-    ionicons:'lib/ionicons/css/ionicons.min'
+    ionicons:'lib/ionicons/css/ionicons.min',
+    ngAria: 'lib/angular-aria/angular-aria.min',
+    ngMaterial: 'lib/angular-material/angular-material.min',
+    ngMaterialCSS: 'lib/angular-material/angular-material'
     },
   /**
    * for lib that either do not support AMD out of the box, or
@@ -30,6 +33,8 @@ require.config({
     angularResource: ['angular'],
     angularSanitize: ['angular'],
     ngAnimate: ['angular'],
+    ngAria: ['angular'],
+    ngMaterial: ['ngAria', 'ngAnimate'],
     uiRouter: ['angular'],
     uiBootstrap: ['angular'],
     angularPdf:['angular','pdfjs'],

@@ -13,5 +13,7 @@ public enum SystemSettingsKey
     /** The question image. */
     QUESTION_IMAGE,
     /** The notes file. */
-    NOTES_FILE
+    NOTES_FILE,
+    /** The achievement data. */
+    ACHIEVEMENT_DATA
 }
