@@ -194,6 +194,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           item.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
           item.subjectName = $window.localStorage.getItem(CHALKNDUST.SUBJECTNAME);
           updatePageDetailsOnClick(item);
+          getResults(item);
         } else {
           $scope.tab = 1;
         }
@@ -212,7 +213,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.tab = newtab;
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER, newtab);
           updatePageDetailsOnClick(item);
-          getResults();
+          getResults(item);
         }
 
         function updatePageDetailsOnClick(item) {
@@ -257,7 +258,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.showResultDiv = false;
         $scope.showResultDetailsDiv = false;
 
-        function getResults() {
+        function getResults(item) {
           GetResultsByClassSubject.query({
             classId : $scope.classId,
             subjectId : item.subjectId,
@@ -2018,15 +2019,23 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
         $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
         $interval(function() {
-
+          $('#loading').hide();
+          $('#loading img').hide();
           GetNotificationList.query({
             classId : $scope.classId,
             studentId : $scope.securUuid
           }, function(response) {
             if (response) {
+              $('#loading').hide();
+              $('#loading img').hide();
               $rootScope.notificationList = response;
+            }else{
+              $('#loading').hide();
+              $('#loading img').hide();
             }
           }, function(error) {
+            $('#loading').hide();
+            $('#loading img').hide();
             showAlert('danger', error.data.message);
           });
         }, 120000);
