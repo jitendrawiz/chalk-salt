@@ -192,5 +192,14 @@ public interface UserFacade {
      * @throws StudentAchievementException the student achievement exception
      */
     Boolean deleteStudentAchievementContentData(String achievementUuid)throws StudentAchievementException;
+
+    /**
+     * Gets the student achievment list.
+     *
+     * @return the student achievment list
+     * @throws StudentAchievementException the student achievement exception
+     */
+    List<StudentAchievementDto> getStudentAchievmentList()throws StudentAchievementException;
+
 	
 }

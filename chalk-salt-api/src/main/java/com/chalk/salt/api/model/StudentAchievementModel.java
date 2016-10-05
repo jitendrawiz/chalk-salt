@@ -27,6 +27,102 @@ public class StudentAchievementModel
     /** The modified_date. */
     private String modified_date;
 
+    /** The student name. */
+    private String studentName;
+
+    /** The class name. */
+    private String className;
+
+    /** The file path. */
+    private String filePath;
+
+    /** The image link. */
+    private String imageLink;
+
+    /**
+     * Gets the image link.
+     *
+     * @return the image link
+     */
+    public String getImageLink()
+        {
+            return imageLink;
+        }
+
+    /**
+     * Sets the image link.
+     *
+     * @param imageLink
+     *            the new image link
+     */
+    public void setImageLink(String imageLink)
+        {
+            this.imageLink = imageLink;
+        }
+
+    /**
+     * Gets the file path.
+     *
+     * @return the file path
+     */
+    public String getFilePath()
+        {
+            return filePath;
+        }
+
+    /**
+     * Sets the file path.
+     *
+     * @param filePath
+     *            the new file path
+     */
+    public void setFilePath(String filePath)
+        {
+            this.filePath = filePath;
+        }
+
+    /**
+     * Gets the student name.
+     *
+     * @return the student name
+     */
+    public String getStudentName()
+        {
+            return studentName;
+        }
+
+    /**
+     * Sets the student name.
+     *
+     * @param studentName
+     *            the new student name
+     */
+    public void setStudentName(String studentName)
+        {
+            this.studentName = studentName;
+        }
+
+    /**
+     * Gets the class name.
+     *
+     * @return the class name
+     */
+    public String getClassName()
+        {
+            return className;
+        }
+
+    /**
+     * Sets the class name.
+     *
+     * @param className
+     *            the new class name
+     */
+    public void setClassName(String className)
+        {
+            this.className = className;
+        }
+
     /**
      * Gets the achievement uuid.
      *

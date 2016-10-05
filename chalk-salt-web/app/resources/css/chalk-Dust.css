@@ -258,6 +258,12 @@
 .text-color-white {
   color: white !important; }
 
+.capitalize {
+  text-transform: capitalize; }
+
+.transparent-color {
+  background-color: transparent; }
+
 * {
   margin: 0;
   padding: 0; }

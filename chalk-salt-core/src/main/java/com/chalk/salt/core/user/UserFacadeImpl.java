@@ -261,4 +261,13 @@ public class UserFacadeImpl implements UserFacade {
         {
             return userManager.deleteStudentAchievementContentData(achievementUuid);
         }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.core.user.UserFacade#getStudentAchievmentList()
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentList() throws StudentAchievementException
+        {
+        return userManager.getStudentAchievmentList();
+        }
 }

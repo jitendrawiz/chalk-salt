@@ -858,4 +858,30 @@ public class UserDaoImpl implements UserDao {
         
             
         }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#getStudentAchievmentList()
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentList() throws Exception
+        {
+        final String sqlQuery = "SELECT achievement_uuid AS achievementUuid,"
+                + " cst_achievements.class_id AS classId,"
+                + " student_id AS studentId,"
+                + " achievement_description AS achievementDesc,"
+                + " class_name AS className,"
+                + " CONCAT(first_name,' ',last_name)AS studentName, "
+                + " file_name AS fileName,"
+                + " cst_achievements.created_date,"
+                + " DATE_FORMAT(cst_achievements.modified_date,'%d-%M-%Y %H:%i:%S')AS modified_date"
+                + " FROM `cst_achievements` "
+                + " JOIN `cst_class_type` ON `cst_class_type`.class_id=cst_achievements.class_id "
+                + " JOIN `cst_users` ON `cst_users`.user_id=`cst_achievements`.student_id "
+                + " ORDER BY cst_achievements.modified_date DESC LIMIT 4";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            return query.executeAndFetch(StudentAchievementDto.class);
+        }
+        }
 }

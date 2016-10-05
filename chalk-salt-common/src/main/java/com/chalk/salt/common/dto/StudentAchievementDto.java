@@ -1,6 +1,5 @@
 package com.chalk.salt.common.dto;
 
-
 /**
  * The Class StudentAchievementDto.
  */
@@ -28,6 +27,78 @@ public class StudentAchievementDto
     /** The modified_date. */
     private String modified_date;
 
+    /** The student name. */
+    private String studentName;
+
+    /** The class name. */
+    private String className;
+
+    /** The file path. */
+    private String filePath;
+
+    /**
+     * Gets the file path.
+     *
+     * @return the file path
+     */
+    public String getFilePath()
+        {
+            return filePath;
+        }
+
+    /**
+     * Sets the file path.
+     *
+     * @param filePath
+     *            the new file path
+     */
+    public void setFilePath(String filePath)
+        {
+            this.filePath = filePath;
+        }
+
+    /**
+     * Gets the student name.
+     *
+     * @return the student name
+     */
+    public String getStudentName()
+        {
+            return studentName;
+        }
+
+    /**
+     * Sets the student name.
+     *
+     * @param studentName
+     *            the new student name
+     */
+    public void setStudentName(String studentName)
+        {
+            this.studentName = studentName;
+        }
+
+    /**
+     * Gets the class name.
+     *
+     * @return the class name
+     */
+    public String getClassName()
+        {
+            return className;
+        }
+
+    /**
+     * Sets the class name.
+     *
+     * @param className
+     *            the new class name
+     */
+    public void setClassName(String className)
+        {
+            this.className = className;
+        }
+
     /**
      * Gets the achievement uuid.
      *
@@ -41,7 +112,8 @@ public class StudentAchievementDto
     /**
      * Sets the achievement uuid.
      *
-     * @param achievementUuid the new achievement uuid
+     * @param achievementUuid
+     *            the new achievement uuid
      */
     public void setAchievementUuid(String achievementUuid)
         {
@@ -61,7 +133,8 @@ public class StudentAchievementDto
     /**
      * Sets the student id.
      *
-     * @param studentId the new student id
+     * @param studentId
+     *            the new student id
      */
     public void setStudentId(Long studentId)
         {
@@ -81,7 +154,8 @@ public class StudentAchievementDto
     /**
      * Sets the class id.
      *
-     * @param classId the new class id
+     * @param classId
+     *            the new class id
      */
     public void setClassId(Long classId)
         {
@@ -101,7 +175,8 @@ public class StudentAchievementDto
     /**
      * Sets the file name.
      *
-     * @param fileName the new file name
+     * @param fileName
+     *            the new file name
      */
     public void setFileName(String fileName)
         {
@@ -121,7 +196,8 @@ public class StudentAchievementDto
     /**
      * Sets the achievement desc.
      *
-     * @param achievementDesc the new achievement desc
+     * @param achievementDesc
+     *            the new achievement desc
      */
     public void setAchievementDesc(String achievementDesc)
         {
@@ -141,7 +217,8 @@ public class StudentAchievementDto
     /**
      * Sets the created_date.
      *
-     * @param created_date the new created_date
+     * @param created_date
+     *            the new created_date
      */
     public void setCreated_date(String created_date)
         {
@@ -161,12 +238,12 @@ public class StudentAchievementDto
     /**
      * Sets the modified_date.
      *
-     * @param modified_date the new modified_date
+     * @param modified_date
+     *            the new modified_date
      */
     public void setModified_date(String modified_date)
         {
             this.modified_date = modified_date;
         }
-
 
 }

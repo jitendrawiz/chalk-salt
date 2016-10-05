@@ -4,9 +4,23 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
 
   var homeModule = angular.module('Home.controller', [ 'Home.router', 'System.configuration', 'Home.service' ]);
 
-  homeModule.controller('HomeController', [ '$window', '$scope', '$state', '$resource', '$rootScope', 'CHALKNDUST', 'HomeService', 'CandDModalService', '$log', 'HomeGuestService',
-      'userClassLookUpService', 'userNotesLookupService',
-      function($window, $scope, $state, $resource, $rootScope, CHALKNDUST, HomeService, CandDModalService, $log, HomeGuestService, userClassLookUpService, userNotesLookupService) {
+  homeModule.controller('HomeController', [
+      '$window',
+      '$scope',
+      '$state',
+      '$resource',
+      '$rootScope',
+      'CHALKNDUST',
+      'HomeService',
+      'CandDModalService',
+      '$log',
+      'HomeGuestService',
+      'userClassLookUpService',
+      'userNotesLookupService',
+      'StudentAchievementLookupService',
+      '$timeout',
+      function($window, $scope, $state, $resource, $rootScope, CHALKNDUST, HomeService, CandDModalService, $log, HomeGuestService, userClassLookUpService, userNotesLookupService,
+          StudentAchievementLookupService, $timeout) {
         $window.scrollTo(0, 0);
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -115,24 +129,24 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
         $scope.showNotes = function(classId) {
           userNotesLookupService.query({
             classId : classId
-          },function(response) {
-            $scope.modalOptions=[];
+          }, function(response) {
+            $scope.modalOptions = [];
             if (response) {
-              $scope.modalOptions=response;
-              var notesLength=$scope.modalOptions.length;
-              if(notesLength>0){
-              CandDModalService.showNotes({}, $scope.modalOptions).then(function(result) {
+              $scope.modalOptions = response;
+              var notesLength = $scope.modalOptions.length;
+              if (notesLength > 0) {
+                CandDModalService.showNotes({}, $scope.modalOptions).then(function(result) {
 
-              });
-              }else{
+                });
+              } else {
                 var modalOptions = {
-                    header : 'Note',
-                    body : 'Sorry! No notes found.',
-                    btn : 'Ok'
-                  };
+                  header : 'Note',
+                  body : 'Sorry! No notes found.',
+                  btn : 'Ok'
+                };
 
                 CandDModalService.showModal({}, modalOptions).then(function(result) {
-                  
+
                 });
               }
             }
@@ -140,6 +154,45 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
             showAlert('danger', error.data.message);
           });
         };
+        $scope.isFirstStudentPresent = false;
+        $scope.isSecondStudentPresent = false;
+        $scope.isThirdStudentPresent = false;
+        $scope.isFourthStudentPresent = false;
+        getStudentAchievementList();
+        var studentAchievementlist = {};
+        function getStudentAchievementList() {
+          StudentAchievementLookupService.get({}, function(response) {
+            $timeout(function() {
+
+            }, 5000)
+            $scope.achievementData = response;
+            if ($scope.achievementData.length > 0) {
+              for (var i = 0; i < $scope.achievementData.length; i++) {
+                studentAchievementlist[i] = $scope.achievementData[i];
+              }
+            }
+
+            if (angular.isDefined(studentAchievementlist[0])) {
+              $scope.firstStudent = studentAchievementlist[0];
+              $scope.isFirstStudentPresent = true;
+            }
+            if (angular.isDefined(studentAchievementlist[1])) {
+              $scope.secondStudent = studentAchievementlist[1];
+              $scope.isSecondStudentPresent = true;
+            }
+            if (angular.isDefined(studentAchievementlist[2])) {
+              $scope.thirdStudent = studentAchievementlist[2];
+              $scope.isThirdStudentPresent = true;
+            }
+            if (angular.isDefined(studentAchievementlist[3])) {
+              $scope.fourthStudent = studentAchievementlist[3];
+              $scope.isFourthStudentPresent = true;
+            }
+
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        }
 
       } ]);
 });

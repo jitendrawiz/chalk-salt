@@ -641,4 +641,28 @@ public class UserManagerImpl implements UserManager {
             throw new StudentAchievementException(ErrorCode.FAIL_TO_DELETE_STUDENT_ACHIEVEMENT_CONTENT, "Fail to delete student achievement content data and file", exception);
         }
         }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.manager.UserManager#getStudentAchievmentList()
+     */
+    @Override
+    public List<StudentAchievementDto> getStudentAchievmentList() throws StudentAchievementException
+        {
+        List<StudentAchievementDto> list=new ArrayList<StudentAchievementDto>(); 
+            logger.info("fetch list of students achievements list to show on home page...");
+            try{
+                list=  userDao.getStudentAchievmentList();
+                for(int i=0;i<list.size();i++){
+                StudentAchievementDto student=list.get(i);
+                String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
+                destPath += String.join(File.separator, String.valueOf(student.getStudentId()),student.getAchievementUuid(),student.getFileName());
+                student.setFilePath(destPath);
+                }
+            } catch (final Exception exception) {
+                throw new StudentAchievementException(ErrorCode.FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT, "Fail to Fetch list of students achievements to show on home page", exception);
+            }
+            return list;
+        }
+
+   
 }

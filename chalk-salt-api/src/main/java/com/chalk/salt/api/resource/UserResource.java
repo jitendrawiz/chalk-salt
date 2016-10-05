@@ -694,4 +694,40 @@ public class UserResource extends AbstractResource {
         }
     }
     
+    /**
+     * Gets the student achievment list.
+     *
+     * @return the student achievment list
+     * @throws StudentAchievementException the student achievement exception
+     */
+    @GET
+    @Path("/students/achievement-details")   
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStudentAchievmentList()throws StudentAchievementException{
+   
+        List<StudentAchievementModel> stuAchvContent = null;
+        List<StudentAchievementDto> stuAchvList = null;
+        try{
+            stuAchvList = userFacade.getStudentAchievmentList();
+            stuAchvContent = DozerMapperUtil.mapCollection(beanMapper, stuAchvList, StudentAchievementModel.class);
+            for(int i=0;i<stuAchvContent.size();i++){
+                StudentAchievementModel studModel=stuAchvContent.get(i);
+                File file=new File(studModel.getFilePath());
+                final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+                final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+                studModel.setImageLink("data:" + mediaType + ";base64," + encodedImageString);
+            }
+            return Response.ok(stuAchvContent).build();
+            
+        } catch (final StudentAchievementException studentAchievementException) {
+            throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
+        }catch (IOException e) {
+            if(e instanceof NoSuchFileException){
+            throw Utility.buildResourceException(ErrorCode.RESOURCE_NOT_FOUND, "No Image File exists corresponding to the user", Status.NO_CONTENT, StudentAchievementException.class, e);
+            }
+            e.printStackTrace();
+        }
+        return Response.ok(stuAchvContent).build();
+    }
+    
 }

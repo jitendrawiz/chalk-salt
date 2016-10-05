@@ -397,4 +397,12 @@ public interface UserDao {
      * @throws Exception the exception
      */
     void deleteStudentAchievementContentData(String achievementUuid)throws Exception;
+
+    /**
+     * Gets the student achievment list.
+     *
+     * @return the student achievment list
+     * @throws Exception the exception
+     */
+    List<StudentAchievementDto> getStudentAchievmentList()throws Exception;
 }
