@@ -264,6 +264,42 @@
 .transparent-color {
   background-color: transparent; }
 
+@media (min-width: 360px) {
+  .col-sm-6 {
+    width: 100%; }
+  .service_360 p {
+    width: 120;
+    font-size: 12px !important;
+    text-align: center; }
+  .service-item {
+    width: 340px;
+    float: none; }
+  .col-sm-6 {
+    width: 360px; }
+  .icon-box {
+    font-size: 40px;
+    height: 70px;
+    line-height: 70px;
+    width: 70px; }
+  .service_360 {
+    width: 100%;
+    float: none; } }
+
+@media (min-width: 640px) {
+  .col-sm-6 {
+    width: 100%; }
+  .service_360 p {
+    width: 120px;
+    font-size: 12px !important; }
+  .service-item {
+    width: 150px; }
+  .icon-box {
+    width: 100px;
+    height: 100px; }
+  .service_360 {
+    width: 100%;
+    alignment-adjust: central; } }
+
 * {
   margin: 0;
   padding: 0; }
