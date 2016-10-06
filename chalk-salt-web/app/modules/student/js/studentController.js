@@ -294,7 +294,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-
+		$scope.backToResultList = function(){
+	    	  getResults();
+	    	  $scope.showResultDetailsDiv = false;
+              $scope.showResultDiv = true;
+	      };
         /** ************ */
 
         /* Code to display pdf files in website */
