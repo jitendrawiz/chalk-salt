@@ -194,7 +194,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           item.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
           item.subjectName = $window.localStorage.getItem(CHALKNDUST.SUBJECTNAME);
           updatePageDetailsOnClick(item);
-          getResults(item);
+          getResults();
         } else {
           $scope.tab = 1;
         }
@@ -213,7 +213,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.tab = newtab;
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER, newtab);
           updatePageDetailsOnClick(item);
-          getResults(item);
+          getResults();
         }
 
         function updatePageDetailsOnClick(item) {
@@ -258,10 +258,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.showResultDiv = false;
         $scope.showResultDetailsDiv = false;
 
-        function getResults(item) {
+        function getResults() {
+         var subjectId= $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
           GetResultsByClassSubject.query({
             classId : $scope.classId,
-            subjectId : item.subjectId,
+            subjectId : subjectId,
             securUuid : $scope.securUuid
           }, function(response) {
             if (response) {
@@ -277,9 +278,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         }
 
         $scope.detailedResult = function(testSecuruuid) {
+          var subjectId= $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+
           GetResultDetailsByTestUuid.query({
             classId : $scope.classId,
-            subjectId : item.subjectId,
+            subjectId : subjectId,
             securUuid : $scope.securUuid,
             testUuid : testSecuruuid
           }, function(response) {
