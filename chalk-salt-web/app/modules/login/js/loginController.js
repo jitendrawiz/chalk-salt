@@ -25,6 +25,10 @@ define([ 'angular', './loginRouting', './loginService' ], function(angular) {
                 $scope.build = CHALKNDUST.BUILD;
                 $scope.email = CHALKNDUST.EMAIL;
                 $scope.releaseDate = CHALKNDUST.RELEASE_DATE;
+                $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+                $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+                $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+                $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
                 this.authenticateUser = function() {
                 	
                     LoginService.save({}, $scope.authRequest, function(response) {

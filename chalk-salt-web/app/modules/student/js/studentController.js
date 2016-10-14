@@ -30,6 +30,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           GetResultDetailsByTestUuid) {
         $scope.uploadedlogo = {};
         $scope.showVideoDiv = false;
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -421,7 +425,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.alert.message = message;
           $scope.alert.show = true;
         };
-
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
+        
         $scope.closeAlert = function() {
           $scope.alert = {};
           $scope.alert.show = false;

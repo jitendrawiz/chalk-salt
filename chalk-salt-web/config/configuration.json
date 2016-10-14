@@ -17,7 +17,11 @@
 	"TESTTYPE":"testtype",
 	"QUESTIONDATA":"questiondata",
 	"TIMERTIME":"timertime",
-	"SCHEDULETESTUUID":"scheduletestuuid"
+	"SCHEDULETESTUUID":"scheduletestuuid",
+	"CONTACT_NUMBER1":"+91 9650010533",
+	"CONTACT_NUMBER2":"+91 7827522305",
+	"CONTACT_EMAIL":"info@chalkndust.com",
+	"COPY_RIGHT":"Copyright &copy; 2016 Chalk N Dust - All Rights Reserved."
     }
    
 }

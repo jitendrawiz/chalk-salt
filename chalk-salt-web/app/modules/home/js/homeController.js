@@ -39,6 +39,10 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
         };
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
         $scope.userName = $window.localStorage.getItem(CHALKNDUST.USERNAME);
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
         $scope.version = CHALKNDUST.VERSION;
         $scope.build = CHALKNDUST.BUILD;
         $scope.email = CHALKNDUST.EMAIL;
