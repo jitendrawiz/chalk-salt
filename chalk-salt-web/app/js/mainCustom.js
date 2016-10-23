@@ -22,7 +22,12 @@ require.config({
     ionicons:'lib/ionicons/css/ionicons.min',
     ngAria: 'lib/angular-aria/angular-aria.min',
     ngMaterial: 'lib/angular-material/angular-material.min',
-    ngMaterialCSS: 'lib/angular-material/angular-material'
+    ngMaterialCSS: 'lib/angular-material/angular-material',
+    singlePageNav:'resources/js/singlepagenav',
+    owlCarousl:'resources/js/owl.carousel.min',
+    wow:'resources/js/wow.min',
+    easing:'resources/js/jquery.easing-1.3.pack',
+    maincs:'resources/js/main'
     },
   /**
    * for lib that either do not support AMD out of the box, or
@@ -38,7 +43,12 @@ require.config({
     uiRouter: ['angular'],
     uiBootstrap: ['angular'],
     angularPdf:['angular','pdfjs'],
-    bootstrap: ['jquery']
+    bootstrap: ['jquery'],
+    singlePageNav:['jquery'],
+    easing:['jquery'],
+    maincs:['jquery'],
+    owlCarousl:['jquery']
+    
   },
   map: {
     '*': {

@@ -19,9 +19,19 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
       'userNotesLookupService',
       'StudentAchievementLookupService',
       '$timeout',
+      '$location',
+      '$anchorScroll',
       function($window, $scope, $state, $resource, $rootScope, CHALKNDUST, HomeService, CandDModalService, $log, HomeGuestService, userClassLookUpService, userNotesLookupService,
-          StudentAchievementLookupService, $timeout) {
+          StudentAchievementLookupService, $timeout, $location, $anchorScroll) {
         $window.scrollTo(0, 0);
+
+        $scope.scrollTo = function(selector) {
+          $location.hash(selector);
+
+          // call $anchorScroll()
+          $anchorScroll();
+        };
+
         var showAlert = function(type, message) {
           $scope.alert = {};
           $scope.alert.type = type;
@@ -196,7 +206,17 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
           }, function(error) {
             showAlert('danger', error.data.message);
           });
+
         }
+
+        $(".home-slider").owlCarousel({
+          items : 1,
+          loop : true,
+          nav : true,
+          autoplay : true,
+          smartSpeed : 800,
+          autoplayHoverPause : true,
+        });
 
       } ]);
 });

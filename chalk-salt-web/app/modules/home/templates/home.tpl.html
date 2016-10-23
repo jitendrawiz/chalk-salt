@@ -1,15 +1,15 @@
-<script src="./resources/js/jquery.sticky.js"></script>
-<script src="./resources/js/singlepagenav.js"></script>
-<script src="./resources/js/owl.carousel.min.js"></script>
-<script src="./resources/js/wow.min.js"></script>
-<script src="./resources/js/jquery.easing-1.3.pack.js"></script>
-<script src="./resources/js/main.js"></script>
+<!-- <!-- <script src="./resources/js/jquery.sticky.js"></script> --> -->
+<!-- <script src="./resources/js/singlepagenav.js"></script> -->
+<!--  <script src="./resources/js/owl.carousel.min.js"></script>  -->
+<!-- <script src="./resources/js/wow.min.js"></script> -->
+<!-- <script src="./resources/js/jquery.easing-1.3.pack.js"></script> -->
+<!-- <script src="./resources/js/main.js"></script> -->
 <div id="wrapper" class="main-wrapper">
     <header id="masthead" class="site-header navigation navbar-default">
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-sm-6 col-sm-3 col-md-6">
                         <nav class="top-nav">
                             <ul class="inline">
                                 <li><a href="mailto:info@chalkndust.com"><i class="fa fa-envelope-o"></i>{{contact_email}}</a></li>
@@ -34,9 +34,11 @@
                 </div>
             </div>
         </div>
+        
         <div class="header-bottom">
             <div class="container">
-                <div class="navbar-header">
+            
+                <div class="navbar-header col-sm-3 col-sm-6">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                             class="icon-bar"></span>
@@ -44,17 +46,20 @@
                     <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/logo.jpeg" alt="">
                     </a>
                 </div>
-                <nav class="collapse navbar-collapse navbar-right" id="navigation">
+                
+                <nav class="collapse navbar-collapse navbar-right " id="navigation"  >
                     <ul class="nav navbar-nav">
-                        <li><a href="#home">HOME</a></li>
-                        <li><a href="#module">OUR MODULE</a></li>
-                        <li><a href="#courses">COURSES</a></li>
-                        <li><a href="#team">TEAM</a></li>
+                        <li><a ng-click="scrollTo('home')" href="javascript:void(0)">HOME</a></li>
+                        <li><a ng-click="scrollTo('module')" href="javascript:void(0)">OUR MODULE</a></li>
+                        <li><a ng-click="scrollTo('courses')" href="javascript:void(0)">COURSES</a></li>
+                        <li><a ng-click="scrollTo('team')" href="javascript:void(0)">TEAM</a></li>
                         <li><a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">CONTACT US</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
+        
+        
     </header>
     <!--slider-->
     <section id="start">
@@ -146,16 +151,16 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 wow fadeInLeft">
+                <div class="col-xs-12 col-md-6">
                     <div class="row inner-grid">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-6 col-sm-6 no-padding">
                             <div class="post-thumb">
                                 <a href="javascript:void(0)" ng-click="homeCtrl.goToDiscussionRoom()"> <img
                                     src="./resources/images/blog/discussionRoom.jpg" alt="">
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 post-entry">
+                        <div class="col-xs-6 col-sm-6 post-entry">
                             <h4>
                                 <a href="javascript:void(0)" ng-click="homeCtrl.goToDiscussionRoom()">Discussion room</a>
                             </h4>
@@ -168,16 +173,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 wow fadeInRight">
+                <div class="col-xs-12 col-md-6">
                     <div class="row inner-grid">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-6 col-sm-6 no-padding">
                             <div class="post-thumb">
                                 <a href="javascript:void(0)" ng-click="homeCtrl.contactUs()"> <img src="./resources/images/blog/enquiry.jpg"
                                     alt="">
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 post-entry">
+                        <div class="col-xs-6 col-sm-6 post-entry">
                             <h4>
                                 <a href="javascript:void(0)" ng-click="homeCtrl.contactUs()">Enquiry Form</a>
                             </h4>
@@ -288,58 +293,58 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                    <div class="sec-head text-left wow pulse">
+                    <div class="sec-head text-left wow pulse visibilty-visible">
                         <h2>Why Us</h2>
                         <p></p>
                     </div>
                 </div>
                 <div class="service-text service_360">
-                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty">
-                        <div class="service-item">
-                            <div class="icon-box">
+                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty service_float visibilty-visible">
+                        <div class="service-item why_us_service">
+                            <div class="icon-box icone_box_center">
                                 <img src="./resources/images/icons/link.png">
                             </div>
-                            <div class="service-text text-center">
+                            <div class="service-text text-center service_font_02">
                                 <p>Faculty from India's premier institute (IIT and IIMs)</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty" data-wow-delay="0.3s">
-                        <div class="service-item">
+                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty service_float visibilty-visible" data-wow-delay="0.3s">
+                        <div class="service-item why_us_service">
                             <div class="icon-box">
                                 <img src="./resources/images/icons/chat.png">
                             </div>
-                            <div class="service-text text-center">
+                            <div class="service-text text-center service_font_02 service_float">
                                 <p>You can learn freely under their guidance and get in touch with them through our online</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty" data-wow-delay="0.6s">
-                        <div class="service-item">
+                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty service_float visibilty-visible" data-wow-delay="0.6s">
+                        <div class="service-item why_us_service">
                             <div class="icon-box">
                                 <img src="./resources/images/icons/tir.png">
                             </div>
-                            <div class="service-text text-center">
+                            <div class="service-text text-center service_font_02 service_float">
                                 <p>we can act as a medium by connecting you with your future aspiration</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty" data-wow-delay="0.9s">
-                        <div class="service-item">
+                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty service_float visibilty-visible" data-wow-delay="0.9s">
+                        <div class="service-item why_us_service">
                             <div class="icon-box">
                                 <img src="./resources/images/icons/question.png">
                             </div>
-                            <div class="service-text text-center">
+                            <div class="service-text text-center service_font_02">
                                 <p>Clear your doubts within 24 hours</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty" data-wow-delay="0.9s">
-                        <div class="service-item">
+                    <div class="col-sm-6 col-md-3 text-center wow fadeInUp twenty service_float port_left_clear visibilty-visible" data-wow-delay="0.9s">
+                        <div class="service-item why_us_service">
                             <div class="icon-box">
                                 <img src="./resources/images/icons/access.png">
                             </div>
-                            <div class="service-text text-center">
+                            <div class="service-text text-center service_font_02">
                                 <p>Get access to unlimited questions</p>
                             </div>
                         </div>
@@ -354,7 +359,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                    <div class="sec-head text-left wow fadeInDown">
+                    <div class="sec-head text-left wow fadeInDown visibilty-visible">
                         <h2>
                             OUR <a id="courses"></a>COURSES
                         </h2>
@@ -363,9 +368,9 @@
                 </div>
             </div>
         </div>
-        <div id="classdiv" class="container-fluid wow fadeIn">
+        <div id="classdiv" class="container-fluid wow fadeIn visibilty-visible">
             <div class="row project-wrapper">
-                <div class="col-xs-12 col-sm-3 col-md-15 photography">
+                <div class="col-xs-12 col-sm-3 col-sm-6 col-md-15 photography portfolia-respons port_left">
                     <div class="portfolio-item">
                         <img src="./resources/images/portfolio/8.gif" alt="">
                         <div class="portfolio-content">
@@ -380,7 +385,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-15 photoshop">
+                <div class="col-xs-12 col-sm-3 col-sm-6 col-md-15 photoshop portfolia-respons port_left visibilty-visible">
                     <div class="portfolio-item">
                         <img src="./resources/images/portfolio/9.gif" alt="">
                         <div class="portfolio-content">
@@ -395,7 +400,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-15 web-design">
+                <div class="col-xs-12 col-sm-3 col-sm-6 col-md-15 web-design col-sm-6 port_left visibilty-visible">
                     <div class="portfolio-item">
                         <img src="./resources/images/portfolio/10.gif" alt="">
                         <div class="portfolio-content">
@@ -410,7 +415,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-15 branding">
+                <div class="col-xs-12 col-sm-3 col-sm-6 col-md-15 branding portfolia-respons port_left port_left_clear visibilty-visible">
                     <div class="portfolio-item">
                         <img src="./resources/images/portfolio/11.gif" alt="">
                         <div class="portfolio-content">
@@ -425,7 +430,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-15 photography">
+                <div class="col-xs-12 col-sm-3 col-sm-6 col-md-15 photography portfolia-respons port_left visibilty-visible">
                     <div class="portfolio-item">
                         <img src="./resources/images/portfolio/12.gif" alt="">
                         <div class="portfolio-content">
@@ -449,15 +454,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                    <div class="sec-head text-left wow bunce">
+                    <div class="sec-head text-left wow bunce visibilty-visible" style="color: white">
                         <h2>
                             M<a id="team1"></a>eet the Team
                         </h2>
                         <p></p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 wow fadeInUp twenty">
-                    <div class="team-mate">
+                <div class="col-sm-6 col-md-3 wow fadeInUp twenty visibilty-visible">
+                    <div class="team-mate team_mate_360">
                         <figure class="member-photo">
                             <img alt="" src="./resources/images/team/team1.jpg" class="img-responsive">
                             <div class="hover">
@@ -479,8 +484,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 wow fadeInUp twenty" data-wow-delay="0.3s">
-                    <div class="team-mate">
+                <div class="col-sm-6 col-md-3 wow fadeInUp twenty visibilty-visible" data-wow-delay="0.3s">
+                    <div class="team-mate team_mate_360">
                         <figure class="member-photo">
                             <img alt="" src="./resources/images/team/team2.jpg" class="img-responsive">
                             <div class="hover">
@@ -502,8 +507,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 wow fadeInUp twenty" data-wow-delay="0.6s">
-                    <div class="team-mate">
+                <div class="col-sm-6 col-md-3 wow fadeInUp twenty visibilty-visible" data-wow-delay="0.6s">
+                    <div class="team-mate team_mate_360">
                         <figure class="member-photo">
                             <img alt="" src="./resources/images/team/team3.jpg" class="img-responsive">
                             <div class="hover">
@@ -525,8 +530,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 wow fadeInUp twenty" data-wow-delay="0.9s">
-                    <div class="team-mate">
+                <div class="col-sm-6 col-md-3 wow fadeInUp twenty visibilty-visible" data-wow-delay="0.9s">
+                    <div class="team-mate team_mate_360">
                         <figure class="member-photo">
                             <img alt="" src="./resources/images/team/team4.jpg" class="img-responsive">
                             <div class="hover">
@@ -548,8 +553,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 wow fadeInUp twenty" data-wow-delay="0.9s">
-                    <div class="team-mate">
+                <div class="col-sm-6 col-md-3 wow fadeInUp twenty visibilty-visible" data-wow-delay="0.9s">
+                    <div class="team-mate team_mate_360">
                         <figure class="member-photo">
                             <img alt="" src="./resources/images/team/team5.jpg" class="img-responsive">
                             <div class="hover">
@@ -576,10 +581,10 @@
     </section>
     <!--Team-->
     <!--Footer-->
-    <footer id="colophon" class="section site-footer wow fadeInUp" role="contentinfo">
+    <footer id="colophon" class="section site-footer wow fadeInUp visibilty-visible" role="contentinfo">
         <div class="container">
             <div class="footer-logo"></div>
-            <div class="footer-social">
+            <div class="footer-social icon_360">
                 <ul class="inline text-center">
                     <li class="twitter"><a target="_blank" href="https://twitter.com/chalkndust"><i class="fa fa-twitter"></i></a></li>
                     <li class="facebook"><a target="_blank" href="https://www.facebook.com/ChalkNDust"><i class="fa fa-facebook"></i></a></li>
@@ -589,7 +594,7 @@
                     <li class="instagram"><a target="_blank" href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
-            <div class="copyright text-center">
+            <div class="copyright text-center copyright-360 col-sm-6 col-sm-9 col-sm-12 col-md-3">
                 <p>{{copy_right}}</p>
                 <ul class="new_foot_nav">
                     <li><a ui-sref="chalkanddust.termsandconditions">Terms & Conditions</a></li>
@@ -599,6 +604,6 @@
         </div>
     </footer>
     <!--Footer-->
-    <a href="#home" ng-click="homeCtrl.backToTop()" id="back-top"> <i class="fa fa-angle-up"></i>
+    <a ng-click="scrollTo('home')" href="javascript:void(0)" id="back-top"> <i class="fa fa-angle-up"></i>
     </a>
 </div>

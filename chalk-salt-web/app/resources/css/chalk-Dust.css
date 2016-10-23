@@ -167,6 +167,13 @@
   src: local("Open Sans Bold"), local("OpenSans-Bold"), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; }
+
 .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
   font-weight: 400; }
 
@@ -196,7 +203,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 100000;
+  z-index: 10000;
   background-color: #666;
   opacity: 0.8; }
   #loading img {
@@ -263,6 +270,187 @@
 
 .transparent-color {
   background-color: transparent; }
+
+@media screen and (min-device-width: 360px) and (max-device-width: 640px) {
+  body {
+    min-width: 100% !important; }
+  .main_bg_bg {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    background-size: 100% !important;
+    z-index: -1;
+    position: relative; }
+  .service_font_02 p {
+    font-size: 16px !important;
+    padding: 0% 9%; }
+  .why_us_service {
+    width: 100%; }
+  .service_font_02 {
+    width: 100%; }
+  .team_mate_360 {
+    width: 100%;
+    padding-bottom: 10%; }
+  .home-slider {
+    z-index: 0;
+    position: relative; }
+  .navbar-nav {
+    z-index: 99999999999999;
+    position: relative;
+    background-color: #fff; }
+  .navbar-nav > li > a {
+    color: #0a0a0a; }
+  .copyright-360 p {
+    font-size: 16px;
+    float: left;
+    color: #fff;
+    padding-bottom: 5px; }
+  .new_foot_nav li a {
+    margin-bottom: 10px; }
+  .portfolia-respons {
+    max-width: 98%;
+    margin: 1% 1%; }
+  .icon_360 ul li a {
+    font-size: 16px;
+    padding: 2px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px; } }
+
+@media screen and (min-device-width: 320px) and (max-device-width: 360px) {
+  body {
+    min-width: 100% !important; }
+  .main_bg_bg {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    background-size: 100% !important;
+    z-index: -1;
+    position: relative; }
+  .service_font_02 p {
+    font-size: 16px; }
+  .why_us_service {
+    width: 100% !important;
+    float: none;
+    text-align: center; }
+  .twenty {
+    max-width: 100% !important; }
+  .team_mate_360 {
+    width: 100%; }
+  .home-slider {
+    z-index: 0;
+    position: relative; }
+  .navbar-nav {
+    z-index: 9999;
+    position: relative;
+    background-color: #fff; }
+  .navbar-nav > li > a {
+    color: #0a0a0a; }
+  .portfolia-respons {
+    max-width: 98%;
+    margin: 1% 1%; }
+  .ng-binding {
+    font-size: 11px !important; }
+  .icon_360 ul li a {
+    font-size: 16px;
+    padding: 2px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px; } }
+
+@media screen and (max-device-width: 360px) and (min-device-width: 320px) {
+  .ng-binding {
+    text-align: left; } }
+
+@media screen and (min-device-width: 600px) and (max-device-width: 1024px) {
+  body {
+    min-width: 100% !important; }
+  .main_bg_bg {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    background-size: 100% !important;
+    z-index: -1;
+    position: relative; }
+  .service_font_02 p {
+    font-size: 16px; }
+  .why_us_service {
+    width: 100% !important;
+    float: none;
+    text-align: center; }
+  .twenty {
+    max-width: 100% !important; }
+  .team_mate_360 {
+    width: 100%; }
+  .home-slider {
+    z-index: 0;
+    position: relative; }
+  .navbar-nav {
+    z-index: 9999;
+    position: relative;
+    background-color: #fff; }
+  .navbar-nav > li > a {
+    color: #0a0a0a; }
+  .portfolia-respons {
+    max-width: 98%;
+    margin: 1% 1%; }
+  .ng-binding {
+    font-size: 11px !important; } }
+
+@media screen and (min-device-width: 348px) and (max-device-width: 640px) {
+  body {
+    min-width: 100% !important; }
+  .main_bg_bg {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    background-size: 100% !important;
+    z-index: -1;
+    position: relative; }
+  .service_font_02 p {
+    font-size: 16px; }
+  .why_us_service {
+    width: 100% !important;
+    float: none;
+    text-align: center; }
+  .twenty {
+    max-width: 100% !important; }
+  .team_mate_360 {
+    width: 100%; }
+  .home-slider {
+    z-index: 0;
+    position: relative; }
+  .navbar-nav {
+    z-index: 9999;
+    position: relative;
+    background-color: #fff; }
+  .navbar-nav > li > a {
+    color: #0a0a0a; }
+  .portfolia-respons {
+    max-width: 98%;
+    margin: 1% 1%; }
+  .ng-binding {
+    font-size: 11px !important; } }
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .web-design {
+    margin-top: 8px; }
+  .port_left {
+    float: left; }
+  .port_left_clear {
+    clear: both; }
+  .member-photo {
+    padding-top: 15px;
+    margin-bottom: -13px; }
+  .new_foot_nav {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 220px; }
+  .copyright {
+    width: 100%;
+    text-align: center; } }
+
+.visibilty-visible {
+  visibility: visible !important; }
+
+.no-padding {
+  padding: 0; }
 
 * {
   margin: 0;
@@ -3340,10 +3528,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0px 0 6px; }
 
 .header-bottom {
-  height: 70px;
+  height: 85px;
   background: #fff;
   z-index: 1;
-  position: relative;
+  position: initial;
   border-bottom: 5px solid #999; }
 
 .header-bottom img {
@@ -4375,8 +4563,9 @@ button.mfp-close:after {
   float: right; }
 
 .copyright {
-  width: 400px;
-  float: left; }
+  min-width: 450px;
+  float: left;
+  padding-left: -1px; }
 
 .footer-logo a {
   display: block;
@@ -5095,11 +5284,9 @@ blockquote {
   background-image: url(../images/slider/college.jpg);
   background-size: 100%;
   width: 100%;
-  height: 1000px;
-  position: absolute;
   top: 0;
   z-index: 0;
-  position: fixed; }
+  position: initial; }
 
 .slide_image {
   position: relative;
@@ -11823,18 +12010,6 @@ label:before {
   font-family: fontawesome;
   font-weight: normal;
   margin-right: 10px; }
-
-label[for*='1']:before {
-  content: '\f1cb'; }
-
-label[for*='2']:before {
-  content: '\f17d'; }
-
-label[for*='3']:before {
-  content: '\f1a9'; }
-
-label[for*='4']:before {
-  content: '\f1a9'; }
 
 label:hover {
   color: #888;

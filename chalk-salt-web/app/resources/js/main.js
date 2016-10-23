@@ -11,9 +11,9 @@ $(document).ready(function() {
     mobile : false
   });
   wow.init();
-  $(".header-bottom").sticky({
-    topSpacing : 0
-  });
+//  $(".header-bottom").sticky({
+//    topSpacing : 0
+//  });
   $(".navbar-nav").singlePageNav({
     offset : $('.header-bottom').outerHeight(),
     filter : ':not(.external)',
@@ -25,14 +25,7 @@ $(document).ready(function() {
   $(".navigation .navbar-toggle").on("click", function() {
     $(this).toggleClass("active");
   });
-  $(".home-slider").owlCarousel({
-    items : 1,
-    loop : true,
-    nav : true,
-    autoplay : true,
-    smartSpeed : 800,
-    autoplayHoverPause : true,
-  });
+  
   $(window).scroll(function() {
     $('.sec-head').each(function() {
       if (isScrolledIntoView(this) === true) {
@@ -55,3 +48,4 @@ $(document).ready(function() {
     }, 1500, "easeInOutExpo")
   });
 });
+
