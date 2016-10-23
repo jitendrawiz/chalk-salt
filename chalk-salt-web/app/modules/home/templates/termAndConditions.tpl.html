@@ -1,13 +1,21 @@
 <style>
+.main_bg_bg {
+   
+    height: 100%;
+    top: 0;
+     background: url(./resources/images/TandC.jpg) no-repeat center center fixed;
+     -webkit-background-size: cover;
+      -moz-background-size: cover;
+       -o-background-size: cover;
+        background-size: cover;  
+}
+
 .term_condition {
 	background-image: url(./resources/images/TandC.jpg) !important;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
+	
 }
 </style>
-<div class="main_bg_bg term_condition"></div>
-<div id="wrapper" class="main-wrapper">
+    <div id="wrapper" class="main-wrapper term_condition">
     <header id="masthead" class="site-header navigation navbar-default">
         <div class="header-top">
             <div class="container">
@@ -38,10 +46,7 @@
         <div class="header-bottom">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                            class="icon-bar"></span>
-                    </button>
+                    
                     <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/logo.jpeg" alt="">
                     </a>
                 </div>
@@ -140,10 +145,10 @@
     </section>
     <!--Module-->
     <!--Footer-->
-    <footer id="colophon" class="section site-footer wow fadeInUp" role="contentinfo">
+   <footer id="colophon" class="section site-footer wow fadeInUp visibilty-visible" role="contentinfo">
         <div class="container">
             <div class="footer-logo"></div>
-            <div class="footer-social">
+            <div class="footer-social icon_360">
                 <ul class="inline text-center">
                     <li class="twitter"><a target="_blank" href="https://twitter.com/chalkndust"><i class="fa fa-twitter"></i></a></li>
                     <li class="facebook"><a target="_blank" href="https://www.facebook.com/ChalkNDust"><i class="fa fa-facebook"></i></a></li>
@@ -153,7 +158,7 @@
                     <li class="instagram"><a target="_blank" href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
-            <div class="copyright text-center">
+            <div class="copyright text-center copyright-360 col-sm-6 col-sm-9 col-sm-12 col-md-3">
                 <p>{{copy_right}}</p>
                 <ul class="new_foot_nav">
                     <li><a ui-sref="chalkanddust.termsandconditions">Terms & Conditions</a></li>
