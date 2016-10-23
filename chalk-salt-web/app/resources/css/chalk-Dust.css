@@ -8439,7 +8439,7 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   color: #ccc !important; }
 
 #tabbed input:required, #tabbed select:required, #tabbed textarea:required {
-  background: #fff url(img/required.png) no-repeat 100% 18px;
+  background: #fff url(../img/required.png) no-repeat 100% 18px;
   outline: 0;
   box-shadow: none; }
 
@@ -8449,12 +8449,12 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   box-shadow: none; }
 
 #tabbed input:required:valid, #tabbed select:required:valid, #tabbed textarea:required:valid {
-  background: #fff url(img/valid.png) no-repeat 100% 18px;
+  background: #fff url(../img/valid.png) no-repeat 100% 18px;
   outline: 0;
   box-shadow: none; }
 
 #tabbed input:focus:invalid, #tabbed select:focus:invalid, #tabbed textarea:focus:invalid {
-  background: #fff url(img/invalid.png) no-repeat 100% 18px;
+  background: #fff url(../img/invalid.png) no-repeat 100% 18px;
   outline: 0;
   box-shadow: none; }
 
