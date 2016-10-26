@@ -323,7 +323,7 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
                 for (int i = 0; i < notesList.size(); i++)
                     {
                     String notesUuid = notesList.get(i).getNotesUuid();
-                    String destPath = userDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+                    String destPath = userDao.getNotesMediaUrl(SystemSettingsKey.NOTES_FILE.name());
                     destPath += String.join(File.separator, notesList.get(i).getClassName(),notesList.get(i).getSubjectName() , notesUuid);
                     String fileName = studyMaterialDao.getOldFileName(notesUuid);
                     String filePathUrl = destPath + File.separator + fileName;

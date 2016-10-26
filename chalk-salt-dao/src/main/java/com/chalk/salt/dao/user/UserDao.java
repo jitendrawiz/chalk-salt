@@ -405,4 +405,13 @@ public interface UserDao {
      * @throws Exception the exception
      */
     List<StudentAchievementDto> getStudentAchievmentList()throws Exception;
+
+    /**
+     * Gets the notes media url.
+     *
+     * @param name the name
+     * @return the notes media url
+     * @throws Exception the exception
+     */
+    String getNotesMediaUrl(String name)throws Exception;
 }

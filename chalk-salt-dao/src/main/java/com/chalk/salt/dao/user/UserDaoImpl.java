@@ -884,4 +884,17 @@ public class UserDaoImpl implements UserDao {
             return query.executeAndFetch(StudentAchievementDto.class);
         }
         }
+
+    @Override
+    public String getNotesMediaUrl(String settingsKey) throws Exception
+        {
+        final String sqlQuery = "SELECT `media_url` AS url "
+                + "FROM `cst_system_settings` AS systemSettings WHERE systemSettings.settings_key=:settingsKey";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("settingsKey", settingsKey);
+            return query.executeAndFetchFirst(String.class);
+        }
+        }
 }

@@ -470,7 +470,7 @@ public class ExamManagerImpl implements ExamManager
                     for (int i = 0; i < dashBoardNotesList.size(); i++)
                         {
                         String notesUuid = dashBoardNotesList.get(i).getNotesUuid();
-                        String destPath = userDao.getSystemSettings(SystemSettingsKey.NOTES_FILE.name());
+                        String destPath = userDao.getNotesMediaUrl(SystemSettingsKey.NOTES_FILE.name());
                         String appendedPath = studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
                         String appPath[] = appendedPath.split("\\$");
                         destPath += String.join(File.separator, appPath[0], appPath[1], notesUuid);
