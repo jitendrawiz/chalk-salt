@@ -17,7 +17,7 @@ define([ 'angular' ], function(angular) {
       return {
         request : function(config) {
           var url = config.url;
-          if (url.indexOf("suggestions") != -1) {
+          if (url.indexOf("notification") != -1) {
             $('#loading').hide();
           } else {
             $('#loading').show();

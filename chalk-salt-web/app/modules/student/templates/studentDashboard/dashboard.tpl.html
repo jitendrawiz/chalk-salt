@@ -1,26 +1,29 @@
-<div class="col-md-3 column right-navbar-right">
-    <div class="notification">
-        <h3>
-            <i class="fa-circle"></i>Notification
-        </h3>
-        <div style="min-height: 200px;">
-            <p ng-repeat="item in notificationList">
-            <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
-            </p>
-        </div>
-        <div class="clearfix"></div>
-        <div class="disc-room">
-            <br> <br> <a ui-sref="chalkanddust.discussionroomfirstpage"> <i class="fa-group"></i><br>
-                <h3>Discussion Room</h3>
-            </a>
+<div class="row clearfix">
+    <div class="col-md-3 col-sm-3 column right-navbar-right">
+        <div class="notification not_640">
+            <h3>
+                <i class="fa-circle"></i>Notification
+            </h3>
+            <div style="min-height: 200px;">
+                <p ng-repeat="item in notificationList">
+                    <a
+                        ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="disc-room">
+                <br> <br> <a ui-sref="chalkanddust.discussionroomfirstpage"> <i class="fa-group"></i><br>
+                    <h3>Discussion Room</h3>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<div class="col-md-9 column" ng-repeat="item in subjects">
-    <div class="feature-box">
-        <span class="feature-icon feature-icon_01"> <a ng-click="setTabSubject(2,item);" href="javascript:void(0)"> <i class="fa fa-file"></i></a></span>
-        <a ng-click="setTabSubject(2,item)" href="javascript:void(0)">
-            <h3>{{item.subjectName}}</h3>
-        </a>
+    <div class="col-md-9 col-sm-9 column" ng-repeat="item in subjects">
+        <div class="feature-box dashboardSubjects">
+            <span class="feature-icon feature-icon_01"> <a ng-click="setTabSubject(2,item);" href="javascript:void(0)"> <i
+                    class="fa fa-file"></i></a></span> <a ng-click="setTabSubject(2,item)" href="javascript:void(0)">
+                <h3>{{item.subjectName}}</h3>
+            </a>
+        </div>
     </div>
 </div>

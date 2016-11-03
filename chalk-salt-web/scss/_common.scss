@@ -360,3 +360,120 @@ and (max-device-width : 1024px) {
 .no-padding{
 	padding:0;
 }
+
+@media screen and (min-device-width:348px) and (max-device-width:640px){ 
+     .not_640{
+    	position:relative;
+    	float:left;
+    	clear:both;
+    	margin-bottom:20px;
+    	z-index:9999;
+    }
+    .ng-binding {
+    font-size: 11px !important;
+    text-align: center;
+    line-height: 20px;
+	}
+	.right-navbar-right{
+		clear: both !important;
+    margin-bottom: 42px;
+    width: 100%;
+    float: left !important;
+	}
+	.dashboardSubjects{
+	clear:both;
+	}
+	.disc-room i{
+		    padding-left: 36% !important;
+    text-align: center !important;
+	}
+}
+@media screen and (max-device-width: 1280px) and (min-device-width: 800px){
+     .not_640{
+    	position:relative;
+    	float:left;
+    	clear:both;
+    	margin-bottom:20px;
+    	z-index:9999;
+    }
+    .ng-binding {
+    font-size: 11px !important;
+    text-align: center;
+    line-height: 20px;
+	}
+	.right-navbar-right{
+		clear: both !important;
+    margin-bottom: 42px;
+    width: 100%;
+    float: left !important;
+	}
+		.dashboardSubjects{
+	clear:both;
+	}
+	.disc-room i{
+    padding-left: 36% !important;
+    text-align: center !important;
+	}
+}
+@media screen and (max-device-width: 533px) and (min-device-width: 320px){
+    .not_640{
+    	position:relative;
+    	float:left;
+    	margin-bottom:20px;
+    	clear:both;
+    	z-index:9999;
+    }
+    .ng-binding {
+    font-size: 11px !important;
+    text-align: center;
+    line-height: 20px;
+	}
+	.right-navbar-right{
+		clear:both;
+	}
+	.right-navbar-right{
+		clear: both !important;
+    margin-bottom: 42px;
+    width: 100%;
+    float: left !important;
+	}
+		.dashboardSubjects{
+	clear:both;
+	}
+		.disc-room i{
+	    padding-left: 36% !important;
+    text-align: center !important;
+	}
+}
+@media screen and (max-device-width: 1024px) and (min-device-width: 768px){
+    .not_640{
+    	position:relative;
+    	float:left;
+    	margin-bottom:20px;
+    	left:0;
+    	clear:both;
+    	z-index:9999;
+    }
+    .ng-binding {
+    font-size: 11px !important;
+    text-align: center;
+    line-height: 20px;
+	}
+	.right-navbar-right{
+		clear: both !important;
+    margin-bottom: 42px;
+    width: 100%;
+    float: left !important;
+	}
+		.dashboardSubjects{
+	clear:both;
+	}
+	.disc-room i{
+	    padding-left: 36% !important;
+    text-align: center !important;
+	}
+}
+
+.feature_box_width{
+	height:200%;
+}

@@ -27,7 +27,8 @@ require.config({
     owlCarousl:'resources/js/owl.carousel.min',
     wow:'resources/js/wow.min',
     easing:'resources/js/jquery.easing-1.3.pack',
-    maincs:'resources/js/main'
+    maincs:'resources/js/main',
+    hoejs:'resources/js/hoe'
     },
   /**
    * for lib that either do not support AMD out of the box, or
@@ -47,7 +48,8 @@ require.config({
     singlePageNav:['jquery'],
     easing:['jquery'],
     maincs:['jquery'],
-    owlCarousl:['jquery']
+    owlCarousl:['jquery'],
+    hoejs:['jquery','bootstrap']
     
   },
   map: {
