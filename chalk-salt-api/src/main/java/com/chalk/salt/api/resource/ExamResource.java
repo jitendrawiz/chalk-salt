@@ -279,10 +279,12 @@ public class ExamResource extends AbstractResource {
             questionList = examFacade.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid);
             
             for(int i=0;i<questionList.size();i++){
-            File file=new File(questionList.get(i).getQuestionImage());
-            final String mediaType = Utility.probeContentType(file.getAbsolutePath());
-            final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
-            questionList.get(i).setQuestionImage("data:" + mediaType + ";base64," + encodedImageString);
+            if(questionList.get(i).getQuestionImage()!=null){
+                File file=new File(questionList.get(i).getQuestionImage());
+                final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+                final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+                questionList.get(i).setQuestionImage("data:" + mediaType + ";base64," + encodedImageString);
+            }
             }         
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);

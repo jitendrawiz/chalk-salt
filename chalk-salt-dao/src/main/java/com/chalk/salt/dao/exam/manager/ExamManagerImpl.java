@@ -533,9 +533,13 @@ public class ExamManagerImpl implements ExamManager
                     QuestionListDto questionListObject = new QuestionListDto();
                     questionListObject.setId(questionDto.getQuestionId());
                     questionListObject.setName(questionDto.getQuestion());
+                    if(questionDto.getQuestionImage()!=null){
                     String questionImageUri= questionImagesLocation+questionDto.getQuestionSecuruuid()+File.separator+questionDto.getQuestionImage();
-                    questionListObject.setOptions(examDao.getQuestionOptionsUsingQuestionId(questionDto.getQuestionId()));
                     questionListObject.setQuestionImage(questionImageUri);
+                    }else{
+                    questionListObject.setQuestionImage(null);
+                    }
+                    questionListObject.setOptions(examDao.getQuestionOptionsUsingQuestionId(questionDto.getQuestionId()));
                     questionsListDto.add(questionListObject);
                     }
                 return questionsListDto;
