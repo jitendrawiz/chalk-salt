@@ -2,6 +2,9 @@ package com.chalk.salt.api.resource;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
@@ -273,10 +277,23 @@ public class ExamResource extends AbstractResource {
         List<QuestionListDto> questionList = null;
         try{
             questionList = examFacade.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid);
-            return Response.ok(questionList).build();
+            
+            for(int i=0;i<questionList.size();i++){
+            File file=new File(questionList.get(i).getQuestionImage());
+            final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+            final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+            questionList.get(i).setQuestionImage("data:" + mediaType + ";base64," + encodedImageString);
+            }         
         } catch (final ExamException examException) {
             throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
         }
+        catch (IOException e) {
+        if(e instanceof NoSuchFileException){
+            throw Utility.buildResourceException(ErrorCode.RESOURCE_NOT_FOUND, "No Image File exists corresponding to the question", Status.NO_CONTENT, ExamException.class, e);
+        }
+        e.printStackTrace();
+        }
+        return Response.ok(questionList).build();
     }
     
     

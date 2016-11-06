@@ -524,6 +524,7 @@ public class ExamManagerImpl implements ExamManager
             }
             try
                 {
+                String questionImagesLocation=userDao.getSystemSettings("QUESTION_IMAGE");
                 List<QuestionListDto> questionsListDto = new ArrayList<QuestionListDto>();
                 List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, limitOfQuestions,typeOfQuestion);
                 for (int index = 0; index < questionsList.size(); index++)
@@ -532,7 +533,9 @@ public class ExamManagerImpl implements ExamManager
                     QuestionListDto questionListObject = new QuestionListDto();
                     questionListObject.setId(questionDto.getQuestionId());
                     questionListObject.setName(questionDto.getQuestion());
+                    String questionImageUri= questionImagesLocation+questionDto.getQuestionSecuruuid()+File.separator+questionDto.getQuestionImage();
                     questionListObject.setOptions(examDao.getQuestionOptionsUsingQuestionId(questionDto.getQuestionId()));
+                    questionListObject.setQuestionImage(questionImageUri);
                     questionsListDto.add(questionListObject);
                     }
                 return questionsListDto;

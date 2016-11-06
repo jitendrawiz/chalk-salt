@@ -9,7 +9,7 @@ background-size: 100%;
 
 
 </style>
-<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div id="hoeDiv" hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
@@ -85,6 +85,11 @@ background-size: 100%;
                                             </h2>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img ng-src="{{question.questionImage}}" alt="Question Image" class="img-responsive">
+                                        </div>
+                                    </div>
                                     <div class="row text-left options">
                                         <div class="col-md-6" ng-repeat="option in question.options">
                                             <div class="option">
@@ -134,7 +139,7 @@ background-size: 100%;
                            <h2> Sorry, No questions found.</h2>
                             </div>
                         </div>
-                        <div class="col-md-9 column t_instruction_ans t_one test_b_mark"></div>
+                        <div class="col-md-9 column t_instruction_ans t_one test_b_mark_margin"></div>
                     </div>
                     <div class="col-md-9 column t_instruction t_one test_next">
                         <p></p>
@@ -145,4 +150,4 @@ background-size: 100%;
         </div>
     </div>
     <script src="./resources/js/hoe.js"></script>
-</body>
+</div>

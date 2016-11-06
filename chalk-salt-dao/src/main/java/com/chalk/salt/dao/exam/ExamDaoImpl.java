@@ -223,7 +223,7 @@ public class ExamDaoImpl implements ExamDao {
     @Override
     public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions,String typeOfQuestion) throws Exception {
         final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
-                + "`question_uuid` as questionSecuruuid,question_id as questionId FROM `cst_questions` "
+                + "`question_uuid` as questionSecuruuid,question_id as questionId,question_image AS questionImage FROM `cst_questions` "
                 + " WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId "
                 + " AND question_type=\""+typeOfQuestion+"\" ORDER BY created_at DESC LIMIT "+ limitOfQuestions;
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);

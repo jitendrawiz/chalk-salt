@@ -2030,10 +2030,12 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.alert.show = false;
           return true;
         };
-        $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
-        $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
-        $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+        getNotificationList();
         $interval(function() {
+          $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+          $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+          $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+          $rootScope.notificationList=[];
           $('#loading').hide();
           $('#loading img').hide();
           GetNotificationList.query({
@@ -2054,6 +2056,31 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }, 120000);
+        
+        
+        function getNotificationList(){
+          $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+          $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+          $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+          $rootScope.notificationList=[];
+          GetNotificationList.query({
+            classId : $scope.classId,
+            studentId : $scope.securUuid
+          }, function(response) {
+            if (response) {
+              $('#loading').hide();
+              $('#loading img').hide();
+              $rootScope.notificationList = response;
+            }else{
+              $('#loading').hide();
+              $('#loading img').hide();
+            }
+          }, function(error) {
+            $('#loading').hide();
+            $('#loading img').hide();
+            showAlert('danger', error.data.message);
+          });
+        }
 
       } ]);
 });
