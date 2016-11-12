@@ -877,7 +877,7 @@ public class UserDaoImpl implements UserDao {
                 + " FROM `cst_achievements` "
                 + " JOIN `cst_class_type` ON `cst_class_type`.class_id=cst_achievements.class_id "
                 + " JOIN `cst_users` ON `cst_users`.user_id=`cst_achievements`.student_id "
-                + " ORDER BY cst_achievements.modified_date DESC LIMIT 4";
+                + " ORDER BY cst_achievements.modified_date DESC LIMIT 5";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 

@@ -285,7 +285,7 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
         final String sqlQuery = "SELECT "
                 + " notes_uuid as notesUuid,"
                 + " notes_file_name as notesFileName,"
-                + " notes_title as notesTitle,"
+                + " notes_file_name as notesTitle,"
                 + " class_name as className,"
                 + " subject_name as subjectName"
                 + " FROM `cst_notes` "

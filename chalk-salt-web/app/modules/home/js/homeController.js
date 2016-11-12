@@ -172,6 +172,7 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
         $scope.isSecondStudentPresent = false;
         $scope.isThirdStudentPresent = false;
         $scope.isFourthStudentPresent = false;
+        $scope.isFifthStudentPresent = false;
         getStudentAchievementList();
         var studentAchievementlist = {};
         function getStudentAchievementList() {
@@ -202,6 +203,10 @@ define([ 'angular', './homeRouting', './homeService', '../../CandDModal/js/CandD
               $scope.fourthStudent = studentAchievementlist[3];
               $scope.isFourthStudentPresent = true;
             }
+            if (angular.isDefined(studentAchievementlist[4])) {
+	            $scope.fifthStudent = studentAchievementlist[4];
+	            $scope.isFifthStudentPresent = true;
+	        }
 
           }, function(error) {
             showAlert('danger', error.data.message);
