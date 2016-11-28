@@ -546,6 +546,15 @@ html, body {
 .feature_box_width {
   height: 200%; }
 
+.font-size-20 {
+  font-size: 20px !important;
+  color: black;
+  font-weight: normal; }
+
+.home-heading-color {
+  color: #52b5ac !important;
+  font-weight: normal; }
+
 * {
   margin: 0;
   padding: 0; }
@@ -3390,12 +3399,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 30px; }
 
 .sec-head h2 {
-  font-size: 40px;
+  font-size: 44px;
   font-style: italic;
   font-weight: 300;
   margin-bottom: 25px;
   padding-bottom: 6px;
-  position: relative; }
+  position: relative;
+  color: #1b272d; }
 
 .sec-head h2:before {
   background-color: #ccc;
@@ -3629,7 +3639,8 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 5px solid #999; }
 
 .header-bottom img {
-  width: 200px; }
+  width: 200px;
+  height: 75px; }
 
 .navigation .navbar-toggle, .navigation .navbar-toggle .icon-bar {
   border-radius: 0;
