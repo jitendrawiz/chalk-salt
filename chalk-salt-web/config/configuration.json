@@ -1,27 +1,36 @@
 {
-   "CHALKNDUST": { 
-      "NAME":"Chalk And Dust",
-      "EMAIL":"abhishek.kumar627@gmail.com",
-      "VERSION":"1",
-      "BUILD":"1.0",
-      "RELEASE_DATE": "JULY 2016",
-	"SECURUUID":"securUuid",
-	"USERFULLNAME":"userFullName",
-	"EDITFLAG":"Flag",
-	"USERNAME":"Username",
-	"CLASSID":"classId",
-	"SUBJECTID":"subjectId",
-	"TABNUMBER":"tabnumber",
-	"GUESTCLASSID":"guestClassId",
-	"SUBJECTNAME":"subjectName",
-	"TESTTYPE":"testtype",
-	"QUESTIONDATA":"questiondata",
-	"TIMERTIME":"timertime",
-	"SCHEDULETESTUUID":"scheduletestuuid",
-	"CONTACT_NUMBER1":"+91 9650010533",
-	"CONTACT_NUMBER2":"+91 7827522305",
-	"CONTACT_EMAIL":"info@chalkndust.com",
-	"COPY_RIGHT":"Copyright &copy; 2016 Chalk N Dust - All Rights Reserved."
-    }
-   
+	"CHALKNDUST": {
+		"NAME": "Chalk And Dust",
+		"EMAIL": "abhishek.kumar627@gmail.com",
+		"VERSION": "1",
+		"BUILD": "1.0",
+		"RELEASE_DATE": "JULY 2016",
+		"SECURUUID": "securUuid",
+		"USERFULLNAME": "userFullName",
+		"EDITFLAG": "Flag",
+		"USERNAME": "Username",
+		"CLASSID": "classId",
+		"SUBJECTID": "subjectId",
+		"TABNUMBER": "tabnumber",
+		"GUESTCLASSID": "guestClassId",
+		"SUBJECTNAME": "subjectName",
+		"TESTTYPE": "testtype",
+		"QUESTIONDATA": "questiondata",
+		"TIMERTIME": "timertime",
+		"SCHEDULETESTUUID": "scheduletestuuid",
+		"CONTACT_NUMBER1": "+91 9650010533",
+		"CONTACT_NUMBER2": "+91 7827522305",
+		"CONTACT_EMAIL": "info@chalkndust.com",
+		"COPY_RIGHT": "Copyright &copy; 2016 Chalk N Dust - All Rights Reserved.",
+		"NOTES_TYPES": [
+			{
+				"index": "STUDENT_NOTES",
+				"value": "STUDENT NOTES"
+			},
+			{
+				"index": "SAMPLE_NOTES",
+				"value": "SAMPLE NOTES"
+			}
+		]
+	}
 }

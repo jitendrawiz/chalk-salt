@@ -5,7 +5,7 @@
     <ul>
         <h2>
             <li ng-repeat="item in modalOptions" ng-if="item.fileUri!=null"><a
-                ui-sref="chalkanddust.shownotes({pdfUrl: item.fileUri, pdfName: item.notesTitle})" target="_blank">{{item.notesTitle}}</a></li>
+                ui-sref="chalkanddust.shownotes({pdfUrl: item.fileUri, pdfName: item.notesTitle})" target="_blank">{{item.notesTitle}}</a><span style="font-size:18px">({{item.notesFileName}})</span></li>
         </h2>
     </ul>
 </div>

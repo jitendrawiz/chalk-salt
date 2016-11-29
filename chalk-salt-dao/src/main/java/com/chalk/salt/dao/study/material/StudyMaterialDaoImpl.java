@@ -129,8 +129,8 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
     public String saveNotes(NotesContentDto notesContentDetails) throws Exception
     {
         final String sqlQuery = "INSERT INTO `cst_notes` (`notes_title`, `notes_file_name`, `modified_date`, "
-                + "`class_id`, `subject_id`, `notes_uuid`)"
-                + "VALUES(:notesTitle, :notesFileName, :modifiedDate, :classId, :subjectId, :notesUuid)";
+                + "`class_id`, `subject_id`, `notes_uuid`,notes_type)"
+                + "VALUES(:notesTitle, :notesFileName, :modifiedDate, :classId, :subjectId, :notesUuid, :notesType)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -140,6 +140,7 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
             query.addParameter("classId", notesContentDetails.getClassId());
             query.addParameter("subjectId", notesContentDetails.getSubjectId());
             query.addParameter("notesUuid", notesContentDetails.getNotesUuid());
+            query.addParameter("notesType",notesContentDetails.getNotesType());
             query.executeUpdate();
             return notesContentDetails.getNotesUuid();
         }
@@ -195,7 +196,8 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
                 + " DATE_FORMAT(created_date ,'%d-%M-%Y %H:%i:%S')AS createdDate,"
                 + " DATE_FORMAT(modified_date ,'%d-%M-%Y %H:%i:%S')AS modifiedDate,"
                 + " notes_uuid AS notesUuid,"
-                + " class_id AS classId, subject_id AS subjectId"
+                + " class_id AS classId, subject_id AS subjectId,"
+                + " notes_type as notesType"
                 + " FROM cst_notes WHERE notes_uuid= :notesUuid ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -212,13 +214,14 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
     public void updateNotesContentDetails(NotesContentDto notesContentDetails) throws Exception
     {
         final String sqlQuery = "UPDATE `cst_notes` SET notes_title=:notesTitle,  "               
-                + " modified_date=:modifiedDate"
+                + " modified_date=:modifiedDate, notes_type=:notesType"
                 + " WHERE notes_uuid=:notesUuid LIMIT 1";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
             query.addParameter("notesTitle", notesContentDetails.getNotesTitle());
             query.addParameter("modifiedDate", notesContentDetails.getModifiedDate());            
+            query.addParameter("notesType", notesContentDetails.getNotesType());
             query.addParameter("notesUuid", notesContentDetails.getNotesUuid());
             query.executeUpdate();
         }
@@ -285,13 +288,13 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
         final String sqlQuery = "SELECT "
                 + " notes_uuid as notesUuid,"
                 + " notes_file_name as notesFileName,"
-                + " notes_file_name as notesTitle,"
+                + " notes_title as notesTitle,"
                 + " class_name as className,"
                 + " subject_name as subjectName"
                 + " FROM `cst_notes` "
                 + " JOIN  `cst_class_type` ON cst_class_type.class_id=  cst_notes.class_id "
                 + " JOIN `cst_class_subjects` ON cst_class_subjects.subject_id=cst_notes.subject_id "
-                + " WHERE cst_notes.class_id=:classId ORDER BY notes_id ASC LIMIT 3  ";
+                + " WHERE cst_notes.class_id=:classId AND cst_notes.notes_type='SAMPLE_NOTES' ORDER BY notes_id ASC LIMIT 3  ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery);   

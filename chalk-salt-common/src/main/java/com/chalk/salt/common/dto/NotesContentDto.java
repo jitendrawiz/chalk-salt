@@ -3,7 +3,8 @@ package com.chalk.salt.common.dto;
 /**
  * The Class NotesContentDto.
  */
-public class NotesContentDto {
+public class NotesContentDto
+{
     /** The notes id. */
     private Integer notesId;
 
@@ -28,25 +29,50 @@ public class NotesContentDto {
     /** The notes file name. */
     private String notesFileName;
 
+    /** The notes type. */
+    private String notesType;
+
+    /**
+     * Gets the notes type.
+     *
+     * @return the notes type
+     */
+    public String getNotesType()
+        {
+            return notesType;
+        }
+
+    /**
+     * Sets the notes type.
+     *
+     * @param notesType
+     *            the new notes type
+     */
+    public void setNotesType(String notesType)
+        {
+            this.notesType = notesType;
+        }
+
     /**
      * Gets the notes id.
      *
      * @return the notes id
      */
     public Integer getNotesId()
-    {
-        return notesId;
-    }
+        {
+            return notesId;
+        }
 
     /**
      * Sets the notes id.
      *
-     * @param notesId the new notes id
+     * @param notesId
+     *            the new notes id
      */
     public void setNotesId(Integer notesId)
-    {
-        this.notesId = notesId;
-    }
+        {
+            this.notesId = notesId;
+        }
 
     /**
      * Gets the class id.
@@ -54,19 +80,20 @@ public class NotesContentDto {
      * @return the class id
      */
     public Integer getClassId()
-    {
-        return classId;
-    }
+        {
+            return classId;
+        }
 
     /**
      * Sets the class id.
      *
-     * @param classId the new class id
+     * @param classId
+     *            the new class id
      */
     public void setClassId(Integer classId)
-    {
-        this.classId = classId;
-    }
+        {
+            this.classId = classId;
+        }
 
     /**
      * Gets the subject id.
@@ -74,19 +101,20 @@ public class NotesContentDto {
      * @return the subject id
      */
     public Integer getSubjectId()
-    {
-        return subjectId;
-    }
+        {
+            return subjectId;
+        }
 
     /**
      * Sets the subject id.
      *
-     * @param subjectId the new subject id
+     * @param subjectId
+     *            the new subject id
      */
     public void setSubjectId(Integer subjectId)
-    {
-        this.subjectId = subjectId;
-    }
+        {
+            this.subjectId = subjectId;
+        }
 
     /**
      * Gets the notes title.
@@ -94,19 +122,20 @@ public class NotesContentDto {
      * @return the notes title
      */
     public String getNotesTitle()
-    {
-        return notesTitle;
-    }
+        {
+            return notesTitle;
+        }
 
     /**
      * Sets the notes title.
      *
-     * @param notesTitle the new notes title
+     * @param notesTitle
+     *            the new notes title
      */
     public void setNotesTitle(String notesTitle)
-    {
-        this.notesTitle = notesTitle;
-    }
+        {
+            this.notesTitle = notesTitle;
+        }
 
     /**
      * Gets the created date.
@@ -114,19 +143,20 @@ public class NotesContentDto {
      * @return the created date
      */
     public String getCreatedDate()
-    {
-        return createdDate;
-    }
+        {
+            return createdDate;
+        }
 
     /**
      * Sets the created date.
      *
-     * @param createdDate the new created date
+     * @param createdDate
+     *            the new created date
      */
     public void setCreatedDate(String createdDate)
-    {
-        this.createdDate = createdDate;
-    }
+        {
+            this.createdDate = createdDate;
+        }
 
     /**
      * Gets the modified date.
@@ -134,19 +164,20 @@ public class NotesContentDto {
      * @return the modified date
      */
     public String getModifiedDate()
-    {
-        return modifiedDate;
-    }
+        {
+            return modifiedDate;
+        }
 
     /**
      * Sets the modified date.
      *
-     * @param modifiedDate the new modified date
+     * @param modifiedDate
+     *            the new modified date
      */
     public void setModifiedDate(String modifiedDate)
-    {
-        this.modifiedDate = modifiedDate;
-    }
+        {
+            this.modifiedDate = modifiedDate;
+        }
 
     /**
      * Gets the notes uuid.
@@ -154,19 +185,20 @@ public class NotesContentDto {
      * @return the notes uuid
      */
     public String getNotesUuid()
-    {
-        return notesUuid;
-    }
+        {
+            return notesUuid;
+        }
 
     /**
      * Sets the notes uuid.
      *
-     * @param notesUuid the new notes uuid
+     * @param notesUuid
+     *            the new notes uuid
      */
     public void setNotesUuid(String notesUuid)
-    {
-        this.notesUuid = notesUuid;
-    }
+        {
+            this.notesUuid = notesUuid;
+        }
 
     /**
      * Gets the notes file name.
@@ -174,18 +206,19 @@ public class NotesContentDto {
      * @return the notes file name
      */
     public String getNotesFileName()
-    {
-        return notesFileName;
-    }
+        {
+            return notesFileName;
+        }
 
     /**
      * Sets the notes file name.
      *
-     * @param notesFileName the new notes file name
+     * @param notesFileName
+     *            the new notes file name
      */
     public void setNotesFileName(String notesFileName)
-    {
-        this.notesFileName = notesFileName;
-    }
+        {
+            this.notesFileName = notesFileName;
+        }
 
 }

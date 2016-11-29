@@ -93,7 +93,7 @@
 					this is a model {{alert.message}}
 				</div>
 				</alert>-->
-                <form role="form" action="" method="post" name="loginForm" novalidate>
+                <form role="form" ng-submit="loginCtrl.authenticateUser()" method="post" name="loginForm" novalidate>
                     <div class="col-xs-12 col-md-6 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
                         <div class="row inner-grid">
                             <div class="user_log_detail">
@@ -127,8 +127,7 @@
 									  </p>
 									</div>
 								
-                                <button type="button" class="btn btn-secondary btn-block" ng-disabled="loginForm.$invalid"
-                                    ng-click="loginCtrl.authenticateUser()">Log In</button>
+                                <button type="submit" class="btn btn-secondary btn-block" ng-disabled="loginForm.$invalid">Log In</button>
                             </div>
                         </div>
                     </div>

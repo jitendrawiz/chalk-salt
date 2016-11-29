@@ -206,7 +206,8 @@ public class ExamDaoImpl implements ExamDao {
                 + " notes_uuid AS notesUuid,"
                 + " class_id AS classId, subject_id AS subjectId"
                 + " FROM cst_notes "
-                + " WHERE class_id= :classId AND subject_id= :subjectId  ORDER BY created_date DESC LIMIT 4";
+                + " WHERE class_id= :classId AND subject_id= :subjectId  "
+                + " AND notes_type='STUDENT_NOTES' ORDER BY created_date DESC LIMIT 4";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 

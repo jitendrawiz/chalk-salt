@@ -1341,6 +1341,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          * 
          */
 
+        $scope.notes_types=CHALKNDUST.NOTES_TYPES;
+        
         /** ***************Save Notes********************** */
         $scope.notesDetailsToSave = {};
         this.createNotesData = function(fileData) {

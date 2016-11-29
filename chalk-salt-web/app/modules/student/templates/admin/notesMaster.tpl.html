@@ -94,10 +94,13 @@ button, input, select, textarea {
         <div class="user_log_detail">
             <form name="notesMasterForm" role="form" action="" method="post" novalidate>
                 <h3>Notes Master</h3>
-                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>               
+                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
                 <div class="title_name">
                     <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br> <label
-                        class="title_name_title">Notes Title</label><br> <label class="title_name_des">Notes File</label><br /> <br />
+                        class="title_name_title">Notes Title</label><br>
+                        <label class="title_name_des">Notes Type</label> <br />
+                         <label class="title_name_title">Notes File</label><br />
+                    
                 </div>
                 <div class="title_text">
                     <div ng-if="isEmpty(notesDetails.notesUuid)" class="form-group"
@@ -107,8 +110,7 @@ button, input, select, textarea {
                             ng-change="showSubjectsList(notesDetails.classId)">
                             <option value="" disabled>Select Class</option>
                         </select>
-                        <p ng-show="notesMasterForm.studentClass.$error.required && !notesMasterForm.studentClass.$pristine">Class is
-                            required.</p>
+                        <p ng-show="notesMasterForm.studentClass.$error.required && !notesMasterForm.studentClass.$pristine">Class is required.</p>
                     </div>
                     <div ng-if="!isEmpty(notesDetails.notesUuid)" class="form-group"
                         ng-class="{ 'has-error' : notesMasterForm.studentClass.$invalid && !notesMasterForm.studentClass.$pristine }">
@@ -117,11 +119,9 @@ button, input, select, textarea {
                             ng-change="showSubjectsList(notesDetails.classId)">
                             <option value="" disabled>Select Class</option>
                         </select>
-                        <p ng-show="notesMasterForm.studentClass.$error.required && !notesMasterForm.studentClass.$pristine">Class is
-                            required.</p>
+                        <p ng-show="notesMasterForm.studentClass.$error.required && !notesMasterForm.studentClass.$pristine">Class is required.</p>
                     </div>
-                    <div ng-if="isEmpty(notesDetails.notesUuid)" class="form-group"
-                       >
+                    <div ng-if="isEmpty(notesDetails.notesUuid)" class="form-group">
                         <select class="form-control" ng-model="notesDetails.subjectId" name="studentSubject" placeholder="Subject"
                             ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
                             <option value="" disabled>Select Subject</option>
@@ -138,6 +138,7 @@ button, input, select, textarea {
                         <p ng-show="notesMasterForm.studentSubject.$error.required && !notesMasterForm.studentSubject.$pristine">Subject is
                             required.</p>
                     </div>
+                    
                     <div class="form-group" ng-class="{ 'has-error' : notesMasterForm.notesTitle.$invalid && !notesMasterForm.notesTitle.$pristine }">
                         <textarea class="form-control" id="notesTitle" name="notesTitle" ng-model="notesDetails.notesTitle" type="text"
                             placeholder="Notes Title" required></textarea>
@@ -146,13 +147,31 @@ button, input, select, textarea {
                             ng-show="notesMasterForm.notesTitle.$error.required">Notes Title is required.</span>
                         </span>
                     </div>
-                        <div class="form-group">
-                        <input id="inputUploadNotesFile" type="file" file-model="notesFileName" ng-model="notesFileName" name="notesFileName" required/>
-                    <span style="color: red" class="help-block"
+                    
+                    <div ng-if="isEmpty(notesDetails.notesUuid)" class="form-group"
+                        ng-class="{ 'has-error' : notesMasterForm.notesType.$invalid && !notesMasterForm.notesType.$pristine }">
+                        <select class="form-control" ng-model="notesDetails.notesType" name="notesType" placeholder="notesType"
+                            ng-options="note.index as note.value for note in notes_types" ng-required="true">
+                            <option value="" disabled>Select Notes Types</option>
+                        </select>
+                        <p ng-show="notesMasterForm.notesType.$error.required && !notesMasterForm.notesType.$pristine">Notes types is required.</p>
+                    </div>
+                    <div ng-if="!isEmpty(notesDetails.notesUuid)" class="form-group"
+                        ng-class="{ 'has-error' : notesMasterForm.notesType.$invalid && !notesMasterForm.notesType.$pristine }">
+                        <select class="form-control" ng-model="notesDetails.notesType"  name="notesType" placeholder="notesType"
+                            ng-options="note.index as note.value for note in notes_types" ng-required="true">
+                            <option value="" disabled>Select Notes Types</option>
+                        </select>
+                        <p ng-show="notesMasterForm.notesType.$error.required && !notesMasterForm.notesType.$pristine">Notes types is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <input id="inputUploadNotesFile" type="file" file-model="notesFileName" ng-model="notesFileName" name="notesFileName" required />
+                        <span style="color: red" class="help-block"
                             ng-show="notesMasterForm.notesFileName.$invalid  && !notesMasterForm.notesFileName.$pristine"> <span
                             ng-show="notesMasterForm.notesFileName.$error.required">Notes File is required.</span>
                         </span>
                     </div>
+                    
                     <div ng-if="isEmpty(notesDetails.notesUuid)" class="form-group">
                         <button type="button" class="btn btn-secondary btn-block" ng-disabled="notesMasterForm.$invalid"
                             ng-click="adminCtrl.createNotesData(notesFileName)">Submit</button>
