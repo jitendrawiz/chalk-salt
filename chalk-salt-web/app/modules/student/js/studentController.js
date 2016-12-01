@@ -320,6 +320,28 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         } else {
           $scope.pdfUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf';
         }
+        
+        if ($stateParams.pdfUrl != null && $stateParams.pdfUrl != undefined) {
+          var securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
+          if(!validate(securUuid)){
+            var modalOptions = {
+                header : 'Note',
+                body : 'Hi Guest! You are seeing sample notes. Please contact System Administrator for full access of notes.',
+                btn : 'OK'
+              };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+               
+              });
+          }
+        }
+        
+        function validate(input){
+          if(input!=null && input !=undefined && input !=""){
+            return true;
+          }
+          return false;
+        }
+        
         $scope.scroll = 0;
         $scope.loading = 'loading';
 

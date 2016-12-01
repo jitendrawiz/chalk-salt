@@ -45,20 +45,42 @@
 	background: rgba(238, 238, 238, .9);
 	width: 960px;
 }
-.main_bg_bg{
-background-image: none;
-background-size: 100%;
-    height: 1000px;
-    top: 0;
-    z-index: 0;
+
+.main_bg_bg {
+	background-image: none;
+	background-size: 100%;
+	height: 1000px;
+	top: 0;
+	z-index: 0;
 }
-h1, .h1, h2, .h2, h3, .h3{
-margin-top: 0px;
+
+h1, .h1, h2, .h2, h3, .h3 {
+	margin-top: 0px;
 }
 </style>
 <div prevent-right-click style="background-color: gray;">
+    <div id="wrapper" class="main-wrapper">
+        <header id="masthead" class="site-header navigation navbar-default">
+            <div class="header-top">
+                <div class="container"></div>
+            </div>
+            <div class="header-bottom">
+                <div class="container">
+                    <div class="navbar-header col-sm-3 col-sm-6">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                                class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/cndlogo.jpg" alt="">
+                        </a>
+                    </div>
+                    <div layout="column" layout-align="left left">
+                    <h2><div flex="100" class="height-100">{{pdfName}}</div></h2></div>
+                </div>
+            </div>
+        </header>
+    </div>
     <div class="wrapper">
-        <h1 style="padding-top: 20px">{{pdfName}}</h1>
         <ng-pdf template-url="modules/student/templates/studentDashboard/viewer.tpl.html" canvasid="pdf" scale="page-fit" page=1></ng-pdf>
     </div>
 </div>
