@@ -19,7 +19,6 @@ import com.chalk.salt.common.dto.DiscussionTopicRequestDto;
 import com.chalk.salt.common.dto.TopicDetailsDto;
 import com.chalk.salt.common.dto.TopicStatisticsDto;
 import com.chalk.salt.common.exceptions.DiscussionException;
-import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
 import com.chalk.salt.dao.discussion.DiscussionRoomDao;
 import com.chalk.salt.dao.user.UserDao;
@@ -352,5 +351,24 @@ public class DiscussionRoomManagerImpl implements DiscussionRoomManager {
 		}
 		return extension; 
 	}
+
+    @Override
+    public String saveCommentByAdmin(DiscussionCommentDto discussionCommentDetails) throws DiscussionException
+        {
+        logger.info("Save discussion comment .......");
+        try {
+            final Date date = new Date();
+            final String createdDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            final String commentUuid = UUID.randomUUID().toString();
+            discussionCommentDetails.setCommentUuid(commentUuid);
+            discussionCommentDetails.setCreatedDate(createdDate);
+            discussionCommentDetails.setModifiedDate(modifiedDate);
+            discussionDao.saveComments(discussionCommentDetails);
+            return commentUuid;
+        } catch (final Exception exception) {
+            throw new DiscussionException(ErrorCode.FAIL_TO_SAVE_DISCUSSION_TOPIC, "Fail to Save Discussion Comment", exception);
+        }
+        }
 
 }

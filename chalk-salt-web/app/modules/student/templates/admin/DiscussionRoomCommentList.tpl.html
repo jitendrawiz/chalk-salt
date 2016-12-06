@@ -116,6 +116,7 @@ button.btn-block {
 					<label class="title_name_class">Class</label><br> 
 					<label class="title_name_sub">Subject</label><br>
 					<label class="title_name_topic">Topic</label><br>
+                    <label class="title_name_topic" ng-if="isCommentOnTopicToShown">Comments</label><br>
 				</div>
 				<div class="title_text">
 					<div class="form-group"
@@ -158,6 +159,14 @@ button.btn-block {
 							ng-show="commentListForm.topic.$error.required && !commentListForm.topic.$pristine">Topic 
 							is required.</p>
 					</div>
+                    <div class="form-group" layout="row" ng-if="isCommentOnTopicToShown">
+                       <div flex="50"> <textarea class="form-control" id="commentOnTopic" name="commentOnTopic" 
+                            ng-model="commentDetails.commentOnTopic" type="text"
+                            placeholder="Put your comments after selecting topic" required></textarea></div>
+                          <div flex="10" flex-offset="5" layout="row" layout-align="center center"> <button  type="button" style="width: 100%;" class="btn btn-secondary btn-block"
+							ng-click="adminCtrl.saveAdminCommentOnTopic(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">Submit</button></div>
+                   </div>
+                   
 			</form>
 
 		</div>

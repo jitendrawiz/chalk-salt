@@ -166,4 +166,11 @@ public class DiscussionRoomFacadeImpl implements DiscussionRoomFacade{
 		discussionManager.approveTopicRequests(requestSecurUuid);
 	}
 
+    @Override
+    public String saveCommentByAdmin(DiscussionCommentDto discussionCommentDetails) throws DiscussionException
+        {
+            // TODO Auto-generated method stub
+            return discussionManager.saveCommentByAdmin(discussionCommentDetails);
+        }
+
 }

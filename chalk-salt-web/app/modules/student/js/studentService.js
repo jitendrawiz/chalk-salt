@@ -451,7 +451,7 @@ define([ 'angular' ], function(angular) {
   } ]);
 
   /*notes services ends here*/
-  
+
   studentService.factory('getTestTypeService', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/exam/testType/details', {}, {
       get : {
@@ -459,9 +459,9 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-  
+
   /*Schedule test services starts from here*/
-  
+
   studentService.factory('saveScheduleTestMasterData', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/schedule-test/details/save', {}, {
       save : {
@@ -469,7 +469,7 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-  
+
   studentService.factory('GetScheduleTestContentList', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/schedule-test/details/:classId/:subjectId', {
       classId : '@classId',
@@ -509,35 +509,34 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-  
+
   studentService.factory('GetResultsByClassSubject', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/test/results/list/:classId/:subjectId/:securUuid', {
-    	classId : '@classId',
-        subjectId : '@subjectId',
-        securUuid : '@securUuid'
+      classId : '@classId',
+      subjectId : '@subjectId',
+      securUuid : '@securUuid'
     }, {
       get : {
         method : 'GET'
       }
     });
   } ]);
-  
-  
+
   studentService.factory('GetResultDetailsByTestUuid', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/test/results/:classId/:subjectId/:securUuid/:testUuid', {
-    	classId : '@classId',
-        subjectId : '@subjectId',
-        securUuid : '@securUuid',
-        testUuid : '@testUuid'
+      classId : '@classId',
+      subjectId : '@subjectId',
+      securUuid : '@securUuid',
+      testUuid : '@testUuid'
     }, {
       get : {
         method : 'GET'
       }
     });
   } ]);
-  
+
   /*schedule test services ends here*/
-  
+
   /*Nofitication service*/
   studentService.factory('GetNotificationList', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/schedule-test/notification/list/:classId/:studentId', {
@@ -549,8 +548,7 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-  
-  
+
   /***Student Photos Service starts here***/
 
   studentService.factory('GetStudentsList', [ '$resource', 'ENV', function($resource, ENV) {
@@ -563,7 +561,6 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
 
-  
   studentService.factory('createStudentAchievementContentService', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/students/achievement-details/save', {}, {
       save : {
@@ -601,7 +598,7 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-  
+
   studentService.factory('deleteAchievementDetailsService', [ '$resource', 'ENV', function($resource, ENV) {
     return $resource(ENV.API_END_POINT + 'private/students/achievement-details/delete/:achievementUuid', {
       achievementUuid : '@achievementUuid'
@@ -612,7 +609,14 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
 
-  
   /*Student Photos Service ends here*/
+
+  studentService.factory('SaveTopicCommentByAdmin', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/admin/comments/save', {}, {
+      save : {
+        method : 'POST'
+      }
+    });
+  } ]);
 
 });

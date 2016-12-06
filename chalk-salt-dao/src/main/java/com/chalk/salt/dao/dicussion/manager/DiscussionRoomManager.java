@@ -182,4 +182,13 @@ public interface DiscussionRoomManager {
 	 */
 	void deleteTopicImage(String securUuid)throws DiscussionException;
 
+    /**
+     * Save comment by admin.
+     *
+     * @param discussionCommentDetails the discussion comment details
+     * @return the string
+     * @throws DiscussionException the discussion exception
+     */
+    String saveCommentByAdmin(DiscussionCommentDto discussionCommentDetails)throws DiscussionException;
+
 }

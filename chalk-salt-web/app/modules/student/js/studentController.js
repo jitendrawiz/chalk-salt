@@ -263,7 +263,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.showResultDetailsDiv = false;
 
         function getResults() {
-         var subjectId= $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+          var subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
           GetResultsByClassSubject.query({
             classId : $scope.classId,
             subjectId : subjectId,
@@ -282,7 +282,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         }
 
         $scope.detailedResult = function(testSecuruuid) {
-          var subjectId= $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+          var subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
 
           GetResultDetailsByTestUuid.query({
             classId : $scope.classId,
@@ -301,11 +301,11 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-		$scope.backToResultList = function(){
-	    	  getResults();
-	    	  $scope.showResultDetailsDiv = false;
-              $scope.showResultDiv = true;
-	      };
+        $scope.backToResultList = function() {
+          getResults();
+          $scope.showResultDetailsDiv = false;
+          $scope.showResultDiv = true;
+        };
         /** ************ */
 
         /* Code to display pdf files in website */
@@ -320,28 +320,28 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         } else {
           $scope.pdfUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/relativity.pdf';
         }
-        
+
         if ($stateParams.pdfUrl != null && $stateParams.pdfUrl != undefined) {
-          var securUuid=$window.localStorage.getItem(CHALKNDUST.SECURUUID);
-          if(!validate(securUuid)){
+          var securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+          if (!validate(securUuid)) {
             var modalOptions = {
-                header : 'Note',
-                body : 'Hi Guest! You are seeing sample notes. Please contact System Administrator for full access of notes.',
-                btn : 'OK'
-              };
-              CandDModalService.showModal({}, modalOptions).then(function(result) {
-               
-              });
+              header : 'Note',
+              body : 'Hi Guest! You are seeing sample notes. Please contact System Administrator for full access of notes.',
+              btn : 'OK'
+            };
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+
+            });
           }
         }
-        
-        function validate(input){
-          if(input!=null && input !=undefined && input !=""){
+
+        function validate(input) {
+          if (input != null && input != undefined && input != "") {
             return true;
           }
           return false;
         }
-        
+
         $scope.scroll = 0;
         $scope.loading = 'loading';
 
@@ -431,6 +431,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'SaveStudentAchievementFileService',
       'GetAchievementContentList',
       'deleteAchievementDetailsService',
+      'SaveTopicCommentByAdmin',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -439,7 +440,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
-          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService) {
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -451,7 +452,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
         $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
         $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
-        
+
         $scope.closeAlert = function() {
           $scope.alert = {};
           $scope.alert.show = false;
@@ -592,6 +593,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.subjectsList = response;
           }, onRequestFailure);
 
+          $scope.isCommentOnTopicToShown = false;
+
         };
 
         $scope.showTopicDetails = function(classId, subjectId) {
@@ -641,6 +644,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         $scope.showTopicDetailsForCommentsPage = function(classId, subjectId) {
+          $scope.isCommentOnTopicToShown = false;
           if (!classId) {
             resetOptions();
             if (!subjectId) {
@@ -663,6 +667,9 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         $scope.showCommentDetails = function(classId, subjectId, topicId) {
+          if (classId != null && subjectId != null && topicId != null) {
+            $scope.isCommentOnTopicToShown = true;
+          }
           if (!topicId) {
             resetOptions();
             if (!subjectId) {
@@ -1363,8 +1370,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
          * 
          */
 
-        $scope.notes_types=CHALKNDUST.NOTES_TYPES;
-        
+        $scope.notes_types = CHALKNDUST.NOTES_TYPES;
+
         /** ***************Save Notes********************** */
         $scope.notesDetailsToSave = {};
         this.createNotesData = function(fileData) {
@@ -2000,6 +2007,28 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           });
         };
 
+        this.saveAdminCommentOnTopic = function(classId, subjectId, topicId) {
+          var topicComment = $scope.commentDetails.commentOnTopic;
+          var object = {};
+          object.classId = classId;
+          object.subjectId = subjectId;
+          object.discussionTopicId = topicId;
+          object.generalComments = topicComment;
+          object.userSecurUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+
+          SaveTopicCommentByAdmin.save({}, object, function(response) {
+            var modalOptions = {
+              header : 'Note',
+              body : 'Comment on topic added successfully',
+              btn : 'OK'
+            };
+            CandDModalService.showModal({}, modalOptions).then(function(result) {
+              $log.info(result);
+            });
+            $state.reload();
+          }, onRequestFailure)
+        }
+
         /** *Home Page Student images work ends here** */
 
         var Id = $stateParams.id;
@@ -2059,7 +2088,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
           $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
-          $rootScope.notificationList=[];
+          $rootScope.notificationList = [];
           $('#loading').hide();
           $('#loading img').hide();
           GetNotificationList.query({
@@ -2070,7 +2099,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               $('#loading').hide();
               $('#loading img').hide();
               $rootScope.notificationList = response;
-            }else{
+            } else {
               $('#loading').hide();
               $('#loading img').hide();
             }
@@ -2080,13 +2109,12 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }, 120000);
-        
-        
-        function getNotificationList(){
+
+        function getNotificationList() {
           $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
           $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
-          $rootScope.notificationList=[];
+          $rootScope.notificationList = [];
           GetNotificationList.query({
             classId : $scope.classId,
             studentId : $scope.securUuid
@@ -2095,7 +2123,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               $('#loading').hide();
               $('#loading img').hide();
               $rootScope.notificationList = response;
-            }else{
+            } else {
               $('#loading').hide();
               $('#loading img').hide();
             }
