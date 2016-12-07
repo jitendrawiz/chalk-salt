@@ -557,6 +557,12 @@ public class UserManagerImpl implements UserManager {
         final Date date = new Date();
         final String modifiedDate= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
         studentAchievementetails.setModified_date(modifiedDate);
+        if(studentAchievementetails.getTitle()!=null){
+        studentAchievementetails.setClassId(null);
+        studentAchievementetails.setStudentId(null);
+        }else{
+        studentAchievementetails.setTitle(null);
+        }
         return userDao.saveStudentAchievementDetails(studentAchievementetails);
         } catch (final Exception exception) {
             throw new StudentAchievementException(ErrorCode.FAIL_TO_SAVE_STUDENT_ACHIEVEMENT_CONTENT, "Fail to save student achievement content", exception);
@@ -572,7 +578,7 @@ public class UserManagerImpl implements UserManager {
         try {
             String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
             String studentId= userDao.getUserIdUsingAchievementUuid(achievementUuid);
-            destPath += String.join(File.separator, studentId,achievementUuid);
+            destPath += String.join(File.separator, studentId!=null?studentId:"General",achievementUuid);
             File file = new File(destPath);
             if (!file.exists()) {
                 file.mkdirs();
@@ -607,7 +613,12 @@ public class UserManagerImpl implements UserManager {
         {
         logger.info("fetch list of students achievements list...");
         try{
+        
+        if(!(classId.equals("BLANK") && studentId.equals("BLANK"))){
             return userDao.getStudentAchievmentListUsingIds(classId,studentId);
+            }else{
+            return userDao.getGenericAchievementDetails();
+            }
         } catch (final Exception exception) {
             throw new StudentAchievementException(ErrorCode.FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT, "Fail to Fetch list of students achievements", exception);
         }
@@ -624,7 +635,7 @@ public class UserManagerImpl implements UserManager {
             //delete old uploaded file with the old name.
             String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
             String studentId= userDao.getUserIdUsingAchievementUuid(achievementUuid);
-            destPath += String.join(File.separator, studentId,achievementUuid);
+            destPath += String.join(File.separator, studentId!=null?studentId:"General",achievementUuid);
             File folderPathToDelete=new File(destPath);
             String oldFileName=userDao.getOldAchievementFileName(achievementUuid);
             String oldfilePath=destPath+File.separator+oldFileName;
@@ -655,7 +666,7 @@ public class UserManagerImpl implements UserManager {
                 for(int i=0;i<list.size();i++){
                 StudentAchievementDto student=list.get(i);
                 String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
-                destPath += String.join(File.separator, String.valueOf(student.getStudentId()),student.getAchievementUuid(),student.getFileName());
+                destPath += String.join(File.separator, (student.getStudentId()!=null?(String.valueOf(student.getStudentId())):"General"),student.getAchievementUuid(),student.getFileName());
                 student.setFilePath(destPath);
                 }
             } catch (final Exception exception) {

@@ -1,192 +1,191 @@
 <style>
- .title_text { 
- 	width: 70%; 
- 	float: left; 
- } 
+.title_text {
+	width: 70%;
+	float: left;
+}
 
- .title_name { 
- 	width: 30%; 
- 	float: left; 
- } 
+.title_name {
+	width: 30%;
+	float: left;
+}
 
- .title_name { 
- 	text-align: right; 
- 	padding-right: 20px; 
- 	padding-top: 25px; 
- } 
+.title_name {
+	text-align: right;
+	padding-right: 20px;
+	padding-top: 25px;
+}
 
- .title_name_class { 
- 	padding-top: 0px; 
- } 
+.title_name_class {
+	padding-top: 0px;
+}
 
- .title_name_sub { 
- 	padding-top: 15px; 
- } 
+.title_name_sub {
+	padding-top: 15px;
+}
 
- .title_text textarea { 
- 	width: 100%; 
- 	height: 100px; 
- 	padding-bottom: 5px; 
- 	border-radius: 5px; 
- 	padding: 5px; 
- 	color: #000; 
- 	margin: 5px 0px; 
- 	border: 1px solid #CCC; 
- } 
+.title_text textarea {
+	width: 100%;
+	height: 100px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
 
- .title_text select { 
- 	width: 60%; 
- 	height: 40px; 
- 	padding-bottom: 5px; 
- 	border-radius: 5px; 
- 	padding: 5px; 
- 	color: #000; 
- 	margin: 5px 0px; 
- 	border: 1px solid #CCC; 
- } 
+.title_text select {
+	width: 60%;
+	height: 40px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
 
- .title_text button a { 
- 	color: #FFF; 
- 	padding: 0px 40px; 
- } 
+.title_text button a {
+	color: #FFF;
+	padding: 0px 40px;
+}
 
- .btn:focus, .btn:hover, a, a:focus, a:hover { 
- 	text-decoration: none; 
- 	outline: 0; 
- } 
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
 
- .title_text button { 
- 	padding: 8px 0px; 
- 	cursor: pointer; 
- 	background: #2f889a; 
- 	color: #FFF; 
- 	width: 100%; 
- 	border-radius: 5px; 
- 	font-weight: bold; 
- 	border: none; 
- 	-webkit-appearance: none; 
- 	-moz-appearance: none; 
- 	-ms-appearance: none; 
- 	-o-appearance: none; 
- 	appearance: none; 
- } 
+.title_text button {
+	padding: 8px 0px;
+	cursor: pointer;
+	background: #2f889a;
+	color: #FFF;
+	width: 100%;
+	border-radius: 5px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 
- button, input, select, textarea { 
- 	font-family: inherit; 
- 	font-size: inherit; 
- 	line-height: inherit; 
- } 
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
 
- button.btn-block { 
- 	display: inline; 
- 	width: auto; 
- 	background: #6AA3C9 none repeat scroll 0 0; 
- 	color: white; 
- } 
+button.btn-block {
+	display: inline;
+	width: auto;
+	background: #6AA3C9 none repeat scroll 0 0;
+	color: white;
+}
 
- #AchvList th:last-child, td:last-child { 
- 	width: 10%; 
- } 
+#AchvList th:last-child, td:last-child {
+	width: 10%;
+}
 
- #AchvList th{ 
- 	color:#fff; 
- } 
- input { 
- display: block; 
- } 
+#AchvList th {
+	color: #fff;
+}
+
+input {
+	display: block;
+}
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="achievementListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Student Achievement List</h3>
-				<div class="title_name">
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="achievementListForm" role="form" action="" method="post" novalidate>
+                <h3>Student Achievement List</h3>
+                <div class="title_name">
 
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Student</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : achievementListForm.studentClass.$invalid && !achievementListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="achievementDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showStudentsList(achievementDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="achievementListForm.studentClass.$error.required && !achievementListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : achievementListForm.student.$invalid && !achievementListForm.student.$pristine }">
-						<select class="form-control" ng-model="achievementDetails.liststudentId"
-							name="student" placeholder="Student"
-							ng-options="student.studentId as student.studentName for student in studentsList"
-							ng-required="true"
-							ng-change="showAchievementDetails(achievementDetails.listclassId,achievementDetails.liststudentId, classes, studentsList)">
-							<option value="" disabled>Select Student</option>
-						</select>
-						<p
-							ng-show="achievementListForm.student.$error.required && !achievementListForm.student.$pristine">Student
-							is required.</p>
-					</div>
-			</form>
+                    <label class="title_name_class">Achievement type</label><br> <label class="title_name_sub" ng-if="showStudentFieldsOnList">Class</label><br>
+                    <label class="title_name_sub" ng-if="showStudentFieldsOnList">Student</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : achievementListForm.achievementType.$invalid && !achievementListForm.achievementType.$pristine }">
+                        <select class="form-control" ng-model="achievementDetails.typeId" name="achievementType" placeholder="AchievementType"
+                            ng-options="type as type for type in achievementTypes" ng-required="true"
+                            ng-change="showSpecificTypesInputsOnList(achievementDetails.typeId)">
+                            <option value="" disabled>Select Achievement Type</option>
+                        </select>
+                        <p ng-show="achievementListForm.achievementType.$error.required && !achievementListForm.achievementType.$pristine">Achievement
+                            Type is required.</p>
+                    </div>
 
-		</div>
-	</div>
+                    <div class="form-group" ng-if="showStudentFieldsOnList"
+                        ng-class="{ 'has-error' : achievementListForm.studentClass.$invalid && !achievementListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="achievementDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showStudentsList(achievementDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="achievementListForm.studentClass.$error.required && !achievementListForm.studentClass.$pristine">Class is
+                            required.</p>
+                    </div>
+                    <div class="form-group" ng-if="showStudentFieldsOnList"
+                        ng-class="{ 'has-error' : achievementListForm.student.$invalid && !achievementListForm.student.$pristine }">
+                        <select class="form-control" ng-model="achievementDetails.liststudentId" name="student" placeholder="Student"
+                            ng-options="student.studentId as student.studentName for student in studentsList" ng-required="true"
+                            ng-change="showAchievementDetails(achievementDetails.listclassId,achievementDetails.liststudentId, classes, studentsList)">
+                            <option value="" disabled>Select Student</option>
+                        </select>
+                        <p ng-show="achievementListForm.student.$error.required && !achievementListForm.student.$pristine">Student is required.</p>
+                    </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	        <input ng-model="search" type="text" style="width: 40%" placeholder="Search" />
-        
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsAchvList"
-           ng-change="getAchvContentData()" ng-model="$parent.currentPageAchvList" 
-           max-size="$parent.maxSizeAchvList" items-per-page="$parent.itemsPerPageAchvList
-           " 
-            boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-			<table id="AchvList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>S.No.</th>
-						<th>Achievement Description</th>
-						<th>Achievement Image Name</th>
+        <div class="table-responsive ">
+            <div class="number_scroll">
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search" />
+
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsAchvList" ng-change="getAchvContentData()" ng-model="$parent.currentPageAchvList"
+                        max-size="$parent.maxSizeAchvList" items-per-page="$parent.itemsPerPageAchvList
+           " boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="AchvList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Achievement Description</th>
+                        <th>Achievement Image Name</th>
                         <th>Date Modified</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in achvList=achievementListDetails | filter:search|startFrom:(currentPageAchvList-1)*itemsPerPageAchvList | limitTo:itemsPerPageAchvList">
-						<td>{{$index+1}}</td>
-						<td>{{item.achievementDesc}}</td>
-						<td>{{item.fileName}}</td>
-                        <td>{{item.modified_date}}</td>											
-						<td>							
-							<a type="button" ng-click="deleteAchievementContent(item.achievementUuid)" title="Delete">
-							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsAchvList" ng-change="getAchvContentData()" 
-          ng-model="$parent.currentPageAchvList" max-size="$parent.maxSizeAchvList" 
-          items-per-page="$parent.itemsPerPageAchvList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in achvList=achievementListDetails | filter:search|startFrom:(currentPageAchvList-1)*itemsPerPageAchvList | limitTo:itemsPerPageAchvList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.achievementDesc}}</td>
+                        <td>{{item.fileName}}</td>
+                        <td>{{item.modified_date}}</td>
+                        <td><a type="button" ng-click="deleteAchievementContent(item.achievementUuid)" title="Delete"> <i
+                                class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsAchvList" ng-change="getAchvContentData()" ng-model="$parent.currentPageAchvList"
+                        max-size="$parent.maxSizeAchvList" items-per-page="$parent.itemsPerPageAchvList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>

@@ -776,8 +776,8 @@ public class UserDaoImpl implements UserDao {
     public String saveStudentAchievementDetails(StudentAchievementDto studentAchievementetails) throws Exception
         {
         final String sqlQuery = "INSERT INTO `cst_achievements` (`class_id`, `student_id`, `achievement_description`, "
-                + "`file_name`, `modified_date` ,achievement_uuid)"
-                + "VALUES(:classId, :studentId, :achvDesc, :fileName, :modifiedDate,:achvUuid)";
+                + "`file_name`, `modified_date` ,achievement_uuid,achievement_type,achievement_title)"
+                + "VALUES(:classId, :studentId, :achvDesc, :fileName, :modifiedDate,:achvUuid,:typeId,:achievementTitle)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -787,6 +787,8 @@ public class UserDaoImpl implements UserDao {
             query.addParameter("fileName", studentAchievementetails.getFileName());
             query.addParameter("modifiedDate", studentAchievementetails.getModified_date());
             query.addParameter("achvUuid", studentAchievementetails.getAchievementUuid());
+            query.addParameter("typeId", studentAchievementetails.getTypeId());
+            query.addParameter("achievementTitle",studentAchievementetails.getTitle());
             query.executeUpdate();
             return studentAchievementetails.getAchievementUuid();
         }        }
@@ -873,10 +875,11 @@ public class UserDaoImpl implements UserDao {
                 + " CONCAT(first_name,' ',last_name)AS studentName, "
                 + " file_name AS fileName,"
                 + " cst_achievements.created_date,"
-                + " DATE_FORMAT(cst_achievements.modified_date,'%d-%M-%Y %H:%i:%S')AS modified_date"
+                + " DATE_FORMAT(cst_achievements.modified_date,'%d-%M-%Y %H:%i:%S')AS modified_date,"
+                + " cst_achievements.achievement_title as title"
                 + " FROM `cst_achievements` "
-                + " JOIN `cst_class_type` ON `cst_class_type`.class_id=cst_achievements.class_id "
-                + " JOIN `cst_users` ON `cst_users`.user_id=`cst_achievements`.student_id "
+                + " LEFT JOIN `cst_class_type` ON `cst_class_type`.class_id=cst_achievements.class_id "
+                + " LEFT JOIN `cst_users` ON `cst_users`.user_id=`cst_achievements`.student_id "
                 + " ORDER BY cst_achievements.modified_date DESC LIMIT 5";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -895,6 +898,27 @@ public class UserDaoImpl implements UserDao {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("settingsKey", settingsKey);
             return query.executeAndFetchFirst(String.class);
+        }
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.user.UserDao#getGenericAchievementDetails()
+     */
+    @Override
+    public List<StudentAchievementDto> getGenericAchievementDetails() throws Exception
+        {
+        final String sqlQuery = " SELECT achievement_uuid AS achievementUuid,"
+                + "  class_id AS classId, "
+                + "  student_id AS studentId, "
+                + "  achievement_description AS achievementDesc, "
+                + "  file_name AS fileName,created_date, "
+                + "  achievement_title AS title, "
+                + "  DATE_FORMAT(modified_date,'%d-%M-%Y %H:%i:%S')AS modified_date  FROM `cst_achievements` "
+                + "  WHERE class_id IS NULL AND student_id IS NULL AND achievement_type='General' ORDER BY modified_date DESC";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            return query.executeAndFetch(StudentAchievementDto.class);
         }
         }
 }

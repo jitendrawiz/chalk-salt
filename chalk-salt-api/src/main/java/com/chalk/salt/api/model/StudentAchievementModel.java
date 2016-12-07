@@ -39,6 +39,54 @@ public class StudentAchievementModel
     /** The image link. */
     private String imageLink;
 
+    /** The type id. */
+    private String typeId;
+
+    /** The title. */
+    private String title;
+
+    /**
+     * Gets the title.
+     *
+     * @return the title
+     */
+    public String getTitle()
+        {
+            return title;
+        }
+
+    /**
+     * Sets the title.
+     *
+     * @param title
+     *            the new title
+     */
+    public void setTitle(String title)
+        {
+            this.title = title;
+        }
+
+    /**
+     * Gets the type id.
+     *
+     * @return the type id
+     */
+    public String getTypeId()
+        {
+            return typeId;
+        }
+
+    /**
+     * Sets the type id.
+     *
+     * @param typeId
+     *            the new type id
+     */
+    public void setTypeId(String typeId)
+        {
+            this.typeId = typeId;
+        }
+
     /**
      * Gets the image link.
      *

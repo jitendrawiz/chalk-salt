@@ -1895,6 +1895,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           if (!classId) {
             return;
           }
+          $scope.achievementListDetails = [];
           GetStudentsList.query({
             classId : classId
           }, function(response) {
@@ -1905,11 +1906,13 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         $scope.achievementDetailsToSave = {};
         $scope.studentPhotosDetails = {};
         this.createAchievementsData = function(fileData) {
+          debugger;
           angular.extend($scope.achievementDetailsToSave, $scope.studentPhotosDetails);
           var fileName = fileData.name;
           $scope.achievementDetailsToSave.fileName = fileName;
           createStudentAchievementContentService.save({}, $scope.achievementDetailsToSave, function(response) {
             if (response) {
+              $scope.studentPhotosDetails = {};
               if (!angular.isUndefined(fileData)) {
                 saveStudentImageDataFile(fileData, response.achievementUuid);
               }
@@ -1939,17 +1942,19 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** *********Show Achievement List Details***************** */
 
-        $scope.showAchievementDetails = function(classId, studentId, classes, studentsList) {
+        $scope.showAchievementDetails = function(classId, studentId, classes, studentsList, type) {
 
           $scope.classes = classes;
           $scope.studentsList = studentsList;
-
-          if (!classId) {
-            achievementDetails.liststudentId = "";
-            $scope.achievementListDetails = null;
-            $scope.achvList = null;
-            if (!studentId) {
-              return;
+          $scope.achievementListDetails=[];
+          if (type != 'General') {
+            if (!classId) {
+              achievementDetails.liststudentId = "";
+              $scope.achievementListDetails = null;
+              $scope.achvList = null;
+              if (!studentId) {
+                return;
+              }
             }
           }
           GetAchievementContentList.query({
@@ -2028,6 +2033,45 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $state.reload();
           }, onRequestFailure)
         }
+        $scope.showGeneralFields = false;
+        $scope.showStudentFields = false;
+        $scope.achievementTypes = [ "Student", "General" ]
+        $scope.showSpecificTypesInputs = function(typeId) {
+          $scope.studentPhotosDetails.classId = null;
+          $scope.studentsList = [];
+          $scope.studentPhotosDetails.studentId = null;
+          $scope.studentPhotosDetails.title = null;
+          $scope.achievementListDetails = [];
+          if (typeId == "General") {
+            $scope.showGeneralFields = true;
+            $scope.showStudentFields = false;
+          } else {
+            $scope.showGeneralFields = false;
+            $scope.showStudentFields = true;
+          }
+
+        };
+        
+        
+        $scope.showGeneralFieldsOnList = false;
+        $scope.showStudentFieldsOnList = false;
+        $scope.achievementTypes = [ "Student", "General" ]
+        $scope.showSpecificTypesInputsOnList = function(typeId) {
+          $scope.studentPhotosDetails.classId = null;
+          $scope.studentsList = [];
+          $scope.studentPhotosDetails.studentId = null;
+          $scope.studentPhotosDetails.title = null;
+          $scope.achievementListDetails = [];
+          if (typeId == "General") {
+            $scope.showGeneralFieldsOnList = true;
+            $scope.showStudentFieldsOnList = false;
+            $scope.showAchievementDetails("BLANK", "BLANK", $scope.classes, null, 'General');
+          } else {
+            $scope.showGeneralFieldsOnList = false;
+            $scope.showStudentFieldsOnList = true;
+          }
+
+        };
 
         /** *Home Page Student images work ends here** */
 

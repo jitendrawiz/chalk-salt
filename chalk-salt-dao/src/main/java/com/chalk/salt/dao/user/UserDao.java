@@ -414,4 +414,12 @@ public interface UserDao {
      * @throws Exception the exception
      */
     String getNotesMediaUrl(String name)throws Exception;
+
+    /**
+     * Gets the generic achievement details.
+     *
+     * @return the generic achievement details
+     * @throws Exception the exception
+     */
+    List<StudentAchievementDto> getGenericAchievementDetails() throws Exception;
 }

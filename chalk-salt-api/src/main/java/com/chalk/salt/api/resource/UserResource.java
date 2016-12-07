@@ -709,7 +709,9 @@ public class UserResource extends AbstractResource {
         List<StudentAchievementDto> stuAchvList = null;
         try{
             stuAchvList = userFacade.getStudentAchievmentList();
+            
             stuAchvContent = DozerMapperUtil.mapCollection(beanMapper, stuAchvList, StudentAchievementModel.class);
+            if(stuAchvContent!=null){
             for(int i=0;i<stuAchvContent.size();i++){
                 StudentAchievementModel studModel=stuAchvContent.get(i);
                 File file=new File(studModel.getFilePath());
@@ -717,8 +719,10 @@ public class UserResource extends AbstractResource {
                 final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
                 studModel.setImageLink("data:" + mediaType + ";base64," + encodedImageString);
             }
-            return Response.ok(stuAchvContent).build();
             
+            return Response.ok(stuAchvContent).build();
+            }
+            return Response.ok(stuAchvList).build();
         } catch (final StudentAchievementException studentAchievementException) {
             throw Utility.buildResourceException(studentAchievementException.getErrorCode(), studentAchievementException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudentAchievementException.class, studentAchievementException);
         }catch (IOException e) {

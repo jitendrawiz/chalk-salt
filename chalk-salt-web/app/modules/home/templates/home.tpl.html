@@ -216,7 +216,7 @@
                             <div flex="70" layout="column" layout-xs="column" layout-sm="column" layout-align="center center"
                                 layout-align-xs="center center" layout-align-sm="center center" layout-margin layout-wrap class="height-100 width-100">
                                 <h3>
-                                    <span class="text-color-white font-size-30"><span class="capitalize">{{firstStudent.studentName}}</span>({{firstStudent.className}})<br />
+                                    <span class="text-color-white font-size-30"><span class="capitalize">{{firstStudent.studentName==null?firstStudent.title:firstStudent.studentName}}</span><span ng-if="firstStudent.className!=null">({{firstStudent.className}})</span><br />
                                         {{firstStudent.achievementDesc}}</span>
                                 </h3>
                             </div>
@@ -230,7 +230,7 @@
                             <div flex="70" layout="column" layout-xs="column" layout-sm="column" layout-align="center center"
                                 layout-align-xs="center center" layout-align-sm="center center" layout-margin layout-wrap class="height-100 width-100">
                                 <h3>
-                                    <span class="text-color-white font-size-30"><span class="capitalize">{{secondStudent.studentName}}</span>({{secondStudent.className}})<br />
+                                    <span class="text-color-white font-size-30"><span class="capitalize">{{secondStudent.studentName==null?secondStudent.title:secondStudent.studentName}}</span><span ng-if="secondStudent.className!=null">({{secondStudent.className}})</span><br />
                                         {{secondStudent.achievementDesc}}</span>
                                 </h3>
                             </div>
@@ -243,7 +243,7 @@
                             <div flex="70" layout="column" layout-xs="column" layout-sm="column" layout-align="center center"
                                 layout-align-xs="center center" layout-align-sm="center center" layout-margin layout-wrap class="height-100 width-100">
                                 <h3>
-                                    <span class="text-color-white font-size-30"><span class="capitalize">{{thirdStudent.studentName}}</span>({{thirdStudent.className}})<br />
+                                    <span class="text-color-white font-size-30"><span class="capitalize">{{thirdStudent.studentName==null?thirdStudent.title:thirdStudent.studentName}}</span><span ng-if="thirdStudent.className!=null">({{thirdStudent.className}})</span><br />
                                         {{thirdStudent.achievementDesc}}</span>
                                 </h3>
                             </div>
@@ -256,7 +256,7 @@
                             <div flex="70" layout="column" layout-xs="column" layout-sm="column" layout-align="center center"
                                 layout-align-xs="center center" layout-align-sm="center center" layout-margin layout-wrap class="height-100 width-100">
                                 <h3>
-                                    <span class="text-color-white font-size-30"><span class="capitalize">{{fourthStudent.studentName}}</span>({{fourthStudent.className}})<br />
+                                    <span class="text-color-white font-size-30"><span class="capitalize">{{fourthStudent.studentName==null?fourthStudent.title:fourthStudent.studentName}}</span><span ng-if="fourthStudent.className!=null">({{fourthStudent.className}})</span><br />
                                         {{fourthStudent.achievementDesc}}</span>
                                 </h3>
                             </div>
