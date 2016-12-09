@@ -228,7 +228,13 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT(1072),
 	
 	/** The fail to delete student achievement content. */
-	FAIL_TO_DELETE_STUDENT_ACHIEVEMENT_CONTENT(1073);
+	FAIL_TO_DELETE_STUDENT_ACHIEVEMENT_CONTENT(1073),
+	
+	/** The fail to save notification info. */
+	FAIL_TO_SAVE_NOTIFICATION_INFO(1074),
+	
+	/** The fail to fetch notifications. */
+	FAIL_TO_FETCH_NOTIFICATIONS(1075);
 
 	/** The value. */
 	private final int value;

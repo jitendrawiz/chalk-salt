@@ -2,6 +2,7 @@ package com.chalk.dust.core.system;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
@@ -49,5 +50,22 @@ public interface SystemFacade {
      * @throws SystemException the system exception
      */
     List<StudentsDto> getStudentsListByClassId(String classId)throws SystemException;
+
+    /**
+     * Save notification.
+     *
+     * @param notificationDetails the notification details
+     * @return the boolean
+     * @throws SystemException the system exception
+     */
+    Long saveNotification(NotificationDto notificationDetails)throws SystemException;
+
+    /**
+     * Gets the student notification list.
+     *
+     * @return the student notification list
+     * @throws SystemException the system exception
+     */
+    List<NotificationDto> getStudentNotificationList()throws SystemException;;
 
 }

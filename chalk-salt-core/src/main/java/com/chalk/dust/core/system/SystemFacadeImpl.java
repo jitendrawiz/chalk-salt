@@ -12,6 +12,7 @@ import com.chalk.dust.dao.system.manager.SystemManager;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
 import com.chalk.salt.common.dto.EmailNotificationDto;
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
@@ -123,4 +124,16 @@ public class SystemFacadeImpl implements SystemFacade {
         return systemManager.getStudentsListByClassId(classId);
         }
 
+    @Override
+    public Long saveNotification(NotificationDto notificationDetails) throws SystemException
+        {
+            return systemManager.saveNotification(notificationDetails);
+        }
+
+    @Override
+    public List<NotificationDto> getStudentNotificationList() throws SystemException
+        {
+            // TODO Auto-generated method stub
+        return systemManager.getStudentNotificationList();
+        }
 }

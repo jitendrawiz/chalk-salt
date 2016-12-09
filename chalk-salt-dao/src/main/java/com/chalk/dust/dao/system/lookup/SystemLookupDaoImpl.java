@@ -10,6 +10,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import com.chalk.salt.common.dto.ChalkSaltConstants;
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
@@ -95,6 +96,36 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
             final Query query = connection.createQuery(sqlQuery);
             query.addParameter("classId", classId);
             return query.executeAndFetch(StudentsDto.class);
+        }
+        }
+
+    @Override
+    public Long saveNotification(NotificationDto notification) throws Exception
+        {
+        final String sqlQuery = "INSERT INTO `cst_notifications` (start_date,end_date,notification,notification_uuid) "
+                + "  VALUES  (:startDate,:endDate, :notification, :notificationUuid) ";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("startDate", notification.getStartDate());
+            query.addParameter("endDate", notification.getEndDate());
+            query.addParameter("notification", notification.getNotification());
+            query.addParameter("notificationUuid", notification.getNotificationUuid());
+             return (Long)query.executeUpdate().getKey();
+            }
+        }
+
+    @Override
+    public List<NotificationDto> getStudentNotificationList() throws Exception
+        {
+        final String sqlQuery = "SELECT  `start_date` AS startDate,  `end_date` AS endDate,   `notification`, "
+                + "   `notification_uuid` AS notificationUuid,   `created_date` as createdDate   FROM    cst_notifications"
+                + " WHERE CURDATE() BETWEEN start_date AND end_date";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            return query.executeAndFetch(NotificationDto.class);
         }
         }
 

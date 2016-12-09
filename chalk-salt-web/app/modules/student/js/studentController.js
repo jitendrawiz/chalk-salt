@@ -25,9 +25,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       '$stateParams',
       'GetResultsByClassSubject',
       'GetResultDetailsByTestUuid',
+      'GetNotificationStudentList',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService, StudentProfileUpdateService, ChangePasswordService,
           UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams, GetResultsByClassSubject,
-          GetResultDetailsByTestUuid) {
+          GetResultDetailsByTestUuid,GetNotificationStudentList) {
         $scope.uploadedlogo = {};
         $scope.showVideoDiv = false;
         $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
@@ -366,6 +367,19 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /* pdf code ends here */
 
+        getNotificationList();
+        function getNotificationList(){
+          GetNotificationStudentList.get({},
+          
+          function(response){
+            debugger;
+          $scope.studentNotificationList=response  
+          },function(error){
+            showAlert('danger', error.data.message);
+          })
+        }
+        
+        
       } ]);
 
   // * Admin Controller
@@ -432,6 +446,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetAchievementContentList',
       'deleteAchievementDetailsService',
       'SaveTopicCommentByAdmin',
+      'saveNotificationData',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -440,7 +455,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
-          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin) {
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -2074,6 +2089,35 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         /** *Home Page Student images work ends here** */
+        
+        
+        
+        /*Notification work starts here*/
+        $scope.notificationDetailsToSave = {};
+        $scope.notificationDetails={};
+        this.createNotificationData = function(scheduleTestDetails) {
+          angular.extend($scope.notificationDetailsToSave, $scope.notificationDetails);
+          saveNotificationData.save({}, $scope.notificationDetailsToSave, function(response) {
+            if (response) {
+              var modalOptions = {
+                header : 'Note',
+                body : 'Nofication content has been saved successfully',
+                btn : 'OK'
+              };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+              });
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+        
+
+        
+        
+        
+        /*Notification work ends here*/
 
         var Id = $stateParams.id;
 

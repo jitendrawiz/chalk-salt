@@ -106,12 +106,15 @@
                     <li ng-class="{ active:isSet(19)}"><a ng-click="setTab(19);" href=""> <i class="fa fa-files-o"></i> <span
                             class="menu-text">Student Achievement List</span> <span class="selected"></span>
                     </a></li>
+                    <li ng-class="{ active:isSet(20)}"><a ng-click="setTab(20);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Notification</span> <span class="selected"></span>
+                    </a></li>
                 </ul>
             </aside>
             <section id="main-content">
                 <div class="inner-content">
                     <div class="panel theme-panel">
-                        <div class="panel-body" style="min-height: 800px;">
+                        <div class="panel-body" style="min-height: 1000px;">
                             <div class="col-md-12 column right-navbar-right">
                                 <div ng-switch="tab">
                                     <div ng-switch-when="1">
@@ -171,6 +174,9 @@
                                     </div>
                                     <div ng-switch-when="19">
                                         <div ng-include="'modules/student/templates/admin/homePageStudentsAchievementsList.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="20">
+                                        <div ng-include="'modules/student/templates/admin/notificationMaster.tpl.html'"></div>
                                     </div>
                                 </div>
                             </div>

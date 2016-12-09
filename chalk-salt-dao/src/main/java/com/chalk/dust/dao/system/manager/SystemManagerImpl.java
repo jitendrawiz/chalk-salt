@@ -2,6 +2,7 @@ package com.chalk.dust.dao.system.manager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 
 import com.chalk.dust.dao.system.lookup.SystemLookupDao;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
@@ -82,6 +84,36 @@ public class SystemManagerImpl implements SystemManager {
 
         return students;
         
+        }
+
+    @Override
+    public Long saveNotification(NotificationDto notificationDetails) throws SystemException
+        {
+        logger.info("Saving notification details");
+        Long isSaved = null;
+        try {
+        notificationDetails.setNotificationUuid(UUID.randomUUID().toString());
+        isSaved = systemLookupDao.saveNotification(notificationDetails);
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_SAVE_NOTIFICATION_INFO, "fail to save botification info", exception);
+        }
+        return isSaved;
+        }
+
+    @Override
+    public List<NotificationDto> getStudentNotificationList() throws SystemException
+        {
+        logger.info("Obtaining the list of notifications");
+        List<NotificationDto> list = new ArrayList<NotificationDto>();
+        try {
+        list = systemLookupDao.getStudentNotificationList();
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_FETCH_NOTIFICATIONS,
+                    "fail to fetch notifications", exception);
+        }
+
+        return list;
+
         }
 
 }

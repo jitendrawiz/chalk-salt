@@ -17,21 +17,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.dozer.Mapper;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 
 import com.chalk.dust.core.system.SystemFacade;
+import com.chalk.salt.api.model.NotificationModel;
 import com.chalk.salt.api.model.SystemEnquiryModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.cdi.annotations.BeanMapper;
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
+import com.chalk.salt.common.util.DozerMapperUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -158,4 +162,42 @@ public class SystemResource extends AbstractResource {
                     SystemException.class, systemException);
         }
     }
+	
+	@POST
+    @Path("/notification-student/details/save")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveNotification(final @Valid NotificationModel notificationModel)throws SystemException{
+
+        final Map<String, String> response = new HashMap<String, String>();
+        Long notificationUuid = null;
+        try {
+            final NotificationDto notificationdto = beanMapper.map(notificationModel, NotificationDto.class);
+            notificationUuid = systemFacade.saveNotification(notificationdto);
+            response.put("status", notificationUuid.toString());
+            return Response.ok(response).build();
+
+        } catch (final SystemException systemException) {
+            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+        }
+    }
+	
+	 @GET
+	    @Path("/notification-student/details/list")   
+	    @Produces(MediaType.APPLICATION_JSON)
+	    @RequiresAuthentication    
+	    public Response getStudentNotificationList()throws SystemException{
+	    
+	        List<NotificationModel> notificationContent = null;
+	        List<NotificationDto> notificationList = null;
+	        try{
+	            notificationList = systemFacade.getStudentNotificationList();
+	            notificationContent = DozerMapperUtil.mapCollection(beanMapper, notificationList, NotificationModel.class);
+	            return Response.ok(notificationContent).build();
+	        } catch (final SystemException systemException) {
+            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+	        }
+	    }
+	   
+	
 }

@@ -2,6 +2,7 @@ package com.chalk.dust.dao.system.lookup;
 
 import java.util.List;
 
+import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.UserClassDto;
@@ -47,5 +48,22 @@ public interface SystemLookupDao {
      * @throws Exception the exception
      */
     List<StudentsDto> getStudentsListByClassId(String classId)throws Exception;
+
+    /**
+     * Save notification.
+     *
+     * @param notificationDetails the notification details
+     * @return the boolean
+     * @throws Exception the exception
+     */
+    Long saveNotification(NotificationDto notificationDetails)throws Exception;
+
+    /**
+     * Gets the student notification list.
+     *
+     * @return the student notification list
+     * @throws Exception the exception
+     */
+    List<NotificationDto> getStudentNotificationList()throws Exception;
 
 }

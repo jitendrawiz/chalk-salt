@@ -618,5 +618,26 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
+  
+  /*Notification save functionality*/
+  studentService.factory('saveNotificationData', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/notification-student/details/save', {}, {
+      save : {
+        method : 'POST'
+      }
+    });
+  } ]);
+
+
+  studentService.factory('GetNotificationStudentList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/notification-student/details/list', {}, {
+      get : {
+        method : 'GET',
+        isArray: true
+      }
+    });
+  } ]);
+
+  
 
 });

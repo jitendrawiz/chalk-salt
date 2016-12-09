@@ -94,11 +94,8 @@
                         <ul>
                             <marquee direction="up" scrollamount="4">
                                 <div style="min-height: 200px;">
-                                    <!--                                 <p ng-repeat="item in notificationList"> -->
-                                    <!--                                     <a -->
-                                    <!--                                         ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a> -->
-                                    <!--                                 </p> -->
-                                    <p>Coming Soon</p>
+                               <p ng-repeat="item in studentNotificationList"> 
+                                 {{item.notification}}</p>
                                 </div>
                             </marquee>
                         </ul>

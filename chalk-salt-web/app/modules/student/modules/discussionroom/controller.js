@@ -3,7 +3,7 @@ define([ 'angular', './routing', './service', '../../../CandDModal/js/CandDModal
   var module = angular.module('Student.discussionroom.controller', [ 'Student.discussionroom.routing', 'Student.discussionroom.service', 'CandDModal' ]);
 
   module.controller('DiscussionRoomFirstController', [ '$element', '$timeout', '$scope', '$state', 'CHALKNDUST', '$window', 'GetTopicStatistics', 'GetTopicsService',
-      '$stateParams', '$rootScope', function($element, $timeout, $scope, $state, CHALKNDUST, $window, GetTopicStatistics, GetTopicsService, $stateParams, $rootScope) {
+      '$stateParams', '$rootScope','GetNotificationStudentList', function($element, $timeout, $scope, $state, CHALKNDUST, $window, GetTopicStatistics, GetTopicsService, $stateParams, $rootScope,GetNotificationStudentList) {
 
         $scope.alert = {};
         $scope.alert.show = false;
@@ -96,6 +96,18 @@ define([ 'angular', './routing', './service', '../../../CandDModal/js/CandDModal
         $scope.contactUs = function() {
           $state.go('chalkanddust.contactus');
         };
+        
+        getNotificationList();
+        function getNotificationList(){
+          GetNotificationStudentList.get({},
+          
+          function(response){
+            debugger;
+          $scope.studentNotificationList=response  
+          },function(error){
+            showAlert('danger', error.data.message);
+          })
+        }
       } ]);
 
   module.controller('DiscussionRoomSecondController', [
@@ -116,9 +128,10 @@ define([ 'angular', './routing', './service', '../../../CandDModal/js/CandDModal
       'CandDModalService',
       '$log',
       '$rootScope',
+      'GetNotificationStudentList',
 
       function($element, $timeout, $scope, CHALKNDUST, $state, $window, $stateParams, getSubjectNameService, filterFilter, GetCommmentsOfTopicService, CommentService,
-          topicDetailsService, getDetailsOfCommentService, updateCommentDetailsService, CandDModalService, $log, $rootScope) {
+          topicDetailsService, getDetailsOfCommentService, updateCommentDetailsService, CandDModalService, $log, $rootScope,GetNotificationStudentList) {
         $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
         $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
         $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
@@ -127,6 +140,19 @@ define([ 'angular', './routing', './service', '../../../CandDModal/js/CandDModal
         $scope.alert.show = false;
         $scope.currentDate = new Date();
 
+
+        getNotificationList();
+        function getNotificationList(){
+          GetNotificationStudentList.get({},
+          
+          function(response){
+            debugger;
+          $scope.studentNotificationList=response  
+          },function(error){
+            showAlert('danger', error.data.message);
+          })
+        }
+        
         var showAlert = function(type, message) {
           $scope.alert = {};
           $scope.alert.type = type;
