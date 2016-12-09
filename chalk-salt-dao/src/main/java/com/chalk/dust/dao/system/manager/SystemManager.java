@@ -68,4 +68,12 @@ public interface SystemManager {
      */
     Long saveTestGroup(TestGroupDto testGroupDto)throws SystemException;
 
+    /**
+     * Gets the test group list.
+     *
+     * @return the test group list
+     * @throws SystemException the system exception
+     */
+    List<TestGroupDto> getTestGroupList()throws SystemException;
+
 }

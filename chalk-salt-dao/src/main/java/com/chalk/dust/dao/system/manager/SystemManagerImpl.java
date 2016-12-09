@@ -133,4 +133,19 @@ public class SystemManagerImpl implements SystemManager {
         
         }
 
+    @Override
+    public List<TestGroupDto> getTestGroupList() throws SystemException
+        {
+        logger.info("Obtaining the list of test groups");
+        List<TestGroupDto> list = new ArrayList<TestGroupDto>();
+        try {
+        
+        list = systemLookupDao.getTestGroupList();
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_FETCH_TESTGROUPS,
+                    "fail to fetch test groups", exception);
+        }
+        return list;
+        }
+
 }

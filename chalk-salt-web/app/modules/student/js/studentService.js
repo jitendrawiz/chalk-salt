@@ -648,6 +648,17 @@ define([ 'angular' ], function(angular) {
   } ]);
   
   
+  studentService.factory('GetTestGroupData', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/testGroup/details/list', {}, {
+      get : {
+        method : 'GET',
+        isArray: true
+      }
+    });
+  } ]);
+  
+  
+  
   
 
 });

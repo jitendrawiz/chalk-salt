@@ -221,6 +221,25 @@ public class SystemResource extends AbstractResource {
 	            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
 	        }
 	    }	 
-	   
+	    
+	    
+	    
+	    @GET
+        @Path("/testGroup/details/list")   
+        @Produces(MediaType.APPLICATION_JSON)
+        @RequiresAuthentication    
+        public Response getTestGroupList()throws SystemException{
+        
+            List<TestGroupModel> groupModel = null;
+            List<TestGroupDto> groupList = null;
+            try{
+            groupList = systemFacade.getTestGroupList();
+                groupModel = DozerMapperUtil.mapCollection(beanMapper, groupList, TestGroupModel.class);
+                return Response.ok(groupModel).build();
+            } catch (final SystemException systemException) {
+            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+            }
+        }
+       
 	
 }

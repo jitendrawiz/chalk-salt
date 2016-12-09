@@ -144,4 +144,11 @@ public class SystemFacadeImpl implements SystemFacade {
             // TODO Auto-generated method stub
             return systemManager.saveTestGroup(testGroupDto);
         }
+
+    @Override
+    public List<TestGroupDto> getTestGroupList() throws SystemException
+        {
+            // TODO Auto-generated method stub
+            return systemManager.getTestGroupList();
+        }
 }

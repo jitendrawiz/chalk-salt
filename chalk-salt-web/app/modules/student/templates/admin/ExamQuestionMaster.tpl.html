@@ -114,7 +114,8 @@ button, input, select, textarea {
 				<h3>Question Master</h3>
 				<div class="title_name">
 					<label class="title_name_class">Class : </label><br> 
-					<label class="title_name_sub">Subject : </label><br> 
+					<label class="title_name_sub">Subject : </label><br>
+                    <label class="title_name_sub">Test Group : </label><br>
 					<label class="title_name_question">Question : </label><br> 
 					<label class="title_name_option_a">Option A : </label><br> 
 					<label class="title_name_option_b">Option B : </label><br> 
@@ -150,6 +151,20 @@ button, input, select, textarea {
 							ng-show="questionForm.studentSubject.$error.required && !questionForm.studentSubject.$pristine">Subject
 							is required.</p>
 					</div>
+
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : questionForm.testGroup.$invalid && !questionForm.testGroup.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.testGroup"
+                            name="testGroup" placeholder="testGroup"
+                            ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList"
+                            ng-required="true">
+                            <option value="" disabled>Select Test Group</option>
+                        </select>
+                        <p
+                            ng-show="questionForm.testGroup.$error.required && !questionForm.testGroup.$pristine">Test Group
+                            is required.</p>
+                    </div>
+
 
 					<div  class="form-group" ng-class="{ 'has-error' : questionForm.question.$invalid && !questionForm.question.$pristine }">
 						<textarea class="form-control" id="question" name="question"

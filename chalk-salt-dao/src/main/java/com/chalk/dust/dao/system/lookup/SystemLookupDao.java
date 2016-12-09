@@ -76,4 +76,12 @@ public interface SystemLookupDao {
      */
     Long saveTestGroup(TestGroupDto testGroupDto)throws Exception;
 
+    /**
+     * Gets the test group list.
+     *
+     * @return the test group list
+     * @throws Exception the exception
+     */
+    List<TestGroupDto> getTestGroupList()throws Exception;
+
 }

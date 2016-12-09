@@ -448,6 +448,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'SaveTopicCommentByAdmin',
       'saveNotificationData',
       'saveTestGroupData',
+      'GetTestGroupData',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -456,7 +457,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
-          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData,saveTestGroupData) {
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData,saveTestGroupData,GetTestGroupData) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -2142,6 +2143,15 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }
+        
+        
+        
+        GetTestGroupData.get({
+        }, function(result) {
+          $scope.testGroupList = result;
+        }, function(error) {
+          showAlert('danger', error.data.message);
+        });
         
         /*Test group date ends here*/
 

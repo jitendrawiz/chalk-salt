@@ -100,6 +100,9 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
         }
         }
 
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#saveNotification(com.chalk.salt.common.dto.NotificationDto)
+     */
     @Override
     public Long saveNotification(NotificationDto notification) throws Exception
         {
@@ -116,6 +119,9 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
             }
         }
 
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#getStudentNotificationList()
+     */
     @Override
     public List<NotificationDto> getStudentNotificationList() throws Exception
         {
@@ -130,6 +136,9 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
         }
         }
 
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#saveTestGroup(com.chalk.salt.common.dto.TestGroupDto)
+     */
     @Override
     public Long saveTestGroup(TestGroupDto testGroupDto) throws Exception
         {
@@ -143,6 +152,23 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
              return (Long)query.executeUpdate().getKey();
             }
        
+        }
+
+    /* (non-Javadoc)
+     * @see com.chalk.dust.dao.system.lookup.SystemLookupDao#getTestGroupList()
+     */
+    @Override
+    public List<TestGroupDto> getTestGroupList() throws Exception
+        {
+        final String sqlQuery = "SELECT  `test_group_name` AS testGroupName, `test_group_uuid`AS testGroupUuid "
+                + "   FROM    cst_test_group ";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            return query.executeAndFetch(TestGroupDto.class);
+        } 
+        
         }
 
 }

@@ -237,7 +237,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_NOTIFICATIONS(1075),
 	
 	/** The fail to save testgroup info. */
-	FAIL_TO_SAVE_TESTGROUP_INFO(1076);
+	FAIL_TO_SAVE_TESTGROUP_INFO(1076),
+	
+	/** The fail to fetch testgroups. */
+	FAIL_TO_FETCH_TESTGROUPS(1077);
 
 	/** The value. */
 	private final int value;

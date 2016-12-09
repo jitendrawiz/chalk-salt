@@ -78,4 +78,6 @@ public interface SystemFacade {
      */
     Long saveTestGroup(TestGroupDto testGroupDto)throws SystemException;
 
+    List<TestGroupDto> getTestGroupList()throws SystemException;
+
 }
