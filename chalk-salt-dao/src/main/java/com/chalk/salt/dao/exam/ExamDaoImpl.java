@@ -32,8 +32,8 @@ public class ExamDaoImpl implements ExamDao {
 	@Override
 	public String saveQuestion(QuestionDto questionDetails) throws Exception {
 		final String sqlQuery = "INSERT INTO `cst_questions` (`class_id`, `subject_id`, `question`, "
-				+ "`question_uuid`,question_type)"
-				+ "VALUES(:classId, :subjectId, :question, :questionUuid,:questionType)";
+				+ "`question_uuid`,question_type,test_group_uuid)"
+				+ "VALUES(:classId, :subjectId, :question, :questionUuid,:questionType,:testGroupUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -42,6 +42,7 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("question", questionDetails.getQuestion());
             query.addParameter("questionUuid", questionDetails.getQuestionSecuruuid());  
             query.addParameter("questionType", questionDetails.getQuestionType());          
+            query.addParameter("testGroupUuid", questionDetails.getTestGroupUuid());          
             return String.valueOf(query.executeUpdate().getKey());
            
         }
@@ -343,8 +344,8 @@ public class ExamDaoImpl implements ExamDao {
 	public String saveScheduleTestData(ScheduleTestDto scheduleTestDetails,
 			Date date) throws UserException {
 		final String sqlQuery = "INSERT INTO `cst_schedule_test_master` (`test_title`, `test_date`, `test_time`, "
-				+ " test_type_uuid,class_id,subject_id,test_uuid)"
-				+ "VALUES(:testTitle, :testDate, :testTime, :testTypeUuid, :classId, :subjectId, :testUuid)";
+				+ " test_type_uuid,class_id,subject_id,test_uuid,test_group_uuid)"
+				+ "VALUES(:testTitle, :testDate, :testTime, :testTypeUuid, :classId, :subjectId, :testUuid,:testGroupUuid)";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -354,7 +355,8 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("testTypeUuid", scheduleTestDetails.getTestTypeUuid());   
             query.addParameter("classId", scheduleTestDetails.getClassId());   
             query.addParameter("subjectId", scheduleTestDetails.getSubjectId());   
-            query.addParameter("testUuid", scheduleTestDetails.getScheduleTestUuid());   
+            query.addParameter("testUuid", scheduleTestDetails.getScheduleTestUuid());
+            query.addParameter("testGroupUuid", scheduleTestDetails.getTestGroupUuid());
             query.executeUpdate();
             return scheduleTestDetails.getScheduleTestUuid();
         }

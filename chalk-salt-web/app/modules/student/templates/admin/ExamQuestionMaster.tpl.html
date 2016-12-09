@@ -153,15 +153,15 @@ button, input, select, textarea {
 					</div>
 
                     <div class="form-group"
-                        ng-class="{ 'has-error' : questionForm.testGroup.$invalid && !questionForm.testGroup.$pristine }">
-                        <select class="form-control" ng-model="questionDetails.testGroup"
-                            name="testGroup" placeholder="testGroup"
+                        ng-class="{ 'has-error' : questionForm.testGroupUuid.$invalid && !questionForm.testGroupUuid.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.testGroupUuid"
+                            name="testGroupUuid" placeholder="testGroupUuid"
                             ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList"
                             ng-required="true">
                             <option value="" disabled>Select Test Group</option>
                         </select>
                         <p
-                            ng-show="questionForm.testGroup.$error.required && !questionForm.testGroup.$pristine">Test Group
+                            ng-show="questionForm.testGroupUuid.$error.required && !questionForm.testGroupUuid.$pristine">Test Group
                             is required.</p>
                     </div>
 

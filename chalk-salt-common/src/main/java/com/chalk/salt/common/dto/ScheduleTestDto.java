@@ -35,6 +35,21 @@ public class ScheduleTestDto {
 	/** The test duration. */
 	private String testDuration;
 
+	   /** The test group uuid. */
+    private String testGroupUuid;
+
+
+    public String getTestGroupUuid()
+    {
+        return testGroupUuid;
+    }
+
+public void setTestGroupUuid(String testGroupUuid)
+    {
+        this.testGroupUuid = testGroupUuid;
+    }
+
+	
 	/**
 	 * Gets the test duration.
 	 *

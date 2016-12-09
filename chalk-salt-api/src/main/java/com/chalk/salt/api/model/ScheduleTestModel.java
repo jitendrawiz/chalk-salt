@@ -36,8 +36,21 @@ public class ScheduleTestModel extends ApiModel {
 	private String scheduleTestModifiedData;
 	
 	
+	/** The test group uuid. */
+	private String testGroupUuid;
 
-	/**
+
+	public String getTestGroupUuid()
+    {
+        return testGroupUuid;
+    }
+
+public void setTestGroupUuid(String testGroupUuid)
+    {
+        this.testGroupUuid = testGroupUuid;
+    }
+
+    /**
 	 * Gets the schedule test uuid.
 	 *
 	 * @return the schedule test uuid
