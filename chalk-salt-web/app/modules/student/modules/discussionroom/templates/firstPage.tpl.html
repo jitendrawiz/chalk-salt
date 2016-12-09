@@ -57,7 +57,7 @@
                 <p>{{item.topicDescription}}</p>
                 <p>
                     <a ui-sref="chalkanddust.discussionroomtopic({topicId: item.topicId})" style="float: right; color: #99ccff;margin-top: -20px"><u>Read More
-                            >></u></a>
+                            ></u></a>
                 </p>
             </div>
             <div class="dr_bg_img_sub dr_main_bg" ng-if="topicList.length=='0'">
@@ -71,8 +71,8 @@
                     <ul>
                         <marquee direction="up" scrollamount="4">
                             <div style="min-height: 200px;">
-                                 <p ng-repeat="item in studentNotificationList"> 
-                                 {{item.notification}}</p>
+                             <h4>    <p ng-repeat="item in studentNotificationList"> 
+                                 {{item.notification}}</p></h4>
                             </div>
                         </marquee>
                     </ul>
