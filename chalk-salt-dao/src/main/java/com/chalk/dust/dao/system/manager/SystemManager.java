@@ -5,6 +5,7 @@ import java.util.List;
 import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 
@@ -56,6 +57,15 @@ public interface SystemManager {
      * @return the student notification list
      * @throws SystemException the system exception
      */
-    List<NotificationDto> getStudentNotificationList()throws SystemException;;
+    List<NotificationDto> getStudentNotificationList()throws SystemException;
+
+    /**
+     * Save test group.
+     *
+     * @param testGroupDto the test group dto
+     * @return the long
+     * @throws SystemException the system exception
+     */
+    Long saveTestGroup(TestGroupDto testGroupDto)throws SystemException;
 
 }

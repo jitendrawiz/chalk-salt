@@ -13,6 +13,7 @@ import com.chalk.salt.common.dto.ChalkSaltConstants;
 import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
@@ -127,6 +128,21 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
             final Query query = connection.createQuery(sqlQuery);
             return query.executeAndFetch(NotificationDto.class);
         }
+        }
+
+    @Override
+    public Long saveTestGroup(TestGroupDto testGroupDto) throws Exception
+        {
+        final String sqlQuery = "INSERT INTO cst_test_group(`test_group_name`,`test_group_uuid`)"
+                + " VALUES  (    :testGroupName, :testGroupUuid     ); ";
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            query.addParameter("testGroupName", testGroupDto.getTestGroupName());
+            query.addParameter("testGroupUuid", testGroupDto.getTestGroupUuid());
+             return (Long)query.executeUpdate().getKey();
+            }
+       
         }
 
 }

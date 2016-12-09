@@ -637,7 +637,17 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
-
+/*Notification save ends functionality*/
+ 
+  studentService.factory('saveTestGroupData', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/testGroupAdmin/details/save', {}, {
+      save : {
+        method : 'POST'
+      }
+    });
+  } ]);
+  
+  
   
 
 });

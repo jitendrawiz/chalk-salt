@@ -17,6 +17,7 @@ import com.chalk.salt.common.dto.NotificationTemplateRequest;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 import com.chalk.salt.common.exceptions.TemplateProcessingException;
@@ -135,5 +136,12 @@ public class SystemFacadeImpl implements SystemFacade {
         {
             // TODO Auto-generated method stub
         return systemManager.getStudentNotificationList();
+        }
+
+    @Override
+    public Long saveTestGroup(TestGroupDto testGroupDto) throws SystemException
+        {
+            // TODO Auto-generated method stub
+            return systemManager.saveTestGroup(testGroupDto);
         }
 }

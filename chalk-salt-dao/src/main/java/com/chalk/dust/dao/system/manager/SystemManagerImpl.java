@@ -13,6 +13,7 @@ import com.chalk.salt.common.cdi.annotations.AppLogger;
 import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -106,6 +107,7 @@ public class SystemManagerImpl implements SystemManager {
         logger.info("Obtaining the list of notifications");
         List<NotificationDto> list = new ArrayList<NotificationDto>();
         try {
+        
         list = systemLookupDao.getStudentNotificationList();
         } catch (final Exception exception) {
             throw new SystemException(ErrorCode.FAIL_TO_FETCH_NOTIFICATIONS,
@@ -114,6 +116,21 @@ public class SystemManagerImpl implements SystemManager {
 
         return list;
 
+        }
+
+    @Override
+    public Long saveTestGroup(TestGroupDto testGroupDto) throws SystemException
+        {
+        logger.info("Saving test group details");
+        Long isSaved = null;
+        try {
+        testGroupDto.setTestGroupUuid(UUID.randomUUID().toString());
+        isSaved = systemLookupDao.saveTestGroup(testGroupDto);
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_SAVE_TESTGROUP_INFO, "fail to save test group info", exception);
+        }
+        return isSaved;
+        
         }
 
 }

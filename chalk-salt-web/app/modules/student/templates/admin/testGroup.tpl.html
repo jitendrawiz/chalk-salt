@@ -1,0 +1,118 @@
+<style>
+.title_name {
+    width: 30%;
+    float: left;
+}
+
+.title_name {
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+.title_name_class {
+    padding-top: 0px;
+}
+
+.title_name_sub {
+    padding-top: 20px;
+}
+
+.title_name_title {
+    padding-top: 15px;
+}
+
+.title_name_des {
+    padding-top: 80px;
+}
+
+.title_name_photo {
+    padding-top: 56px;
+}
+
+.title_text textarea {
+    width: 100%;
+    height: 100px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+
+.title_text select {
+    width: 60%;
+    height: 40px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #000;
+    margin: 5px 0px;
+    border: 1px solid #CCC;
+}
+
+.title_text button a {
+    color: #FFF;
+    padding: 0px 40px;
+}
+
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+.title_text button {
+    padding: 8px 0px;
+    cursor: pointer;
+    background: #2f889a;
+    color: #FFF;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+</style>
+<div class="col-xs-12 col-md-10 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="testGroupForm" role="form" action="" method="post" novalidate>
+                <h3>Test Group</h3>
+                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
+                    
+                     <label class="title_name_title">Test Group Name</label><br />
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : testGroupForm.testGroupName.$invalid && !testGroupForm.testGroupName.$pristine }">
+                        <input class="form-control" id="testGroupName" name="testGroupName" ng-model="testGroupDetails.testGroupName" type="text"
+                            placeholder="Test Group" required /> <span style="color: red"
+                            ng-show="testGroupForm.testGroupName.$invalid && !testGroupForm.testGroupName.$pristine "> <span
+                            ng-show="testGroupForm.testGroupName.$error.required">Test group is required.</span>
+                        </span>
+                    </div>
+                    <div ng-if="isEmpty(testGroupDetails.notificationUuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="testGroupForm.$invalid"
+                            ng-click="adminCtrl.createTestGroupData()">Submit</button>
+                    </div>
+                    <div ng-if="!isEmpty(testGroupDetails.notificationUuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="testGroupForm.$invalid"
+                            ng-click="adminCtrl.updateTestGroupData()">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

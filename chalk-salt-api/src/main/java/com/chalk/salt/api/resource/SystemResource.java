@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import com.chalk.dust.core.system.SystemFacade;
 import com.chalk.salt.api.model.NotificationModel;
 import com.chalk.salt.api.model.SystemEnquiryModel;
+import com.chalk.salt.api.model.TestGroupModel;
 import com.chalk.salt.api.util.ApiConstants;
 import com.chalk.salt.api.util.Utility;
 import com.chalk.salt.common.cdi.annotations.AppLogger;
@@ -33,6 +34,7 @@ import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.SystemEnquiryDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 import com.chalk.salt.common.exceptions.SystemException;
 import com.chalk.salt.common.util.DozerMapperUtil;
@@ -198,6 +200,27 @@ public class SystemResource extends AbstractResource {
             throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
 	        }
 	    }
+	 
+	 
+	 
+	    @POST
+	    @Path("/testGroupAdmin/details/save")
+	    @Consumes(MediaType.APPLICATION_JSON)
+	    @Produces(MediaType.APPLICATION_JSON)
+	    public Response saveTestGroup(final @Valid TestGroupModel testGroupModel)throws SystemException{
+
+	        final Map<String, String> response = new HashMap<String, String>();
+	        Long testGroupUuid = null;
+	        try {
+	            final TestGroupDto testGroupDto = beanMapper.map(testGroupModel, TestGroupDto.class);
+	            testGroupUuid = systemFacade.saveTestGroup(testGroupDto);
+	            response.put("status", testGroupUuid.toString());
+	            return Response.ok(response).build();
+
+	        } catch (final SystemException systemException) {
+	            throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+	        }
+	    }	 
 	   
 	
 }

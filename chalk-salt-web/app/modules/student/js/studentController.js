@@ -447,6 +447,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'deleteAchievementDetailsService',
       'SaveTopicCommentByAdmin',
       'saveNotificationData',
+      'saveTestGroupData',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -455,7 +456,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
-          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData) {
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData,saveTestGroupData) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -2118,6 +2119,31 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         
         
         /*Notification work ends here*/
+        
+        
+        
+        /*Test Group data start here*/
+        $scope.testGroupDetailsToSave={};
+        $scope.testGroupDetails={};
+        this.createTestGroupData=function(){
+          angular.extend($scope.testGroupDetailsToSave, $scope.testGroupDetails);
+          saveTestGroupData.save({}, $scope.testGroupDetailsToSave, function(response) {
+            if (response) {
+              var modalOptions = {
+                header : 'Note',
+                body : 'Test Group content has been saved successfully',
+                btn : 'OK'
+              };
+              CandDModalService.showModal({}, modalOptions).then(function(result) {
+                $state.reload();
+              });
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        }
+        
+        /*Test group date ends here*/
 
         var Id = $stateParams.id;
 

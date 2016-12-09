@@ -5,6 +5,7 @@ import java.util.List;
 import com.chalk.salt.common.dto.NotificationDto;
 import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
 
 // TODO: Auto-generated Javadoc
@@ -65,5 +66,14 @@ public interface SystemLookupDao {
      * @throws Exception the exception
      */
     List<NotificationDto> getStudentNotificationList()throws Exception;
+
+    /**
+     * Save test group.
+     *
+     * @param testGroupDto the test group dto
+     * @return the long
+     * @throws Exception the exception
+     */
+    Long saveTestGroup(TestGroupDto testGroupDto)throws Exception;
 
 }
