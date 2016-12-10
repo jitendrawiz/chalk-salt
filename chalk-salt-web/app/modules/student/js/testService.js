@@ -5,11 +5,12 @@ define([ 'angular' ], function(angular) {
   var testService = angular.module('Student.testservice', [ 'System.configuration', 'ngResource' ]);
 
   testService.factory('GetTestQuestionsListService', [ '$resource', 'ENV', function($resource, ENV) {
-    return $resource(ENV.API_END_POINT + 'private/test/list/:classId/:subjectId/:type/:scheduleTestUuid', {
+    return $resource(ENV.API_END_POINT + 'private/test/list/:classId/:subjectId/:type/:scheduleTestUuid/:testGroupId', {
       classId : '@classId',
       subjectId : '@subjectId',
       type : '@type',
-      scheduleTestUuid:'@scheduleTestUuid'
+      scheduleTestUuid:'@scheduleTestUuid',
+      testGroupId:'@testGroupId'
     }, {
       get : {
         method : 'GET'

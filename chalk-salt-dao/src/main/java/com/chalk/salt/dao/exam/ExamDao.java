@@ -113,7 +113,7 @@ public interface ExamDao {
      * @return the questions using type
      * @throws Exception the exception
      */
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, int limitOfQuestions,String typeOfQuestion)throws Exception;
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String typeOfQuestion,String testGroupId)throws Exception;
 
 	/**
 	 * Save question options.
@@ -266,7 +266,7 @@ public interface ExamDao {
 	 * @return the result list by class and subject id
 	 * @throws Exception the exception
 	 */
-	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid) throws Exception;
+	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid,String testGroupId) throws Exception;
 
 	
 	/**

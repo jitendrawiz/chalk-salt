@@ -523,11 +523,12 @@ define([ 'angular' ], function(angular) {
   } ]);
 
   studentService.factory('GetResultDetailsByTestUuid', [ '$resource', 'ENV', function($resource, ENV) {
-    return $resource(ENV.API_END_POINT + 'private/test/results/:classId/:subjectId/:securUuid/:testUuid', {
+    return $resource(ENV.API_END_POINT + 'private/test/results/:classId/:subjectId/:securUuid/:testUuid/:testGroupId', {
       classId : '@classId',
       subjectId : '@subjectId',
       securUuid : '@securUuid',
-      testUuid : '@testUuid'
+      testUuid : '@testUuid',
+      testGroupId : '@testGroupId'
     }, {
       get : {
         method : 'GET'

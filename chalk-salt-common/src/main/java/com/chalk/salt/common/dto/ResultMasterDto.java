@@ -29,7 +29,32 @@ public class ResultMasterDto {
 	/** The secur uuid. */
 	private String securUuid;
 	
+	/** The test group uuid. */
+	private String testGroupUuid;
+	
+	
+	
 	/**
+	 * Gets the test group uuid.
+	 *
+	 * @return the test group uuid
+	 */
+	public String getTestGroupUuid()
+        {
+            return testGroupUuid;
+        }
+
+    /**
+     * Sets the test group uuid.
+     *
+     * @param testGroupUuid the new test group uuid
+     */
+    public void setTestGroupUuid(String testGroupUuid)
+        {
+            this.testGroupUuid = testGroupUuid;
+        }
+
+    /**
 	 * Gets the test uuid.
 	 *
 	 * @return the test uuid

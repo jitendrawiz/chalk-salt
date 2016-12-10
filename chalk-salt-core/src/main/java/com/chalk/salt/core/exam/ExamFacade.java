@@ -91,7 +91,7 @@ public interface ExamFacade {
      * @return the questions using type
      * @throws ExamException the exam exception
      */
-    List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid)throws ExamException;
+    List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid,String testGroupId)throws ExamException;
 
 	/**
 	 * Save answer details.
@@ -188,6 +188,6 @@ public interface ExamFacade {
 	 * @return the result details by test uuid
 	 * @throws ExamException the exam exception
 	 */
-	List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid)throws ExamException;
+	List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid,String testGroupId)throws ExamException;
 
 }

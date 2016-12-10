@@ -266,17 +266,18 @@ public class ExamResource extends AbstractResource {
      * @throws ExamException the exam exception
      */
     @GET
-    @Path("/test/list/{classId}/{subjectId}/{type}/{scheduleTestUuid}")
+    @Path("/test/list/{classId}/{subjectId}/{type}/{scheduleTestUuid}/{testGroupId}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     public Response getTestQuestionsList(@NotBlank @PathParam("classId") final String classId,
             @NotBlank @PathParam("subjectId") final String subjectId,
             @NotBlank @PathParam("type") final String type,
-            @NotBlank @PathParam("scheduleTestUuid") final String scheduleTestUuid) throws ExamException{
+            @NotBlank @PathParam("scheduleTestUuid") final String scheduleTestUuid,
+            @PathParam("testGroupId")final String testGroupId) throws ExamException{
 
         List<QuestionListDto> questionList = null;
         try{
-            questionList = examFacade.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid);
+            questionList = examFacade.getQuestionsUsingType(classId,subjectId,type,scheduleTestUuid,testGroupId);
             
             for(int i=0;i<questionList.size();i++){
             if(questionList.get(i).getQuestionImage()!=null){
@@ -522,18 +523,19 @@ public class ExamResource extends AbstractResource {
     }
     
     @GET
-    @Path("/test/results/{classId}/{subjectId}/{securUuid}/{testUuid}")
+    @Path("/test/results/{classId}/{subjectId}/{securUuid}/{testUuid}/{testGroupId}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresAuthentication
     public Response getResultDetailsByTestUuid(
     		@NotBlank @PathParam("classId") final String classId,
             @NotBlank @PathParam("subjectId") final String subjectId, 
             @NotBlank @PathParam("securUuid") final String securUuid,
-            @NotBlank @PathParam("testUuid") final String testUuid)throws ExamException{
+            @NotBlank @PathParam("testUuid") final String testUuid,
+            @NotBlank @PathParam("testGroupId") final String testGroupId)throws ExamException{
 	    List<ResultContentDto> resultDetails = null;
 	    try{
 	    	logger.info("GetResultDetailsByTestUuid service called.........");
-	    	resultDetails = examFacade.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid);
+	    	resultDetails = examFacade.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
 	        return Response.ok(resultDetails).build();
 	    } catch (final ExamException examException) {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);

@@ -282,14 +282,15 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           });
         }
 
-        $scope.detailedResult = function(testSecuruuid) {
+        $scope.detailedResult = function(testSecuruuid,testGroupId) {
           var subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
 
           GetResultDetailsByTestUuid.query({
             classId : $scope.classId,
             subjectId : subjectId,
             securUuid : $scope.securUuid,
-            testUuid : testSecuruuid
+            testUuid : testSecuruuid,
+            testGroupId:testGroupId
           }, function(response) {
             if (response) {
               $scope.resultDetailList = response;

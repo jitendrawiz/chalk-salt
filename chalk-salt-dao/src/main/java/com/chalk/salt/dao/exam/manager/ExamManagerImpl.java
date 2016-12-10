@@ -499,12 +499,12 @@ public class ExamManagerImpl implements ExamManager
      * .lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid) throws ExamException
+    public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid,String testGroupId) throws ExamException
         {
             logger.info("Fetching list of questions ...");
-            int limitOfQuestions = 0;
+           // int limitOfQuestions = 0;
             String typeOfQuestion="Practice Question";
-            if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77"))
+            /*if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77"))
                 {
                 limitOfQuestions = 40;
                 }
@@ -516,7 +516,7 @@ public class ExamManagerImpl implements ExamManager
                     {
                     limitOfQuestions = 20;
                     }
-            
+            */
             if(scheduleTestUuid.equals("1")){
             typeOfQuestion="Practice Question";
             }else{
@@ -526,7 +526,7 @@ public class ExamManagerImpl implements ExamManager
                 {
                 String questionImagesLocation=userDao.getSystemSettings("QUESTION_IMAGE");
                 List<QuestionListDto> questionsListDto = new ArrayList<QuestionListDto>();
-                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, limitOfQuestions,typeOfQuestion);
+                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, typeOfQuestion,testGroupId);
                 for (int index = 0; index < questionsList.size(); index++)
                     {
                     QuestionDto questionDto = questionsList.get(index);
@@ -860,11 +860,11 @@ public class ExamManagerImpl implements ExamManager
 	 */
 	@Override
 	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid,
-			String testUuid) throws ExamException {
+			String testUuid,String testGroupId) throws ExamException {
 		logger.info("fetch test result details using ClassId, SubjectId, SecurUuid and TestUuid.");
         try
         {
-        	return examDao.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid);
+        	return examDao.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
         }
         catch (final Exception exception)
         {

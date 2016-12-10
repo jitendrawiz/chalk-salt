@@ -23,10 +23,14 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
 
         $window.localStorage.setItem(CHALKNDUST.TESTTYPE, $stateParams.type);
-        if($window.localStorage.getItem(CHALKNDUST.SUBJECTID)==null || $window.localStorage.getItem(CHALKNDUST.SUBJECTID)==undefined){
-        $window.localStorage.setItem(CHALKNDUST.SUBJECTID, $stateParams.subjectId);
+        if ($window.localStorage.getItem(CHALKNDUST.SUBJECTID) == null || $window.localStorage.getItem(CHALKNDUST.SUBJECTID) == undefined) {
+          $window.localStorage.setItem(CHALKNDUST.SUBJECTID, $stateParams.subjectId);
         }
         $window.localStorage.setItem(CHALKNDUST.SCHEDULETESTUUID, $stateParams.scheduletestuuid);
+
+        if ($stateParams.testGroupId != null && $stateParams.testGroupId != "") {
+          $window.localStorage.setItem(CHALKNDUST.TESTGROUPID, $stateParams.testGroupId);
+        }
 
         $scope.goBackToDashBoard = function() {
           $state.go('chalkanddust.profile');
@@ -61,7 +65,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
       'saveAnswersService',
       'GetNotificationList',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, $stateParams, GetUserPhotoService, GetTestQuestionsListService, helperService,
-          saveAnswersService,GetNotificationList) {
+          saveAnswersService, GetNotificationList) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -81,7 +85,9 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         $scope.subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
         $scope.type = $window.localStorage.getItem(CHALKNDUST.TESTTYPE);
         $scope.scheduleTestUuid = $window.localStorage.getItem(CHALKNDUST.SCHEDULETESTUUID);
+        $scope.testGroupId = $window.localStorage.getItem(CHALKNDUST.TESTGROUPID);
 
+        
         /* Get User Profile Photo */
         GetUserPhotoService.get({
           securUuid : $scope.securUuid
@@ -148,7 +154,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           // alert(data);
           // });
           console.log($scope.questions);
-          if($scope.scheduleTestUuid!=1){
+          if ($scope.scheduleTestUuid != 1) {
             $scope.answers = answers;
             var answerObject = {
               studentId : $scope.securUuid,
@@ -156,7 +162,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
               subjectId : $scope.subjectId,
               answers : $scope.answers,
               testTypeId : $scope.type,
-              scheduleTestUuid:$scope.scheduleTestUuid
+              scheduleTestUuid : $scope.scheduleTestUuid
             };
 
             saveAnswersService.save({}, answerObject, function(response) {
@@ -166,11 +172,9 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             }, function(error) {
               showAlert('danger', error.data.message);
             });
-          }else{
+          } else {
             $scope.mode = 'result';
           }
-         
-         
 
         }
 
@@ -184,7 +188,8 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             classId : $scope.classId,
             subjectId : $scope.subjectId,
             type : $scope.type,
-            scheduleTestUuid: $scope.scheduleTestUuid
+            scheduleTestUuid : $scope.scheduleTestUuid,
+            testGroupId:$scope.testGroupId
           }, function(res) {
             var questiondata = window.localStorage.getItem(CHALKNDUST.QUESTIONDATA);
             $scope.config = $scope.defaultConfig;
@@ -250,7 +255,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             studentId : $scope.securUuid
           }, function(response) {
             if (response) {
-              $rootScope.notificationList=response;
+              $rootScope.notificationList = response;
             }
           }, function(error) {
             showAlert('danger', error.data.message);

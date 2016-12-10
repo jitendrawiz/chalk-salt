@@ -30,7 +30,7 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templa
       template : studentdetailstemplate,
       controller : 'AdminController as adminCtrl'
     }).state('chalkanddust.testInstruction', {
-      url : '/student/exam/testInstruction/:type/:scheduletestuuid/:subjectId',
+      url : '/student/exam/testInstruction/:type/:scheduletestuuid/:subjectId/:testGroupId',
       template : testInstructionTemplate,
       controller : 'TestController as testCtrl'
     }).state('chalkanddust.questioncreate', {

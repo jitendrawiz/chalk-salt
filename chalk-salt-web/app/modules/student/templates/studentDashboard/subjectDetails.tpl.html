@@ -84,7 +84,7 @@
                             <td>{{result.testDate}}</td>
                             <td>{{result.testTime}}</td>
                             <td>{{result.totalMarks}}</td>
-                            <td><a ng-click="detailedResult(result.testUuid)" title="View"> <i class="glyphicon glyphicon-eye-open"
+                            <td><a ng-click="detailedResult(result.testUuid,result.testGroupUuid)" title="View"> <i class="glyphicon glyphicon-eye-open"
                                     aria-hidden="true"></i>
                             </a></td>
                         </tr>
@@ -137,7 +137,7 @@
             <i class="fa-circle"></i>Notification
         </h3>
     <h4>    <p ng-repeat="item in notificationList">
-                <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId})">{{item.testTitle}}</a>
+                <a ui-sref="chalkanddust.testInstruction({type:item.testTypeUuid,scheduletestuuid:item.scheduleTestUuid,subjectId:item.subjectId,testGroupId:item.testGroupUuid})">{{item.testTitle}}({{item.testGroupName}})</a>
             </p></h4>
             
         <marquee direction="up" scrollamount="4">
