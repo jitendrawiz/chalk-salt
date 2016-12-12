@@ -57,9 +57,32 @@ public class QuestionDto
     /** The question image url. */
     private String questionImageUrl;
 
-    
     /** The test group uuid. */
     private String testGroupUuid;
+
+    /** The test group name. */
+    private String testGroupName;
+
+    /**
+     * Gets the test group name.
+     *
+     * @return the test group name
+     */
+    public String getTestGroupName()
+        {
+            return testGroupName;
+        }
+
+    /**
+     * Sets the test group name.
+     *
+     * @param testGroupName
+     *            the new test group name
+     */
+    public void setTestGroupName(String testGroupName)
+        {
+            this.testGroupName = testGroupName;
+        }
 
     /**
      * Gets the test group uuid.
@@ -74,7 +97,8 @@ public class QuestionDto
     /**
      * Sets the test group uuid.
      *
-     * @param testGroupUuid the new test group uuid
+     * @param testGroupUuid
+     *            the new test group uuid
      */
     public void setTestGroupUuid(String testGroupUuid)
         {
@@ -94,7 +118,8 @@ public class QuestionDto
     /**
      * Sets the question image.
      *
-     * @param questionImage the new question image
+     * @param questionImage
+     *            the new question image
      */
     public void setQuestionImage(String questionImage)
         {
@@ -114,7 +139,8 @@ public class QuestionDto
     /**
      * Sets the question image url.
      *
-     * @param questionImageUrl the new question image url
+     * @param questionImageUrl
+     *            the new question image url
      */
     public void setQuestionImageUrl(String questionImageUrl)
         {

@@ -145,8 +145,8 @@ button.btn-block {
     	
         <input ng-model="search" type="text" style="width: 40%" placeholder="Search question" />
         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsQuestionsList" ng-change="getQuestionsData()" ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList" items-per-page="$parent.itemsPerPageQuestionList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
+          <uib-pagination total-items="$parent.totalItemsQuestionList" ng-change="getQuestionsData()" ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList" items-per-page="$parent.itemsPerPageQuestionList"  boundary-link-numbers="true"></uib-pagination>      
+         </div>  
     </div>
 			<table id="questionList" class="table table-bordered">
 				<thead>
@@ -158,6 +158,7 @@ button.btn-block {
 						<th>Option C</th>
 						<th>Option D</th>						
 						<th>Answer</th>
+                        <th>Question Group</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -169,7 +170,8 @@ button.btn-block {
 						<td>{{item.optionB}}</td>
 						<td>{{item.optionC}}</td>
 						<td>{{item.optionD}}</td>
-						<td>{{item.answer}}</td>						
+						<td>{{item.answer}}</td>
+                        <td>{{item.testGroupName}}</td>						
 						<td>							
 							<a type="button" ng-click="editQuestion(item.questionSecuruuid)" title="Edit">
 							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>

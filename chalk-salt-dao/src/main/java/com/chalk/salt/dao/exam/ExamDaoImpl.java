@@ -74,8 +74,12 @@ public class ExamDaoImpl implements ExamDao {
 	public List<QuestionDto> getQuestions(String classId, String subjectId) throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, question, "
 				+ "`created_at` as creationDate, `modified_at` as modifiedDate, "
-				+ "`question_uuid` as questionSecuruuid, question_id as questionId,question_type as questionType FROM `cst_questions` "
-				+ "WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId";
+				+ "`question_uuid` as questionSecuruuid, question_id as questionId,question_type as questionType, "
+				+ " cst_questions.test_group_uuid AS testGroupUuid,"
+				+ " cst_test_group.test_group_name AS testGroupName "
+				+ " FROM `cst_questions` "
+				+ " JOIN cst_test_group ON cst_test_group.test_group_uuid= cst_questions.test_group_uuid "
+				+ " WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId";
 
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -92,7 +96,7 @@ public class ExamDaoImpl implements ExamDao {
 	@Override
 	public String updateQuestionDetails(QuestionDto question) throws Exception {
 		final String sqlQuery = "UPDATE `cst_questions` SET `question`=:question,question_type=:questionType, "				
-				+ " `modified_at`=:modifiedAt WHERE `question_uuid`=:questionUuid";
+				+ " `modified_at`=:modifiedAt,test_group_uuid=:testGroupUuid WHERE `question_uuid`=:questionUuid";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -100,6 +104,7 @@ public class ExamDaoImpl implements ExamDao {
             query.addParameter("questionUuid", question.getQuestionSecuruuid());   
             query.addParameter("modifiedAt", question.getModifiedDate());
             query.addParameter("questionType", question.getQuestionType());
+            query.addParameter("testGroupUuid", question.getTestGroupUuid());
             query.executeUpdate();
             return question.getQuestionSecuruuid();
         }
