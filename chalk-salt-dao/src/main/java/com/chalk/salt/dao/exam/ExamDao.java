@@ -12,6 +12,7 @@ import com.chalk.salt.common.dto.QuestionOptionsDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 
 /**
@@ -113,7 +114,7 @@ public interface ExamDao {
      * @return the questions using type
      * @throws Exception the exception
      */
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String typeOfQuestion,String testGroupId)throws Exception;
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String typeOfQuestion,int limitOfQuestions,String testGroupId)throws Exception;
 
 	/**
 	 * Save question options.
@@ -279,5 +280,13 @@ public interface ExamDao {
 	 * @throws Exception the exception
 	 */
 	public List<ResultMasterDto> getResultsByClassSubject(String classId, String subjectId, String securUuid)throws Exception;
+
+    /**
+     * Gets the practice test groups.
+     *
+     * @return the practice test groups
+     * @throws Exception the exception
+     */
+    public List<TestGroupDto> getPracticeTestGroups()throws Exception;
 
 }

@@ -35,6 +35,7 @@ import com.chalk.salt.common.dto.QuestionOptionsDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.ErrorCode;
@@ -502,9 +503,9 @@ public class ExamManagerImpl implements ExamManager
     public List<QuestionListDto> getQuestionsUsingType(String classId, String subjectId, String type,String scheduleTestUuid,String testGroupId) throws ExamException
         {
             logger.info("Fetching list of questions ...");
-           // int limitOfQuestions = 0;
+            int limitOfQuestions = 0;
             String typeOfQuestion="Practice Question";
-            /*if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77"))
+            if (type.equals("cf92fe46-4684-11e6-beb8-9e71128cae77"))
                 {
                 limitOfQuestions = 40;
                 }
@@ -516,7 +517,7 @@ public class ExamManagerImpl implements ExamManager
                     {
                     limitOfQuestions = 20;
                     }
-            */
+            
             if(scheduleTestUuid.equals("1")){
             typeOfQuestion="Practice Question";
             }else{
@@ -526,7 +527,7 @@ public class ExamManagerImpl implements ExamManager
                 {
                 String questionImagesLocation=userDao.getSystemSettings("QUESTION_IMAGE");
                 List<QuestionListDto> questionsListDto = new ArrayList<QuestionListDto>();
-                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, typeOfQuestion,testGroupId);
+                List<QuestionDto> questionsList = examDao.getQuestionsUsingType(classId, subjectId, typeOfQuestion,limitOfQuestions,testGroupId);
                 for (int index = 0; index < questionsList.size(); index++)
                     {
                     QuestionDto questionDto = questionsList.get(index);
@@ -871,4 +872,18 @@ public class ExamManagerImpl implements ExamManager
         	throw new ExamException(ErrorCode.FAIL_TO_FETCH_RESULT_DETAILS, "Fail to fetch result details", exception);
         }
 	}
+
+    @Override
+    public List<TestGroupDto> getPracticeTestGroups() throws ExamException
+        {
+        logger.info("fetch test group details.");
+        try
+        {
+            return examDao.getPracticeTestGroups();
+        }
+        catch (final Exception exception)
+        {
+            throw new ExamException(ErrorCode.FAIL_TO_FETCH_TEST_GROUP_DETAILS, "Fail to fetch group result details", exception);
+        }
+        }
 }

@@ -240,7 +240,10 @@ public enum ErrorCode {
 	FAIL_TO_SAVE_TESTGROUP_INFO(1076),
 	
 	/** The fail to fetch testgroups. */
-	FAIL_TO_FETCH_TESTGROUPS(1077);
+	FAIL_TO_FETCH_TESTGROUPS(1077),
+	
+	/** The fail to fetch test group details. */
+	FAIL_TO_FETCH_TEST_GROUP_DETAILS(1078);
 
 	/** The value. */
 	private final int value;

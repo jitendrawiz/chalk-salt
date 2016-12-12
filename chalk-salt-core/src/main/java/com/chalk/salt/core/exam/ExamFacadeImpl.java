@@ -15,6 +15,7 @@ import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.dao.exam.manager.ExamManager;
@@ -177,5 +178,12 @@ public class ExamFacadeImpl implements ExamFacade {
 			String testUuid, String testGroupId) throws ExamException {
 		return examManager.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
 	}
+
+    @Override
+    public List<TestGroupDto> getPracticeTestGroups() throws ExamException
+        {
+            // TODO Auto-generated method stub
+        return examManager.getPracticeTestGroups();
+        }
 
 }

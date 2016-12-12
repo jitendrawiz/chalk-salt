@@ -17,6 +17,7 @@ import com.chalk.salt.common.dto.QuestionOptionsDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
@@ -223,11 +224,16 @@ public class ExamDaoImpl implements ExamDao {
      * @see com.chalk.salt.dao.exam.ExamDao#getQuestionsUsingType(java.lang.String, java.lang.String, int, java.lang.String)
      */
     @Override
-    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String typeOfQuestion,String testGroupId) throws Exception {
-        final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
+    public List<QuestionDto> getQuestionsUsingType(String classId, String subjectId, String typeOfQuestion,int limitOfQuestions,String testGroupId) throws Exception {
+    String appendString="";
+    if(typeOfQuestion.equals("Practice Question")){
+     appendString=" LIMIT "+limitOfQuestions;
+    }    
+    
+    final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `question`, `created_at` as creationDate, `modified_at` as modifiedDate, "
                 + "`question_uuid` as questionSecuruuid,question_id as questionId,question_image AS questionImage,test_group_uuid as testGroupUuid FROM `cst_questions` "
                 + " WHERE NOT deleted AND class_id=:classId AND subject_id=:subjectId "
-                + " AND question_type=\""+typeOfQuestion+"\" AND test_group_uuid=\""+testGroupId +"\"ORDER BY created_at";
+                + " AND question_type=\""+typeOfQuestion+"\" AND test_group_uuid=\""+testGroupId +"\"ORDER BY created_at"+ appendString;
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -570,15 +576,18 @@ public class ExamDaoImpl implements ExamDao {
 		final String sqlQuery = "SELECT DISTINCT `cst_schedule_test_master`.`test_title` AS testTitle,"
 				+ "`cst_schedule_test_master`.`test_date` AS testDate, `cst_schedule_test_master`.`test_time` AS testTime,"
 				+ "`cst_schedule_test_master`.`test_uuid` AS testUuid, `cst_schedule_test_master`.`class_id` AS classId,"
-				+ "`cst_schedule_test_master`.`subject_id` AS subjectId,cst_schedule_test_master.test_group_uuid AS testGroupUuid, (SELECT COUNT(*) FROM `cst_student_test_answers` "
-				+ "JOIN `cst_student_test` ON `cst_student_test`.`id` = `cst_student_test_answers`.`cst_student_test_id` "
-				+ "JOIN `cst_questions_options` ON `cst_questions_options`.`options_id` = `cst_student_test_answers`.`question_option_selected_id` "
-				+ "WHERE `cst_questions_options`.`isAnswer` AND `cst_student_test`.`class_id` =:classId "
-				+ "AND `cst_student_test`.`subject_id` =:subjectId AND `cst_student_test`.`student_id` =:securUuid "
-				+ "AND `cst_student_test`.`scheduled_test_uuid` IS NOT NULL) AS totalMarks FROM `cst_schedule_test_master` "
-				+ "JOIN `cst_student_test` ON `cst_student_test`.`scheduled_test_uuid` = `cst_schedule_test_master`.`test_uuid` "
-				+ "WHERE `cst_schedule_test_master`.`class_id` =:classId AND`cst_schedule_test_master`.`subject_id` =:subjectId "
-				+ "AND `cst_student_test`.`student_id` =:securUuid";
+				+ "`cst_schedule_test_master`.`subject_id` AS subjectId,cst_schedule_test_master.test_group_uuid AS testGroupUuid,"
+				+ "(SELECT COUNT(*) FROM `cst_student_test_answers` "
+				+ " JOIN cst_questions ct ON ct.question_id=cst_student_test_answers.question_id "
+				+ " JOIN `cst_questions_options` ON cst_questions_options.options_id =cst_student_test_answers.question_option_selected_id "
+				+ " JOIN cst_student_test ON cst_student_test.id=`cst_student_test_answers`.cst_student_test_id "
+				+ " WHERE `cst_questions_options`.isAnswer AND `cst_student_test`.class_id=:classId AND cst_student_test.subject_id=:subjectId "
+				+ " AND cst_student_test.student_id=:securUuid AND `cst_student_test`.`scheduled_test_uuid` IS NOT NULL "
+				+ " AND ct.test_group_uuid=cst_schedule_test_master.test_group_uuid) AS totalMarks  "
+				+ " FROM `cst_schedule_test_master` "
+				+ " JOIN `cst_student_test` ON `cst_student_test`.`scheduled_test_uuid` = `cst_schedule_test_master`.`test_uuid` "
+				+ " WHERE `cst_schedule_test_master`.`class_id` =:classId AND`cst_schedule_test_master`.`subject_id` =:subjectId "
+				+ " AND `cst_student_test`.`student_id` =:securUuid";
 		
 		Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
@@ -589,6 +598,27 @@ public class ExamDaoImpl implements ExamDao {
             return query.executeAndFetch(ResultMasterDto.class);
         }
 	}
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.exam.ExamDao#getPracticeTestGroups()
+     */
+    @Override
+    public List<TestGroupDto> getPracticeTestGroups() throws Exception
+        {
+           
+        final String sqlQuery = "    SELECT  DISTINCT"
+                + "    cst_test_group.test_group_name as testGroupName,"
+                + "    cst_test_group.test_group_uuid as testGroupUuid"
+                + "    FROM `cst_test_group`"
+                + "    JOIN `cst_questions` ON `cst_questions`.test_group_uuid=cst_test_group.test_group_uuid"
+                + "    AND cst_questions.question_type='Practice Question' ";
+
+        final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery, true);
+            return query.executeAndFetch(TestGroupDto.class);
+        }
+        }
 
  
 }

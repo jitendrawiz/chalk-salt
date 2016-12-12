@@ -13,6 +13,7 @@ import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 
@@ -197,5 +198,13 @@ public interface ExamManager {
 	 * @throws ExamException the exam exception
 	 */
 	List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid, String testUuid,String testGroupId)throws ExamException;
+
+    /**
+     * Gets the practice test groups.
+     *
+     * @return the practice test groups
+     * @throws ExamException the exam exception
+     */
+    List<TestGroupDto> getPracticeTestGroups()throws ExamException;
 
 }

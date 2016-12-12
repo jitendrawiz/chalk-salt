@@ -49,6 +49,63 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         });
       } ]);
 
+  testModule.controller('TestGroupController', [ '$window', '$scope', '$state', '$resource', '$http', '$location', '$rootScope', 'CHALKNDUST', '$stateParams',
+      'GetUserPhotoService', 'GetTestGroupWithPracticeQuestions',
+      function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, $stateParams, GetUserPhotoService, GetTestGroupWithPracticeQuestions) {
+
+        var showAlert = function(type, message) {
+          $scope.alert = {};
+          $scope.alert.type = type;
+          $scope.alert.message = message;
+          $scope.alert.show = true;
+        };
+
+        $scope.closeAlert = function() {
+          $scope.alert = {};
+          $scope.alert.show = false;
+          return true;
+        };
+        $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
+        $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
+
+        $window.localStorage.setItem(CHALKNDUST.TESTTYPE, $stateParams.type);
+        if ($window.localStorage.getItem(CHALKNDUST.SUBJECTID) == null || $window.localStorage.getItem(CHALKNDUST.SUBJECTID) == undefined) {
+          $window.localStorage.setItem(CHALKNDUST.SUBJECTID, $stateParams.subjectId);
+        }
+        $window.localStorage.setItem(CHALKNDUST.SCHEDULETESTUUID, $stateParams.scheduletestuuid);
+
+        if ($stateParams.testGroupId != null && $stateParams.testGroupId != "") {
+          $window.localStorage.setItem(CHALKNDUST.TESTGROUPID, $stateParams.testGroupId);
+        }
+        
+        if($stateParams.type!=null){
+          $scope.typeOfTest=$stateParams.type;
+        }
+
+        $scope.goBackToDashBoard = function() {
+          $state.go('chalkanddust.profile');
+        };
+
+        $scope.GoToHomePage = function() {
+          $state.go('chalkanddust.home');
+        }
+        GetUserPhotoService.get({
+          securUuid : $scope.securUuid
+        }, function(result) {
+          $scope.userProfilePhoto = result.photolink;
+        }, function(error) {
+          showAlert('danger', error.data.message);
+        });
+
+        GetTestGroupWithPracticeQuestions.get({
+
+        }, function(result) {
+          $scope.testPracticeGroupList = result;
+        }, function(error) {
+          showAlert('danger', error.data.message);
+        });
+      } ]);
+
   testModule.controller('TestDetailController', [
       '$window',
       '$scope',
@@ -87,7 +144,6 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
         $scope.scheduleTestUuid = $window.localStorage.getItem(CHALKNDUST.SCHEDULETESTUUID);
         $scope.testGroupId = $window.localStorage.getItem(CHALKNDUST.TESTGROUPID);
 
-        
         /* Get User Profile Photo */
         GetUserPhotoService.get({
           securUuid : $scope.securUuid
@@ -189,7 +245,7 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
             subjectId : $scope.subjectId,
             type : $scope.type,
             scheduleTestUuid : $scope.scheduleTestUuid,
-            testGroupId:$scope.testGroupId
+            testGroupId : $scope.testGroupId
           }, function(res) {
             var questiondata = window.localStorage.getItem(CHALKNDUST.QUESTIONDATA);
             $scope.config = $scope.defaultConfig;

@@ -49,6 +49,7 @@ import com.chalk.salt.common.dto.QuestionListDto;
 import com.chalk.salt.common.dto.ResultContentDto;
 import com.chalk.salt.common.dto.ResultMasterDto;
 import com.chalk.salt.common.dto.ScheduleTestDto;
+import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.TestTypeDto;
 import com.chalk.salt.common.exceptions.ExamException;
 import com.chalk.salt.common.util.DozerMapperUtil;
@@ -541,4 +542,22 @@ public class ExamResource extends AbstractResource {
 	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
 	    }
     }
+    
+    @GET
+    @Path("/testGroup/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response getPracticeTestGroups()throws ExamException{
+        List<TestGroupDto> grpsDetails = null;
+        try{
+            logger.info("getPracticeTestGroups service called.........");
+            grpsDetails = examFacade.getPracticeTestGroups();
+            return Response.ok(grpsDetails).build();
+        } catch (final ExamException examException) {
+            throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+        }
+    }
+    
+    
+    
 }

@@ -3,8 +3,8 @@
 define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templates/studentHome.tpl.html', 'text!../templates/adminProfile.tpl.html',
     'text!../templates/adminHome.tpl.html', 'text!../templates/admin/StudentDetails.tpl.html', 'text!../templates/admin/ExamQuestionMaster.tpl.html',
     'text!../templates/admin/ExamQuestionList.tpl.html', 'text!../templates/studentDashboard/testInstruction.tpl.html', 'text!../templates/studentDashboard/notes.tpl.html',
-    'text!../templates/exam/testScreenPage.tpl.html'], function(angular, templateHome, templateProfile, adminprofiletemplate, adminhometemplate, studentdetailstemplate,
-    examQuestionMasterTemplate, examQuestionListTemplate, testInstructionTemplate, notesTemplate, testScreenTemplate) {
+    'text!../templates/exam/testScreenPage.tpl.html','text!../templates/exam/testGroupPage.tpl.html'], function(angular, templateHome, templateProfile, adminprofiletemplate, adminhometemplate, studentdetailstemplate,
+    examQuestionMasterTemplate, examQuestionListTemplate, testInstructionTemplate, notesTemplate, testScreenTemplate,testGroupTemplate) {
 
   var homeRouter = angular.module('Student.router', []);
 
@@ -49,6 +49,10 @@ define([ 'angular', 'text!../templates/studentProfile.tpl.html', 'text!../templa
       url : '/student/exam/testscreen',
       template : testScreenTemplate,
       controller : 'TestDetailController as testCtrl'
+    }).state('chalkanddust.testGroupPage', {
+      url : '/student/exam/testGroupPage/:type',
+      template : testGroupTemplate,
+      controller : 'TestGroupController as testCtrl'
     });
   } ]);
 });

@@ -68,5 +68,15 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
+  
+  testService.factory('GetTestGroupWithPracticeQuestions', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/testGroup/list', {
+    }, {
+      get : {
+        method : 'GET',
+        isArray: true
+      }
+    });
+  } ]);
 
 });

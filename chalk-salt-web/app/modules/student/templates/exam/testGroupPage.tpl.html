@@ -1,0 +1,64 @@
+<style>
+.main_bg_bg{
+background-image: none;
+background-size: 100%;
+    height: 1000px;
+    top: 0;
+    z-index: 0;
+}
+
+
+</style>
+<div id="hoeDiv" hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+    <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
+        <header id="hoe-header" hoe-lpanel-effect="shrink">
+            <div class="hoe-left-header">
+                <a ng-click="GoToHomePage();" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
+                    class="hoe-sidebar-toggle"><a href="#"></a></span>
+            </div>
+            <div class="hoe-right-header" hoe-position-type="relative">
+                <!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
+                <ul class="left-navbar">
+                    <li>
+                        <form method="post" class="hoe-searchbar">
+                            <h4>
+                                <a ng-click="goBackToDashBoard();" href="javascript:void(0);">Dashboard</a>
+                            </h4>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="right-navbar">
+                    <!-- <li><a href="#" ng-show="fullName"><i class="fa fa-user"></i>{{fullName}} </a></li>
+                    <li><a ui-sref="chalkanddust.student">My Profile</a></li>
+                    <li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
+                    <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
+                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="./resources/images/user.png"
+                                alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img class="img-circle "
+                                ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a ui-sref="chalkanddust.logout"><i class="fa fa-power-off"></i>Logout</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+        </header>
+        <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+            <section id="main-content">
+                <div class="inner-content">
+<md-content>
+<div layout="row" layout-wrap   ng-repeat="item in testPracticeGroupList">
+
+        <div class="feature-box dashboardSubjects">
+            <span class="feature-icon feature-icon_01">  <i
+                    class="fa fa-file"></i></span> <a ui-sref="chalkanddust.testInstruction({type:typeOfTest,scheduletestuuid:1,subjectId:1,testGroupId:item.testGroupUuid})" href="javascript:void(0)">
+                <h4>{{item.testGroupName}}</h4>
+            </a>
+        </div>
+    </div>
+</md-content>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="./resources/js/hoe.js"></script>
+</div>

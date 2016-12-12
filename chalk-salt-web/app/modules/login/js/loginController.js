@@ -98,6 +98,9 @@ loginModule.controller('LogoutController', [ '$scope', '$state', 'LogoutService'
                 $window.localStorage.removeItem(CHALKNDUST.TESTTYPE);
                 clearTimeout($rootScope.timeoutvariable);
                 $window.localStorage.removeItem(CHALKNDUST.TIMERTIME);
+                $window.localStorage.removeItem(CHALKNDUST.SCHEDULETESTUUID);
+                $window.localStorage.removeItem(CHALKNDUST.TESTGROUPID);
+
                 
             };
             /**
