@@ -28,7 +28,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetNotificationStudentList',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService, StudentProfileUpdateService, ChangePasswordService,
           UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams, GetResultsByClassSubject,
-          GetResultDetailsByTestUuid,GetNotificationStudentList) {
+          GetResultDetailsByTestUuid, GetNotificationStudentList) {
         $scope.uploadedlogo = {};
         $scope.showVideoDiv = false;
         $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
@@ -282,7 +282,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           });
         }
 
-        $scope.detailedResult = function(testSecuruuid,testGroupId) {
+        $scope.detailedResult = function(testSecuruuid, testGroupId) {
           var subjectId = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
 
           GetResultDetailsByTestUuid.query({
@@ -290,7 +290,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             subjectId : subjectId,
             securUuid : $scope.securUuid,
             testUuid : testSecuruuid,
-            testGroupId:testGroupId
+            testGroupId : testGroupId
           }, function(response) {
             if (response) {
               $scope.resultDetailList = response;
@@ -369,18 +369,17 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         /* pdf code ends here */
 
         getNotificationList();
-        function getNotificationList(){
+        function getNotificationList() {
           GetNotificationStudentList.get({},
-          
-          function(response){
+
+          function(response) {
             debugger;
-          $scope.studentNotificationList=response  
-          },function(error){
+            $scope.studentNotificationList = response
+          }, function(error) {
             showAlert('danger', error.data.message);
           })
         }
-        
-        
+
       } ]);
 
   // * Admin Controller
@@ -450,6 +449,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'saveNotificationData',
       'saveTestGroupData',
       'GetTestGroupData',
+      'GetNotificationListForAdmin',
+      'DeleteNotificationForAdmin',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -458,7 +459,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           updateVideoDetailsService, deleteVideoDetailsService, createNotesContentService, SaveNotesFileService, UpdateNotesFileService, GetNotesContentList,
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
-          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin,saveNotificationData,saveTestGroupData,GetTestGroupData) {
+          SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin, saveNotificationData, saveTestGroupData,
+          GetTestGroupData, GetNotificationListForAdmin, DeleteNotificationForAdmin) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -1964,7 +1966,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
           $scope.classes = classes;
           $scope.studentsList = studentsList;
-          $scope.achievementListDetails=[];
+          $scope.achievementListDetails = [];
           if (type != 'General') {
             if (!classId) {
               achievementDetails.liststudentId = "";
@@ -2069,8 +2071,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           }
 
         };
-        
-        
+
         $scope.showGeneralFieldsOnList = false;
         $scope.showStudentFieldsOnList = false;
         $scope.achievementTypes = [ "Student", "General" ]
@@ -2092,12 +2093,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         };
 
         /** *Home Page Student images work ends here** */
-        
-        
-        
-        /*Notification work starts here*/
+
+        /* Notification work starts here */
         $scope.notificationDetailsToSave = {};
-        $scope.notificationDetails={};
+        $scope.notificationDetails = {};
         this.createNotificationData = function(scheduleTestDetails) {
           angular.extend($scope.notificationDetailsToSave, $scope.notificationDetails);
           saveNotificationData.save({}, $scope.notificationDetailsToSave, function(response) {
@@ -2115,19 +2114,70 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         };
-        
 
-        
-        
-        
-        /*Notification work ends here*/
-        
-        
-        
-        /*Test Group data start here*/
-        $scope.testGroupDetailsToSave={};
-        $scope.testGroupDetails={};
-        this.createTestGroupData=function(){
+        $scope.showNotificationDetails = function() {
+
+          GetNotificationListForAdmin.query({
+
+          }, function(response) {
+            if (response) {
+              $scope.notificationListDetails = response;
+              $scope.totalItemsnotificationList = $scope.notificationListDetails.length;
+              $scope.currentPagenotificationList = 1;
+              $scope.itemsPerPagenotificationList = 5;
+              $scope.maxSizenotificationList = 5;
+
+              $scope.$watch('search', function(newVal, oldVal) {
+                $scope.notificationList = filterFilter($scope.notificationListDetails, newVal);
+                $scope.totalItemsnotificationList = $scope.notificationList.length;
+                $scope.currentPagenotificationList = 1;
+              }, true);
+              $scope.getnotificationsData = function() {
+                var self = this;
+                var itemsPerPagenotificationList = self.itemsPerPagenotificationList;
+                var offset = (self.currentPagenotificationList - 1) * itemsPerPagenotificationList;
+                $scope.notificationList = $scope.notificationListDetails.slice(offset, offset + itemsPerPagenotificationList)
+              };
+              $scope.getnotificationsData();
+            }
+          }, onRequestFailure);
+
+        };
+
+        $scope.showNotificationDetails();
+
+        $scope.deletenotification = function(notificationUuid) {
+          var modalOptionsConfirm = {
+            header : 'Note',
+            body : 'Are you sure you want to delete notification?',
+            btn : 'OK'
+          };
+          CandDModalService.showConfirm({}, modalOptionsConfirm).then(function(result) {
+            DeleteNotificationForAdmin.erase({
+              notificationUuid : notificationUuid
+            }, function(response) {
+              if (response) {
+                var modalOptions = {
+                  header : 'Note',
+                  body : 'Notification record deleted successfully',
+                  btn : 'OK'
+                };
+                CandDModalService.showModal({}, modalOptions).then(function(result) {
+                  $log.info(result);
+                });
+                $state.reload();
+              }
+            }, onRequestFailure);
+
+          });
+        }
+
+        /* Notification work ends here */
+
+        /* Test Group data start here */
+        $scope.testGroupDetailsToSave = {};
+        $scope.testGroupDetails = {};
+        this.createTestGroupData = function() {
           angular.extend($scope.testGroupDetailsToSave, $scope.testGroupDetails);
           saveTestGroupData.save({}, $scope.testGroupDetailsToSave, function(response) {
             if (response) {
@@ -2144,17 +2194,14 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             showAlert('danger', error.data.message);
           });
         }
-        
-        
-        
-        GetTestGroupData.get({
-        }, function(result) {
+
+        GetTestGroupData.get({}, function(result) {
           $scope.testGroupList = result;
         }, function(error) {
           showAlert('danger', error.data.message);
         });
-        
-        /*Test group date ends here*/
+
+        /* Test group date ends here */
 
         var Id = $stateParams.id;
 

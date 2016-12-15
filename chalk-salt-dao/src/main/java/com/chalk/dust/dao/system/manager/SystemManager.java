@@ -76,4 +76,21 @@ public interface SystemManager {
      */
     List<TestGroupDto> getTestGroupList()throws SystemException;
 
+    /**
+     * Gets the admin notification list.
+     *
+     * @return the admin notification list
+     * @throws SystemException the system exception
+     */
+    List<NotificationDto> getAdminNotificationList()throws SystemException;
+
+    /**
+     * Delete admin notification.
+     *
+     * @param notificationUuid the notification uuid
+     * @return the boolean
+     * @throws SystemException the system exception
+     */
+    Boolean deleteAdminNotification(String notificationUuid)throws SystemException;
+
 }

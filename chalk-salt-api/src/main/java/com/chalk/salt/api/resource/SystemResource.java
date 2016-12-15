@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -184,6 +185,25 @@ public class SystemResource extends AbstractResource {
         }
     }
 	
+	@DELETE
+    @Path("/notification-admin/delete/{notificationUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresAuthentication
+    public Response deleteAdminNotification(@NotBlank @PathParam("notificationUuid") final String notificationUuid)throws SystemException{
+        
+        final Map<String, String> response = new HashMap<String, String>();
+        Boolean deleteStatus = false;
+        try{
+            deleteStatus = systemFacade.deleteAdminNotification(notificationUuid);
+            response.put("deleteStatus", deleteStatus.toString());
+            return Response.ok(deleteStatus).build();
+            
+        } catch (final SystemException systemException) {
+        throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+    }
+    }
+	
+	
 	 @GET
 	    @Path("/notification-student/details/list")   
 	    @Produces(MediaType.APPLICATION_JSON)
@@ -200,6 +220,26 @@ public class SystemResource extends AbstractResource {
             throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
 	        }
 	    }
+	 
+	
+	 @GET
+     @Path("notification-admin/details/list")   
+     @Produces(MediaType.APPLICATION_JSON)
+     @RequiresAuthentication    
+     public Response getAdminNotificationList()throws SystemException{
+     
+         List<NotificationModel> notificationContent = null;
+         List<NotificationDto> notificationList = null;
+         try{
+             notificationList = systemFacade.getAdminNotificationList();
+             notificationContent = DozerMapperUtil.mapCollection(beanMapper, notificationList, NotificationModel.class);
+             return Response.ok(notificationContent).build();
+         } catch (final SystemException systemException) {
+         throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+         }
+     }
+  
+ 
 	 
 	 
 	 

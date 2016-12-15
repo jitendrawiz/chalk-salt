@@ -84,4 +84,20 @@ public interface SystemLookupDao {
      */
     List<TestGroupDto> getTestGroupList()throws Exception;
 
+    /**
+     * Gets the admin notification list.
+     *
+     * @return the admin notification list
+     * @throws Exception the exception
+     */
+    List<NotificationDto> getAdminNotificationList()throws Exception;
+
+    /**
+     * Delete admin notification.
+     *
+     * @return the boolean
+     * @throws Exception the exception
+     */
+    Boolean deleteAdminNotification(String notificationUuid)throws Exception;
+
 }

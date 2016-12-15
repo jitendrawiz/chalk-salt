@@ -148,4 +148,36 @@ public class SystemManagerImpl implements SystemManager {
         return list;
         }
 
+    @Override
+    public List<NotificationDto> getAdminNotificationList() throws SystemException
+        {
+
+        logger.info("Obtaining the list of notifications for admin");
+        List<NotificationDto> list = new ArrayList<NotificationDto>();
+        try {
+        
+        list = systemLookupDao.getAdminNotificationList();
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_FETCH_NOTIFICATIONS,
+                    "fail to fetch notifications", exception);
+        }
+        return list;
+
+        }
+
+    @Override
+    public Boolean deleteAdminNotification(String notificationUuid) throws SystemException
+        {
+        logger.info("deleting admin notification using notificiationuuid {}",notificationUuid);
+        Boolean isDeleled=false;
+        try {
+        isDeleled = systemLookupDao.deleteAdminNotification(notificationUuid);
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_DELETE_NOTIFICATION,
+                    "fail to delete notifications", exception);
+        }
+        return isDeleled;
+
+        }
+
 }

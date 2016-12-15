@@ -78,6 +78,28 @@ public interface SystemFacade {
      */
     Long saveTestGroup(TestGroupDto testGroupDto)throws SystemException;
 
+    /**
+     * Gets the test group list.
+     *
+     * @return the test group list
+     * @throws SystemException the system exception
+     */
     List<TestGroupDto> getTestGroupList()throws SystemException;
+
+    /**
+     * Gets the admin notification list.
+     *
+     * @return the admin notification list
+     */
+    List<NotificationDto> getAdminNotificationList()throws SystemException;
+
+    /**
+     * Delete admin notification.
+     *
+     * @param notificationUuid the notification uuid
+     * @return the boolean
+     * @throws SystemException the system exception
+     */
+    Boolean deleteAdminNotification(String notificationUuid)throws SystemException;
 
 }

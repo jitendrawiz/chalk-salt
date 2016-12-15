@@ -107,9 +107,12 @@
                             class="menu-text">Student Achievement List</span> <span class="selected"></span>
                     </a></li>
                     <li ng-class="{active:isSet(20)}"><a ng-click="setTab(20);" href=""> <i class="fa fa-files-o"></i> <span
-                            class="menu-text">Notification</span> <span class="selected"></span>
+                            class="menu-text">Notification Master</span> <span class="selected"></span>
                     </a></li>
                     <li ng-class="{active:isSet(21)}"><a ng-click="setTab(21);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Notification List</span> <span class="selected"></span>
+                    </a></li>
+                    <li ng-class="{active:isSet(22)}"><a ng-click="setTab(22);" href=""> <i class="fa fa-files-o"></i> <span
                             class="menu-text">Test Group Master</span> <span class="selected"></span>
                     </a></li>
                 </ul>
@@ -182,6 +185,9 @@
                                         <div ng-include="'modules/student/templates/admin/notificationMaster.tpl.html'"></div>
                                     </div>
                                     <div ng-switch-when="21">
+                                        <div ng-include="'modules/student/templates/admin/notificationList.tpl.html'"></div>
+                                    </div>
+                                     <div ng-switch-when="22">
                                         <div ng-include="'modules/student/templates/admin/testGroup.tpl.html'"></div>
                                     </div>
                                 </div>

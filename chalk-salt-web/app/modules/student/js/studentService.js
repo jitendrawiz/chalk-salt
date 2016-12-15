@@ -638,6 +638,17 @@ define([ 'angular' ], function(angular) {
       }
     });
   } ]);
+  
+  studentService.factory('GetNotificationListForAdmin', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/notification-admin/details/list', {}, {
+      get : {
+        method : 'GET',
+        isArray: true
+      }
+    });
+  } ]);
+  
+  
 /*Notification save ends functionality*/
  
   studentService.factory('saveTestGroupData', [ '$resource', 'ENV', function($resource, ENV) {
@@ -658,7 +669,15 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
   
-  
+  studentService.factory('DeleteNotificationForAdmin', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/notification-admin/delete/:notificationUuid', {
+      notificationUuid : '@notificationUuid'
+    }, {
+      erase : {
+        method : 'DELETE'
+      }
+    });
+  } ]);
   
   
 

@@ -151,4 +151,16 @@ public class SystemFacadeImpl implements SystemFacade {
             // TODO Auto-generated method stub
             return systemManager.getTestGroupList();
         }
+
+    @Override
+    public List<NotificationDto> getAdminNotificationList() throws SystemException
+        {
+        return systemManager.getAdminNotificationList();
+        }
+
+    @Override
+    public Boolean deleteAdminNotification(String notificationUuid) throws SystemException
+        {
+        return systemManager.deleteAdminNotification(notificationUuid);
+        }
 }

@@ -171,4 +171,35 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
         
         }
 
+    @Override
+    public List<NotificationDto> getAdminNotificationList() throws Exception
+        {
+
+        final String sqlQuery = "SELECT  DATE_FORMAT(`start_date`,'%d-%M-%Y') AS startDate,"
+                + "  DATE_FORMAT(`end_date`,'%d-%M-%Y') AS endDate,"
+                + " `notification`, "
+                + " `notification_uuid` AS notificationUuid,   `created_date` as createdDate   "
+                + " FROM cst_notifications ORDER BY cst_notifications.notification_id";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            return query.executeAndFetch(NotificationDto.class);
+        }
+        
+        }
+
+    @Override
+    public Boolean deleteAdminNotification(String notificationUuid) throws Exception
+        {
+        final String sqlQuery = "DELETE FROM cst_notifications WHERE notification_uuid=:notificationUuid";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("notificationUuid", notificationUuid);
+            query.executeUpdate();
+            return true;
+        }       }
+
 }
