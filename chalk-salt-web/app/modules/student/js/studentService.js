@@ -679,6 +679,15 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
   
+  studentService.factory('DeleteTestGroup', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/testGroup-admin/delete/:testGroupUuid', {
+      testGroupUuid : '@testGroupUuid'
+    }, {
+      erase : {
+        method : 'DELETE'
+      }
+    });
+  } ]);
   
 
 });

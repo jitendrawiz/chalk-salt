@@ -93,4 +93,13 @@ public interface SystemManager {
      */
     Boolean deleteAdminNotification(String notificationUuid)throws SystemException;
 
+    /**
+     * Delete admin test group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the boolean
+     * @throws SystemException the system exception
+     */
+    Boolean deleteAdminTestGroup(String testGroupUuid)throws SystemException;
+
 }

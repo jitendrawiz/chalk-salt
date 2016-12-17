@@ -7,6 +7,7 @@ import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
+import com.chalk.salt.common.exceptions.SystemException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -95,9 +96,28 @@ public interface SystemLookupDao {
     /**
      * Delete admin notification.
      *
+     * @param notificationUuid the notification uuid
      * @return the boolean
      * @throws Exception the exception
      */
     Boolean deleteAdminNotification(String notificationUuid)throws Exception;
+
+    /**
+     * Gets the questions latched on group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the questions latched on group
+     * @throws Exception the exception
+     */
+    Long getQuestionsLatchedOnGroup(String testGroupUuid)throws SystemException;
+
+    /**
+     * Delete admin test group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the boolean
+     * @throws Exception the exception
+     */
+    Boolean deleteAdminTestGroup(String testGroupUuid)throws Exception;
 
 }

@@ -246,7 +246,10 @@ public enum ErrorCode {
 	FAIL_TO_FETCH_TEST_GROUP_DETAILS(1078),
 	
 	/** The fail to delete notification. */
-	FAIL_TO_DELETE_NOTIFICATION(1079);
+	FAIL_TO_DELETE_NOTIFICATION(1079),
+	
+	/** The fail to delete test group. */
+	FAIL_TO_DELETE_TEST_GROUP(1080);
 
 	/** The value. */
 	private final int value;

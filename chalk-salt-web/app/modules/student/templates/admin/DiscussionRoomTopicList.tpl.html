@@ -96,94 +96,85 @@ button.btn-block {
 	width: 10%;
 }
 
-#topicList th{
-	color:#fff;
+#topicList th {
+	color: #fff;
 }
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="topicListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Discussion Room Topic List</h3>
-				<div class="title_name">
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="topicListForm" role="form" action="" method="post" novalidate>
+                <h3>Discussion Room Topic List</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
 
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Subject</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : topicListForm.studentClass.$invalid && !topicListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="topicDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(topicDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="topicListForm.studentClass.$error.required && !topicListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : topicListForm.studentSubject.$invalid && !topicListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="topicDetails.listsubjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true"
-							ng-change="showTopicDetails(topicDetails.listclassId,topicDetails.listsubjectId)">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="topicListForm.studentSubject.$error.required && !topicListForm.studentSubject.$pristine">Subject
-							is required.</p>
-					</div>
-			</form>
+                <div class="title_name">
 
-		</div>
-	</div>
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group" ng-class="{ 'has-error' : topicListForm.studentClass.$invalid && !topicListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="topicDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(topicDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="topicListForm.studentClass.$error.required && !topicListForm.studentClass.$pristine">Class is required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : topicListForm.studentSubject.$invalid && !topicListForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="topicDetails.listsubjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                            ng-change="showTopicDetails(topicDetails.listclassId,topicDetails.listsubjectId)">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="topicListForm.studentSubject.$error.required && !topicListForm.studentSubject.$pristine">Subject is required.</p>
+                    </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	
-        <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList" max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-			<table id="topicList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Topic Title</th>
-						<th>Topic Description</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in topicsList=topicsListDetails | filter:search|startFrom:(currentPagetopicsList-1)*itemsPerPagetopicsList | limitTo:itemsPerPagetopicsList">
-						<td>{{item.topicTitle}}</td>
-						<td>{{item.topicDescription}}</td>
-						<td><a type="button" ng-click="adminCtrl.editTopic(item.securUuid)" title="Edit">
-								<i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
-							</a>
-							<a type="button" ng-click="adminCtrl.deleteTopic(item.securUuid)" title="Delete">
-								<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList" max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+        <div class="table-responsive ">
+            <div class="number_scroll">
 
-	</div>
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList"
+                        max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="topicList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Topic Title</th>
+                        <th>Topic Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in topicsList=topicsListDetails | filter:search|startFrom:(currentPagetopicsList-1)*itemsPerPagetopicsList | limitTo:itemsPerPagetopicsList">
+                        <td>{{item.topicTitle}}</td>
+                        <td>{{item.topicDescription}}</td>
+                        <td><a type="button" ng-click="adminCtrl.editTopic(item.securUuid)" title="Edit"> <i class="glyphicon glyphicon-edit"
+                                aria-hidden="true"></i>
+                        </a> <a type="button" ng-click="adminCtrl.deleteTopic(item.securUuid)" title="Delete"> <i class="glyphicon glyphicon-trash"
+                                aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemstopicsList" ng-change="getTopicsData()" ng-model="$parent.currentPagetopicsList"
+                        max-size="$parent.maxSizetopicsList" items-per-page="$parent.itemsPerPagetopicsList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

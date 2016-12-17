@@ -105,162 +105,126 @@ button, input, select, textarea {
 	line-height: inherit;
 }
 </style>
-<div class="col-xs-12 col-md-10 wow fadeInLeft"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="questionForm"  role="form" action="" method="post"
-				novalidate>
-				<h3>Question Master</h3>
-				<div class="title_name">
-					<label class="title_name_class">Class : </label><br> 
-					<label class="title_name_sub">Subject : </label><br>
-                    <label class="title_name_sub">Test Group : </label><br>
-					<label class="title_name_question">Question : </label><br> 
-					<label class="title_name_option_a">Option A : </label><br> 
-					<label class="title_name_option_b">Option B : </label><br> 
-					<label class="title_name_option_c">Option C : </label><br/>
-					<label class="title_name_option_d">Option D : </label><br/><br/>
-					<label class="title_name_answer">Answer : </label><br/>
-					<label class="title_name_file">Upload Image : </label><br/>
-                    <label class="title_name_class">Question Type : </label><br/>
-				</div>
-				<div class="title_text">
-					<div  class="form-group"
-						ng-class="{ 'has-error' : questionForm.studentClass.$invalid && !tquestionForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="questionDetails.classId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(questionDetails.classId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="questionForm.studentClass.$error.required && !questionForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : questionForm.studentSubject.$invalid && !questionForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="questionDetails.subjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="questionForm.studentSubject.$error.required && !questionForm.studentSubject.$pristine">Subject
-							is required.</p>
-					</div>
-
+<div class="col-xs-12 col-md-10 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="questionForm" role="form" action="" method="post" novalidate>
+                <h3>Question Master</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
+                    <label class="title_name_class">Class : </label><br> <label class="title_name_sub">Subject : </label><br> <label
+                        class="title_name_sub">Test Group : </label><br> <label class="title_name_question">Question : </label><br> <label
+                        class="title_name_option_a">Option A : </label><br> <label class="title_name_option_b">Option B : </label><br> <label
+                        class="title_name_option_c">Option C : </label><br /> <label class="title_name_option_d">Option D : </label><br /> <br /> <label
+                        class="title_name_answer">Answer : </label><br /> <label class="title_name_file">Upload Image : </label><br /> <label
+                        class="title_name_class">Question Type : </label><br />
+                </div>
+                <div class="title_text">
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.studentClass.$invalid && !tquestionForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.classId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(questionDetails.classId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="questionForm.studentClass.$error.required && !questionForm.studentClass.$pristine">Class is required.</p>
+                    </div>
                     <div class="form-group"
-                        ng-class="{ 'has-error' : questionForm.testGroupUuid.$invalid && !questionForm.testGroupUuid.$pristine }">
-                        <select class="form-control" ng-model="questionDetails.testGroupUuid"
-                            name="testGroupUuid" placeholder="testGroupUuid"
-                            ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList"
-                            ng-required="true">
+                        ng-class="{ 'has-error' : questionForm.studentSubject.$invalid && !questionForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.subjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="questionForm.studentSubject.$error.required && !questionForm.studentSubject.$pristine">Subject is required.</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.testGroupUuid.$invalid && !questionForm.testGroupUuid.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.testGroupUuid" name="testGroupUuid" placeholder="testGroupUuid"
+                            ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList" ng-required="true">
                             <option value="" disabled>Select Test Group</option>
                         </select>
-                        <p
-                            ng-show="questionForm.testGroupUuid.$error.required && !questionForm.testGroupUuid.$pristine">Test Group
-                            is required.</p>
+                        <p ng-show="questionForm.testGroupUuid.$error.required && !questionForm.testGroupUuid.$pristine">Test Group is required.</p>
                     </div>
 
 
-					<div  class="form-group" ng-class="{ 'has-error' : questionForm.question.$invalid && !questionForm.question.$pristine }">
-						<textarea class="form-control" id="question" name="question"
-							ng-model="questionDetails.question" type="text"
-							placeholder="Question" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.question.$invalid  && !questionForm.question.$pristine">
-							<span ng-show="questionForm.question.$error.required">Question is required.</span>
-						</span>
-					</div>
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.question.$invalid && !questionForm.question.$pristine }">
+                        <textarea class="form-control" id="question" name="question" ng-model="questionDetails.question" type="text"
+                            placeholder="Question" required></textarea>
+                        <span style="color: red" class="help-block" ng-show="questionForm.question.$invalid  && !questionForm.question.$pristine">
+                            <span ng-show="questionForm.question.$error.required">Question is required.</span>
+                        </span>
+                    </div>
 
-					<div  class="form-group" ng-class="{ 'has-error' : questionForm.optionA.$invalid && !questionForm.optionA.$pristine }">
-						<textarea class="form-control" id="optionA" name="optionA"
-							ng-model="questionDetails.optionA" type="text"
-							placeholder="Option A" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.optionA.$invalid  && !questionForm.optionA.$pristine">
-							<span ng-show="questionForm.optionA.$error.required">Option A is required.</span>
-						</span>
-					</div>
-					<div  class="form-group"
-						ng-class="{ 'has-error' : questionForm.optionB.$invalid && !questionForm.optionB.$pristine }">
-						<textarea class="form-control" id="optionB" name="optionB"
-							ng-model="questionDetails.optionB" type="text"
-							placeholder="Option B" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.optionB.$invalid  && !questionForm.optionB.$pristine">
-							<span ng-show="questionForm.optionB.$error.required">Option B is required.</span>
-						</span>
-					</div>
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.optionA.$invalid && !questionForm.optionA.$pristine }">
+                        <textarea class="form-control" id="optionA" name="optionA" ng-model="questionDetails.optionA" type="text"
+                            placeholder="Option A" required></textarea>
+                        <span style="color: red" class="help-block" ng-show="questionForm.optionA.$invalid  && !questionForm.optionA.$pristine">
+                            <span ng-show="questionForm.optionA.$error.required">Option A is required.</span>
+                        </span>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.optionB.$invalid && !questionForm.optionB.$pristine }">
+                        <textarea class="form-control" id="optionB" name="optionB" ng-model="questionDetails.optionB" type="text"
+                            placeholder="Option B" required></textarea>
+                        <span style="color: red" class="help-block" ng-show="questionForm.optionB.$invalid  && !questionForm.optionB.$pristine">
+                            <span ng-show="questionForm.optionB.$error.required">Option B is required.</span>
+                        </span>
+                    </div>
 
-					<div  class="form-group" ng-class="{ 'has-error' : questionForm.optionC.$invalid && !questionForm.optionC.$pristine }">
-						<textarea class="form-control" id="optionC" name="optionC"
-							ng-model="questionDetails.optionC" type="text"
-							placeholder="Option C" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.optionC.$invalid  && !questionForm.optionC.$pristine">
-							<span ng-show="questionForm.optionC.$error.required">Option C is required.</span>
-						</span>
-					</div>
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.optionC.$invalid && !questionForm.optionC.$pristine }">
+                        <textarea class="form-control" id="optionC" name="optionC" ng-model="questionDetails.optionC" type="text"
+                            placeholder="Option C" required></textarea>
+                        <span style="color: red" class="help-block" ng-show="questionForm.optionC.$invalid  && !questionForm.optionC.$pristine">
+                            <span ng-show="questionForm.optionC.$error.required">Option C is required.</span>
+                        </span>
+                    </div>
 
-					<div  class="form-group"
-						ng-class="{ 'has-error' : questionForm.optionD.$invalid && !questionForm.optionD.$pristine }">
-						<textarea class="form-control" id="optionD" name="optionD"
-							ng-model="questionDetails.optionD" type="text"
-							placeholder="Option D" required></textarea>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.optionD.$invalid  && !questionForm.optionD.$pristine">
-							<span ng-show="questionForm.optionD.$error.required">Option D is required.</span>
-						</span>
-					</div>
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.optionD.$invalid && !questionForm.optionD.$pristine }">
+                        <textarea class="form-control" id="optionD" name="optionD" ng-model="questionDetails.optionD" type="text"
+                            placeholder="Option D" required></textarea>
+                        <span style="color: red" class="help-block" ng-show="questionForm.optionD.$invalid  && !questionForm.optionD.$pristine">
+                            <span ng-show="questionForm.optionD.$error.required">Option D is required.</span>
+                        </span>
+                    </div>
 
-					<div  class="form-group" ng-class="{ 'has-error' : questionForm.answer.$invalid && !questionForm.answer.$pristine }">
-						<select name="answer" id="answer" ng-model="questionDetails.answer" ng-required="true">
-							<option value="">--- Select Answer ---</option>
-						    <option value="A">A</option>
-						    <option value="B">B</option>
-						    <option value="C">C</option>
-						    <option value="D">D</option>
-					    </select>
-						<span style="color: red" class="help-block"
-							ng-show="questionForm.answer.$invalid  && !questionForm.answer.$pristine">
-							<span ng-show="questionForm.answer.$error.required">Answer is required.</span>
-						</span>
-					</div>
-					
-					<div class="form-group">
-						<input id="inputUploadQuestionPhoto" type="file" file-model="questionImage" placeholder="Upload Image"/>
-					</div>
-                    
-                    <div  class="form-group" ng-class="{ 'has-error' : questionForm.questionType.$invalid && !questionForm.questionType.$pristine }">
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.answer.$invalid && !questionForm.answer.$pristine }">
+                        <select name="answer" id="answer" ng-model="questionDetails.answer" ng-required="true">
+                            <option value="">--- Select Answer ---</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select> <span style="color: red" class="help-block" ng-show="questionForm.answer.$invalid  && !questionForm.answer.$pristine">
+                            <span ng-show="questionForm.answer.$error.required">Answer is required.</span>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <input id="inputUploadQuestionPhoto" type="file" file-model="questionImage" placeholder="Upload Image" />
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : questionForm.questionType.$invalid && !questionForm.questionType.$pristine }">
                         <select name="questionType" id="questionType" ng-model="questionDetails.questionType" ng-required="true">
                             <option value="">--- Select Type ---</option>
                             <option value="Practice Question">Practice Question</option>
-                            <option value="Scheduled Exam Question">Scheduled Exam Question</option>                            
-                        </select>
-                        <span style="color: red" class="help-block"
-                            ng-show="questionForm.questionType.$invalid  && !questionForm.questionType.$pristine">
-                            <span ng-show="questionForm.questionType.$error.required">Question type is required.</span>
+                            <option value="Scheduled Exam Question">Scheduled Exam Question</option>
+                        </select> <span style="color: red" class="help-block"
+                            ng-show="questionForm.questionType.$invalid  && !questionForm.questionType.$pristine"> <span
+                            ng-show="questionForm.questionType.$error.required">Question type is required.</span>
                         </span>
                     </div>
-					
-					<div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group">
-						<button type="button" class="btn btn-secondary btn-block"
-							ng-click="saveQuestion(questionImage)" ng-disabled="questionForm.$invalid">Submit</button>
-					</div>
-					
-					<div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group">
-						<button type="button" class="btn btn-secondary btn-block"
-							ng-disabled="questionForm.$invalid"
-							ng-click="updateQuestion(questionImage, classes, subjectsList)">Update</button>
-					</div>
 
-				</div>
-			</form>
+                    <div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-click="saveQuestion(questionImage)"
+                            ng-disabled="questionForm.$invalid">Submit</button>
+                    </div>
 
-		</div>
-	</div>
+                    <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" ng-disabled="questionForm.$invalid"
+                            ng-click="updateQuestion(questionImage, classes, subjectsList)">Update</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>

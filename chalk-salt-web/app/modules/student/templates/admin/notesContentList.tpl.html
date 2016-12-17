@@ -1,194 +1,180 @@
 <style>
- .title_text { 
- 	width: 70%; 
- 	float: left; 
- } 
+.title_text {
+	width: 70%;
+	float: left;
+}
 
- .title_name { 
- 	width: 30%; 
- 	float: left; 
- } 
+.title_name {
+	width: 30%;
+	float: left;
+}
 
- .title_name { 
- 	text-align: right; 
- 	padding-right: 20px; 
- 	padding-top: 25px; 
- } 
+.title_name {
+	text-align: right;
+	padding-right: 20px;
+	padding-top: 25px;
+}
 
- .title_name_class { 
- 	padding-top: 0px; 
- } 
+.title_name_class {
+	padding-top: 0px;
+}
 
- .title_name_sub { 
- 	padding-top: 15px; 
- } 
+.title_name_sub {
+	padding-top: 15px;
+}
 
- .title_text textarea { 
- 	width: 100%; 
- 	height: 100px; 
- 	padding-bottom: 5px; 
- 	border-radius: 5px; 
- 	padding: 5px; 
- 	color: #000; 
- 	margin: 5px 0px; 
- 	border: 1px solid #CCC; 
- } 
+.title_text textarea {
+	width: 100%;
+	height: 100px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
 
- .title_text select { 
- 	width: 60%; 
- 	height: 40px; 
- 	padding-bottom: 5px; 
- 	border-radius: 5px; 
- 	padding: 5px; 
- 	color: #000; 
- 	margin: 5px 0px; 
- 	border: 1px solid #CCC; 
- } 
+.title_text select {
+	width: 60%;
+	height: 40px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+	margin: 5px 0px;
+	border: 1px solid #CCC;
+}
 
- .title_text button a { 
- 	color: #FFF; 
- 	padding: 0px 40px; 
- } 
+.title_text button a {
+	color: #FFF;
+	padding: 0px 40px;
+}
 
- .btn:focus, .btn:hover, a, a:focus, a:hover { 
- 	text-decoration: none; 
- 	outline: 0; 
- } 
+.btn:focus, .btn:hover, a, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
 
- .title_text button { 
- 	padding: 8px 0px; 
- 	cursor: pointer; 
- 	background: #2f889a; 
- 	color: #FFF; 
- 	width: 100%; 
- 	border-radius: 5px; 
- 	font-weight: bold; 
- 	border: none; 
- 	-webkit-appearance: none; 
- 	-moz-appearance: none; 
- 	-ms-appearance: none; 
- 	-o-appearance: none; 
- 	appearance: none; 
- } 
+.title_text button {
+	padding: 8px 0px;
+	cursor: pointer;
+	background: #2f889a;
+	color: #FFF;
+	width: 100%;
+	border-radius: 5px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 
- button, input, select, textarea { 
- 	font-family: inherit; 
- 	font-size: inherit; 
- 	line-height: inherit; 
- } 
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
 
- button.btn-block { 
- 	display: inline; 
- 	width: auto; 
- 	background: #6AA3C9 none repeat scroll 0 0; 
- 	color: white; 
- } 
+button.btn-block {
+	display: inline;
+	width: auto;
+	background: #6AA3C9 none repeat scroll 0 0;
+	color: white;
+}
 
- #NotesList th:last-child, td:last-child { 
- 	width: 10%; 
- } 
+#NotesList th:last-child, td:last-child {
+	width: 10%;
+}
 
- #NotesList th{ 
- 	color:#fff; 
- } 
- input { 
- display: block; 
- } 
+#NotesList th {
+	color: #fff;
+}
+
+input {
+	display: block;
+}
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="notesListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Notes Content List</h3>
-				<div class="title_name">
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="notesListForm" role="form" action="" method="post" novalidate>
+                <h3>Notes Content List</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
 
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Subject</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : notesListForm.studentClass.$invalid && !notesListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="notesDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(notesDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="notesListForm.studentClass.$error.required && !notesListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : notesListForm.studentSubject.$invalid && !notesListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="notesDetails.listsubjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true"
-							ng-change="showNotesDetails(notesDetails.listclassId,notesDetails.listsubjectId, classes, subjectsList)">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="notesListForm.studentSubject.$error.required && !notesListForm.studentSubject.$pristine">Subject
-							is required.</p>
-					</div>
-			</form>
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group" ng-class="{ 'has-error' : notesListForm.studentClass.$invalid && !notesListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="notesDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(notesDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="notesListForm.studentClass.$error.required && !notesListForm.studentClass.$pristine">Class is required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : notesListForm.studentSubject.$invalid && !notesListForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="notesDetails.listsubjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                            ng-change="showNotesDetails(notesDetails.listclassId,notesDetails.listsubjectId, classes, subjectsList)">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="notesListForm.studentSubject.$error.required && !notesListForm.studentSubject.$pristine">Subject is required.</p>
+                    </div>
+            </form>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Notes" />
-        
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsNotesList"
-           ng-change="getNotesContentData()" ng-model="$parent.currentPageNotesList" 
-           max-size="$parent.maxSizeNotesList" items-per-page="$parent.itemsPerPageNotesList
-           " 
-            boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-			<table id="NotesList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>S.No.</th>
-						<th>Notes Title</th>
-						<th>Notes File Name</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in NotesList=NotesListDetails | filter:search|startFrom:(currentPageNotesList-1)*itemsPerPageNotesList | limitTo:itemsPerPageNotesList">
-						<td>{{$index+1}}</td>
-						<td>{{item.notesTitle}}</td>
-						<td>{{item.notesFileName}}</td>												
-						<td>							
-							<a type="button" ng-click="editNotesContent(item.notesUuid)" title="Edit">
-							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
-							</a>
-							
-							<a type="button" ng-click="deleteNotesContent(item.notesUuid)" title="Delete">
-							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsNotesList" ng-change="getNotesContentData()" 
-          ng-model="$parent.currentPageNotesList" max-size="$parent.maxSizeNotesList" 
-          items-per-page="$parent.itemsPerPageNotesList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+        <div class="table-responsive ">
+            <div class="number_scroll">
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search Notes" />
 
-	</div>
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsNotesList" ng-change="getNotesContentData()"
+                        ng-model="$parent.currentPageNotesList" max-size="$parent.maxSizeNotesList"
+                        items-per-page="$parent.itemsPerPageNotesList
+           " boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="NotesList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Notes Title</th>
+                        <th>Notes File Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in NotesList=NotesListDetails | filter:search|startFrom:(currentPageNotesList-1)*itemsPerPageNotesList | limitTo:itemsPerPageNotesList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.notesTitle}}</td>
+                        <td>{{item.notesFileName}}</td>
+                        <td><a type="button" ng-click="editNotesContent(item.notesUuid)" title="Edit"> <i class="glyphicon glyphicon-edit"
+                                aria-hidden="true"></i>
+                        </a> <a type="button" ng-click="deleteNotesContent(item.notesUuid)" title="Delete"> <i class="glyphicon glyphicon-trash"
+                                aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsNotesList" ng-change="getNotesContentData()"
+                        ng-model="$parent.currentPageNotesList" max-size="$parent.maxSizeNotesList" items-per-page="$parent.itemsPerPageNotesList"
+                        boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

@@ -90,6 +90,7 @@ public interface SystemFacade {
      * Gets the admin notification list.
      *
      * @return the admin notification list
+     * @throws SystemException the system exception
      */
     List<NotificationDto> getAdminNotificationList()throws SystemException;
 
@@ -101,5 +102,14 @@ public interface SystemFacade {
      * @throws SystemException the system exception
      */
     Boolean deleteAdminNotification(String notificationUuid)throws SystemException;
+
+    /**
+     * Delete admin test group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the boolean
+     * @throws SystemException the system exception
+     */
+    Boolean deleteAdminTestGroup(String testGroupUuid)throws SystemException;;
 
 }

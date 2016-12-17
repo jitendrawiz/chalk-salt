@@ -180,4 +180,24 @@ public class SystemManagerImpl implements SystemManager {
 
         }
 
+    @Override
+    public Boolean deleteAdminTestGroup(String testGroupUuid) throws SystemException
+        {
+        logger.info("deleting  test Group using testGroupUuid {}",testGroupUuid);
+        Boolean isDeleled=false;
+        Long countOfQuestionsLatched=systemLookupDao.getQuestionsLatchedOnGroup(testGroupUuid);
+        if(countOfQuestionsLatched>0){
+            throw new SystemException(ErrorCode.FAIL_TO_DELETE_TEST_GROUP,
+                "Fail to delete test group as there are some questions which are latched to it.");
+        }
+        try {
+        isDeleled = systemLookupDao.deleteAdminTestGroup(testGroupUuid);
+        } catch (final Exception exception) {
+            throw new SystemException(ErrorCode.FAIL_TO_DELETE_TEST_GROUP,
+                    "Fail to delete test group", exception);
+        }
+        return isDeleled;
+
+        }
+
 }

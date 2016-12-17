@@ -115,6 +115,9 @@
                     <li ng-class="{active:isSet(22)}"><a ng-click="setTab(22);" href=""> <i class="fa fa-files-o"></i> <span
                             class="menu-text">Test Group Master</span> <span class="selected"></span>
                     </a></li>
+                    <li ng-class="{active:isSet(23)}"><a ng-click="setTab(23);" href=""> <i class="fa fa-files-o"></i> <span
+                            class="menu-text">Test Group List</span> <span class="selected"></span>
+                    </a></li>
                 </ul>
             </aside>
             <section id="main-content">
@@ -189,6 +192,9 @@
                                     </div>
                                      <div ng-switch-when="22">
                                         <div ng-include="'modules/student/templates/admin/testGroup.tpl.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="23">
+                                        <div ng-include="'modules/student/templates/admin/testGroupList.tpl.html'"></div>
                                     </div>
                                 </div>
                             </div>

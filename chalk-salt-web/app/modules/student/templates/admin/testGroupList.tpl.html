@@ -84,11 +84,11 @@ button.btn-block {
 	color: white;
 }
 
-#notificationList th:last-child, td:last-child {
+#testGroupList th:last-child, td:last-child {
 	width: 10%;
 }
 
-#notificationList th {
+#testGroupList th {
 	color: #fff;
 }
 
@@ -99,8 +99,8 @@ input {
 <div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
     <div class="row inner-grid">
         <div class="user_log_detail">
-            <form name="notificationListForm" role="form" action="" method="post" novalidate>
-                <h3>Notification List</h3>
+            <form name="testGroupListForm" role="form" action="" method="post" novalidate>
+                <h3>Test Group List</h3>
                 <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
             </form>
         </div>
@@ -113,31 +113,27 @@ input {
         <div class="table-responsive ">
             <div class="number_scroll">
 
-                <input ng-model="search" type="text" style="width: 40%" placeholder="Search notification" />
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search test group" />
                 <div class="num_s">
-                    <uib-pagination total-items="$parent.totalItemsnotificationList" ng-change="getnotificationsData()"
-                        ng-model="$parent.currentPagenotificationList" max-size="$parent.maxSizenotificationList"
-                        items-per-page="$parent.itemsPerPagenotificationList" boundary-link-numbers="true"></uib-pagination>
+                    <uib-pagination total-items="$parent.totalItemstestGroupList" ng-change="getTestGroupListData()"
+                        ng-model="$parent.currentPagetestGroupList" max-size="$parent.maxSizetestGroupList"
+                        items-per-page="$parent.itemsPerPagetestGroupList" boundary-link-numbers="true"></uib-pagination>
                 </div>
             </div>
-            <table id="notificationList" class="table table-bordered">
+            <table id="testGroupList" class="table table-bordered">
                 <thead>
                     <tr>
                         <th>S.No.</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Notification</th>
+                        <th>Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr
-                        ng-repeat="item in notificationList=notificationListDetails | filter:search|startFrom:(currentPagenotificationList-1)*itemsPerPagenotificationList | limitTo:itemsPerPagenotificationList">
+                        ng-repeat="item in testGroupAdminList=testGroupListDetails | filter:search|startFrom:(currentPagetestGroupList-1)*itemsPerPagetestGroupList | limitTo:itemsPerPagetestGroupList">
                         <td>{{$index+1}}</td>
-                        <td>{{item.startDate}}</td>
-                        <td>{{item.endDate}}</td>
-                        <td>{{item.notification}}</td>
-                        <td><a type="button" ng-click="deletenotification(item.notificationUuid)" title="Delete"> <i
+                        <td>{{item.testGroupName}}</td>
+                        <td><a type="button" ng-click="deleteTestGroup(item.testGroupUuid)" title="Delete"> <i
                                 class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                         </a></td>
                     </tr>
@@ -145,9 +141,9 @@ input {
             </table>
             <div class="number_scroll">
                 <div class="num_s">
-                    <uib-pagination total-items="$parent.totalItemsnotificationList" ng-change="getnotificationsData()"
-                        ng-model="$parent.currentPagenotificationList" max-size="$parent.maxSizenotificationList"
-                        items-per-page="$parent.itemsPerPagenotificationList" boundary-link-numbers="true"></uib-pagination>
+                    <uib-pagination total-items="$parent.totalItemstestGroupList" ng-change="getTestGroupListData()"
+                        ng-model="$parent.currentPagetestGroupList" max-size="$parent.maxSizetestGroupList"
+                        items-per-page="$parent.itemsPerPagetestGroupList" boundary-link-numbers="true"></uib-pagination>
                 </div>
             </div>
         </div>

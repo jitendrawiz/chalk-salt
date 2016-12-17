@@ -92,62 +92,66 @@ button.btn-block {
 	width: 10%;
 }
 
-#topicList th{
-	color:#fff;
+#topicList th {
+	color: #fff;
 }
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<h3>Student Topic Request List</h3>
-		</div>
-	</div>
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <h3>Student Topic Request List</h3>
+            <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	
-        <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
-       <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()" ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList" items-per-page="$parent.itemsPerPageTopicRequestList"  boundary-link-numbers="true"></uib-pagination>      
-         </div>
-    </div>
-			<table id="topicList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Student Details</th>
-						<th>Class</th>
-						<th>Subject</th>
-						<th>Topic Title</th>
-						<th>Topic Description</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in topicRequestList=topicRequestListDetails | filter:search|startFrom:(currentPageTopicRequestList-1)*itemsPerPageTopicRequestList | limitTo:itemsPerPageTopicRequestList">
-						<td>{{item.studentName}}<br>{{item.email}}<br>{{item.mobile}}</td>
-						<td>{{item.studentClass}}</td>
-						<td>{{item.subjectName}}</td>
-						<td>{{item.topicTitle}}</td>
-						<td>{{item.topicDescription}}</td>
-						<td>
-						<a ng-click="adminCtrl.approveTopicRequest(item.requestSecurUuid)"
-                ng-show="item.approved != '1' "><span class="glyphicon glyphicon-minus"></span></a> <span
-                ng-show="item.approved == '1'" class="glyphicon glyphicon-ok"></span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()" ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList" items-per-page="$parent.itemsPerPageTopicRequestList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+        <div class="table-responsive ">
+            <div class="number_scroll">
 
-	</div>
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search topic" />
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()"
+                        ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList"
+                        items-per-page="$parent.itemsPerPageTopicRequestList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="topicList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Student Details</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>Topic Title</th>
+                        <th>Topic Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in topicRequestList=topicRequestListDetails | filter:search|startFrom:(currentPageTopicRequestList-1)*itemsPerPageTopicRequestList | limitTo:itemsPerPageTopicRequestList">
+                        <td>{{item.studentName}}<br>{{item.email}}<br>{{item.mobile}}
+                        </td>
+                        <td>{{item.studentClass}}</td>
+                        <td>{{item.subjectName}}</td>
+                        <td>{{item.topicTitle}}</td>
+                        <td>{{item.topicDescription}}</td>
+                        <td><a ng-click="adminCtrl.approveTopicRequest(item.requestSecurUuid)" ng-show="item.approved != '1' "><span
+                                class="glyphicon glyphicon-minus"></span></a> <span ng-show="item.approved == '1'" class="glyphicon glyphicon-ok"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsTopicRequestList" ng-change="getTopicRequestData()"
+                        ng-model="$parent.currentPageTopicRequestList" max-size="$parent.maxSizeTopicRequestList"
+                        items-per-page="$parent.itemsPerPageTopicRequestList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

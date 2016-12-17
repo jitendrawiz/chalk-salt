@@ -451,6 +451,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetTestGroupData',
       'GetNotificationListForAdmin',
       'DeleteNotificationForAdmin',
+      'DeleteTestGroup',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -460,7 +461,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
           SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin, saveNotificationData, saveTestGroupData,
-          GetTestGroupData, GetNotificationListForAdmin, DeleteNotificationForAdmin) {
+          GetTestGroupData, GetNotificationListForAdmin, DeleteNotificationForAdmin,DeleteTestGroup) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -488,6 +489,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $window.localStorage.setItem(CHALKNDUST.TABNUMBER, newTab);
           $scope.topicsList = [];
           $scope.commentsList = [];
+          $scope.alert = {};
         };
 
         $scope.isSet = function(tabNum) {
@@ -2196,11 +2198,46 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
         }
 
         GetTestGroupData.get({}, function(result) {
-          $scope.testGroupList = result;
+          if (result) {
+            $scope.testGroupList = result;
+
+            $scope.testGroupAdminList = result;
+
+            $scope.testGroupListDetails = result;
+            $scope.totalItemstestGroupList = $scope.testGroupListDetails.length;
+            $scope.currentPagetestGroupList = 1;
+            $scope.itemsPerPagetestGroupList = 5;
+            $scope.maxSizetestGroupList = 5;
+
+            $scope.$watch('search', function(newVal, oldVal) {
+              $scope.testGroupAdminList = filterFilter($scope.testGroupListDetails, newVal);
+              $scope.totalItemstestGroupList = $scope.testGroupAdminList.length;
+              $scope.currentPagetestGroupList = 1;
+            }, true);
+            $scope.getTestGroupListData = function() {
+              var self = this;
+              var itemsPerPagetestGroupList = self.itemsPerPagetestGroupList;
+              var offset = (self.currentPagetestGroupList - 1) * itemsPerPagetestGroupList;
+              $scope.testGroupAdminList = $scope.testGroupListDetails.slice(offset, offset + itemsPerPagetestGroupList)
+            };
+            $scope.getTestGroupListData();
+
+          }
+
         }, function(error) {
           showAlert('danger', error.data.message);
         });
 
+        
+        $scope.deleteTestGroup=function(testGroupUuid){
+          DeleteTestGroup.erase({
+            testGroupUuid : testGroupUuid
+          },function(response){
+            
+          },function(error){
+            showAlert('danger', error.data.message);
+          })
+        }
         /* Test group date ends here */
 
         var Id = $stateParams.id;

@@ -87,11 +87,12 @@ button, input, select, textarea {
         <div class="user_log_detail">
             <form name="scheduleTestMasterForm" role="form" action="" method="post" novalidate>
                 <h3>Schedule Test Master</h3>
-                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
                 <div class="title_name">
                     <label class="title_name_class">Class</label><br /> <label class="title_name_sub">Subject</label><br /> <label
-                        class="title_name_sub">Test Type</label><br />  <label class="title_name_sub">Test Group</label><br />  <label class="title_name_title">Test Title</label><br /><label class="title_name_title">Test Date</label><br /> <label
-                        class="title_name_title">Test Time</label><br /> <br />
+                        class="title_name_sub">Test Type</label><br /> <label class="title_name_sub">Test Group</label><br /> <label
+                        class="title_name_title">Test Title</label><br />
+                    <label class="title_name_title">Test Date</label><br /> <label class="title_name_title">Test Time</label><br /> <br />
                 </div>
                 <div class="title_text">
                     <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
@@ -143,33 +144,35 @@ button, input, select, textarea {
                     </div>
                     <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
                         ng-class="{ 'has-error' : scheduleTestMasterForm.testType.$invalid && !scheduleTestMasterForm.testType.$pristine }">
-                        <select class="form-control" ng-model="scheduleTestDetails.testTypeUuid" disabled="true" name="testType" placeholder="Test Type"
-                            ng-options="testType.testTypeUuid as testType.testDuration for testType in testTypeList" ng-required="true">
+                        <select class="form-control" ng-model="scheduleTestDetails.testTypeUuid" disabled="true" name="testType"
+                            placeholder="Test Type" ng-options="testType.testTypeUuid as testType.testDuration for testType in testTypeList"
+                            ng-required="true">
                             <option value="" disabled>Select Test Type</option>
                         </select>
                         <p ng-show="scheduleTestMasterForm.testType.$error.required && !scheduleTestMasterForm.testType.$pristine">Test Type is
                             required.</p>
                     </div>
-                    
+
                     <div ng-if="isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
                         ng-class="{ 'has-error' : scheduleTestMasterForm.testGroupUuid.$invalid && !scheduleTestMasterForm.testGroupUuid.$pristine }">
                         <select class="form-control" ng-model="scheduleTestDetails.testGroupUuid" name="testGroupUuid" placeholder="Test Group"
                             ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList" ng-required="true">
                             <option value="" disabled>Select Test Group</option>
                         </select>
-                        <p ng-show="scheduleTestMasterForm.testGroupUuid.$error.required && !scheduleTestMasterForm.testGroupUuid.$pristine">Test Group is
-                            required.</p>
+                        <p ng-show="scheduleTestMasterForm.testGroupUuid.$error.required && !scheduleTestMasterForm.testGroupUuid.$pristine">Test
+                            Group is required.</p>
                     </div>
                     <div ng-if="!isEmpty(scheduleTestDetails.scheduleTestUuid)" class="form-group"
                         ng-class="{ 'has-error' : scheduleTestMasterForm.testGroupUuid.$invalid && !scheduleTestMasterForm.testGroupUuid.$pristine }">
-                        <select class="form-control" ng-model="scheduleTestDetails.testGroupUuid" disabled="true" name="testGroupUuid" placeholder="Test Group"
-                            ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList" ng-required="true">
+                        <select class="form-control" ng-model="scheduleTestDetails.testGroupUuid" disabled="true" name="testGroupUuid"
+                            placeholder="Test Group" ng-options="testGroup.testGroupUuid as testGroup.testGroupName for testGroup in testGroupList"
+                            ng-required="true">
                             <option value="" disabled>Select Test Group</option>
                         </select>
-                        <p ng-show="scheduleTestMasterForm.testGroupUuid.$error.required && !scheduleTestMasterForm.testGroupUuid.$pristine">Test Group is
-                            required.</p>
+                        <p ng-show="scheduleTestMasterForm.testGroupUuid.$error.required && !scheduleTestMasterForm.testGroupUuid.$pristine">Test
+                            Group is required.</p>
                     </div>
-                    
+
                     <div class="form-group"
                         ng-class="{ 'has-error' : scheduleTestMasterForm.testTitle.$invalid && !scheduleTestMasterForm.testTitle.$pristine  }">
                         <input class="form-control" id="testTitle" name="testTitle" ng-model="scheduleTestDetails.testTitle" type="text"

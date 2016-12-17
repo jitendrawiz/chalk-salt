@@ -163,4 +163,10 @@ public class SystemFacadeImpl implements SystemFacade {
         {
         return systemManager.deleteAdminNotification(notificationUuid);
         }
+
+    @Override
+    public Boolean deleteAdminTestGroup(String testGroupUuid) throws SystemException
+        {
+        return systemManager.deleteAdminTestGroup(testGroupUuid);
+        }
 }

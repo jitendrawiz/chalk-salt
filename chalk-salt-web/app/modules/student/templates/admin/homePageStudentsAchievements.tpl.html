@@ -94,12 +94,13 @@ button, input, select, textarea {
         <div class="user_log_detail">
             <form name="studentHomePhotosForm" role="form" action="" method="post" novalidate>
                 <h3>Achievement Master</h3>
-                <uib-alert ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
                 <div class="title_name">
-                   <label class="title_name_class">Achievement type</label><br>  <label class="title_name_sub" ng-if="showStudentFields">Class</label><br ng-if="showStudentFields"> <label class="title_name_sub"
-                        ng-if="showStudentFields">Student Name</label><br ng-if="showStudentFields"> <label class="title_name_title"
-                        ng-if="showGeneralFields">Title</label><br> <label class="title_name_title">Student Achievements
-                        Description</label><br> <label class="title_name_des">Student Image</label><br /> <br />
+                    <label class="title_name_class">Achievement type</label><br> <label class="title_name_sub" ng-if="showStudentFields">Class</label><br
+                        ng-if="showStudentFields"> <label class="title_name_sub" ng-if="showStudentFields">Student Name</label><br
+                        ng-if="showStudentFields"> <label class="title_name_title" ng-if="showGeneralFields">Title</label><br> <label
+                        class="title_name_title">Student Achievements Description</label><br> <label class="title_name_des">Student Image</label><br />
+                    <br />
                 </div>
                 <div class="title_text">
                     <div class="form-group"
@@ -133,7 +134,7 @@ button, input, select, textarea {
                     <div class="form-group" ng-if="showGeneralFields"
                         ng-class="{ 'has-error' : studentHomePhotosForm.title.$invalid && !studentHomePhotosForm.title.$pristine }">
                         <input class="form-control" id="title" name="title" ng-model="studentPhotosDetails.title" type="text" placeholder="Title"
-                           ng-required="showGeneralFields" /> <span style="color: red" class="help-block"
+                            ng-required="showGeneralFields" /> <span style="color: red" class="help-block"
                             ng-show="studentHomePhotosForm.title.$invalid  && !studentHomePhotosForm.title.$pristine"> <span
                             ng-show="studentHomePhotosForm.title.$error.required">Title is required.</span>
                         </span>

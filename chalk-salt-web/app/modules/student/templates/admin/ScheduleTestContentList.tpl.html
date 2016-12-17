@@ -88,111 +88,99 @@ button.btn-block {
 	width: 10%;
 }
 
-#ScheduleList th{
-	color:#fff;
+#ScheduleList th {
+	color: #fff;
 }
+
 input {
-display: block;
+	display: block;
 }
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="ScheduleListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Schedule Content List</h3>
-				<div class="title_name">
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="ScheduleListForm" role="form" action="" method="post" novalidate>
+                <h3>Schedule Content List</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
 
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Subject</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : ScheduleListForm.studentClass.$invalid && !ScheduleListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="ScheduleDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(ScheduleDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="ScheduleListForm.studentClass.$error.required && !ScheduleListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : ScheduleListForm.studentSubject.$invalid && !ScheduleListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="ScheduleDetails.listsubjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true"
-							ng-change="showScheduleTestDetails(ScheduleDetails.listclassId,ScheduleDetails.listsubjectId, classes, subjectsList)">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="ScheduleListForm.studentSubject.$error.required && !ScheduleListForm.studentSubject.$pristine">Subject
-							is required.</p>
-					</div>
-			</form>
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : ScheduleListForm.studentClass.$invalid && !ScheduleListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="ScheduleDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(ScheduleDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="ScheduleListForm.studentClass.$error.required && !ScheduleListForm.studentClass.$pristine">Class is required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : ScheduleListForm.studentSubject.$invalid && !ScheduleListForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="ScheduleDetails.listsubjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                            ng-change="showScheduleTestDetails(ScheduleDetails.listclassId,ScheduleDetails.listsubjectId, classes, subjectsList)">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="ScheduleListForm.studentSubject.$error.required && !ScheduleListForm.studentSubject.$pristine">Subject is
+                            required.</p>
+                    </div>
+            </form>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Schedule test content" />
-        
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsScheduleList"
-           ng-change="getScheduleContentData()" ng-model="$parent.currentPageScheduleList" 
-           max-size="$parent.maxSizeScheduleList" items-per-page="$parent.itemsPerPageScheduleList
-           " 
-            boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-			<table id="ScheduleList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>S.No.</th>
-						<th>Schedule Test Title</th>
-						<th>Schedule Test Date</th>
+        <div class="table-responsive ">
+            <div class="number_scroll">
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search Schedule test content" />
+
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsScheduleList" ng-change="getScheduleContentData()"
+                        ng-model="$parent.currentPageScheduleList" max-size="$parent.maxSizeScheduleList"
+                        items-per-page="$parent.itemsPerPageScheduleList
+           " boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="ScheduleList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Schedule Test Title</th>
+                        <th>Schedule Test Date</th>
                         <th>Schedule Test Time</th>
                         <th>Schedule Test Created Date</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in ScheduleList=ScheduleListDetails | filter:search|startFrom:(currentPageScheduleList-1)*itemsPerPageScheduleList | limitTo:itemsPerPageScheduleList">
-						<td>{{$index+1}}</td>
-						<td>{{item.testTitle}}</td>
-						<td>{{item.testDate}}</td>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in ScheduleList=ScheduleListDetails | filter:search|startFrom:(currentPageScheduleList-1)*itemsPerPageScheduleList | limitTo:itemsPerPageScheduleList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.testTitle}}</td>
+                        <td>{{item.testDate}}</td>
                         <td>{{item.testTime}}</td>
-                        <td>{{item.scheduleTestCreatedDate}}</td>												
-						<td>							
-							<a type="button" ng-click="editScheduleTestContent(item.scheduleTestUuid)" title="Edit">
-							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
-							</a>
-							
-							<a type="button" ng-click="deleteScheduleTestContent(item.scheduleTestUuid)" title="Delete">
-							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsScheduleList" ng-change="getScheduleContentData()" 
-          ng-model="$parent.currentPageScheduleList" max-size="$parent.maxSizeScheduleList" 
-          items-per-page="$parent.itemsPerPageScheduleList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+                        <td>{{item.scheduleTestCreatedDate}}</td>
+                        <td><a type="button" ng-click="editScheduleTestContent(item.scheduleTestUuid)" title="Edit"> <i
+                                class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                        </a> <a type="button" ng-click="deleteScheduleTestContent(item.scheduleTestUuid)" title="Delete"> <i
+                                class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsScheduleList" ng-change="getScheduleContentData()"
+                        ng-model="$parent.currentPageScheduleList" max-size="$parent.maxSizeScheduleList"
+                        items-per-page="$parent.itemsPerPageScheduleList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>

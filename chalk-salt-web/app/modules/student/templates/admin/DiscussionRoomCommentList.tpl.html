@@ -23,7 +23,7 @@
 	padding-top: 15px;
 }
 
-.title_name_topic{
+.title_name_topic {
 	padding-top: 15px;
 }
 
@@ -100,116 +100,106 @@ button.btn-block {
 	width: 10%;
 }
 
-#commentList th{
-	color:#fff;
+#commentList th {
+	color: #fff;
 }
-
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="commentListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Discussion Room Comment List</h3>
-				<div class="title_name">
-					<label class="title_name_class">Class</label><br> 
-					<label class="title_name_sub">Subject</label><br>
-					<label class="title_name_topic">Topic</label><br>
-                    <label class="title_name_topic" ng-if="isCommentOnTopicToShown">Comments</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : commentListForm.studentClass.$invalid && !commentListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="commentDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(commentDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="commentListForm.studentClass.$error.required && !commentListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : commentListForm.studentSubject.$invalid && !commentListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="commentDetails.listsubjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true"
-							ng-change="showTopicDetailsForCommentsPage(commentDetails.listclassId,commentDetails.listsubjectId)">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="commentListForm.studentSubject.$error.required && !commentListForm.studentSubject.$pristine">Subject 
-							is required.</p>
-					</div>
-					
-					<div class="form-group"
-						ng-class="{ 'has-error' : commentListForm.topic.$invalid && !commentListForm.topic.$pristine }">
-						<select class="form-control" ng-model="commentDetails.listTopicId"
-							name="topic" placeholder="Topic"
-							ng-options="topic.discussionTopicId as topic.topicTitle for topic in topicsList"
-							ng-required="true"
-							ng-change="showCommentDetails(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">
-							<option value="" disabled>Select Topic</option>
-						</select>
-						<p
-							ng-show="commentListForm.topic.$error.required && !commentListForm.topic.$pristine">Topic 
-							is required.</p>
-					</div>
-                    <div class="form-group" layout="row" ng-if="isCommentOnTopicToShown">
-                       <div flex="50"> <textarea class="form-control" id="commentOnTopic" name="commentOnTopic" 
-                            ng-model="commentDetails.commentOnTopic" type="text"
-                            placeholder="Put your comments after selecting topic" required></textarea></div>
-                          <div flex="10" flex-offset="5" layout="row" layout-align="center center"> <button  type="button" style="width: 100%;" class="btn btn-secondary btn-block"
-							ng-click="adminCtrl.saveAdminCommentOnTopic(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">Submit</button></div>
-                   </div>
-                   
-			</form>
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="commentListForm" role="form" action="" method="post" novalidate>
+                <h3>Discussion Room Comment List</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br> <label
+                        class="title_name_topic">Topic</label><br> <label class="title_name_topic" ng-if="isCommentOnTopicToShown">Comments</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : commentListForm.studentClass.$invalid && !commentListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="commentDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(commentDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="commentListForm.studentClass.$error.required && !commentListForm.studentClass.$pristine">Class is required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : commentListForm.studentSubject.$invalid && !commentListForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="commentDetails.listsubjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                            ng-change="showTopicDetailsForCommentsPage(commentDetails.listclassId,commentDetails.listsubjectId)">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="commentListForm.studentSubject.$error.required && !commentListForm.studentSubject.$pristine">Subject is
+                            required.</p>
+                    </div>
 
-		</div>
-	</div>
+                    <div class="form-group" ng-class="{ 'has-error' : commentListForm.topic.$invalid && !commentListForm.topic.$pristine }">
+                        <select class="form-control" ng-model="commentDetails.listTopicId" name="topic" placeholder="Topic"
+                            ng-options="topic.discussionTopicId as topic.topicTitle for topic in topicsList" ng-required="true"
+                            ng-change="showCommentDetails(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">
+                            <option value="" disabled>Select Topic</option>
+                        </select>
+                        <p ng-show="commentListForm.topic.$error.required && !commentListForm.topic.$pristine">Topic is required.</p>
+                    </div>
+                    <div class="form-group" layout="row" ng-if="isCommentOnTopicToShown">
+                        <div flex="50">
+                            <textarea class="form-control" id="commentOnTopic" name="commentOnTopic" ng-model="commentDetails.commentOnTopic"
+                                type="text" placeholder="Put your comments after selecting topic" required></textarea>
+                        </div>
+                        <div flex="10" flex-offset="5" layout="row" layout-align="center center">
+                            <button type="button" style="width: 100%;" class="btn btn-secondary btn-block"
+                                ng-click="adminCtrl.saveAdminCommentOnTopic(commentDetails.listclassId,commentDetails.listsubjectId,commentDetails.listTopicId)">Submit</button>
+                        </div>
+                    </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	
-        <input ng-model="search" type="text" style="width: 40%" placeholder="Search Comment" />
-       <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()" ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList" items-per-page="$parent.itemsPerPagecommentsList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-         </div>
-			<table id="commentList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Comment</th>
-						<th>User/Last Updated</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in commentsList =commentsListDetails| filter:search|startFrom:(currentPagecommentsList-1)*itemsPerPagecommentsList | limitTo:itemsPerPagecommentsList">
-						<td>{{item.generalComments}}</td>
-						<td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}</td>
-						<td>
-							<a type="button" ng-click="adminCtrl.deleteComment(item.commentUuid)" title="Delete">
-								<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()" ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList" items-per-page="$parent.itemsPerPagecommentsList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
+        <div class="table-responsive ">
+            <div class="number_scroll">
+
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search Comment" />
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()"
+                        ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList"
+                        items-per-page="$parent.itemsPerPagecommentsList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="commentList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Comment</th>
+                        <th>User/Last Updated</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in commentsList =commentsListDetails| filter:search|startFrom:(currentPagecommentsList-1)*itemsPerPagecommentsList | limitTo:itemsPerPagecommentsList">
+                        <td>{{item.generalComments}}</td>
+                        <td>{{item.userName}}<br>{{item.modifiedDate | date:'MMM dd, yyyy h:mm a'}}
+                        </td>
+                        <td><a type="button" ng-click="adminCtrl.deleteComment(item.commentUuid)" title="Delete"> <i
+                                class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemscommentsList" ng-change="getCommentsData()"
+                        ng-model="$parent.currentPagecommentsList" max-size="$parent.maxSizecommentsList"
+                        items-per-page="$parent.itemsPerPagecommentsList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
     </div>
-		</div>
-
-	</div>
 </div>

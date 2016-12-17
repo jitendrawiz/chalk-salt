@@ -15,6 +15,8 @@ import com.chalk.salt.common.dto.StudentsDto;
 import com.chalk.salt.common.dto.SubjectDto;
 import com.chalk.salt.common.dto.TestGroupDto;
 import com.chalk.salt.common.dto.UserClassDto;
+import com.chalk.salt.common.exceptions.SystemException;
+import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.dao.sql2o.connection.factory.ConnectionFactory;
 
 // TODO: Auto-generated Javadoc
@@ -201,5 +203,59 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
             query.executeUpdate();
             return true;
         }       }
+
+    /**
+     * Gets the questions latched on group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the questions latched on group
+     * @throws Exception the exception
+     */
+    @Override
+    public Long getQuestionsLatchedOnGroup(String testGroupUuid) throws SystemException
+        {
+        final String sqlQuery = "SELECT  COUNT(*)AS countQuestionsLatched "
+                + " FROM cst_questions "
+                + " JOIN cst_test_group ON cst_test_group.test_group_uuid=cst_questions.test_group_uuid "
+                + " WHERE cst_test_group.test_group_uuid=:testGroupUuid";
+        Sql2o dataSource = null;
+        try
+            {
+            dataSource = ConnectionFactory
+                    .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+            }
+        catch (UserException e)
+            {
+            e.printStackTrace();
+            }
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("testGroupUuid", testGroupUuid);
+            return (Long)query.executeScalar();
+        }
+       
+        
+        }
+
+    /**
+     * Delete admin test group.
+     *
+     * @param testGroupUuid the test group uuid
+     * @return the boolean
+     * @throws Exception the exception
+     */
+    @Override
+    public Boolean deleteAdminTestGroup(String testGroupUuid) throws Exception
+        {
+        final String sqlQuery = "DELETE FROM cst_test_group WHERE test_group_uuid=:testGroupUuid";
+        final Sql2o dataSource = ConnectionFactory
+                .provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery);
+            query.addParameter("testGroupUuid", testGroupUuid);
+            query.executeUpdate();
+            return true;
+        }
+        }
 
 }

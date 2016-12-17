@@ -555,6 +555,10 @@ html, body {
   color: #52b5ac !important;
   font-weight: normal; }
 
+#uibAlert button {
+  width: auto;
+  background-color: transparent; }
+
 * {
   margin: 0;
   padding: 0; }

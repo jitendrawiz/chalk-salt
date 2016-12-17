@@ -88,108 +88,100 @@ button.btn-block {
 	width: 10%;
 }
 
-#questionList th{
-	color:#fff;
+#questionList th {
+	color: #fff;
 }
 </style>
-<div class="span12"
-	style="visibility: visible; animation-name: fadeInLeft;">
-	<div class="row inner-grid">
-		<div class="user_log_detail">
-			<form name="questionListForm" role="form" action="" method="post"
-				novalidate>
-				<h3>Question List</h3>
-				<div class="title_name">
+<div class="span12" style="visibility: visible; animation-name: fadeInLeft;">
+    <div class="row inner-grid">
+        <div class="user_log_detail">
+            <form name="questionListForm" role="form" action="" method="post" novalidate>
+                <h3>Question List</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+                <div class="title_name">
 
-					<label class="title_name_class">Class</label><br> <label
-						class="title_name_sub">Subject</label><br>
-				</div>
-				<div class="title_text">
-					<div class="form-group"
-						ng-class="{ 'has-error' : questionListForm.studentClass.$invalid && !questionListForm.studentClass.$pristine }">
-						<select class="form-control" ng-model="questionDetails.listclassId"
-							name="studentClass" placeholder="Class"
-							ng-options="studentclass.classId as studentclass.className for studentclass in classes"
-							ng-required="true"
-							ng-change="showSubjectsList(questionDetails.listclassId)">
-							<option value="" disabled>Select Class</option>
-						</select>
-						<p
-							ng-show="questionListForm.studentClass.$error.required && !questionListForm.studentClass.$pristine">Class
-							is required.</p>
-					</div>
-					<div class="form-group"
-						ng-class="{ 'has-error' : questionListForm.studentSubject.$invalid && !questionListForm.studentSubject.$pristine }">
-						<select class="form-control" ng-model="questionDetails.listsubjectId"
-							name="studentSubject" placeholder="Subject"
-							ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList"
-							ng-required="true"
-							ng-change="showQuestionDetails(questionDetails.listclassId,questionDetails.listsubjectId, classes, subjectsList)">
-							<option value="" disabled>Select Subject</option>
-						</select>
-						<p
-							ng-show="questionListForm.studentSubject.$error.required && !questionListForm.studentSubject.$pristine">Subject
-							is required.</p>
-					</div>
-			</form>
+                    <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br>
+                </div>
+                <div class="title_text">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : questionListForm.studentClass.$invalid && !questionListForm.studentClass.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.listclassId" name="studentClass" placeholder="Class"
+                            ng-options="studentclass.classId as studentclass.className for studentclass in classes" ng-required="true"
+                            ng-change="showSubjectsList(questionDetails.listclassId)">
+                            <option value="" disabled>Select Class</option>
+                        </select>
+                        <p ng-show="questionListForm.studentClass.$error.required && !questionListForm.studentClass.$pristine">Class is required.</p>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : questionListForm.studentSubject.$invalid && !questionListForm.studentSubject.$pristine }">
+                        <select class="form-control" ng-model="questionDetails.listsubjectId" name="studentSubject" placeholder="Subject"
+                            ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true"
+                            ng-change="showQuestionDetails(questionDetails.listclassId,questionDetails.listsubjectId, classes, subjectsList)">
+                            <option value="" disabled>Select Subject</option>
+                        </select>
+                        <p ng-show="questionListForm.studentSubject.$error.required && !questionListForm.studentSubject.$pristine">Subject is
+                            required.</p>
+                    </div>
+            </form>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<div class="table-responsive ">
-		<div class="number_scroll">
-    	
-        <input ng-model="search" type="text" style="width: 40%" placeholder="Search question" />
-        <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsQuestionList" ng-change="getQuestionsData()" ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList" items-per-page="$parent.itemsPerPageQuestionList"  boundary-link-numbers="true"></uib-pagination>      
-         </div>  
-    </div>
-			<table id="questionList" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Q.No.</th>
-						<th>Question</th>
-						<th>Option A</th>
-						<th>Option B</th>
-						<th>Option C</th>
-						<th>Option D</th>						
-						<th>Answer</th>
+        <div class="table-responsive ">
+            <div class="number_scroll">
+
+                <input ng-model="search" type="text" style="width: 40%" placeholder="Search question" />
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsQuestionList" ng-change="getQuestionsData()"
+                        ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList"
+                        items-per-page="$parent.itemsPerPageQuestionList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+            <table id="questionList" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Q.No.</th>
+                        <th>Question</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Answer</th>
                         <th>Question Group</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in questionList=questionListDetails | filter:search|startFrom:(currentPageQuestionList-1)*itemsPerPageQuestionList | limitTo:itemsPerPageQuestionList">
-						<td>{{$index+1}}</td>
-						<td>{{item.question}}</td>
-						<td>{{item.optionA}}</td>
-						<td>{{item.optionB}}</td>
-						<td>{{item.optionC}}</td>
-						<td>{{item.optionD}}</td>
-						<td>{{item.answer}}</td>
-                        <td>{{item.testGroupName}}</td>						
-						<td>							
-							<a type="button" ng-click="editQuestion(item.questionSecuruuid)" title="Edit">
-							  <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
-							</a>
-							
-							<a type="button" ng-click="deleteQuestion(item.questionSecuruuid)" title="Delete">
-							  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="number_scroll">     
-         <div class="num_s">
-          <uib-pagination total-items="$parent.totalItemsQuestionList" ng-change="getQuestionsData()" ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList" items-per-page="$parent.itemsPerPageQuestionList"  boundary-link-numbers="true"></uib-pagination>      
-         </div> 
-    </div>
-		</div>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        ng-repeat="item in questionList=questionListDetails | filter:search|startFrom:(currentPageQuestionList-1)*itemsPerPageQuestionList | limitTo:itemsPerPageQuestionList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.question}}</td>
+                        <td>{{item.optionA}}</td>
+                        <td>{{item.optionB}}</td>
+                        <td>{{item.optionC}}</td>
+                        <td>{{item.optionD}}</td>
+                        <td>{{item.answer}}</td>
+                        <td>{{item.testGroupName}}</td>
+                        <td><a type="button" ng-click="editQuestion(item.questionSecuruuid)" title="Edit"> <i
+                                class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                        </a> <a type="button" ng-click="deleteQuestion(item.questionSecuruuid)" title="Delete"> <i class="glyphicon glyphicon-trash"
+                                aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="number_scroll">
+                <div class="num_s">
+                    <uib-pagination total-items="$parent.totalItemsQuestionList" ng-change="getQuestionsData()"
+                        ng-model="$parent.currentPageQuestionList" max-size="$parent.maxSizeQuestionList"
+                        items-per-page="$parent.itemsPerPageQuestionList" boundary-link-numbers="true"></uib-pagination>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>

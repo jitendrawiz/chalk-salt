@@ -280,6 +280,25 @@ public class SystemResource extends AbstractResource {
             throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
             }
         }
-       
+	    
+	    
+	    @DELETE
+	    @Path("/testGroup-admin/delete/{testGroupUuid}")
+	    @Produces(MediaType.APPLICATION_JSON)
+	    @RequiresAuthentication
+	    public Response deleteAdminTestGroup(@NotBlank @PathParam("testGroupUuid") final String testGroupUuid)throws SystemException{
+	        
+	        final Map<String, String> response = new HashMap<String, String>();
+	        Boolean deleteStatus = false;
+	        try{
+	            deleteStatus = systemFacade.deleteAdminTestGroup(testGroupUuid);
+	            response.put("deleteStatus", deleteStatus.toString());
+	            return Response.ok(deleteStatus).build();
+	            
+	        } catch (final SystemException systemException) {
+	        throw Utility.buildResourceException(systemException.getErrorCode(), systemException.getMessage(), Status.INTERNAL_SERVER_ERROR, SystemException.class, systemException);
+	    }
+	    }
+	       
 	
 }

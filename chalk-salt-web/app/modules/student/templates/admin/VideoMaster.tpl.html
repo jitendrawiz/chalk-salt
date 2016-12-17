@@ -94,6 +94,7 @@ button, input, select, textarea {
         <div class="user_log_detail">
             <form name="videoMasterForm" role="form" action="" method="post" novalidate>
                 <h3>Video Master</h3>
+                <uib-alert id="uibAlert" ng-show="alert.show" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
                 <div class="title_name">
                     <label class="title_name_class">Class</label><br> <label class="title_name_sub">Subject</label><br> <label
                         class="title_name_title">Video Title</label><br> <label class="title_name_des">Video Link</label><br /> <br />
@@ -106,8 +107,7 @@ button, input, select, textarea {
                             ng-change="showSubjectsList(videoDetails.classId)">
                             <option value="" disabled>Select Class</option>
                         </select>
-                        <p ng-show="videoMasterForm.studentClass.$error.required && !videoMasterForm.studentClass.$pristine">Class is
-                            required.</p>
+                        <p ng-show="videoMasterForm.studentClass.$error.required && !videoMasterForm.studentClass.$pristine">Class is required.</p>
                     </div>
                     <div ng-if="!isEmpty(videoDetails.videoUuid)" class="form-group"
                         ng-class="{ 'has-error' : videoMasterForm.studentClass.$invalid && !videoMasterForm.studentClass.$pristine }">
@@ -116,11 +116,9 @@ button, input, select, textarea {
                             ng-change="showSubjectsList(videoDetails.classId)">
                             <option value="" disabled>Select Class</option>
                         </select>
-                        <p ng-show="videoMasterForm.studentClass.$error.required && !videoMasterForm.studentClass.$pristine">Class is
-                            required.</p>
+                        <p ng-show="videoMasterForm.studentClass.$error.required && !videoMasterForm.studentClass.$pristine">Class is required.</p>
                     </div>
-                    <div ng-if="isEmpty(videoDetails.videoUuid)" class="form-group"
-                       >
+                    <div ng-if="isEmpty(videoDetails.videoUuid)" class="form-group">
                         <select class="form-control" ng-model="videoDetails.subjectId" name="studentSubject" placeholder="Subject"
                             ng-options="studentSubject.subjectId as studentSubject.subjectName for studentSubject in subjectsList" ng-required="true">
                             <option value="" disabled>Select Subject</option>
@@ -145,16 +143,15 @@ button, input, select, textarea {
                             ng-show="videoMasterForm.videoTitle.$error.required">Video Title is required.</span>
                         </span>
                     </div>
-                    <div class="form-group"
-                        ng-class="{ 'has-error' : videoMasterForm.videoLink.$invalid && !videoMasterForm.videoLink.$pristine }">
-                        <textarea class="form-control" id="videoLink" name="videoLink" ng-model="videoDetails.videoLink"
-                            type="text" placeholder="Video Link" required></textarea>
+                    <div class="form-group" ng-class="{ 'has-error' : videoMasterForm.videoLink.$invalid && !videoMasterForm.videoLink.$pristine }">
+                        <textarea class="form-control" id="videoLink" name="videoLink" ng-model="videoDetails.videoLink" type="text"
+                            placeholder="Video Link" required></textarea>
                         <span style="color: red" class="help-block"
                             ng-show="videoMasterForm.videoLink.$invalid  && !videoMasterForm.videoLink.$pristine"> <span
                             ng-show="videoMasterForm.videoLink.$error.required">Video Link is required.</span>
                         </span>
                     </div>
-                    
+
                     <div ng-if="isEmpty(videoDetails.videoUuid)" class="form-group">
                         <button type="button" class="btn btn-secondary btn-block" ng-disabled="videoMasterForm.$invalid"
                             ng-click="adminCtrl.createVideoData()">Submit</button>
