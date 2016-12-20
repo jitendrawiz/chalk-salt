@@ -620,7 +620,18 @@ public class ExamManagerImpl implements ExamManager
                 {
                 throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST, "Fail to save schedule test data");
                 }
-            if (date.before(new Date())) { throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST, "Data input is not valid,please input valid date after current date"); }
+            String currentdatetemp=dataFormat.format(new Date());
+            Date currentdate=null;
+            try
+                {
+                currentdate = dataFormat.parse(currentdatetemp);
+                }
+            catch (ParseException e1)
+                {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                }
+            if (date.before(currentdate)) { throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST, "Data input is not valid,please input valid date equal to or greater than current date"); }
             List<ScheduleTestDto> listOfSchedulerTest = null;
             try
                 {
@@ -745,7 +756,19 @@ public class ExamManagerImpl implements ExamManager
                 {
                 throw new ExamException(ErrorCode.FAIL_TO_UPDATE_SCHEDULE_TEST_DATA, "Fail to update schedule test data");
                 }
-            if (date.before(new Date())) { throw new ExamException(ErrorCode.FAIL_TO_UPDATE_SCHEDULE_TEST_DATA, "Data input is not valid,please input valid date after current date"); }
+            String currentdatetemp=dataFormat.format(new Date());
+            Date currentdate=null;
+            try
+                {
+                currentdate = dataFormat.parse(currentdatetemp);
+                }
+            catch (ParseException e1)
+                {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                }
+            
+            if (date.before(currentdate)) { throw new ExamException(ErrorCode.FAIL_TO_UPDATE_SCHEDULE_TEST_DATA, "Data input is not valid,please input valid date equal to or greater than current date"); }
             List<ScheduleTestDto> listOfSchedulerTest = null;
             try
                 {
@@ -753,7 +776,7 @@ public class ExamManagerImpl implements ExamManager
                 }
             catch (Exception exception)
                 {
-                throw new ExamException(ErrorCode.FAIL_TO_SAVE_SCHEDULE_TEST, "Fail to save schedule test data", exception);
+                throw new ExamException(ErrorCode.FAIL_TO_UPDATE_SCHEDULE_TEST_DATA, "Fail to update schedule test data", exception);
                 }
             DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
             DateTime inputDateStartTime = formatter.parseDateTime(scheduleTestContentDetails.getTestDate() + " " + scheduleTestContentDetails.getTestTime());

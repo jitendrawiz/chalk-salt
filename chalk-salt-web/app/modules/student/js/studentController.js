@@ -490,6 +490,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.topicsList = [];
           $scope.commentsList = [];
           $scope.alert = {};
+          $scope.ScheduleList=[];
+          $scope.ScheduleListDetails=[];
         };
 
         $scope.isSet = function(tabNum) {
@@ -1734,10 +1736,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               return false;
             }
           }
-          var currentDate = new Date();
-          var inputDate = new Date(testDate);
-          if (inputDate.getTime() < currentDate.getTime()) {
-            showAlert('danger', "Please input valid date greater than currentdate");
+          var currentDate = new Date().setHours(0,0,0,0);
+          var inputDate = new Date(testDate).setHours(0,0,0,0);
+          if (inputDate < currentDate) {
+            showAlert('danger', "Please input valid date greater than or equal to currentdate");
             return false;
           }
 

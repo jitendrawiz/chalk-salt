@@ -386,7 +386,7 @@ public class ExamDaoImpl implements ExamDao {
 				+ " test_title AS testTitle,"
 				+ " DATE_FORMAT(created_at ,'%d-%M-%Y %H:%i:%S') AS  scheduleTestCreatedDate,"
 				+ " test_type_uuid AS testTypeUuid, "
-				+ " test_uuid AS scheduleTestUuid "
+				+ " test_uuid AS scheduleTestUuid ,test_group_uuid AS testGroupUuid "
 				+ " FROM `cst_schedule_test_master` "
 				+ " WHERE class_id= :classId AND subject_id= :subjectId and test_date>=CURRENT_DATE() ORDER BY test_id DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
@@ -411,7 +411,7 @@ public class ExamDaoImpl implements ExamDao {
 				+ " test_title AS testTitle,"
 				+ " DATE_FORMAT(created_at ,'%d-%M-%Y %H:%i:%S') AS  scheduleTestCreatedDate,"
 				+ " test_type_uuid AS testTypeUuid, "
-				+ " test_uuid AS scheduleTestUuid "
+				+ " test_uuid AS scheduleTestUuid, test_group_uuid as testGroupUuid "
 				+ " FROM `cst_schedule_test_master` "
 				+ " WHERE  test_uuid=:scheduleTestUuid";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
