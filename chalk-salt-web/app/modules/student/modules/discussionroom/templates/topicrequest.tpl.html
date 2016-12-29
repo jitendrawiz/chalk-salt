@@ -31,7 +31,7 @@
                     <table>
                         <tr>
                             <td class="right_one">Subject</td>
-                            <td class="sub_size">
+                            <td class="sub_size left_one_t">
                                 <div class="form-group"
                                     ng-class="{ 'has-error' : topicRequestForm.studentSubject.$invalid && !topicRequestForm.studentSubject.$pristine }">
                                     <select class="form-control" ng-model="topicRequestInfo.subjectId" name="studentSubject" placeholder="Subject"
@@ -46,7 +46,7 @@
                         <tr>
                             <td class="right_one end_text">Topic Title</td>
                             <td>
-                                <div class="form-group"
+                                <div class="form-group left_one_t"
                                     ng-class="{ 'has-error' : topicRequestForm.topicTitle.$invalid && !topicRequestForm.topicTitle.$pristine }">
                                     <textarea class="form-control" id="topicTitle" name="topicTitle" ng-model="topicRequestInfo.topicTitle"
                                         type="text" placeholder="Topic Title" required></textarea>
@@ -60,7 +60,7 @@
                         <tr>
                             <td class="right_one">Topic Description</td>
                             <td>
-                                <div class="form-group"
+                                <div class="form-group left_one_t"
                                     ng-class="{ 'has-error' : topicRequestForm.topicDescription.$invalid && !topicRequestForm.topicDescription.$pristine }">
                                     <textarea class="form-control" id="topicDescription" name="topicDescription"
                                         ng-model="topicRequestInfo.topicDescription" type="text" placeholder="Topic Description" required></textarea>
@@ -74,7 +74,7 @@
                         <tr>
                             <td class="right_one">Image Upload</td>
                             <td>
-                                <div class="form-group">
+                                <div class="form-group left_one_t">
                                     <input id="inputUploadTopicPhoto" type="file" file-model="topicImage" />
                                 </div>
                             </td>
@@ -82,7 +82,7 @@
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <div class="form-group">
+                                <div class="form-group left_one_t">
                                     <button type="button" class="btn btn-secondary btn-block" ng-disabled="topicRequestForm.$invalid"
                                         ng-click="requestCtrl.saveTopicRequest(topicImage)">Submit</button>
                                 </div>

@@ -6239,6 +6239,11 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   background: #3f4868;
   color: #fff; }
 
+#discussionRoomPage .dr_std_scroll {
+  width: 100%;
+  height: 400px;
+  overflow: scroll; }
+
 #discussionRoomPage .dr_heading {
   width: 80%;
   margin: 0 auto;
@@ -6517,7 +6522,7 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
 #discussionRoomPage .dr_new_entery h3 {
   border-bottom: 1px dotted #9CF;
   padding-bottom: 5px;
-  padding-left: 40px;
+  padding-left: 20px;
   padding-top: 20px;
   font-family: Roboto; }
 
@@ -6525,7 +6530,8 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 40px;
-  margin-top: 40px; }
+  margin-top: 40px;
+  border: none; }
 
 #discussionRoomPage .dr_new_entery table td select {
   width: 400px;
@@ -6603,6 +6609,10 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     width: 90%;
     margin: 0 auto;
     height: 80px; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
   #discussionRoomPage .dr_heading ul li a {
     font-size: 12px; }
   #discussionRoomPage .dr_search {
@@ -6612,7 +6622,7 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     font-size: 8px;
     line-height: 40px; }
   #discussionRoomPage .dr_new_entery table {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 40px;
     margin-top: 40px; }
@@ -6691,6 +6701,10 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     width: 90%;
     margin: 0 auto;
     height: 80px; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
   #discussionRoomPage .dr_heading ul li a {
     font-size: 12px; }
   #discussionRoomPage .dr_search {
@@ -6768,6 +6782,10 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     width: 90%;
     margin: 0 auto;
     height: 80px; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
   #discussionRoomPage .dr_heading ul li a {
     font-size: 12px; }
   #discussionRoomPage .dr_search {
@@ -6863,6 +6881,10 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     width: 90%;
     margin: 0 auto;
     height: 80px; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
   #discussionRoomPage .dr_heading ul li a {
     font-size: 12px; }
   #discussionRoomPage .dr_search {
@@ -6942,20 +6964,32 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     height: 80px; }
   #discussionRoomPage .dr_heading ul li a {
     font-size: 8px; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
   #discussionRoomPage .dr_search {
     float: right;
     width: 40%;
     height: 20px;
     font-size: 8px;
     line-height: 20px; }
+  #discussionRoomPage .dr_new_entery table tr {
+    width: 20% !important; }
   #discussionRoomPage .dr_new_entery table {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 40px;
-    margin-top: 40px;
+    width: 30% !important; }
+  #discussionRoomPage .dr_new_entery table td {
     font-size: 10px; }
+  #discussionRoomPage .dr_new_entery table td button {
+    width: 55%; }
+  #discussionRoomPage .dr_new_entery table {
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 8px; }
   #discussionRoomPage .dr_new_entery table td select {
-    width: 40%;
+    width: 60%;
     float: left;
     margin: 10px 10px;
     alignment-adjust: baseline;
@@ -6983,16 +7017,16 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     transition: all 0.5s ease;
     -webkit-appearance: none; }
   #discussionRoomPage .dr_new_entery table td textarea {
-    width: 60%;
+    width: 70%;
     float: left;
-    margin: 10px 10px;
+    margin: 5px 5px;
     alignment-adjust: baseline;
     text-align: left;
-    height: 35px;
-    min-height: 70px;
+    height: 25px;
+    min-height: 60px;
     max-height: 100%;
-    line-height: 30px;
-    padding: 3px;
+    line-height: 20px;
+    padding: 2px;
     border: 1px solid #666;
     background-color: transparent;
     border-radius: 5px; }
@@ -7016,7 +7050,7 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
 
 @media (min-width: 768px) and (max-width: 980px) {
   #discussionRoomPage .dr_main_detail {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: auto; }
   #discussionRoomPage .dr_update h5 {
@@ -7080,30 +7114,38 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
 
 @media (min-width: 360px) and (max-width: 640px) {
   #discussionRoomPage .dr_main_detail {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: auto; }
   #discussionRoomPage .dr_update h5 {
     margin: 0px 0px;
     font-size: 10px;
     font-weight: bold; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
+  #discussionRoomPage .dr_dis_head {
+    font-size: 20px !important; }
   #discussionRoomPage p {
     margin: 0 0 10px;
     width: 100%;
     font-size: 10px; }
   #discussionRoomPage .dr_subject {
-    width: 33%;
+    width: 100%;
     float: left;
     height: auto; }
   #discussionRoomPage .dr_sub_com {
-    width: 50%;
+    width: 85%;
     float: left;
+    clear: both;
     min-height: 100px;
     max-height: auto;
     margin: 0px 18px;
     float: left; }
   #discussionRoomPage .dr_events {
-    display: none; }
+    width: 100%;
+    margin-bottom: 10px; }
   #discussionRoomPage .dr_bg_img_sub h3 {
     padding: 10px;
     line-height: 20px;
@@ -7112,7 +7154,8 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
   #discussionRoomPage .dr_bg_img_sub p {
     padding: 10px;
     line-height: 20px;
-    font-size: 10px; }
+    font-size: 10px;
+    text-align: left; }
   #discussionRoomPage .dr_icon_list span {
     float: left;
     width: 70%;
@@ -7133,9 +7176,9 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     margin-bottom: 0px !important;
     padding-left: 10px; }
   #discussionRoomPage .dr_subject ul li a {
-    font-size: 9px; }
+    font-size: 8px; }
   #discussionRoomPage .dr_subject ul li a:hover {
-    font-size: 10px; }
+    font-size: 8px; }
   #discussionRoomPage .dr_heading ul li a {
     text-decoration: none;
     font-size: 8px;
@@ -7156,6 +7199,161 @@ _:-ms-input-placeholder, :root .csslider1 > .cs_arrownext > label span:after {
     border-bottom: 2px solid #CCC;
     padding: 0px 6px;
     font-size: 12px; } }
+
+@media (min-width: 320px) and (max-width: 533px) {
+  #discussionRoomPage .dr_main_detail {
+    width: 100%;
+    margin: 0 auto;
+    height: auto; }
+  #discussionRoomPage .dr_std_scroll {
+    width: 100%;
+    height: 400px;
+    overflow: scroll; }
+  #discussionRoomPage .dr_update h5 {
+    margin: 0px 0px;
+    font-size: 10px;
+    font-weight: bold; }
+  #discussionRoomPage .dr_dis_head {
+    font-size: 20px !important; }
+  #discussionRoomPage p {
+    margin: 0 0 10px;
+    width: 100%;
+    font-size: 10px; }
+  #discussionRoomPage .dr_subject {
+    width: 100%;
+    float: left;
+    height: auto; }
+  #discussionRoomPage .dr_dis_head ul b li {
+    font-size: 10px; }
+  #discussionRoomPage .dr_sub_com {
+    width: 85%;
+    float: left;
+    clear: both;
+    min-height: 100px;
+    max-height: auto;
+    margin: 0px 18px;
+    float: left; }
+  #discussionRoomPage .dr_events {
+    width: 100%;
+    margin-bottom: 10px; }
+  #discussionRoomPage .dr_bg_img_sub h3 {
+    padding: 10px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: bold; }
+  #discussionRoomPage .dr_bg_img_sub p {
+    padding: 10px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: left; }
+  #discussionRoomPage .dr_icon_list span {
+    float: left;
+    width: 70%;
+    clear: both;
+    margin-top: 5px;
+    font-size: 12px;
+    padding: 3px; }
+  #discussionRoomPage .dr_subject h4 {
+    display: block;
+    background: #9CF;
+    line-height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    list-style: none;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding-left: 10px; }
+  #discussionRoomPage .dr_subject ul li a {
+    font-size: 8px; }
+  #discussionRoomPage .dr_subject ul li a:hover {
+    font-size: 8px; }
+  #discussionRoomPage .dr_heading ul li a {
+    text-decoration: none;
+    font-size: 8px;
+    color: #FFF;
+    display: block;
+    padding: 0px 5px;
+    line-height: 40px;
+    font-family: Roboto;
+    transition: 0.5s; }
+  #discussionRoomPage .dr_search {
+    float: right;
+    width: 40%;
+    height: 40px;
+    display: block;
+    line-height: 40px; }
+  #discussionRoomPage .dr_heading {
+    width: 100%; }
+  #discussionRoomPage .dr_heading ul li a {
+    font-size: 7px !important; }
+  #discussionRoomPage .dr_notification span ul li {
+    float: none;
+    line-height: 20px;
+    border-bottom: 2px solid #CCC;
+    padding: 0px 6px;
+    font-size: 12px; }
+  #discussionRoomPage .dr_dis_head {
+    border-bottom: none; }
+  #discussionRoomPage .dr_new_entery table tr {
+    width: 20% !important; }
+  #discussionRoomPage .dr_new_entery table {
+    width: 30% !important; }
+  #discussionRoomPage .dr_new_entery table td {
+    font-size: 10px; }
+  #discussionRoomPage .dr_new_entery table td button {
+    width: 40%; }
+  #discussionRoomPage .dr_new_entery {
+    width: 90%; }
+  #discussionRoomPage .dr_new_entery table {
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 8px; }
+  #discussionRoomPage .dr_new_entery table td select {
+    width: 50%;
+    float: left;
+    margin: 10px 10px;
+    alignment-adjust: baseline;
+    text-align: left;
+    height: 35px;
+    font-size: 10px;
+    line-height: 30px;
+    padding: 5px;
+    border: 1px solid #666;
+    background-color: transparent;
+    border-radius: 5px; }
+  #discussionRoomPage .dr_new_entery table td button {
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 5px 15px;
+    font-size: 1rem;
+    margin: 2px 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: #9CF;
+    border: 2px solid #09F;
+    color: white;
+    transition: all 0.5s ease;
+    -webkit-appearance: none; }
+  #discussionRoomPage .dr_new_entery table td textarea {
+    width: 70%;
+    float: left;
+    margin: 5px 5px;
+    alignment-adjust: baseline;
+    text-align: left;
+    height: 25px;
+    min-height: 60px;
+    max-height: 100%;
+    line-height: 20px;
+    padding: 2px;
+    border: 1px solid #666;
+    background-color: transparent;
+    border-radius: 5px; } }
 
 #tabbed label.tabs {
   background: #6e98e3;

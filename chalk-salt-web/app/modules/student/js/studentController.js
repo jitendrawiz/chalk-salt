@@ -373,7 +373,6 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           GetNotificationStudentList.get({},
 
           function(response) {
-            debugger;
             $scope.studentNotificationList = response
           }, function(error) {
             showAlert('danger', error.data.message);
