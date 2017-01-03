@@ -11822,6 +11822,26 @@ form {
 .piechart a {
   float: left; }
 
+@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  main {
+    min-width: 150px !important;
+    min-height: 80px;
+    max-width: 750px;
+    float: left;
+    background: #fff; }
+  .feature_box_width {
+    padding: 5px !important; }
+  .disc-room h3 {
+    text-align: center;
+    padding: 15px 0px;
+    transition: 0.3s;
+    background: none;
+    font-size: 20px;
+    color: #fff; }
+  .text_result {
+    width: 65% !important;
+    padding-left: 0px !important; } }
+
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: auto; }

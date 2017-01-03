@@ -13,8 +13,8 @@ background-size: 100%;
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
-                <a ng-click="GoToHomePage();" href="javascript:void(0);"><i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a> <span
-                    class="hoe-sidebar-toggle"><a href="#"></a></span>
+                <a ng-click="GoToHomePage();" href="javascript:void(0);">
+                <i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a>
             </div>
             <div class="hoe-right-header" hoe-position-type="relative">
                 <!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
@@ -46,7 +46,7 @@ background-size: 100%;
             <section id="main-content">
                 <div class="inner-content">
 <md-content>
-<div layout="row" layout-wrap   ng-repeat="item in testPracticeGroupList">
+<div class="col-md-6"  ng-repeat="item in testPracticeGroupList">
 
         <div class="feature-box dashboardSubjects">
             <span class="feature-icon feature-icon_01">  <i
