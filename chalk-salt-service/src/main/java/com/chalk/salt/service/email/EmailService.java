@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,8 @@ import com.chalk.salt.common.dto.EmailNotificationDto;
 import com.chalk.salt.common.dto.NotificationMessageDto;
 import com.chalk.salt.common.exceptions.SystemException;
 import com.chalk.salt.common.exceptions.UserException;
+import com.chalk.salt.common.util.SystemSettingsKey;
+import com.chalk.salt.dao.user.UserDao;
 
 
 /**
@@ -40,6 +43,10 @@ public class EmailService {
 
     /** The Constant executorService. */
     private static final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    
+    
+    @Inject
+    private UserDao userDao;
 
     /**
      * Send mail.
@@ -71,13 +78,27 @@ public class EmailService {
      final EmailNotificationDto emailNotification = (EmailNotificationDto) notificationMessage;
          final String to = emailNotification.getTo();
          final String[] recipientList = parseRecipientList(to);
+         String emailFrom="chalkandsalt@gmail.com";
+         String emailUsername="chalkandsalt";
+         String emailPassword="ch@lkands@lt";
+         try
+            {
+             emailFrom=userDao.getSystemSettings(SystemSettingsKey.EMAIL_FROM.name());
+             emailUsername=userDao.getSystemSettings(SystemSettingsKey.EMAIL_USERNAME.name());
+             emailPassword=userDao.getSystemSettings(SystemSettingsKey.EMAIL_PASSWORD.name());
+            }
+        catch (Exception e)
+            {
+            e.printStackTrace();
+            }
+         
          imageHtmlEmail.addTo(recipientList);
          imageHtmlEmail.setSubject(emailNotification.getSubject());
          imageHtmlEmail.setDataSourceResolver(new DataSourceUrlResolver(null));
-         imageHtmlEmail.setFrom("chalkandsalt@gmail.com");
+         imageHtmlEmail.setFrom(emailFrom);
          imageHtmlEmail.setHostName("smtp.gmail.com");
          imageHtmlEmail.setSmtpPort(465);
-         imageHtmlEmail.setAuthenticator(new DefaultAuthenticator("chalkandsalt", "ch@lkands@lt"));
+         imageHtmlEmail.setAuthenticator(new DefaultAuthenticator(emailUsername,emailPassword));
          imageHtmlEmail.setSSLOnConnect(true);;            
          imageHtmlEmail.setHtmlMsg(notificationMessage.getBody());
          final List<String> attachments = emailNotification.getAttachments();

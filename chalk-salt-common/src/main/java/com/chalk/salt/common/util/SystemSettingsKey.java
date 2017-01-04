@@ -3,8 +3,7 @@ package com.chalk.salt.common.util;
 /**
  * The Enum ServiceConfiguration.
  */
-public enum SystemSettingsKey
-{
+public enum SystemSettingsKey {
 
     /** The profile photo. */
     PROFILE_PHOTO,
@@ -15,5 +14,14 @@ public enum SystemSettingsKey
     /** The notes file. */
     NOTES_FILE,
     /** The achievement data. */
-    ACHIEVEMENT_DATA
+    ACHIEVEMENT_DATA,
+
+    /** The email from. */
+    EMAIL_FROM,
+
+    /** The email username. */
+    EMAIL_USERNAME,
+
+    /** The email password. */
+    EMAIL_PASSWORD
 }
