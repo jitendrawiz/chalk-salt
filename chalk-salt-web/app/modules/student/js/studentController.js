@@ -2301,6 +2301,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $rootScope.notificationList = [];
           $('#loading').hide();
           $('#loading img').hide();
+          if($scope.classId!=null && $scope.securUuid!=null){
           GetNotificationList.query({
             classId : $scope.classId,
             studentId : $scope.securUuid
@@ -2318,6 +2319,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $('#loading img').hide();
             showAlert('danger', error.data.message);
           });
+          }
         }, 120000);
 
         function getNotificationList() {
@@ -2325,6 +2327,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
           $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
           $rootScope.notificationList = [];
+          if($scope.classId!=null && $scope.securUuid!=null){
           GetNotificationList.query({
             classId : $scope.classId,
             studentId : $scope.securUuid
@@ -2342,6 +2345,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $('#loading img').hide();
             showAlert('danger', error.data.message);
           });
+          }
         }
 
       } ]);

@@ -344,6 +344,9 @@ public class UserResource extends AbstractResource {
                 return Response.noContent().build();
             }
             File file=new File(photolink);
+            if(!file.exists()){
+            return Response.noContent().build();
+            }
             final String mediaType = Utility.probeContentType(file.getAbsolutePath());
             final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
             response.put("photolink", "data:" + mediaType + ";base64," + encodedImageString);
