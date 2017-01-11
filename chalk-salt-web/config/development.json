@@ -1,6 +1,6 @@
 {
 	"ENV":{
 		"NAME": "development",
-		"API_END_POINT": "http://chalkndust.com/chalk-salt-api/"
+		"API_END_POINT": "http://www.chalkndust.com/chalk-salt-api/"
 	}
 }
