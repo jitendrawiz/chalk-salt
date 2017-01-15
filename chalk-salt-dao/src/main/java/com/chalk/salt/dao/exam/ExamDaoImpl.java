@@ -189,7 +189,7 @@ public class ExamDaoImpl implements ExamDao {
 				+ " subject_id AS subjectId"
 				+ " FROM cst_videos"
 				+ " WHERE class_id =:classId AND subject_id=:subjectId"
-				+ " ORDER BY created_time DESC LIMIT 4";
+				+ " ORDER BY created_time DESC";
         final Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery, true);
@@ -214,7 +214,7 @@ public class ExamDaoImpl implements ExamDao {
                 + " class_id AS classId, subject_id AS subjectId"
                 + " FROM cst_notes "
                 + " WHERE class_id= :classId AND subject_id= :subjectId  "
-                + " AND notes_type='STUDENT_NOTES' ORDER BY created_date DESC LIMIT 4";
+                + " AND notes_type='STUDENT_NOTES' ORDER BY created_date DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
