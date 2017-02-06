@@ -333,6 +333,8 @@ html, body {
     text-align: center; }
   .twenty {
     max-width: 100% !important; }
+  .thirtyfive {
+    max-width: 100% !important; }
   .team_mate_360 {
     width: 100%; }
   .home-slider {
@@ -377,6 +379,8 @@ html, body {
     text-align: center; }
   .twenty {
     max-width: 100% !important; }
+  .thirtyfive {
+    max-width: 100% !important; }
   .team_mate_360 {
     width: 100%; }
   .home-slider {
@@ -410,6 +414,8 @@ html, body {
     float: none;
     text-align: center; }
   .twenty {
+    max-width: 100% !important; }
+  .thirtyfive {
     max-width: 100% !important; }
   .team_mate_360 {
     width: 100%; }
@@ -5426,6 +5432,9 @@ blockquote {
 
 .twenty {
   max-width: 20%; }
+
+.thirtyfive {
+  max-width: 33%; }
 
 .new_foot_nav {
   float: left;
