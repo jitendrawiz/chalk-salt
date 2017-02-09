@@ -1971,8 +1971,9 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.studentsList = studentsList;
           $scope.achievementListDetails = [];
           if (type != 'General') {
+            type="Student";
             if (!classId) {
-              achievementDetails.liststudentId = "";
+             // $scope.achievementDetails.liststudentId = "";
               $scope.achievementListDetails = null;
               $scope.achvList = null;
               if (!studentId) {
@@ -1980,6 +1981,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               }
             }
           }
+          if(type != 'General' && studentId!="" && studentId!=null){ 
           GetAchievementContentList.query({
             classId : classId,
             studentId : studentId
@@ -2006,7 +2008,34 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               $scope.getAchvContentData();
             }
           }, onRequestFailure);
+          }else if(type == 'General' && studentId=="BLANK" && classId=="BLANK"){
+            GetAchievementContentList.query({
+              classId : classId,
+              studentId : studentId
+            }, function(response) {
+              if (response) {
+                $scope.achievementListDetails = response;
+                $scope.totalItemsAchvList = $scope.achievementListDetails.length;
+                $scope.currentPageAchvList = 1;
+                $scope.itemsPerPageAchvList = 5;
+                $scope.maxSizeAchvList = 5;
 
+                $scope.$watch('search', function(newVal, oldVal) {
+                  $scope.achvList = filterFilter($scope.achievementListDetails, newVal);
+                  $scope.totalItemsAchvList = $scope.achvList.length;
+
+                  $scope.currentPageAchvList = 1;
+                }, true);
+                $scope.getAchvContentData = function() {
+                  var self = this;
+                  var itemsPerPageAchvList = self.itemsPerPageAchvList;
+                  var offset = (self.currentPageAchvList - 1) * itemsPerPageAchvList;
+                  $scope.achvList = $scope.achievementListDetails.slice(offset, offset + itemsPerPageAchvList)
+                };
+                $scope.getAchvContentData();
+              }
+            }, onRequestFailure);            
+          }
         };
 
         $scope.deleteAchievementContent = function(achievementUuid) {
