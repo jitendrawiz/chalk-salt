@@ -19,7 +19,21 @@ public class GuestUserDto {
 	/** The secur uuid. */
 	private String securUuid;
 	
-	/**
+	private boolean isAlreadyExists;
+	
+	
+	
+	public boolean isAlreadyExists()
+        {
+            return isAlreadyExists;
+        }
+
+    public void setAlreadyExists(boolean isAlreadyExists)
+        {
+            this.isAlreadyExists = isAlreadyExists;
+        }
+
+    /**
 	 * Gets the user name.
 	 *
 	 * @return the user name

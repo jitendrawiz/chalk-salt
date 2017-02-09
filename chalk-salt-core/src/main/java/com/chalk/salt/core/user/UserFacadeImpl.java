@@ -23,9 +23,11 @@ import com.chalk.salt.common.exceptions.StudentAchievementException;
 import com.chalk.salt.common.exceptions.TemplateProcessingException;
 import com.chalk.salt.common.exceptions.UserException;
 import com.chalk.salt.common.util.ErrorCode;
+import com.chalk.salt.common.util.SystemSettingsKey;
 import com.chalk.salt.core.constant.NotificationTemplateKey;
 import com.chalk.salt.core.templating.DatabaseTemplateConfiguration;
 import com.chalk.salt.core.templating.TemplateConfig;
+import com.chalk.salt.dao.user.UserDao;
 import com.chalk.salt.dao.user.manager.UserManager;
 import com.chalk.salt.service.email.EmailService;
 
@@ -56,6 +58,9 @@ public class UserFacadeImpl implements UserFacade {
     @Inject
     @TemplateConfig
     private DatabaseTemplateConfiguration databaseTemplateConfiguration;
+    
+    @Inject
+    private UserDao userDao;
 
     
     /**
@@ -209,10 +214,55 @@ public class UserFacadeImpl implements UserFacade {
 	 */
 	@Override
 	public GuestUserDto saveGuestUserDetails(GuestUserDto userDetails) throws UserException {
-		return userManager.saveGuestUserDetails(userDetails);
+		GuestUserDto guestUserDto = userManager.saveGuestUserDetails(userDetails);
+		if(!guestUserDto.isAlreadyExists()){
+           final EmailNotificationDto emailNotification = getGuestEmailNotification(userDetails, NotificationTemplateKey.GUEST_USER_REGISTRATION_SUCCESSFUL.name(), "Chalk N Dust | Guest User Registration");
+           emailService.sendMail(emailNotification);
+        }
+        return guestUserDto;
 	}
 
-	/* (non-Javadoc)
+	private EmailNotificationDto getGuestEmailNotification(GuestUserDto user, String notificationTemplateKey, String subject) throws UserException
+        {
+        final EmailNotificationDto emailNotification = new EmailNotificationDto();
+        String userFromEmail=null;
+       try
+        {
+        userFromEmail= userDao.getSystemSettings(SystemSettingsKey.EMAIL_FROM.name());
+        }
+        catch (Exception e1)
+        {
+        throw new UserException(ErrorCode.USER_REGISTRATION_FAILURE, "Guest user registration success but email not sent");
+        }
+           if(userFromEmail!=null){
+           StringBuilder emails=new StringBuilder(userFromEmail);
+             emails.append(";");
+             emails.append(user.getEmail());
+             emailNotification.setTo(emails.toString());
+           }else{
+           emailNotification.setTo(user.getEmail());
+           }
+       
+         emailNotification.setSubject(subject);
+
+        final Map<String, Object> userDataModel = beanMapper.map(user, Map.class);
+
+        String processedNotificationTemplate = null;
+        try {
+            final NotificationTemplateRequest notificationTemplateRequest = new NotificationTemplateRequest();
+            notificationTemplateRequest.setTemplateKey(notificationTemplateKey);
+            notificationTemplateRequest.setDataMap(userDataModel);
+            notificationTemplateRequest.setMergeBodyInTemplate(true);
+            processedNotificationTemplate = databaseTemplateConfiguration.processTemplate(notificationTemplateRequest);
+
+        } catch (final TemplateProcessingException e) {
+                throw new UserException(ErrorCode.USER_REGISTRATION_FAILURE, "Guest user registration success but email not sent");
+        }
+        emailNotification.setBody(processedNotificationTemplate);
+        return emailNotification;
+        }
+
+    /* (non-Javadoc)
 	 * @see com.chalk.salt.core.user.UserFacade#resetPassword(java.lang.String)
 	 */
 	@Override

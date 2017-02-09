@@ -519,6 +519,7 @@ public class UserManagerImpl implements UserManager {
 				}
 	        }else{
 	        	userDetails=userDao.getGuestUserInfo(securUuid);
+	        	userDetails.setAlreadyExists(true);
 	        }
 		} catch (final Exception exception) {
             throw new UserException(ErrorCode.FAIL_TO_SAVE_USER_INFO, "Fail to save Guest User Registration", exception);

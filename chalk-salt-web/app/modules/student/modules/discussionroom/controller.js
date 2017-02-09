@@ -87,6 +87,20 @@ define([ 'angular', './routing', './service', '../../../CandDModal/js/CandDModal
           if ($window.localStorage.getItem(CHALKNDUST.GUESTCLASSID) != null) {
             $window.localStorage.removeItem(CHALKNDUST.GUESTCLASSID);
             $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
+              $window.localStorage.removeItem(CHALKNDUST.SECURUUID);
+              $window.localStorage.removeItem(CHALKNDUST.USERFULLNAME);
+              $window.localStorage.removeItem(CHALKNDUST.EDITFLAG);
+              $window.localStorage.removeItem(CHALKNDUST.USERNAME);
+              $window.localStorage.removeItem(CHALKNDUST.CLASSID);
+              $window.localStorage.removeItem(CHALKNDUST.SUBJECTID);
+              $window.localStorage.removeItem(CHALKNDUST.TABNUMBER);
+              $window.localStorage.removeItem(CHALKNDUST.SUBJECTNAME);
+              $window.localStorage.removeItem(CHALKNDUST.QUESTIONDATA);
+              $window.localStorage.removeItem(CHALKNDUST.TESTTYPE);
+              clearTimeout($rootScope.timeoutvariable);
+              $window.localStorage.removeItem(CHALKNDUST.TIMERTIME);
+              $window.localStorage.removeItem(CHALKNDUST.SCHEDULETESTUUID);
+              $window.localStorage.removeItem(CHALKNDUST.TESTGROUPID);
             $state.go('chalkanddust.home');
           } else {
             $state.go('chalkanddust.profile');

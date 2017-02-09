@@ -12,6 +12,9 @@ public enum NotificationTemplateKey {
 	NEW_ENQUIRY,
 	
 	/** The reset password. */
-	RESET_PASSWORD;
+	RESET_PASSWORD,
+	
+	/** The guest user registration successful. */
+	GUEST_USER_REGISTRATION_SUCCESSFUL;
 
 }
