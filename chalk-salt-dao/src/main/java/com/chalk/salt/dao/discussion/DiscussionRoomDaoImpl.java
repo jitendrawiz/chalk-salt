@@ -98,7 +98,8 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 			throws Exception {
 		final String sqlQuery = "SELECT `class_id` as classId, `subject_id` as subjectId, `topic_title` as topicTitle, "
 				+ "`topic_description` as topicDescription, `created_date` as createdDate, `modified_date` as modifiedDate, "
-				+ "`secur_uuid` as securUuid, discussion_topic_id as discussionTopicId FROM `cst_discussion_topics` where class_id=:classId and subject_id =:subjectId";
+				+ "`secur_uuid` as securUuid, discussion_topic_id as discussionTopicId FROM `cst_discussion_topics` "
+				+ " where class_id=:classId and subject_id =:subjectId ORDER BY discussion_topic_id DESC";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
@@ -281,7 +282,7 @@ public class DiscussionRoomDaoImpl implements DiscussionRoomDao{
 				+ " cst_discussion_topics.subject_id =:subjectId AND "
 				+ " cst_discussion_topics.discussion_topic_id =:topicId "
 				+ " GROUP BY cst_discussion_topic_comments.discussion_comment_id"
-				+ " ) AS comments ORDER BY comments.createdDate DESC ";
+				+ " ) AS comments ORDER BY comments.createdDate ASC ";
         Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
             final Query query = connection.createQuery(sqlQuery); 
