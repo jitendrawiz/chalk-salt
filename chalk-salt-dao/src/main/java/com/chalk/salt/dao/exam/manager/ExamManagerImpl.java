@@ -460,11 +460,14 @@ public class ExamManagerImpl implements ExamManager
             DashBoardDataDto dashBoardDataDto = null;
             List<DashBoardVediosContentDto> dashBoardVedioList = null;
             List<DashBoardNotesDto> dashBoardNotesList = null;
+            DashBoardNotesDto dashBoardSubjectPaper = null;
             try
                 {
                 dashBoardDataDto = new DashBoardDataDto();
                 dashBoardVedioList = examDao.getVediosListByClassAndSubjectId(classId, subjectId);
                 dashBoardNotesList = examDao.getNotesListByClassAndSubjectId(classId, subjectId);
+                dashBoardSubjectPaper= examDao.getSubjectPaperByClassAndSubjectId(classId,subjectId);
+                
                 dashBoardDataDto.setVideos(dashBoardVedioList);
                 if (dashBoardNotesList.size() > 0)
                     {
@@ -482,6 +485,17 @@ public class ExamManagerImpl implements ExamManager
                         }
                     }
                 dashBoardDataDto.setNotes(dashBoardNotesList);
+                if(dashBoardSubjectPaper!=null){
+                String notesUuid = dashBoardSubjectPaper.getNotesUuid();
+                String destPath = userDao.getNotesMediaUrl(SystemSettingsKey.NOTES_FILE.name());
+                String appendedPath = studyMaterialDao.getPathOfNotesUsingNotesUuid(notesUuid);
+                String appPath[] = appendedPath.split("\\$");
+                destPath += String.join(File.separator, appPath[0], appPath[1], notesUuid);
+                String fileName = studyMaterialDao.getOldFileName(notesUuid);
+                String filePathUrl = destPath + File.separator + fileName;
+                dashBoardSubjectPaper.setFileUrl(filePathUrl);
+                }
+                dashBoardDataDto.setSubjectiveNotes(dashBoardSubjectPaper);
                 logger.info("Dashboard data fetch ends here ......");
                 return dashBoardDataDto;
                 }

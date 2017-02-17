@@ -625,5 +625,27 @@ public class ExamDaoImpl implements ExamDao {
         }
         }
 
+    @Override
+    public DashBoardNotesDto getSubjectPaperByClassAndSubjectId(String classId, String subjectId) throws Exception
+        {
+        final String sqlQuery = "SELECT notes_id AS notesId,"
+                + " notes_title AS notesTitle,"
+                + " notes_file_name AS notesFileName,"
+                + " DATE_FORMAT(created_date ,'%d-%M-%Y %H:%i:%S')AS createdDate,"
+                + " DATE_FORMAT(modified_date ,'%d-%M-%Y %H:%i:%S')AS modifiedDate,"
+                + " notes_uuid AS notesUuid,"
+                + " class_id AS classId, subject_id AS subjectId"
+                + " FROM cst_notes "
+                + " WHERE class_id= :classId AND subject_id= :subjectId  "
+                + " AND notes_type='SUBJECTIVE_PAPER' ORDER BY created_date DESC LIMIT 1";
+        Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetchFirst(DashBoardNotesDto.class);
+        }
+        }
+
  
 }

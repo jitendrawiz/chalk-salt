@@ -213,8 +213,10 @@ button, input, select, textarea {
                     </div>
 
                     <div ng-if="isEmpty(questionDetails.questionSecuruuid)" class="form-group">
-                        <button type="button" class="btn btn-secondary btn-block" ng-click="saveQuestion(questionImage)"
+                        <button type="button" class="btn btn-secondary btn-block" ng-click="saveQuestion(questionImage, false)"
                             ng-disabled="questionForm.$invalid">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-block" ng-click="saveQuestion(questionImage, true)"
+                            ng-disabled="questionForm.$invalid">Submit and Continue</button>
                     </div>
 
                     <div ng-if="!isEmpty(questionDetails.questionSecuruuid)" class="form-group">

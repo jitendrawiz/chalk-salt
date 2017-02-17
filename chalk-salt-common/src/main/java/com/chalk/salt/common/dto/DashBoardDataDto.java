@@ -5,49 +5,79 @@ import java.util.List;
 /**
  * The Class DashBoardDataDto.
  */
-public class DashBoardDataDto {
-	
-	/** The notes. */
-	private List<DashBoardNotesDto> notes;
-	
-	/** The vedios. */
-	private List<DashBoardVediosContentDto> videos;
+public class DashBoardDataDto
+{
 
-	/**
-	 * Gets the notes.
-	 *
-	 * @return the notes
-	 */
-	public List<DashBoardNotesDto> getNotes() {
-		return notes;
-	}
+    /** The notes. */
+    private List<DashBoardNotesDto> notes;
 
-	/**
-	 * Sets the notes.
-	 *
-	 * @param notes the new notes
-	 */
-	public void setNotes(List<DashBoardNotesDto> notes) {
-		this.notes = notes;
-	}
+    /** The vedios. */
+    private List<DashBoardVediosContentDto> videos;
 
-	/**
-	 * Gets the videos.
-	 *
-	 * @return the videos
-	 */
-	public List<DashBoardVediosContentDto> getVideos() {
-		return videos;
-	}
+    /** The subjective notes. */
+    private DashBoardNotesDto subjectiveNotes;
 
-	/**
-	 * Sets the videos.
-	 *
-	 * @param videos the new videos
-	 */
-	public void setVideos(List<DashBoardVediosContentDto> videos) {
-		this.videos = videos;
-	}
+    /**
+     * Gets the subjective notes.
+     *
+     * @return the subjective notes
+     */
+    public DashBoardNotesDto getSubjectiveNotes()
+        {
+            return subjectiveNotes;
+        }
 
-	
+    /**
+     * Sets the subjective notes.
+     *
+     * @param subjectiveNotes
+     *            the new subjective notes
+     */
+    public void setSubjectiveNotes(DashBoardNotesDto subjectiveNotes)
+        {
+            this.subjectiveNotes = subjectiveNotes;
+        }
+
+    /**
+     * Gets the notes.
+     *
+     * @return the notes
+     */
+    public List<DashBoardNotesDto> getNotes()
+        {
+            return notes;
+        }
+
+    /**
+     * Sets the notes.
+     *
+     * @param notes
+     *            the new notes
+     */
+    public void setNotes(List<DashBoardNotesDto> notes)
+        {
+            this.notes = notes;
+        }
+
+    /**
+     * Gets the videos.
+     *
+     * @return the videos
+     */
+    public List<DashBoardVediosContentDto> getVideos()
+        {
+            return videos;
+        }
+
+    /**
+     * Sets the videos.
+     *
+     * @param videos
+     *            the new videos
+     */
+    public void setVideos(List<DashBoardVediosContentDto> videos)
+        {
+            this.videos = videos;
+        }
+
 }

@@ -30,6 +30,10 @@
 			{
 				"index": "SAMPLE_NOTES",
 				"value": "SAMPLE NOTES"
+			},
+			{
+				"index": "SUBJECTIVE_PAPER",
+				"value": "SUBJECTIVE PAPER"
 			}
 		],
 		"TESTGROUPID":"testGroupId"

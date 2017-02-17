@@ -251,6 +251,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               if ($scope.notesObject.length === 0) {
                 $scope.showNotesDiv = true;
               }
+              
+              $scope.subjectivePaper=response.subjectiveNotes;
             }
           }, function(error) {
             showAlert('danger', error.data.message);
@@ -803,7 +805,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
         /** ***** Save Question******* */
         $scope.questionDetails = {};
-        $scope.saveQuestion = function(fileData) {
+         $scope.saveQuestion = function(fileData,isStatePersist) {
           SaveQuestionDetailsService.save({}, $scope.questionDetails, function(response) {
             if (response) {
               var modalOptions = {
@@ -818,7 +820,28 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
               if (!angular.isUndefined(fileData)) {
                 updateQuestionPhoto(fileData, response.questionSecuruuid);
               }
+              if(isStatePersist){
+                var obj={"classId":$scope.questionDetails.classId,
+                         "subjectId":$scope.questionDetails.subjectId,
+                         "testGroupUuid":$scope.questionDetails.testGroupUuid,
+                         "question":null,
+                         "optionA":null,
+                         "optionB":null,
+                         "optionC":null,
+                         "optionD":null,
+                         "answer":null,
+                         "questionType":null};
+                $scope.questionDetails.question=obj.question;
+                $scope.questionDetails.optionA=obj.optionA;
+                $scope.questionDetails.optionB=obj.optionB;
+                $scope.questionDetails.optionC=obj.optionC;
+                $scope.questionDetails.optionD=obj.optionD;
+                $scope.questionDetails.answer=obj.answer;
+                $scope.questionDetails.questionType=obj.questionType;
+              }else{
               $state.reload();
+              }
+             
             }
 
           }, function(error) {

@@ -289,4 +289,14 @@ public interface ExamDao {
      */
     public List<TestGroupDto> getPracticeTestGroups()throws Exception;
 
+    /**
+     * Gets the subject paper by class and subject id.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the subject paper by class and subject id
+     * @throws Exception the exception
+     */
+    public DashBoardNotesDto getSubjectPaperByClassAndSubjectId(String classId, String subjectId)throws Exception;;
+
 }
