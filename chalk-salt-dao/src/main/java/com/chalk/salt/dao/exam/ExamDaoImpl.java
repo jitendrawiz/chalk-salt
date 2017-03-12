@@ -548,9 +548,11 @@ public class ExamDaoImpl implements ExamDao {
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 2,1) AS optionC, "
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 3,1) AS optionD, "
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` AND cst_questions_options.`isAnswer`) AS answer, "
-				+ " (SELECT `cst_questions_options`.`name` FROM `cst_student_test_answers` "
-				+ " JOIN cst_questions_options ON cst_questions_options.`options_id`=cst_student_test_answers.`question_option_selected_id` "
-				+ " WHERE `cst_student_test_answers`.`question_id` = cst_questions.question_id LIMIT 1) AS answerOpted "
+				+ " (SELECT cqo.name FROM `cst_student_test_answers` csta "
+				+ " JOIN cst_questions_options cqo ON cqo.options_id=csta.question_option_selected_id "
+				+ " AND  csta.question_id=cqo.question_id "
+				+ " WHERE csta.cst_student_test_id=cst_student_test.id "
+				+ " AND csta.question_id=cst_questions.question_id LIMIT 1) AS answerOpted "
 				+ " FROM `cst_questions` "
 				+ " JOIN `cst_student_test` ON `cst_student_test`.`class_id`=`cst_questions`.`class_id` "
 				+ " AND `cst_student_test`.`subject_id`=`cst_questions`.`subject_id` "
@@ -582,17 +584,19 @@ public class ExamDaoImpl implements ExamDao {
 				+ "`cst_schedule_test_master`.`test_date` AS testDate, `cst_schedule_test_master`.`test_time` AS testTime,"
 				+ "`cst_schedule_test_master`.`test_uuid` AS testUuid, `cst_schedule_test_master`.`class_id` AS classId,"
 				+ "`cst_schedule_test_master`.`subject_id` AS subjectId,cst_schedule_test_master.test_group_uuid AS testGroupUuid,"
-				+ "(SELECT COUNT(*) FROM `cst_student_test_answers` "
+				+ " (SELECT COUNT(*) FROM `cst_student_test_answers` "
 				+ " JOIN cst_questions ct ON ct.question_id=cst_student_test_answers.question_id "
 				+ " JOIN `cst_questions_options` ON cst_questions_options.options_id =cst_student_test_answers.question_option_selected_id "
+				+ " AND `cst_questions_options`.isAnswer"
 				+ " JOIN cst_student_test ON cst_student_test.id=`cst_student_test_answers`.cst_student_test_id "
-				+ " WHERE `cst_questions_options`.isAnswer AND `cst_student_test`.class_id=:classId AND cst_student_test.subject_id=:subjectId "
+				+ " WHERE `cst_student_test`.class_id=:classId AND cst_student_test.subject_id=:subjectId "
 				+ " AND cst_student_test.student_id=:securUuid AND `cst_student_test`.`scheduled_test_uuid` IS NOT NULL "
+				+ " AND cst_student_test.scheduled_test_uuid =cst.scheduled_test_uuid "
 				+ " AND ct.test_group_uuid=cst_schedule_test_master.test_group_uuid) AS totalMarks  "
 				+ " FROM `cst_schedule_test_master` "
-				+ " JOIN `cst_student_test` ON `cst_student_test`.`scheduled_test_uuid` = `cst_schedule_test_master`.`test_uuid` "
+				+ " JOIN `cst_student_test` cst ON cst.`scheduled_test_uuid` = `cst_schedule_test_master`.`test_uuid`  "
 				+ " WHERE `cst_schedule_test_master`.`class_id` =:classId AND`cst_schedule_test_master`.`subject_id` =:subjectId "
-				+ " AND `cst_student_test`.`student_id` =:securUuid";
+				+ " AND cst.`student_id` =:securUuid";
 		
 		Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
         try (final Connection connection = dataSource.open()) {
