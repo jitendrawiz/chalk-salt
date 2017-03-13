@@ -534,13 +534,27 @@ public class ExamResource extends AbstractResource {
             @NotBlank @PathParam("testUuid") final String testUuid,
             @NotBlank @PathParam("testGroupId") final String testGroupId)throws ExamException{
 	    List<ResultContentDto> resultDetails = null;
-	    try{
-	    	logger.info("GetResultDetailsByTestUuid service called.........");
-	    	resultDetails = examFacade.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
-	        return Response.ok(resultDetails).build();
-	    } catch (final ExamException examException) {
-	        throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
-	    }
+        try{
+        logger.info("GetResultDetailsByTestUuid service called.........");
+            resultDetails = examFacade.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
+            for(int i=0;i<resultDetails.size();i++){
+            if(resultDetails.get(i).getQuestionImage()!=null){
+                File file=new File(resultDetails.get(i).getQuestionImagePath());
+                final String mediaType = Utility.probeContentType(file.getAbsolutePath());
+                final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
+                resultDetails.get(i).setQuestionImage("data:" + mediaType + ";base64," + encodedImageString);
+            }
+            }         
+        } catch (final ExamException examException) {
+            throw Utility.buildResourceException(examException.getErrorCode(), examException.getMessage(), Status.INTERNAL_SERVER_ERROR, ExamException.class, examException);
+        }
+        catch (IOException e) {
+        if(e instanceof NoSuchFileException){
+            throw Utility.buildResourceException(ErrorCode.RESOURCE_NOT_FOUND, "No Image File exists corresponding to the question", Status.NO_CONTENT, ExamException.class, e);
+        }
+        e.printStackTrace();
+        }
+        return Response.ok(resultDetails).build();
     }
     
     @GET

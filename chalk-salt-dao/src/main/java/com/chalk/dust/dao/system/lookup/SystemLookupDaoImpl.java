@@ -89,7 +89,8 @@ public class SystemLookupDaoImpl implements SystemLookupDao {
     public List<StudentsDto> getStudentsListByClassId(String classId) throws Exception
         {
         final String sqlQuery = " SELECT cst_users.user_id AS studentId, "
-                + " CONCAT_WS(' ',first_name,last_name) AS studentName "
+                + " CONCAT_WS(' ',first_name,last_name) AS studentName,"
+                + " cst_users.secur_uuid AS securUuid "
                 + " FROM `cst_users` "
                 + " JOIN cst_logins ON cst_logins.user_id=cst_users.user_id "
                 + " AND cst_logins.active WHERE class_id=:classId ORDER BY studentName";

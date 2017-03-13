@@ -543,6 +543,8 @@ public class ExamDaoImpl implements ExamDao {
 				+ "`cst_schedule_test_master`.`test_title` AS testTitle, "
 				+ "`cst_student_test`.`scheduled_test_uuid` AS testUuid, "
 				+ " cst_questions.`question`, "
+				+ " cst_questions.question_image AS questionImage, "
+				+ " cst_questions.question_uuid AS questionUuid, "
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 0,1) AS optionA, "
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 1,1) AS optionB, "
 				+ " (SELECT `cst_questions_options`.`name` FROM `cst_questions_options`  WHERE cst_questions_options.`question_id` = `cst_questions`.`question_id` LIMIT 2,1) AS optionC, "

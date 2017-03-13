@@ -453,6 +453,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetNotificationListForAdmin',
       'DeleteNotificationForAdmin',
       'DeleteTestGroup',
+      'GetResultsByClassSubject',
+      'GetResultDetailsByTestUuid',
       function($stateParams, $window, $scope, $filter, $state, $resource, $location, $rootScope, CHALKNDUST, $log, GetUserDetailsService, StudentProfileUpdateService,
           ChangePasswordService, userClassLookUpService, GetSubjectsList, createNewTopic, GetTopicsList, GetTopicDetailsService, deleteTopicDetailsService,
           updateTopicDetailsService, GetCommentsList, deleteCommentDetailsService, GetStudentListService, CandDModalService, deleteStudentDetailsService, filterFilter,
@@ -462,7 +464,9 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           GetNotesDetailsService, updateNotesDetailsService, deleteNotesDetailsService, getTestTypeService, saveScheduleTestMasterData, GetScheduleTestContentList,
           GetScheduleTestDetailsService, updateScheduleDetailsService, deleteScheduleTestDetailsService, GetStudentsList, createStudentAchievementContentService,
           SaveStudentAchievementFileService, GetAchievementContentList, deleteAchievementDetailsService, SaveTopicCommentByAdmin, saveNotificationData, saveTestGroupData,
-          GetTestGroupData, GetNotificationListForAdmin, DeleteNotificationForAdmin,DeleteTestGroup) {
+          GetTestGroupData, GetNotificationListForAdmin,
+          DeleteNotificationForAdmin,DeleteTestGroup,
+          GetResultsByClassSubject,GetResultDetailsByTestUuid) {
 
         var showAlert = function(type, message) {
           $scope.alert = {};
@@ -493,6 +497,8 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           $scope.alert = {};
           $scope.ScheduleList=[];
           $scope.ScheduleListDetails=[];
+          $scope.TestResultsList=[];
+          $scope.TestResultsListDetails=[];
         };
 
         $scope.isSet = function(tabNum) {
@@ -614,6 +620,7 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
             $scope.videoListDetails = [];
             $scope.NotesListDetails = [];
             $scope.ScheduleListDetails = [];
+            $scope.TestResultsListDetails = [];
             $scope.achievementListDetails = [];
             $scope.subjectsList = response;
           }, onRequestFailure);
@@ -2292,6 +2299,64 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
           })
         }
         /* Test group date ends here */
+        
+        /*Showing Test results on admin page*/
+        $scope.showMainDiv=true;
+        $scope.showTestResultSpecificDiv=false;
+        $scope.showTestResultDetails=function(testResultDetails){
+          if(testResultDetails.liststudentId!=null && testResultDetails.listsubjectId!=null){
+            GetResultsByClassSubject.query({
+              classId : testResultDetails.listclassId,
+              subjectId : testResultDetails.listsubjectId,
+              securUuid : testResultDetails.liststudentId
+            }, function(response) {
+              if (response) {
+                $scope.TestResultsListDetails = response;
+                $scope.totalItemsTestResultsList = $scope.TestResultsListDetails.length;
+                $scope.currentPageTestResultsList = 1;
+                $scope.itemsPerPageTestResultsList = 5;
+                $scope.maxSizeTestResultsList = 5;
+                $scope.$watch('search', function(newVal, oldVal) {
+                  $scope.TestResultsList = filterFilter($scope.TestResultsListDetails, newVal);
+                  $scope.totalItemsTestResultsList = $scope.TestResultsList.length;
+                  $scope.currentPageTestResultsList = 1;
+                }, true);
+                $scope.getTestResultsContentData = function() {
+                  var self = this;
+                  var itemsPerPageTestResultsList = self.itemsPerPageTestResultsList;
+                  var offset = (self.currentPageTestResultsList - 1) * itemsPerPageTestResultsList;
+                  $scope.TestResultsList = $scope.TestResultsListDetails.slice(offset, offset + itemsPerPageTestResultsList)
+                };
+                $scope.getTestResultsContentData();
+              }
+            }, function(error) {
+              showAlert('danger', error.data.message);
+            });
+          }
+        }
+        $scope.showDetailedResult = function(testResultDetails,testSecuruuid, testGroupId) {
+          GetResultDetailsByTestUuid.query({
+            classId : testResultDetails.listclassId,
+            subjectId : testResultDetails.listsubjectId,
+            securUuid : testResultDetails.liststudentId,
+            testUuid : testSecuruuid,
+            testGroupId : testGroupId
+          }, function(response) {
+            if (response) {
+              $scope.detailedResultList = response;
+              $scope.showMainDiv=false;
+              $scope.showTestResultSpecificDiv=true;
+            }
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          });
+        };
+        
+        $scope.showMainDivElements=function(){
+          $scope.showMainDiv=true;
+          $scope.showTestResultSpecificDiv=false;
+        };
+        /*Showing Test Results on admin page*/
 
         var Id = $stateParams.id;
 

@@ -32,7 +32,76 @@ public class ResultContentDto {
 	/** The answer opted. */
 	private String answerOpted;
 	
+	/** The question image. */
+	private String questionImage;
+	
+	/** The question image path. */
+	private String questionImagePath;
+	
+	/** The question uuid. */
+	private String questionUuid;
+	
 	/**
+	 * Gets the question uuid.
+	 *
+	 * @return the question uuid
+	 */
+	public String getQuestionUuid()
+        {
+            return questionUuid;
+        }
+
+    /**
+     * Sets the question uuid.
+     *
+     * @param questionUuid the new question uuid
+     */
+    public void setQuestionUuid(String questionUuid)
+        {
+            this.questionUuid = questionUuid;
+        }
+
+    /**
+	 * Gets the question image.
+	 *
+	 * @return the question image
+	 */
+	public String getQuestionImage()
+        {
+            return questionImage;
+        }
+
+    /**
+     * Sets the question image.
+     *
+     * @param questionImage the new question image
+     */
+    public void setQuestionImage(String questionImage)
+        {
+            this.questionImage = questionImage;
+        }
+
+    /**
+     * Gets the question image path.
+     *
+     * @return the question image path
+     */
+    public String getQuestionImagePath()
+        {
+            return questionImagePath;
+        }
+
+    /**
+     * Sets the question image path.
+     *
+     * @param questionImagePath the new question image path
+     */
+    public void setQuestionImagePath(String questionImagePath)
+        {
+            this.questionImagePath = questionImagePath;
+        }
+
+    /**
 	 * Gets the test title.
 	 *
 	 * @return the test title

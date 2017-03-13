@@ -11,6 +11,32 @@ public class StudentsDto
 
     /** The student name. */
     private String studentName;
+    
+    
+    /** The secur uuid. */
+    private String securUuid;
+    
+    
+
+    /**
+     * Gets the secur uuid.
+     *
+     * @return the secur uuid
+     */
+    public String getSecurUuid()
+        {
+            return securUuid;
+        }
+
+    /**
+     * Sets the secur uuid.
+     *
+     * @param securUuid the new secur uuid
+     */
+    public void setSecurUuid(String securUuid)
+        {
+            this.securUuid = securUuid;
+        }
 
     /**
      * Gets the student id.

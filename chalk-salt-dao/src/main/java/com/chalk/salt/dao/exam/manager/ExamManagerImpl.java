@@ -900,14 +900,29 @@ public class ExamManagerImpl implements ExamManager
 	public List<ResultContentDto> getResultDetailsByTestUuid(String classId, String subjectId, String securUuid,
 			String testUuid,String testGroupId) throws ExamException {
 		logger.info("fetch test result details using ClassId, SubjectId, SecurUuid and TestUuid.");
-        try
+		List<ResultContentDto>  resultContentList=new ArrayList<ResultContentDto>();
+		try
         {
-        	return examDao.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
+        String questionImagesLocation=userDao.getSystemSettings(SystemSettingsKey.QUESTION_IMAGE.name());
+        resultContentList=	 examDao.getResultDetailsByTestUuid(classId, subjectId, securUuid, testUuid,testGroupId);
+        for(int i=0;i<resultContentList.size();i++){
+        ResultContentDto resultContentDto=resultContentList.get(i);
+                    if (resultContentDto.getQuestionImage() != null)
+                        {
+                        String questionImageUri = questionImagesLocation + resultContentDto.getQuestionUuid() + File.separator + resultContentDto.getQuestionImage();
+                        resultContentDto.setQuestionImagePath(questionImageUri);
+                        }
+                    else
+                        {
+                        resultContentDto.setQuestionImage(null);
+                        }
+        }
         }
         catch (final Exception exception)
         {
         	throw new ExamException(ErrorCode.FAIL_TO_FETCH_RESULT_DETAILS, "Fail to fetch result details", exception);
         }
+        return resultContentList;
 	}
 
     @Override
