@@ -96,7 +96,7 @@ public class SystemFacadeImpl implements SystemFacade {
 	private EmailNotificationDto getSystemEnquiryNotification(
 			SystemEnquiryDto systemEnquiryDetails) throws SystemException {
 		final EmailNotificationDto emailNotification = new EmailNotificationDto();
-        emailNotification.setTo("chalkandsalt@gmail.com");
+        emailNotification.setTo("infochalkndust@gmail.com");
         emailNotification.setSubject("New Enquiry");
 
         final Map<String, Object> systemEnquiryModel = beanMapper.map(systemEnquiryDetails, Map.class);
