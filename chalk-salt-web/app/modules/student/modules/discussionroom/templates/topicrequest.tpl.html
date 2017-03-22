@@ -9,20 +9,40 @@
 </style>
 <div id="discussionRoomPage">
     <div class="dr_com_main">
-        <div class="dr_com_head">
-            <div class="dr_heading">
-                <ul>
-                    <li><a href="mailto:infochalkndust@gmail.com"><i class="fa fa-envelope-o"></i>{{contact_email}}</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-phone"></i>{{contact_number1}}</a><a id="home"></a></li>
-                </ul>
-                <div class="dr_search">
-                    <ul>
-                        <li><a href="javascript:void(0)" ng-click="requestCtrl.goBackToTopicsScreen()"><span
+        <header id="masthead" class="site-header navigation navbar-default">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-3 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline">
+                                <li><a href="mailto:infochalkndust@gmail.com"><i class="fa fa-envelope-o"></i>{{contact_email}}</a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-phone"></i>{{contact_number1}}</a><a id="home"></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline text-right">
+                             <li><a href="javascript:void(0)" ng-click="requestCtrl.goBackToTopicsScreen()"><span
                                 class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
-                    </ul>
+                     </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="navbar-header col-sm-3 col-sm-6">
+                    <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/cndlogo.jpg" alt="">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse navbar-right " id="navigation">
+                </nav>
+            </div>
+        </div>
+    </header>
         <div class="clear"></div>
         <div class="dr_main_detail">
             <div class="dr_new_entery">

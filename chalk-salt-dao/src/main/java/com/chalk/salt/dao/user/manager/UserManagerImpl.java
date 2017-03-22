@@ -666,9 +666,11 @@ public class UserManagerImpl implements UserManager {
                 list=  userDao.getStudentAchievmentList();
                 for(int i=0;i<list.size();i++){
                 StudentAchievementDto student=list.get(i);
+                if(student.getFileName()!=null){
                 String destPath = systemLookupDao.getSystemSettings(SystemSettingsKey.ACHIEVEMENT_DATA.name());
                 destPath += String.join(File.separator, (student.getStudentId()!=null?(String.valueOf(student.getStudentId())):"General"),student.getAchievementUuid(),student.getFileName());
                 student.setFilePath(destPath);
+                }
                 }
             } catch (final Exception exception) {
                 throw new StudentAchievementException(ErrorCode.FAIL_TO_FETCH_STUDENT_ACHIEVEMENT_CONTENT, "Fail to Fetch list of students achievements to show on home page", exception);

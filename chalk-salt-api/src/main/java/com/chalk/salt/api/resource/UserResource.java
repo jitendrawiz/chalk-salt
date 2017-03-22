@@ -717,11 +717,13 @@ public class UserResource extends AbstractResource {
             if(stuAchvContent!=null){
             for(int i=0;i<stuAchvContent.size();i++){
                 StudentAchievementModel studModel=stuAchvContent.get(i);
+                if(studModel.getFilePath()!=null){
                 File file=new File(studModel.getFilePath());
                 final String mediaType = Utility.probeContentType(file.getAbsolutePath());
                 final String encodedImageString = Base64.encodeBase64String(Files.readAllBytes(file.toPath()));
                 studModel.setImageLink("data:" + mediaType + ";base64," + encodedImageString);
-            }
+                }
+                }
             
             return Response.ok(stuAchvContent).build();
             }
