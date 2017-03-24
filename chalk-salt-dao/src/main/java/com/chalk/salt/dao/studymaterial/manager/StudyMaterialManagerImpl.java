@@ -335,6 +335,32 @@ public class StudyMaterialManagerImpl implements StudyMaterialManager {
         }
         return notesList;
         }
+
+    @Override
+    public List<NotesDto> getSubjectivePaperListUsingIds(String classId, String subjectId) throws StudyMaterialException
+        {
+        logger.info("fetch list of notes...");
+        List<NotesDto> notesList=null;
+        try{
+        notesList= studyMaterialDao.getSubjectivePaperListUsingIds(classId,subjectId);
+            
+            if (notesList.size() > 0)
+                {
+                for (int i = 0; i < notesList.size(); i++)
+                    {
+                    String notesUuid = notesList.get(i).getNotesUuid();
+                    String destPath = userDao.getNotesMediaUrl(SystemSettingsKey.NOTES_FILE.name());
+                    destPath += String.join(File.separator, notesList.get(i).getClassName(),notesList.get(i).getSubjectName() , notesUuid);
+                    String fileName = studyMaterialDao.getOldFileName(notesUuid);
+                    String filePathUrl = destPath + File.separator + fileName;
+                    notesList.get(i).setFileUri(filePathUrl);
+                    }
+                }
+        } catch (final Exception exception) {
+            throw new StudyMaterialException(ErrorCode.FAIL_TO_FETCH_STUDY_MATERIAL, "Fail to Fetch list of Notes", exception);
+        }
+        return notesList;
+        }
     
 	
 }

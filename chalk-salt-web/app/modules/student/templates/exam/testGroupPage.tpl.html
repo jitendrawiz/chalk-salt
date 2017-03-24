@@ -11,10 +11,44 @@ background-size: 100%;
 </style>
 <div id="hoeDiv" hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
     <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
+               <header id="masthead" class="site-header navigation navbar-default">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-3 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline">
+                                <li><a href="mailto:infochalkndust@gmail.com"><i class="fa fa-envelope-o"></i>{{contact_email}}</a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-phone"></i>{{contact_number1}}</a><a id="home"></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <nav class="top-nav">
+                            <ul class="inline text-right">
+                        <li><a href="javascript:void(0)" ng-click="backToDashBoard();"><span
+                            class="glyphicon glyphicon-chevron-left"></span>Go Back</a></li>
+                        </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="navbar-header col-sm-3 col-sm-6">
+                    <a class="navbar-brand" ui-sref="chalkanddust.home"> <img src="resources/images/icons/cndlogo.jpg" alt="">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse navbar-right " id="navigation">
+                </nav>
+            </div>
+        </div>
+    </header>
         <header id="hoe-header" hoe-lpanel-effect="shrink">
             <div class="hoe-left-header">
                 <a ng-click="GoToHomePage();" href="javascript:void(0);">
-                <i class="fa fa-graduation-cap"></i> <span>Chalk & Dust</span></a>
+                <i class="fa fa-graduation-cap"></i> <span>Chalk N Dust</span></a>
             </div>
             <div class="hoe-right-header" hoe-position-type="relative">
                 <!--                 <span class="hoe-sidebar-toggle"><a href="#"></a></span> -->
@@ -32,7 +66,7 @@ background-size: 100%;
                     <li><a ui-sref="chalkanddust.student">My Profile</a></li>
                     <li><a ui-sref="chalkanddust.logout">Log Out</a></li> -->
                     <li class="dropdown hoe-rheader-submenu hoe-header-profile"><a href="javascript:void(0)" class="dropdown-toggle"
-                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="./resources/images/user.png"
+                        data-toggle="dropdown"> <span ng-show="isUndefined(userProfilePhoto)"><img src="../../resources/images/user.png"
                                 alt="no image"></span> <span ng-show="!isUndefined(userProfilePhoto)"><img class="img-circle "
                                 ng-src="{{userProfilePhoto}}" alt="Profile Photo"></span> <span><b>{{fullName}}</b> <i class=" fa fa-angle-down"></i></span>
                     </a>

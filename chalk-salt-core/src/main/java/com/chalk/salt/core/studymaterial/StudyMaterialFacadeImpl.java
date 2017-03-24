@@ -163,4 +163,16 @@ public class StudyMaterialFacadeImpl implements StudyMaterialFacade {
         return studyMaterialManager.getNotesListUsingClassIds(classId);
         }
 
+
+
+    @Override
+    public List<NotesDto> getSubjectivePaperListUsingIds(String classId, String subjectId) throws StudyMaterialException
+        {
+        return studyMaterialManager.getSubjectivePaperListUsingIds(classId,subjectId);
+        }
+
+
+
+   
+
 }

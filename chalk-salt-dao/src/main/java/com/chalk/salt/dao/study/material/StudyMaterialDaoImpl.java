@@ -302,4 +302,33 @@ public class StudyMaterialDaoImpl implements StudyMaterialDao {
             return query.executeAndFetch(NotesDto.class);
         }   
         }
+
+    /* (non-Javadoc)
+     * @see com.chalk.salt.dao.study.material.StudyMaterialDao#getSubjectivePaperListUsingIds(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<NotesDto> getSubjectivePaperListUsingIds(String classId, String subjectId) throws Exception
+        {
+        final String sqlQuery = "SELECT "
+                + " notes_uuid as notesUuid,"
+                + " notes_file_name as notesFileName,"
+                + " notes_title as notesTitle,"
+                + " class_name as className,"
+                + " subject_name as subjectName"
+                + " FROM `cst_notes` "
+                + " JOIN  `cst_class_type` ON cst_class_type.class_id=  cst_notes.class_id "
+                + " JOIN `cst_class_subjects` ON cst_class_subjects.subject_id=cst_notes.subject_id "
+                + " WHERE cst_notes.class_id=:classId  "
+                + " AND cst_notes.subject_id= :subjectId"
+                + " AND cst_notes.notes_type='SUBJECTIVE_PAPER'"
+                + " AND ((DATE_FORMAT(cst_notes.created_date,'%Y-%m-%d')=CURDATE()) "
+                + "  OR (DATE_FORMAT(cst_notes.modified_date,'%Y-%m-%d')=CURDATE())) ORDER BY notes_id ASC   ";
+      Sql2o dataSource = ConnectionFactory.provideSql2oInstance(ChalkSaltConstants.DOMAIN_DATASOURCE_JNDI_NAME);
+        try (final Connection connection = dataSource.open()) {
+            final Query query = connection.createQuery(sqlQuery); 
+            query.addParameter("classId", classId);
+            query.addParameter("subjectId", subjectId);
+            return query.executeAndFetch(NotesDto.class);
+        }
+        }
 }

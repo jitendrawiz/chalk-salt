@@ -133,4 +133,15 @@ public interface StudyMaterialFacade {
      */
     List<NotesDto> getNotesListUsingClassIds(String classId)throws StudyMaterialException;
 
+
+    /**
+     * Gets the subjective paper list using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the subjective paper list using ids
+     * @throws StudyMaterialException the study material exception
+     */
+    List<NotesDto> getSubjectivePaperListUsingIds(String classId, String subjectId)throws StudyMaterialException;
+
 }

@@ -689,5 +689,18 @@ define([ 'angular' ], function(angular) {
     });
   } ]);
   
+  studentService.factory('GetSubjectivePaperList', [ '$resource', 'ENV', function($resource, ENV) {
+    return $resource(ENV.API_END_POINT + 'private/notes-master/details/subjectivePaper/:classId/:subjectId', {
+      classId : '@classId',
+      subjectId : '@subjectId'
+    }, {
+      get : {
+        method : 'GET',
+        isArray: true
+      }
+    });
+  } ]);
+  
+  
 
 });

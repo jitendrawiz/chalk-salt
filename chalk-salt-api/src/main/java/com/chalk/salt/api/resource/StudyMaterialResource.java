@@ -425,4 +425,28 @@ public class StudyMaterialResource {
             throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
         }
     }
+    
+    /**
+     * Gets the subjective paper list using class ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the subjective paper list using class ids
+     * @throws StudyMaterialException the study material exception
+     */
+    @GET
+    @Path("/notes-master/details/subjectivePaper/{classId}/{subjectId}")   
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSubjectivePaperListUsingClassIds(@NotBlank @PathParam("classId") final String classId,@NotBlank @PathParam("subjectId") final String subjectId)throws StudyMaterialException{
+        
+        List<NotesModel> notesContent = null;
+        List<NotesDto> notesContentList = null;
+        try{
+            notesContentList = studyMaterialFacade.getSubjectivePaperListUsingIds(classId,subjectId);
+            notesContent = DozerMapperUtil.mapCollection(beanMapper, notesContentList, NotesModel.class);
+            return Response.ok(notesContent).build();
+        } catch (final StudyMaterialException studyMaterialException) {
+            throw Utility.buildResourceException(studyMaterialException.getErrorCode(), studyMaterialException.getMessage(), Status.INTERNAL_SERVER_ERROR, StudyMaterialException.class, studyMaterialException);
+        }
+    }
 }

@@ -135,4 +135,14 @@ public interface StudyMaterialDao {
      * @throws Exception the exception
      */
     List<NotesDto> getNotesListUsingClassIds(String classId)throws Exception;
+
+    /**
+     * Gets the subjective paper list using ids.
+     *
+     * @param classId the class id
+     * @param subjectId the subject id
+     * @return the subjective paper list using ids
+     * @throws Exception the exception
+     */
+    List<NotesDto> getSubjectivePaperListUsingIds(String classId, String subjectId)throws Exception;
 }

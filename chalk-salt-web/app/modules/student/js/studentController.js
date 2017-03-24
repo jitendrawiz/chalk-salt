@@ -26,9 +26,10 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
       'GetResultsByClassSubject',
       'GetResultDetailsByTestUuid',
       'GetNotificationStudentList',
+      'GetSubjectivePaperList',
       function($window, $scope, $state, $resource, $http, $location, $rootScope, CHALKNDUST, GetUserDetailsService, StudentProfileUpdateService, ChangePasswordService,
           UpdateProfilePhotoService, GetUserPhotoService, DeletePhotoService, CandDModalService, GetDashboardDataBySubject, $stateParams, GetResultsByClassSubject,
-          GetResultDetailsByTestUuid, GetNotificationStudentList) {
+          GetResultDetailsByTestUuid, GetNotificationStudentList,GetSubjectivePaperList) {
         $scope.uploadedlogo = {};
         $scope.showVideoDiv = false;
         $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
@@ -376,6 +377,22 @@ define([ 'angular', './studentRouting', './studentService', '../../CandDModal/js
 
           function(response) {
             $scope.studentNotificationList = response
+          }, function(error) {
+            showAlert('danger', error.data.message);
+          })
+        }
+        
+        getSubjectivePaperList();
+        
+        function getSubjectivePaperList(){
+          var classIdParam = $window.localStorage.getItem(CHALKNDUST.CLASSID);
+          var subjectIdParam = $window.localStorage.getItem(CHALKNDUST.SUBJECTID);
+          GetSubjectivePaperList.get({
+            classId : classIdParam,
+            subjectId : subjectIdParam
+          },
+          function(response) {
+            $scope.subjectPaperList = response
           }, function(error) {
             showAlert('danger', error.data.message);
           })

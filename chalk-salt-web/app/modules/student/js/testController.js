@@ -19,6 +19,14 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           $scope.alert.show = false;
           return true;
         };
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
+        
+        $scope.backToDashBoard = function() {
+          $state.go('chalkanddust.profile');
+        };
         $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
 
@@ -64,6 +72,14 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           $scope.alert = {};
           $scope.alert.show = false;
           return true;
+        };
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
+        
+        $scope.backToDashBoard = function() {
+          $state.go('chalkanddust.profile');
         };
         $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
@@ -136,6 +152,12 @@ define([ 'angular', '../../CandDModal/js/CandDModalService' ], function(angular)
           $scope.alert.show = false;
           return true;
         };
+        $rootScope.contact_number1 = CHALKNDUST.CONTACT_NUMBER1;
+        $rootScope.contact_number2 = CHALKNDUST.CONTACT_NUMBER2;
+        $rootScope.contact_email = CHALKNDUST.CONTACT_EMAIL;
+        $rootScope.copy_right = CHALKNDUST.COPY_RIGHT;
+        
+       
         $scope.securUuid = $window.localStorage.getItem(CHALKNDUST.SECURUUID);
         $scope.fullName = $window.localStorage.getItem(CHALKNDUST.USERFULLNAME);
         $scope.classId = $window.localStorage.getItem(CHALKNDUST.CLASSID);
